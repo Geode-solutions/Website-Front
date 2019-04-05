@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/df0a4b86-e5ec-497d-96b9-07e67d56fb95/deploy-status)](https://app.netlify.com/sites/geode-solutions/deploys)
+
 # geode-solutions.com
 
 > Website for Geode-solutions
