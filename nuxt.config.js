@@ -48,6 +48,10 @@ export default {
   */
   modules: [
     '@bazzite/nuxt-netlify',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-137823587-1',
+      dev: false
+    }]
   ],
 
   /*
