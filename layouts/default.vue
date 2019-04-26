@@ -11,7 +11,7 @@
         nuxt
         to="/"
       >
-        <v-toolbar-title>Geode-solutions</v-toolbar-title>
+        <v-toolbar-title>{{ name }}</v-toolbar-title>
       </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -32,10 +32,30 @@
       </v-container>
     </v-content>
     <v-footer
-      color="primary"
+      height="auto"
       app
     >
-      <span>&copy; 2019</span>
+      <v-card
+        flat
+        tile
+        class="primary flex text-xs-center"
+      >
+        <v-card-text class="pa-1"> 
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            icon
+            target="_blank"
+            :href="icon.url"
+          >
+            <v-icon size="24px">{{ icon.icon }}</v-icon>
+          </v-btn>
+        </v-card-text>  
+        <v-divider></v-divider>  
+        <v-card-text>
+          &copy;2019 — <strong>{{ name }}</strong>
+        </v-card-text>
+      </v-card>
     </v-footer>
   </v-app>
 </template>
@@ -44,10 +64,17 @@
   export default {
     data() {
       return {
+        name: 'Geode-solutions',
         items: [
           { title: 'OpenGeode', to: '/open-geode' },
-          { title: 'About us', to: '/about' },
-          { title: 'Contact', to: '/contact' }
+          { title: 'About us', to: '/about' }
+        ],
+        icons: [
+          { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },
+          { icon: 'fab fa-twitter', url: 'https://twitter.com/Geode-solutions' },
+          { icon: 'fab fa-youtube', url: 'https://youtube.com/Geode-solutions' },
+          { icon: 'fab fa-linkedin', url: 'https://linkedin.com/Geode-solutions' },
+          { icon: 'fas fa-envelope', url: 'mailto:contact@geode-solutions.com' }
         ]
       }
     }
