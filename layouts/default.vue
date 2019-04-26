@@ -53,7 +53,7 @@
         </v-card-text>  
         <v-divider></v-divider>  
         <v-card-text>
-          &copy;2019 — <strong>{{ name }}</strong>
+          Copyright &copy; {{ date }} — {{ name }}. All rights reserved.
         </v-card-text>
       </v-card>
     </v-footer>
@@ -75,7 +75,8 @@
           { icon: 'fab fa-youtube', url: 'https://youtube.com/Geode-solutions' },
           { icon: 'fab fa-linkedin', url: 'https://linkedin.com/Geode-solutions' },
           { icon: 'fas fa-envelope', url: 'mailto:contact@geode-solutions.com' }
-        ]
+        ],
+        date: new Date().getFullYear()
       }
     }
   }
