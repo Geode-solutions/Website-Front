@@ -22,5 +22,10 @@
 
 <script>
   export default {
+    head() {
+      return {
+        title: 'OpenGeode: open source platform for geosciences meshing'
+      }
+    }
   }
 </script>  

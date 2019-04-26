@@ -22,7 +22,7 @@
           :key="i"
           v-for="(item, i) in items"
         >
-            <span>{{ item.title }}</span>
+          <span>{{ item.title }}</span>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -43,7 +43,7 @@
         <v-card-text class="pa-1"> 
           <v-btn
             v-for="icon in icons"
-            :key="icon"
+            :key="icon.icon"
             icon
             target="_blank"
             :href="icon.url"
