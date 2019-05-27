@@ -47,6 +47,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@bazzite/nuxt-netlify',
     ['@nuxtjs/google-analytics', {
       id: 'UA-137823587-1',
       dev: false
@@ -69,5 +70,19 @@ export default {
     */
     extend(config, ctx) {
     }
+  },
+
+  /*
+  ** Netlify configuration
+  */
+  netlify: {
+    redirects: [
+      {
+        from: 'https://geode-solutions.netlify.com/*',
+        to: 'https://geode-solutions.com/:splat',
+        status: 301,
+        force: true
+      }
+    ]
   }
 }
