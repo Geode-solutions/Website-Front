@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar
+    <v-toolbar dark
       color="primary"
       fixed
       app
@@ -11,7 +11,10 @@
         nuxt
         to="/"
       >
-        <v-toolbar-title>{{ name }}</v-toolbar-title>
+        <v-toolbar-side-icon>
+        <v-icon large>$vuetify.icons.logo</v-icon>
+        </v-toolbar-side-icon>
+        <v-toolbar-title>Geode-solutions</v-toolbar-title>
       </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -38,9 +41,10 @@
       <v-card
         flat
         tile
+        dark
         class="primary flex text-xs-center"
       >
-        <v-card-text class="pa-1"> 
+        <v-card-text class="pa-1" d> 
           <v-btn
             v-for="icon in icons"
             :key="icon.icon"
@@ -67,7 +71,9 @@
         name: 'Geode-solutions',
         items: [
           { title: 'OpenGeode', to: '/open-geode' },
+          { title: 'Products', to: '/extensions' },
           { title: 'About us', to: '/about' }
+          
         ],
         icons: [
           { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },

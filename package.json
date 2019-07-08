@@ -9,6 +9,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
+  "electron:generate-icons": "electron-icon-builder --input=./src/assets/logo.png --output=dist_electron --flatten",
   "dependencies": {
     "@nuxtjs/google-analytics": "^2.2.0",
     "cross-env": "^5.2.0",
