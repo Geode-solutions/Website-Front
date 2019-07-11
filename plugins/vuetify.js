@@ -8,7 +8,7 @@ Vue.use(Vuetify, {
   iconfont: 'fa',
   theme: {
     primary: colors.teal.darken1,
-    secondary: colors.teal.lighten2,
+    secondary: colors.teal.lighten5,
     accent: colors.red.darken4,
     info: colors.teal.lighten1,
     warning: colors.amber.base,
