@@ -39,13 +39,17 @@
             </v-btn>
           </v-card-text>
           <v-spacer />
-          <v-flex text-xs-right>
-            <v-btn target="_blank" flat href="/credits">
-              <v-card-text>
+          <v-card-text>
+            <v-flex text-xs-right>
+              <v-btn small class="pa-0 ma-0" flat href="/legalNotice">
+                Legal notice
+              </v-btn>
+              |
+              <v-btn small class="pa-0 ma-0" flat href="/credits">
                 Credits
-              </v-card-text>
-            </v-btn>
-          </v-flex>
+              </v-btn>
+            </v-flex>
+          </v-card-text>
         </v-layout>
         <v-divider />
         <v-layout row align-center>
@@ -73,7 +77,7 @@
 export default {
   data() {
     return {
-      name: 'Geode-solutions',
+      name: 'Geode-solutions SAS',
       items: [
         // { title: 'OpenGeode', to: '/open-geode' },
         // { title: 'Products', to: '/extensions' },
@@ -98,5 +102,8 @@ export default {
 <style scoped>
 * {
   text-transform: none !important;
+}
+.v-btn {
+  min-width: 0;
 }
 </style>
