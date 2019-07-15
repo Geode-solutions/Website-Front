@@ -7,7 +7,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "electron:generate-icons": "electron-icon-builder --input=./src/assets/logo.png --output=dist_electron --flatten",
   "dependencies": {
@@ -20,10 +21,14 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-prettier": "^3.0.1",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^5.2.3",
     "nodemon": "^1.18.11",
-    "prettier": "^1.17.0",
+    "prettier": "^1.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }
