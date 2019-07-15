@@ -142,6 +142,7 @@
       <v-layout
         wrap
         row
+        align-center
         justify-space-around
       >
         <v-flex
@@ -159,6 +160,7 @@
           >
             <v-img
               contain
+              max-height="100"
               :src="partner.logo"
             />
           </a>
