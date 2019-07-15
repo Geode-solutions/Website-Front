@@ -24,7 +24,7 @@
 
     <v-footer height="auto">
       <v-card flat tile dark class="primary flex">
-        <v-layout row>
+        <v-layout row align-center>
           <v-card-text class="pa-1">
             <v-btn
               v-for="icon in icons"
@@ -41,14 +41,14 @@
           <v-spacer />
           <v-flex text-xs-right>
             <v-btn target="_blank" flat href="/credits">
-              <v-card-text class="align-center">
+              <v-card-text>
                 Credits
               </v-card-text>
             </v-btn>
           </v-flex>
         </v-layout>
         <v-divider />
-        <v-layout row>
+        <v-layout row align-center>
           <v-flex>
             <v-card-text>
               Copyright &copy; {{ date }} — {{ name }}. All rights reserved.

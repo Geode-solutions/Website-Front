@@ -39,8 +39,6 @@
           v-for="(card, index) in masterCards"
           :key="index"
           v-scroll-reveal.reset
-          xs12
-          sm5
           md1
         >
           <v-card
@@ -109,8 +107,8 @@
           v-scroll-reveal.reset
           xs12
           sm5
-          md3
-          class="ma-2"
+          lg3
+          class="ma-3"
         >
           <v-card
             class="elevation-5"
@@ -142,25 +140,29 @@
         Our partners
       </h2>
       <v-layout
-        v-scroll-show
         wrap
         row
-        justify-space-around=""
+        justify-space-around
       >
-        <a
+        <v-flex
           v-for="(partner, index) in partners"
           :key="index"
           v-scroll-reveal.reset
-          :href="partner.url"
-          target="_blank"
-          class="ma-3"
+          xs12
+          sm5
+          lg3
+          class="ma-2"
         >
-          <img
-            height="100px"
-            contain
-            :src="partner.logo"
+          <a
+            :href="partner.url"
+            target="_blank"
           >
-        </a>
+            <v-img
+              contain
+              :src="partner.logo"
+            />
+          </a>
+        </v-flex> 
       </v-layout>
 
       <h2
@@ -169,28 +171,31 @@
       >
         Who we are
       </h2>
-      <v-layout row>
+      <v-layout 
+        row wrap
+        justify-space-around
+      >
         <v-flex
           v-for="(guy, index) in us" :key="index"
           v-scroll-reveal.reset
+          xs8
+          sm4
+          class="ma-2"
         >
           <v-card
-            class="justify-center elevation-5 mx-auto text-xs-center"
-            width="20vw"
+            class="elevation-5 text-xs-center"
           >
             <v-avatar
-              size="15vw"
+              :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
               class="ma-2"
             >
-              <img :src="guy.pict">
+              <v-img :src="guy.pict" />
             </v-avatar>
             <v-card-title
               primary-title
-              class="justify-center"
+              class="justify-center headline"
             >
-              <p class="headline">
-                {{ guy.name }}
-              </p>
+              {{ guy.name }}
             </v-card-title>
           </v-card>
         </v-flex>
