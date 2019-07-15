@@ -1,28 +1,24 @@
 <template>
   <v-layout column>
-    <v-container
-      fluid
-      pa-0
-    >
+    <no-ssr>
       <v-parallax
-        :src="require('@/assets/ossau.JPG')"
-        style="height: 100vh;"
-      >
+        src="https://pixabay.com/get/55e2d7444e57a514f6d1867dda6d49214b6ac3e45657724b772c7add9e/grid-3227459_1920.jpg"
+        :height="windowHeight"
+      > 
         <v-layout
           column
           align-center
           justify-center
         >
-          <h1 class="display-3 mb-3">
+          <h1 class="display-3 mb-3 primary--text">
             Geode-solutions
           </h1>
-          <h4 class="headline text-xs-center">
+          <h4 class="headline text-xs-center primary--text">
             Software company building the next generation of meshing tools for advanced geosciences
           </h4>
         </v-layout>
       </v-parallax>
-    </v-container>
-
+    </no-ssr>
     <v-container>
       <v-layout
         column
@@ -210,6 +206,7 @@
 export default {
   data() {
     return {
+      windowHeight: 0,
       cards: [
         {
           image:
@@ -295,6 +292,15 @@ export default {
           pict: require('../assets/PierreA.png')
         }
       ]
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.getWindowHeight)
+    this.getWindowHeight()
+  },
+  methods: {
+    getWindowHeight() {
+      this.windowHeight = document.documentElement.clientHeight
     }
   }
 }
