@@ -2,7 +2,7 @@
   <v-layout column>
     <no-ssr>
       <v-parallax
-        src="https://pixabay.com/get/55e2d7444e57a514f6d1867dda6d49214b6ac3e45657724b772c7add9e/grid-3227459_1920.jpg"
+        :src="require('@/assets/hero.jpg')"
         :height="windowHeight"
       > 
         <v-layout
@@ -285,11 +285,11 @@ export default {
       us: [
         {
           name: 'Arnaud Botella',
-          pict: require('../assets/ArnaudB.png')
+          pict: require('@/assets/ArnaudB.png')
         },
         {
           name: 'Pierre Anquez',
-          pict: require('../assets/PierreA.png')
+          pict: require('@/assets/PierreA.png')
         }
       ]
     }
