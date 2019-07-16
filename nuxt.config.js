@@ -7,14 +7,14 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'Geode-solutions',
+    title: 'Geode-solutions - next generation of meshing tools',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: 'Official Geode-solutions website'
+        content: 'Software company building the next generation of meshing tools for advanced geosciences'
       }
     ],
     link: [
