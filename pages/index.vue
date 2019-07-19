@@ -194,7 +194,20 @@
               class="justify-center headline"
             >
               {{ guy.name }}
+              <v-btn
+              icon
+              target="_blank"
+              :href="guy.url"
+            >
+              <v-icon size="24px">
+                fab fa-linkedin
+              </v-icon>
+            </v-btn>
             </v-card-title>
+            <v-card-text
+              class="justify-center headline"> 
+              {{ guy.job }}
+            </v-card-text> 
           </v-card>
         </v-flex>
       </v-layout>
@@ -285,11 +298,15 @@ export default {
       us: [
         {
           name: 'Arnaud Botella',
-          pict: require('@/assets/ArnaudB.png')
+          pict: require('@/assets/ArnaudB.png'),
+          job: 'President & co-founder',
+          url: 'https://linkedin.com/in/arnaud-botella'
         },
         {
           name: 'Pierre Anquez',
-          pict: require('@/assets/PierreA.png')
+          pict: require('@/assets/PierreA.png'),
+          job: 'CEO & co-founder',
+          url: 'https://linkedin.com/in/pierre-anquez'
         }
       ]
     }
