@@ -7,8 +7,10 @@
 
       <h3>Pictures:</h3>
 
-      <p>Hero - Pixabay Licence (Free for commercial use, No attribution
-        required)</p>
+      <p>
+        Hero - Pixabay Licence (Free for commercial use, No attribution
+        required)
+      </p>
       <p>Open source - Author: Nick Youngson</p>
       <p>Mesh around (modified) - Author: JD Hancock</p>
       <p>

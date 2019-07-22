@@ -195,18 +195,20 @@
             >
               {{ guy.name }}
               <v-btn
-              icon
-              target="_blank"
-              :href="guy.url"
-            >
-              <v-icon size="24px">
-                fab fa-linkedin
-              </v-icon>
-            </v-btn>
+                icon
+                target="_blank"
+                :href="guy.url"
+              >
+                <v-icon size="24px" color="#0A66C2">
+                  fab fa-linkedin
+                </v-icon>
+              </v-btn>
+              {{ guy.job }}
             </v-card-title>
             <v-card-text
-              class="justify-center headline"> 
-              {{ guy.job }}
+              class="justify-center headline font-italic"
+            > 
+              {{ guy.topic }}
             </v-card-text> 
           </v-card>
         </v-flex>
@@ -300,13 +302,15 @@ export default {
           name: 'Arnaud Botella',
           pict: require('@/assets/ArnaudB.png'),
           job: 'President & co-founder',
-          url: 'https://linkedin.com/in/arnaud-botella'
+          url: 'https://linkedin.com/in/arnaud-botella',
+          topic: 'Mesh generation'
         },
         {
           name: 'Pierre Anquez',
           pict: require('@/assets/PierreA.png'),
           job: 'CEO & co-founder',
-          url: 'https://linkedin.com/in/pierre-anquez'
+          url: 'https://linkedin.com/in/pierre-anquez',
+          topic: 'Repair and simplification'
         }
       ]
     }
