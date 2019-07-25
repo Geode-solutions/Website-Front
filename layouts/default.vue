@@ -79,7 +79,7 @@ export default {
     return {
       name: 'Geode-solutions SAS',
       items: [
-        // { title: 'OpenGeode', to: '/open-geode' },
+        { title: 'OpenGeode', to: '/open-geode' },
         // { title: 'Products', to: '/extensions' },
         // { title: 'About us', to: '/about' }
       ],
@@ -90,6 +90,10 @@ export default {
         {
           icon: 'fab fa-linkedin',
           url: 'https://linkedin.com/Geode-solutions'
+        },
+        {
+          icon: 'fab fa-slack',
+          url: 'https://slackin-opengeode.herokuapp.com'
         },
         { icon: 'fas fa-envelope', url: 'mailto:contact@geode-solutions.com' }
       ],

@@ -40,7 +40,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', { src: '@/plugins/scroll', ssr: false }],
+  plugins: ['@/plugins/vuetify', { src: '@/plugins/scroll', ssr: false }, { src: '@/plugins/particles', ssr: false }],
 
   /*
    ** Nuxt.js modules
