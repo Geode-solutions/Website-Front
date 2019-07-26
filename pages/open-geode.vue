@@ -10,7 +10,7 @@
     </v-flex>
     
     <no-ssr>
-    <vue-particles class="particles-wrapper mb-3" style="z-index: 10"
+    <vue-particles class="particles-wrapper mb-3" style="z-index: 1"
       color="00897B"
       :particleOpacity="0.5"
       :particlesNumber="80"
