@@ -1,8 +1,16 @@
 <template>
   <v-layout column>
+
+        <v-flex
+      class="text-xs-center title"
+    >
+    <h1 class="display-3 primary--text">
+      OpenGeode
+    </h1>
+    </v-flex>
     
     <no-ssr>
-    <vue-particles class="particles-wrapper mb-3"
+    <vue-particles class="particles-wrapper mb-3" style="z-index: 10"
       color="00897B"
       :particleOpacity="0.5"
       :particlesNumber="80"
@@ -18,13 +26,7 @@
     </vue-particles>
     </no-ssr>
     
-    <v-flex
-      class="text-xs-center title"
-    >
-    <h1 class="display-3 primary--text">
-      OpenGeode
-    </h1>
-    </v-flex>
+
 
     <v-container>
 
