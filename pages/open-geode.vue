@@ -1,7 +1,7 @@
 <template>
   <v-layout column>
     
-
+    <no-ssr>
     <vue-particles class="particles-wrapper mb-3"
       color="00897B"
       :particleOpacity="0.5"
@@ -16,7 +16,8 @@
       :moveSpeed="4"
     >
     </vue-particles>
-
+    </no-ssr>
+    
     <v-flex
       class="text-xs-center title"
     >
