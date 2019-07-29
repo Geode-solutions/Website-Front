@@ -6,8 +6,9 @@ Vue.component('Logo', Logo);
 export default {
   icons: {
       iconfont: 'fa',
+values: {
       logo: {
         component: 'Logo'
-      }
+      }} 
     }
 };
