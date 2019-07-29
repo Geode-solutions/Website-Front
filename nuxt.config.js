@@ -1,4 +1,6 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+import colors from 'vuetify/es5/util/colors'
+import icons from "./plugins/icons";
 
 export default {
   mode: 'universal',
@@ -40,12 +42,13 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', { src: '@/plugins/scroll', ssr: false }, { src: '@/plugins/particles', ssr: false }],
+  plugins: ['@/plugins/vuetify_icons',{ src: '@/plugins/scroll', ssr: false }, { src: '@/plugins/particles', ssr: false }],
 
   /*
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/vuetify',
     [
       '@nuxtjs/google-analytics',
       {
@@ -54,6 +57,19 @@ export default {
       }
     ]
   ],
+
+  vuetify: {
+    theme: {
+      primary: colors.teal.darken1,
+      secondary: colors.teal.lighten5,
+      accent: colors.red.darken4,
+      info: colors.teal.lighten1,
+      warning: colors.amber.base,
+      error: colors.deepOrange.accent4,
+      success: colors.green.accent3
+    },
+    icons
+  },
 
   /*
    ** Build configuration
