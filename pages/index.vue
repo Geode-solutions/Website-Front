@@ -117,7 +117,7 @@
             >
               <v-card-title 
                 primary-title
-                class="display-1 align-center justify-center"
+                class="display-1 justify-center fill-height"
               >
                 {{ card.title }}
               </v-card-title>

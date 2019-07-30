@@ -10,9 +10,11 @@
         <v-toolbar-title>Geode-solutions</v-toolbar-title>
       </v-btn>
       <v-spacer />
+      <v-toolbar-items>
         <v-btn v-for="(item, i) in items" :key="i" text nuxt :to="item.to">
           <span>{{ item.title }}</span>
         </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
     <v-content class="secondary">
       <!-- <v-container fluid> -->
@@ -22,7 +24,7 @@
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
-        <v-layout row align-center>
+        <v-layout align-center>
           <v-card-text class="pa-1">
             <v-btn
               v-for="icon in icons"
