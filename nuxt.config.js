@@ -1,6 +1,4 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import colors from 'vuetify/es5/util/colors'
-import icons from "./plugins/icons";
 
 export default {
   mode: 'universal',
@@ -37,7 +35,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+  css: [],
 
   /*
    ** Plugins to load before mounting the App
@@ -60,28 +58,28 @@ export default {
 
   vuetify: {
     theme: {
-      primary: colors.teal.darken1,
-      secondary: colors.teal.lighten5,
-      accent: colors.red.darken4,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
+      themes: {
+        light: {
+          primary: colors.teal.darken1,
+          secondary: colors.teal.lighten4,
+          accent: colors.red.darken4
+        }
+      }
     },
-    icons
+    icons: {
+      iconfont: 'fa',
+      values: {
+        logo: {
+          component: 'Logo'
+        }
+      } 
+    }
   },
 
   /*
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
     /*
      ** You can extend webpack config here
      */

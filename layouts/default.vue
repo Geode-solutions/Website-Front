@@ -1,29 +1,27 @@
 <template>
-  <v-app class="secondary">
-    <v-toolbar dark color="primary" fixed app>
-      <v-btn flat active-class="" nuxt to="/">
-        <v-toolbar-side-icon>
+  <v-app>
+    <v-app-bar dark color="primary" fixed app>
+      <v-btn text active-class="" nuxt to="/">
+        <v-app-bar-nav-icon>
           <v-icon large>
             $vuetify.icons.logo
           </v-icon>
-        </v-toolbar-side-icon>
+        </v-app-bar-nav-icon>
         <v-toolbar-title>Geode-solutions</v-toolbar-title>
       </v-btn>
       <v-spacer />
-      <v-toolbar-items>
-        <v-btn v-for="(item, i) in items" :key="i" flat nuxt :to="item.to">
+        <v-btn v-for="(item, i) in items" :key="i" text nuxt :to="item.to">
           <span>{{ item.title }}</span>
         </v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-    <v-content>
+    </v-app-bar>
+    <v-content class="secondary">
       <!-- <v-container fluid> -->
       <nuxt />
       <!-- </v-container> -->
     </v-content>
 
-    <v-footer height="auto">
-      <v-card flat tile dark class="primary flex">
+    <v-footer padless>
+      <v-card text tile dark class="primary flex">
         <v-layout row align-center>
           <v-card-text class="pa-1">
             <v-btn
@@ -40,12 +38,12 @@
           </v-card-text>
           <v-spacer />
           <v-card-text>
-            <v-flex text-xs-right>
-              <v-btn small class="pa-0 ma-0" flat href="/legalNotice">
+            <v-flex text-right>
+              <v-btn small class="pa-0 ma-0" text href="/legalNotice">
                 Legal notice
               </v-btn>
               |
-              <v-btn small class="pa-0 ma-0" flat href="/credits">
+              <v-btn small class="pa-0 ma-0" text href="/credits">
                 Credits
               </v-btn>
             </v-flex>
@@ -59,8 +57,8 @@
             </v-card-text>
           </v-flex>
           <v-spacer />
-          <v-flex text-xs-right>
-            <v-btn target="_blank" flat href="https://nuxtjs.org/">
+          <v-flex text-right>
+            <v-btn target="_blank" text href="https://nuxtjs.org/">
               <img
                 width="120px"
                 src="https://nuxtjs.org/logos/built-with-nuxt-white.svg"

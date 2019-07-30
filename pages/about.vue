@@ -3,24 +3,24 @@
     <v-layout column align-center>
       <v-layout justify-space-around row class="py-5">
         <v-flex>
-          <v-card class="elevation-5 mx-5  text-xs-center">
+          <v-card class="elevation-5 mx-5  text-center">
             <v-avatar size="300px" class="ma-2">
               <img src="@/assets/ArnaudB.png">
             </v-avatar>
             <v-card-title primary-title justify-center>
-              <p class="headline text-xs-center">
+              <p class="headline text-center">
                 Arnaud Botella
               </p>
             </v-card-title>
           </v-card>
         </v-flex>
         <v-flex>
-          <v-card class="elevation-5 mx-5  text-xs-center">
+          <v-card class="elevation-5 mx-5  text-center">
             <v-avatar size="300px" class="ma-2">
               <img src="@/assets/PierreA.png">
             </v-avatar>
             <v-card-title primary-title>
-              <p class="headline text-xs-center" style="width:300px">
+              <p class="headline text-center" style="width:300px">
                 Pierre Anquez
               </p>
             </v-card-title>
