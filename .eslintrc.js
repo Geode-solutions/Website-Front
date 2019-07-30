@@ -8,7 +8,8 @@ module.exports = {
     "plugin:vue/recommended"
   ],
   plugins: [
-    'vue'
+    'vue',
+    'vuetify'
   ],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
@@ -18,7 +19,8 @@ module.exports = {
       {
         treatUndefinedAsUnspecified: false
       }
-    ]
+    ],
+    'vuetify/no-deprecated-classes': 'error'
   },
   parserOptions: {
     parser: "babel-eslint"

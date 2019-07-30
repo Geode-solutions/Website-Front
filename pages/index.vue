@@ -13,7 +13,7 @@
           <h1 class="display-3 mb-3 primary--text">
             Geode-solutions
           </h1>
-          <h4 class="headline text-xs-center primary--text">
+          <h4 class="headline text-center primary--text">
             Software company building the next generation of meshing tools for advanced geosciences
           </h4>
         </v-layout>
@@ -117,12 +117,12 @@
             >
               <v-card-title 
                 primary-title
-                class="display-1 align-center justify-center"
+                class="display-1 justify-center fill-height"
               >
                 {{ card.title }}
               </v-card-title>
             </v-img>
-            <v-card-text class="subheading font-weight-medium text-xs-center">
+            <v-card-text class="subheading font-weight-medium text-center">
               {{ card.text }}
             </v-card-text>
           </v-card>
@@ -181,7 +181,7 @@
           class="ma-2"
         >
           <v-card
-            class="elevation-5 text-xs-center"
+            class="elevation-5 text-center"
           >
             <v-avatar
               :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
