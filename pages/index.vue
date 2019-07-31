@@ -75,7 +75,7 @@
                   </v-card-title>
                   <v-card-text
                     align="justify"
-                    class="subheading"
+                    class="body-1"
                   >
                     {{ card.text }}
                   </v-card-text>
@@ -122,7 +122,7 @@
                 {{ card.title }}
               </v-card-title>
             </v-img>
-            <v-card-text class="subheading font-weight-medium text-center">
+            <v-card-text class="body-1 font-weight-medium text-center">
               {{ card.text }}
             </v-card-text>
           </v-card>

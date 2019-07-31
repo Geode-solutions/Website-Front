@@ -1,21 +1,59 @@
 <template>
   <v-app>
     <v-app-bar dark color="primary" fixed app>
-      <v-btn text active-class="" nuxt to="/">
-        <v-app-bar-nav-icon>
-          <v-icon large>
-            $vuetify.icons.logo
-          </v-icon>
-        </v-app-bar-nav-icon>
-        <v-toolbar-title>Geode-solutions</v-toolbar-title>
-      </v-btn>
-      <v-spacer />
-      <v-toolbar-items>
-        <v-btn v-for="(item, i) in items" :key="i" text nuxt :to="item.to">
-          <span>{{ item.title }}</span>
+      <v-layout class="hidden-sm-and-down">
+        <v-btn text active-class="" nuxt to="/">
+          <v-app-bar-nav-icon>
+            <v-icon large>
+              $vuetify.icons.logo
+            </v-icon>
+          </v-app-bar-nav-icon>
+          <v-toolbar-title>{{ name }}</v-toolbar-title>
         </v-btn>
-      </v-toolbar-items>
+        <v-spacer />
+        <v-toolbar-items>
+          <v-btn v-for="(item, i) in items" :key="i" text nuxt :to="item.to">
+            <span>{{ item.title }}</span>
+          </v-btn>
+        </v-toolbar-items>
+      </v-layout>
+
+      <v-expansion-panels
+        v-model="menu"
+        class="hidden-md-and-up"
+        style="position: absolute; top: 0; left: 0;"
+        accordion
+      >
+        <v-expansion-panel class="primary" style="width: 100%;">
+          <v-expansion-panel-header>
+            <v-layout row align-center>
+              <v-flex class="px-2" xs1>
+                <v-icon large>
+                  $vuetify.icons.logo
+                </v-icon>
+              </v-flex>
+              <v-flex class="title">
+                {{ name }}
+              </v-flex>
+              <v-spacer />
+            </v-layout>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-list color="primary" subheader>
+              <v-list-item text nuxt to="/" @click="menu = false">
+                <v-list-item-title>Home</v-list-item-title>
+              </v-list-item>
+              <v-list-item v-for="(item, i) in items" :key="i" text nuxt 
+                           :to="item.to" @click="menu = false"
+              >
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-app-bar>
+
     <v-content class="secondary">
       <!-- <v-container fluid> -->
       <nuxt />
@@ -55,7 +93,7 @@
         <v-layout row align-center>
           <v-flex>
             <v-card-text>
-              Copyright &copy; {{ date }} — {{ name }}. All rights reserved.
+              Copyright &copy; {{ date }} — {{ name }} SAS. All rights reserved.
             </v-card-text>
           </v-flex>
           <v-spacer />
@@ -77,7 +115,8 @@
 export default {
   data() {
     return {
-      name: 'Geode-solutions SAS',
+      name: 'Geode-solutions',
+      menu: false,
       items: [
         { title: 'OpenGeode', to: '/open-geode' },
         // { title: 'Products', to: '/extensions' },
