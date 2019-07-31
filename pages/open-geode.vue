@@ -42,7 +42,7 @@
           sm4
         >
           <v-card
-            text
+            flat
             style="background: rgba(0,0,0,0)"
             my-5
           >
@@ -72,7 +72,7 @@
           md1
         >
           <v-card
-            text
+            flat
             style="background: rgba(0,0,0,0)"
           >
             <v-layout
@@ -98,7 +98,7 @@
                 sm7
               >
                 <v-card
-                  text
+                  flat
                   style="background: rgba(0,0,0,0)"
                 >
                   <v-card-title
