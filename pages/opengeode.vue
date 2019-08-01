@@ -3,14 +3,14 @@
     <v-flex
       class="text-center title"
     >
-      <h1 :class="display" class="primary--text">
+      <h1 :class="display" >
         OpenGeode
       </h1>
     </v-flex>
     
     <no-ssr>
       <vue-particles class="particles-wrapper mb-3" style="z-index: 1"
-                     color="00897B"
+                     color="004D40"
                      :particle-opacity="0.5"
                      :particles-number="80"
                      shape-type="circle"
