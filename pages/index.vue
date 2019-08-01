@@ -79,6 +79,13 @@
                   >
                     {{ card.text }}
                   </v-card-text>
+                  <v-card-text
+                    v-if="card.url"
+                    align="justify"
+                    class="body-1"
+                  >
+                    <a :href="card.url">{{card.text2url}}</a>
+                  </v-card-text>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -249,7 +256,7 @@ export default {
             'https://live.staticflickr.com/5674/31045227201_57b9c73426_b.jpg',
           title: 'Auto update',
           text:
-            'New features and improvments continuouly shipped using automatic updates'
+            'New features and improvments continuously shipped using automatic updates'
         },
         {
           image:
@@ -267,6 +274,8 @@ export default {
             'OpenGeode is our open source platform for representing and manipulating geological models.\
               It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
               The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
+          url: "/open-geode",
+          text2url: 'More details',
           reverse: true
         },
         {
@@ -276,6 +285,8 @@ export default {
             'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
              It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
             Available in proprietary OpenGeode extension.',
+          url: "",
+          text2url: 'More details soon',
           reverse: false
         }
       ],

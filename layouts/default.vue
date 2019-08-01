@@ -124,11 +124,11 @@ export default {
       ],
       icons: [
         { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },
-        { icon: 'fab fa-twitter', url: 'https://twitter.com/Geode-solutions' },
+        { icon: 'fab fa-twitter', url: 'https://twitter.com/GeodeSolutions' },
         // { icon: 'fab fa-youtube', url: 'https://youtube.com/Geode-solutions' },
         {
           icon: 'fab fa-linkedin',
-          url: 'https://linkedin.com/Geode-solutions'
+          url: 'https://linkedin.com/company/geode-solutions'
         },
         {
           icon: 'fab fa-slack',

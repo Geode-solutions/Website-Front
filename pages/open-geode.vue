@@ -3,7 +3,7 @@
     <v-flex
       class="text-center title"
     >
-      <h1 class="display-3 primary--text">
+      <h1 class="display-4 primary--text">
         OpenGeode
       </h1>
     </v-flex>
@@ -30,8 +30,9 @@
       <v-layout column class="text-center">
         <v-flex
           class="text-center"
+          mb-5
         >
-          <h2 class="headline primary--text my-3">
+          <h2 class="display-1 primary--text my-3">
             Open source platform for representing and manipulating geometric models
           </h2>
         </v-flex>  
@@ -40,17 +41,17 @@
           class="text-center"
           xs12
           sm4
+          my-5
         >
           <v-card
             flat
             style="background: rgba(0,0,0,0)"
-            my-5
           >
             <v-card-title
               primary-title
-              class="justify-center display-1"
+              class="justify-center display-2"
             >
-              Visit Github repo
+              Visit GitHub repo
             </v-card-title>
             <a 
               href="https://github.com/Geode-solutions/OpenGeode" 
@@ -65,6 +66,12 @@
           </v-card>
         </v-flex>
   
+        <h2
+          class="section display-3 mt-5"
+          align="center"
+        >
+          Key features
+        </h2>
         <v-flex
           v-for="(card, index) in cards"
           :key="index"
@@ -109,7 +116,7 @@
                   </v-card-title>
                   <v-card-text
                     align="justify"
-                    class="subheading"
+                    class="body-1"
                   >
                     {{ card.text }}
                   </v-card-text>
@@ -117,44 +124,8 @@
               </v-flex>
             </v-layout>
           </v-card>
-        </v-flex>
-
-
-        <h2 class="headline primary--text my-3">
-          Because of all these points both academic and industrial 
-          applications can safely rely on OpenGeode to develop new geomodeling and 
-          meshing technologies, without losing time and energy on the complex task 
-          of designing and maintaining model data structures.
-        </h2>
-
-
-        <v-carousel>
-          <v-carousel-item
-            v-for="(card, index) in cards"
-            :key="index"
-            :src="card.image"
-            cycle
-            interval="10"
-          >
-            <v-container fill-height>
-              <v-layout align-center>
-                <v-flex>
-                  <h3 class="display-3">
-                    {{ card.title }}
-                  </h3>
-                  <span class="subheading">{{ card.text }}</span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-carousel-item>
-        </v-carousel>
+        </v-flex>        
       </v-layout>
-
-      <h2 class="headline primary--text my-3">
-        Academic and industrial applications can safely rely on OpenGeode to develop new geomodeling and 
-        meshing technologies, without losing time and energy on the complex task 
-        of designing and maintaining model data structures.
-      </h2>
     </v-container>
   </v-layout>
 </template>
@@ -171,60 +142,71 @@ export default {
       windowHeight: 0,
       cards: [
         {
-          title: 'Open source platform',
+          title: 'Open source and cross-platform',
           image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
           text:
-            'OpenGeode is our open source platform. Because of these features and \
-            its permissive software license (modified BSD), both academic and industrial \
-            applications can safely rely on OpenGeode to develop new geomodeling and \
-            meshing technologies without losing time and energy on the complex task \
-            of designing and maintaining geological model data structures.',
+            'OpenGeode is an open source C++ framework available on GitHub, \
+            under a permissive software license (MIT). \
+            We also provide pre-compiled releases on several platforms: \
+            Windows, UNIX-based, macOS.',
           reverse: true
         },
         
         {
-          title: 'Geometrical models',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          title: 'Geometric and geological models',
+          image: 'https://cdn.pixabay.com/photo/2016/01/08/18/00/antelope-canyon-1128815_960_720.jpg',
           text:
-            'OpenGeode is for representing and manipulating geological models. CAD',
+            'OpenGeode offers a CAD framework dedicated to Geosciences with \
+            data structures for meshes (wells, faults, horizons, 3D structured, \
+            partially or fully unstructured meshes), and for boundary representations \
+            organizing a rich set of relationships between geological features (structural \
+            models, cross-sections).',
           reverse: false
         },
 
         {
-          title: 'Extensibility and scriptability',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          title: 'Industrial quality',
+          image: 'https://cdn.pixabay.com/photo/2015/11/28/23/20/technique-1068097_960_720.jpg',
           text:
-            'OpenGeode is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping. \
-            Entire extensible through a plugin system',
+            'A complete set of tools is used around OpenGeode to ensure its quality and its stability. \
+            The Continuous Integration and Continuous Delivery philosophy has been chosen: code changes \
+            are delivered more frequently, more reliably (high-leveled tests) and as automatic as possible, \
+            using Microsoft Azure DevOps tools.',
           reverse: true
         },
 
         {
-          title: 'Geosciences',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          title: 'Ease-of-use',
+          image: 'https://cdn.pixabay.com/photo/2016/03/09/15/26/ruler-1246653_960_720.jpg',
           text:
-            'OpenGeode is designed from the ground up to support any geosciences applications requiring \
-            a discretized geological model. It is the industrialisation of RINGMesh',
+            'OpenGeode is easy to read since its code intelligibility:\
+            API librairies are heavily documented, classes and methods are meaningful named. \
+            OpenGeode is easy to get and to compile.  Convenient and open-source tools will soon be associated to OpenGeode:\
+            a Javascript-based scriptability framework for quick prototyping and \
+            a web-based application using an innovative UI and modern technologies.',
           reverse: false
         },
+
+        {
+          title: 'Extensibility',
+          image: 'https://cdn.pixabay.com/photo/2012/03/01/01/42/connect-20333_960_720.jpg',
+          text:
+            'OpenGeode supports users in adding new functionalities to allow easy adaptation to specific requirements. \
+            We provide a quick start template to create your own technologies based on OpenGeode.',
+          reverse: true
+        },
+
 
         {
           title: 'Efficiency',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          image: 'https://cdn.pixabay.com/photo/2014/06/18/16/31/jet-engine-371412_960_720.jpg',
           text:
-            'OpenGeode combines modern concurrency and GPU-accelerated programming. Written C++.',
-          reverse: true
-        },
-
-        {
-          title: 'CI/CD',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
-          text:
-            'A complete set of tools is used around OpenGeode to ensure its quality and its stability, \
-            from continuous integration for building and testing on multiple architectures to continuous \
-            deployment for keeping the platform up to date with latest improvements.',
+            'Modern concurrency and GPU-accelerated solutions are planned to be integrated to reach real-time computations. \
+            We want to deliver turnkey powerful solutions for effective and immediate use.',
           reverse: false
         },
+
+
       ]
     }
   }
