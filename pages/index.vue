@@ -274,7 +274,7 @@ export default {
             'OpenGeode is our open source platform for representing and manipulating geological models.\
               It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
               The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
-          url: "/open-geode",
+          url: "/opengeode",
           text2url: 'More details',
           reverse: true
         },

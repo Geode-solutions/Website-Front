@@ -118,7 +118,7 @@ export default {
       name: 'Geode-solutions',
       menu: false,
       items: [
-        { title: 'OpenGeode', to: '/open-geode' },
+        { title: 'OpenGeode', to: '/opengeode' },
         // { title: 'Products', to: '/extensions' },
         // { title: 'About us', to: '/about' }
       ],
