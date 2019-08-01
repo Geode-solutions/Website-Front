@@ -24,7 +24,7 @@
         style="position: absolute; top: 0; left: 0;"
         accordion
       >
-        <v-expansion-panel class="primary" style="width: 100%;">
+        <v-expansion-panel class="primary" style="width: 99%;">
           <v-expansion-panel-header>
             <v-layout row align-center>
               <v-flex class="px-2" xs1>
@@ -32,7 +32,7 @@
                   $vuetify.icons.logo
                 </v-icon>
               </v-flex>
-              <v-flex class="title">
+              <v-flex class="title mx-2">
                 {{ name }}
               </v-flex>
               <v-spacer />

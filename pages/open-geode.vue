@@ -3,7 +3,7 @@
     <v-flex
       class="text-center title"
     >
-      <h1 class="display-4 primary--text">
+      <h1 :class="display" class="primary--text">
         OpenGeode
       </h1>
     </v-flex>
@@ -208,6 +208,14 @@ export default {
 
 
       ]
+    }
+  },
+  computed: {
+    display() {
+      switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 'display-3'
+          default: return 'display-4'
+      }
     }
   }
 }
