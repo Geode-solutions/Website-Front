@@ -7,29 +7,15 @@
 
       <h3>Pictures:</h3>
 
-      <p>
-        Hero - Pixabay Licence (Free for commercial use, No attribution
-        required)
-      </p>
       <p>Open source - Author: Nick Youngson</p>
       <p>Mesh around (modified) - Author: JD Hancock</p>
-      <p>
-        Fast - Pixabay Licence (Free for commercial use, No attribution
-        required)
-      </p>
-      <p>
-        Human-machine - Pixabay Licence (Free for commercial use, No attribution
-        required)
-      </p>
-      <p>
-        Map of the world - Pixabay Licence (Free for commercial use, No
-        attribution required)
-      </p>
       <p>Escalator - Author: Nico Kaiser</p>
-      <p>
-        Puzzle - Pixabay Licence (Free for commercial use, No attribution
-        required)
-      </p>
+
+
+      <h4> Under Pixabay Licence (Free for commercial use, No attribution
+        required):</h4>
+      <p>Hero, Fast, Human-machine, Map of the world, Puzzle, Antelope Canyon, Technique, Ruler and Pens, Connect, Reactor</p>
+
     </v-layout>
   </v-container>
 </template>
