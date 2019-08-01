@@ -82,7 +82,7 @@
                   <v-card-text
                     v-if="card.url"
                     align="justify"
-                    class="body-1"
+                    class="title"
                   >
                     <a :href="card.url">{{card.text2url}}</a>
                   </v-card-text>
