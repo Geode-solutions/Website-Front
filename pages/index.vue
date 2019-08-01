@@ -14,7 +14,7 @@
             Geode-solutions
           </h1>
           <h4 class="headline text-center primary--text">
-            Software company building the next generation of meshing tools for advanced geosciences
+            Software company building the next generation of meshing tools for advanced modeling
           </h4>
         </v-layout>
       </v-parallax>
