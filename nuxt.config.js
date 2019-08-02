@@ -1,18 +1,21 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
-import pkg from './package'
+import colors from 'vuetify/es5/util/colors'
 
 export default {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: pkg.name,
+    title: 'Geode-solutions - next generation of meshing tools',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Software company building the next generation of meshing tools for advanced modeling'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -25,50 +28,52 @@ export default {
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#fff' },
 
   /*
-  ** Global CSS
-  */
-  css: [
-    '~/assets/style/app.styl'
-  ],
+   ** Global CSS
+   */
+  css: [],
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '@/plugins/vuetify'
-  ],
+   ** Plugins to load before mounting the App
+   */
+  plugins: ['@/plugins/vuetify_icons',{ src: '@/plugins/scroll', ssr: false }, { src: '@/plugins/particles', ssr: false }],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     '@bazzite/nuxt-netlify',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-137823587-1',
-      dev: false
-    }]
+    '@nuxtjs/vuetify',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-137823587-1',
+        dev: false
+      }
+    ]
   ],
 
-  /*
-  ** Build configuration
-  */
-  build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
+  vuetify: {
+    theme: {
+      themes: {
+        light: {
+          primary: colors.teal.darken1,
+          secondary: colors.teal.lighten4,
+          accent: colors.red.darken4
+        }
       }
     },
-    /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
+    icons: {
+      iconfont: 'fa',
+      values: {
+        logo: {
+          component: 'Logo'
+        }
+      } 
     }
   },
 
@@ -84,5 +89,15 @@ export default {
         force: true
       }
     ]
+  },
+  
+  /*
+   ** Build configuration
+   */
+  build: {
+    /*
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {}
   }
 }

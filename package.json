@@ -3,27 +3,35 @@
   "version": "1.0.0",
   "description": "Website for Geode-solutions",
   "author": "Geode-solutions",
-  "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
+  "electron:generate-icons": "electron-icon-builder --input=./src/assets/logo.png --output=dist_electron --flatten",
   "dependencies": {
     "@bazzite/nuxt-netlify": "^0.1.0",
     "@nuxtjs/google-analytics": "^2.2.0",
+    "@nuxtjs/vuetify": "^1.0.2",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.5.1",
-    "vuetify": "^1.5.9",
-    "vuetify-loader": "^1.2.1"
+    "nuxt": "^2.8.1",
+    "vue-particles": "^1.0.9",
+    "vue-scroll-reveal": "^1.0.11",
+    "vuetify": "^2.0.2",
+    "vuetify-loader": "^1.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.4",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "eslint-plugin-vuetify": "^1.0.0-beta.3",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
   }
 }
