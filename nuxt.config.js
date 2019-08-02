@@ -14,7 +14,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Software company building the next generation of meshing tools for advanced geosciences'
+        content: 'Software company building the next generation of meshing tools for advanced modeling'
       }
     ],
     link: [
@@ -89,7 +89,7 @@ export default {
         force: true
       }
     ]
-  }
+  },
   
   /*
    ** Build configuration
