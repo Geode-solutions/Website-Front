@@ -60,6 +60,7 @@
               <v-icon  
                 :size="$vuetify.breakpoint.smAndUp ? 150 : 100"
                 color="#000000"
+                style="display: ''"
               >fab fa-github
               </v-icon>
             </a> 
