@@ -119,13 +119,10 @@ export default {
       menu: false,
       items: [
         { title: 'OpenGeode', to: '/opengeode' },
-        // { title: 'Products', to: '/extensions' },
-        // { title: 'About us', to: '/about' }
       ],
       icons: [
         { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },
         { icon: 'fab fa-twitter', url: 'https://twitter.com/GeodeSolutions' },
-        // { icon: 'fab fa-youtube', url: 'https://youtube.com/Geode-solutions' },
         {
           icon: 'fab fa-linkedin',
           url: 'https://linkedin.com/company/geode-solutions'
