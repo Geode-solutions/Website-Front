@@ -89,15 +89,5 @@ export default {
         force: true
       }
     ]
-  },
-  
-  /*
-   ** Build configuration
-   */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
   }
 }

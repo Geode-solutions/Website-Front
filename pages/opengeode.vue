@@ -1,15 +1,15 @@
 <template>
-  <v-layout column>
-    <v-flex
+  <v-row>
+    <v-col
       class="text-center title"
     >
-      <h1 :class="display" >
+      <h1 :class="display">
         OpenGeode
       </h1>
-    </v-flex>
+    </v-col>
     
     <no-ssr>
-      <vue-particles class="particles-wrapper mb-3" style="z-index: 1"
+      <vue-particles class="particles-wrapper mb-5" style="z-index: 1"
                      color="004D40"
                      :particle-opacity="0.5"
                      :particles-number="80"
@@ -27,22 +27,12 @@
 
 
     <v-container>
-      <v-layout column class="text-center">
-        <v-flex
-          class="text-center"
-          mb-5
-        >
-          <h2 class="display-1 primary--text my-3">
+      <v-row class="text-center">
+        <v-col>
+          <h2 class="display-1 primary--text my-5">
             Open source platform for representing and manipulating geometric models
           </h2>
-        </v-flex>  
 
-        <v-flex
-          class="text-center"
-          xs12
-          sm4
-          my-5
-        >
           <v-card
             flat
             style="background: rgba(0,0,0,0)"
@@ -61,74 +51,69 @@
                 :size="$vuetify.breakpoint.smAndUp ? 150 : 100"
                 color="#000000"
                 style="display: ''"
-              >fab fa-github
+              >
+                fab fa-github
               </v-icon>
             </a> 
           </v-card>
-        </v-flex>
   
-        <h2
-          class="section display-3 mt-5"
-          align="center"
-        >
-          Key features
-        </h2>
-        <v-flex
-          v-for="(card, index) in cards"
-          :key="index"
-          v-scroll-reveal.reset
-          md1
-        >
-          <v-card
-            flat
-            style="background: rgba(0,0,0,0)"
+          <h2
+            class="section display-3 mt-5"
+            align="center"
           >
-            <v-layout
-              :reverse="card.reverse"
-              row
-              wrap
-              align-center
-              justify-space-around
+            Key features
+          </h2>
+            <v-card
+              v-for="(card, index) in cards"
+              :key="index"
+              v-scroll-reveal.reset
+              flat
+              style="background: rgba(0,0,0,0)"
             >
-              <v-flex
-                xs12
-                sm5
+              <v-row
+                align="center"
+                justify="space-around"
               >
-                <v-card-text>
-                  <v-img
-                    :src="card.image"
-                    contain
-                  />
-                </v-card-text>
-              </v-flex>
-              <v-flex
-                xs12
-                sm7
-              >
-                <v-card
-                  flat
-                  style="background: rgba(0,0,0,0)"
+                <v-col
+                  :order="index % 2"
+                  xs="12"
+                  sm="5"
                 >
-                  <v-card-title
-                    primary-title
-                    class="justify-center display-1"
-                  >
-                    {{ card.title }}
-                  </v-card-title>
-                  <v-card-text
-                    align="justify"
-                    class="body-1"
-                  >
-                    {{ card.text }}
+                  <v-card-text>
+                    <v-img
+                      :src="card.image"
+                      contain
+                    />
                   </v-card-text>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-card>
-        </v-flex>        
-      </v-layout>
+                </v-col>
+                <v-col
+                  xs="12"
+                  sm="7"
+                >
+                  <v-card
+                    flat
+                    style="background: rgba(0,0,0,0)"
+                  >
+                    <v-card-title
+                      primary-title
+                      class="justify-center display-1"
+                    >
+                      {{ card.title }}
+                    </v-card-title>
+                    <v-card-text
+                      align="justify"
+                      class="body-1"
+                    >
+                      {{ card.text }}
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-card>
+        </v-col>  
+      </v-row>
     </v-container>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>
