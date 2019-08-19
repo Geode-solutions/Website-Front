@@ -66,7 +66,6 @@
             <v-card
               v-for="(card, index) in cards"
               :key="index"
-              v-scroll-reveal.reset
               flat
               style="background: rgba(0,0,0,0)"
             >
@@ -75,11 +74,12 @@
                 justify="space-around"
               >
                 <v-col
-                  :order="index % 2"
+                  :order="(index + 1) % 2"
                   xs="12"
                   sm="5"
                 >
-                  <v-card-text>
+                  <v-card-text
+                    v-scroll-reveal >
                     <v-img
                       :src="card.image"
                       contain
@@ -134,8 +134,7 @@ export default {
             'OpenGeode is an open source C++ framework available on GitHub, \
             under a permissive software license (MIT). \
             We also provide pre-compiled releases on several platforms: \
-            Windows, UNIX-based, macOS.',
-          reverse: true
+            Windows, UNIX-based, macOS.'
         },
         
         {
@@ -146,8 +145,7 @@ export default {
             data structures for meshes (wells, faults, horizons, 3D structured, \
             partially or fully unstructured meshes), and for boundary representations \
             organizing a rich set of relationships between geological features (structural \
-            models, cross-sections).',
-          reverse: false
+            models, cross-sections).'
         },
 
         {
@@ -157,8 +155,7 @@ export default {
             'A complete set of tools is used around OpenGeode to ensure its quality and its stability. \
             The Continuous Integration and Continuous Delivery philosophy has been chosen: code changes \
             are delivered more frequently, more reliably (high-leveled tests) and as automatic as possible, \
-            using Microsoft Azure DevOps tools.',
-          reverse: true
+            using Microsoft Azure DevOps tools.'
         },
 
         {
@@ -169,8 +166,7 @@ export default {
             API librairies are heavily documented, classes and methods are meaningful named. \
             OpenGeode is easy to get and to compile.  Convenient and open-source tools will soon be associated to OpenGeode:\
             a Javascript-based scriptability framework for quick prototyping and \
-            a web-based application using an innovative UI and modern technologies.',
-          reverse: false
+            a web-based application using an innovative UI and modern technologies.'
         },
 
         {
@@ -178,8 +174,7 @@ export default {
           image: 'https://cdn.pixabay.com/photo/2012/03/01/01/42/connect-20333_960_720.jpg',
           text:
             'OpenGeode supports users in adding new functionalities to allow easy adaptation to specific requirements. \
-            We provide a quick start template to create your own technologies based on OpenGeode.',
-          reverse: true
+            We provide a quick start template to create your own technologies based on OpenGeode.'
         },
 
 
@@ -188,8 +183,7 @@ export default {
           image: 'https://cdn.pixabay.com/photo/2014/06/18/16/31/jet-engine-371412_960_720.jpg',
           text:
             'Modern concurrency and GPU-accelerated solutions are planned to be integrated to reach real-time computations. \
-            We want to deliver turnkey powerful solutions for effective and immediate use.',
-          reverse: false
+            We want to deliver turnkey powerful solutions for effective and immediate use.'
         },
 
 

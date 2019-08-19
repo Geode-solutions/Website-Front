@@ -32,7 +32,6 @@
             <v-card
               v-for="(card, index) in masterCards"
               :key="index"
-              v-scroll-reveal.reset
               flat
               style="background: rgba(0,0,0,0)"
             >
@@ -41,13 +40,14 @@
                 justify="space-around"
               >
                 <v-col
-                  :order="index % 2"
+                  :order="(index + 1) % 2"
                   xs="12"
                   sm="5"
                 >
                   <v-card-text>
                     <v-img
                       :src="card.image"
+                      v-scroll-reveal
                       contain
                     />
                   </v-card-text>
@@ -98,7 +98,6 @@
           <v-col
             v-for="(card, index) in cards"
             :key="index"
-            v-scroll-reveal.reset
             xs="12"
             sm="5"
             lg="3"
@@ -107,6 +106,7 @@
             <v-card
               class="elevation-5"
               height="100%"
+              v-scroll-reveal
             >
               <v-img
                 :src="card.image"
@@ -140,7 +140,7 @@
           <v-col
             v-for="(partner, index) in partners"
             :key="index"
-            v-scroll-reveal.reset
+            v-scroll-reveal
             xs="12"
             sm="5"
             lg="3"
@@ -170,7 +170,7 @@
         >
           <v-col
             v-for="(guy, index) in us" :key="index"
-            v-scroll-reveal.reset
+            v-scroll-reveal
             xs="8"
             sm="4"
             class="ma-2"
