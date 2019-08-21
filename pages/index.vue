@@ -40,8 +40,8 @@
                 justify="space-around"
               >
                 <v-col
-                  :order="(index + 1) % 2"
-                  xs="12"
+                  :order-sm="(index + 1) % 2"
+                  cols="12"
                   sm="5"
                 >
                   <v-card-text>
@@ -53,7 +53,7 @@
                   </v-card-text>
                 </v-col>
                 <v-col
-                  xs="12"
+                  cols="12"
                   sm="7"
                 >
                   <v-card
@@ -98,7 +98,7 @@
           <v-col
             v-for="(card, index) in cards"
             :key="index"
-            xs="12"
+            cols="12"
             sm="5"
             lg="3"
             class="ma-3"
@@ -141,7 +141,7 @@
             v-for="(partner, index) in partners"
             :key="index"
             v-scroll-reveal
-            xs="12"
+            cols="12"
             sm="5"
             lg="3"
             class="ma-2"
@@ -171,7 +171,7 @@
           <v-col
             v-for="(guy, index) in us" :key="index"
             v-scroll-reveal
-            xs="8"
+            cols="8"
             sm="4"
             class="ma-2"
           >

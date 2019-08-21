@@ -74,8 +74,8 @@
                 justify="space-around"
               >
                 <v-col
-                  :order="(index + 1) % 2"
-                  xs="12"
+                  :order-sm="(index + 1) % 2"
+                  cols="12"
                   sm="5"
                 >
                   <v-card-text
@@ -87,7 +87,7 @@
                   </v-card-text>
                 </v-col>
                 <v-col
-                  xs="12"
+                  cols="12"
                   sm="7"
                 >
                   <v-card

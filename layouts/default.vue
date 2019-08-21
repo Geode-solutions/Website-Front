@@ -63,7 +63,7 @@
     <v-footer padless>
       <v-card text tile dark class="primary flex">
         <v-row align-center>
-          <v-col text-right>
+          <v-col cols="auto">
             <v-card-text class="pa-1 ml-2">
               <v-btn
                 v-for="icon in icons"
@@ -79,7 +79,7 @@
             </v-card-text>
           </v-col>
           <v-spacer />
-          <v-col class="text-right">
+          <v-col  cols="auto" class="text-right">
             <v-card-text>
               <v-btn small class="pa-0 ma-0" text href="/legalNotice">
                 Legal notice
@@ -93,13 +93,13 @@
         </v-row>
         <v-divider />
         <v-row align-center class="px-1">
-          <v-col cols="8">
+          <v-col cols="auto">
             <v-card-text>
               Copyright &copy; {{ date }} — {{ name }} SAS. All rights reserved.
             </v-card-text>
           </v-col>
           <v-spacer />
-          <v-col class="text-right">
+          <v-col cols="auto" class="text-right">
             <v-btn target="_blank" text href="https://nuxtjs.org/">
               <img
                 width="120px"
