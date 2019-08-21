@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar dark color="primary" fixed app>
-      <v-layout class="hidden-sm-and-down">
+      <v-row class="hidden-sm-and-down px-2">
         <v-btn text active-class="" nuxt to="/">
           <v-app-bar-nav-icon>
             <v-icon large>
@@ -16,7 +16,7 @@
             <span>{{ item.title }}</span>
           </v-btn>
         </v-toolbar-items>
-      </v-layout>
+      </v-row>
 
       <v-expansion-panels
         v-model="menu"
@@ -24,19 +24,19 @@
         style="position: absolute; top: 0; left: 0;"
         accordion
       >
-        <v-expansion-panel class="primary" style="width: 99%;">
+        <v-expansion-panel class="primary">
           <v-expansion-panel-header>
-            <v-layout row align-center>
-              <v-flex class="px-2" xs1>
+            <v-row align-center>
+              <v-col class="px-2" cols="1">
                 <v-icon large>
                   $vuetify.icons.logo
                 </v-icon>
-              </v-flex>
-              <v-flex class="title mx-2">
+              </v-col>
+              <v-col class="title mx-2">
                 {{ name }}
-              </v-flex>
+              </v-col>
               <v-spacer />
-            </v-layout>
+            </v-row>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-list color="primary" subheader>
@@ -62,23 +62,25 @@
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
-        <v-layout align-center>
-          <v-card-text class="pa-1">
-            <v-btn
-              v-for="icon in icons"
-              :key="icon.icon"
-              icon
-              target="_blank"
-              :href="icon.url"
-            >
-              <v-icon size="24px">
-                {{ icon.icon }}
-              </v-icon>
-            </v-btn>
-          </v-card-text>
+        <v-row align-center>
+          <v-col cols="auto">
+            <v-card-text class="pa-1 ml-2">
+              <v-btn
+                v-for="icon in icons"
+                :key="icon.icon"
+                icon
+                target="_blank"
+                :href="icon.url"
+              >
+                <v-icon size="24px">
+                  {{ icon.icon }}
+                </v-icon>
+              </v-btn>
+            </v-card-text>
+          </v-col>
           <v-spacer />
-          <v-card-text>
-            <v-flex text-right>
+          <v-col  cols="auto" class="text-right">
+            <v-card-text>
               <v-btn small class="pa-0 ma-0" text href="/legalNotice">
                 Legal notice
               </v-btn>
@@ -86,26 +88,26 @@
               <v-btn small class="pa-0 ma-0" text href="/credits">
                 Credits
               </v-btn>
-            </v-flex>
-          </v-card-text>
-        </v-layout>
+            </v-card-text>
+          </v-col>
+        </v-row>
         <v-divider />
-        <v-layout row align-center>
-          <v-flex>
+        <v-row align-center class="px-1">
+          <v-col cols="auto">
             <v-card-text>
               Copyright &copy; {{ date }} — {{ name }} SAS. All rights reserved.
             </v-card-text>
-          </v-flex>
+          </v-col>
           <v-spacer />
-          <v-flex text-right>
+          <v-col cols="auto" class="text-right">
             <v-btn target="_blank" text href="https://nuxtjs.org/">
               <img
                 width="120px"
                 src="https://nuxtjs.org/logos/built-with-nuxt-white.svg"
               >
             </v-btn>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-card>
     </v-footer>
   </v-app>

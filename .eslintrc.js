@@ -20,7 +20,9 @@ module.exports = {
         treatUndefinedAsUnspecified: false
       }
     ],
-    'vuetify/no-deprecated-classes': 'error'
+    'vuetify/no-deprecated-classes': 'error',
+    'vuetify/grid-unknown-attributes': 'error',
+    'vuetify/no-legacy-grid': 'error',
   },
   parserOptions: {
     parser: "babel-eslint"
