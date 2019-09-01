@@ -82,6 +82,7 @@
                     v-scroll-reveal >
                     <v-img
                       :src="card.image"
+                      :alt="'Geode-solutions '+ card.title"
                       contain
                     />
                   </v-card-text>
