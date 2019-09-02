@@ -5,6 +5,7 @@
         <v-parallax
           :src="require('@/assets/hero.jpg')"
           :height="windowHeight"
+          alt="Geode-solutions next generation of meshing tools"
         > 
           <v-row
             align="center"
@@ -13,9 +14,9 @@
               <h1 class="display-3 text-center mb-3 primary--text">
                 Geode-solutions
               </h1>
-              <h4 class="headline text-center primary--text">
+              <h2 class="headline text-center primary--text">
                 Software company building the next generation of meshing tools for advanced modeling
-              </h4>
+              </h2>
             </v-col>
           </v-row>
         </v-parallax>
@@ -47,6 +48,7 @@
                   <v-card-text>
                     <v-img
                       :src="card.image"
+                      :alt="'Geode-solutions '+ card.title"
                       v-scroll-reveal
                       contain
                     />
@@ -110,6 +112,7 @@
             >
               <v-img
                 :src="card.image"
+                :alt="'Geode-solutions '+ card.title"
                 aspect-ratio="2.75"
                 gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
               >
@@ -154,6 +157,7 @@
                 contain
                 max-height="100"
                 :src="partner.logo"
+                :alt="'Geode-solutions '+ partner.name"
               />
             </a>
           </v-col> 
@@ -182,7 +186,8 @@
                 :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
                 class="ma-2"
               >
-                <v-img :src="guy.pict" />
+                <v-img :src="guy.pict" 
+                      :alt="'Geode-solutions '+ guy.name"/>
               </v-avatar>
               <v-card-title
                 primary-title
