@@ -130,7 +130,7 @@ export default {
       cards: [
         {
           title: 'Open source and cross-platform',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          image: require('@/assets/open-source.jpg'),
           text:
             'OpenGeode is an open source C++ framework available on GitHub, \
             under a permissive software license (MIT). \

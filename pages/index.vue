@@ -263,7 +263,7 @@ export default {
       masterCards: [
         {
           title: 'Open source platform',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          image: require('@/assets/open-source.jpg'),
           text:
             'OpenGeode is our open source platform for representing and manipulating geological models.\
               It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
@@ -273,7 +273,7 @@ export default {
         },
         {
           title: 'Advanced meshing',
-          image: require('../assets/mesh_JD_Hancock.png'),
+          image: require('@/assets/mesh_JD_Hancock.png'),
           text:
             'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
              It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
@@ -285,7 +285,7 @@ export default {
       partners: [
         {
           name: 'Helioparc',
-          logo: 'http://www.helioparc.fr/theme/base-2014/img/header/logo.svg',
+          logo: require('@/assets/logo_helioparc.svg'),
           url: 'http://www.helioparc.fr'
         },
         {
@@ -296,8 +296,8 @@ export default {
         },
         {
           name: 'RING',
-          logo: 'http://www.ring-team.org/images/Logos/logo_ring_blanc.png',
-          url: 'http://www.ring-team.org'
+          logo: 'https://www.ring-team.org/images/Logos/logo_ring_blanc.png',
+          url: 'https://www.ring-team.org'
         }
       ],
       us: [
