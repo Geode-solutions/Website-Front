@@ -318,6 +318,11 @@ export default {
           url: 'https://www.nouvelle-aquitaine.fr'
         },
         {
+          name: 'Pole Avenia',
+          logo: 'https://www.pole-avenia.com/eng/wp-content/uploads/sites/3/2015/03/POLE-AVENIA.png',
+          url: 'https://www.pole-avenia.com/eng'
+        },
+        {
           name: 'RING',
           logo: 'https://www.ring-team.org/images/Logos/logo_ring_blanc.png',
           url: 'https://www.ring-team.org'
