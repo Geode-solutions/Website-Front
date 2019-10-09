@@ -79,7 +79,7 @@
             </v-card-text>
           </v-col>
           <v-spacer />
-          <v-col  cols="auto" class="text-right">
+          <v-col cols="auto" class="text-right">
             <v-card-text>
               <v-btn small class="pa-0 ma-0" text href="/legalNotice">
                 Legal notice

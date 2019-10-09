@@ -63,54 +63,55 @@
           >
             Key features
           </h2>
-            <v-card
-              v-for="(card, index) in cards"
-              :key="index"
-              flat
-              style="background: rgba(0,0,0,0)"
+          <v-card
+            v-for="(card, index) in cards"
+            :key="index"
+            flat
+            style="background: rgba(0,0,0,0)"
+          >
+            <v-row
+              align="center"
+              justify="space-around"
             >
-              <v-row
-                align="center"
-                justify="space-around"
+              <v-col
+                :order-sm="(index + 1) % 2"
+                cols="12"
+                sm="5"
               >
-                <v-col
-                  :order-sm="(index + 1) % 2"
-                  cols="12"
-                  sm="5"
+                <v-card-text
+                  v-scroll-reveal
                 >
-                  <v-card-text
-                    v-scroll-reveal >
-                    <v-img
-                      :src="card.image"
-                      :alt="'Geode-solutions '+ card.title"
-                      contain
-                    />
-                  </v-card-text>
-                </v-col>
-                <v-col
-                  cols="12"
-                  sm="7"
+                  <v-img
+                    :src="card.image"
+                    :alt="'Geode-solutions '+ card.title"
+                    contain
+                  />
+                </v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="7"
+              >
+                <v-card
+                  flat
+                  style="background: rgba(0,0,0,0)"
                 >
-                  <v-card
-                    flat
-                    style="background: rgba(0,0,0,0)"
+                  <v-card-title
+                    primary-title
+                    class="justify-center display-1"
                   >
-                    <v-card-title
-                      primary-title
-                      class="justify-center display-1"
-                    >
-                      {{ card.title }}
-                    </v-card-title>
-                    <v-card-text
-                      align="justify"
-                      class="body-1"
-                    >
-                      {{ card.text }}
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
+                    {{ card.title }}
+                  </v-card-title>
+                  <v-card-text
+                    align="justify"
+                    class="body-1"
+                  >
+                    {{ card.text }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-card>
         </v-col>  
       </v-row>
     </v-container>

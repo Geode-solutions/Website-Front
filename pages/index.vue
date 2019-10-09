@@ -8,16 +8,33 @@
           alt="Geode-solutions next generation of meshing tools"
         > 
           <v-row
+            class="flex-column"
             align="center"
+            justify="end"
           >
-            <v-col>
-              <h1 class="display-3 text-center mb-3 primary--text">
-                Geode-solutions
-              </h1>
-              <h2 class="headline text-center primary--text">
-                Software company building the next generation of meshing tools for advanced modeling
-              </h2>
+            <v-col
+              cols="7"
+              sm="5"
+              md="3"
+              lg="2"
+            >
+              <v-img
+                :src="require('@/assets/logo.svg')"
+                alt="Geode-solutions logo"
+              />
             </v-col>
+          </v-row>
+          <v-row
+            class="flex-column"
+            align="center"
+            justify="start"
+          >
+            <h1 class="display-3 text-center mb-3 primary--text">
+              Geode-solutions
+            </h1>
+            <h2 class="headline text-center primary--text">
+              Software company building the next generation of meshing tools for advanced modeling
+            </h2>
           </v-row>
         </v-parallax>
       </no-ssr>
@@ -47,9 +64,9 @@
                 >
                   <v-card-text>
                     <v-img
+                      v-scroll-reveal
                       :src="card.image"
                       :alt="'Geode-solutions '+ card.title"
-                      v-scroll-reveal
                       contain
                     />
                   </v-card-text>
@@ -106,9 +123,9 @@
             class="ma-3"
           >
             <v-card
+              v-scroll-reveal
               class="elevation-5"
               height="100%"
-              v-scroll-reveal
             >
               <v-img
                 :src="card.image"
@@ -187,7 +204,8 @@
                 class="ma-2"
               >
                 <v-img :src="guy.pict" 
-                      :alt="'Geode-solutions '+ guy.name"/>
+                       :alt="'Geode-solutions '+ guy.name"
+                />
               </v-avatar>
               <v-card-title
                 primary-title
@@ -293,6 +311,11 @@ export default {
           logo:
             'https://labanquiz.com/wp-content/uploads/2016/10/cropped-cropped-cropped-la_banquiz.png',
           url: 'https://labanquiz.com'
+        },
+        {
+          name: 'Nouvelle-Aquitaine',
+          logo: require('@/assets/logo_region.png'),
+          url: 'https://www.nouvelle-aquitaine.fr'
         },
         {
           name: 'RING',
