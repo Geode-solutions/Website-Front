@@ -26,7 +26,7 @@
       >
         <v-expansion-panel class="primary">
           <v-expansion-panel-header>
-            <v-row align-center>
+            <v-row align="center">
               <v-col class="px-2" cols="1">
                 <v-icon large>
                   $vuetify.icons.logo
@@ -35,7 +35,6 @@
               <v-col class="title mx-2">
                 {{ name }}
               </v-col>
-              <v-spacer />
             </v-row>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
@@ -62,7 +61,7 @@
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
-        <v-row align-center>
+        <v-row align="center">
           <v-col cols="auto">
             <v-card-text class="pa-1 ml-2">
               <v-btn
@@ -92,7 +91,7 @@
           </v-col>
         </v-row>
         <v-divider />
-        <v-row align-center class="px-1">
+        <v-row align="center" class="px-1">
           <v-col cols="auto">
             <v-card-text>
               Copyright &copy; {{ date }} — {{ name }} SAS. All rights reserved.
