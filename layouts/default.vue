@@ -70,6 +70,7 @@
                 icon
                 target="_blank"
                 :href="icon.url"
+                class="mx-1"
               >
                 <v-icon size="24px">
                   {{ icon.icon }}

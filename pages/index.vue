@@ -151,39 +151,6 @@
           class="section display-3"
           align="center"
         >
-          Our partners
-        </h2>
-        <v-row
-          align="center"
-          justify="space-around"
-        >
-          <v-col
-            v-for="(partner, index) in partners"
-            :key="index"
-            v-scroll-reveal
-            cols="12"
-            sm="5"
-            lg="3"
-            class="ma-2"
-          >
-            <a
-              :href="partner.url"
-              target="_blank"
-            >
-              <v-img
-                contain
-                max-height="100"
-                :src="partner.logo"
-                :alt="'Geode-solutions '+ partner.name"
-              />
-            </a>
-          </v-col> 
-        </v-row>
-
-        <h2
-          class="section display-3"
-          align="center"
-        >
           Who we are
         </h2>
         <v-row 
@@ -231,6 +198,39 @@
             </v-card>
           </v-col>
         </v-row>
+        <h2
+          class="section display-3"
+          align="center"
+        >
+          Our partners
+        </h2>
+        <v-row
+          align="center"
+          justify="space-around"
+        >
+          <v-col
+            v-for="(partner, index) in partners"
+            :key="index"
+            v-scroll-reveal
+            cols="12"
+            sm="5"
+            lg="3"
+            class="ma-2"
+          >
+            <a
+              :href="partner.url"
+              target="_blank"
+            >
+              <v-img
+                contain
+                max-height="100"
+                :src="partner.logo"
+                :alt="'Geode-solutions '+ partner.name"
+              />
+            </a>
+          </v-col> 
+        </v-row>
+
       </v-container>
     </v-col>
   </v-row>
@@ -321,6 +321,11 @@ export default {
           name: 'Pole Avenia',
           logo: 'https://www.pole-avenia.com/eng/wp-content/uploads/sites/3/2015/03/POLE-AVENIA.png',
           url: 'https://www.pole-avenia.com/eng'
+        },
+        {
+          name: 'Total SA',
+          logo: require('@/assets/logo_total.svg'),
+          url: 'https://www.ep.total.com'
         },
         {
           name: 'RING',
