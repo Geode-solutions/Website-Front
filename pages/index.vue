@@ -104,49 +104,55 @@
             </v-card>
           </v-col>
         </v-row>
-
-        <h2
-          class="section display-3"
-          align="center"
-        >
-          Why Geode-solutions
-        </h2>
-        <v-row
-          justify="center"
-        >
-          <v-col
-            v-for="(card, index) in cards"
-            :key="index"
-            cols="12"
-            sm="5"
-            lg="3"
-            class="ma-3"
-          >
-            <v-card
-              v-scroll-reveal
-              class="elevation-5"
-              height="100%"
+      </v-container>
+      <v-container fluid style="background-color: white">
+        <v-row class="container" style="margin-left: auto; margin-right: auto">
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
             >
-              <v-img
-                :src="card.image"
-                :alt="'Geode-solutions '+ card.title"
-                aspect-ratio="2.75"
-                gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
+              Why Geode-solutions
+            </h2>
+            <v-row
+              justify="center"
+            >
+              <v-col
+                v-for="(card, index) in cards"
+                :key="index"
+                cols="12"
+                sm="5"
+                lg="3"
+                class="ma-3"
               >
-                <v-card-title 
-                  primary-title
-                  class="display-1 justify-center fill-height"
+                <v-card
+                  v-scroll-reveal
+                  class="elevation-5"
+                  height="100%"
                 >
-                  {{ card.title }}
-                </v-card-title>
-              </v-img>
-              <v-card-text class="body-1 font-weight-medium text-center">
-                {{ card.text }}
-              </v-card-text>
-            </v-card>
+                  <v-img
+                    :src="card.image"
+                    :alt="'Geode-solutions '+ card.title"
+                    aspect-ratio="2.75"
+                    gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
+                  >
+                    <v-card-title 
+                      primary-title
+                      class="display-1 justify-center fill-height"
+                    >
+                      {{ card.title }}
+                    </v-card-title>
+                  </v-img>
+                  <v-card-text class="body-1 font-weight-medium text-center">
+                    {{ card.text }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
-
+      </v-container>
+      <v-container>
         <h2
           class="section display-3"
           align="center"
@@ -198,37 +204,43 @@
             </v-card>
           </v-col>
         </v-row>
-        <h2
-          class="section display-3"
-          align="center"
-        >
-          Our partners
-        </h2>
-        <v-row
-          align="center"
-          justify="space-around"
-        >
-          <v-col
-            v-for="(partner, index) in partners"
-            :key="index"
-            v-scroll-reveal
-            cols="12"
-            sm="5"
-            lg="3"
-            class="ma-2"
-          >
-            <a
-              :href="partner.url"
-              target="_blank"
+      </v-container>
+      <v-container fluid style="background-color: white">
+        <v-row class="container" style="margin-left: auto; margin-right: auto">
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
             >
-              <v-img
-                contain
-                max-height="100"
-                :src="partner.logo"
-                :alt="'Geode-solutions '+ partner.name"
-              />
-            </a>
-          </v-col> 
+              Our partners
+            </h2>
+            <v-row
+              align="center"
+              justify="space-around"
+            >
+              <v-col
+                v-for="(partner, index) in partners"
+                :key="index"
+                v-scroll-reveal
+                cols="12"
+                sm="5"
+                lg="3"
+                class="ma-2"
+              >
+                <a
+                  :href="partner.url"
+                  target="_blank"
+                >
+                  <v-img
+                    contain
+                    max-height="100"
+                    :src="partner.logo"
+                    :alt="'Geode-solutions '+ partner.name"
+                  />
+                </a>
+              </v-col> 
+            </v-row>
+          </v-col>
         </v-row>
       </v-container>
     </v-col>
@@ -373,7 +385,7 @@ export default {
 
 <style scoped>
 .section {
-  padding-top: 200px;
-  padding-bottom: 48px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 </style>
