@@ -1,227 +1,238 @@
 <template>
-  <v-layout column>
-    <no-ssr>
-      <v-parallax
-        :src="require('@/assets/hero.jpg')"
-        :height="windowHeight"
-      > 
-        <v-layout
-          column
-          align-center
-          justify-center
-        >
-          <h1 class="display-3 mb-3 primary--text">
-            Geode-solutions
-          </h1>
-          <h4 class="headline text-center primary--text">
-            Software company building the next generation of meshing tools for advanced modeling
-          </h4>
-        </v-layout>
-      </v-parallax>
-    </no-ssr>
-    <v-container>
-      <v-layout
-        column
-        align-center
-        justify-center
-      >
+  <v-row no-gutters>
+    <v-col>
+      <no-ssr>
+        <v-parallax
+          :src="require('@/assets/hero.jpg')"
+          :height="windowHeight"
+          alt="Geode-solutions next generation of meshing tools"
+        > 
+          <v-row
+            class="flex-column"
+            align="center"
+            justify="end"
+          >
+            <v-col
+              cols="7"
+              sm="5"
+              md="3"
+              lg="2"
+            >
+              <v-img
+                :src="require('@/assets/logo.svg')"
+                alt="Geode-solutions logo"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            class="flex-column"
+            align="center"
+            justify="start"
+          >
+            <h1 class="display-3 text-center mb-3 primary--text">
+              Geode-solutions
+            </h1>
+            <h2 class="headline text-center primary--text">
+              Software company building the next generation of meshing tools for advanced modeling
+            </h2>
+          </v-row>
+        </v-parallax>
+      </no-ssr>
+      <v-container>
+        <v-row>
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
+            >
+              What we do
+            </h2>
+            <v-card
+              v-for="(card, index) in masterCards"
+              :key="index"
+              flat
+              style="background: rgba(0,0,0,0)"
+            >
+              <v-row
+                align="center"
+                justify="space-around"
+              >
+                <v-col
+                  :order-sm="(index + 1) % 2"
+                  cols="12"
+                  sm="5"
+                >
+                  <v-card-text>
+                    <v-img
+                      v-scroll-reveal
+                      :src="card.image"
+                      :alt="'Geode-solutions '+ card.title"
+                      contain
+                    />
+                  </v-card-text>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="7"
+                >
+                  <v-card
+                    flat
+                    style="background: rgba(0,0,0,0)"
+                  >
+                    <v-card-title
+                      primary-title
+                      class="justify-center display-1"
+                    >
+                      {{ card.title }}
+                    </v-card-title>
+                    <v-card-text
+                      align="justify"
+                      class="body-1"
+                    >
+                      {{ card.text }}
+                    </v-card-text>
+                    <v-card-text
+                      v-if="card.url"
+                      align="justify"
+                      class="title"
+                    >
+                      <a :href="card.url">{{ card.text2url }}</a>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+
         <h2
           class="section display-3"
           align="center"
         >
-          What we do
+          Why Geode-solutions
         </h2>
-        <v-flex
-          v-for="(card, index) in masterCards"
-          :key="index"
-          v-scroll-reveal.reset
-          md1
+        <v-row
+          justify="center"
         >
-          <v-card
-            flat
-            style="background: rgba(0,0,0,0)"
+          <v-col
+            v-for="(card, index) in cards"
+            :key="index"
+            cols="12"
+            sm="5"
+            lg="3"
+            class="ma-3"
           >
-            <v-layout
-              :reverse="card.reverse"
-              row
-              wrap
-              align-center
-              justify-space-around
+            <v-card
+              v-scroll-reveal
+              class="elevation-5"
+              height="100%"
             >
-              <v-flex
-                xs12
-                sm5
+              <v-img
+                :src="card.image"
+                :alt="'Geode-solutions '+ card.title"
+                aspect-ratio="2.75"
+                gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
               >
-                <v-card-text>
-                  <v-img
-                    :src="card.image"
-                    contain
-                  />
-                </v-card-text>
-              </v-flex>
-              <v-flex
-                xs12
-                sm7
-              >
-                <v-card
-                  flat
-                  style="background: rgba(0,0,0,0)"
+                <v-card-title 
+                  primary-title
+                  class="display-1 justify-center fill-height"
                 >
-                  <v-card-title
-                    primary-title
-                    class="justify-center display-1"
-                  >
-                    {{ card.title }}
-                  </v-card-title>
-                  <v-card-text
-                    align="justify"
-                    class="body-1"
-                  >
-                    {{ card.text }}
-                  </v-card-text>
-                  <v-card-text
-                    v-if="card.url"
-                    align="justify"
-                    class="title"
-                  >
-                    <a :href="card.url">{{card.text2url}}</a>
-                  </v-card-text>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-card>
-        </v-flex>
-      </v-layout>
+                  {{ card.title }}
+                </v-card-title>
+              </v-img>
+              <v-card-text class="body-1 font-weight-medium text-center">
+                {{ card.text }}
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
 
-      <h2
-        class="section display-3"
-        align="center"
-      >
-        Why Geode-solutions
-      </h2>
-      <v-layout
-        wrap
-        row
-        justify-center
-      >
-        <v-flex
-          v-for="(card, index) in cards"
-          :key="index"
-          v-scroll-reveal.reset
-          xs12
-          sm5
-          lg3
-          class="ma-3"
+        <h2
+          class="section display-3"
+          align="center"
         >
-          <v-card
-            class="elevation-5"
-            height="100%"
+          Who we are
+        </h2>
+        <v-row 
+          justify="space-around"
+        >
+          <v-col
+            v-for="(guy, index) in us" :key="index"
+            v-scroll-reveal
+            cols="8"
+            sm="4"
+            class="ma-2"
           >
-            <v-img
-              :src="card.image"
-              aspect-ratio="2.75"
-              gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
+            <v-card
+              class="elevation-5 text-center"
             >
-              <v-card-title 
+              <v-avatar
+                :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
+                class="ma-2"
+              >
+                <v-img :src="guy.pict" 
+                       :alt="'Geode-solutions '+ guy.name"
+                />
+              </v-avatar>
+              <v-card-title
                 primary-title
-                class="display-1 justify-center fill-height"
+                class="justify-center headline"
               >
-                {{ card.title }}
+                {{ guy.name }}
+                <v-btn
+                  icon
+                  target="_blank"
+                  :href="guy.url"
+                >
+                  <v-icon size="24px" color="#0A66C2">
+                    fab fa-linkedin
+                  </v-icon>
+                </v-btn>
+                {{ guy.job }}
               </v-card-title>
-            </v-img>
-            <v-card-text class="body-1 font-weight-medium text-center">
-              {{ card.text }}
-            </v-card-text>
-          </v-card>
-        </v-flex>
-      </v-layout>
-
-      <h2
-        class="section display-3"
-        align="center"
-      >
-        Our partners
-      </h2>
-      <v-layout
-        wrap
-        row
-        align-center
-        justify-space-around
-      >
-        <v-flex
-          v-for="(partner, index) in partners"
-          :key="index"
-          v-scroll-reveal.reset
-          xs12
-          sm5
-          lg3
-          class="ma-2"
+              <v-card-text
+                class="justify-center headline font-italic"
+              > 
+                {{ guy.topic }}
+              </v-card-text> 
+            </v-card>
+          </v-col>
+        </v-row>
+        <h2
+          class="section display-3"
+          align="center"
         >
-          <a
-            :href="partner.url"
-            target="_blank"
-          >
-            <v-img
-              contain
-              max-height="100"
-              :src="partner.logo"
-            />
-          </a>
-        </v-flex> 
-      </v-layout>
-
-      <h2
-        class="section display-3"
-        align="center"
-      >
-        Who we are
-      </h2>
-      <v-layout 
-        row wrap
-        justify-space-around
-      >
-        <v-flex
-          v-for="(guy, index) in us" :key="index"
-          v-scroll-reveal.reset
-          xs8
-          sm4
-          class="ma-2"
+          Our partners
+        </h2>
+        <v-row
+          align="center"
+          justify="space-around"
         >
-          <v-card
-            class="elevation-5 text-center"
+          <v-col
+            v-for="(partner, index) in partners"
+            :key="index"
+            v-scroll-reveal
+            cols="12"
+            sm="5"
+            lg="3"
+            class="ma-2"
           >
-            <v-avatar
-              :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
-              class="ma-2"
+            <a
+              :href="partner.url"
+              target="_blank"
             >
-              <v-img :src="guy.pict" />
-            </v-avatar>
-            <v-card-title
-              primary-title
-              class="justify-center headline"
-            >
-              {{ guy.name }}
-              <v-btn
-                icon
-                target="_blank"
-                :href="guy.url"
-              >
-                <v-icon size="24px" color="#0A66C2">
-                  fab fa-linkedin
-                </v-icon>
-              </v-btn>
-              {{ guy.job }}
-            </v-card-title>
-            <v-card-text
-              class="justify-center headline font-italic"
-            > 
-              {{ guy.topic }}
-            </v-card-text> 
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-layout>
+              <v-img
+                contain
+                max-height="100"
+                :src="partner.logo"
+                :alt="'Geode-solutions '+ partner.name"
+              />
+            </a>
+          </v-col> 
+        </v-row>
+      </v-container>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -269,31 +280,38 @@ export default {
       masterCards: [
         {
           title: 'Open source platform',
-          image: 'http://www.picpedia.org/highway-signs/images/open-source.jpg',
+          image: require('@/assets/open-source.jpg'),
           text:
             'OpenGeode is our open source platform for representing and manipulating geological models.\
               It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
               The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
           url: "/opengeode",
-          text2url: 'More details',
-          reverse: true
+          text2url: 'More details'
         },
         {
-          title: 'Advanced meshing',
-          image: require('../assets/mesh_JD_Hancock.png'),
+          title: 'Advanced meshing and modeling',
+          image: require('@/assets/mesh_JD_Hancock.png'),
           text:
-            'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
+            'Our reliable and pratical solutions for meshing and modeling combine innovative technologies across industrial fields.\
              It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
             Available in proprietary OpenGeode extension.',
-          url: "",
-          text2url: 'More details soon',
-          reverse: false
+          url: "/products",
+          text2url: 'More details'
+        },
+        {
+          title: 'Custom-tailored services',
+          image: require('@/assets/mesh_JD_Hancock.png'),
+          text:
+            'We delivers custom-tailored services to address your specific needs and challenges. \
+            Our experts can provide training, support and software development on a wild range of applications from geometry and software to geosciences.',
+          url: "/services",
+          text2url: 'More details'
         }
       ],
       partners: [
         {
           name: 'Helioparc',
-          logo: 'http://www.helioparc.fr/theme/base-2014/img/header/logo.svg',
+          logo: require('@/assets/logo_helioparc.svg'),
           url: 'http://www.helioparc.fr'
         },
         {
@@ -303,9 +321,24 @@ export default {
           url: 'https://labanquiz.com'
         },
         {
+          name: 'Nouvelle-Aquitaine',
+          logo: require('@/assets/logo_region.png'),
+          url: 'https://www.nouvelle-aquitaine.fr'
+        },
+        {
+          name: 'Pole Avenia',
+          logo: 'https://www.pole-avenia.com/eng/wp-content/uploads/sites/3/2015/03/POLE-AVENIA.png',
+          url: 'https://www.pole-avenia.com/eng'
+        },
+        {
+          name: 'Total SA',
+          logo: require('@/assets/logo_total.svg'),
+          url: 'https://www.ep.total.com'
+        },
+        {
           name: 'RING',
-          logo: 'http://www.ring-team.org/images/Logos/logo_ring_blanc.png',
-          url: 'http://www.ring-team.org'
+          logo: 'https://www.ring-team.org/images/Logos/logo_ring_blanc.png',
+          url: 'https://www.ring-team.org'
         }
       ],
       us: [
