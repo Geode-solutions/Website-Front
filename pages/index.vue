@@ -7,35 +7,29 @@
           :height="windowHeight"
           alt="Geode-solutions next generation of meshing tools"
         > 
-          <v-row
-            class="flex-column"
-            align="center"
-            justify="end"
+          <v-card 
+            class="container" 
+            width="600" 
+            style="border-radius: 80px; background-color: rgba(255,255,255,0.8)"
           >
-            <v-col
-              cols="7"
-              sm="5"
-              md="3"
-              lg="2"
+            <v-img
+              :src="require('@/assets/logo.svg')"
+              alt="Geode-solutions logo"
+              width="50%"
+              class="mx-auto"
+            />
+            <v-row
+              class="flex-column"
+              align="center"
             >
-              <v-img
-                :src="require('@/assets/logo.svg')"
-                alt="Geode-solutions logo"
-              />
-            </v-col>
-          </v-row>
-          <v-row
-            class="flex-column"
-            align="center"
-            justify="start"
-          >
-            <h1 class="display-3 text-center mb-3 primary--text">
-              Geode-solutions
-            </h1>
-            <h2 class="headline text-center primary--text">
-              Software company building the next generation of meshing tools for advanced modeling
-            </h2>
-          </v-row>
+              <h1 class="display-3 text-center mb-3 primary--text">
+                Geode-solutions
+              </h1>
+              <h2 class="headline text-center primary--text">
+                Software company building the next generation of meshing tools for advanced modeling
+              </h2>
+            </v-row>
+          </v-card>
         </v-parallax>
       </no-ssr>
       <v-container>
@@ -47,35 +41,22 @@
             >
               What we do
             </h2>
-            <v-card
-              v-for="(card, index) in masterCards"
-              :key="index"
-            >
-              <v-row
-                align="center"
-                justify="space-around"
+            <v-row justify="space-around">
+              <v-col
+                v-for="card in masterCards"
+                :key="card.title"
+                cols="12"
+                md="6"
               >
-                <v-col
-                  :order-sm="(index + 1) % 2"
-                  cols="12"
-                  sm="5"
-                >
-                  <v-card-text>
-                    <v-img
-                      v-scroll-reveal
-                      :src="card.image"
-                      :alt="'Geode-solutions '+ card.title"
-                      contain
-                    />
-                  </v-card-text>
-                </v-col>
-                <v-col
-                  cols="12"
-                  sm="7"
-                >
-                  <v-card
-                    flat
-                    style="background: rgba(0,0,0,0)"
+                <v-hover #default="{ hover }">
+                  <v-card 
+                    v-scroll-reveal
+                    dark
+                    height="500"
+                    :elevation="hover ? 20 : 2"
+                    :img="card.image"
+                    nuxt
+                    :to="card.url"
                   >
                     <v-card-title
                       primary-title
@@ -93,13 +74,11 @@
                       v-if="card.url"
                       align="justify"
                       class="title"
-                    >
-                      <a :href="card.url">{{ card.text2url }}</a>
-                    </v-card-text>
+                    />
                   </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
+                </v-hover>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-container>
@@ -212,7 +191,7 @@
             >
               Our partners
             </h2>
-            <carousel autoplay loop :per-page="nbPartners"> 
+            <carousel v-scroll-reveal autoplay loop :per-page="nbPartners"> 
               <slide 
                 v-for="(partner, index) in partners"
                 :key="index"
@@ -276,14 +255,13 @@ export default {
       ],
       masterCards: [
         {
-          title: 'Open source platform',
-          image: require('@/assets/open-source.jpg'),
+          title: 'Advanced meshing and modeling',
+          image: require('@/assets/mesh_JD_Hancock.png'),
           text:
-            'OpenGeode is our open source platform for representing and manipulating geological models.\
-              It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
-              The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
-          url: "/opengeode",
-          text2url: 'More details'
+            'Our reliable and pratical solutions for meshing and modeling combine innovative technologies across industrial fields.\
+             It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
+            Available in proprietary OpenGeode extension.',
+          url: "/products"
         },
         {
           title: 'Advanced meshing and modeling',
@@ -292,8 +270,16 @@ export default {
             'Our reliable and pratical solutions for meshing and modeling combine innovative technologies across industrial fields.\
              It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
             Available in proprietary OpenGeode extension.',
-          url: "/products",
-          text2url: 'More details'
+          url: "/products"
+        },
+        {
+          title: 'Open source platform',
+          image: require('@/assets/open-source.jpg'),
+          text:
+            'OpenGeode is our open source platform for representing and manipulating geological models.\
+              It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
+              The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
+          url: "/opengeode"
         },
         {
           title: 'Custom-tailored services',
@@ -301,8 +287,7 @@ export default {
           text:
             'We delivers custom-tailored services to address your specific needs and challenges. \
             Our experts can provide training, support and software development on a wild range of applications from geometry and software to geosciences.',
-          url: "/services",
-          text2url: 'More details'
+          url: "/services"
         }
       ],
       partners: [
@@ -379,7 +364,7 @@ export default {
 
 <style scoped>
 .section {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>
