@@ -2,7 +2,9 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1 class="display-3 my-5 py-5" align="center">Custom-tailored services</h1>
+        <h1 class="display-3 my-5 py-5" align="center">
+          Custom-tailored services
+        </h1>
         <v-card v-for="(service, index) in services" :key="index" class="my-5">
           <v-row align="center" justify="space-around">
             <v-col :order-sm="(index + 1) % 2" cols="12" sm="5">
@@ -17,8 +19,12 @@
             </v-col>
             <v-col cols="12" sm="7">
               <v-card flat style="background: rgba(0,0,0,0)">
-                <v-card-title primary-title class="justify-center display-1">{{ service.title }}</v-card-title>
-                <v-card-text align="justify" class="title">{{ service.text }}</v-card-text>
+                <v-card-title primary-title class="justify-center display-1">
+                  {{ service.title }}
+                </v-card-title>
+                <v-card-text align="justify" class="title">
+                  {{ service.text }}
+                </v-card-text>
               </v-card>
             </v-col>
           </v-row>
@@ -26,7 +32,9 @@
         <h2 class="display-1 my-5 py-5" align="center">
           Let us know how we can help:
           <div class="my-2">
-            <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">Contact us</v-btn>
+            <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
+              Contact us
+            </v-btn>
           </div>
         </h2>
       </v-col>

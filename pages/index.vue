@@ -59,7 +59,7 @@
                     :to="card.url"
                     class="d-flex flex-column"
                   >
-                    <v-spacer/>
+                    <v-spacer />
                     <v-card-title
                       class="display-1"
                     >
