@@ -50,8 +50,6 @@
             <v-card
               v-for="(card, index) in masterCards"
               :key="index"
-              flat
-              style="background: rgba(0,0,0,0)"
             >
               <v-row
                 align="center"
@@ -106,7 +104,7 @@
         </v-row>
       </v-container>
       <v-container fluid style="background-color: white">
-        <v-row class="container" style="margin-left: auto; margin-right: auto">
+        <v-row class="container mx-auto">
           <v-col>
             <h2
               class="section display-3"
@@ -206,7 +204,7 @@
         </v-row>
       </v-container>
       <v-container fluid style="background-color: white">
-        <v-row class="container" style="margin-left: auto; margin-right: auto">
+        <v-row class="container mx-auto">
           <v-col>
             <h2
               class="section display-3"
@@ -214,32 +212,19 @@
             >
               Our partners
             </h2>
-            <v-row
-              align="center"
-              justify="space-around"
-            >
-              <v-col
+            <carousel autoplay loop :per-page="nbPartners"> 
+              <slide 
                 v-for="(partner, index) in partners"
                 :key="index"
-                v-scroll-reveal
-                cols="12"
-                sm="5"
-                lg="3"
-                class="ma-2"
               >
                 <a
                   :href="partner.url"
                   target="_blank"
                 >
-                  <v-img
-                    contain
-                    max-height="100"
-                    :src="partner.logo"
-                    :alt="'Geode-solutions '+ partner.name"
-                  />
+                  <img width="80%" :src="partner.logo">
                 </a>
-              </v-col> 
-            </v-row>
+              </slide>
+            </carousel>
           </v-col>
         </v-row>
       </v-container>
@@ -369,6 +354,15 @@ export default {
           topic: 'Repair and simplification'
         }
       ]
+    }
+  },
+  computed: {
+    nbPartners() {
+      switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 1
+          case 'sm': return 2
+          default: return 3
+      }
     }
   },
   mounted() {
