@@ -57,10 +57,11 @@
                     :img="card.image"
                     nuxt
                     :to="card.url"
+                    class="d-flex flex-column"
                   >
+                    <v-spacer/>
                     <v-card-title
-                      primary-title
-                      class="justify-center display-1"
+                      class="display-1"
                     >
                       {{ card.title }}
                     </v-card-title>
@@ -70,11 +71,6 @@
                     >
                       {{ card.text }}
                     </v-card-text>
-                    <v-card-text
-                      v-if="card.url"
-                      align="justify"
-                      class="title"
-                    />
                   </v-card>
                 </v-hover>
               </v-col>
