@@ -30,7 +30,7 @@
           </v-row>
         </v-card>
         <h2 class="display-1 my-5 py-5" align="center">
-          Let us know how we can help:
+          Let us know how we can help!
           <div class="my-2">
             <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
               Contact us
@@ -47,18 +47,18 @@ export default {
   data: () => ({
     services: [
       {
-        title: 'OpenGeode integration',
+        title: 'OpenGeode integration in software suite',
         image: require('@/assets/mesh_JD_Hancock.png'),
         text:
-          'You would like to use OpenGeode features and technologies as another software plugin. \
-            We offer you the possibility to develop integration of OpenGeode through other platform plugins.'
+          'You would like to use OpenGeode environment, features and technologies within another software suite. \
+            We offer you the possibility to integrate OpenGeode ecosystem through other platform plugins.'
       },
       {
         title: 'Third party integration in OpenGeode',
         image: require('@/assets/mesh_JD_Hancock.png'),
         text:
-          'You are used to specific code and you need its feature in a OpenGeode module. \
-            We are able to develop your OpenGeode module integrating a code or its features.'
+          'You are used to specific code and you need its features in an OpenGeode module. \
+            We are able to develop your OpenGeode module integrating your code and its features.'
       },
       {
         title: 'Prototyping ideas',
@@ -74,13 +74,13 @@ export default {
         text:
           'You have precise needs on tool development in mesh and modeling domains. \
             You do not have technical skills to execute this development project. \
-            We propose you our skills and experience in these domains to design and develop your solution.'
+            We propose you our skills and experience to design and develop your solution.'
       },
       {
         title: 'Expertise and Consulting',
         image: require('@/assets/mesh_JD_Hancock.png'),
         text:
-          'You have specific needs on meshing tasks or existing tools. \
+          'You have specific questions or needs on meshing tasks or existing tools. \
             Our experts advices and skills will allow you to reach your objectives faster.'
       },
       {
@@ -89,7 +89,7 @@ export default {
           'https://cdn.pixabay.com/photo/2016/06/29/08/50/pencil-1486278_960_720.jpg',
         text:
           'You need to learn how to work with OpenGeode platform and our products. \
-            You ask for courses on modeling and meshing. \
+            You ask for courses on modeling and meshing or on software develpment. \
             We can build together custom training program designed from your needs.'
       }
     ]
