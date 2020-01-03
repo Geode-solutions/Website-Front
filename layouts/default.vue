@@ -95,7 +95,7 @@
         <v-row align="center" class="px-1">
           <v-col cols="auto">
             <v-card-text>
-              Copyright &copy; {{ date }} — {{ name }} SAS. All rights reserved.
+              Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights reserved.
             </v-card-text>
           </v-col>
           <v-spacer />

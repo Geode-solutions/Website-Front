@@ -109,7 +109,7 @@ export default {
       cards: [
         {
           title: 'Open source and cross-platform',
-          image: require('@/assets/open-source.jpg'),
+          image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
           text:
             'OpenGeode is an open source C++ framework available on GitHub, \
             under a permissive software license (MIT). \

@@ -1,7 +1,7 @@
 <template>
   <v-col>
     <h2
-      class="section display-3"
+      class="section display-2 ma-5"
       align="center"
     >
       {{ category }}
@@ -10,8 +10,8 @@
       justify="space-around"
     >
       <v-col
-        v-for="(card, index) in products"
-        :key="index"
+        v-for="(card, i) in products"
+        :key="i"
         cols="12"
         md="6"
       >
@@ -20,19 +20,29 @@
           class="elevation-5"
           height="100%"
         >
-          <v-carousel cycle hide-delimiter-background interval="2000" height="200"> 
+          <v-carousel v-if="card.images.length > 1" cycle hide-delimiter-background interval="2000" :height="height"> 
             <v-carousel-item
-              v-for="(image, index) in card.images"
-              :key="index"
+              v-for="(image, j) in card.images"
+              :key="j"
             >
               <v-img
                 :src="image"
-                :alt="'Geode-solutions '+ card.title"
                 height="100%"
-                gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
               />
             </v-carousel-item>
           </v-carousel>
+          <v-img
+            v-else-if="card.images.length == 1"
+            :src="card.images[0]"
+            :height="height"
+          />
+          <v-img
+            v-else
+            src="https://cdn.pixabay.com/photo/2017/07/28/23/18/coming-soon-2550190_960_720.jpg"
+            :height="height"
+          />
+              
+
           <v-card-title 
             primary-title
             class="display-1 justify-center"
@@ -59,6 +69,7 @@ export default {
       required: true,
       type: Array
     }
-  }
+  },
+  data: () => ({height: "300"})
 }
 </script>

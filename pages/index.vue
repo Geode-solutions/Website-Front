@@ -9,8 +9,8 @@
         > 
           <v-card 
             class="container" 
-            width="600" 
-            style="border-radius: 80px; background-color: rgba(255,255,255,0.8)"
+            width="600"
+            style="border-radius: 80px 0px; background-color: rgba(255,255,255,0.8)"
           >
             <v-img
               :src="require('@/assets/logo.svg')"
@@ -57,20 +57,31 @@
                     :img="card.image"
                     nuxt
                     :to="card.url"
-                    class="d-flex flex-column"
+                    class="d-flex"
                   >
-                    <v-spacer />
-                    <v-card-title
-                      class="display-1"
+                    <v-img :src="card.image"
+                           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
                     >
-                      {{ card.title }}
-                    </v-card-title>
-                    <v-card-text
-                      align="justify"
-                      class="body-1"
-                    >
-                      {{ card.text }}
-                    </v-card-text>
+                      <v-row class="flex-column" no-gutters style="height: 100%">
+                        <v-spacer />
+                        <v-col cols="auto">
+                          <v-card-title
+                            class="display-1"
+                            align="end"
+                          >
+                            {{ card.title }}
+                          </v-card-title> 
+                        </v-col>
+                        <v-col cols="auto">
+                          <v-card-text
+                            align="justify"
+                            class="body-1"
+                          >
+                            {{ card.text }}
+                          </v-card-text>
+                        </v-col>
+                      </v-row>
+                    </v-img>
                   </v-card>
                 </v-hover>
               </v-col>
@@ -251,38 +262,38 @@ export default {
       ],
       masterCards: [
         {
-          title: 'Advanced meshing and modeling',
-          image: require('@/assets/mesh_JD_Hancock.png'),
+          title: 'Advanced meshing',
+          image: 'https://cdn.pixabay.com/photo/2015/09/26/19/09/cobweb-959578_960_720.jpg',
           text:
-            'Our reliable and pratical solutions for meshing and modeling combine innovative technologies across industrial fields.\
-             It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
+            'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
+             It brings robustness and high industrial quality meshes on deeply complex models.\
             Available in proprietary OpenGeode extension.',
           url: "/products"
         },
         {
-          title: 'Advanced meshing and modeling',
-          image: require('@/assets/mesh_JD_Hancock.png'),
+          title: 'Explicit modeling',
+          image: 'https://cdn.pixabay.com/photo/2013/07/18/20/27/nut-165083_960_720.jpg',
           text:
-            'Our reliable and pratical solutions for meshing and modeling combine innovative technologies across industrial fields.\
-             It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
+            'Useful and handy tools to generate an explicit model from given surfaces.\
+             We take advantage of our strong meshing expertise to ensure robustness and model requirements for meshing and simulation applications.\
             Available in proprietary OpenGeode extension.',
           url: "/products"
         },
         {
-          title: 'Open source platform',
-          image: require('@/assets/open-source.jpg'),
+          title: 'OpenGeode platform',
+          image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
           text:
-            'OpenGeode is our open source platform for representing and manipulating geological models.\
-              It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
-              The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
+            'Open source platform for representing and manipulating models.\
+             It is designed from the ground up to support any geometrical and geosciences applications requiring a discretized model.\
+             The platform is easy to use with readable API and JavaScript scriptability.',
           url: "/opengeode"
         },
         {
           title: 'Custom-tailored services',
-          image: require('@/assets/mesh_JD_Hancock.png'),
+          image: 'https://cdn.pixabay.com/photo/2017/08/03/12/21/tailoring-2575930_960_720.jpg',
           text:
-            'We delivers custom-tailored services to address your specific needs and challenges. \
-            Our experts can provide training, support and software development on a wild range of applications from geometry and software to geosciences.',
+            'We deliver custom-tailored services to address your specific needs and challenges. \
+             Our experts can provide training, support and software development on a wide range of applications from geometry and software to geosciences.',
           url: "/services"
         }
       ],

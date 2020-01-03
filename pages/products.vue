@@ -1,21 +1,29 @@
 <template>
   <v-row>
     <v-col>
-      <h1 class="display-2" align="center">
+      <h1 class="display-3 ma-5" align="center">
         Our products
       </h1>
+      <p class="container title font-weight-light" align="justify">
+        Geode-solutions provide a set of OpenGeode extensions designed to overcome 
+        classical bottlenecks in modeling and meshing applications both 2D and 3D.
+        These extensions offer new solutions developed with state-of-the-art technologies 
+        with robustness, performance and pragmatism as main development driver.
+        Every extension is deeply tested to reach optimum stability and efficiency.
+        They are delivered as a complete application with user interface and
+        as software components easily integrable in any software suite using their API, 
+        and available on Windows, macOS and Linux.
+      </p>
     </v-col>  
-
     <v-container fluid style="background-color: white">
       <v-row class="container mx-auto">
-        <product category="Modeling" :products="modelingProducts"/>
+        <product category="Modeling" :products="modelingProducts" />
       </v-row>
     </v-container>
 
-
     <v-container>
       <v-row>
-        <product category="Meshing" :products="meshingProducts"/>
+        <product category="Meshing" :products="meshingProducts" />
       </v-row>
     </v-container>
   </v-row>
@@ -31,54 +39,36 @@ export default {
   data: () => ({
     modelingProducts: [
         {
-          images: [
-            'https://cdn.pixabay.com/photo/2016/11/18/12/55/light-1834289_960_720.jpg',
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg'],
-          title: 'Fast',
+          images: [],
+          title: 'Modeling from surfaces',
           text:
-            'Aiming real-time using modern concurrency and GPU-accelerated programming '
+            'Build your sealed model by inserting/removing surfaces incrementally, always valid at each step.'
         },
         {
-          images: [
-            'https://cdn.pixabay.com/photo/2016/08/05/09/28/hand-1571851_960_720.jpg',
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg'],
-          title: 'Reinvented UI',
+          images: [],
+          title: 'Modeling from data points',
           text:
-            "Dedicated for scientists using today's technologies, offering intuitivity and reactiveness"
-        },
-        {
-          images: [
-            'https://cdn.pixabay.com/photo/2016/08/05/09/28/hand-1571851_960_720.jpg',
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg'],
-          title: 'Cross-platform',
-          text:
-            'Compatible and constinuously tested on Windows, Linux and MacOS'
+            "Compute surfaces fitting your set of points and design your sealed model"
         }
       ],
     meshingProducts: [
         {
-          images: [
-            'https://cdn.pixabay.com/photo/2016/11/18/12/55/light-1834289_960_720.jpg',
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg'],
-          title: 'Fast',
+          images: [],
+          title: 'Validating and repairing',
           text:
-            'Aiming real-time using modern concurrency and GPU-accelerated programming '
+            'Checking mesh and/or model required features to design your simulation application'
         },
         {
-          images: [
-            'https://cdn.pixabay.com/photo/2016/08/05/09/28/hand-1571851_960_720.jpg',
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg'],
-          title: 'Reinvented UI',
+          images: [],
+          title: 'Surface model remeshing',
           text:
-            "Dedicated for scientists using today's technologies, offering intuitivity and reactiveness"
+            "Robust triangulated surface model remesher, adapted to any geometric constraint."
         },
         {
-          images: [
-            'https://cdn.pixabay.com/photo/2016/08/05/09/28/hand-1571851_960_720.jpg',
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg'],
-          title: 'Cross-platform',
+          images: [],
+          title: 'Volume model meshing',
           text:
-            'Compatible and constinuously tested on Windows, Linux and MacOS'
+            "Robust tetrahedral model mesher, adapted to any geometric constraint."
         }
       ]
     }
