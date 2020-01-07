@@ -10,25 +10,28 @@
     "generate": "nuxt generate",
     "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
+  "electron:generate-icons": "electron-icon-builder --input=./src/assets/logo.png --output=dist_electron --flatten",
   "dependencies": {
     "@bazzite/nuxt-netlify": "^0.1.1",
     "@nuxtjs/google-analytics": "^2.2.2",
     "@nuxtjs/vuetify": "^1.9.1",
     "cross-env": "^6.0.3",
-    "nuxt": "^2.10.2",
+    "nuxt": "^2.11.0",
+    "vue-awesome-swiper": "^3.1.3",
+    "vue-carousel": "^0.18.0",
     "vue-particles": "^1.0.9",
     "vue-scroll-reveal": "^1.0.11"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@fortawesome/fontawesome-free": "^5.12.0",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-config-prettier": "^6.7.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-loader": "^3.0.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^6.0.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-vue": "^6.1.2",
     "eslint-plugin-vuetify": "^1.0.0-beta.5",
-    "nodemon": "^2.0.1",
+    "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   }
 }

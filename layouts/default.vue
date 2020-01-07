@@ -63,14 +63,14 @@
       <v-card text tile dark class="primary flex">
         <v-row align="center">
           <v-col cols="auto">
-            <v-card-text class="pa-1 ml-2">
+            <v-card-text class="ml-2">
               <v-btn
                 v-for="icon in icons"
                 :key="icon.icon"
                 icon
                 target="_blank"
                 :href="icon.url"
-                class="mx-1"
+                class="mr-4"
               >
                 <v-icon size="24px">
                   {{ icon.icon }}
@@ -95,7 +95,7 @@
         <v-row align="center" class="px-1">
           <v-col cols="auto">
             <v-card-text>
-              Copyright &copy; {{ date }} — {{ name }} SAS. All rights reserved.
+              Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights reserved.
             </v-card-text>
           </v-col>
           <v-spacer />
@@ -121,6 +121,8 @@ export default {
       menu: false,
       items: [
         { title: 'OpenGeode', to: '/opengeode' },
+        { title: 'Products', to: '/products' },
+        { title: 'Services', to: '/services' }
       ],
       icons: [
         { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },

@@ -1,35 +1,21 @@
 module.exports = {
   root: true,
-  env: {
-    node: true
-  },
-  extends: [
-    "eslint:recommended",
-    "plugin:vue/recommended"
-  ],
-  plugins: [
-    'vue',
-    'vuetify'
-  ],
+  env: {node: true},
+  extends: ['eslint:recommended', 'plugin:vue/recommended'],
+  plugins: ['vue', 'vuetify'],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-    "vue/return-in-computed-property": [
-      "error",
-      {
-        treatUndefinedAsUnspecified: false
-      }
-    ],
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/return-in-computed-property':
+        ['error', {treatUndefinedAsUnspecified: false}],
     'vuetify/no-deprecated-classes': 'error',
     'vuetify/grid-unknown-attributes': 'error',
     'vuetify/no-legacy-grid': 'error',
   },
-  parserOptions: {
-    parser: "babel-eslint"
-  },
+  parserOptions: {parser: 'babel-eslint'},
   rules: {
-    "semi": [2, "never"],
-    "no-console": "off",
-    "vue/max-attributes-per-line": "off"
+    'semi': [2, 'never'],
+    'no-console': 'off',
+    'vue/max-attributes-per-line': 'off'
   }
 };

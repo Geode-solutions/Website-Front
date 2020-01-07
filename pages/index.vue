@@ -7,35 +7,29 @@
           :height="windowHeight"
           alt="Geode-solutions next generation of meshing tools"
         > 
-          <v-row
-            class="flex-column"
-            align="center"
-            justify="end"
+          <v-card 
+            class="container" 
+            width="600"
+            style="border-radius: 80px 0px; background-color: rgba(255,255,255,0.8)"
           >
-            <v-col
-              cols="7"
-              sm="5"
-              md="3"
-              lg="2"
+            <v-img
+              :src="require('@/assets/logo.svg')"
+              alt="Geode-solutions logo"
+              width="50%"
+              class="mx-auto"
+            />
+            <v-row
+              class="flex-column"
+              align="center"
             >
-              <v-img
-                :src="require('@/assets/logo.svg')"
-                alt="Geode-solutions logo"
-              />
-            </v-col>
-          </v-row>
-          <v-row
-            class="flex-column"
-            align="center"
-            justify="start"
-          >
-            <h1 class="display-3 text-center mb-3 primary--text">
-              Geode-solutions
-            </h1>
-            <h2 class="headline text-center primary--text">
-              Software company building the next generation of meshing tools for advanced modeling
-            </h2>
-          </v-row>
+              <h1 class="display-3 text-center mb-3 primary--text">
+                Geode-solutions
+              </h1>
+              <h2 class="headline text-center primary--text">
+                Software company building the next generation of meshing tools for advanced modeling
+              </h2>
+            </v-row>
+          </v-card>
         </v-parallax>
       </no-ssr>
       <v-container>
@@ -47,106 +41,102 @@
             >
               What we do
             </h2>
-            <v-card
-              v-for="(card, index) in masterCards"
-              :key="index"
-              flat
-              style="background: rgba(0,0,0,0)"
-            >
-              <v-row
-                align="center"
-                justify="space-around"
+            <v-row justify="space-around">
+              <v-col
+                v-for="card in masterCards"
+                :key="card.title"
+                cols="12"
+                md="6"
               >
-                <v-col
-                  :order-sm="(index + 1) % 2"
-                  cols="12"
-                  sm="5"
-                >
-                  <v-card-text>
-                    <v-img
-                      v-scroll-reveal
-                      :src="card.image"
-                      :alt="'Geode-solutions '+ card.title"
-                      contain
-                    />
-                  </v-card-text>
-                </v-col>
-                <v-col
-                  cols="12"
-                  sm="7"
-                >
-                  <v-card
-                    flat
-                    style="background: rgba(0,0,0,0)"
+                <v-hover #default="{ hover }">
+                  <v-card 
+                    v-scroll-reveal
+                    dark
+                    height="500"
+                    :elevation="hover ? 20 : 2"
+                    :img="card.image"
+                    nuxt
+                    :to="card.url"
+                    class="d-flex"
                   >
-                    <v-card-title
+                    <v-img :src="card.image"
+                           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
+                    >
+                      <v-row class="flex-column" no-gutters style="height: 100%">
+                        <v-spacer />
+                        <v-col cols="auto">
+                          <v-card-title
+                            class="display-1"
+                            align="end"
+                          >
+                            {{ card.title }}
+                          </v-card-title> 
+                        </v-col>
+                        <v-col cols="auto">
+                          <v-card-text
+                            align="justify"
+                            class="body-1"
+                          >
+                            {{ card.text }}
+                          </v-card-text>
+                        </v-col>
+                      </v-row>
+                    </v-img>
+                  </v-card>
+                </v-hover>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container fluid style="background-color: white">
+        <v-row class="container mx-auto">
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
+            >
+              Why Geode-solutions
+            </h2>
+            <v-row
+              justify="center"
+            >
+              <v-col
+                v-for="(card, index) in cards"
+                :key="index"
+                cols="12"
+                sm="5"
+                lg="3"
+                class="ma-3"
+              >
+                <v-card
+                  v-scroll-reveal
+                  class="elevation-5"
+                  height="100%"
+                >
+                  <v-img
+                    :src="card.image"
+                    :alt="'Geode-solutions '+ card.title"
+                    aspect-ratio="2.75"
+                    gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
+                  >
+                    <v-card-title 
                       primary-title
-                      class="justify-center display-1"
+                      class="display-1 justify-center fill-height"
                     >
                       {{ card.title }}
                     </v-card-title>
-                    <v-card-text
-                      align="justify"
-                      class="body-1"
-                    >
-                      {{ card.text }}
-                    </v-card-text>
-                    <v-card-text
-                      v-if="card.url"
-                      align="justify"
-                      class="title"
-                    >
-                      <a :href="card.url">{{ card.text2url }}</a>
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
+                  </v-img>
+                  <v-card-text class="body-1 font-weight-medium text-center">
+                    {{ card.text }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
-
-        <h2
-          class="section display-3"
-          align="center"
-        >
-          Why Geode-solutions
-        </h2>
-        <v-row
-          justify="center"
-        >
-          <v-col
-            v-for="(card, index) in cards"
-            :key="index"
-            cols="12"
-            sm="5"
-            lg="3"
-            class="ma-3"
-          >
-            <v-card
-              v-scroll-reveal
-              class="elevation-5"
-              height="100%"
-            >
-              <v-img
-                :src="card.image"
-                :alt="'Geode-solutions '+ card.title"
-                aspect-ratio="2.75"
-                gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
-              >
-                <v-card-title 
-                  primary-title
-                  class="display-1 justify-center fill-height"
-                >
-                  {{ card.title }}
-                </v-card-title>
-              </v-img>
-              <v-card-text class="body-1 font-weight-medium text-center">
-                {{ card.text }}
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-
+      </v-container>
+      <v-container>
         <h2
           class="section display-3"
           align="center"
@@ -198,39 +188,31 @@
             </v-card>
           </v-col>
         </v-row>
-        <h2
-          class="section display-3"
-          align="center"
-        >
-          Our partners
-        </h2>
-        <v-row
-          align="center"
-          justify="space-around"
-        >
-          <v-col
-            v-for="(partner, index) in partners"
-            :key="index"
-            v-scroll-reveal
-            cols="12"
-            sm="5"
-            lg="3"
-            class="ma-2"
-          >
-            <a
-              :href="partner.url"
-              target="_blank"
+      </v-container>
+      <v-container fluid style="background-color: white">
+        <v-row class="container mx-auto">
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
             >
-              <v-img
-                contain
-                max-height="100"
-                :src="partner.logo"
-                :alt="'Geode-solutions '+ partner.name"
-              />
-            </a>
-          </v-col> 
+              Our partners
+            </h2>
+            <carousel v-scroll-reveal autoplay loop :per-page="nbPartners"> 
+              <slide 
+                v-for="(partner, index) in partners"
+                :key="index"
+              >
+                <a
+                  :href="partner.url"
+                  target="_blank"
+                >
+                  <img width="80%" :src="partner.logo">
+                </a>
+              </slide>
+            </carousel>
+          </v-col>
         </v-row>
-
       </v-container>
     </v-col>
   </v-row>
@@ -280,24 +262,39 @@ export default {
       ],
       masterCards: [
         {
-          title: 'Open source platform',
-          image: require('@/assets/open-source.jpg'),
-          text:
-            'OpenGeode is our open source platform for representing and manipulating geological models.\
-              It is designed from the ground up to support any geosciences applications requiring a discretized geological model.\
-              The platform is easy to use thanks to its readable API and its JavaScript scriptability for quick prototyping.',
-          url: "/opengeode",
-          text2url: 'More details'
-        },
-        {
           title: 'Advanced meshing',
-          image: require('@/assets/mesh_JD_Hancock.png'),
+          image: 'https://cdn.pixabay.com/photo/2015/09/26/19/09/cobweb-959578_960_720.jpg',
           text:
             'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
-             It allows us to bring robustness and high industrial quality meshes on deeply complex models.\
+             It brings robustness and high industrial quality meshes on deeply complex models.\
             Available in proprietary OpenGeode extension.',
-          url: "",
-          text2url: 'More details soon'
+          url: "/products"
+        },
+        {
+          title: 'Explicit modeling',
+          image: 'https://cdn.pixabay.com/photo/2013/07/18/20/27/nut-165083_960_720.jpg',
+          text:
+            'Useful and handy tools to generate an explicit model from given surfaces.\
+             We take advantage of our strong meshing expertise to ensure robustness and model requirements for meshing and simulation applications.\
+            Available in proprietary OpenGeode extension.',
+          url: "/products"
+        },
+        {
+          title: 'OpenGeode platform',
+          image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
+          text:
+            'Open source platform for representing and manipulating models.\
+             It is designed from the ground up to support any geometrical and geosciences applications requiring a discretized model.\
+             The platform is easy to use with readable API and JavaScript scriptability.',
+          url: "/opengeode"
+        },
+        {
+          title: 'Custom-tailored services',
+          image: 'https://cdn.pixabay.com/photo/2017/08/03/12/21/tailoring-2575930_960_720.jpg',
+          text:
+            'We deliver custom-tailored services to address your specific needs and challenges. \
+             Our experts can provide training, support and software development on a wide range of applications from geometry and software to geosciences.',
+          url: "/services"
         }
       ],
       partners: [
@@ -351,6 +348,15 @@ export default {
       ]
     }
   },
+  computed: {
+    nbPartners() {
+      switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 1
+          case 'sm': return 2
+          default: return 3
+      }
+    }
+  },
   mounted() {
     window.addEventListener('resize', this.getWindowHeight)
     this.getWindowHeight()
@@ -365,7 +371,7 @@ export default {
 
 <style scoped>
 .section {
-  padding-top: 200px;
-  padding-bottom: 48px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>

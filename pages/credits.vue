@@ -6,18 +6,10 @@
           Credits
         </h2>
 
-        <h3>Pictures:</h3>
-
-        <p>Open source - Author: Nick Youngson</p>
-        <p>Mesh around (modified) - Author: JD Hancock</p>
-        <p>Escalator - Author: Nico Kaiser</p>
-
-
         <h4>
-          Under Pixabay Licence (Free for commercial use, No attribution
-          required):
+          All pictures are under Pixabay Licence (Free for commercial use, No attribution
+          required)
         </h4>
-        <p>Hero, Fast, Human-machine, Map of the world, Puzzle, Antelope Canyon, Technique, Ruler and Pens, Connect, Reactor</p>
       </v-col>
     </v-row>
   </v-container>
