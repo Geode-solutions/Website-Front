@@ -335,6 +335,11 @@ export default {
           url: 'https://labanquiz.com'
         },
         {
+          name: 'NAOS',
+          logo: require('@/assets/logo_NAOS.png'),
+          url: 'https://naos-cluster.com/'
+        },
+        {
           name: 'Nouvelle-Aquitaine',
           logo: require('@/assets/logo_region.png'),
           url: 'https://www.nouvelle-aquitaine.fr'
