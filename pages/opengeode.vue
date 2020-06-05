@@ -105,7 +105,6 @@
 export default {
   data() {
     return {
-      windowHeight: 0,
       cards: [
         {
           title: 'Open source and cross-platform',
