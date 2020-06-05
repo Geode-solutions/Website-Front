@@ -96,6 +96,26 @@
               class="section display-3"
               align="center"
             >
+              Which applications
+            </h2>
+            <v-timeline>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light">Geothermal</v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">Mining</v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light">CCUS</v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">Oil&Gas</v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light">Geomechanics</v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">...</v-timeline-item>
+            </v-timeline>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container fluid>
+        <v-row class="container mx-auto">
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
+            >
               Why Geode-solutions
             </h2>
             <v-row
@@ -136,7 +156,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-container>
+      <v-container fluid style="background-color: white">
         <h2
           class="section display-3"
           align="center"
@@ -145,6 +165,7 @@
         </h2>
         <v-row 
           justify="space-around"
+          class="container mx-auto"
         >
           <v-col
             v-for="(guy, index) in us" :key="index"
@@ -330,8 +351,7 @@ export default {
         },
         {
           name: 'LaBanquiz',
-          logo:
-            'https://labanquiz.com/wp-content/uploads/2016/10/cropped-cropped-cropped-la_banquiz.png',
+          logo: require('@/assets/logo_banquiz.png'),
           url: 'https://labanquiz.com'
         },
         {
@@ -343,7 +363,7 @@ export default {
       partners: [
         {
           name: 'Pole Avenia',
-          logo: 'https://www.pole-avenia.com/eng/wp-content/uploads/sites/3/2015/03/POLE-AVENIA.png',
+          logo: require('@/assets/logo_pole_avenia.png'),
           url: 'https://www.pole-avenia.com/eng'
         },
         {
@@ -353,7 +373,7 @@ export default {
         },
         {
           name: 'RING',
-          logo: 'https://www.ring-team.org/images/Logos/logo_ring_blanc.png',
+          logo: require('@/assets/logo_ring.png'),
           url: 'https://www.ring-team.org'
         },
         {
@@ -370,6 +390,11 @@ export default {
           name: 'Université de Lorraine',
           logo: require('@/assets/logo_UL.png'),
           url: 'http://www.univ-lorraine.fr/'
+        },
+        {
+          name: 'ENEREX',
+          logo: require('@/assets/logo_enerex.png'),
+          url: 'https://enerex.fr/'
         }
       ],
       us: [
