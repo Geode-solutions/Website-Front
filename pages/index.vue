@@ -357,12 +357,17 @@ export default {
         {
           name: 'NAOS',
           logo: require('@/assets/logo_NAOS.png'),
-          url: 'https://naos-cluster.com/'
+          url: 'https://naos-cluster.com'
         },
         {
           name: 'Nouvelle-Aquitaine',
           logo: require('@/assets/logo_region.png'),
           url: 'https://www.nouvelle-aquitaine.fr'
+        },
+        {
+          name: 'Geoliens',
+          logo: require('@/assets/logo_geoliens.png'),
+          url: 'https://www.geoliens.org'
         }
       ],
       partners: [
