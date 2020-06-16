@@ -151,3 +151,9 @@ export default {
   min-width: 0;
 }
 </style>
+
+<style>
+.v-card__text, .v-card__title {
+    word-break: normal; /* maybe !important  */
+  }
+</style>

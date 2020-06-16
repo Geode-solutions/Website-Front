@@ -49,40 +49,45 @@
                 md="6"
               >
                 <v-hover #default="{ hover }">
-                  <v-card 
-                    v-scroll-reveal
-                    dark
-                    height="500"
-                    :elevation="hover ? 20 : 2"
-                    :img="card.image"
-                    nuxt
-                    :to="card.url"
-                    class="d-flex"
+                  <v-lazy 
+                    :options="{
+                      threshold: .5
+                    }"
                   >
-                    <v-img :src="card.image"
-                           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
+                    <v-card 
+                      dark
+                      height="500"
+                      :elevation="hover ? 20 : 2"
+                      :img="card.image"
+                      nuxt
+                      :to="card.url"
+                      class="d-flex"
                     >
-                      <v-row class="flex-column" no-gutters style="height: 100%">
-                        <v-spacer />
-                        <v-col cols="auto">
-                          <v-card-title
-                            class="display-1"
-                            align="end"
-                          >
-                            {{ card.title }}
-                          </v-card-title> 
-                        </v-col>
-                        <v-col cols="auto">
-                          <v-card-text
-                            align="justify"
-                            class="body-1"
-                          >
-                            {{ card.text }}
-                          </v-card-text>
-                        </v-col>
-                      </v-row>
-                    </v-img>
-                  </v-card>
+                      <v-img :src="card.image"
+                             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
+                      >
+                        <v-row class="flex-column" no-gutters style="height: 100%">
+                          <v-spacer />
+                          <v-col cols="auto">
+                            <v-card-title
+                              class="display-1"
+                              align="end"
+                            >
+                              {{ card.title }}
+                            </v-card-title> 
+                          </v-col>
+                          <v-col cols="auto">
+                            <v-card-text
+                              align="justify"
+                              class="body-1"
+                            >
+                              {{ card.text }}
+                            </v-card-text>
+                          </v-col>
+                        </v-row>
+                      </v-img>
+                    </v-card>
+                  </v-lazy>
                 </v-hover>
               </v-col>
             </v-row>
@@ -99,12 +104,24 @@
               Which applications
             </h2>
             <v-timeline>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light">Geothermal</v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">Mining</v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light">CCUS</v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">Oil&Gas</v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light">Geomechanics</v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">...</v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light">
+                Geothermal
+              </v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">
+                Mining
+              </v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light">
+                CCUS
+              </v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">
+                Oil&Gas
+              </v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light">
+                Geomechanics
+              </v-timeline-item>
+              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">
+                ...
+              </v-timeline-item>
             </v-timeline>
           </v-col>
         </v-row>
@@ -129,28 +146,33 @@
                 lg="3"
                 class="ma-3"
               >
-                <v-card
-                  v-scroll-reveal
-                  class="elevation-5"
-                  height="100%"
+                <v-lazy 
+                  :options="{
+                    threshold: .5
+                  }"
                 >
-                  <v-img
-                    :src="card.image"
-                    :alt="'Geode-solutions '+ card.title"
-                    aspect-ratio="2.75"
-                    gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
+                  <v-card
+                    class="elevation-5"
+                    height="100%"
                   >
-                    <v-card-title 
-                      primary-title
-                      class="display-1 justify-center fill-height"
+                    <v-img
+                      :src="card.image"
+                      :alt="'Geode-solutions '+ card.title"
+                      aspect-ratio="2.75"
+                      gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
                     >
-                      {{ card.title }}
-                    </v-card-title>
-                  </v-img>
-                  <v-card-text class="body-1 font-weight-medium text-center">
-                    {{ card.text }}
-                  </v-card-text>
-                </v-card>
+                      <v-card-title 
+                        primary-title
+                        class="display-1 justify-center fill-height"
+                      >
+                        {{ card.title }}
+                      </v-card-title>
+                    </v-img>
+                    <v-card-text class="body-1 font-weight-medium text-center">
+                      {{ card.text }}
+                    </v-card-text>
+                  </v-card>
+                </v-lazy>
               </v-col>
             </v-row>
           </v-col>
@@ -169,44 +191,49 @@
         >
           <v-col
             v-for="(guy, index) in us" :key="index"
-            v-scroll-reveal
             cols="8"
             sm="4"
             class="ma-2"
           >
-            <v-card
-              class="elevation-5 text-center"
+            <v-lazy 
+              :options="{
+                threshold: .5
+              }"
             >
-              <v-avatar
-                :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
-                class="ma-2"
+              <v-card
+                class="elevation-5 text-center"
               >
-                <v-img :src="guy.pict" 
-                       :alt="'Geode-solutions '+ guy.name"
-                />
-              </v-avatar>
-              <v-card-title
-                primary-title
-                class="justify-center headline"
-              >
-                {{ guy.name }}
-                <v-btn
-                  icon
-                  target="_blank"
-                  :href="guy.url"
+                <v-avatar
+                  :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
+                  class="ma-2"
                 >
-                  <v-icon size="24px" color="#0A66C2">
-                    fab fa-linkedin
-                  </v-icon>
-                </v-btn>
-                {{ guy.job }}
-              </v-card-title>
-              <v-card-text
-                class="justify-center headline font-italic"
-              > 
-                {{ guy.topic }}
-              </v-card-text> 
-            </v-card>
+                  <v-img :src="guy.pict" 
+                         :alt="'Geode-solutions '+ guy.name"
+                  />
+                </v-avatar>
+                <v-card-title
+                  primary-title
+                  class="justify-center headline"
+                >
+                  {{ guy.name }}
+                  <v-btn
+                    icon
+                    target="_blank"
+                    :href="guy.url"
+                  >
+                    <v-icon size="24px" color="#0A66C2">
+                      fab fa-linkedin
+                    </v-icon>
+                  </v-btn>
+                  {{ guy.job }}
+                </v-card-title>
+                <v-card-text
+                  class="justify-center headline font-italic"
+                > 
+                  {{ guy.topic }}
+                </v-card-text> 
+              </v-card>
+            </v-lazy>
           </v-col>
         </v-row>
       </v-container>
@@ -219,20 +246,27 @@
             >
               They support us
             </h2>
-            <carousel v-scroll-reveal autoplay loop :per-page="nbPartners"> 
-              <slide 
-                v-for="(supporter, index) in supporters"
-                :key="index"
-                class="logo"
-              >
-                <a
-                  :href="supporter.url"
-                  target="_blank"
+
+            <v-lazy 
+              :options="{
+                threshold: .5
+              }"
+            >
+              <carousel autoplay loop :per-page="nbPartners"> 
+                <slide 
+                  v-for="(supporter, index) in supporters"
+                  :key="index"
+                  class="logo"
                 >
-                  <img width="80%" :src="supporter.logo">
-                </a>
-              </slide>
-            </carousel>
+                  <a
+                    :href="supporter.url"
+                    target="_blank"
+                  >
+                    <img width="80%" :src="supporter.logo">
+                  </a>
+                </slide>
+              </carousel>
+            </v-lazy>
           </v-col>
         </v-row>
         <v-row class="container mx-auto">
@@ -243,20 +277,27 @@
             >
               Our partners
             </h2>
-            <carousel v-scroll-reveal autoplay loop :per-page="nbPartners"> 
-              <slide 
-                v-for="(partner, index) in partners"
-                :key="index"
-                class="logo"
-              >
-                <a
-                  :href="partner.url"
-                  target="_blank"
+
+            <v-lazy 
+              :options="{
+                threshold: .5
+              }"
+            >
+              <carousel autoplay loop :per-page="nbPartners"> 
+                <slide 
+                  v-for="(partner, index) in partners"
+                  :key="index"
+                  class="logo"
                 >
-                  <img width="80%" :src="partner.logo">
-                </a>
-              </slide>
-            </carousel>
+                  <a
+                    :href="partner.url"
+                    target="_blank"
+                  >
+                    <img width="80%" :src="partner.logo">
+                  </a>
+                </slide>
+              </carousel>
+            </v-lazy>
           </v-col>
         </v-row>
       </v-container>

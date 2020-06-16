@@ -44,7 +44,6 @@ export default {
   plugins:
       [
         '@/plugins/vuetify_icons', {src: '@/plugins/carousel', ssr: false},
-        {src: '@/plugins/scroll', ssr: false},
         {src: '@/plugins/particles', ssr: false}
       ],
 
@@ -89,6 +88,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    // extend(config, ctx) {}
   }
 }

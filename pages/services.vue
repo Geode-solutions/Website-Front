@@ -10,16 +10,22 @@
             Contact us
           </v-btn>
         </h2>
+
         <v-card v-for="(service, index) in services" :key="index" style="margin-bottom: 40px">
           <v-row align="center" justify="space-around">
             <v-col :order-sm="(index + 1) % 2" cols="12" sm="5">
               <v-card-text>
-                <v-img
-                  v-scroll-reveal
-                  :src="service.image"
-                  :alt="'Geode-solutions '+ service.title"
-                  contain
-                />
+                <v-lazy 
+                  :options="{
+                    threshold: .5
+                  }"
+                >
+                  <v-img
+                    :src="service.image"
+                    :alt="'Geode-solutions '+ service.title"
+                    contain
+                  />
+                </v-lazy>
               </v-card-text>
             </v-col>
             <v-col cols="12" sm="7">

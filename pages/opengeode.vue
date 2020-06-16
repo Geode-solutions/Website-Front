@@ -71,28 +71,33 @@
               sm="5"
               md="6"
             >
-              <v-card
-                v-scroll-reveal
-                height="100%"
+              <v-lazy 
+                :options="{
+                  threshold: .5
+                }"
               >
-                <v-img
-                  :src="card.image"
-                  :alt="'Geode-solutions '+ card.title"
-                  contain
-                />
-                <v-card-title
-                  primary-title
-                  class="justify-center display-1"
+                <v-card
+                  height="100%"
                 >
-                  {{ card.title }}
-                </v-card-title>
-                <v-card-text
-                  align="justify"
-                  class="body-1"
-                >
-                  {{ card.text }}
-                </v-card-text>
-              </v-card>
+                  <v-img
+                    :src="card.image"
+                    :alt="'Geode-solutions '+ card.title"
+                    contain
+                  />
+                  <v-card-title
+                    primary-title
+                    class="justify-center display-1"
+                  >
+                    {{ card.title }}
+                  </v-card-title>
+                  <v-card-text
+                    align="justify"
+                    class="body-1"
+                  >
+                    {{ card.text }}
+                  </v-card-text>
+                </v-card>
+              </v-lazy>
             </v-col>
           </v-row>
         </v-col>  
