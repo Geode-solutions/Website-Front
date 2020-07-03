@@ -189,18 +189,15 @@
           justify="space-around"
           class="container mx-auto"
         >
-          <v-col
-            cols="8"
-            sm="4"
-            class="ma-2"
-          >
+          <v-col>
             <v-lazy 
               :options="{
                 threshold: .5
               }"
             >
               <vue-word-cloud
-                style="height: 480px;width: 640px;"
+                style="height: 480px;width: 100%;"
+                spacing="0.2"
                 :words="skills"
                 :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
                 font-family="Roboto"
