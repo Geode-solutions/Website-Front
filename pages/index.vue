@@ -183,7 +183,7 @@
           class="section display-3"
           align="center"
         >
-          What skills
+          What are our skills
         </h2>
         <v-row 
           justify="space-around"
@@ -198,7 +198,7 @@
               <client-only>
                 <vue-word-cloud
                   style="height: 480px;width: 100%;"
-                  spacing="0.2"
+                  spacing="0.3"
                   :words="skills"
                   :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
                   font-family="Roboto"
