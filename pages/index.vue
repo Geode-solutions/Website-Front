@@ -198,9 +198,9 @@
               <client-only>
                 <vue-word-cloud
                   style="height: 480px;width: 100%;"
-                  spacing="0.3"
+                  spacing="0.4"
                   :words="skills"
-                  :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
+                  :color="getColor"
                   font-family="Roboto"
                 />
               </client-only>
@@ -504,7 +504,7 @@ export default {
         ["Meshing", 5],
         ["Python", 2],
         ["Algorithms", 3],
-        ["Computational geometry", 2],
+        ["Computational geometry", 3],
         ["Geomodeling", 2],
         ["Unstructured meshes", 3],
         ["BoundaryRepresentation", 2],
@@ -536,6 +536,12 @@ export default {
   methods: {
     getWindowHeight() {
       this.windowHeight = document.documentElement.clientHeight
+    },
+    getColor() {
+      const number = Math.random();
+      if( number > 0.6) return '#00897B';
+      if( number < 0.3) return '#26A69A';
+       return '#80CBC4';
     }
   }
 }
