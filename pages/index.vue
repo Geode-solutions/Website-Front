@@ -201,8 +201,8 @@
             >
               <vue-word-cloud
                 style="height: 480px;width: 640px;"
-                :words="words"
-                :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+                :words="skills"
+                :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
                 font-family="Roboto"
               />
             </v-lazy>
@@ -337,7 +337,7 @@
 </template>
 
 <script>
-import VueWordCloud from 'vuewordcloud'
+import VueWordCloud from 'vuewordcloud';
 
 export default {
   components: {
@@ -500,24 +500,24 @@ export default {
           topic: 'Repair and simplification'
         }
       ],
-      words:[
-["C++", 5],
-["Meshing", 5],
-["Python", 2],
-["Algorithms", 3],
-["Computational geometry", 2],
-["Geomodeling", 2],
-["Unstructured meshes", 3],
-["BoundaryRepresentation", 2],
-["Model editing", 4],
-["Mesh repair", 2],
-["Model repair", 5],
-["Continuous integration", 2],
-["Continuous deployment", 2],
-["Software engineering", 4],
-["Robustness", 2],
-["JavaScript", 2],
-["Web technologies", 2],
+      skills:[
+        ["C++", 5],
+        ["Meshing", 5],
+        ["Python", 2],
+        ["Algorithms", 3],
+        ["Computational geometry", 2],
+        ["Geomodeling", 2],
+        ["Unstructured meshes", 3],
+        ["BoundaryRepresentation", 2],
+        ["Model editing", 4],
+        ["Mesh repair", 2],
+        ["Model repair", 5],
+        ["Continuous integration", 2],
+        ["Continuous deployment", 2],
+        ["Software engineering", 4],
+        ["Robustness", 2],
+        ["JavaScript", 2],
+        ["Web technologies", 2],
       ]
     }
   },
