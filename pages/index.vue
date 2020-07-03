@@ -337,14 +337,14 @@ export default {
             'https://live.staticflickr.com/5674/31045227201_57b9c73426_b.jpg',
           title: 'Auto update',
           text:
-            'New features and improvments continuously shipped using automatic updates'
+            'New features and improvements continuously shipped using automatic updates'
         },
         {
           image:
             'https://cdn.pixabay.com/photo/2018/03/13/22/53/puzzle-3223941_960_720.jpg',
           title: 'Extensible',
           text:
-            'Free open-source platform and plugin system for modular and custom development'
+            'Free open-source platform and plugin system for modular and custom developments'
         }
       ],
       masterCards: [
@@ -371,8 +371,8 @@ export default {
           image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
           text:
             'Open source platform for representing and manipulating models.\
-             It is designed from the ground up to support any geometrical and geosciences applications requiring a discretized model.\
-             The platform is easy to use with readable API and JavaScript scriptability.',
+             It is designed from the ground up to support any geometrical and geosciences application requiring a discretized model.\
+             The platform is easy to use with readable API and Python scriptability.',
           url: "/opengeode"
         },
         {
