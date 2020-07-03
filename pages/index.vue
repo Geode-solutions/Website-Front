@@ -195,13 +195,15 @@
                 threshold: .5
               }"
             >
-              <vue-word-cloud
-                style="height: 480px;width: 100%;"
-                spacing="0.2"
-                :words="skills"
-                :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
-                font-family="Roboto"
-              />
+              <no-ssr>
+                <vue-word-cloud
+                  style="height: 480px;width: 100%;"
+                  spacing="0.2"
+                  :words="skills"
+                  :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
+                  font-family="Roboto"
+                />
+              </no-ssr>
             </v-lazy>
           </v-col>
         </v-row>
@@ -334,7 +336,7 @@
 </template>
 
 <script>
-import VueWordCloud from 'vuewordcloud';
+import VueWordCloud from 'vuewordcloud'
 
 export default {
   components: {
