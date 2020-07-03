@@ -8,7 +8,7 @@
       </h1>
     </v-col>
     
-    <no-ssr>
+    <client-only>
       <vue-particles class="particles-wrapper mb-5" style="z-index: 1"
                      color="004D40"
                      :particle-opacity="0.5"
@@ -22,7 +22,7 @@
                      :lines-distance="150"
                      :move-speed="4"
       />
-    </no-ssr>
+    </client-only>
     
 
 

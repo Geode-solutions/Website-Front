@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col>
-      <no-ssr>
+      <client-only>
         <v-parallax
           :src="require('@/assets/hero.jpg')"
           :height="windowHeight"
@@ -31,7 +31,7 @@
             </v-row>
           </v-card>
         </v-parallax>
-      </no-ssr>
+      </client-only>
       <v-container>
         <v-row>
           <v-col>
@@ -195,7 +195,7 @@
                 threshold: .5
               }"
             >
-              <no-ssr>
+              <client-only>
                 <vue-word-cloud
                   style="height: 480px;width: 100%;"
                   spacing="0.2"
@@ -203,7 +203,7 @@
                   :color="([, weight]) => weight > 4 ? '#00897B' : weight > 3 ? '#26A69A' : '#80CBC4'"
                   font-family="Roboto"
                 />
-              </no-ssr>
+              </client-only>
             </v-lazy>
           </v-col>
         </v-row>
