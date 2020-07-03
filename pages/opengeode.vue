@@ -138,8 +138,8 @@ export default {
           text:
             'A complete set of tools is used around OpenGeode to ensure its quality and its stability. \
             The Continuous Integration and Continuous Delivery philosophy has been chosen: code changes \
-            are delivered more frequently, more reliably (high-leveled tests) and as automatic as possible, \
-            using Microsoft Azure DevOps tools.'
+            are delivered more frequently, more reliably (high-leveled tests) and automatically, \
+            using open-source GitHub tools.'
         },
 
         {
@@ -149,7 +149,7 @@ export default {
             'OpenGeode is easy to read since its code intelligibility:\
             API librairies are heavily documented, classes and methods are meaningful named. \
             OpenGeode is easy to get and to compile.  Convenient and open-source tools will soon be associated to OpenGeode:\
-            a Javascript-based scriptability framework for quick prototyping and \
+            a Python-based scriptability framework for quick prototyping and \
             a web-based application using an innovative UI and modern technologies.'
         },
 
