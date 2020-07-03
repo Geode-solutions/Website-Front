@@ -183,6 +183,37 @@
           class="section display-3"
           align="center"
         >
+          What skills
+        </h2>
+        <v-row 
+          justify="space-around"
+          class="container mx-auto"
+        >
+          <v-col
+            cols="8"
+            sm="4"
+            class="ma-2"
+          >
+            <v-lazy 
+              :options="{
+                threshold: .5
+              }"
+            >
+              <vue-word-cloud
+                style="height: 480px;width: 640px;"
+                :words="words"
+                :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+                font-family="Roboto"
+              />
+            </v-lazy>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container fluid>
+        <h2
+          class="section display-3"
+          align="center"
+        >
           Who we are
         </h2>
         <v-row 
@@ -306,7 +337,12 @@
 </template>
 
 <script>
+import VueWordCloud from 'vuewordcloud'
+
 export default {
+  components: {
+    VueWordCloud
+  },
   data() {
     return {
       windowHeight: 0,
@@ -463,6 +499,25 @@ export default {
           url: 'https://linkedin.com/in/pierre-anquez',
           topic: 'Repair and simplification'
         }
+      ],
+      words:[
+["C++", 5],
+["Meshing", 5],
+["Python", 2],
+["Algorithms", 3],
+["Computational geometry", 2],
+["Geomodeling", 2],
+["Unstructured meshes", 3],
+["BoundaryRepresentation", 2],
+["Model editing", 4],
+["Mesh repair", 2],
+["Model repair", 5],
+["Continuous integration", 2],
+["Continuous deployment", 2],
+["Software engineering", 4],
+["Robustness", 2],
+["JavaScript", 2],
+["Web technologies", 2],
       ]
     }
   },

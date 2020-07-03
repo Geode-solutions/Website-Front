@@ -10,20 +10,20 @@
     "generate": "nuxt generate",
     "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
-  "electron:generate-icons": "electron-icon-builder --input=./src/assets/logo.png --output=dist_electron --flatten",
   "dependencies": {
     "@bazzite/nuxt-netlify": "^0.1.1",
     "@nuxtjs/google-analytics": "^2.3.0",
     "@nuxtjs/vuetify": "^1.11.2",
     "cross-env": "^6.0.3",
-    "nuxt": "^2.12.2",
+    "nuxt": "^2.13.3",
     "vue-awesome-swiper": "^3.1.3",
     "vue-carousel": "^0.18.0",
     "vue-particles": "^1.0.9",
-    "vue-scroll-reveal": "^1.0.11"
+    "vue-scroll-reveal": "^1.0.11",
+    "vuewordcloud": "^18.7.12"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fortawesome/fontawesome-free": "^5.13.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
