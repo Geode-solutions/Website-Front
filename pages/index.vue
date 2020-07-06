@@ -104,22 +104,22 @@
               Which applications
             </h2>
             <v-timeline>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light">
-                Geothermal
+              <v-timeline-item small fill-dot class="display-1 font-weight-light">
+                Geo&shythermal
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">
+              <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
                 Mining
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light">
+              <v-timeline-item small fill-dot class="display-1 font-weight-light">
                 CCUS
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">
+              <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
                 Oil&Gas
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light">
-                Geomechanics
+              <v-timeline-item small fill-dot class="display-1 font-weight-light">
+                Geo&shymecha&shynics
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-2 font-weight-light text-right">
+              <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
                 ...
               </v-timeline-item>
             </v-timeline>
