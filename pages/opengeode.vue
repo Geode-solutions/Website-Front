@@ -103,6 +103,39 @@
         </v-col>  
       </v-row>
     </v-container>
+      <v-container fluid style="background-color: white">
+        <v-row class="container mx-auto">
+          <v-col>
+            <h2
+              class="section display-3"
+              align="center"
+            >
+              They use it
+            </h2>
+
+            <v-lazy 
+              :options="{
+                threshold: .5
+              }"
+            >
+              <carousel autoplay loop :per-page="nbUsers"> 
+                <slide 
+                  v-for="(user, index) in users"
+                  :key="index"
+                  class="logo"
+                >
+                  <a
+                    :href="user.url"
+                    target="_blank"
+                  >
+                    <img width="80%" :src="user.logo">
+                  </a>
+                </slide>
+              </carousel>
+            </v-lazy>
+        </v-col>  
+      </v-row>
+    </v-container>
   </v-row>
 </template>
 
@@ -169,8 +202,23 @@ export default {
             'Modern concurrency and GPU-accelerated solutions are planned to be integrated to reach real-time computations. \
             We want to deliver turnkey powerful solutions for effective and immediate use.'
         },
-
-
+      ],
+      users: [
+        {
+          name: 'Total SA',
+          logo: require('@/assets/logo_total.svg'),
+          url: 'https://www.ep.total.com'
+        },
+        {
+          name: 'RING',
+          logo: require('@/assets/logo_ring.png'),
+          url: 'https://www.ring-team.org'
+        },
+        {
+          name: 'GSC',
+          logo: require('@/assets/logo_GSC.png'),
+          url: 'https://www.nrcan.gc.ca/home'
+        }
       ]
     }
   },
@@ -179,6 +227,13 @@ export default {
       switch (this.$vuetify.breakpoint.name) {
           case 'xs': return 'display-3'
           default: return 'display-4'
+      }
+    },
+    nbUsers() {
+      switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 1
+          case 'sm': return 2
+          default: return 3
       }
     }
   },
@@ -200,5 +255,14 @@ export default {
   top: 25vh;
   width: 100%;
   height: 50%;
+}
+.section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
