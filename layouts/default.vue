@@ -53,11 +53,9 @@
       </v-expansion-panels>
     </v-app-bar>
 
-    <v-content class="secondary">
-      <!-- <v-container fluid> -->
+    <v-main class="secondary">
       <nuxt />
-      <!-- </v-container> -->
-    </v-content>
+    </v-main>
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
