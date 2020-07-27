@@ -103,36 +103,36 @@
         </v-col>  
       </v-row>
     </v-container>
-      <v-container fluid style="background-color: white">
-        <v-row class="container mx-auto">
-          <v-col>
-            <h2
-              class="section display-3"
-              align="center"
-            >
-              They use it
-            </h2>
+    <v-container fluid style="background-color: white">
+      <v-row class="container mx-auto">
+        <v-col>
+          <h2
+            class="section display-3"
+            align="center"
+          >
+            They use it
+          </h2>
 
-            <v-lazy 
-              :options="{
-                threshold: .5
-              }"
-            >
-              <carousel autoplay loop :per-page="nbUsers"> 
-                <slide 
-                  v-for="(user, index) in users"
-                  :key="index"
-                  class="logo"
+          <v-lazy 
+            :options="{
+              threshold: .5
+            }"
+          >
+            <carousel autoplay loop :per-page="nbUsers"> 
+              <slide 
+                v-for="(user, index) in users"
+                :key="index"
+                class="logo"
+              >
+                <a
+                  :href="user.url"
+                  target="_blank"
                 >
-                  <a
-                    :href="user.url"
-                    target="_blank"
-                  >
-                    <img width="80%" :src="user.logo">
-                  </a>
-                </slide>
-              </carousel>
-            </v-lazy>
+                  <img width="80%" :src="user.logo">
+                </a>
+              </slide>
+            </carousel>
+          </v-lazy>
         </v-col>  
       </v-row>
     </v-container>
