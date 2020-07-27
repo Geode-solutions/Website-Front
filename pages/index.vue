@@ -538,10 +538,10 @@ export default {
       this.windowHeight = document.documentElement.clientHeight
     },
     getColor() {
-      const number = Math.random();
-      if( number > 0.6) return '#00897B';
-      if( number < 0.3) return '#26A69A';
-       return '#80CBC4';
+      const number = Math.random()
+      if( number > 0.6) return '#00897B'
+      if( number < 0.3) return '#26A69A'
+       return '#80CBC4'
     }
   }
 }

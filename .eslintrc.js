@@ -18,4 +18,4 @@ module.exports = {
     'no-console': 'off',
     'vue/max-attributes-per-line': 'off'
   }
-};
+}
