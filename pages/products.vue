@@ -102,6 +102,13 @@
                         </li>
                       </ul>
                     </v-card-text>
+                    <v-card-text
+                      align="center"
+                      class="body-1 font-weight-medium"
+                    >
+                      Readiness 
+                      <v-progress-linear :value="beta.readiness" height="10" striped rounded />
+                    </v-card-text>
                   </v-card>
                 </v-lazy>
               </v-col>
@@ -177,7 +184,8 @@ export default {
           features: [
             "Robust to degenerated input meshes", 
             "Guaranteed conformal to surface intersections"
-          ]
+          ],
+          readiness: "80"
         },        
         {
           title: '3D tetrahedral meshing',
@@ -188,7 +196,8 @@ export default {
           features: [
             "Robust to degenerated input meshes", 
             "Guaranteed conformal to input boundary surface meshes"
-          ]
+          ],
+          readiness: "60"
         },
         {
           title: 'Conversion between model and mesh',
@@ -198,7 +207,8 @@ export default {
           features: [
             'Automatic recovery of model components and topology from mesh',
             'Output mesh gathering all model information as attributes'
-          ]
+          ],
+          readiness: "80"
         },
         {
           title: 'Watertight model sealing',
@@ -210,7 +220,8 @@ export default {
             "Remove all gaps and intersections between surfaces",
             "Compute watertight model components and topology",
             "Guaranteed full conformal meshes with all model components"
-          ]
+          ],
+          readiness: "40"
         },
         {
           title: 'Incremental surface-based modeling',
@@ -221,7 +232,8 @@ export default {
             "Produce surface to surface intersections and topology",
             "Interactive surface addition and removal from the model",
             "Guaranteed model validity at any time"
-          ]
+          ],
+          readiness: "60"
         }
       ],
       nexts: [
