@@ -218,6 +218,11 @@ export default {
           name: 'GSC',
           logo: require('@/assets/logo_GSC.png'),
           url: 'https://www.nrcan.gc.ca/home'
+        },
+        {
+          name: 'BSC',
+          logo: require('@/assets/logo_BSC.png'),
+          url: 'https://www.bsc.es/'
         }
       ]
     }
