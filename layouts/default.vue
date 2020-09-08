@@ -133,6 +133,10 @@ export default {
           icon: 'fab fa-slack',
           url: 'https://slackin-opengeode.herokuapp.com'
         },
+        {
+          icon: 'fab fa-youtube',
+          url: 'https://www.youtube.com/channel/UCkzmIOpr3H8I8kDLCGZBiXA'
+        },
         { icon: 'fas fa-envelope', url: 'mailto:contact@geode-solutions.com' }
       ],
       date: new Date().getFullYear()
