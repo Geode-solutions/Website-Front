@@ -481,6 +481,11 @@ export default {
           name: 'ENEREX',
           logo: require('@/assets/logo_enerex.png'),
           url: 'https://enerex.fr/'
+        },
+        {
+          name: 'ARXITEK',
+          logo: require('@/assets/logo_arxitek.png'),
+          url: 'https://arxitek.fr/'
         }
       ],
       us: [
