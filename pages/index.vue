@@ -5,7 +5,7 @@
         <v-parallax
           :src="require('@/assets/hero.jpg')"
           :height="windowHeight"
-          alt="Geode-solutions next generation of meshing tools"
+          alt="Geode-solutions next generation of modeling tools"
         > 
           <v-card 
             class="container" 
@@ -26,7 +26,7 @@
                 Geode-solutions
               </h1>
               <h2 class="headline text-center primary--text">
-                Software company building the next generation of meshing tools for advanced modeling
+                Software company building the next generation of modeling tools using advanced meshing
               </h2>
             </v-row>
           </v-card>
@@ -449,8 +449,8 @@ export default {
       partners: [
         {
           name: 'Pole Avenia',
-          logo: require('@/assets/logo_pole_avenia.png'),
-          url: 'https://www.pole-avenia.com/eng'
+          logo: require('@/assets/logo-avenia.svg'),
+          url: 'https://www.pole-avenia.com'
         },
         {
           name: 'Total SA',

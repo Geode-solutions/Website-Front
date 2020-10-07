@@ -7,7 +7,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'Geode-solutions - next generation of meshing tools',
+    title: 'Geode-solutions - next generation of modeling tools',
     meta:
         [
           {charset: 'utf-8'},
@@ -15,7 +15,7 @@ export default {
             hid: 'description',
             name: 'description',
             content:
-                'Software company building the next generation of meshing tools for advanced modeling'
+                'Software company building the next generation of modeling tools using advanced meshing'
           }
         ],
     link:
