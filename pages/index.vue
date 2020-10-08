@@ -486,6 +486,11 @@ export default {
           name: 'ARXITEK',
           logo: require('@/assets/logo_arxitek.png'),
           url: 'https://arxitek.fr/'
+        },
+        {
+          name: 'Earth Quick',
+          logo: require('@/assets/logo_earth_quick.jpg'),
+          url: 'https://www.earth-quick.com/'
         }
       ],
       us: [
