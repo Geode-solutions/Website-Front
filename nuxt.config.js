@@ -15,7 +15,7 @@ export default {
             hid: 'description',
             name: 'description',
             content:
-                'Software company building the next generation of modeling tools using advanced meshing'
+                'Technology company tackling next generation of modeling challenges using advanced meshing'
           }
         ],
     link:

@@ -5,7 +5,7 @@
         <v-parallax
           :src="require('@/assets/hero.jpg')"
           :height="windowHeight"
-          alt="Geode-solutions next generation of modeling tools"
+          alt="Geode-solutions next generation of modeling challenges"
         > 
           <v-card 
             class="container" 
@@ -26,7 +26,7 @@
                 Geode-solutions
               </h1>
               <h2 class="headline text-center primary--text">
-                Software company building the next generation of modeling tools using advanced meshing
+                Technology company tackling next generation of modeling challenges using advanced meshing
               </h2>
             </v-row>
           </v-card>
