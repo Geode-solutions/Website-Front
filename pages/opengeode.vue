@@ -30,7 +30,7 @@
       <v-row class="text-center">
         <v-col>
           <h2 class="display-1 primary--text my-5">
-            Open source platform for representing and manipulating geometric models
+            Open source framework for representing and manipulating geometric models
           </h2>
 
           <v-card
@@ -244,7 +244,7 @@ export default {
   },
   head() {
     return {
-      title: 'OpenGeode - open source platform for geometric models'
+      title: 'OpenGeode - open source framework for geometric models'
     }
   }
 }

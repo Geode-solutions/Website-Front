@@ -120,6 +120,9 @@
                 Geo&shymecha&shynics
               </v-timeline-item>
               <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
+                Hydro&shygeology
+              </v-timeline-item>
+              <v-timeline-item small fill-dot class="display-1 font-weight-light">
                 ...
               </v-timeline-item>
             </v-timeline>
@@ -379,7 +382,7 @@ export default {
             'https://cdn.pixabay.com/photo/2018/03/13/22/53/puzzle-3223941_960_720.jpg',
           title: 'Extensible',
           text:
-            'Free open-source platform and plugin system for modular and custom developments'
+            'Free open-source framework and plugin system for modular and custom developments'
         }
       ],
       masterCards: [
@@ -402,12 +405,12 @@ export default {
           url: "/products"
         },
         {
-          title: 'OpenGeode platform',
+          title: 'OpenGeode framework',
           image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
           text:
-            'Open source platform for representing and manipulating models.\
+            'Open source framework for representing and manipulating models.\
              It is designed from the ground up to support any geometrical and geosciences application requiring a discretized model.\
-             The platform is easy to use with readable API and Python scriptability.',
+             The framework is easy to use with readable API and Python scriptability.',
           url: "/opengeode"
         },
         {
@@ -453,7 +456,7 @@ export default {
           url: 'https://www.pole-avenia.com'
         },
         {
-          name: 'Total SA',
+          name: 'Total SE',
           logo: require('@/assets/logo_total.svg'),
           url: 'https://www.ep.total.com'
         },
@@ -511,10 +514,11 @@ export default {
       ],
       skills:[
         ["C++", 5],
+        ["DevOps", 4],
         ["Meshing", 5],
         ["Python", 2],
         ["Algorithms", 3],
-        ["Computational geometry", 3],
+        ["Computational geometry", 4],
         ["Geomodeling", 2],
         ["Unstructured meshes", 3],
         ["BoundaryRepresentation", 2],
@@ -524,9 +528,10 @@ export default {
         ["Continuous integration", 2],
         ["Continuous deployment", 2],
         ["Software engineering", 4],
-        ["Robustness", 2],
+        ["Robustness", 3],
         ["JavaScript", 2],
         ["Web technologies", 2],
+        ["Visualization", 2],
       ]
     }
   },
