@@ -30,7 +30,7 @@
       <v-row class="text-center">
         <v-col>
           <h2 class="display-1 primary--text my-5">
-            Open source platform for representing and manipulating geometric models
+            Open source framework for representing and manipulating geometric models
           </h2>
 
           <v-card
@@ -103,36 +103,36 @@
         </v-col>  
       </v-row>
     </v-container>
-      <v-container fluid style="background-color: white">
-        <v-row class="container mx-auto">
-          <v-col>
-            <h2
-              class="section display-3"
-              align="center"
-            >
-              They use it
-            </h2>
+    <v-container fluid style="background-color: white">
+      <v-row class="container mx-auto">
+        <v-col>
+          <h2
+            class="section display-3"
+            align="center"
+          >
+            They use it
+          </h2>
 
-            <v-lazy 
-              :options="{
-                threshold: .5
-              }"
-            >
-              <carousel autoplay loop :per-page="nbUsers"> 
-                <slide 
-                  v-for="(user, index) in users"
-                  :key="index"
-                  class="logo"
+          <v-lazy 
+            :options="{
+              threshold: .5
+            }"
+          >
+            <carousel autoplay loop :per-page="nbUsers"> 
+              <slide 
+                v-for="(user, index) in users"
+                :key="index"
+                class="logo"
+              >
+                <a
+                  :href="user.url"
+                  target="_blank"
                 >
-                  <a
-                    :href="user.url"
-                    target="_blank"
-                  >
-                    <img width="80%" :src="user.logo">
-                  </a>
-                </slide>
-              </carousel>
-            </v-lazy>
+                  <img width="80%" :src="user.logo">
+                </a>
+              </slide>
+            </carousel>
+          </v-lazy>
         </v-col>  
       </v-row>
     </v-container>
@@ -218,6 +218,11 @@ export default {
           name: 'GSC',
           logo: require('@/assets/logo_GSC.png'),
           url: 'https://www.nrcan.gc.ca/home'
+        },
+        {
+          name: 'BSC',
+          logo: require('@/assets/logo_BSC.png'),
+          url: 'https://www.bsc.es/'
         }
       ]
     }
@@ -239,7 +244,7 @@ export default {
   },
   head() {
     return {
-      title: 'OpenGeode - open source platform for geometric models'
+      title: 'OpenGeode - open source framework for geometric models'
     }
   }
 }
