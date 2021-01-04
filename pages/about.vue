@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-layout column align-center>
-      <v-layout justify-space-around row class="py-5">
-        <v-flex>
+    <v-row column align="center">
+      <v-row justify="space-around" class="py-5">
+        <v-col>
           <v-card class="elevation-5 mx-5  text-center">
             <v-avatar size="300px" class="ma-2">
               <img src="@/assets/ArnaudB.png">
@@ -13,8 +13,8 @@
               </p>
             </v-card-title>
           </v-card>
-        </v-flex>
-        <v-flex>
+        </v-col>
+        <v-col>
           <v-card class="elevation-5 mx-5  text-center">
             <v-avatar size="300px" class="ma-2">
               <img src="@/assets/PierreA.png">
@@ -25,9 +25,9 @@
               </p>
             </v-card-title>
           </v-card>
-        </v-flex>
-      </v-layout>
-    </v-layout>
+        </v-col>
+      </v-row>
+    </v-row>
 
     <h4 class="headline" align="center">
       Our team is young but our experience is strong. We are both specialists in

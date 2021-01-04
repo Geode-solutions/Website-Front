@@ -5,7 +5,7 @@
         <v-row class="text-center">
           <v-col>
             <h1 class="display-3 ma-5" align="center">
-              Our products
+              Our software
             </h1>
             <p class="container title font-weight-light" align="justify">
               Geode-solutions provide a set of OpenGeode extensions designed to overcome 
@@ -14,8 +14,8 @@
               with robustness, performance and pragmatism as main development driver.
               Every extension is deeply tested to reach optimum stability and efficiency.
               They are delivered as a complete application with user interface and
-              as software components easily integrable in any software suite using their API, 
-              and available on Windows, macOS and Linux.
+              as software components easily integrable in any software suite using their C++ and Python API, 
+              and available on Windows and Linux.
             </p>
           </v-col>
         </v-row>
@@ -77,7 +77,7 @@
                     height="100%"
                   >
                     <v-img
-                      :src="beta.image"
+                      :src="require('@/assets/techno/'+beta.image)"
                       :alt="'Geode-solutions '+ beta.title"
                       contain
                     />
@@ -116,56 +116,6 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-container>
-        <v-row>
-          <v-col>
-            <h2 class="display-2 font-weight-light ma-5" align="center">
-              Next technologies
-            </h2>
-            <v-row justify="space-around">
-              <v-col
-                v-for="next in nexts"
-                :key="next.title"
-                cols="11"
-                sm="5"
-                md="6"
-              >
-                <v-lazy 
-                  :options="{
-                    threshold: .5
-                  }"
-                  min-height="500"
-                >
-                  <v-card
-                    height="100%"
-                  >
-                    <v-img
-                      :src="next.image"
-                      :alt="'Geode-solutions '+ next.title"
-                      contain
-                    />
-                    <v-card-title
-                      primary-title
-                      class="justify-center display-1 px-5 ma-4"
-                    >
-                      {{ next.title }}
-                    </v-card-title>
-                    <v-card-text
-                      align="justify"
-                      class="body-1"
-                    >
-                      {{ next.text }}
-                    </v-card-text>
-                  </v-card>
-                </v-lazy>
-              </v-col>
-            </v-row>
-            <!-- <h2 class="display-2 font-weight-light ma-5" align="center">
-        Workflows
-      </h2> -->
-          </v-col>  
-        </v-row>
-      </v-container>
     </v-col>
   </v-row>
 </template>
@@ -177,7 +127,7 @@ export default {
       betas: [
         {
           title: '2D/3D triangular remeshing',
-          image: require('@/assets/dfn.png'),
+          image: 'dfn.png',
           text:
             'Remeshing of 2D and 3D triangulated surfaces, \
             targeting both triangle equilaterality and user input mesh sizes.',
@@ -189,7 +139,7 @@ export default {
         },        
         {
           title: '3D tetrahedral meshing',
-          image: require('@/assets/corbi.gif'),
+          image: 'corbi.gif',
           text:
             'Tetrahedral mesh generation from a set of triangulated surfaces, \
             targeting both tetrahedron regularity and user input mesh sizes.',
@@ -201,7 +151,7 @@ export default {
         },
         {
           title: 'Conversion between model and mesh',
-          image: require('@/assets/fractures.png'),
+          image: 'fractures.png',
           text:
             'Handy tools to convert mesh to boundary representation and boundary representation to mesh.',
           features: [
@@ -212,7 +162,7 @@ export default {
         },
         {
           title: 'Watertight model sealing',
-          image: require('@/assets/repair.png'),
+          image: 'repair.png',
           text:
             'Repair and build a boundary representation which ensure the watertightness. \
             This property is key to guarantee model integrity, topological requests validity and conformal meshing.',
@@ -225,7 +175,7 @@ export default {
         },
         {
           title: 'Incremental surface-based modeling',
-          image: require('@/assets/incremental.png'),
+          image: 'incremental.png',
           text:
             'Build a boundary representation from an independent set of surfaces in an extreme robust way.',
           features: [
@@ -235,30 +185,12 @@ export default {
           ],
           readiness: "60"
         }
-      ],
-      nexts: [
-        {
-          title: 'Mesh/model validity checker',
-          image: 'https://cdn.pixabay.com/photo/2017/07/28/23/18/coming-soon-2550190_960_720.jpg',
-          text:
-            'Before doing any computation or meshing step, make sure your data satisfy your needs. \
-            Meshes can be degenerated, non-manifold, colocated and boundary representations can have \
-            topological issues. This checker can track and expose all flawed configurations from your data.'
-        },
-        {
-          title: '3D mixed-element meshing',
-          image: 'https://cdn.pixabay.com/photo/2017/07/28/23/18/coming-soon-2550190_960_720.jpg',
-          text:
-            'Hexahedral elements have great numerical properties but hard to respect a given geometry. \
-            By combining hexahedra, tetrahedra and/or pyramids, mixed-element meshes provide both \
-            good numerical properties and respect to the input geometry.'
-        }
       ]
     }
   },
   head() {
     return {
-      title: 'Geode-solutions products for geometric and geosciences models'
+      title: 'Geode-solutions software'
     }
   }
 }
