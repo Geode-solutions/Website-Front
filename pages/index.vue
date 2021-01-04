@@ -398,9 +398,9 @@ export default {
           title: 'Model repair',
           image: 'screw.jpg',
           text:
-            'Useful and handy tools to check, verify and fix surface-based model.\
+            'Useful and handy tools to check, verify and fix surface-based models.\
             These tools are customizable and can target model watertighness or geometric simplification.\
-            Available in proprietary OpenGeode extension.',
+            Available in proprietary OpenGeode extensions.',
           url: "/technologies"
         },
         {

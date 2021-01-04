@@ -147,8 +147,8 @@ export default {
         title: 'Tetrahedral meshing',
         image: 'corbi.gif',
         text:
-          'Tetrahderal meshes are classical meshes used for various computations.\
-          However, generating a good quality tetrahedral mesh of a complex geological model can ctill be challenging.'
+          'Tetraheeral meshes are classical meshes used for various computations.\
+          However, generating a good quality tetrahedral mesh of a complex geological model can still be challenging.'
       },
       {
         title: 'Hybrid meshing',
