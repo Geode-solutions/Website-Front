@@ -14,23 +14,21 @@
     "@bazzite/nuxt-netlify": "^0.2.0",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/vuetify": "^1.11.2",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.14.12",
     "vue-awesome-swiper": "^4.1.1",
     "vue-carousel": "^0.18.0",
     "vue-particles": "^1.0.9",
-    "vue-scroll-reveal": "^1.0.11",
     "vuewordcloud": "^18.7.12"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
     "eslint-loader": "^4.0.2",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-vue": "^7.4.0",
     "eslint-plugin-vuetify": "1.0.0-beta.7",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.1"
   }
 }

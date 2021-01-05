@@ -30,32 +30,34 @@
       <v-row class="text-center">
         <v-col>
           <h2 class="display-1 primary--text my-5">
-            Open source framework for representing and manipulating geometric models
+            Open source framework <br> for representing and manipulating geometric models
           </h2>
 
-          <v-card
-            flat
-            style="background: rgba(0,0,0,0)"
-          >
-            <v-card-title
-              primary-title
-              class="justify-center display-2"
-            >
-              Visit GitHub repo
-            </v-card-title>
-            <a 
-              href="https://github.com/Geode-solutions/OpenGeode" 
+          <v-hover v-slot="{ hover }">
+            <v-card 
+              class="mx-auto"
+              max-width="500"
+              rounded
+              :elevation="hover ? 20 : 2"
+              href="https://github.com/Geode-solutions/OpenGeode"  
               target="_blank"
             >
-              <v-icon  
-                :size="$vuetify.breakpoint.smAndUp ? 150 : 100"
-                color="#000000"
-                style="display: ''"
+              <v-card-title
+                primary-title
+                class="justify-center display-2"
               >
-                fab fa-github
-              </v-icon>
-            </a> 
-          </v-card>
+                Visit GitHub repo
+              </v-card-title>
+              <v-card-text>
+                <v-icon  
+                  :size="$vuetify.breakpoint.smAndUp ? 150 : 100"
+                  color="#000000"
+                >
+                  fab fa-github
+                </v-icon>
+              </v-card-text>
+            </v-card>
+          </v-hover>
   
           <h2
             class="section display-3 mt-5"
@@ -80,8 +82,8 @@
                   height="100%"
                 >
                   <v-img
-                    :src="card.image"
-                    :alt="'Geode-solutions '+ card.title"
+                    :src="require('@/assets/opengeode/' + card.image)"
+                    :alt="'Geode-solutions ' + card.title"
                     contain
                   />
                   <v-card-title
@@ -100,6 +102,14 @@
               </v-lazy>
             </v-col>
           </v-row>
+          <h2 class="display-1 my-5 py-5" align="center">
+            Interested by OpenGeode features?
+            <div class="my-2">
+              <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
+                Contact us
+              </v-btn>
+            </div>
+          </h2>
         </v-col>  
       </v-row>
     </v-container>
@@ -128,7 +138,7 @@
                   :href="user.url"
                   target="_blank"
                 >
-                  <img width="80%" :src="user.logo">
+                  <img width="80%" :src=" require('@/assets/logos/'+user.logo)">
                 </a>
               </slide>
             </carousel>
@@ -146,7 +156,7 @@ export default {
       cards: [
         {
           title: 'Open source and cross-platform',
-          image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
+          image: 'road.jpg',
           text:
             'OpenGeode is an open source C++ framework available on GitHub, \
             under a permissive software license (MIT). \
@@ -156,7 +166,7 @@ export default {
         
         {
           title: 'Geometric and geological models',
-          image: 'https://cdn.pixabay.com/photo/2016/01/08/18/00/antelope-canyon-1128815_960_720.jpg',
+          image: 'antelope-canyon.jpg',
           text:
             'OpenGeode offers a CAD framework dedicated to Geosciences with \
             data structures for meshes (wells, faults, horizons, 3D structured, \
@@ -167,7 +177,7 @@ export default {
 
         {
           title: 'Industrial quality',
-          image: 'https://cdn.pixabay.com/photo/2015/11/28/23/20/technique-1068097_960_720.jpg',
+          image: 'technique.jpg',
           text:
             'A complete set of tools is used around OpenGeode to ensure its quality and its stability. \
             The Continuous Integration and Continuous Delivery philosophy has been chosen: code changes \
@@ -177,7 +187,7 @@ export default {
 
         {
           title: 'Ease-of-use',
-          image: 'https://cdn.pixabay.com/photo/2016/03/09/15/26/ruler-1246653_960_720.jpg',
+          image: 'ruler.jpg',
           text:
             'OpenGeode is easy to read since its code intelligibility:\
             API librairies are heavily documented, classes and methods are meaningful named. \
@@ -188,7 +198,7 @@ export default {
 
         {
           title: 'Extensibility',
-          image: 'https://cdn.pixabay.com/photo/2012/03/01/01/42/connect-20333_960_720.jpg',
+          image: 'hands.jpg',
           text:
             'OpenGeode supports users in adding new functionalities to allow easy adaptation to specific requirements. \
             We provide a quick start template to create your own technologies based on OpenGeode.'
@@ -197,7 +207,7 @@ export default {
 
         {
           title: 'Efficiency',
-          image: 'https://cdn.pixabay.com/photo/2014/06/18/16/31/jet-engine-371412_960_720.jpg',
+          image: 'jet-engine.jpg',
           text:
             'Modern concurrency and GPU-accelerated solutions are planned to be integrated to reach real-time computations. \
             We want to deliver turnkey powerful solutions for effective and immediate use.'
@@ -206,25 +216,30 @@ export default {
       users: [
         {
           name: 'Total SA',
-          logo: require('@/assets/logo_total.svg'),
+          logo: 'logo_total.svg',
           url: 'https://www.ep.total.com'
         },
         {
           name: 'RING',
-          logo: require('@/assets/logo_ring.png'),
+          logo: 'logo_ring.png',
           url: 'https://www.ring-team.org'
         },
         {
           name: 'GSC',
-          logo: require('@/assets/logo_GSC.png'),
+          logo: 'logo_GSC.png',
           url: 'https://www.nrcan.gc.ca/home'
         },
         {
           name: 'BSC',
-          logo: require('@/assets/logo_BSC.png'),
+          logo: 'logo_BSC.png',
           url: 'https://www.bsc.es/'
         }
       ]
+    }
+  },
+  head() {
+    return {
+      title: 'OpenGeode - open source framework for geometric models'
     }
   },
   computed: {
@@ -240,11 +255,6 @@ export default {
           case 'sm': return 2
           default: return 3
       }
-    }
-  },
-  head() {
-    return {
-      title: 'OpenGeode - open source framework for geometric models'
     }
   }
 }

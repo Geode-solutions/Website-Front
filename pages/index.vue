@@ -48,7 +48,7 @@
                 cols="12"
                 md="6"
               >
-                <v-hover #default="{ hover }">
+                <v-hover v-slot="{ hover }">
                   <v-lazy 
                     :options="{
                       threshold: .5
@@ -58,12 +58,12 @@
                       dark
                       height="500"
                       :elevation="hover ? 20 : 2"
-                      :img="card.image"
+                      :img="require('@/assets/index/' + card.image)"
                       nuxt
                       :to="card.url"
                       class="d-flex"
                     >
-                      <v-img :src="card.image"
+                      <v-img :src="require('@/assets/index/' + card.image)"
                              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
                       >
                         <v-row class="flex-column" no-gutters style="height: 100%">
@@ -159,7 +159,7 @@
                     height="100%"
                   >
                     <v-img
-                      :src="card.image"
+                      :src="require('@/assets/index/' + card.image)"
                       :alt="'Geode-solutions '+ card.title"
                       aspect-ratio="2.75"
                       gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
@@ -295,7 +295,7 @@
                     :href="supporter.url"
                     target="_blank"
                   >
-                    <img width="80%" :src="supporter.logo">
+                    <img width="80%" :src="require('@/assets/logos/'+supporter.logo)">
                   </a>
                 </slide>
               </carousel>
@@ -326,7 +326,7 @@
                     :href="partner.url"
                     target="_blank"
                   >
-                    <img width="80%" :src="partner.logo">
+                    <img width="80%" :src="require('@/assets/logos/'+partner.logo)">
                   </a>
                 </slide>
               </carousel>
@@ -350,63 +350,62 @@ export default {
       windowHeight: 0,
       cards: [
         {
-          image:
-            'https://cdn.pixabay.com/photo/2016/11/18/12/55/light-1834289_960_720.jpg',
+          image: 'light.jpg',
           title: 'Fast',
-          text:
-            'Aiming real-time using modern concurrency and GPU-accelerated programming '
+          text: 'Aiming real-time using modern concurrency and GPU-accelerated programming '
         },
         {
-          image:
-            'https://cdn.pixabay.com/photo/2016/08/05/09/28/hand-1571851_960_720.jpg',
+          image: 'hand.jpg',
           title: 'Reinvented UI',
-          text:
-            "Dedicated for scientists using today's technologies, offering intuitivity and reactiveness"
+          text: "Dedicated for scientists using today's technologies, offering intuitivity and reactiveness"
         },
         {
-          image:
-            'https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_960_720.jpg',
+          image: 'map-of-the-world.jpg',
           title: 'Cross-platform',
-          text:
-            'Compatible and constinuously tested on Windows, Linux and MacOS'
+          text:  'Compatible and constinuously tested on Windows, Linux and MacOS'
         },
         {
-          image:
-            'https://live.staticflickr.com/5674/31045227201_57b9c73426_b.jpg',
+          image: '31045227201_57b9c73426_b.jpg',
           title: 'Auto update',
-          text:
-            'New features and improvements continuously shipped using automatic updates'
+          text: 'New features and improvements continuously shipped using automatic updates'
         },
         {
-          image:
-            'https://cdn.pixabay.com/photo/2018/03/13/22/53/puzzle-3223941_960_720.jpg',
+          image: 'puzzle.jpg',
           title: 'Extensible',
-          text:
-            'Free open-source framework and plugin system for modular and custom developments'
+          text: 'Free open-source framework and plugin system for modular and custom developments'
         }
       ],
       masterCards: [
         {
           title: 'Advanced meshing',
-          image: 'https://cdn.pixabay.com/photo/2015/09/26/19/09/cobweb-959578_960_720.jpg',
+          image: 'cobweb.jpg',
           text:
             'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
              It brings robustness and high industrial quality meshes on deeply complex models.\
-            Available in proprietary OpenGeode extension.',
-          url: "/products"
+             Available in proprietary OpenGeode extension.',
+          url: "/expertize"
         },
         {
-          title: 'Explicit modeling',
-          image: 'https://cdn.pixabay.com/photo/2013/07/18/20/27/nut-165083_960_720.jpg',
+          title: 'Modeling',
+          image: 'nut.jpg',
           text:
-            'Useful and handy tools to generate an explicit model from given surfaces.\
+            'Technologies to generate an explicit model from given surfaces or an implicit model from given points.\
              We take advantage of our strong meshing expertise to ensure robustness and model requirements for meshing and simulation applications.\
-            Available in proprietary OpenGeode extension.',
-          url: "/products"
+             Available in proprietary OpenGeode extension.',
+          url: "/expertize"
+        },
+        {
+          title: 'Model repair',
+          image: 'screw.jpg',
+          text:
+            'Useful and handy tools to check, verify and fix surface-based models.\
+            These tools are customizable and can target model watertighness or geometric simplification.\
+            Available in proprietary OpenGeode extensions.',
+          url: "/expertize"
         },
         {
           title: 'OpenGeode framework',
-          image: 'https://cdn.pixabay.com/photo/2019/11/03/08/35/road-4598095_960_720.jpg',
+          image: 'road.jpg',
           text:
             'Open source framework for representing and manipulating models.\
              It is designed from the ground up to support any geometrical and geosciences application requiring a discretized model.\
@@ -415,7 +414,7 @@ export default {
         },
         {
           title: 'Custom-tailored services',
-          image: 'https://cdn.pixabay.com/photo/2017/08/03/12/21/tailoring-2575930_960_720.jpg',
+          image: 'tailoring.jpg',
           text:
             'We deliver custom-tailored services to address your specific needs and challenges. \
              Our experts can provide training, support and software development on a wide range of applications from geometry and software to geosciences.',
@@ -425,74 +424,74 @@ export default {
       supporters: [
         {
           name: 'Helioparc',
-          logo: require('@/assets/logo_helioparc.svg'),
+          logo: 'logo_helioparc.svg',
           url: 'http://www.helioparc.fr'
         },
         {
           name: 'LaBanquiz',
-          logo: require('@/assets/logo_banquiz.png'),
+          logo: 'logo_banquiz.png',
           url: 'https://labanquiz.com'
         },
         {
           name: 'NAOS',
-          logo: require('@/assets/logo_NAOS.png'),
+          logo: 'logo_NAOS.png',
           url: 'https://naos-cluster.com'
         },
         {
           name: 'Nouvelle-Aquitaine',
-          logo: require('@/assets/logo_region.png'),
+          logo: 'logo_region.png',
           url: 'https://www.nouvelle-aquitaine.fr'
         },
         {
           name: 'Geoliens',
-          logo: require('@/assets/logo_geoliens.png'),
+          logo: 'logo_geoliens.png',
           url: 'https://www.geoliens.org'
         }
       ],
       partners: [
         {
           name: 'Pole Avenia',
-          logo: require('@/assets/logo-avenia.svg'),
+          logo: 'logo-avenia.svg',
           url: 'https://www.pole-avenia.com'
         },
         {
           name: 'Total SE',
-          logo: require('@/assets/logo_total.svg'),
+          logo: 'logo_total.svg',
           url: 'https://www.ep.total.com'
         },
         {
           name: 'RING',
-          logo: require('@/assets/logo_ring.png'),
+          logo: 'logo_ring.png',
           url: 'https://www.ring-team.org'
         },
         {
           name: 'GeoRessources',
-          logo: require('@/assets/logo_georessources.jpg'),
+          logo: 'logo_georessources.jpg',
           url: 'http://georessources.univ-lorraine.fr/'
         },
         {
           name: 'CNRS',
-          logo: require('@/assets/logo_cnrs.png'),
+          logo: 'logo_cnrs.png',
           url: 'http://georessources.univ-lorraine.fr/'
         },
         {
           name: 'Université de Lorraine',
-          logo: require('@/assets/logo_UL.png'),
+          logo: 'logo_UL.png',
           url: 'http://www.univ-lorraine.fr/'
         },
         {
           name: 'ENEREX',
-          logo: require('@/assets/logo_enerex.png'),
+          logo: 'logo_enerex.png',
           url: 'https://enerex.fr/'
         },
         {
           name: 'ARXITEK',
-          logo: require('@/assets/logo_arxitek.png'),
+          logo: 'logo_arxitek.png',
           url: 'https://arxitek.fr/'
         },
         {
           name: 'Earth Quick',
-          logo: require('@/assets/logo_earth_quick.jpg'),
+          logo: 'logo_earth_quick.jpg',
           url: 'https://www.earth-quick.com/'
         }
       ],
