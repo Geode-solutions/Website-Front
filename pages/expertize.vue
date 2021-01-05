@@ -49,7 +49,7 @@ export default {
       {
         title: 'Geosciences meshing',
         text:
-          'Remeshing triangulated surfaces or volumetric meshing, using tetrahedral or more complex meshes \
+          'Surfaces remeshing or volumetric meshing, using tetrahedral or more complex meshes \
           such as hybrid meshes, is a necessary but often difficult operation.\
           This is particularly the case when dealing with open surfaces including holes, multiple contacts and small angles, \
           as it is in geological models. Our meshing technologies are based on robust and pragmatic algorithms \
@@ -58,15 +58,16 @@ export default {
       {
         title: 'Geosciences modeling',
         text:
-          'Creating a model from a given set of surfaces or a given set of points is known as explicit or implicit modeling.\
-          Both technologies can be used to successfully build one model representing the geological subsurface of interest.'
+          'Creating a complete geological model from a set of independent surfaces or a set of points is known as explicit or implicit modeling. \
+          Based on data, knowledge, interpolation, and robust geometrical/topological editing operations, \
+          our modeling tools are able to build numerical models of the subsurface domain of interest.'
       },
       {
         title: 'Geosciences model repair',
         text:
-          'Before doing any computation or meshing step, make sure your data satisfy your needs.\
-          Meshes can be degenerated, non-manifold, colocated and boundary representations can have topological issues.\
-          Our model repair technologie can track, expose and fixe most of flawed configurations from your data.'
+          'Before doing any computation or meshing step, make sure your data satisfies your needs.\
+          Meshes can be degenerated, non-manifold, collocated and boundary representations can have topological issues. \
+          Our model repair technologies tracks, exposes and fixs a lot of flawed configurations from your data'
       }
     ]
   }),

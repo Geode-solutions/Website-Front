@@ -161,7 +161,7 @@
               </v-col>
             </v-row>
             <h2 class="display-1 my-5 py-5" align="center">
-              Want to try this solutions or looking for another technology?
+              Want to try these solutions or looking for another technology?
               <div class="my-2">
                 <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
                   Contact us
@@ -247,20 +247,20 @@ export default {
           text:
             'Before doing any computation or meshing step, make sure your data satisfy your needs. \
             Meshes can be degenerated, non-manifold, colocated and boundary representations can have \
-            topological issues. This checker can track and expose all flawed configurations from your data.'
+            topological issues. This checker tracks and exposes all flawed configurations from your data.'
         },
         {
-          title: '3D mixed-element meshing',
+          title: '3D hybrid meshing',
           text:
             'Hexahedral elements have great numerical properties but hard to respect a given geometry. \
-            By combining hexahedra, tetrahedra and/or pyramids, mixed-element meshes provide both \
+            By combining hexahedra, tetrahedra and/or pyramids, hybrid meshes provide both \
             good numerical properties and respect to the input geometry.'
         },
         {
           title: 'Implicit modeling',
           text:
-            'Build a boundary representation from an independent set of points representing each surface of the model.\
-            Interpolation techniques are used to build each fault and the stratigraphy.',
+            'Build a boundary representation from an independent set of points representing each feature of the model. \
+            Interpolation techniques are used to build each fault and the stratigraphic pile.',
         }
       ]
     }
