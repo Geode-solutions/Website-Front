@@ -58,7 +58,7 @@ export default {
   data: () => ({
     services: [
       {
-        title: 'Third party OpenGeode integration',
+        title: 'OpenGeode integration',
         image: 'integration.jpg',
         text:
           'You would like to use OpenGeode environment, features and technologies within another software suite. \

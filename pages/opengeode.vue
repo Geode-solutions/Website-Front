@@ -30,7 +30,7 @@
       <v-row class="text-center">
         <v-col>
           <h2 class="display-1 primary--text my-5">
-            Open source framework for representing and manipulating geometric models
+            Open source framework <br> for representing and manipulating geometric models
           </h2>
 
           <v-hover v-slot="{ hover }">
@@ -102,6 +102,14 @@
               </v-lazy>
             </v-col>
           </v-row>
+          <h2 class="display-1 my-5 py-5" align="center">
+            Interested by OpenGeode features?
+            <div class="my-2">
+              <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
+                Contact us
+              </v-btn>
+            </div>
+          </h2>
         </v-col>  
       </v-row>
     </v-container>

@@ -116,6 +116,61 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-container>
+        <v-row>
+          <v-col>
+            <h2 class="display-2 font-weight-light ma-5" align="center">
+              Next technologies
+            </h2>
+            <v-row justify="space-around">
+              <v-col
+                v-for="next in nexts"
+                :key="next.title"
+                cols="11"
+                sm="5"
+                md="6"
+              >
+                <v-lazy 
+                  :options="{
+                    threshold: .5
+                  }"
+                  min-height="500"
+                >
+                  <v-card
+                    height="100%"
+                  >
+                    <v-img
+                      :src="require('@/assets/techno/coming-soon.jpg')"
+                      :alt="'Geode-solutions '+ next.title"
+                      contain
+                    />
+                    <v-card-title
+                      primary-title
+                      class="justify-center display-1 px-5 ma-4"
+                    >
+                      {{ next.title }}
+                    </v-card-title>
+                    <v-card-text
+                      align="justify"
+                      class="body-1"
+                    >
+                      {{ next.text }}
+                    </v-card-text>
+                  </v-card>
+                </v-lazy>
+              </v-col>
+            </v-row>
+            <h2 class="display-1 my-5 py-5" align="center">
+              Want to try this solutions or looking for another technology?
+              <div class="my-2">
+                <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
+                  Contact us
+                </v-btn>
+              </div>
+            </h2>
+          </v-col>  
+        </v-row>
+      </v-container>
     </v-col>
   </v-row>
 </template>
@@ -184,6 +239,28 @@ export default {
             "Guaranteed model validity at any time"
           ],
           readiness: "60"
+        }
+      ],
+      nexts: [
+        {
+          title: 'Mesh/model validity checker',
+          text:
+            'Before doing any computation or meshing step, make sure your data satisfy your needs. \
+            Meshes can be degenerated, non-manifold, colocated and boundary representations can have \
+            topological issues. This checker can track and expose all flawed configurations from your data.'
+        },
+        {
+          title: '3D mixed-element meshing',
+          text:
+            'Hexahedral elements have great numerical properties but hard to respect a given geometry. \
+            By combining hexahedra, tetrahedra and/or pyramids, mixed-element meshes provide both \
+            good numerical properties and respect to the input geometry.'
+        },
+        {
+          title: 'Implicit modeling',
+          text:
+            'Build a boundary representation from an independent set of points representing each surface of the model.\
+            Interpolation techniques are used to build each fault and the stratigraphy.',
         }
       ]
     }
