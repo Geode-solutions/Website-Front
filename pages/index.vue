@@ -12,22 +12,27 @@
             width="600"
             style="border-radius: 80px 0px; background-color: rgba(255,255,255,0.8)"
           >
-            <v-img
-              :src="require('@/assets/logo.svg')"
-              alt="Geode-solutions logo"
-              width="50%"
-              class="mx-auto"
-            />
             <v-row
-              class="flex-column"
+              class="flex-column pa-3"
               align="center"
+              align-content="space-around"
             >
-              <h1 class="display-3 text-center mb-3 primary--text">
-                Geode-solutions
-              </h1>
-              <h2 class="headline text-center primary--text">
-                Technology company tackling next generation of modeling challenges using advanced meshing
-              </h2>
+              <v-col>
+                <v-img
+                  :src="require('@/assets/logo.svg')"
+                  alt="Geode-solutions logo"
+                  width="50%"
+                  class="mx-auto"
+                />
+                <h1 class="display-3 text-center mb-3 primary--text">
+                  Geode-solutions
+                </h1>
+              </v-col>
+              <v-col>
+                <h2 class="headline text-center primary--text">
+                  Technology company tackling next generation of modeling challenges using advanced meshing
+                </h2>
+              </v-col>
             </v-row>
           </v-card>
         </v-parallax>
@@ -123,7 +128,7 @@
                 Hydro&shygeology
               </v-timeline-item>
               <v-timeline-item small fill-dot class="display-1 font-weight-light">
-                ...
+                Urban geology
               </v-timeline-item>
             </v-timeline>
           </v-col>

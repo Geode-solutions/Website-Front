@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar dark color="primary" fixed app>
       <v-row class="hidden-sm-and-down px-2">
-        <v-btn text active-class="" nuxt to="/">
+        <v-btn text active-class="no-active" nuxt to="/">
           <v-app-bar-nav-icon>
             <v-icon large>
               $vuetify.icons.logo
@@ -152,6 +152,9 @@ export default {
 }
 .v-btn {
   min-width: 0;
+}
+.v-btn--active.no-active::before {                                                                             
+  opacity: 0 !important;
 }
 </style>
 
