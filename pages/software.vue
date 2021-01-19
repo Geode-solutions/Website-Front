@@ -190,7 +190,7 @@ export default {
             "Robust to degenerated input meshes", 
             "Guaranteed conformal to surface intersections"
           ],
-          readiness: "80"
+          readiness: "90"
         },        
         {
           title: '3D tetrahedral meshing',
@@ -202,7 +202,7 @@ export default {
             "Robust to degenerated input meshes", 
             "Guaranteed conformal to input boundary surface meshes"
           ],
-          readiness: "60"
+          readiness: "80"
         },
         {
           title: 'Conversion between model and mesh',
@@ -213,7 +213,7 @@ export default {
             'Automatic recovery of model components and topology from mesh',
             'Output mesh gathering all model information as attributes'
           ],
-          readiness: "80"
+          readiness: "90"
         },
         {
           title: 'Watertight model sealing',
