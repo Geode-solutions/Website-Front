@@ -5,10 +5,10 @@
         <v-row>
           <v-col>
             <h1 class="display-3 my-5 py-5" align="center">
-              Our expertize
+              Our expertise
             </h1>
             <p class="container title font-weight-light" align="justify">
-              Geode-solutions is looking, researching and developing technologies and expertize
+              Geode-solutions is looking, researching and developing technologies and expertise
               to tackle next generation of 2D and 3D modeling challenges using advanced meshing.
             </p>
             <v-card v-for="(mesh, index) in meshing" :key="index" style="margin-bottom: 40px">
@@ -73,7 +73,7 @@ export default {
   }),
   head() {
     return {
-      title: 'Geode-solutions expertize'
+      title: 'Geode-solutions expertise'
     }
   }
 }

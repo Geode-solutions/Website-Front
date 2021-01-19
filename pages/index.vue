@@ -388,7 +388,7 @@ export default {
             'Our reliable and pratical solutions for meshing combine innovative technologies across industrial fields.\
              It brings robustness and high industrial quality meshes on deeply complex models.\
              Available in proprietary OpenGeode extension.',
-          url: "/expertize"
+          url: "/expertise"
         },
         {
           title: 'Modeling',
@@ -397,7 +397,7 @@ export default {
             'Technologies to generate an explicit model from given surfaces or an implicit model from given points.\
              We take advantage of our strong meshing expertise to ensure robustness and model requirements for meshing and simulation applications.\
              Available in proprietary OpenGeode extension.',
-          url: "/expertize"
+          url: "/expertise"
         },
         {
           title: 'Model repair',
@@ -406,7 +406,7 @@ export default {
             'Useful and handy tools to check, verify and fix surface-based models.\
             These tools are customizable and can target model watertighness or geometric simplification.\
             Available in proprietary OpenGeode extensions.',
-          url: "/expertize"
+          url: "/expertise"
         },
         {
           title: 'OpenGeode framework',

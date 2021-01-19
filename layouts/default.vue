@@ -119,7 +119,7 @@ export default {
       menu: false,
       items: [
         { title: 'OpenGeode', to: '/opengeode' },
-        { title: 'Expertize', to: '/expertize' },
+        { title: 'Expertise', to: '/expertise' },
         { title: 'Software', to: '/software' },
         { title: 'Services', to: '/services' }
       ],

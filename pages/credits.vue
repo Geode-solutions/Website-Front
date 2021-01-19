@@ -7,7 +7,7 @@
         </h2>
 
         <h4>
-          All pictures in "Expertize" and "Software" pages are Copyright — Geode-solutions SAS. All rights reserved.
+          All pictures in "Expertise" and "Software" pages are Copyright — Geode-solutions SAS. All rights reserved.
         </h4>
 
         <h4>
