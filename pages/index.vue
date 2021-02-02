@@ -498,6 +498,11 @@ export default {
           name: 'Earth Quick',
           logo: 'logo_earth_quick.jpg',
           url: 'https://www.earth-quick.com/'
+        },
+        {
+          name: 'MOSART PME',
+          logo: 'LOGOMOSART-PME.jpg',
+          url: 'https://www.mosart-pme.org/'
         }
       ],
       us: [
