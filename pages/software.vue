@@ -171,6 +171,39 @@
           </v-col>  
         </v-row>
       </v-container>
+    <v-container fluid style="background-color: white">
+      <v-row class="container mx-auto">
+        <v-col>
+          <h2
+            class="section display-3"
+            align="center"
+          >
+            Thanks to our pilots
+          </h2>
+
+          <v-lazy 
+            :options="{
+              threshold: .5
+            }"
+          >
+            <carousel autoplay loop :per-page="nbUsers"> 
+              <slide 
+                v-for="(user, index) in users"
+                :key="index"
+                class="logo"
+              >
+                <a
+                  :href="user.url"
+                  target="_blank"
+                >
+                  <img width="80%" :src=" require('@/assets/logos/'+user.logo)">
+                </a>
+              </slide>
+            </carousel>
+          </v-lazy>
+        </v-col>  
+      </v-row>
+    </v-container>
     </v-col>
   </v-row>
 </template>
@@ -262,6 +295,23 @@ export default {
             'Build a boundary representation from an independent set of points representing each feature of the model. \
             Interpolation techniques are used to build each fault and the stratigraphic pile.',
         }
+      ],
+      users: [
+        {
+          name: 'RING',
+          logo: 'logo_ring.png',
+          url: 'https://www.ring-team.org'
+        },
+        {
+          name: 'GSC',
+          logo: 'logo_GSC.png',
+          url: 'https://www.nrcan.gc.ca/home'
+        },
+        {
+          name: 'BSC',
+          logo: 'logo_BSC.png',
+          url: 'https://www.bsc.es/'
+        }
       ]
     }
   },
@@ -269,6 +319,27 @@ export default {
     return {
       title: 'Geode-solutions software'
     }
+  },
+  computed: {
+    nbUsers() {
+      switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 1
+          case 'sm': return 2
+          default: return 3
+      }
+    }
   }
 }
 </script>
+
+<style scoped>
+.section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
