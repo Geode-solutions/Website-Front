@@ -215,8 +215,8 @@ export default {
       ],
       users: [
         {
-          name: 'Total SA',
-          logo: 'logo_total.svg',
+          name: 'Total SE',
+          logo: 'logo_totalenergies.png',
           url: 'https://www.ep.total.com'
         },
         {

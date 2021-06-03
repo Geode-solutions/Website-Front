@@ -461,7 +461,7 @@ export default {
         },
         {
           name: 'Total SE',
-          logo: 'logo_total.svg',
+          logo: 'logo_totalenergies.png',
           url: 'https://www.ep.total.com'
         },
         {
