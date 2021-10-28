@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h2 class="headline">
+        <h2 class="text-h5">
           Credits
         </h2>
 

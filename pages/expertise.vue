@@ -4,30 +4,30 @@
       <v-container>
         <v-row>
           <v-col>
-            <h1 class="display-3 my-5 py-5" align="center">
+            <h1 class="text-h2 my-5 py-5" align="center">
               Our expertise
             </h1>
-            <p class="container title font-weight-light" align="justify">
+            <p class="container text-h6 font-weight-light" align="justify">
               Geode-solutions is looking, researching and developing technologies and expertise
               to tackle next generation of 2D and 3D modeling challenges using advanced meshing.
             </p>
             <v-card v-for="(mesh, index) in meshing" :key="index" style="margin-bottom: 40px">
               <v-row align="center" justify="space-around">
                 <v-col :order-sm="index % 2" cols="12" sm="5">
-                  <v-card-title primary-title class="justify-center display-1">
+                  <v-card-title primary-title class="justify-center text-h4">
                     {{ mesh.title }}
                   </v-card-title>
                 </v-col>
                 <v-col cols="12" sm="7">
                   <v-card flat>
-                    <v-card-text align="justify" class="title">
+                    <v-card-text align="justify" class="text-h6">
                       {{ mesh.text }}
                     </v-card-text>
                   </v-card>
                 </v-col>
               </v-row>
             </v-card>
-            <h2 class="display-1 my-5 py-5" align="center">
+            <h2 class="text-h4 my-5 py-5" align="center">
               Let us know how we can help!
               <div class="my-2">
                 <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">

@@ -24,12 +24,12 @@
                   width="50%"
                   class="mx-auto"
                 />
-                <h1 class="display-3 text-center mb-3 primary--text">
+                <h1 class="text-h2 text-center mb-3 primary--text">
                   Geode-solutions
                 </h1>
               </v-col>
               <v-col>
-                <h2 class="headline text-center primary--text">
+                <h2 class="text-h5 text-center primary--text">
                   Technology company tackling next generation of modeling challenges using advanced meshing
                 </h2>
               </v-col>
@@ -41,7 +41,7 @@
         <v-row>
           <v-col>
             <h2
-              class="section display-3"
+              class="section text-h2"
               align="center"
             >
               What we do
@@ -75,7 +75,7 @@
                           <v-spacer />
                           <v-col cols="auto">
                             <v-card-title
-                              class="display-1"
+                              class="text-h4"
                               align="end"
                             >
                               {{ card.title }}
@@ -84,7 +84,7 @@
                           <v-col cols="auto">
                             <v-card-text
                               align="justify"
-                              class="body-1"
+                              class="text-body-1"
                             >
                               {{ card.text }}
                             </v-card-text>
@@ -103,31 +103,31 @@
         <v-row class="container mx-auto">
           <v-col>
             <h2
-              class="section display-3"
+              class="section text-h2"
               align="center"
             >
               Which applications
             </h2>
             <v-timeline>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light">
-                Geo&shythermal
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
+                Geo&shy;thermal
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light text-right">
                 Mining
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light">
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
                 CCUS
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
-                Oil&Gas
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light text-right">
+                Oil&shy;Gas
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light">
-                Geo&shymecha&shynics
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
+                Geo&shy;mecha&shy;nics
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light text-right">
-                Hydro&shygeology
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light text-right">
+                Hydro&shy;geology
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="display-1 font-weight-light">
+              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
                 Urban geology
               </v-timeline-item>
             </v-timeline>
@@ -138,7 +138,7 @@
         <v-row class="container mx-auto">
           <v-col>
             <h2
-              class="section display-3"
+              class="section text-h2"
               align="center"
             >
               Why Geode-solutions
@@ -171,12 +171,12 @@
                     >
                       <v-card-title 
                         primary-title
-                        class="display-1 justify-center fill-height"
+                        class="text-h4 justify-center fill-height"
                       >
                         {{ card.title }}
                       </v-card-title>
                     </v-img>
-                    <v-card-text class="body-1 font-weight-medium text-center">
+                    <v-card-text class="text-body-1 font-weight-medium text-center">
                       {{ card.text }}
                     </v-card-text>
                   </v-card>
@@ -188,7 +188,7 @@
       </v-container>
       <v-container fluid style="background-color: white">
         <h2
-          class="section display-3"
+          class="section text-h2"
           align="center"
         >
           What are our skills
@@ -218,7 +218,7 @@
       </v-container>
       <v-container fluid>
         <h2
-          class="section display-3"
+          class="section text-h2"
           align="center"
         >
           Who we are
@@ -251,7 +251,7 @@
                 </v-avatar>
                 <v-card-title
                   primary-title
-                  class="justify-center headline"
+                  class="justify-center text-h5"
                 >
                   {{ guy.name }}
                   <v-btn
@@ -266,7 +266,7 @@
                   {{ guy.job }}
                 </v-card-title>
                 <v-card-text
-                  class="justify-center headline font-italic"
+                  class="justify-center text-h5 font-italic"
                 > 
                   {{ guy.topic }}
                 </v-card-text> 
@@ -279,7 +279,7 @@
         <v-row class="container mx-auto">
           <v-col>
             <h2
-              class="section display-3"
+              class="section text-h2"
               align="center"
             >
               They support us
@@ -310,7 +310,7 @@
         <v-row class="container mx-auto">
           <v-col>
             <h2
-              class="section display-3"
+              class="section text-h2"
               align="center"
             >
               Our partners

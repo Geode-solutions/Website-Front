@@ -32,7 +32,7 @@
                   $vuetify.icons.logo
                 </v-icon>
               </v-col>
-              <v-col class="title mx-2">
+              <v-col class="text-h6 mx-2">
                 {{ name }}
               </v-col>
             </v-row>
@@ -59,7 +59,7 @@
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
-        <v-row align="center">
+        <v-row align="center" class="mr-0">
           <v-col cols="auto">
             <v-card-text class="ml-2">
               <v-btn
@@ -90,7 +90,7 @@
           </v-col>
         </v-row>
         <v-divider />
-        <v-row align="center" class="px-1">
+        <v-row align="center" class="px-1 mb-0 pt-1">
           <v-col cols="auto">
             <v-card-text>
               Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights reserved.
@@ -101,7 +101,7 @@
             <v-btn target="_blank" text href="https://nuxtjs.org/">
               <img
                 width="120px"
-                src="https://nuxtjs.org/logos/built-with-nuxt-white.svg"
+                src="@/assets/nuxt.svg"
               >
             </v-btn>
           </v-col>

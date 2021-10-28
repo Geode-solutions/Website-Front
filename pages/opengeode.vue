@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col
-      class="text-center title"
+      class="text-center text-h6"
     >
       <h1 :class="display">
         OpenGeode
@@ -29,7 +29,7 @@
     <v-container>
       <v-row class="text-center">
         <v-col>
-          <h2 class="display-1 primary--text my-5">
+          <h2 class="text-h4 primary--text my-5">
             Open source framework <br> for representing and manipulating geometric models
           </h2>
 
@@ -44,7 +44,7 @@
             >
               <v-card-title
                 primary-title
-                class="justify-center display-2"
+                class="justify-center text-h3"
               >
                 Visit GitHub repo
               </v-card-title>
@@ -60,7 +60,7 @@
           </v-hover>
   
           <h2
-            class="section display-3 mt-5"
+            class="section text-h2 mt-5"
             align="center"
           >
             Key features
@@ -88,13 +88,13 @@
                   />
                   <v-card-title
                     primary-title
-                    class="justify-center display-1"
+                    class="justify-center text-h4"
                   >
                     {{ card.title }}
                   </v-card-title>
                   <v-card-text
                     align="justify"
-                    class="body-1"
+                    class="text-body-1"
                   >
                     {{ card.text }}
                   </v-card-text>
@@ -102,7 +102,7 @@
               </v-lazy>
             </v-col>
           </v-row>
-          <h2 class="display-1 my-5 py-5" align="center">
+          <h2 class="text-h4 my-5 py-5" align="center">
             Interested by OpenGeode features?
             <div class="my-2">
               <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
@@ -117,7 +117,7 @@
       <v-row class="container mx-auto">
         <v-col>
           <h2
-            class="section display-3"
+            class="section text-h2"
             align="center"
           >
             They use it
