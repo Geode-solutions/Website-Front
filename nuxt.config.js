@@ -64,7 +64,7 @@ export default {
         }
       }
     },
-    icons: {iconfont: 'fa', values: {logo: {component: 'Logo'}}}
+    icons: {iconfont: 'fa', values: {logo: {component: 'GeodeLogo'}}}
   },
 
   /*

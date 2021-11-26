@@ -13,22 +13,21 @@
   "dependencies": {
     "@bazzite/nuxt-netlify": "^0.2.0",
     "@nuxtjs/google-analytics": "^2.4.0",
-    "@nuxtjs/vuetify": "^1.11.3",
-    "nuxt": "^2.14.12",
-    "vue-awesome-swiper": "^4.1.1",
+    "@nuxtjs/vuetify": "^1.12.1",
+    "nuxt": "^2.15.8",
     "vue-carousel": "^0.18.0",
     "vue-particles": "^1.0.9",
     "vuewordcloud": "^18.7.12"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.19.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-loader": "^4.0.2",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^7.5.0",
-    "eslint-plugin-vuetify": "1.0.0-beta.7",
-    "prettier": "^2.2.1"
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.1.1",
+    "eslint-plugin-vuetify": "1.1.0",
+    "prettier": "^2.5.0"
   }
 }

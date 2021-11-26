@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Logo from '@/components/Logo'
+import GeodeLogo from '@/components/GeodeLogo'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-Vue.component('Logo', Logo)
+Vue.component('GeodeLogo', GeodeLogo)

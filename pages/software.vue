@@ -210,125 +210,121 @@
 
 <script>
 export default {
+  name: 'GeodeSoftware',
   data() {
     return {
       betas: [
         {
           title: '2D/3D triangular remeshing',
-          image: 'dfn.png',
-          text:
-            'Remeshing of 2D and 3D triangulated surfaces, \
+          image: 'dfn.jpg',
+          text: 'Remeshing of 2D and 3D triangulated surfaces, \
             targeting both triangle equilaterality and user input mesh sizes.',
           features: [
-            "Robust to degenerated input meshes", 
-            "Guaranteed conformal to surface intersections"
+            'Robust to degenerated input meshes',
+            'Guaranteed conformal to surface intersections',
           ],
-          readiness: "90"
-        },        
+          readiness: '90',
+        },
         {
           title: '3D tetrahedral meshing',
           image: 'corbi.gif',
-          text:
-            'Tetrahedral mesh generation from a set of triangulated surfaces, \
+          text: 'Tetrahedral mesh generation from a set of triangulated surfaces, \
             targeting both tetrahedron regularity and user input mesh sizes.',
           features: [
-            "Robust to degenerated input meshes", 
-            "Guaranteed conformal to input boundary surface meshes"
+            'Robust to degenerated input meshes',
+            'Guaranteed conformal to input boundary surface meshes',
           ],
-          readiness: "80"
+          readiness: '80',
         },
         {
           title: 'Conversion between model and mesh',
           image: 'fractures.png',
-          text:
-            'Handy tools to convert mesh to boundary representation and boundary representation to mesh.',
+          text: 'Handy tools to convert mesh to boundary representation and boundary representation to mesh.',
           features: [
             'Automatic recovery of model components and topology from mesh',
-            'Output mesh gathering all model information as attributes'
+            'Output mesh gathering all model information as attributes',
           ],
-          readiness: "90"
+          readiness: '90',
         },
         {
           title: 'Watertight model sealing',
           image: 'repair.png',
-          text:
-            'Repair and build a boundary representation which ensure the watertightness. \
+          text: 'Repair and build a boundary representation which ensure the watertightness. \
             This property is key to guarantee model integrity, topological requests validity and conformal meshing.',
           features: [
-            "Remove all gaps and intersections between surfaces",
-            "Compute watertight model components and topology",
-            "Guaranteed full conformal meshes with all model components"
+            'Remove all gaps and intersections between surfaces',
+            'Compute watertight model components and topology',
+            'Guaranteed full conformal meshes with all model components',
           ],
-          readiness: "40"
+          readiness: '40',
         },
         {
           title: 'Incremental surface-based modeling',
           image: 'incremental.png',
-          text:
-            'Build a boundary representation from an independent set of surfaces in an extreme robust way.',
+          text: 'Build a boundary representation from an independent set of surfaces in an extreme robust way.',
           features: [
-            "Produce surface to surface intersections and topology",
-            "Interactive surface addition and removal from the model",
-            "Guaranteed model validity at any time"
+            'Produce surface to surface intersections and topology',
+            'Interactive surface addition and removal from the model',
+            'Guaranteed model validity at any time',
           ],
-          readiness: "60"
-        }
+          readiness: '60',
+        },
       ],
       nexts: [
         {
           title: 'Mesh/model validity checker',
-          text:
-            'Before doing any computation or meshing step, make sure your data satisfy your needs. \
+          text: 'Before doing any computation or meshing step, make sure your data satisfy your needs. \
             Meshes can be degenerated, non-manifold, colocated and boundary representations can have \
-            topological issues. This checker tracks and exposes all flawed configurations from your data.'
+            topological issues. This checker tracks and exposes all flawed configurations from your data.',
         },
         {
           title: '3D hybrid meshing',
-          text:
-            'Hexahedral elements have great numerical properties but hard to respect a given geometry. \
+          text: 'Hexahedral elements have great numerical properties but hard to respect a given geometry. \
             By combining hexahedra, tetrahedra and/or pyramids, hybrid meshes provide both \
-            good numerical properties and respect to the input geometry.'
+            good numerical properties and respect to the input geometry.',
         },
         {
           title: 'Implicit modeling',
-          text:
-            'Build a boundary representation from an independent set of points representing each feature of the model. \
+          text: 'Build a boundary representation from an independent set of points representing each feature of the model. \
             Interpolation techniques are used to build each fault and the stratigraphic pile.',
-        }
+        },
       ],
       users: [
         {
           name: 'RING',
           logo: 'logo_ring.png',
-          url: 'https://www.ring-team.org'
+          url: 'https://www.ring-team.org',
         },
         {
           name: 'GSC',
           logo: 'logo_GSC.png',
-          url: 'https://www.nrcan.gc.ca/home'
+          url: 'https://www.nrcan.gc.ca/home',
         },
         {
           name: 'BSC',
           logo: 'logo_BSC.png',
-          url: 'https://www.bsc.es/'
-        }
-      ]
+          url: 'https://www.bsc.es/',
+        },
+      ],
     }
   },
   head() {
     return {
-      title: 'Geode-solutions software'
+      title: 'Geode-solutions software',
     }
   },
   computed: {
     nbUsers() {
       switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 1
-          case 'sm': return 2
-          default: return 3
+        case 'xs':
+          return 1
+        case 'sm':
+          return 2
+        default:
+          return 3
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -338,8 +334,8 @@ export default {
   padding-bottom: 50px;
 }
 .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
