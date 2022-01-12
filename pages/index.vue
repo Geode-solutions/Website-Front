@@ -473,7 +473,21 @@ export default {
           pict: require('@/assets/PierreA.jpg'),
           job: 'CEO & co-founder',
           url: 'https://linkedin.com/in/pierre-anquez',
-          topic: 'Repair and simplification',
+          topic: 'Explicit modeling',
+        },
+        {
+          name: 'Melchior Schuh-Senlis',
+          pict: require('@/assets/Melchior.jpg'),
+          job: 'Research engineer',
+          url: 'https://www.linkedin.com/in/melchior-schuh-senlis-a9573aba',
+          topic: 'Implicit modeling',
+        },
+        {
+          name: 'Julien Champagnol',
+          pict: require('@/assets/Julien.jpg'),
+          job: 'Cloud developer',
+          url: 'https://www.linkedin.com/in/julien-champagnol-90330b17b',
+          topic: 'Web and microservices',
         },
       ],
       skills: [
