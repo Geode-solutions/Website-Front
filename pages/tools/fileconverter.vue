@@ -1,142 +1,200 @@
 <template>
-  <client-only>
-    <v-card v-if="!cloudRunning" loading elevation="2">
-      <v-card-title>Cloud instance is starting </v-card-title>
-      <v-card-subtitle>Why are we doing that ?</v-card-subtitle>
-      <v-card-text>
-        We start our server only on demand, in a goal of digital sobriety.
-        <br />
-        This can take up to 30 seconds.
-      </v-card-text>
-    </v-card>
-    <v-stepper v-else v-model="currentStep" vertical>
-      <v-stepper-step
-        :complete="currentStep > 1"
-        step="1"
-        @click="currentStep = 1"
-      >
-        <v-row align="center"
-          ><v-col cols="auto">Please select a file to convert</v-col>
-          <v-col>
-            <v-chip v-if="files.length"> {{ files[0].name }} </v-chip>
+  <!-- v-if="!cloudRunning" -->
+  <v-container>
+    <v-row class="flex-column">
+      <v-col>
+        <h1 class="text-h2 py-5" align="center">File converter</h1>
+        <v-col>
+        <v-row justify="space-around">
+          <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
+            <v-card
+              class="card"
+              nuxt
+              hover
+              elevation="5"
+              v-ripple
+              :href="item.href"
+              target="_blank"
+              contain
+            >
+              <v-row justify="center" align="center">
+                <v-col cols="auto">
+                  <v-icon size="80" class="justify-center">
+                    {{ item.icon }}
+                  </v-icon>
+                </v-col>
+              </v-row>
+              <v-card-title primary-title class="justify-center text-h6" align="center">
+                <br />
+                {{ item.title }}
+              </v-card-title>
+              <v-card-text class="justify-center text-body-1">
+                {{ item.text }}
+              </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
-      </v-stepper-step>
+      </v-col>
+      </v-col>
+      <v-col>
+        <v-card class="card" loading elevation="2">
+          <v-card-title>Cloud instance is starting...</v-card-title>
+          <v-card-subtitle>Why do you have to wait?</v-card-subtitle>
+          <v-card-text>
+            We start our server only on demand... and this takes a few seconds
+            before you can use our free tools (up to 30 seconds).
+            <br />
+            This is aligned with an energy sobriety strategy. So be patient
+            <v-icon color="primary" size="20"
+              >mdi-emoticon-excited-outline</v-icon
+            >
+            <br />
+            We are currently trying to reduce this waiting launch time to
+            improve your experience with our free tools.
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-      <v-stepper-content step="1">
-        <v-file-input
-          chips
-          rounded
-          :multiple="multiple"
-          color="#3b3b3b"
-          :label="inputMessage"
-          :accept="acceptedExtensions"
-          :rules="inputRules"
-          show-size
-          :success="success"
-          @click:clear="objects = []"
-          @change="GetAllowedObjects"
-        >
-        </v-file-input>
-      </v-stepper-content>
+      <v-col>
+        <v-stepper class="stepper" v-model="currentStep" vertical>
+          <v-stepper-step
+            :complete="currentStep > 1"
+            step="1"
+            @click="currentStep = 1"
+          >
+            <v-row align="center"
+              ><v-col cols="auto">Please select a file to convert</v-col>
+              <v-col>
+                <v-chip v-if="files.length"> {{ files[0].name }} </v-chip>
+              </v-col>
+            </v-row>
+          </v-stepper-step>
 
-      <v-stepper-step
-        :complete="currentStep > 2"
-        step="2"
-        @click="currentStep = 2"
-      >
-        <v-row align="center"
-          ><v-col cols="auto">Confirm the data type</v-col>
-          <v-col>
-            <v-chip v-if="GeodeObject"> {{ GeodeObject }} </v-chip>
-          </v-col>
-        </v-row>
-      </v-stepper-step>
+          <v-stepper-content step="1">
+            <v-file-input
+              chips
+              rounded
+              :multiple="multiple"
+              color="#3b3b3b"
+              :label="inputMessage"
+              :accept="acceptedExtensions"
+              :rules="inputRules"
+              show-size
+              :success="success"
+              @click:clear="objects = []"
+              @change="GetAllowedObjects"
+            >
+            </v-file-input>
+          </v-stepper-content>
 
-      <v-stepper-content step="2">
-        <v-row v-if="objects.length" class="flex-column">
-          <v-col>
-            <v-row justify="left">
-              <v-col v-for="object in objects" :key="object" cols="2" md="2">
-                <v-tooltip bottom>
-                  <template #activator="{ on }">
+          <v-stepper-step
+            :complete="currentStep > 2"
+            step="2"
+            @click="currentStep = 2"
+          >
+            <v-row align="center"
+              ><v-col cols="auto">Confirm the data type</v-col>
+              <v-col>
+                <v-chip v-if="GeodeObject"> {{ GeodeObject }} </v-chip>
+              </v-col>
+            </v-row>
+          </v-stepper-step>
+
+          <v-stepper-content step="2">
+            <v-row v-if="objects.length">
+              <v-col>
+                <v-row justify="left">
+                  <v-col
+                    v-for="object in objects"
+                    :key="object"
+                    cols="2"
+                    md="2"
+                  >
+                    <v-tooltip bottom>
+                      <template #activator="{ on }">
+                        <v-card
+                          nuxt
+                          class="card"
+                          hover
+                          v-on="on"
+                          elevation="5"
+                          v-ripple
+                        >
+                          <v-img
+                            :src="
+                              require('@/assets/tools/' +
+                                GeodeObjects[object].image)
+                            "
+                            contain
+                            @click="GetOutputFileExtensions(object)"
+                          >
+                          </v-img>
+                        </v-card>
+                      </template>
+                      <span>{{ GeodeObjects[object].tooltip }}</span>
+                    </v-tooltip>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-stepper-content>
+
+          <v-stepper-step
+            :complete="currentStep > 3"
+            step="3"
+            @click="currentStep = 3"
+          >
+            <v-row align="center"
+              ><v-col cols="auto">Select file format</v-col>
+              <v-col>
+                <v-chip v-if="extension"> {{ extension }} </v-chip>
+              </v-col>
+            </v-row>
+          </v-stepper-step>
+
+          <v-stepper-content step="3">
+            <v-row v-if="fileExtensions.length" class="flex-column">
+              <v-col>
+                <v-row justify="left">
+                  <v-col
+                    v-for="fileExtension in fileExtensions"
+                    :key="fileExtension"
+                    cols="2"
+                    md="2"
+                  >
                     <v-card
                       nuxt
-                      class="card"
                       hover
                       v-on="on"
-                      elevation="5"
-                      v-ripple
+                      active-class=""
+                      @click="setFileFormat(fileExtension)"
                     >
-                      <v-img
-                        :src="
-                          require('@/assets/tools/' +
-                            GeodeObjects[object].image)
-                        "
-                        contain
-                        @click="GetOutputFileExtensions(object)"
-                      >
-                      </v-img>
+                      <v-card-title class="justify-center">{{
+                        fileExtension
+                      }}</v-card-title>
                     </v-card>
-                  </template>
-                  <span>{{ GeodeObjects[object].tooltip }}</span>
-                </v-tooltip>
+                  </v-col>
+                </v-row>
               </v-col>
             </v-row>
-          </v-col>
-        </v-row>
-      </v-stepper-content>
+          </v-stepper-content>
 
-      <v-stepper-step
-        :complete="currentStep > 3"
-        step="3"
-        @click="currentStep = 3"
-      >
-        <v-row align="center"
-          ><v-col cols="auto">Select file format</v-col>
-          <v-col>
-            <v-chip v-if="extension"> {{ extension }} </v-chip>
-          </v-col>
-        </v-row>
-      </v-stepper-step>
-
-      <v-stepper-content step="3">
-        <v-row v-if="fileExtensions.length" class="flex-column">
-          <v-col>
-            <v-row justify="left">
-              <v-col
-                v-for="fileExtension in fileExtensions"
-                :key="fileExtension"
-                cols="2"
-                md="2"
-              >
-                <v-card
-                  nuxt
-                  hover
-                  v-on="on"
-                  active-class=""
-                  @click="setFileFormat(fileExtension)"
-                >
-                  <v-card-title class="justify-center">{{
-                    fileExtension
-                  }}</v-card-title>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-stepper-content>
-
-      <v-stepper-step step="4"> Convert your file</v-stepper-step>
-      <v-stepper-content step="4">
-        <v-btn color="primary" @click="ConvertFile(files[0])"> Convert </v-btn>
-        <v-btn text @click="currentStep = 3"> Cancel </v-btn>
-      </v-stepper-content>
-    </v-stepper>
-  </client-only>
+          <v-stepper-step step="4"> Convert your file</v-stepper-step>
+          <v-stepper-content step="4">
+            <v-btn color="primary" @click="ConvertFile(files[0])">
+              Convert
+            </v-btn>
+            <v-btn text @click="currentStep = 3"> Cancel </v-btn>
+          </v-stepper-content>
+        </v-stepper>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+
+import GeodeLogo from '@/components/GeodeLogo'
 export default {
   name: 'File',
   props: {
@@ -152,8 +210,8 @@ export default {
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
-      fileExtensions: [],
-      objects: [],
+      fileExtensions: ['msh', 'og_brep'],
+      objects: ['BRep'],
       files: [],
       acceptedExtensions: '',
       inputRules: [(value) => !!value || 'The file is mandatory'],
@@ -222,6 +280,18 @@ export default {
           image: 'VertexSet.svg',
         },
       },
+      items: [
+      {
+        icon: 'mdi-github',
+        title: 'Visit OpenGeode GitHub repo',
+        href: 'https://github.com/Geode-solutions/OpenGeode',
+      },
+      {
+        icon: 'mdi-github',
+        title: 'Visit the native file formats documentation',
+        href: 'https://docs.geode-solutions.com/formats/',
+      },
+    ],
     }
   },
   computed: {
@@ -337,6 +407,10 @@ export default {
 
 <style scoped>
 .card {
-  border-radius: 15px;
+  border-radius: 10px;
+}
+
+.stepper {
+  border-radius: 10px;
 }
 </style>

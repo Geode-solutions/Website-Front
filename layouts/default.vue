@@ -133,7 +133,7 @@ export default {
         { title: 'Expertise', to: '/expertise' },
         { title: 'Software', to: '/software' },
         { title: 'Services', to: '/services' },
-        { title: 'Free tools', to: '/tools' },
+        { title: 'Free tools', to: '/tools/welcome' },
       ],
       icons: [
         { icon: 'mdi-github', url: 'https://github.com/Geode-solutions' },

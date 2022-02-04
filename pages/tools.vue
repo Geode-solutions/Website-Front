@@ -1,12 +1,11 @@
 <template>
   <v-row class="fill-height" no-gutters>
-    <v-navigation-drawer clipped expand-on-hover>
+    <v-navigation-drawer clipped>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
-          :disabled="items.enabled"
           router
           exact
           nuxt
@@ -15,7 +14,10 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-badge v-if="item.badge" :content="item.badge" inline overlap>
+              <v-list-item-title v-text="item.title"> </v-list-item-title>
+            </v-badge>
+            <v-list-item-title v-else v-text="item.title"> </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -43,13 +45,13 @@ export default {
         icon: 'mdi-file-replace-outline',
         title: 'File converter',
         to: '/tools/fileconverter',
-        enabled: true,
+        badge: 'beta',
       },
       {
         icon: 'mdi-format-list-checks',
         title: 'Validity checker',
         to: '/tools/validitychecker',
-        enabled: false,
+        badge: 'soon',
       },
     ],
     miniVariant: true,

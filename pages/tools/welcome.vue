@@ -1,64 +1,92 @@
 <template>
-  <client-only>
-    <v-row justify="left">
-      <v-col v-for="(item, i) in items" :key="i" cols="3" md="3">
-        <v-tooltip bottom>
-          <template #activator="{ on }">
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12">
+        <h1 class="text-h2 py-5" align="center">Free tools home page</h1>
+
+        <p class="container text-h6 font-weight-light" align="justify">
+          All those tools are entirely free to use.
+          <br />
+          We rely on the cloud technology for computing power. Each cloud
+          instance is launched on demand, the downside is that you have to wait
+          a few seconds for the cloud to be ready to use. Each file that you
+          send to us is deleted at the end of the cloud instance.
+          <br />
+          Some tools may be in beta version and you may experience some bugs,
+          they will be fixed in the near future.
+
+          <br />
+          We are interested in your feedback if you encounter a problem during
+          your usage, if you have some improvement ideas or if you simply have
+          ideas for new tools that may be useful to you.
+        </p>
+        <div class="my-2" align="center">
+          <v-btn color="primary" dark href="mailto:contact@geode-solutions.com">
+            Contact us
+          </v-btn>
+        </div>
+      </v-col>
+      <v-col>
+        <v-row justify="space-around">
+          <v-col v-for="(item, i) in items" :key="i" cols="11" md="4">
             <v-card
+              class="card"
               nuxt
               hover
-              v-on="on"
               elevation="5"
               v-ripple
               :to="item.to"
               contain
             >
-              <v-icon size="100" class="justify-center">
-                {{ item.icon }}
-              </v-icon>
+              <v-row justify="center" align="center">
+                <v-col cols="auto">
+                  <v-icon size="100" class="justify-center">
+                    {{ item.icon }}
+                  </v-icon>
+                </v-col>
+                <v-col cols="auto">
+                  <v-chip color="primary">{{ item.chip }}</v-chip>
+                </v-col>
+              </v-row>
               <v-card-title primary-title class="justify-center text-h4">
+                <br />
                 {{ item.title }}
               </v-card-title>
-              <v-card-text align="justify" class="text-body-1">
+              <v-card-text class="justify-center text-body-1">
                 {{ item.text }}
               </v-card-text>
             </v-card>
-          </template>
-          <span>{{ item.title }}</span>
-        </v-tooltip>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
-  </client-only>
+  </v-container>
 </template>
 
 
 
 <script>
-// var tools = require('../tools.vue')
-// import { items } from '../tools.vue'
-// console.log(items)
-// import items from '../tools'
-
 export default {
   name: 'GeodeTools',
   data: () => ({
     clipped: true,
     drawer: false,
     fixed: false,
-    // items: items,
     items: [
       {
         icon: 'mdi-file-replace-outline',
+        chip: 'Beta',
         title: 'File converter',
         to: '/tools/fileconverter',
-        text: 'blabla1',
+        text: 'Convert a file into another file format',
         enabled: true,
       },
       {
         icon: 'mdi-format-list-checks',
+        chip: 'Coming soon!',
         title: 'Validity checker',
         to: '/tools/validitychecker',
-        text: 'blabla2',
+        text: 'Check the validity of your meshes and models',
         enabled: false,
       },
     ],
@@ -71,3 +99,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.card {
+  border-radius: 10px;
+}
+</style>
