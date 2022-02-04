@@ -8,29 +8,29 @@ export default {
   head: {
     title: 'Geode-solutions - next generation of modeling tools',
     meta:
-        [
-          {charset: 'utf-8'},
-          {name: 'viewport', content: 'width=device-width, initial-scale=1'}, {
-            hid: 'description',
-            name: 'description',
-            content:
-                'Technology company tackling next generation of modeling challenges using advanced meshing'
-          }
-        ],
+      [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }, {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Technology company tackling next generation of modeling challenges using advanced meshing'
+        }
+      ],
     link:
-        [
-          {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}, {
-            rel: 'stylesheet',
-            href:
-                'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-          }
-        ]
+      [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, {
+          rel: 'stylesheet',
+          href:
+            'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+        }
+      ]
   },
 
   /*
    ** Customize the progress-bar color
    */
-  loading: {color: '#fff'},
+  loading: { color: '#fff' },
 
   /*
    ** Global CSS
@@ -41,19 +41,19 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins:
-      [
-        '@/plugins/vuetify_icons', {src: '@/plugins/carousel', ssr: false},
-        {src: '@/plugins/particles', ssr: false}
-      ],
+    [
+      '@/plugins/vuetify_icons', { src: '@/plugins/carousel', ssr: false },
+      { src: '@/plugins/particles', ssr: false }
+    ],
 
   /*
    ** Nuxt.js modules
    */
   modules:
-      [
-        '@bazzite/nuxt-netlify', '@nuxtjs/vuetify',
-        ['@nuxtjs/google-analytics', {id: 'UA-137823587-1', dev: false}]
-      ],
+    [
+      '@nuxtjs/axios', '@bazzite/nuxt-netlify', '@nuxtjs/vuetify',
+      ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }]
+    ],
 
   vuetify: {
     theme: {
@@ -65,7 +65,7 @@ export default {
         }
       }
     },
-    icons: {iconfont: 'fa', values: {logo: {component: 'GeodeLogo'}}}
+    icons: { iconfont: 'mdi', values: { logo: { component: 'GeodeLogo' } } }
   },
 
   /*

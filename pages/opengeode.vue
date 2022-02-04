@@ -1,9 +1,7 @@
 <template>
   <v-row>
     <v-col class="text-center text-h6">
-      <h1 :class="display">
-        OpenGeode
-      </h1>
+      <h1 :class="display">OpenGeode</h1>
     </v-col>
 
     <client-only>
@@ -28,7 +26,7 @@
       <v-row class="text-center">
         <v-col>
           <h2 class="text-h4 primary--text my-5">
-            Open source framework <br>
+            Open source framework <br />
             for representing and manipulating geometric models
           </h2>
 
@@ -46,18 +44,16 @@
               </v-card-title>
               <v-card-text>
                 <v-icon
-                  :size="$vuetify.breakpoint.smAndUp ? 150 : 100"
+                  :size="$vuetify.breakpoint.smAndUp ? 180 : 100"
                   color="#000000"
                 >
-                  fab fa-github
+                  mdi-github
                 </v-icon>
               </v-card-text>
             </v-card>
           </v-hover>
 
-          <h2 class="section text-h2 mt-5" align="center">
-            Key features
-          </h2>
+          <h2 class="section text-h2 mt-5" align="center">Key features</h2>
           <v-row justify="space-around">
             <v-col
               v-for="card in cards"
@@ -106,9 +102,7 @@
     <v-container fluid style="background-color: white">
       <v-row class="container mx-auto">
         <v-col>
-          <h2 class="section text-h2" align="center">
-            They use it
-          </h2>
+          <h2 class="section text-h2" align="center">They use it</h2>
 
           <v-lazy
             :options="{
@@ -121,7 +115,7 @@
                   <img
                     width="80%"
                     :src="require('@/assets/logos/' + user.logo)"
-                  >
+                  />
                 </a>
               </slide>
             </carousel>

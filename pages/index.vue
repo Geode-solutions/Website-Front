@@ -230,9 +230,7 @@
                 <v-card-title primary-title class="justify-center text-h5">
                   {{ guy.name }}
                   <v-btn icon target="_blank" :href="guy.url">
-                    <v-icon size="24px" color="#0A66C2">
-                      fab fa-linkedin
-                    </v-icon>
+                    <v-icon size="24px" color="#0A66C2">mdi-linkedin</v-icon>
                   </v-btn>
                   {{ guy.job }}
                 </v-card-title>

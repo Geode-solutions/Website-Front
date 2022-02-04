@@ -72,7 +72,7 @@
                 :href="icon.url"
                 class="mr-4"
               >
-                <v-icon size="24px">
+                <v-icon size="28px">
                   {{ icon.icon }}
                 </v-icon>
               </v-btn>
@@ -133,23 +133,24 @@ export default {
         { title: 'Expertise', to: '/expertise' },
         { title: 'Software', to: '/software' },
         { title: 'Services', to: '/services' },
+        { title: 'Free tools', to: '/tools' },
       ],
       icons: [
-        { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },
-        { icon: 'fab fa-twitter', url: 'https://twitter.com/GeodeSolutions' },
+        { icon: 'mdi-github', url: 'https://github.com/Geode-solutions' },
+        { icon: 'mdi-twitter', url: 'https://twitter.com/GeodeSolutions' },
         {
-          icon: 'fab fa-linkedin',
+          icon: 'mdi-linkedin',
           url: 'https://linkedin.com/company/geode-solutions',
         },
         {
-          icon: 'fab fa-slack',
+          icon: 'mdi-slack',
           url: 'https://slackin-opengeode.herokuapp.com',
         },
         {
-          icon: 'fab fa-youtube',
+          icon: 'mdi-youtube',
           url: 'https://www.youtube.com/channel/UCkzmIOpr3H8I8kDLCGZBiXA',
         },
-        { icon: 'fas fa-envelope', url: 'mailto:contact@geode-solutions.com' },
+        { icon: 'mdi-email', url: 'mailto:contact@geode-solutions.com' },
       ],
       date: new Date().getFullYear(),
     }
