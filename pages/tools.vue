@@ -1,6 +1,11 @@
 <template>
   <v-row class="fill-height" no-gutters>
-    <v-navigation-drawer clipped>
+    <v-navigation-drawer
+      clipped
+      permanent
+      :mini-variant="mini"
+      :expand-on-hover="mini"
+    >
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -32,9 +37,6 @@
 export default {
   name: 'GeodeTools',
   data: () => ({
-    clipped: true,
-    drawer: false,
-    fixed: false,
     items: [
       {
         icon: 'mdi-apps',
@@ -54,12 +56,28 @@ export default {
         badge: 'soon',
       },
     ],
-    miniVariant: true,
   }),
+
   head() {
     return {
       title: 'Geode-solutions free tools',
     }
+  },
+  computed: {
+    mini() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          return true
+        case 'sm':
+          return true
+        case 'md':
+          return true
+        case 'lg':
+          return false
+        case 'xl':
+          return false
+      }
+    },
   },
 }
 </script>

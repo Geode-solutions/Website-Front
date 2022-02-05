@@ -1,42 +1,52 @@
 <template>
-  <!-- v-if="!cloudRunning" -->
   <v-container>
     <v-row class="flex-column">
       <v-col>
         <h1 class="text-h2 py-5" align="center">File converter</h1>
         <v-col>
-        <v-row justify="space-around">
-          <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
-            <v-card
-              class="card"
-              nuxt
-              hover
-              elevation="5"
-              v-ripple
-              :href="item.href"
-              target="_blank"
-              contain
-            >
-              <v-row justify="center" align="center">
-                <v-col cols="auto">
-                  <v-icon size="80" class="justify-center">
-                    {{ item.icon }}
-                  </v-icon>
-                </v-col>
-              </v-row>
-              <v-card-title primary-title class="justify-center text-h6" align="center">
-                <br />
-                {{ item.title }}
-              </v-card-title>
-              <v-card-text class="justify-center text-body-1">
-                {{ item.text }}
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+          <v-row justify="space-around">
+            <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
+              <v-card
+                class="card"
+                nuxt
+                hover
+                elevation="5"
+                v-ripple
+                :href="item.href"
+                target="_blank"
+                contain
+              >
+                <v-row justify="center" align="center">
+                  <v-col cols="auto">
+                    <v-icon v-if="item.icon.match(/mdi-.*/)" size="128" class="justify-center">
+                      {{ item.icon }}
+                    </v-icon>
+                    <v-img v-else
+                      :src="require('@/assets/logo.svg')"
+                      alt="Geode-solutions logo"
+                      width="50%"
+                      class="mx-auto"
+                      contain
+                    />
+                  </v-col>
+                </v-row>
+                <v-card-title
+                  primary-title
+                  class="justify-center text-h6"
+                  align="center"
+                >
+                  <br />
+                  {{ item.title }}
+                </v-card-title>
+                <v-card-text class="justify-center text-body-1">
+                  {{ item.text }}
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-col>
       </v-col>
-      </v-col>
-      <v-col>
+      <v-col v-if="!cloudRunning">
         <v-card class="card" loading elevation="2">
           <v-card-title>Cloud instance is starting...</v-card-title>
           <v-card-subtitle>Why do you have to wait?</v-card-subtitle>
@@ -55,7 +65,7 @@
         </v-card>
       </v-col>
 
-      <v-col>
+      <v-col v-else>
         <v-stepper class="stepper" v-model="currentStep" vertical>
           <v-stepper-step
             :complete="currentStep > 1"
@@ -193,8 +203,7 @@
 </template>
 
 <script>
-
-import GeodeLogo from '@/components/GeodeLogo'
+import fileDownload from 'js-file-download'
 export default {
   name: 'File',
   props: {
@@ -206,12 +215,13 @@ export default {
   data() {
     return {
       cloudRunning: false,
-      API: 'https://api.geode-solutions.com', // 'https://api.geode-solutions.com', //"http://localhost:5000",
+      // API: 'http://localhost:5000',
+      API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
-      fileExtensions: ['msh', 'og_brep'],
-      objects: ['BRep'],
+      fileExtensions: [],
+      objects: [],
       files: [],
       acceptedExtensions: '',
       inputRules: [(value) => !!value || 'The file is mandatory'],
@@ -281,17 +291,17 @@ export default {
         },
       },
       items: [
-      {
-        icon: 'mdi-github',
-        title: 'Visit OpenGeode GitHub repo',
-        href: 'https://github.com/Geode-solutions/OpenGeode',
-      },
-      {
-        icon: 'mdi-github',
-        title: 'Visit the native file formats documentation',
-        href: 'https://docs.geode-solutions.com/formats/',
-      },
-    ],
+        {
+          icon: 'mdi-github',
+          title: 'Visit OpenGeode GitHub repo',
+          href: 'https://github.com/Geode-solutions/OpenGeode',
+        },
+        {
+          icon: '',
+          title: 'Visit the native file formats documentation',
+          href: 'https://docs.geode-solutions.com/formats/',
+        },
+      ],
     }
   },
   computed: {
@@ -300,20 +310,20 @@ export default {
     },
   },
   created() {
-    // this.CreateBackEnd() // Lauches the AWS Lambda function
+    this.CreateBackEnd() // Lauches the AWS Lambda function
     // this.GetAllowedFiles();
   },
   mounted() {},
   methods: {
     async CreateBackEnd() {
       if (process.client) {
-        console.log(this.cloudRunning)
-        // const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
-        console.log(this.cloudRunning)
-        this.ID = '123456'
-        // this.ID = id
+        // console.log(this.cloudRunning)
+        const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
+        // console.log(this.cloudRunning)
+        // this.ID = '123456'
+        this.ID = id
         this.cloudRunning = true
-        console.log(this.ID)
+        // console.log(this.ID)
         this.PingTask()
         this.GetAllowedFiles()
       }
@@ -353,7 +363,7 @@ export default {
         .then((response) => {
           console.log('response :', response)
           this.fileExtensions = response.data.outputfileextensions
-          console.log('this.fileExtensions :', this.fileExtensions)
+          // console.log('this.fileExtensions :', this.fileExtensions)
         })
       this.currentStep = this.currentStep + 1
     },
@@ -362,7 +372,7 @@ export default {
       this.currentStep = 4
     },
     async ConvertFile() {
-      console.log('ConvertFile')
+      // console.log('ConvertFile')
       const self = this
       const reader = new FileReader()
       reader.onload = async function (event) {
@@ -378,8 +388,13 @@ export default {
           .post(`${self.path}/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
-              console.log('response.headers :', response.headers)
-              fileDownload(response.data, 'corbi.msh')
+              // console.log('response.headers :', response.headers)
+              let newFilename =
+                self.files[0].name.replace(/\.[^/.]+$/, '') +
+                '.' +
+                self.extension
+              // console.log('newFilename :', newFilename)
+              fileDownload(response.data, newFilename)
             }
           })
       }
@@ -390,15 +405,17 @@ export default {
         this.$axios
           .post(`${this.path}/ping`)
           .then((response) => {
-            console.log('ping', response.status)
+            // console.log('ping', response.status)
             if (response.status != 200) {
               this.cloudRunning = false
               this.ID = ''
-              console.log('restarting server')
+              // console.log('restarting server')
               this.CreateBackEnd()
             }
           })
-          .catch((error) => console.log('error', error))
+          // .catch((error) => 
+          // console.log('error', error)
+          // )
       }, 10 * 1000)
     },
   },
