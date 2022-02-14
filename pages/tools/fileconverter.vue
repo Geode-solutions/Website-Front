@@ -18,10 +18,15 @@
               >
                 <v-row justify="center" align="center">
                   <v-col cols="auto">
-                    <v-icon v-if="item.icon.match(/mdi-.*/)" size="128" class="justify-center">
+                    <v-icon
+                      v-if="item.icon.match(/mdi-.*/)"
+                      size="128"
+                      class="justify-center"
+                    >
                       {{ item.icon }}
                     </v-icon>
-                    <v-img v-else
+                    <v-img
+                      v-else
                       :src="require('@/assets/logo.svg')"
                       alt="Geode-solutions logo"
                       width="50%"
@@ -311,25 +316,22 @@ export default {
   },
   created() {
     this.CreateBackEnd() // Lauches the AWS Lambda function
-    // this.GetAllowedFiles();
   },
   mounted() {},
   methods: {
     async CreateBackEnd() {
       if (process.client) {
-        // console.log(this.cloudRunning)
         const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
-        // console.log(this.cloudRunning)
-        // this.ID = '123456'
         this.ID = id
+        // this.ID = '123456'
         this.cloudRunning = true
-        // console.log(this.ID)
-        this.PingTask()
         this.GetAllowedFiles()
+        this.PingTask()
       }
     },
     GetAllowedFiles() {
       this.$axios.post(`${this.path}/allowedfiles`).then((response) => {
+        consoile.log('response : ', response)
         const extensions = response.data.extensions.map(
           (extension) => '.' + extension
         )
@@ -361,7 +363,7 @@ export default {
       this.$axios
         .post(`${this.path}/outputfileextensions`, params)
         .then((response) => {
-          console.log('response :', response)
+          // console.log('response :', response)
           this.fileExtensions = response.data.outputfileextensions
           // console.log('this.fileExtensions :', this.fileExtensions)
         })
@@ -402,20 +404,18 @@ export default {
     },
     PingTask() {
       setInterval(() => {
-        this.$axios
-          .post(`${this.path}/ping`)
-          .then((response) => {
-            // console.log('ping', response.status)
-            if (response.status != 200) {
-              this.cloudRunning = false
-              this.ID = ''
-              // console.log('restarting server')
-              this.CreateBackEnd()
-            }
-          })
-          // .catch((error) => 
-          // console.log('error', error)
-          // )
+        this.$axios.post(`${this.path}/ping`).then((response) => {
+          // console.log('ping', response.status)
+          if (response.status != 200) {
+            this.cloudRunning = false
+            this.ID = ''
+            // console.log('restarting server')
+            this.CreateBackEnd()
+          }
+        })
+        // .catch((error) =>
+        // console.log('error', error)
+        // )
       }, 10 * 1000)
     },
   },
