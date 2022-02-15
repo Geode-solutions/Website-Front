@@ -58,6 +58,8 @@
       <nuxt />
     </v-main>
 
+    <CookieControl> </CookieControl>
+
     <v-footer padless>
       <v-card text tile dark class="primary flex">
         <v-row align="center" class="mr-0">
@@ -122,8 +124,10 @@
 </template>
 
 <script>
+// import CookieLaw from 'vue-cookie-law'
 export default {
   name: 'GeodeLayout',
+  // components: { CookieLaw },
   data() {
     return {
       name: 'Geode-solutions',

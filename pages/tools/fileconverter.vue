@@ -220,8 +220,8 @@ export default {
   data() {
     return {
       cloudRunning: false,
-      // API: 'http://localhost:5000',
-      API: 'https://api.geode-solutions.com',
+      API: 'http://localhost:5000',
+      // API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -321,9 +321,9 @@ export default {
   methods: {
     async CreateBackEnd() {
       if (process.client) {
-        const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
-        this.ID = id
-        // this.ID = '123456'
+        // const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
+        // this.ID = id
+        this.ID = '123456'
         console.log("ID : ", this.ID)
         this.cloudRunning = true
         this.GetAllowedFiles()
@@ -405,6 +405,7 @@ export default {
     },
     PingTask() {
       setInterval(() => {
+        NProgress.done()
         this.$axios.post(`${this.path}/ping`).then((response) => {
           // console.log('ping', response.status)
           if (response.status != 200) {

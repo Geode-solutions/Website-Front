@@ -18,6 +18,7 @@
     "axios": "^0.25.0",
     "js-file-download": "^0.4.12",
     "nuxt": "^2.15.8",
+    "nuxt-cookie-control": "^1.9.91",
     "vue-carousel": "^0.18.0",
     "vue-particles": "^1.0.9",
     "vuewordcloud": "^18.7.12"
