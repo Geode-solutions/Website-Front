@@ -324,6 +324,7 @@ export default {
         const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
         this.ID = id
         // this.ID = '123456'
+        console.log("ID : ", this.ID)
         this.cloudRunning = true
         this.GetAllowedFiles()
         this.PingTask()
