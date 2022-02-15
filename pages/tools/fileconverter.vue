@@ -331,7 +331,7 @@ export default {
     },
     GetAllowedFiles() {
       this.$axios.post(`${this.path}/allowedfiles`).then((response) => {
-        consoile.log('response : ', response)
+        // consoile.log('response : ', response)
         const extensions = response.data.extensions.map(
           (extension) => '.' + extension
         )
