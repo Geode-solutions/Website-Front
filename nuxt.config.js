@@ -51,27 +51,61 @@ export default {
    */
   modules:
     [
-      ['nuxt-cookie-control', { controlButton: true }],
+      ['nuxt-cookie-control',
+        {
+          controlButton: true,
+          colors: {
+            // barTextColor: '#fff',
+            modalOverlay: '#000',
+            barBackground: colors.teal.darken1,
+            barButtonColor: '#000',
+            modalTextColor: '#000',
+            // modalBackground: '#fff',
+            modalOverlayOpacity: 0,
+            modalButtonColor: '#fff',
+            modalUnsavedColor: '#000',
+            // barButtonHoverColor: '#fff',
+            // barButtonBackground: '#fff',
+            // modalButtonHoverColor: '#fff',
+            modalButtonBackground: colors.teal.darken1,
+            controlButtonIconColor: colors.teal.darken1,
+            // controlButtonBackground: colors.teal.darken1,
+            // barButtonHoverBackground: '#333',
+            checkboxActiveBackground: colors.teal.darken1,
+            checkboxInactiveBackground: '#000',
+            modalButtonHoverBackground: '#333',
+            checkboxDisabledBackground: '#ddd',
+            controlButtonIconHoverColor: colors.amber.accent4,
+            controlButtonHoverBackground: colors.brown.darken4
+            // checkboxActiveCircleBackground: '#fff',
+            // checkboxInactiveCircleBackground: '#fff',
+            // checkboxDisabledCircleBackground: '#fff'
+          }
+        }
+      ],
       '@nuxtjs/axios',
       '@bazzite/nuxt-netlify',
       '@nuxtjs/vuetify',
       ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }]
     ],
 
+  vuetify: {
+    theme: {
+      themes: {
+        light: {
+          primary: colors.teal.darken1,
+          secondary: colors.teal.lighten4,
+          accent: colors.red.darken4
+        }
+      }
+    },
+    icons: { iconfont: 'mdi', values: { logo: { component: 'GeodeLogo' } } }
+  },
+
   cookies: {
     necessary: [
       {
-        //if multilanguage
-        name: {
-          en: 'Default Cookies'
-        },
-        //else
         name: 'Default Cookies',
-        //if multilanguage
-        description: {
-          en: 'Used for cookie control.'
-        },
-        //else
         description: 'Used for cookie control.',
         cookies: ['cookie_control_consent', 'cookie_control_enabled_cookies']
       }
@@ -79,14 +113,8 @@ export default {
     optional: [
       {
         name: 'Google Analitycs',
-        //if you don't set identifier, slugified name will be used
         identifier: 'ga',
-        //if multilanguage
-        description: {
-          en: 'Google GTM is ...'
-        },
-        //else
-        description: 'Google GTM is...',
+        description: 'To improve user experience on our website',
 
         initialState: true,
         src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
@@ -100,22 +128,10 @@ export default {
           });
         },
         declined: () => {
+
         }
       }
     ],
-  },
-
-  vuetify: {
-    theme: {
-      themes: {
-        light: {
-          primary: colors.teal.darken1,
-          secondary: colors.teal.lighten4,
-          accent: colors.red.darken4
-        }
-      }
-    },
-    icons: { iconfont: 'mdi', values: { logo: { component: 'GeodeLogo' } } }
   },
 
   /*

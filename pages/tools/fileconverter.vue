@@ -129,7 +129,7 @@
                       <template #activator="{ on }">
                         <v-card
                           nuxt
-                          class="card"
+                          class="card ma-2"
                           hover
                           v-on="on"
                           elevation="5"
@@ -178,6 +178,7 @@
                     md="2"
                   >
                     <v-card
+                      class="card ma-2"
                       nuxt
                       hover
                       v-on="on"
@@ -321,11 +322,17 @@ export default {
   methods: {
     async CreateBackEnd() {
       if (process.client) {
-        // const id = await this.$axios.$post(`${this.API}/tools/createbackend`)
-        // this.ID = id
-        this.ID = '123456'
-        console.log("ID : ", this.ID)
-        this.cloudRunning = true
+        await this.$axios
+          .$post(`${this.API}/tools/createbackend`)
+          .then((response) => {
+            console.log('response.ID :', response.ID)
+            if (response.status == 200) {
+              this.ID = response.ID
+              this.cloudRunning = true
+            } else {
+              CreateBackEnd()
+            }
+          })
         this.GetAllowedFiles()
         this.PingTask()
       }
@@ -405,7 +412,7 @@ export default {
     },
     PingTask() {
       setInterval(() => {
-        NProgress.done()
+        // NProgress.done()
         this.$axios.post(`${this.path}/ping`).then((response) => {
           // console.log('ping', response.status)
           if (response.status != 200) {
