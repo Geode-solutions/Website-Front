@@ -326,13 +326,13 @@ export default {
           .post(`${this.API}/tools/createbackend`)
           .then((response) => {
             console.log('response :', response)
-            // if (response.status == 200) {
-              this.ID = response
+            if (response.status == 200) {
+              this.ID = response.data
               console.log('this.ID :', this.ID)
               this.cloudRunning = true
-            // } else {
-            //   this.CreateBackEnd()
-            // }
+            } else {
+              this.CreateBackEnd()
+            }
           })
         this.GetAllowedFiles()
         this.PingTask()
