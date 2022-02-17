@@ -323,7 +323,7 @@ export default {
     async CreateBackEnd() {
       if (process.client) {
         await this.$axios
-          .$post(`${this.API}/tools/createbackend`)
+          .post(`${this.API}/tools/createbackend`)
           .then((response) => {
             console.log('response :', response)
             // if (response.status == 200) {
