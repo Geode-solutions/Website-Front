@@ -341,7 +341,6 @@ export default {
     },
     GetAllowedFiles() {
       this.$axios.post(`${this.path}/allowedfiles`).then((response) => {
-        // consoile.log('response : ', response)
         const extensions = response.data.extensions.map(
           (extension) => '.' + extension
         )
@@ -373,9 +372,7 @@ export default {
       this.$axios
         .post(`${this.path}/outputfileextensions`, params)
         .then((response) => {
-          // console.log('response :', response)
           this.fileExtensions = response.data.outputfileextensions
-          // console.log('this.fileExtensions :', this.fileExtensions)
         })
       this.currentStep = this.currentStep + 1
     },
@@ -384,7 +381,6 @@ export default {
       this.currentStep = 4
     },
     async ConvertFile() {
-      // console.log('ConvertFile')
       const self = this
       const reader = new FileReader()
       reader.onload = async function (event) {
@@ -400,12 +396,10 @@ export default {
           .post(`${self.path}/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
-              // console.log('response.headers :', response.headers)
               let newFilename =
                 self.files[0].name.replace(/\.[^/.]+$/, '') +
                 '.' +
                 self.extension
-              // console.log('newFilename :', newFilename)
               fileDownload(response.data, newFilename)
             }
           })
@@ -414,19 +408,13 @@ export default {
     },
     PingTask() {
       setInterval(() => {
-        // NProgress.done()
         this.$axios.post(`${this.path}/ping`).then((response) => {
-          // console.log('ping', response.status)
           if (response.status != 200) {
             this.cloudRunning = false
             this.ID = ''
-            // console.log('restarting server')
             this.CreateBackEnd()
           }
         })
-        // .catch((error) =>
-        // console.log('error', error)
-        // )
       }, 10 * 1000)
     },
   },
