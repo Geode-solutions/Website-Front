@@ -327,10 +327,10 @@ export default {
           .then((response) => {
             console.log('response :', response)
             if (response.status == 200) {
-              this.ID = response.ID
+              this.ID = response
               this.cloudRunning = true
             } else {
-              CreateBackEnd()
+              this.CreateBackEnd()
             }
           })
         this.GetAllowedFiles()
