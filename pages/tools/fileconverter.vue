@@ -220,6 +220,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       cloudRunning: false,
       // API: 'http://localhost:5000',
       API: 'https://api.geode-solutions.com',
@@ -320,24 +321,42 @@ export default {
   },
   mounted() {},
   methods: {
-    async CreateBackEnd() {
+    CheckID() {
       if (process.client) {
-        await this.$axios
-          .post(`${this.API}/tools/createbackend`)
-          .then((response) => {
-            console.log('response :', response)
+        var ID = localStorage.getItem('ID')
+        if (ID === null) {
+          this.CreateBackEnd()
+        } else {
+          this.ID = ID
+          this.$axios.post(`${this.API}/ping`).then((response) => {
             if (response.status == 200) {
-              this.ID = response.data
-              console.log('this.ID :', this.ID)
               this.cloudRunning = true
+              this.PingTask()
             } else {
-              console.log('Task creation failed !')
+              this.ID = ''
               this.CreateBackEnd()
             }
           })
-        this.GetAllowedFiles()
-        this.PingTask()
+        }
       }
+    },
+    async CreateBackEnd() {
+      await this.$axios
+        .post(`${this.API}/tools/createbackend`)
+        .then((response) => {
+          if (response.status == 200) {
+            console.log(response.data)
+            this.ID = response.data.ID
+            localStorage.setItem('ID', this.ID)
+            console.log('this.ID :', this.ID)
+            this.cloudRunning = true
+          } else {
+            console.log('Task creation failed !')
+            this.CreateBackEnd()
+          }
+        })
+      this.GetAllowedFiles()
+      this.PingTask()
     },
     GetAllowedFiles() {
       this.$axios.post(`${this.path}/allowedfiles`).then((response) => {
@@ -408,6 +427,7 @@ export default {
     },
     PingTask() {
       setInterval(() => {
+        this.$nuxt.$loading.finish()
         this.$axios.post(`${this.path}/ping`).then((response) => {
           if (response.status != 200) {
             this.cloudRunning = false
