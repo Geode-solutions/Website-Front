@@ -325,14 +325,17 @@ export default {
       if (process.client) {
         var ID = localStorage.getItem('ID')
         if (ID === null) {
+          console.log('ID not found')
           this.CreateBackEnd()
         } else {
           this.ID = ID
           this.$axios.post(`${this.API}/ping`).then((response) => {
             if (response.status == 200) {
+              console.log('Flask responded')
               this.cloudRunning = true
               this.PingTask()
             } else {
+              console.log("Flask didn't respond")
               this.ID = ''
               this.CreateBackEnd()
             }
