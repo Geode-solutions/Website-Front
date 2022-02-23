@@ -324,6 +324,7 @@ export default {
     CheckID() {
       if (process.client) {
         var ID = localStorage.getItem('ID')
+        console.log('ID')
         if (ID === null) {
           console.log('ID not found')
           this.CreateBackEnd()
@@ -433,6 +434,7 @@ export default {
         this.$nuxt.$loading.finish()
         this.$axios.post(`${this.path}/ping`).then((response) => {
           if (response.status != 200) {
+            console.log('PingTask response : ', response)
             this.cloudRunning = false
             this.ID = ''
             this.CreateBackEnd()
