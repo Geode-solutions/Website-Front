@@ -317,7 +317,7 @@ export default {
     },
   },
   created() {
-    this.CreateBackEnd() // Lauches the AWS Lambda function
+    this.CheckID() // Lauches the AWS Lambda function
   },
   mounted() {},
   methods: {
