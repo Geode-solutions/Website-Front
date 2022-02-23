@@ -330,7 +330,7 @@ export default {
           this.CreateBackEnd()
         } else {
           this.ID = ID
-          this.$axios.post(`${this.API}/ping`).then((response) => {
+          this.$axios.post(`${this.path}/ping`).then((response) => {
             if (response.status == 200) {
               console.log('Flask responded')
               this.cloudRunning = true
