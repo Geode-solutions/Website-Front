@@ -28,32 +28,37 @@
       </v-col>
       <v-col>
         <v-row justify="space-around">
-          <v-col v-for="(item, i) in items" :key="i" cols="11" md="4">
+          <v-col
+            v-for="(tool, i) in tools.slice(-tools.length + 1, tools.length)"
+            :key="i"
+            cols="11"
+            md="4"
+          >
             <v-card
               class="card"
               nuxt
               hover
               elevation="5"
               v-ripple
-              :to="item.to"
+              :to="tool.to"
               contain
             >
               <v-row justify="center" align="center">
                 <v-col cols="auto">
                   <v-icon size="100" class="justify-center">
-                    {{ item.icon }}
+                    {{ tool.icon }}
                   </v-icon>
                 </v-col>
                 <v-col cols="auto">
-                  <v-chip color="primary">{{ item.chip }}</v-chip>
+                  <v-chip color="primary">{{ tool.chip }}</v-chip>
                 </v-col>
               </v-row>
               <v-card-title primary-title class="justify-center text-h4">
                 <br />
-                {{ item.title }}
+                {{ tool.title }}
               </v-card-title>
               <v-card-text class="justify-center text-body-1">
-                {{ item.text }}
+                {{ tool.text }}
               </v-card-text>
             </v-card>
           </v-col>
@@ -63,38 +68,17 @@
   </v-container>
 </template>
 
-
-
 <script>
+import tools_list from './tools_list'
+
 export default {
-  name: 'GeodeTools',
+  name: 'welcome',
   data: () => ({
-    clipped: true,
-    drawer: false,
-    fixed: false,
-    items: [
-      {
-        icon: 'mdi-file-replace-outline',
-        chip: 'Beta',
-        title: 'File converter',
-        to: '/tools/fileconverter',
-        text: 'Convert a file into another file format',
-        enabled: true,
-      },
-      {
-        icon: 'mdi-format-list-checks',
-        chip: 'Coming soon!',
-        title: 'Validity checker',
-        to: '/tools/validitychecker',
-        text: 'Check the validity of your meshes and models',
-        enabled: false,
-      },
-    ],
-    miniVariant: true,
+    tools: tools_list,
   }),
   head() {
     return {
-      title: 'Free tools welcome page',
+      title: 'Geode-solutions free tools',
     }
   },
 }

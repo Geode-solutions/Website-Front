@@ -52,22 +52,7 @@
         </v-col>
       </v-col>
       <v-col v-if="!cloudRunning">
-        <v-card class="card" loading elevation="2">
-          <v-card-title>Cloud instance is starting...</v-card-title>
-          <v-card-subtitle>Why do you have to wait?</v-card-subtitle>
-          <v-card-text>
-            We start our server only on demand... and this takes a few seconds
-            before you can use our free tools (up to 30 seconds).
-            <br />
-            This is aligned with an energy sobriety strategy. So be patient
-            <v-icon color="primary" size="20"
-              >mdi-emoticon-excited-outline</v-icon
-            >
-            <br />
-            We are currently trying to reduce this waiting launch time to
-            improve your experience with our free tools.
-          </v-card-text>
-        </v-card>
+        <cloud-loading> </cloud-loading>
       </v-col>
 
       <v-col v-else>
@@ -210,20 +195,18 @@
 
 <script>
 import fileDownload from 'js-file-download'
+import CloudLoading from '../../components/CloudLoading.vue'
+import geode_objects from './geode_objects'
+
 export default {
-  name: 'File',
-  props: {
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  name: 'fileconverter',
+  components: { CloudLoading },
   data() {
     return {
       loading: false,
       cloudRunning: false,
-      // API: 'http://localhost:5000',
-      API: 'https://api.geode-solutions.com',
+      API: 'http://localhost:5000',
+      // API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -235,68 +218,7 @@ export default {
       inputMessage: 'Please select a file',
       success: false,
       GeodeObject: '',
-      GeodeObjects: {
-        BRep: {
-          tooltip: 'BRep',
-          image: 'BRep.svg',
-        },
-        EdgedCurve2D: {
-          tooltip: 'EdgedCurve2D',
-          image: 'edged_curve2d.svg',
-        },
-        EdgedCurve3D: {
-          tooltip: 'EdgedCurve3D',
-          image: 'edged_curve3d.svg',
-        },
-        Graph: {
-          tooltip: 'Graph',
-          image: 'edged_curve.svg',
-        },
-        // HybridSolidy3D: {
-        //   tooltip: "HybridSolid3D",
-        //   image: "HybridSolid3D.svg",
-        // },
-        PointSet2D: {
-          tooltip: 'PointSet2D',
-          image: 'point_set2d.svg',
-        },
-        PointSet3D: {
-          tooltip: 'PointSet3D',
-          image: 'point_set3d.svg',
-        },
-        PolygonalSurface2D: {
-          tooltip: 'PolygonalSurface2D',
-          image: 'polygonal_surface2d.svg',
-        },
-        PolygonalSurface3D: {
-          tooltip: 'PolygonalSurface3D',
-          image: 'polygonal_surface3d.svg',
-        },
-        PolyhedralSolid3D: {
-          tooltip: 'PolyhedralSolid3D',
-          image: 'polyhedral_solid.svg',
-        },
-        Section: {
-          tooltip: 'Section',
-          image: 'section.svg',
-        },
-        TetrahedralSolid3D: {
-          tooltip: 'TetrahedralSolid3D',
-          image: 'tetrahedral_solid.svg',
-        },
-        TriangulatedSurface2D: {
-          tooltip: 'TriangulatedSurface2D',
-          image: 'triangulated_surface2d.svg',
-        },
-        TriangulatedSurface3D: {
-          tooltip: 'TriangulatedSurface3D',
-          image: 'triangulated_surface3d.svg',
-        },
-        VertexSet: {
-          tooltip: 'VertexSet',
-          image: 'VertexSet.svg',
-        },
-      },
+      GeodeObjects: geode_objects,
       items: [
         {
           icon: 'mdi-github',
@@ -324,9 +246,8 @@ export default {
     CheckID() {
       if (process.client) {
         var ID = localStorage.getItem('ID')
-        console.log('ID')
+        console.log('ID', ID)
         if (ID === null) {
-          console.log('ID not found')
           this.CreateBackEnd()
         } else {
           this.ID = ID
@@ -334,19 +255,13 @@ export default {
             .post(`${this.path}/ping`)
             .then((response) => {
               if (response.status == 200) {
-                console.log('Flask responded')
                 this.cloudRunning = true
                 this.PingTask()
               } else {
-                console.log("Flask didn't respond")
-                this.ID = ''
                 this.CreateBackEnd()
               }
             })
             .catch((error) => {
-              console.log('error : ', error)
-              console.log("Flask didn't respond")
-              this.ID = ''
               this.CreateBackEnd()
             })
         }
@@ -357,10 +272,8 @@ export default {
         .post(`${this.API}/tools/createbackend`)
         .then((response) => {
           if (response.status == 200) {
-            console.log(response.data)
             this.ID = response.data.ID
             localStorage.setItem('ID', this.ID)
-            console.log('this.ID :', this.ID)
             this.cloudRunning = true
           } else {
             console.log('Task creation failed !')
