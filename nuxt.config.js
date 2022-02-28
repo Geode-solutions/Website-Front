@@ -54,6 +54,7 @@ export default {
       ['nuxt-cookie-control',
         {
           controlButton: true,
+          domain: 'geode-solutions.com',
           colors: {
             modalOverlay: '#000',
             barBackground: colors.teal.darken1,
@@ -97,7 +98,8 @@ export default {
       {
         name: 'Default Cookies',
         description: 'Used for cookie control.',
-        cookies: ['cookie_control_consent', 'cookie_control_enabled_cookies']
+        cookies: ['cookie_control_consent', 'cookie_control_enabled_cookies'],
+        isSecureContext: true
       }
     ],
     optional: [
@@ -118,7 +120,7 @@ export default {
       //     });
       //   },
       //   declined: () => {
-
+      // this.cookies.set({ name: "cookie_control_consent", value: false });
       //   }
       // }
     ],
