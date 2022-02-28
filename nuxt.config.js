@@ -55,31 +55,21 @@ export default {
         {
           controlButton: true,
           colors: {
-            // barTextColor: '#fff',
             modalOverlay: '#000',
             barBackground: colors.teal.darken1,
             barButtonColor: '#000',
             modalTextColor: '#000',
-            // modalBackground: '#fff',
             modalOverlayOpacity: 0,
             modalButtonColor: '#fff',
             modalUnsavedColor: '#000',
-            // barButtonHoverColor: '#fff',
-            // barButtonBackground: '#fff',
-            // modalButtonHoverColor: '#fff',
             modalButtonBackground: colors.teal.darken1,
             controlButtonIconColor: colors.teal.darken1,
-            // controlButtonBackground: colors.teal.darken1,
-            // barButtonHoverBackground: '#333',
             checkboxActiveBackground: colors.teal.darken1,
             checkboxInactiveBackground: '#000',
             modalButtonHoverBackground: '#333',
             checkboxDisabledBackground: '#ddd',
             controlButtonIconHoverColor: colors.amber.accent4,
             controlButtonHoverBackground: colors.brown.darken4
-            // checkboxActiveCircleBackground: '#fff',
-            // checkboxInactiveCircleBackground: '#fff',
-            // checkboxDisabledCircleBackground: '#fff'
           }
         }
       ],
@@ -111,26 +101,26 @@ export default {
       }
     ],
     optional: [
-      {
-        name: 'Google Analitycs',
-        identifier: 'ga',
-        description: 'To improve user experience on our website',
+      // {
+      //   name: 'Google Analitycs',
+      //   identifier: 'ga',
+      //   description: 'To improve user experience on our website',
 
-        initialState: true,
-        src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
-        async: true,
-        cookies: ['_ga', '_gat', '_gid'],
-        accepted: () => {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
-          });
-        },
-        declined: () => {
+      //   initialState: true,
+      //   src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
+      //   async: true,
+      //   cookies: ['_ga', '_gat', '_gid'],
+      //   accepted: () => {
+      //     window.dataLayer = window.dataLayer || [];
+      //     window.dataLayer.push({
+      //       'gtm.start': new Date().getTime(),
+      //       event: 'gtm.js'
+      //     });
+      //   },
+      //   declined: () => {
 
-        }
-      }
+      //   }
+      // }
     ],
   },
 

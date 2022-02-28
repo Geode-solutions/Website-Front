@@ -256,6 +256,7 @@ export default {
             .then((response) => {
               if (response.status == 200) {
                 this.cloudRunning = true
+                this.GetAllowedFiles()
                 this.PingTask()
               } else {
                 this.CreateBackEnd()
