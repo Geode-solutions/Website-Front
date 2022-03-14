@@ -50,6 +50,7 @@ export default {
       title: 'Geode-solutions free tools',
     }
   },
+  
   computed: {
     mini() {
       switch (this.$vuetify.breakpoint.name) {
