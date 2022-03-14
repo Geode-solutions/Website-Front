@@ -103,26 +103,25 @@ export default {
       }
     ],
     optional: [
-      // {
-      //   name: 'Google Analitycs',
-      //   identifier: 'ga',
-      //   description: 'To improve user experience on our website',
-
-      //   initialState: true,
-      //   src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
-      //   async: true,
-      //   cookies: ['_ga', '_gat', '_gid'],
-      //   accepted: () => {
-      //     window.dataLayer = window.dataLayer || [];
-      //     window.dataLayer.push({
-      //       'gtm.start': new Date().getTime(),
-      //       event: 'gtm.js'
-      //     });
-      //   },
-      //   declined: () => {
-      // this.cookies.set({ name: "cookie_control_consent", value: false });
-      //   }
-      // }
+      {
+        // name: 'Google Analitycs',
+        // identifier: 'ga',
+        // description: 'To improve user experience on our website',
+        // initialState: true,
+        // src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
+        // async: true,
+        // cookies: ['_ga', '_gat', '_gid'],
+        // accepted: () => {
+        //   window.dataLayer = window.dataLayer || [];
+        //   window.dataLayer.push({
+        //     'gtm.start': new Date().getTime(),
+        //     event: 'gtm.js'
+        //   });
+        // },
+        // declined: () => {
+        //   // this.cookies.set({ name: "cookie_control_consent", value: false });
+        // }
+      }
     ],
   },
 
