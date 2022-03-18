@@ -209,8 +209,8 @@ export default {
     return {
       loading: false,
       cloudRunning: false,
-      API: 'http://localhost:5000',
-      // API: 'https://api.geode-solutions.com',
+      // API: 'http://localhost:5000',
+      API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
