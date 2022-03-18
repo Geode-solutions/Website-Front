@@ -138,10 +138,11 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <h4 class="text-h4 py-5">
+              
+              
                 This file format isn't supported! Please check the native file
                 formats documentation for more information
-              </h4>
+              </p>
             </v-row>
           </v-stepper-content>
 
