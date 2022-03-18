@@ -138,9 +138,11 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <h4 class="text-h4 py-5">This file format isn't supported! Please check the native file formats documentation for more information</h4>
+              <h4 class="text-h4 py-5">
+                This file format isn't supported! Please check the native file
+                formats documentation for more information
+              </h4>
             </v-row>
-            
           </v-stepper-content>
 
           <v-stepper-step
@@ -209,8 +211,8 @@ export default {
     return {
       loading: false,
       cloudRunning: false,
-      // API: 'http://localhost:5000',
-      API: 'https://api.geode-solutions.com',
+      API: 'http://localhost:5000',
+      // API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -311,6 +313,7 @@ export default {
       this.$axios
         .post(`${this.path}/allowedobjects`, params)
         .then((response) => {
+          console.log('allowedobjects : ', response)
           this.objects = response.data.objects
         })
       this.currentStep = this.currentStep + 1
@@ -357,17 +360,19 @@ export default {
       await reader.readAsDataURL(this.files[0])
     },
     PingTask() {
-      setInterval(() => {
-        this.$nuxt.$loading.finish()
-        this.$axios.post(`${this.path}/ping`).then((response) => {
-          if (response.status != 200) {
-            console.log('PingTask response : ', response)
-            this.cloudRunning = false
-            this.ID = ''
-            this.CreateBackEnd()
-          }
-        })
-      }, 10 * 1000)
+      setInterval(() => this.DoPing(), 10 * 1000)
+    },
+    DoPing() {
+      this.$nuxt.$loading.finish()
+      this.$axios.post(`${this.path}/ping`).then((response) => {
+        if (response.status != 200) {
+          console.log('PingTask response : ', response)
+          setTimeout(() => this.DoPing, 2000)
+          this.cloudRunning = false
+          this.ID = ''
+          this.CreateBackEnd()
+        }
+      })
     },
   },
 }
