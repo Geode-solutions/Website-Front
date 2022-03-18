@@ -2,7 +2,7 @@ const tools_list = [
     {
         icon: 'mdi-apps',
         title: 'Welcome',
-        to: '/tools/welcome',
+        to: '/tools',
         text: '',
         badge: '',
         chip: '',
