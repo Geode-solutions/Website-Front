@@ -138,7 +138,7 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <h3 class="text-h2 py-5">This file format isn't supported! Please check the native file formats documentation for more information</h3>
+              <h4 class="text-h4 py-5">This file format isn't supported! Please check the native file formats documentation for more information</h4>
             </v-row>
             
           </v-stepper-content>
