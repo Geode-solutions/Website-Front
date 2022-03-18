@@ -138,7 +138,7 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <h1 class="text-h2 py-5">This file format isn't supported! Please check the native file formats documentation for more information</h1>
+              <h3 class="text-h2 py-5">This file format isn't supported! Please check the native file formats documentation for more information</h3>
             </v-row>
             
           </v-stepper-content>
@@ -209,8 +209,8 @@ export default {
     return {
       loading: false,
       cloudRunning: false,
-      // API: 'http://localhost:5000',
-      API: 'https://api.geode-solutions.com',
+      API: 'http://localhost:5000',
+      // API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -307,7 +307,7 @@ export default {
       }
 
       const params = new FormData()
-      params.append('fileName', this.files[0].name)
+      params.append('filename', this.files[0].name)
       this.$axios
         .post(`${this.path}/allowedobjects`, params)
         .then((response) => {
