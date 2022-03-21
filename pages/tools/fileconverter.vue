@@ -138,8 +138,7 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              
-              
+              <p>
                 This file format isn't supported! Please check the native file
                 formats documentation for more information
               </p>
@@ -366,6 +365,7 @@ export default {
     DoPing() {
       this.$nuxt.$loading.finish()
       this.$axios.post(`${this.path}/ping`).then((response) => {
+        console.log(this.path)
         if (response.status != 200) {
           console.log('PingTask response : ', response)
           setTimeout(() => this.DoPing, 2000)

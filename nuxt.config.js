@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import { useCookie, setCookie } from 'h3'
 
 export default {
   target: 'static',
@@ -119,7 +120,6 @@ export default {
           });
         },
         declined: () => {
-          // this.cookies.set({ name: "cookie_control_consent", value: false });
         }
       }
     ],
