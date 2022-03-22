@@ -1,11 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // publicRuntimeConfig: {
-  //   myPublicVariable: process.env.PUBLIC_VARIABLE,
-  // },
+  /*
+    ** Environment variables
+  */
   publicRuntimeConfig: {
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
   },
   target: 'static',
   /*
