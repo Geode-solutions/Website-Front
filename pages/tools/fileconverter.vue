@@ -211,9 +211,7 @@ export default {
     return {
       loading: false,
       cloudRunning: false,
-      // API: 'http://localhost:5000',
-      // API: 'https://api.geode-solutions.com',
-      API: '',
+      API: this.$config.API_URL,
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -246,10 +244,6 @@ export default {
     },
   },
   created() {
-    if (process.client) {
-      this.API = this.$config.API_URL
-      console.log(this.$config.API_URL)
-    }
     this.CheckID() // Lauches the AWS Lambda function
   },
   mounted() {},
