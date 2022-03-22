@@ -139,8 +139,8 @@
             </v-row>
             <v-row v-else>
               <p>
-                This file format isn't supported! Please check the supported file
-                formats documentation for more information
+                This file format isn't supported! Please check the supported
+                file formats documentation for more information
               </p>
             </v-row>
           </v-stepper-content>
@@ -212,7 +212,8 @@ export default {
       loading: false,
       cloudRunning: false,
       // API: 'http://localhost:5000',
-      API: 'https://api.geode-solutions.com',
+      // API: 'https://api.geode-solutions.com',
+      API: '',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -245,6 +246,10 @@ export default {
     },
   },
   created() {
+    if (process.client) {
+      this.API = this.$config.API_URL
+      console.log(this.$config.API_URL)
+    }
     this.CheckID() // Lauches the AWS Lambda function
   },
   mounted() {},
@@ -252,7 +257,6 @@ export default {
     CheckID() {
       if (process.client) {
         var ID = localStorage.getItem('ID')
-        console.log('ID', ID)
         if (ID === null) {
           this.CreateBackEnd()
         } else {
@@ -364,18 +368,16 @@ export default {
     },
     DoPing() {
       this.$nuxt.$loading.finish()
-      this.$axios
-        .post(`${this.path}/ping`, { headers: { __show_no_progress__: true } })
-        .then((response) => {
-          console.log(this.path)
-          if (response.status != 200) {
-            console.log('PingTask response : ', response)
-            setTimeout(() => this.DoPing, 2000)
-            this.cloudRunning = false
-            this.ID = ''
-            this.CreateBackEnd()
-          }
-        })
+      this.$axios.post(`${this.path}/ping`).then((response) => {
+        console.log(this.path)
+        if (response.status != 200) {
+          console.log('PingTask response : ', response)
+          setTimeout(() => this.DoPing, 2000)
+          this.cloudRunning = false
+          this.ID = ''
+          this.CreateBackEnd()
+        }
+      })
     },
   },
 }

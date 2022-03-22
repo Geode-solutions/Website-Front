@@ -1,6 +1,12 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  // publicRuntimeConfig: {
+  //   myPublicVariable: process.env.PUBLIC_VARIABLE,
+  // },
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL
+  },
   target: 'static',
   /*
    ** Headers of the page
