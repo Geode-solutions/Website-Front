@@ -139,7 +139,7 @@
             </v-row>
             <v-row v-else>
               <p>
-                This file format isn't supported! Please check the native file
+                This file format isn't supported! Please check the supported file
                 formats documentation for more information
               </p>
             </v-row>
@@ -211,8 +211,8 @@ export default {
     return {
       loading: false,
       cloudRunning: false,
-      // API: 'http://localhost:5000',
-      API: 'https://api.geode-solutions.com',
+      API: 'http://localhost:5000',
+      // API: 'https://api.geode-solutions.com',
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -233,7 +233,7 @@ export default {
         },
         {
           icon: '',
-          title: 'Visit the native file formats documentation',
+          title: 'Visit the supported file formats documentation',
           href: 'https://docs.geode-solutions.com/formats/',
         },
       ],
@@ -364,16 +364,18 @@ export default {
     },
     DoPing() {
       this.$nuxt.$loading.finish()
-      this.$axios.post(`${this.path}/ping`).then((response) => {
-        console.log(this.path)
-        if (response.status != 200) {
-          console.log('PingTask response : ', response)
-          setTimeout(() => this.DoPing, 2000)
-          this.cloudRunning = false
-          this.ID = ''
-          this.CreateBackEnd()
-        }
-      })
+      this.$axios
+        .post(`${this.path}/ping`, { headers: { __show_no_progress__: true } })
+        .then((response) => {
+          console.log(this.path)
+          if (response.status != 200) {
+            console.log('PingTask response : ', response)
+            setTimeout(() => this.DoPing, 2000)
+            this.cloudRunning = false
+            this.ID = ''
+            this.CreateBackEnd()
+          }
+        })
     },
   },
 }
