@@ -15,7 +15,7 @@ const geode_objects = {
         tooltip: 'Graph',
         image: 'edged_curve.svg',
     },
-    // HybridSolidy3D: {
+    // HybridSolid3D: {
     //   tooltip: "HybridSolid3D",
     //   image: "HybridSolid3D.svg",
     // },
