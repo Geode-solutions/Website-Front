@@ -69,10 +69,10 @@
 </template>
 
 <script>
-import tools_list from './tools_list'
+import tools_list from '../../assets/tools_list'
 
 export default {
-  name: 'welcome',
+  name: 'WelcomePage',
   data: () => ({
     tools: tools_list,
   }),

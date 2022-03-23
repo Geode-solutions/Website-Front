@@ -202,10 +202,10 @@
 <script>
 import fileDownload from 'js-file-download'
 import CloudLoading from '../../components/CloudLoading.vue'
-import geode_objects from './geode_objects'
+import geode_objects from '../../assets/geode_objects'
 
 export default {
-  name: 'fileconverter',
+  name: 'FileConverter',
   components: { CloudLoading },
   data() {
     return {
@@ -267,7 +267,7 @@ export default {
                 this.CreateBackEnd()
               }
             })
-            .catch((error) => {
+            .catch(() => {
               this.CreateBackEnd()
             })
         }

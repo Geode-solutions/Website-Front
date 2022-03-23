@@ -35,10 +35,10 @@
 
 <script>
 
-import tools_list from './tools/tools_list'
+import tools_list from '../assets/tools_list'
 
 export default {
-  name: 'tools',
+  name: 'FreeTools',
   data() {
     return {
       tools: tools_list,
@@ -63,6 +63,8 @@ export default {
         case 'lg':
           return false
         case 'xl':
+          return false
+        default:
           return false
       }
     },
