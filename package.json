@@ -6,9 +6,9 @@
   "scripts": {
     "build": "nuxt build",
     "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "dev": "nuxt NUXT_ENV_API_URL=http://localhost:5000",
+    "dev": "nuxt",
     "generate": "nuxt generate",
-    "start": "nuxt start NUXT_ENV_API_URL=https://api.geode-solutions.com"
+    "start": "nuxt start"
   },
   "dependencies": {
     "@bazzite/nuxt-netlify": "^0.2.0",

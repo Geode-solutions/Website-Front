@@ -5,8 +5,9 @@ export default {
     ** Environment variables
   */
   publicRuntimeConfig: {
-    API_URL: process.env.NUXT_ENV_API_URL
+    API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
   },
+  
   target: 'static',
   /*
    ** Headers of the page
@@ -108,26 +109,26 @@ export default {
         isSecureContext: true
       }
     ],
-    optional: [
-      {
-        name: 'Google Analitycs',
-        identifier: 'ga',
-        description: 'To improve user experience on our website',
-        initialState: true,
-        src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
-        async: true,
-        cookies: ['_ga', '_gat', '_gid'],
-        accepted: () => {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
-          });
-        },
-        declined: () => {
-        }
-      }
-    ],
+    // optional: [
+    //   {
+    //     name: 'Google Analitycs',
+    //     identifier: 'ga',
+    //     description: 'To improve user experience on our website',
+    //     initialState: true,
+    //     src: 'https://www.googletagmanager.com/gtag/js?id=<API-KEY>',
+    //     async: true,
+    //     cookies: ['_ga', '_gat', '_gid'],
+    //     accepted: () => {
+    //       window.dataLayer = window.dataLayer || [];
+    //       window.dataLayer.push({
+    //         'gtm.start': new Date().getTime(),
+    //         event: 'gtm.js'
+    //       });
+    //     },
+    //     declined: () => {
+    //     }
+    //   }
+    // ],
   },
 
   /*

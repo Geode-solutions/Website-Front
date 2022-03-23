@@ -250,6 +250,7 @@ export default {
   methods: {
     CheckID() {
       if (process.client) {
+        console.log(this.$config.API_URL)
         var ID = localStorage.getItem('ID')
         if (ID === null) {
           this.CreateBackEnd()
@@ -273,6 +274,7 @@ export default {
       }
     },
     async CreateBackEnd() {
+      console.log(this.API)
       await this.$axios
         .post(`${this.API}/tools/createbackend`)
         .then((response) => {
@@ -361,7 +363,6 @@ export default {
       setInterval(() => this.DoPing(), 10 * 1000)
     },
     DoPing() {
-      this.$nuxt.$loading.finish()
       this.$axios.post(`${this.path}/ping`).then((response) => {
         console.log(this.path)
         if (response.status != 200) {
