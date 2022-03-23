@@ -138,7 +138,7 @@ export default {
           text: 'OpenGeode is an open source C++ framework available on GitHub, \
             under a permissive software license (MIT). \
             We also provide pre-compiled releases on several platforms: \
-            Windows, UNIX-based, macOS.',
+            Windows and UNIX-based.',
         },
 
         {

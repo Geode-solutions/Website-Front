@@ -25,13 +25,9 @@ export default {
         }
       ],
     link:
-      [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, {
-          rel: 'stylesheet',
-          href:
-            'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-        }
-      ]
+        [
+          {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+        ]
   },
 
   /*
@@ -82,7 +78,7 @@ export default {
         }
       ],
       '@nuxtjs/axios',
-      '@bazzite/nuxt-netlify',
+      '@aceforth/nuxt-netlify',
       '@nuxtjs/vuetify',
       ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }]
     ],
