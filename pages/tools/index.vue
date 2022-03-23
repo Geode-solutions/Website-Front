@@ -2,25 +2,24 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12">
-        <h1 class="text-h2 py-5" align="center">
-          Free tools home page
-        </h1>
+        <h1 class="text-h2 py-5" align="center">Free tools home page</h1>
 
         <p class="container text-h6 font-weight-light" align="justify">
           All the tools offered here are entirely free to use.
-          <br>
-          We rely on a cloud technology for computing power. Each cloud
-          instance is launched on demand, the downside is that you have to wait
-          a few seconds for the cloud to be ready to be used. Each file that you
-          send to us is deleted at the end of the cloud instance.
-          <br>
+          <br />
+          We rely on a cloud technology for computing power. Each cloud instance
+          is launched on demand, the downside is that you have to wait a few
+          seconds for the cloud to be ready to be used. Each file that you send
+          to us is deleted at the end of the cloud instance.
+          <br />
           Some tools may be in beta version and you may experience some bugs,
           but they will be fixed in the near future.
 
-          <br>
-          We are interested in your feedback in case you encountered a problem during
-          your usage, if you have some improvement ideas, if you simply have
-          ideas for new tools that may be useful to you, or want to share your enthusiasm about these tools.
+          <br />
+          We are interested in your feedback in case you encountered a problem
+          during your usage, if you have some improvement ideas, if you simply
+          have ideas for new tools that may be useful to you, or want to share
+          your enthusiasm about these tools.
         </p>
         <div class="my-2" align="center">
           <v-btn color="primary" dark href="mailto:contact@geode-solutions.com">
@@ -58,7 +57,7 @@
                 </v-col>
               </v-row>
               <v-card-title primary-title class="justify-center text-h4">
-                <br>
+                <br />
                 {{ tool.title }}
               </v-card-title>
               <v-card-text class="justify-center text-body-1">
