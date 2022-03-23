@@ -7,7 +7,7 @@
         </h1>
 
         <p class="container text-h6 font-weight-light" align="justify">
-          All those tools are entirely free to use.
+          All the tools offered here are entirely free to use.
           <br>
           We rely on a cloud technology for computing power. Each cloud
           instance is launched on demand, the downside is that you have to wait
