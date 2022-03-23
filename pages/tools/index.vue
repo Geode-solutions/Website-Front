@@ -20,7 +20,7 @@
           <br>
           We are interested in your feedback in case you encountered a problem during
           your usage, if you have some improvement ideas or if you simply have
-          ideas for new tools that may be useful to you.
+          ideas for new tools that may be useful to you, or want to share your enthusiasm about these tools.
         </p>
         <div class="my-2" align="center">
           <v-btn color="primary" dark href="mailto:contact@geode-solutions.com">
