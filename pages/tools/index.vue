@@ -16,7 +16,7 @@
           they will be fixed in the near future.
 
           <br />
-          We are interested in your feedback if you encounter a problem during
+          We are interested in your feedback in case you encountered a problem during
           your usage, if you have some improvement ideas or if you simply have
           ideas for new tools that may be useful to you.
         </p>
