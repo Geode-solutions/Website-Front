@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'validitychecker',
+  name: 'Validitychecker',
   data: () => ({}),
   head() {
     return {

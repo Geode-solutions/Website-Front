@@ -61,4 +61,4 @@ const geode_objects = {
     }
 }
 
-export default geode_objects;
+export default geode_objects

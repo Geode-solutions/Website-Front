@@ -44,7 +44,9 @@
       <v-container>
         <v-row>
           <v-col>
-            <h2 class="section text-h2" align="center">What we do</h2>
+            <h2 class="section text-h2" align="center">
+              What we do
+            </h2>
             <v-row justify="space-around">
               <v-col
                 v-for="card in masterCards"
@@ -100,7 +102,9 @@
       <v-container fluid style="background-color: white">
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="section text-h2" align="center">Which applications</h2>
+            <h2 class="section text-h2" align="center">
+              Which applications
+            </h2>
             <v-timeline>
               <v-timeline-item small fill-dot class="text-h4 font-weight-light">
                 Geo&shy;thermal
@@ -142,7 +146,9 @@
       <v-container fluid>
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="section text-h2" align="center">Why Geode-solutions</h2>
+            <h2 class="section text-h2" align="center">
+              Why Geode-solutions
+            </h2>
             <v-row justify="center">
               <v-col
                 v-for="(card, index) in cards"
@@ -184,7 +190,9 @@
         </v-row>
       </v-container>
       <v-container fluid style="background-color: white">
-        <h2 class="section text-h2" align="center">What are our skills</h2>
+        <h2 class="section text-h2" align="center">
+          What are our skills
+        </h2>
         <v-row justify="space-around" class="container mx-auto">
           <v-col>
             <v-lazy
@@ -206,7 +214,9 @@
         </v-row>
       </v-container>
       <v-container fluid>
-        <h2 class="section text-h2" align="center">Who we are</h2>
+        <h2 class="section text-h2" align="center">
+          Who we are
+        </h2>
         <v-row justify="space-around" class="container mx-auto">
           <v-col
             v-for="(guy, index) in us"
@@ -230,7 +240,9 @@
                 <v-card-title primary-title class="justify-center text-h5">
                   {{ guy.name }}
                   <v-btn icon target="_blank" :href="guy.url">
-                    <v-icon size="24px" color="#0A66C2">mdi-linkedin</v-icon>
+                    <v-icon size="24px" color="#0A66C2">
+                      mdi-linkedin
+                    </v-icon>
                   </v-btn>
                   {{ guy.job }}
                 </v-card-title>
@@ -245,7 +257,9 @@
       <v-container fluid style="background-color: white">
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="section text-h2" align="center">They support us</h2>
+            <h2 class="section text-h2" align="center">
+              They support us
+            </h2>
 
             <v-lazy
               :options="{
@@ -262,7 +276,7 @@
                     <img
                       width="80%"
                       :src="require('@/assets/logos/' + supporter.logo)"
-                    />
+                    >
                   </a>
                 </slide>
               </carousel>
@@ -271,7 +285,9 @@
         </v-row>
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="section text-h2" align="center">Our partners</h2>
+            <h2 class="section text-h2" align="center">
+              Our partners
+            </h2>
 
             <v-lazy
               :options="{
@@ -288,7 +304,7 @@
                     <img
                       width="80%"
                       :src="require('@/assets/logos/' + partner.logo)"
-                    />
+                    >
                   </a>
                 </slide>
               </carousel>

@@ -20,9 +20,9 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-badge v-if="tool.badge" :content="tool.badge" inline overlap>
-              <v-list-item-title v-text="tool.title"> </v-list-item-title>
+              <v-list-item-title v-text="tool.title" />
             </v-badge>
-            <v-list-item-title v-else v-text="tool.title"> </v-list-item-title>
+            <v-list-item-title v-else v-text="tool.title" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -38,7 +38,7 @@
 import tools_list from './tools/tools_list'
 
 export default {
-  name: 'tools',
+  name: 'Tools',
   data() {
     return {
       tools: tools_list,
