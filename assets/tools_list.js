@@ -25,4 +25,4 @@ const tools_list = [
     },
 ]
 
-export default tools_list;
+export default tools_list

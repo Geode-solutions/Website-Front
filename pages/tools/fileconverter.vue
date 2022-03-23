@@ -7,11 +7,11 @@
           <v-row justify="space-around">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
               <v-card
+                v-ripple
                 class="card"
                 nuxt
                 hover
                 elevation="5"
-                v-ripple
                 :href="item.href"
                 target="_blank"
                 contain
@@ -52,20 +52,22 @@
         </v-col>
       </v-col>
       <v-col v-if="!cloudRunning">
-        <cloud-loading> </cloud-loading>
+        <cloud-loading />
       </v-col>
 
       <v-col v-else>
-        <v-stepper class="stepper" v-model="currentStep" vertical>
+        <v-stepper v-model="currentStep" class="stepper" vertical>
           <v-stepper-step
             :complete="currentStep > 1"
             step="1"
             @click="currentStep = 1"
           >
-            <v-row align="center"
-              ><v-col cols="auto">Please select a file to convert</v-col>
+            <v-row align="center">
+              <v-col cols="auto"> Please select a file to convert </v-col>
               <v-col>
-                <v-chip v-if="files.length"> {{ files[0].name }} </v-chip>
+                <v-chip v-if="files.length">
+                  {{ files[0].name }}
+                </v-chip>
               </v-col>
             </v-row>
           </v-stepper-step>
@@ -83,8 +85,7 @@
               :success="success"
               @click:clear="objects = []"
               @change="GetAllowedObjects"
-            >
-            </v-file-input>
+            />
           </v-stepper-content>
 
           <v-stepper-step
@@ -92,10 +93,12 @@
             step="2"
             @click="currentStep = 2"
           >
-            <v-row align="center"
-              ><v-col cols="auto">Confirm the data type</v-col>
+            <v-row align="center">
+              <v-col cols="auto"> Confirm the data type </v-col>
               <v-col>
-                <v-chip v-if="GeodeObject"> {{ GeodeObject }} </v-chip>
+                <v-chip v-if="GeodeObject">
+                  {{ GeodeObject }}
+                </v-chip>
               </v-col>
             </v-row>
           </v-stepper-step>
@@ -113,12 +116,12 @@
                     <v-tooltip bottom>
                       <template #activator="{ on }">
                         <v-card
+                          v-ripple
                           nuxt
                           class="card ma-2"
                           hover
-                          v-on="on"
                           elevation="5"
-                          v-ripple
+                          v-on="on"
                         >
                           <v-img
                             :src="
@@ -127,8 +130,7 @@
                             "
                             contain
                             @click="GetOutputFileExtensions(object)"
-                          >
-                          </v-img>
+                          />
                         </v-card>
                       </template>
                       <span>{{ GeodeObjects[object].tooltip }}</span>
@@ -150,10 +152,12 @@
             step="3"
             @click="currentStep = 3"
           >
-            <v-row align="center"
-              ><v-col cols="auto">Select file format</v-col>
+            <v-row align="center">
+              <v-col cols="auto"> Select file format </v-col>
               <v-col>
-                <v-chip v-if="extension"> {{ extension }} </v-chip>
+                <v-chip v-if="extension">
+                  {{ extension }}
+                </v-chip>
               </v-col>
             </v-row>
           </v-stepper-step>
@@ -172,13 +176,13 @@
                       class="card ma-2"
                       nuxt
                       hover
-                      v-on="on"
                       active-class=""
+                      v-on="on"
                       @click="setFileFormat(fileExtension)"
                     >
-                      <v-card-title class="justify-center">{{
-                        fileExtension
-                      }}</v-card-title>
+                      <v-card-title class="justify-center">
+                        {{ fileExtension }}
+                      </v-card-title>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -186,7 +190,7 @@
             </v-row>
           </v-stepper-content>
 
-          <v-stepper-step step="4"> Convert your file</v-stepper-step>
+          <v-stepper-step step="4"> Convert your file </v-stepper-step>
           <v-stepper-content step="4">
             <v-btn color="primary" @click="ConvertFile(files[0])">
               Convert
