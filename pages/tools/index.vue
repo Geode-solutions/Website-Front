@@ -7,7 +7,7 @@
         <p class="container text-h6 font-weight-light" align="justify">
           All those tools are entirely free to use.
           <br />
-          We rely on the cloud technology for computing power. Each cloud
+          We rely on a cloud technology for computing power. Each cloud
           instance is launched on demand, the downside is that you have to wait
           a few seconds for the cloud to be ready to use. Each file that you
           send to us is deleted at the end of the cloud instance.
