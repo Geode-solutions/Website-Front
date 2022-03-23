@@ -205,7 +205,7 @@
 
 <script>
 import fileDownload from 'js-file-download'
-import CloudLoading from '../../components/CloudLoading.vue'
+import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '../../assets/geode_objects'
 
 export default {
