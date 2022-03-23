@@ -5,7 +5,7 @@ export default {
     ** Environment variables
   */
   publicRuntimeConfig: {
-    API_URL: process.env.API_URL === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
+    API_URL: process.env.NUXT_ENV_API_URL
   },
   target: 'static',
   /*
