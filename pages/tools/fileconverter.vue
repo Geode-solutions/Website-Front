@@ -5,11 +5,10 @@
         <h1 class="text-h2 py-5" align="center">File converter</h1>
         <v-col>
           <v-row justify="space-around">
-            <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
+            <v-col v-for="(item, i) in items" :key="i" cols="11" md="6">
               <v-card
                 v-ripple
                 class="card"
-                nuxt
                 hover
                 elevation="5"
                 :href="item.href"
@@ -19,20 +18,11 @@
                 <v-row justify="center" align="center">
                   <v-col cols="auto">
                     <v-icon
-                      v-if="item.icon.match(/mdi-.*/)"
                       size="128"
                       class="justify-center"
                     >
                       {{ item.icon }}
                     </v-icon>
-                    <v-img
-                      v-else
-                      :src="require('@/assets/logo.svg')"
-                      alt="Geode-solutions logo"
-                      width="50%"
-                      class="mx-auto"
-                      contain
-                    />
                   </v-col>
                 </v-row>
                 <v-card-title
@@ -40,7 +30,6 @@
                   class="justify-center text-h6"
                   align="center"
                 >
-                  <br />
                   {{ item.title }}
                 </v-card-title>
                 <v-card-text class="justify-center text-body-1">
@@ -117,7 +106,6 @@
                       <template #activator="{ on }">
                         <v-card
                           v-ripple
-                          nuxt
                           class="card ma-2"
                           hover
                           elevation="5"
@@ -174,9 +162,7 @@
                   >
                     <v-card
                       class="card ma-2"
-                      nuxt
                       hover
-                      active-class=""
                       v-on="on"
                       @click="setFileFormat(fileExtension)"
                     >
@@ -205,8 +191,8 @@
 
 <script>
 import fileDownload from 'js-file-download'
-import CloudLoading from '../../components/CloudLoading.vue'
-import geode_objects from '../../assets/geode_objects'
+import CloudLoading from '@/components/CloudLoading.vue'
+import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'FileConverter',
@@ -235,7 +221,7 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode',
         },
         {
-          icon: '',
+          icon: '$vuetify.icons.logo',
           title: 'Visit the supported file formats documentation',
           href: 'https://docs.geode-solutions.com/formats/',
         },

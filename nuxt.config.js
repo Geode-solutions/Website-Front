@@ -7,7 +7,7 @@ export default {
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
   },
-  
+
   target: 'static',
   /*
    ** Headers of the page
@@ -25,9 +25,9 @@ export default {
         }
       ],
     link:
-        [
-          {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-        ]
+      [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
   },
 
   /*
