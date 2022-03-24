@@ -191,6 +191,8 @@ import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
 
+import { mapState } from 'vuex'
+
 export default {
   name: 'FileConverter',
   components: { CloudLoading },
@@ -199,7 +201,6 @@ export default {
       loading: false,
       cloudRunning: false,
       API: this.$config.API_URL,
-      ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
       fileExtensions: [],
@@ -213,7 +214,7 @@ export default {
       GeodeObjects: geode_objects,
       items: [
         {
-          icon: '$vuetify.icons.logo',
+          icon: 'mdi-file-check-outline',
           title: 'Supported file formats',
           href: 'https://docs.geode-solutions.com/formats/',
         },
@@ -226,12 +227,13 @@ export default {
     }
   },
   computed: {
+    ...mapState(['ID', 'cloudRuning']),
     path() {
       return this.API + '/' + this.ID
     },
   },
   created() {
-    this.CheckID() // Lauches the AWS Lambda function
+    this.CheckID()
   },
   mounted() {},
   methods: {
@@ -244,7 +246,7 @@ export default {
         } else {
           this.ID = ID
           this.$axios
-            .post(`${this.path}/ping`)
+            .post(`/ping`)
             .then((response) => {
               if (response.status == 200) {
                 this.cloudRunning = true
@@ -260,26 +262,8 @@ export default {
         }
       }
     },
-    async CreateBackEnd() {
-      console.log(this.API)
-      await this.$axios
-        .post(`${this.API}/tools/createbackend`)
-        .then((response) => {
-          console.log('response : ', response)
-          if (response.status == 200) {
-            this.ID = response.data.ID
-            localStorage.setItem('ID', this.ID)
-            this.cloudRunning = true
-          } else {
-            console.log('Task creation failed !')
-            this.CreateBackEnd()
-          }
-        })
-      this.GetAllowedFiles()
-      this.PingTask()
-    },
     GetAllowedFiles() {
-      this.$axios.post(`${this.path}/allowedfiles`).then((response) => {
+      this.$axios.post(`/allowedfiles`).then((response) => {
         const extensions = response.data.extensions.map(
           (extension) => '.' + extension
         )
@@ -297,23 +281,19 @@ export default {
 
       const params = new FormData()
       params.append('filename', this.files[0].name)
-      this.$axios
-        .post(`${this.path}/allowedobjects`, params)
-        .then((response) => {
-          console.log('allowedobjects : ', response)
-          this.objects = response.data.objects
-        })
+      this.$axios.post(`/allowedobjects`, params).then((response) => {
+        console.log('allowedobjects : ', response)
+        this.objects = response.data.objects
+      })
       this.currentStep = this.currentStep + 1
     },
     GetOutputFileExtensions(object) {
       const params = new FormData()
       params.append('object', object)
       this.GeodeObject = object
-      this.$axios
-        .post(`${this.path}/outputfileextensions`, params)
-        .then((response) => {
-          this.fileExtensions = response.data.outputfileextensions
-        })
+      this.$axios.post(`/outputfileextensions`, params).then((response) => {
+        this.fileExtensions = response.data.outputfileextensions
+      })
       this.currentStep = this.currentStep + 1
     },
     setFileFormat(extension) {
@@ -332,34 +312,15 @@ export default {
         params.append('extension', self.extension)
         params.append('responseType', 'blob')
 
-        await self.$axios
-          .post(`${self.path}/convertfile`, params)
-          .then((response) => {
-            if (response.status == 200) {
-              let newFilename =
-                self.files[0].name.replace(/\.[^/.]+$/, '') +
-                '.' +
-                self.extension
-              fileDownload(response.data, newFilename)
-            }
-          })
+        await self.$axios.post(`/convertfile`, params).then((response) => {
+          if (response.status == 200) {
+            let newFilename =
+              self.files[0].name.replace(/\.[^/.]+$/, '') + '.' + self.extension
+            fileDownload(response.data, newFilename)
+          }
+        })
       }
       await reader.readAsDataURL(this.files[0])
-    },
-    PingTask() {
-      setInterval(() => this.DoPing(), 10 * 1000)
-    },
-    DoPing() {
-      this.$axios.post(`${this.path}/ping`).then((response) => {
-        console.log(this.path)
-        if (response.status != 200) {
-          console.log('PingTask response : ', response)
-          setTimeout(() => this.DoPing, 2000)
-          this.cloudRunning = false
-          this.ID = ''
-          this.CreateBackEnd()
-        }
-      })
     },
   },
 }
