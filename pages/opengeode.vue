@@ -46,10 +46,10 @@
               </v-card-title>
               <v-card-text>
                 <v-icon
-                  :size="$vuetify.breakpoint.smAndUp ? 150 : 100"
+                  :size="$vuetify.breakpoint.smAndUp ? 180 : 100"
                   color="#000000"
                 >
-                  fab fa-github
+                  mdi-github
                 </v-icon>
               </v-card-text>
             </v-card>

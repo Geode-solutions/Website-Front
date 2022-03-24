@@ -4,7 +4,9 @@
       <v-row class="hidden-sm-and-down px-2">
         <v-btn text active-class="no-active" nuxt to="/">
           <v-app-bar-nav-icon>
-            <v-icon large> $vuetify.icons.logo </v-icon>
+            <v-icon large>
+              $vuetify.icons.logo
+            </v-icon>
           </v-app-bar-nav-icon>
           <v-toolbar-title>{{ name }}</v-toolbar-title>
         </v-btn>
@@ -26,7 +28,9 @@
           <v-expansion-panel-header>
             <v-row align="center">
               <v-col class="px-2" cols="1">
-                <v-icon large> $vuetify.icons.logo </v-icon>
+                <v-icon large>
+                  $vuetify.icons.logo
+                </v-icon>
               </v-col>
               <v-col class="text-h6 mx-2">
                 {{ name }}
@@ -58,6 +62,8 @@
       <nuxt />
     </v-main>
 
+    <CookieControl />
+
     <v-footer padless>
       <v-card text tile dark class="primary flex">
         <v-row align="center" class="mr-0">
@@ -72,7 +78,7 @@
                 :href="icon.url"
                 class="mr-4"
               >
-                <v-icon size="24px">
+                <v-icon size="28px">
                   {{ icon.icon }}
                 </v-icon>
               </v-btn>
@@ -112,7 +118,7 @@
                 height="40px"
                 width="120px"
                 src="@/assets/nuxt.svg"
-              />
+              >
             </v-btn>
           </v-col>
         </v-row>
@@ -133,23 +139,24 @@ export default {
         { title: 'Expertise', to: '/expertise' },
         { title: 'Software', to: '/software' },
         { title: 'Services', to: '/services' },
+        { title: 'Free tools', to: '/tools' },
       ],
       icons: [
-        { icon: 'fab fa-github', url: 'https://github.com/Geode-solutions' },
-        { icon: 'fab fa-twitter', url: 'https://twitter.com/GeodeSolutions' },
+        { icon: 'mdi-github', url: 'https://github.com/Geode-solutions' },
+        { icon: 'mdi-twitter', url: 'https://twitter.com/GeodeSolutions' },
         {
-          icon: 'fab fa-linkedin',
+          icon: 'mdi-linkedin',
           url: 'https://linkedin.com/company/geode-solutions',
         },
         {
-          icon: 'fab fa-slack',
+          icon: 'mdi-slack',
           url: 'https://slackin-opengeode.herokuapp.com',
         },
         {
-          icon: 'fab fa-youtube',
+          icon: 'mdi-youtube',
           url: 'https://www.youtube.com/channel/UCkzmIOpr3H8I8kDLCGZBiXA',
         },
-        { icon: 'fas fa-envelope', url: 'mailto:contact@geode-solutions.com' },
+        { icon: 'mdi-email', url: 'mailto:contact@geode-solutions.com' },
       ],
       date: new Date().getFullYear(),
     }
