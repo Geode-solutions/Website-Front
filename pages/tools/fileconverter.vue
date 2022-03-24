@@ -5,7 +5,7 @@
         <h1 class="text-h2 py-5" align="center">File converter</h1>
         <v-col>
           <v-row justify="space-around">
-            <v-col v-for="(item, i) in items" :key="i" cols="11" md="6">
+            <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
               <v-card
                 v-ripple
                 class="card"
@@ -17,10 +17,7 @@
               >
                 <v-row justify="center" align="center">
                   <v-col cols="auto">
-                    <v-icon
-                      size="128"
-                      class="justify-center"
-                    >
+                    <v-icon size="128" class="justify-center">
                       {{ item.icon }}
                     </v-icon>
                   </v-col>
@@ -216,14 +213,14 @@ export default {
       GeodeObjects: geode_objects,
       items: [
         {
-          icon: 'mdi-github',
-          title: 'Visit OpenGeode GitHub repo',
-          href: 'https://github.com/Geode-solutions/OpenGeode',
+          icon: 'mdi-file-check',
+          title: 'Supported file formats',
+          href: 'https://docs.geode-solutions.com/formats/',
         },
         {
-          icon: '$vuetify.icons.logo',
-          title: 'Visit the supported file formats documentation',
-          href: 'https://docs.geode-solutions.com/formats/',
+          icon: 'mdi-github',
+          title: 'OpenGeode GitHub repo',
+          href: 'https://github.com/Geode-solutions/OpenGeode',
         },
       ],
     }
