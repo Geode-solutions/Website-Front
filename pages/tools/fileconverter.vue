@@ -216,7 +216,7 @@ export default {
       GeodeObjects: geode_objects,
       items: [
         {
-          icon: 'mdi-github',
+          icon: 'mdi-file-check',
           title: 'Visit OpenGeode GitHub repo',
           href: 'https://github.com/Geode-solutions/OpenGeode',
         },
