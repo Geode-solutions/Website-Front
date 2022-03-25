@@ -5,10 +5,10 @@ export const state = () => ({
 
 export const mutations = {
   setID (state, ID) {
-    state.ID = ID
+    this.state.ID = ID
   },
-  setCloudRunning (state, cloudRunning) {
-    state.cloudRunning = cloudRunning
+  setCloudRunning (cloudRunning) {
+    this.cloudRunning = cloudRunning
   }
 }
 
@@ -17,59 +17,55 @@ export const actions = {
     if (process.client) {
       console.log(this.$config.API_URL)
       var ID = localStorage.getItem('ID')
-      if (ID === null) {
-        this.CreateBackEnd()
+      if (ID === null || typeof ID !== 'undefined') {
+        console.log("ID null")
+        this.dispatch('CreateBackEnd')
       } else {
-        // this.ID = ID
-        // commit("setID", ID)
         this.$axios
-          .post(`/ping`)
+          .post(`${ID}/ping`)
           .then((response) => {
             if (response.status == 200) {
-              this.cloudRunning = true
-              this.GetAllowedFiles()
-              this.PingTask()
+              this.commit("setID", ID)
+              this.commit("setCloudRunning", true)
+              this.dispatch('PingTask')
             } else {
-              this.CreateBackEnd()
+              this.dispatch('CreateBackEnd')
             }
           })
           .catch(() => {
-            this.CreateBackEnd()
+            this.dispatch('CreateBackEnd')
           })
       }
     }
   },
   async CreateBackEnd ({ commit }) {
-    console.log(this.API)
     await this.$axios
       .post(`/tools/createbackend`)
       .then((response) => {
         console.log('response : ', response)
         if (response.status == 200) {
-          commit("setID", response.data.ID)
-          localStorage.setItem('ID', this.ID)
-          commit("setCloudRunning", true)
+          this.commit("setID", response.data.ID)
+          localStorage.setItem('ID', response.data.ID)
+          this.commit("setCloudRunning", true)
         } else {
           console.log('Task creation failed !')
-          this.CreateBackEnd()
+          this.dispatch('CreateBackEnd')
         }
       })
     // this.GetAllowedFiles()
-    this.PingTask()
+    this.dispatch('PingTask')
   },
   PingTask () {
-    setInterval(() => this.DoPing(), 10 * 1000)
+    setInterval(() => this.dispatch('DoPing'), 10 * 1000)
   },
   DoPing () {
-    this.$axios.post(`/ping`).then((response) => {
-      console.log(this.path)
+    console.log("this.state.ID : ", this.state.ID)
+    this.$axios.post(`${this.state.ID}/ping`).then((response) => {
+      // console.log(response)
       if (response.status != 200) {
         console.log('PingTask response : ', response)
-        setTimeout(() => this.DoPing, 2000)
-        this.cloudRunning = false
-        commit("setCloudRunning", true)
-        this.ID = ''
-        this.CreateBackEnd()
+        commit("setCloudRunning", false)
+        this.dispatch('CreateBackEnd')
       }
     })
   },
