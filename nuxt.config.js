@@ -8,7 +8,7 @@ export default {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
   },
   axios: {
-    baseURL: API_URL,
+    baseURL: 'http://localhost:5000',
   },
 
   target: 'static',

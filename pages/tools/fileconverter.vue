@@ -200,9 +200,8 @@ export default {
   data() {
     return {
       loading: false,
-      cloudRunning: false,
-      API: this.$config.API_URL,
       currentStep: 1,
+      multiple: false,
       extension: '',
       fileExtensions: [],
       objects: [],
@@ -229,9 +228,6 @@ export default {
   },
   computed: {
     ...mapState(['ID', 'cloudRunning']),
-    path() {
-      return this.API + '/' + this.ID
-    },
   },
   created() {
     this.CheckID()
@@ -240,7 +236,7 @@ export default {
   methods: {
     ...mapActions(['CheckID', 'CreateBackEnd']),
     GetAllowedFiles() {
-      this.$axios.post(`/allowedfiles`).then((response) => {
+      this.$axios.post(`${this.$store.ID}/allowedfiles`).then((response) => {
         const extensions = response.data.extensions.map(
           (extension) => '.' + extension
         )
@@ -258,19 +254,24 @@ export default {
 
       const params = new FormData()
       params.append('filename', this.files[0].name)
-      this.$axios.post(`/allowedobjects`, params).then((response) => {
-        console.log('allowedobjects : ', response)
-        this.objects = response.data.objects
-      })
+      console.log('this.ID : ', this.$store.ID)
+      this.$axios
+        .post(`${this.$store.ID}/allowedobjects`, params)
+        .then((response) => {
+          console.log('allowedobjects : ', response)
+          this.objects = response.data.objects
+        })
       this.currentStep = this.currentStep + 1
     },
     GetOutputFileExtensions(object) {
       const params = new FormData()
       params.append('object', object)
       this.GeodeObject = object
-      this.$axios.post(`/outputfileextensions`, params).then((response) => {
-        this.fileExtensions = response.data.outputfileextensions
-      })
+      this.$axios
+        .post(`${this.ID}/outputfileextensions`, params)
+        .then((response) => {
+          this.fileExtensions = response.data.outputfileextensions
+        })
       this.currentStep = this.currentStep + 1
     },
     setFileFormat(extension) {
@@ -289,13 +290,17 @@ export default {
         params.append('extension', self.extension)
         params.append('responseType', 'blob')
 
-        await self.$axios.post(`/convertfile`, params).then((response) => {
-          if (response.status == 200) {
-            let newFilename =
-              self.files[0].name.replace(/\.[^/.]+$/, '') + '.' + self.extension
-            fileDownload(response.data, newFilename)
-          }
-        })
+        await self.$axios
+          .post(`${this.ID}/convertfile`, params)
+          .then((response) => {
+            if (response.status == 200) {
+              let newFilename =
+                self.files[0].name.replace(/\.[^/.]+$/, '') +
+                '.' +
+                self.extension
+              fileDownload(response.data, newFilename)
+            }
+          })
       }
       await reader.readAsDataURL(this.files[0])
     },
