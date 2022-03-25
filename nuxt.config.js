@@ -7,6 +7,9 @@ export default {
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
   },
+  axios: {
+    baseURL: API_URL,
+  },
 
   target: 'static',
   /*
@@ -46,7 +49,7 @@ export default {
   plugins:
     [
       '@/plugins/vuetify_icons', { src: '@/plugins/carousel', ssr: false },
-      { src: '@/plugins/particles', ssr: false }
+      { src: '@/plugins/particles', ssr: false }, '@/plugins/vuex.js'
     ],
 
   /*

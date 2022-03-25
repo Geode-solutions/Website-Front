@@ -187,6 +187,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
@@ -227,7 +228,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['ID', 'cloudRuning']),
+    ...mapState(['ID', 'cloudRunning']),
     path() {
       return this.API + '/' + this.ID
     },
@@ -237,31 +238,7 @@ export default {
   },
   mounted() {},
   methods: {
-    CheckID() {
-      if (process.client) {
-        console.log(this.$config.API_URL)
-        var ID = localStorage.getItem('ID')
-        if (ID === null) {
-          this.CreateBackEnd()
-        } else {
-          this.ID = ID
-          this.$axios
-            .post(`/ping`)
-            .then((response) => {
-              if (response.status == 200) {
-                this.cloudRunning = true
-                this.GetAllowedFiles()
-                this.PingTask()
-              } else {
-                this.CreateBackEnd()
-              }
-            })
-            .catch(() => {
-              this.CreateBackEnd()
-            })
-        }
-      }
-    },
+    ...mapActions(['CheckID', 'CreateBackEnd']),
     GetAllowedFiles() {
       this.$axios.post(`/allowedfiles`).then((response) => {
         const extensions = response.data.extensions.map(
