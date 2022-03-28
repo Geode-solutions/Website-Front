@@ -15,6 +15,9 @@
 
 
 <script>
+import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'ValidityChecker',
   data: () => ({}),
@@ -22,6 +25,15 @@ export default {
     return {
       title: 'Validity checker',
     }
+  },
+  computed: {
+    ...mapState(['ID', 'cloudRunning']),
+  },
+  created() {
+    this.CheckID()
+  },
+  methods: {
+    ...mapActions(['CheckID', 'CreateBackEnd']),
   },
 }
 </script>

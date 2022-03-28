@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import tools_list from '@/assets/tools_list'
 
 export default {
@@ -83,6 +85,15 @@ export default {
     return {
       title: 'Geode-solutions free tools',
     }
+  },
+  computed: {
+    ...mapState(['ID', 'cloudRunning']),
+  },
+  created() {
+    this.CheckID()
+  },
+  methods: {
+    ...mapActions(['CheckID', 'CreateBackEnd']),
   },
 }
 </script>

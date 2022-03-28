@@ -187,12 +187,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
-
-import { mapState } from 'vuex'
 
 export default {
   name: 'FileConverter',
@@ -236,7 +235,7 @@ export default {
   methods: {
     ...mapActions(['CheckID', 'CreateBackEnd']),
     GetAllowedFiles() {
-      this.$axios.post(`${this.$store.ID}/allowedfiles`).then((response) => {
+      this.$axios.post(`${this.ID}/allowedfiles`).then((response) => {
         const extensions = response.data.extensions.map(
           (extension) => '.' + extension
         )
@@ -254,13 +253,11 @@ export default {
 
       const params = new FormData()
       params.append('filename', this.files[0].name)
-      console.log('this.ID : ', this.$store.ID)
-      this.$axios
-        .post(`${this.$store.ID}/allowedobjects`, params)
-        .then((response) => {
-          console.log('allowedobjects : ', response)
-          this.objects = response.data.objects
-        })
+      console.log('this.ID : ', this.ID)
+      this.$axios.post(`${this.ID}/allowedobjects`, params).then((response) => {
+        console.log('allowedobjects : ', response)
+        this.objects = response.data.objects
+      })
       this.currentStep = this.currentStep + 1
     },
     GetOutputFileExtensions(object) {
@@ -291,7 +288,7 @@ export default {
         params.append('responseType', 'blob')
 
         await self.$axios
-          .post(`${this.ID}/convertfile`, params)
+          .post(`${self.ID}/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
               let newFilename =
