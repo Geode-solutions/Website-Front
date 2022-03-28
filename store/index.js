@@ -7,8 +7,8 @@ export const mutations = {
   setID (state, ID) {
     this.state.ID = ID
   },
-  setCloudRunning (cloudRunning) {
-    this.cloudRunning = cloudRunning
+  setCloudRunning (state, cloudRunning) {
+    this.state.cloudRunning = cloudRunning
   }
 }
 
@@ -59,11 +59,8 @@ export const actions = {
     setInterval(() => this.dispatch('DoPing'), 10 * 1000)
   },
   DoPing () {
-    console.log("this.state.ID : ", this.state.ID)
     this.$axios.post(`${this.state.ID}/ping`).then((response) => {
-      // console.log(response)
       if (response.status != 200) {
-        console.log('PingTask response : ', response)
         commit("setCloudRunning", false)
         this.dispatch('CreateBackEnd')
       }
