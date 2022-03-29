@@ -3,6 +3,10 @@ const geode_objects = {
         tooltip: 'BRep',
         image: 'BRep.svg',
     },
+    CrossSection: {
+        tooltip: 'CrossSection',
+        image: 'cross_section.svg',
+    },
     EdgedCurve2D: {
         tooltip: 'EdgedCurve2D',
         image: 'edged_curve2d.svg',
@@ -15,10 +19,10 @@ const geode_objects = {
         tooltip: 'Graph',
         image: 'edged_curve.svg',
     },
-    // HybridSolid3D: {
-    //   tooltip: "HybridSolid3D",
-    //   image: "HybridSolid3D.svg",
-    // },
+    HybridSolid3D: {
+        tooltip: "HybridSolid3D",
+        image: "hybrid_solid.svg",
+    },
     PointSet2D: {
         tooltip: 'PointSet2D',
         image: 'point_set2d.svg',
@@ -42,6 +46,10 @@ const geode_objects = {
     Section: {
         tooltip: 'Section',
         image: 'section.svg',
+    },
+    StructuralModel: {
+        tooltip: 'StructuralModel',
+        image: 'structural_model.svg',
     },
     TetrahedralSolid3D: {
         tooltip: 'TetrahedralSolid3D',
