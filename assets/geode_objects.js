@@ -43,6 +43,14 @@ const geode_objects = {
         tooltip: 'PolyhedralSolid3D',
         image: 'polyhedral_solid.svg',
     },
+    RegularGrid3D: {
+        tooltip: 'RegularGrid3D',
+        image: 'regular_grid.svg',
+    },
+    RegularGrid2D: {
+        tooltip: 'RegularGrid2D',
+        image: 'regular_grid.svg',
+    },
     Section: {
         tooltip: 'Section',
         image: 'section.svg',
