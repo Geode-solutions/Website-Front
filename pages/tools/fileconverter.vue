@@ -213,7 +213,7 @@ export default {
       GeodeObjects: geode_objects,
       items: [
         {
-          icon: 'mdi-file-check-outline',
+          icon: 'mdi-file-check',
           title: 'Supported file formats',
           href: 'https://docs.geode-solutions.com/formats/',
         },
