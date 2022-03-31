@@ -4,9 +4,7 @@
       <v-row class="hidden-sm-and-down px-2">
         <v-btn text active-class="no-active" nuxt to="/">
           <v-app-bar-nav-icon>
-            <v-icon large>
-              $vuetify.icons.logo
-            </v-icon>
+            <v-icon large> $vuetify.icons.logo </v-icon>
           </v-app-bar-nav-icon>
           <v-toolbar-title>{{ name }}</v-toolbar-title>
         </v-btn>
@@ -28,9 +26,7 @@
           <v-expansion-panel-header>
             <v-row align="center">
               <v-col class="px-2" cols="1">
-                <v-icon large>
-                  $vuetify.icons.logo
-                </v-icon>
+                <v-icon large> $vuetify.icons.logo </v-icon>
               </v-col>
               <v-col class="text-h6 mx-2">
                 {{ name }}
@@ -118,7 +114,7 @@
                 height="40px"
                 width="120px"
                 src="@/assets/nuxt.svg"
-              >
+              />
             </v-btn>
           </v-col>
         </v-row>

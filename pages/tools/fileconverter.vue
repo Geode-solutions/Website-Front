@@ -41,7 +41,7 @@
         <cloud-loading />
       </v-col>
 
-      <v-col v-else>
+      <v-col v-else class="pb-10">
         <v-stepper v-model="currentStep" class="stepper" vertical>
           <v-stepper-step
             :complete="currentStep > 1"
@@ -183,6 +183,23 @@
         </v-stepper>
       </v-col>
     </v-row>
+
+    <template v-if="cloudRunning">
+      This tool uses our Open-Source codes :
+      <v-tooltip right>
+        <template v-slot:activator="{ on }">
+          <v-icon color="primary" class="justify-right" v-on="on">
+            mdi-information-outline
+          </v-icon>
+        </template>
+        <span>
+          <template v-for="version in versions">
+            {{ version.package }} v{{ version.version }}
+            <br />
+          </template>
+        </span>
+      </v-tooltip>
+    </template>
   </v-container>
 </template>
 
@@ -202,7 +219,9 @@ export default {
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
+      versions: [],
       fileExtensions: [],
+      multiple: false,
       objects: [],
       files: [],
       acceptedExtensions: '',
@@ -249,6 +268,7 @@ export default {
               if (response.status == 200) {
                 this.cloudRunning = true
                 this.GetAllowedFiles()
+                this.GetPackagesVersions()
                 this.PingTask()
               } else {
                 this.CreateBackEnd()
@@ -276,6 +296,7 @@ export default {
           }
         })
       this.GetAllowedFiles()
+      this.GetPackagesVersions()
       this.PingTask()
     },
     GetAllowedFiles() {
@@ -284,6 +305,12 @@ export default {
           (extension) => '.' + extension
         )
         this.acceptedExtensions = extensions.join(',')
+      })
+    },
+    GetPackagesVersions() {
+      this.$axios.get(`${this.path}/versions`).then((response) => {
+        this.versions = response.data.versions
+        console.table(this.versions)
       })
     },
     GetAllowedObjects(changedFiles) {
