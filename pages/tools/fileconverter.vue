@@ -310,7 +310,7 @@ export default {
     GetPackagesVersions() {
       this.$axios.get(`${this.path}/versions`).then((response) => {
         this.versions = response.data.versions
-        console.table(this.versions)
+        // console.table(this.versions)
       })
     },
     GetAllowedObjects(changedFiles) {
