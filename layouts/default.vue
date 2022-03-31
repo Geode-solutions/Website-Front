@@ -58,7 +58,7 @@
       <nuxt />
     </v-main>
 
-    <!-- <CookieControl /> -->
+    <CookieControl />
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
