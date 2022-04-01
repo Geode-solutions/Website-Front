@@ -41,7 +41,7 @@
         <cloud-loading />
       </v-col>
 
-      <v-col v-else>
+      <v-col v-else class="pb-5">
         <v-stepper v-model="currentStep" class="stepper" vertical>
           <v-stepper-step
             :complete="currentStep > 1"
@@ -182,13 +182,28 @@
           </v-stepper-content>
         </v-stepper>
       </v-col>
+      <v-col v-if="cloudRunning">
+        This tool uses our Open-Source codes
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-icon color="primary" class="justify-right" v-on="on">
+              mdi-information-outline
+            </v-icon>
+          </template>
+          <span>
+            <template v-for="version in versions">
+              {{ version.package }} v{{ version.version }}
+              <br />
+            </template>
+          </span>
+        </v-tooltip>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
@@ -202,7 +217,9 @@ export default {
       currentStep: 1,
       multiple: false,
       extension: '',
+      versions: [],
       fileExtensions: [],
+      multiple: false,
       objects: [],
       files: [],
       acceptedExtensions: '',
@@ -228,21 +245,25 @@ export default {
   computed: {
     ...mapState(['ID', 'cloudRunning']),
   },
-  created() {
-    this.CheckID()
+  async created() {
+    await this.CheckID()
+    this.GetAllowedFiles()
+    this.GetPackagesVersions()
   },
   mounted() {},
   methods: {
     ...mapActions(['CheckID', 'CreateBackEnd']),
-    GetAllowedFiles() {
-      this.$axios.post(`${this.ID}/allowedfiles`).then((response) => {
-        const extensions = response.data.extensions.map(
-          (extension) => '.' + extension
-        )
-        this.acceptedExtensions = extensions.join(',')
-      })
+    async GetAllowedFiles() {
+      const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
+      const extensions = data.extensions.map((extension) => '.' + extension)
+      this.acceptedExtensions = extensions.join(',')
     },
-    GetAllowedObjects(changedFiles) {
+    async GetPackagesVersions() {
+      console.log(this.ID)
+      const data = await this.$axios.$get(`${this.ID}/versions`)
+      this.versions = data.versions
+    },
+    async GetAllowedObjects(changedFiles) {
       this.success = true
       this.message = 'File(s) selected'
       if (this.multiple) {
@@ -253,22 +274,21 @@ export default {
 
       const params = new FormData()
       params.append('filename', this.files[0].name)
-      console.log('this.ID : ', this.ID)
-      this.$axios.post(`${this.ID}/allowedobjects`, params).then((response) => {
-        console.log('allowedobjects : ', response)
-        this.objects = response.data.objects
-      })
+
+      const data = await this.$axios.$post(`${this.ID}/allowedobjects`, params)
+      this.objects = data.objects
       this.currentStep = this.currentStep + 1
     },
-    GetOutputFileExtensions(object) {
+    async GetOutputFileExtensions(object) {
       const params = new FormData()
       params.append('object', object)
       this.GeodeObject = object
-      this.$axios
-        .post(`${this.ID}/outputfileextensions`, params)
-        .then((response) => {
-          this.fileExtensions = response.data.outputfileextensions
-        })
+
+      const data = await this.$axios.$post(
+        `${this.ID}/outputfileextensions`,
+        params
+      )
+      this.fileExtensions = data.outputfileextensions
       this.currentStep = this.currentStep + 1
     },
     setFileFormat(extension) {

@@ -13,7 +13,7 @@ export const mutations = {
 }
 
 export const actions = {
-  CheckID () {
+  async CheckID () {
     if (process.client) {
       console.log(this.$config.API_URL)
       var ID = localStorage.getItem('ID')
@@ -21,7 +21,7 @@ export const actions = {
         console.log("ID null")
         this.dispatch('CreateBackEnd')
       } else {
-        this.$axios
+        await this.$axios
           .post(`${ID}/ping`)
           .then((response) => {
             if (response.status == 200) {
@@ -52,14 +52,13 @@ export const actions = {
           this.dispatch('CreateBackEnd')
         }
       })
-    // this.GetAllowedFiles()
     this.dispatch('PingTask')
   },
   PingTask () {
     setInterval(() => this.dispatch('DoPing'), 10 * 1000)
   },
-  DoPing () {
-    this.$axios.post(`${this.state.ID}/ping`).then((response) => {
+  async DoPing () {
+    await this.$axios.post(`${this.state.ID}/ping`).then((response) => {
       if (response.status != 200) {
         commit("setCloudRunning", false)
         this.dispatch('CreateBackEnd')

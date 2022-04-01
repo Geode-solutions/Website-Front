@@ -15,8 +15,7 @@
 
 
 <script>
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'ValidityChecker',
