@@ -1,67 +1,68 @@
+// State
 export const state = () => ({
   ID: '',
   cloudRunning: false
 })
 
+// Getters
 export const mutations = {
   setID (state, ID) {
-    this.state.ID = ID
+    state.ID = ID
   },
   setCloudRunning (state, cloudRunning) {
-    this.state.cloudRunning = cloudRunning
+    state.cloudRunning = cloudRunning
   }
 }
-
+// 
+// Actions
 export const actions = {
-  async CheckID () {
-    if (process.client) {
-      console.log(this.$config.API_URL)
-      var ID = localStorage.getItem('ID')
-      if (ID === null || typeof ID !== 'undefined') {
-        console.log("ID null")
-        this.dispatch('CreateBackEnd')
-      } else {
-        await this.$axios
-          .post(`${ID}/ping`)
-          .then((response) => {
-            if (response.status == 200) {
-              this.commit("setID", ID)
-              this.commit("setCloudRunning", true)
-              this.dispatch('PingTask')
-            } else {
-              this.dispatch('CreateBackEnd')
-            }
-          })
-          .catch(() => {
-            this.dispatch('CreateBackEnd')
-          })
-      }
-    }
+  CheckID ({ commit, dispatch }) {
+    commit("setID", '123456')
+    commit("setCloudRunning", true)
+    // if (process.client) {
+    //   var ID = localStorage.getItem('ID')
+    //   if (ID === null || typeof ID !== 'undefined') {
+    //     return dispatch('CreateBackEnd')
+    //   } else {
+    //     this.$axios
+    //       .post(`${ID}/ping`)
+    //       .then((response) => {
+    //         if (response.status == 200) {
+    //           commit("setID", ID)
+    //           commit("setCloudRunning", true)
+    //           return dispatch('PingTask')
+    //         } else {
+    //           return dispatch('CreateBackEnd')
+    //         }
+    //       })
+    //       .catch(() => {
+    //         return dispatch('CreateBackEnd')
+    //       })
+    //   }
+    // }
   },
-  async CreateBackEnd ({ commit }) {
-    await this.$axios
-      .post(`/tools/createbackend`)
-      .then((response) => {
-        console.log('response : ', response)
-        if (response.status == 200) {
-          this.commit("setID", response.data.ID)
-          localStorage.setItem('ID', response.data.ID)
-          this.commit("setCloudRunning", true)
-        } else {
-          console.log('Task creation failed !')
-          this.dispatch('CreateBackEnd')
-        }
-      })
-    this.dispatch('PingTask')
-  },
+  // CreateBackEnd ({ commit, dispatch }) {
+  //   this.$axios
+  //     .post(`${this.$config.API_URL}tools/createbackend`)
+  //     .then((response) => {
+  //       if (response.status == 200) {
+  //         commit("setID", response.data.ID)
+  //         localStorage.setItem('ID', response.data.ID)
+  //         commit("setCloudRunning", true)
+  //       } else {
+  //         return dispatch('CreateBackEnd')
+  //       }
+  //     })
+  //   return dispatch('PingTask')
+  // },
   PingTask () {
     setInterval(() => this.dispatch('DoPing'), 10 * 1000)
   },
-  async DoPing () {
-    await this.$axios.post(`${this.state.ID}/ping`).then((response) => {
+  DoPing ({ state, dispatch }) {
+    this.$axios.post(`${state.ID}/ping`).then((response) => {
       if (response.status != 200) {
         commit("setCloudRunning", false)
-        this.dispatch('CreateBackEnd')
+        dispatch('CreateBackEnd')
       }
     })
   },

@@ -203,7 +203,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
@@ -246,20 +246,25 @@ export default {
     ...mapState(['ID', 'cloudRunning']),
   },
   async created() {
-    await this.CheckID()
-    this.GetAllowedFiles()
-    this.GetPackagesVersions()
+    if (process.client) {
+      await this.CheckID()
+      this.GetAllowedFiles()
+      this.GetPackagesVersions()
+      this.PingTask()
+    }
   },
   mounted() {},
   methods: {
-    ...mapActions(['CheckID', 'CreateBackEnd']),
+    ...mapActions(['CheckID', 'CreateBackEnd', 'PingTask']),
     async GetAllowedFiles() {
-      const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
-      const extensions = data.extensions.map((extension) => '.' + extension)
-      this.acceptedExtensions = extensions.join(',')
+      if (process.client) {
+        const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
+        const extensions = data.extensions.map((extension) => '.' + extension)
+        this.acceptedExtensions = extensions.join(',')
+        console.log(this.acceptedExtensions)
+      }
     },
     async GetPackagesVersions() {
-      console.log(this.ID)
       const data = await this.$axios.$get(`${this.ID}/versions`)
       this.versions = data.versions
     },
