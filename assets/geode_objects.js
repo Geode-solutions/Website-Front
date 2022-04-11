@@ -45,11 +45,11 @@ const geode_objects = {
     },
     RegularGrid3D: {
         tooltip: 'RegularGrid3D',
-        image: 'regular_grid.svg',
+        image: 'regular_grid3d.svg',
     },
     RegularGrid2D: {
         tooltip: 'RegularGrid2D',
-        image: 'regular_grid.svg',
+        image: 'regular_grid2d.svg',
     },
     Section: {
         tooltip: 'Section',
