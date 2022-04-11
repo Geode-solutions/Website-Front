@@ -213,21 +213,15 @@ export default {
   components: { CloudLoading },
   data() {
     return {
-      loading: false,
-      currentStep: 1,
-      multiple: false,
-      extension: '',
-      versions: [],
-      fileExtensions: [],
-      multiple: false,
-      objects: [],
-      files: [],
       acceptedExtensions: '',
-      inputRules: [(value) => !!value || 'The file is mandatory'],
-      inputMessage: 'Please select a file',
-      success: false,
+      extension: '',
+      currentStep: 1,
+      fileExtensions: [],
+      files: [],
       GeodeObject: '',
       GeodeObjects: geode_objects,
+      inputMessage: 'Please select a file',
+      inputRules: [(value) => !!value || 'The file is mandatory'],
       items: [
         {
           icon: 'mdi-file-check',
@@ -240,6 +234,12 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode',
         },
       ],
+      loading: false,
+      multiple: false,
+      versions: [],
+      multiple: false,
+      objects: [],
+      success: false,
     }
   },
   computed: {
@@ -250,19 +250,16 @@ export default {
       await this.CheckID()
       this.GetAllowedFiles()
       this.GetPackagesVersions()
-      this.PingTask()
     }
   },
   mounted() {},
   methods: {
     ...mapActions(['CheckID', 'CreateBackEnd', 'PingTask']),
     async GetAllowedFiles() {
-      if (process.client) {
-        const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
-        const extensions = data.extensions.map((extension) => '.' + extension)
-        this.acceptedExtensions = extensions.join(',')
-        console.log(this.acceptedExtensions)
-      }
+      const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
+      const extensions = data.extensions.map((extension) => '.' + extension)
+      this.acceptedExtensions = extensions.join(',')
+      console.log(this.acceptedExtensions)
     },
     async GetPackagesVersions() {
       const data = await this.$axios.$get(`${this.ID}/versions`)
