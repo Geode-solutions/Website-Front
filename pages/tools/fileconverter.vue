@@ -245,12 +245,21 @@ export default {
   computed: {
     ...mapState(['ID', 'cloudRunning']),
   },
-  async created() {
+  created() {
     if (process.client) {
-      await this.CheckID()
-      this.GetAllowedFiles()
-      this.GetPackagesVersions()
+      this.CheckID()
     }
+  },
+  watch: {
+    cloudRunning(newValue) {
+      // console.log(`Updating from ${oldValue} to ${newValue}`)
+
+      // Do whatever makes sense now
+      if (newValue === true) {
+        this.GetAllowedFiles()
+        this.GetPackagesVersions()
+      }
+    },
   },
   mounted() {},
   methods: {
