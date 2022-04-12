@@ -1,2 +1,2 @@
-[context.next.environment]
+[context.next]
   SITE_BRANCH = "next"
