@@ -283,6 +283,7 @@ export default {
         var test = '/test'
         console.log(test)
       } else {
+        var test = ''
         console.log('Pas marché')
       }
       console.log(`${this.API}${test}/tools/createbackend`)
