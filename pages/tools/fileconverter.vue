@@ -278,7 +278,7 @@ export default {
       }
     },
     async CreateBackEnd() {
-      console.log(process.env.SITE_BRANCH)
+      console.log(this.$config)
       if (process.env.SITE_BRANCH == 'next') {
         var test = '/test'
         console.log(test)
