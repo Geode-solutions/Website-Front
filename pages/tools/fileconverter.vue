@@ -190,11 +190,9 @@
               mdi-information-outline
             </v-icon>
           </template>
-          <span>
-            <template v-for="version in versions">
-              {{ version.package }} v{{ version.version }}
-              <!-- <br /> -->
-            </template>
+          <span v-for="version in versions" :key="version.package">
+            {{ version.package }} v{{ version.version }}
+            <br />
           </span>
         </v-tooltip>
       </v-col>
@@ -280,9 +278,16 @@ export default {
       }
     },
     async CreateBackEnd() {
-      console.log(this.API)
+      console.log(process.env.SITE_BRANCH)
+      if (process.env.SITE_BRANCH == 'next') {
+        var test = '/test'
+        console.log(test)
+      } else {
+        console.log('Pas marché')
+      }
+      console.log(`${this.API}${test}/tools/createbackend`)
       await this.$axios
-        .post(`${this.API}/test/tools/createbackend`)
+        .post(`${this.API}${test}/tools/createbackend`)
         .then((response) => {
           console.log('response : ', response)
           if (response.status == 200) {
