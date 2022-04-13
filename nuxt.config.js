@@ -49,7 +49,7 @@ export default {
   plugins:
     [
       '@/plugins/vuetify_icons', { src: '@/plugins/carousel', ssr: false },
-      { src: '@/plugins/particles', ssr: false }, '@/plugins/vuex.js'
+      { src: '@/plugins/particles', ssr: false }
     ],
 
   /*
