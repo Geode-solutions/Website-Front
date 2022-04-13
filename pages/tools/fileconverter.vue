@@ -201,6 +201,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
@@ -210,24 +211,15 @@ export default {
   components: { CloudLoading },
   data() {
     return {
-      loading: false,
-      cloudRunning: false,
-      API: this.$config.API_URL,
-      test: this.$config.SITE_BRANCH,
-      ID: '', // For connection with the back-end
-      currentStep: 1,
-      extension: '',
-      versions: [],
-      fileExtensions: [],
-      multiple: false,
-      objects: [],
-      files: [],
       acceptedExtensions: '',
-      inputRules: [(value) => !!value || 'The file is mandatory'],
-      inputMessage: 'Please select a file',
-      success: false,
+      extension: '',
+      currentStep: 1,
+      fileExtensions: [],
+      files: [],
       GeodeObject: '',
       GeodeObjects: geode_objects,
+      inputMessage: 'Please select a file',
+      inputRules: [(value) => !!value || 'The file is mandatory'],
       items: [
         {
           icon: 'mdi-file-check',
@@ -240,79 +232,40 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode',
         },
       ],
+      loading: false,
+      multiple: false,
+      versions: [],
+      multiple: false,
+      objects: [],
+      success: false,
     }
   },
   computed: {
-    path() {
-      return this.API + '/' + this.ID
-    },
+    ...mapState(['ID', 'cloudRunning']),
   },
   created() {
-    this.CheckID() // Lauches the AWS Lambda function
+    if (process.client) {
+      this.createConnexion()
+    }
   },
-  mounted() {},
+  watch: {
+    cloudRunning(newValue) {
+      if (newValue === true) {
+        this.GetAllowedFiles()
+        this.GetPackagesVersions()
+      }
+    },
+  },
   methods: {
-    CheckID() {
-      if (process.client) {
-        // console.log(this.$config.SITE_BRANCH)
-        // console.log(this.$config.API_URL)
-        var ID = localStorage.getItem('ID')
-        if (ID === null) {
-          this.CreateBackEnd()
-        } else {
-          this.ID = ID
-          this.$axios
-            .post(`${this.path}/ping`)
-            .then((response) => {
-              if (response.status == 200) {
-                this.cloudRunning = true
-                this.GetAllowedFiles()
-                this.GetPackagesVersions()
-                this.PingTask()
-              } else {
-                this.CreateBackEnd()
-              }
-            })
-            .catch(() => {
-              this.CreateBackEnd()
-            })
-        }
-      }
-    },
-    async CreateBackEnd() {
-      // console.log(this.$config)
-      if (this.$config.SITE_BRANCH == 'next') {
-        var test = '/test'
-        console.log(test)
-      } else {
-        var test = ''
-        console.log('Pas marché')
-      }
-      console.log(`${this.API}${test}/tools/createbackend`)
-      await this.$axios
-        .post(`${this.API}${test}/tools/createbackend`)
-        .then((response) => {
-          console.log('response : ', response)
-          if (response.status == 200) {
-            this.ID = response.data.ID
-            localStorage.setItem('ID', this.ID)
-            this.cloudRunning = true
-          } else {
-            console.log('Task creation failed !')
-            this.CreateBackEnd()
-          }
-        })
-      this.GetAllowedFiles()
-      this.GetPackagesVersions()
-      this.PingTask()
-    },
+    ...mapActions(['createConnexion']),
     async GetAllowedFiles() {
-      const data = await this.$axios.$post(`${this.path}/allowedfiles`)
+      const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
+      console.log(this.acceptedExtensions)
     },
     async GetPackagesVersions() {
-      const data = await this.$axios.$get(`${this.path}/versions`)
+      const data = await this.$axios.$get(`${this.ID}/versions`)
       this.versions = data.versions
     },
     async GetAllowedObjects(changedFiles) {
@@ -326,10 +279,8 @@ export default {
 
       const params = new FormData()
       params.append('filename', this.files[0].name)
-      const data = await this.$axios.$post(
-        `${this.path}/allowedobjects`,
-        params
-      )
+
+      const data = await this.$axios.$post(`${this.ID}/allowedobjects`, params)
       this.objects = data.objects
       this.currentStep = this.currentStep + 1
     },
@@ -337,8 +288,9 @@ export default {
       const params = new FormData()
       params.append('object', object)
       this.GeodeObject = object
+
       const data = await this.$axios.$post(
-        `${this.path}/outputfileextensions`,
+        `${this.ID}/outputfileextensions`,
         params
       )
       this.fileExtensions = data.outputfileextensions
@@ -361,7 +313,7 @@ export default {
         params.append('responseType', 'blob')
 
         await self.$axios
-          .post(`${self.path}/convertfile`, params)
+          .post(`${self.ID}/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
               let newFilename =
@@ -373,21 +325,6 @@ export default {
           })
       }
       await reader.readAsDataURL(this.files[0])
-    },
-    PingTask() {
-      setInterval(() => this.DoPing(), 10 * 1000)
-    },
-    DoPing() {
-      this.$axios.post(`${this.path}/ping`).then((response) => {
-        console.log(this.path)
-        if (response.status != 200) {
-          console.log('PingTask response : ', response)
-          setTimeout(() => this.DoPing, 2000)
-          this.cloudRunning = false
-          this.ID = ''
-          this.CreateBackEnd()
-        }
-      })
     },
   },
 }

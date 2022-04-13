@@ -13,15 +13,23 @@
   </v-container>
 </template>
 
-
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'ValidityChecker',
-  data: () => ({}),
   head() {
     return {
       title: 'Validity checker',
     }
+  },
+  created() {
+    if (process.client) {
+      this.createConnexion()
+    }
+  },
+  methods: {
+    ...mapActions(['createConnexion']),
   },
 }
 </script>
