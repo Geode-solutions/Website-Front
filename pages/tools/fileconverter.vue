@@ -253,6 +253,7 @@ export default {
   methods: {
     CheckID() {
       if (process.client) {
+        console.log(this.$config.SITE_BRANCH)
         console.log(this.$config.API_URL)
         var ID = localStorage.getItem('ID')
         if (ID === null) {
