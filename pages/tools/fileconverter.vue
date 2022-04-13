@@ -190,11 +190,9 @@
               mdi-information-outline
             </v-icon>
           </template>
-          <span>
-            <template v-for="version in versions">
-              {{ version.package }} v{{ version.version }}
-              <br />
-            </template>
+          <span v-for="version in versions" :key="version.package">
+            {{ version.package }} v{{ version.version }}
+            <br />
           </span>
         </v-tooltip>
       </v-col>
@@ -247,23 +245,19 @@ export default {
   },
   created() {
     if (process.client) {
-      this.CheckID()
+      this.createConnexion()
     }
   },
   watch: {
     cloudRunning(newValue) {
-      // console.log(`Updating from ${oldValue} to ${newValue}`)
-
-      // Do whatever makes sense now
       if (newValue === true) {
         this.GetAllowedFiles()
         this.GetPackagesVersions()
       }
     },
   },
-  mounted() {},
   methods: {
-    ...mapActions(['CheckID', 'CreateBackEnd', 'PingTask']),
+    ...mapActions(['createConnexion']),
     async GetAllowedFiles() {
       const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)

@@ -13,26 +13,23 @@
   </v-container>
 </template>
 
-
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ValidityChecker',
-  data: () => ({}),
   head() {
     return {
       title: 'Validity checker',
     }
   },
-  computed: {
-    ...mapState(['ID', 'cloudRunning']),
-  },
   created() {
-    this.CheckID()
+    if (process.client) {
+      this.createConnexion()
+    }
   },
   methods: {
-    ...mapActions(['CheckID', 'CreateBackEnd']),
+    ...mapActions(['createConnexion']),
   },
 }
 </script>
