@@ -30,7 +30,7 @@ export const actions = {
     }
   },
   async CreateBackEnd ({ commit, dispatch }) {
-    const response = await this.$axios.post(`${this.$config.API_URL}tools/createbackend`)
+    const response = await this.$axios.post(`${this.$config.API_URL}{this.$config.SITE_BRANCH}tools/createbackend`)
     if (response.status == 200) {
       commit("setID", response.data.ID)
       localStorage.setItem('ID', response.data.ID)
