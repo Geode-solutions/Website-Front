@@ -1,0 +1,2 @@
+[context."next".environment]
+  SITE_BRANCH = "next"
