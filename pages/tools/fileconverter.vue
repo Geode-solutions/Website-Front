@@ -213,6 +213,7 @@ export default {
       loading: false,
       cloudRunning: false,
       API: this.$config.API_URL,
+      test: this.$config.SITE_BRANCH,
       ID: '', // For connection with the back-end
       currentStep: 1,
       extension: '',
@@ -253,8 +254,8 @@ export default {
   methods: {
     CheckID() {
       if (process.client) {
-        console.log(this.$config.SITE_BRANCH)
-        console.log(this.$config.API_URL)
+        // console.log(this.$config.SITE_BRANCH)
+        // console.log(this.$config.API_URL)
         var ID = localStorage.getItem('ID')
         if (ID === null) {
           this.CreateBackEnd()
@@ -287,7 +288,7 @@ export default {
         var test = ''
         console.log('Pas marché')
       }
-      console.log(`${this.API}${test}/tools/createbackend`)
+      console.log(`${this.API}${this.test}/tools/createbackend`)
       await this.$axios
         .post(`${this.API}${test}/tools/createbackend`)
         .then((response) => {
