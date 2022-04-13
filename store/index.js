@@ -1,11 +1,15 @@
 
 export const state = () => ({
   ID: '',
+  connexionLaunched: false,
   cloudRunning: false
 })
 export const mutations = {
   setID (state, ID) {
     state.ID = ID
+  },
+  setConnexionLaunched (state, connexionLaunched) {
+    state.connexionLaunched = connexionLaunched
   },
   setCloudRunning (state, cloudRunning) {
     state.cloudRunning = cloudRunning
@@ -13,17 +17,20 @@ export const mutations = {
 }
 export const actions = {
   async createConnexion ({ commit, dispatch }) {
-    var ID = localStorage.getItem('ID')
-    if (ID === null || typeof ID !== 'undefined') {
-      return dispatch('CreateBackEnd')
-    } else {
-      var response = await this.$axios.post(`${ID}/ping`)
-      if (response.status == 200) {
-        commit("setID", ID)
-        commit("setCloudRunning", true)
-        return dispatch('PingTask')
-      } else {
+    if (!this.state.connexionLaunched) {
+      commit("setConnexionLaunched", true)
+      var ID = localStorage.getItem('ID')
+      if (ID === null || typeof ID !== 'undefined') {
         return dispatch('CreateBackEnd')
+      } else {
+        var response = await this.$axios.post(`${ID}/ping`)
+        if (response.status == 200) {
+          commit("setID", ID)
+          commit("setCloudRunning", true)
+          return dispatch('PingTask')
+        } else {
+          return dispatch('CreateBackEnd')
+        }
       }
     }
   },
