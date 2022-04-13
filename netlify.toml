@@ -1,2 +1,2 @@
 [context."next".environment]
-  SITE_BRANCH = "/test"
+  SITE_BRANCH = "next"

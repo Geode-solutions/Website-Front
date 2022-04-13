@@ -280,15 +280,15 @@ export default {
       }
     },
     async CreateBackEnd() {
-      console.log(this.$config)
-      if (process.env.SITE_BRANCH == 'next') {
+      // console.log(this.$config)
+      if (this.$config.SITE_BRANCH == 'next') {
         var test = '/test'
         console.log(test)
       } else {
         var test = ''
         console.log('Pas marché')
       }
-      console.log(`${this.API}${this.test}/tools/createbackend`)
+      console.log(`${this.API}${test}/tools/createbackend`)
       await this.$axios
         .post(`${this.API}${test}/tools/createbackend`)
         .then((response) => {
