@@ -262,7 +262,6 @@ export default {
       const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
-      console.log(this.acceptedExtensions)
     },
     async GetPackagesVersions() {
       const data = await this.$axios.$get(`${this.ID}/versions`)

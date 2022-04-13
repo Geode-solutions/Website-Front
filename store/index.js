@@ -17,20 +17,19 @@ export const mutations = {
 }
 export const actions = {
   async createConnexion ({ commit, dispatch }) {
-    if (!this.state.connexionLaunched) {
-      commit("setConnexionLaunched", true)
-      var ID = localStorage.getItem('ID')
-      if (ID === null || typeof ID !== 'undefined') {
-        return dispatch('CreateBackEnd')
+    if (this.state.connexionLaunched) { return }
+    commit("setConnexionLaunched", true)
+    var ID = localStorage.getItem('ID')
+    if (ID === null || typeof ID !== 'undefined') {
+      return dispatch('CreateBackEnd')
+    } else {
+      var response = await this.$axios.post(`${ID}/ping`)
+      if (response.status == 200) {
+        commit("setID", ID)
+        commit("setCloudRunning", true)
+        return dispatch('PingTask')
       } else {
-        var response = await this.$axios.post(`${ID}/ping`)
-        if (response.status == 200) {
-          commit("setID", ID)
-          commit("setCloudRunning", true)
-          return dispatch('PingTask')
-        } else {
-          return dispatch('CreateBackEnd')
-        }
+        return dispatch('CreateBackEnd')
       }
     }
   },
@@ -45,8 +44,8 @@ export const actions = {
       return dispatch('CreateBackEnd')
     }
   },
-  PingTask () {
-    setInterval(() => this.dispatch('DoPing'), 10 * 1000)
+  PingTask ({ dispatch }) {
+    setInterval(() => dispatch('DoPing'), 10 * 1000)
   },
   DoPing ({ state, dispatch }) {
     this.$axios.post(`${state.ID}/ping`).then((response) => {
