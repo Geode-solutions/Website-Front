@@ -13,11 +13,9 @@
   </v-container>
 </template>
 
-
 <script>
 export default {
   name: 'ValidityChecker',
-  data: () => ({}),
   head() {
     return {
       title: 'Validity checker',
@@ -31,4 +29,3 @@ export default {
   border-radius: 10px;
 }
 </style>
-

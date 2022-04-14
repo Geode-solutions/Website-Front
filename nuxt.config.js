@@ -5,7 +5,8 @@ export default {
     ** Environment variables
   */
   publicRuntimeConfig: {
-    API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000'
+    API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
+    SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : ''
   },
 
   target: 'static',
@@ -46,7 +47,7 @@ export default {
   plugins:
     [
       '@/plugins/vuetify_icons', { src: '@/plugins/carousel', ssr: false },
-      { src: '@/plugins/particles', ssr: false }
+      { src: '@/plugins/particles', ssr: false }, '@/plugins/axios'
     ],
 
   /*

@@ -28,13 +28,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <nuxt-child />
+      <nuxt-child keep-alive />
     </v-col>
   </v-row>
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 import tools_list from '@/assets/tools_list'
 
 export default {
@@ -50,7 +50,15 @@ export default {
       title: 'Geode-solutions free tools',
     }
   },
-  
+  created() {
+    if (process.client) {
+      this.createConnexion()
+    }
+  },
+  methods: {
+    ...mapActions(['createConnexion']),
+  },
+
   computed: {
     mini() {
       switch (this.$vuetify.breakpoint.name) {
