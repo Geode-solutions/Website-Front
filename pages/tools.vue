@@ -28,7 +28,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <nuxt-child />
+      <nuxt-child keep-alive />
     </v-col>
   </v-row>
 </template>

@@ -19,11 +19,11 @@ export const actions = {
   async createConnexion ({ commit, dispatch }) {
     if (this.state.connexionLaunched) { return }
     commit("setConnexionLaunched", true)
-    var ID = localStorage.getItem('ID')
-    if (ID === null || typeof ID !== 'undefined') {
+    const ID = localStorage.getItem('ID')
+    if (ID === null || typeof ID === 'undefined') {
       return dispatch('CreateBackEnd')
     } else {
-      var response = await this.$axios.post(`${ID}/ping`)
+      const response = await this.$axios.post(`${ID}/ping`)
       if (response.status == 200) {
         commit("setID", ID)
         commit("setCloudRunning", true)

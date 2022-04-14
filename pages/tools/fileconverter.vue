@@ -201,7 +201,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
 import geode_objects from '@/assets/geode_objects'
@@ -242,12 +242,6 @@ export default {
   },
   computed: {
     ...mapState(['ID', 'cloudRunning']),
-  },
-  created() {
-    if (process.client) {
-      this.GetAllowedFiles()
-      this.GetPackagesVersions()
-    }
   },
   watch: {
     cloudRunning(newValue) {
