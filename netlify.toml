@@ -1,2 +1,6 @@
-[context."next".environment]
+[context.production.environment]
+  SITE_BRANCH = ""
+[context.deploy-preview.environment]
+  SITE_BRANCH = ""
+[context.deploy-deploy.environment]
   SITE_BRANCH = "/test"
