@@ -14,22 +14,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: 'ValidityChecker',
   head() {
     return {
       title: 'Validity checker',
     }
-  },
-  created() {
-    if (process.client) {
-      this.createConnexion()
-    }
-  },
-  methods: {
-    ...mapActions(['createConnexion']),
   },
 }
 </script>
@@ -39,4 +29,3 @@ export default {
   border-radius: 10px;
 }
 </style>
-

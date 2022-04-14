@@ -245,7 +245,8 @@ export default {
   },
   created() {
     if (process.client) {
-      this.createConnexion()
+      this.GetAllowedFiles()
+      this.GetPackagesVersions()
     }
   },
   watch: {
@@ -257,7 +258,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['createConnexion']),
     async GetAllowedFiles() {
       const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)
