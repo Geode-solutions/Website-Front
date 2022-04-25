@@ -173,7 +173,9 @@
             </v-row>
           </v-stepper-content>
 
-          <v-stepper-step step="4"> Convert your file </v-stepper-step>
+          <v-stepper-step step="4" @click="currentStep = 4">
+            Convert your file
+          </v-stepper-step>
           <v-stepper-content step="4">
             <v-btn color="primary" @click="ConvertFile(files[0])">
               Convert
@@ -253,12 +255,14 @@ export default {
   },
   methods: {
     async GetAllowedFiles() {
-      const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
+      const data = await this.$axios.$post(
+        `${this.ID}/fileconverter/allowedfiles`
+      )
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
     },
     async GetPackagesVersions() {
-      const data = await this.$axios.$get(`${this.ID}/versions`)
+      const data = await this.$axios.$get(`${this.ID}/fileconverter/versions`)
       this.versions = data.versions
     },
     async GetAllowedObjects(changedFiles) {
@@ -273,7 +277,10 @@ export default {
       const params = new FormData()
       params.append('filename', this.files[0].name)
 
-      const data = await this.$axios.$post(`${this.ID}/allowedobjects`, params)
+      const data = await this.$axios.$post(
+        `${this.ID}/fileconverter/allowedobjects`,
+        params
+      )
       this.objects = data.objects
       this.currentStep = this.currentStep + 1
     },
@@ -283,7 +290,7 @@ export default {
       this.GeodeObject = object
 
       const data = await this.$axios.$post(
-        `${this.ID}/outputfileextensions`,
+        `${this.ID}/fileconverter/outputfileextensions`,
         params
       )
       this.fileExtensions = data.outputfileextensions
