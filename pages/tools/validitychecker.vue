@@ -208,11 +208,10 @@ export default {
       ],
       loading: false,
       multiple: false,
-      versions: [],
-      multiple: false,
       objects: [],
       success: false,
-      test: '',
+      modelValid: '',
+      versions: [],
     }
   },
   computed: {
@@ -296,7 +295,7 @@ export default {
           .post(`${self.ID}/validitychecker/inspectfile`, params)
           .then((response) => {
             if (response.status == 200) {
-              self.test = response.data.valid
+              self.modelValid = response.data.valid
             }
           })
       }

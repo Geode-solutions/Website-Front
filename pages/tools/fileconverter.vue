@@ -185,18 +185,7 @@
         </v-stepper>
       </v-col>
       <v-col v-if="cloudRunning">
-        This tool uses our Open-Source codes
-        <v-tooltip right>
-          <template v-slot:activator="{ on }">
-            <v-icon color="primary" class="justify-right" v-on="on">
-              mdi-information-outline
-            </v-icon>
-          </template>
-          <span v-for="version in versions" :key="version.package">
-            {{ version.package }} v{{ version.version }}
-            <br />
-          </span>
-        </v-tooltip>
+        <PackagesVersions versions="this.versions" />
       </v-col>
     </v-row>
   </v-container>
@@ -206,11 +195,12 @@
 import { mapState } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
+import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'FileConverter',
-  components: { CloudLoading },
+  components: { CloudLoading, PackagesVersions },
   data() {
     return {
       acceptedExtensions: '',
