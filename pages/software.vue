@@ -269,14 +269,20 @@ export default {
           ],
           readiness: '60',
         },
-      ],
-      nexts: [
         {
           title: 'Mesh/model validity checker',
+          image: 'validity_checker.svg',
           text: 'Before doing any computation or meshing step, make sure your data satisfy your needs. \
             Meshes can be degenerated, non-manifold, colocated and boundary representations can have \
             topological issues. This checker tracks and exposes all flawed configurations from your data.',
+          features: [
+            'Track any topological issues in your model',
+            'Track geometrical problems in your meshes, including colocated points, non-manifold or degeneration issues, and polygon adjacencies problems.',
+          ],
+          readiness: '90',
         },
+      ],
+      nexts: [
         {
           title: '3D hybrid meshing',
           text: 'Hexahedral elements have great numerical properties but hard to respect a given geometry. \
