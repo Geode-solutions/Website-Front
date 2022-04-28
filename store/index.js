@@ -44,8 +44,6 @@ export const actions = {
         localStorage.setItem('ID', response.data.ID)
         commit("setCloudRunning", true)
         return dispatch('PingTask')
-      } else {
-        return dispatch('CreateBackEnd')
       }
     } catch (e) {
       console.log("error: ", e)
@@ -55,14 +53,13 @@ export const actions = {
   PingTask ({ dispatch }) {
     setInterval(() => dispatch('DoPing'), 10 * 1000)
   },
-  DoPing ({ state, dispatch }) {
+  async DoPing ({ state, dispatch }) {
     try {
-      this.$axios.post(`${state.ID}/ping`).then((response) => {
-        if (response.status != 200) {
-          commit("setCloudRunning", false)
-          return dispatch('CreateBackEnd')
-        }
-      })
+      const response = await this.$axios.post(`${state.ID}/ping`)
+      if (response.status != 200) {
+        commit("setCloudRunning", false)
+        return dispatch('CreateBackEnd')
+      }
     } catch (e) {
       console.log("error: ", e)
       return dispatch('CreateBackEnd')
