@@ -23,7 +23,6 @@ export const actions = {
     if (ID === null || typeof ID === 'undefined') {
       return dispatch('CreateBackEnd')
     } else {
-      console.log("coucouavant")
       try {
         const response = await this.$axios.post(`${ID}/ping`)
         if (response.status === 200) {
