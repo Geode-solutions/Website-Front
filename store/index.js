@@ -23,17 +23,21 @@ export const actions = {
     if (ID === null || typeof ID === 'undefined') {
       return dispatch('CreateBackEnd')
     } else {
-      const response = await this.$axios.post(`${ID}/ping`)
-      if (response.status == 200) {
-        commit("setID", ID)
-        commit("setCloudRunning", true)
-        return dispatch('PingTask')
-      } else {
-        return dispatch('CreateBackEnd')
+      console.log("coucouavant")
+      try {
+        const response = await this.$axios.post(`${ID}/ping`)
+        if (response.status === 200) {
+          commit("setID", ID)
+          commit("setCloudRunning", true)
+          return dispatch('PingTask')
+        }
+      } catch (e) {
+        dispatch('CreateBackEnd')
       }
     }
   },
   async CreateBackEnd ({ commit, dispatch }) {
+
     const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
     if (response.status == 200) {
       commit("setID", response.data.ID)
