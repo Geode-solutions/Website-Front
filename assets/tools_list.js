@@ -24,10 +24,10 @@ const tools_list = [
         chip: 'Coming soon!',
     },
     {
-        icon: 'mdi-transition',
-        title: 'File transposer',
+        icon: 'mdi-map',
+        title: 'CRS converter',
         to: '/tools/filetransposer',
-        text: 'Check the validity of your meshes and models',
+        text: 'Convert your file from a coordinate system to another one',
         badge: 'soon',
         chip: 'Coming soon!',
     },

@@ -46,7 +46,7 @@
           <v-stepper-step
             :complete="currentStep > 1"
             step="1"
-            @click=";(currentStep = 1), (files = [])"
+            @click="SetStep(1)"
           >
             <v-row align="center">
               <v-col cols="auto"> Please select a file to check </v-col>
@@ -77,7 +77,7 @@
           <v-stepper-step
             :complete="currentStep > 2"
             step="2"
-            @click=";(currentStep = 2), (GeodeObject = '')"
+            @click="SetStep(2)"
           >
             <v-row align="center">
               <v-col cols="auto"> Confirm the data type </v-col>
@@ -132,40 +132,62 @@
             </v-row>
           </v-stepper-content>
 
-          <v-stepper-step step="3"> Inspect your file </v-stepper-step>
+          <v-stepper-step step="3" :complete="currentStep > 3">
+            Inspect your file
+          </v-stepper-step>
           <v-stepper-content step="3">
             <v-btn color="primary" @click="InspectFile(files[0])">
               Inspect
             </v-btn>
-            <v-btn
-              text
-              @click=";(currentStep = currentStep - 1), (GeodeObject = '')"
-            >
-              Cancel
-            </v-btn>
+            <v-btn text @click="SetStep(2)"> Cancel </v-btn>
           </v-stepper-content>
 
           <v-stepper-step step="4"> Inspection results </v-stepper-step>
           <v-stepper-content step="4">
-            <v-expansion-panel>
-              <v-expansion-panel-content></v-expansion-panel-content>
-            </v-expansion-panel>
+            <v-container>
+              <v-row>
+                <v-col cols="8">
+                  <p v-if="modelValid" class="text-left">
+                    <v-icon color="teal"> mdi-check </v-icon> Model is valid!
+                  </p>
+                  <p v-else class="text-left">
+                    <v-icon color="error"> mdi-alert-circle </v-icon> Model is
+                    not valid!
+                  </p>
+                </v-col>
+                <v-col cols="1">
+                  <v-btn @click="all"> Unfold </v-btn>
+                </v-col>
+                <v-col cols="1">
+                  <v-btn @click="none"> Fold </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+            <v-expansion-panels v-model="panel" class="pa-2" multiple focusable>
+              <v-expansion-panel
+                v-for="(modelCheck, i) in modelChecks"
+                :key="i"
+                class="card"
+              >
+                <v-expansion-panel-header>
+                  <div>
+                    <v-icon v-if="modelCheck.isValid" color="teal">
+                      mdi-check
+                    </v-icon>
+                    <v-icon v-else color="error"> mdi-close </v-icon>
+                    {{ modelCheck.name }}
+                  </div>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  {{ modelCheck.description }}
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-stepper-content>
         </v-stepper>
       </v-col>
       <v-col v-if="cloudRunning">
-        This tool uses our Open-Source codes
-        <v-tooltip right>
-          <template v-slot:activator="{ on }">
-            <v-icon color="primary" class="justify-right" v-on="on">
-              mdi-information-outline
-            </v-icon>
-          </template>
-          <span v-for="version in versions" :key="version.package">
-            {{ version.package }} v{{ version.version }}
-            <br />
-          </span>
-        </v-tooltip>
+        <PackagesVersions :versions="versions" />
       </v-col>
     </v-row>
   </v-container>
@@ -174,10 +196,11 @@
 <script>
 import { mapState } from 'vuex'
 import CloudLoading from '@/components/CloudLoading.vue'
+import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 export default {
   name: 'ValidityChecker',
-  components: { CloudLoading },
+  components: { CloudLoading, PackagesVersions },
   head() {
     return {
       title: 'Validity checker',
@@ -206,11 +229,27 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
         },
       ],
+      panel: [],
+      panelsCount: 2,
+      modelChecks: [],
+      // modelChecks: [
+      //   {
+      //     name: 'Toto',
+      //     isValid: true,
+      //     description: 'There is no problem with toto',
+      //   },
+      //   {
+      //     name: 'Tutu',
+      //     isValid: false,
+      //     description: 'There is a problem with tutu',
+      //   },
+      // ],
       loading: false,
       multiple: false,
       objects: [],
       success: false,
-      modelValid: '',
+      modelValid: false,
+
       versions: [],
     }
   },
@@ -225,9 +264,21 @@ export default {
       }
     },
   },
+  activated() {
+    if (this.cloudRunning === true) {
+      this.GetAllowedFiles()
+      this.GetPackagesVersions()
+    }
+  },
   methods: {
+    all() {
+      this.panel = [...Array(this.panelsCount).keys()].map((k, i) => i)
+    },
+    none() {
+      this.panel = []
+    },
     async GetAllowedFiles() {
-      const data = await this.$axios.$post(
+      const data = await this.$axios.$get(
         `${this.ID}/validitychecker/allowedfiles`
       )
       const extensions = data.extensions.map((extension) => '.' + extension)
@@ -257,29 +308,25 @@ export default {
       this.objects = data.objects
       this.currentStep = this.currentStep + 1
     },
-
-    async GetAllowedObjects(changedFiles) {
-      this.success = true
-      this.message = 'File(s) selected'
-      if (this.multiple) {
-        this.files = changedFiles
-      } else {
-        this.files = [changedFiles]
-      }
-
-      const params = new FormData()
-      params.append('filename', this.files[0].name)
-
-      const data = await this.$axios.$post(
-        `${this.ID}/validitychecker/allowedobjects`,
-        params
-      )
-      this.objects = data.objects
-      this.currentStep = this.currentStep + 1
-    },
     SetGeodeObject(object) {
       this.GeodeObject = object
       this.currentStep = this.currentStep + 1
+    },
+
+    SetStep(step) {
+      if ((step = 3)) {
+        console.log()
+        this.modelValid = ''
+        this.modelChecks = [{}]
+      }
+      if ((step = 2)) {
+        this.GeodeObject = ''
+      }
+      if ((step = 1)) {
+        this.files = []
+      }
+      console.log(step)
+      this.currentStep = step
     },
     async InspectFile() {
       const self = this
@@ -289,16 +336,19 @@ export default {
         params.append('object', self.GeodeObject)
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
+        // params.append('responseType', 'blob')
 
-        console.log(`${self.ID}/validitychecker/inspectfile`)
         await self.$axios
           .post(`${self.ID}/validitychecker/inspectfile`, params)
           .then((response) => {
             if (response.status == 200) {
+              console.log(response.data)
               self.modelValid = response.data.valid
             }
           })
       }
+      await reader.readAsDataURL(this.files[0])
+      this.SetStep(4)
     },
   },
 }

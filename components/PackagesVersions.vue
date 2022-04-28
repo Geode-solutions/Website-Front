@@ -18,6 +18,11 @@
 <script>
 export default {
   name: 'PackagesVersions',
-  props: ['versions'],
+  props: {
+    versions: {
+      type: Array,
+      required: true,
+    },
+  },
 }
 </script>

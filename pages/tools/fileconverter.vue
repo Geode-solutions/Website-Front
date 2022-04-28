@@ -185,7 +185,7 @@
         </v-stepper>
       </v-col>
       <v-col v-if="cloudRunning">
-        <PackagesVersions versions="this.versions" />
+        <PackagesVersions :versions="versions" />
       </v-col>
     </v-row>
   </v-container>
@@ -243,9 +243,15 @@ export default {
       }
     },
   },
+  activated() {
+    if (this.cloudRunning === true) {
+      this.GetAllowedFiles()
+      this.GetPackagesVersions()
+    }
+  },
   methods: {
     async GetAllowedFiles() {
-      const data = await this.$axios.$post(
+      const data = await this.$axios.$get(
         `${this.ID}/fileconverter/allowedfiles`
       )
       const extensions = data.extensions.map((extension) => '.' + extension)
@@ -258,12 +264,14 @@ export default {
     async GetAllowedObjects(changedFiles) {
       this.success = true
       this.message = 'File(s) selected'
-      if (this.multiple) {
-        this.files = changedFiles
-      } else {
-        this.files = [changedFiles]
+      console.log('changedFiles', changedFiles)
+      if (changedFiles) {
+        if (this.multiple) {
+          this.files = changedFiles
+        } else {
+          this.files = [changedFiles]
+        }
       }
-
       const params = new FormData()
       params.append('filename', this.files[0].name)
 
@@ -303,7 +311,7 @@ export default {
         params.append('responseType', 'blob')
 
         await self.$axios
-          .post(`${self.ID}/convertfile`, params)
+          .post(`${self.ID}/fileconverter/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
               let newFilename =
