@@ -2,5 +2,5 @@
   SITE_BRANCH = ""
 [context.deploy-preview.environment]
   SITE_BRANCH = ""
-[context.deploy-deploy.environment]
+[context."next".environment]
   SITE_BRANCH = "/test"

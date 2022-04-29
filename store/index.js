@@ -23,36 +23,45 @@ export const actions = {
     if (ID === null || typeof ID === 'undefined') {
       return dispatch('CreateBackEnd')
     } else {
-      const response = await this.$axios.post(`${ID}/ping`)
-      if (response.status == 200) {
-        commit("setID", ID)
-        commit("setCloudRunning", true)
-        return dispatch('PingTask')
-      } else {
+      try {
+        const response = await this.$axios.post(`${ID}/ping`)
+        if (response.status === 200) {
+          commit("setID", ID)
+          commit("setCloudRunning", true)
+          return dispatch('PingTask')
+        }
+      } catch (e) {
         return dispatch('CreateBackEnd')
       }
     }
   },
   async CreateBackEnd ({ commit, dispatch }) {
-    const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
-    if (response.status == 200) {
-      commit("setID", response.data.ID)
-      localStorage.setItem('ID', response.data.ID)
-      commit("setCloudRunning", true)
-      return dispatch('PingTask')
-    } else {
+    try {
+      const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
+      if (response.status == 200) {
+        commit("setID", response.data.ID)
+        localStorage.setItem('ID', response.data.ID)
+        commit("setCloudRunning", true)
+        return dispatch('PingTask')
+      }
+    } catch (e) {
+      console.log("error: ", e)
       return dispatch('CreateBackEnd')
     }
   },
   PingTask ({ dispatch }) {
     setInterval(() => dispatch('DoPing'), 10 * 1000)
   },
-  DoPing ({ state, dispatch }) {
-    this.$axios.post(`${state.ID}/ping`).then((response) => {
+  async DoPing ({ state, dispatch }) {
+    try {
+      const response = await this.$axios.post(`${state.ID}/ping`)
       if (response.status != 200) {
         commit("setCloudRunning", false)
         return dispatch('CreateBackEnd')
       }
-    })
-  },
+    } catch (e) {
+      console.log("error: ", e)
+      return dispatch('CreateBackEnd')
+    }
+  }
 }
