@@ -144,45 +144,7 @@
 
           <v-stepper-step step="4"> Inspection results </v-stepper-step>
           <v-stepper-content step="4">
-            <v-container>
-              <v-row>
-                <v-col cols="8">
-                  <p v-if="modelValid" class="text-left">
-                    <v-icon color="teal"> mdi-check </v-icon> Model is valid!
-                  </p>
-                  <p v-else class="text-left">
-                    <v-icon color="error"> mdi-alert-circle </v-icon> Model is
-                    not valid!
-                  </p>
-                </v-col>
-                <v-col cols="1">
-                  <v-btn @click="all"> Unfold </v-btn>
-                </v-col>
-                <v-col cols="1">
-                  <v-btn @click="none"> Fold </v-btn>
-                </v-col>
-              </v-row>
-            </v-container>
-            <v-expansion-panels v-model="panel" class="pa-2" multiple focusable>
-              <v-expansion-panel
-                v-for="(modelCheck, i) in modelChecks"
-                :key="i"
-                class="card"
-              >
-                <v-expansion-panel-header>
-                  <div>
-                    <v-icon v-if="modelCheck.isValid" color="teal">
-                      mdi-check
-                    </v-icon>
-                    <v-icon v-else color="error"> mdi-close </v-icon>
-                    {{ modelCheck.name }}
-                  </div>
-                </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  {{ modelCheck.description }}
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
+            <!-- <ExpansionPanels :modelChecks="modelChecks" class="pa-2" /> -->
           </v-stepper-content>
         </v-stepper>
       </v-col>
@@ -196,11 +158,13 @@
 <script>
 import { mapState } from 'vuex'
 import CloudLoading from '@/components/CloudLoading.vue'
+import ExpansionPanels from '@/components/ExpansionPanels.vue'
 import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
+
 export default {
   name: 'ValidityChecker',
-  components: { CloudLoading, PackagesVersions },
+  components: { CloudLoading, ExpansionPanels, PackagesVersions },
   head() {
     return {
       title: 'Validity checker',
@@ -229,27 +193,62 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
         },
       ],
-      panel: [],
-      panelsCount: 2,
-      modelChecks: [],
+      multiple: false,
+      modelChecks: [{}],
       // modelChecks: [
       //   {
-      //     name: 'Toto',
-      //     isValid: true,
-      //     description: 'There is no problem with toto',
-      //   },
-      //   {
-      //     name: 'Tutu',
-      //     isValid: false,
-      //     description: 'There is a problem with tutu',
+      //     is_valid: false,
+      //     validity_sentence: 'The model is not valid',
+      //     is_leaf: false,
+      //     list_invalidity: [
+      //       {
+      //         is_valid: false,
+      //         validity_sentence: 'The adjacency is not valid',
+      //         is_leaf: false,
+      //         list_invalidity: [
+      //           {
+      //             is_valid: false,
+      //             validity_sentence:
+      //               'brep_meshed_components_are_linked_to_a_unique_vertex',
+      //             is_leaf: false,
+      //             list_invalidity: [
+      //               {
+      //                 is_valid: true,
+      //                 validity_sentence:
+      //                   'brep_meshed_components_are_linked_to_a_unique_vertex',
+      //                 is_leaf: true,
+      //                 list_invalidity: ['1', '2'],
+      //               },
+      //               {
+      //                 is_valid: false,
+      //                 validity_sentence:
+      //                   'brep_meshed_components_are_linked_to_a_unique_vertex',
+      //                 is_leaf: true,
+      //                 list_invalidity: ['1', '2'],
+      //               },
+      //             ],
+      //           },
+      //         ],
+      //       },
+      //       {
+      //         is_valid: '',
+      //         validity_sentence: 'The manufold is valid',
+      //         is_leaf: false,
+      //         list_invalidity: [
+      //           {
+      //             is_valid: true,
+      //             validity_sentence:
+      //               'brep_meshed_components_are_linked_to_a_unique_vertex',
+      //             is_leaf: true,
+      //             list_invalidity: ['toto', 'tutu'],
+      //           },
+      //         ],
+      //       },
+      //     ],
       //   },
       // ],
-      loading: false,
-      multiple: false,
       objects: [],
       success: false,
-      modelValid: false,
-
       versions: [],
     }
   },
@@ -315,7 +314,6 @@ export default {
 
     SetStep(step) {
       if ((step = 3)) {
-        console.log()
         this.modelValid = ''
         this.modelChecks = [{}]
       }
@@ -327,6 +325,20 @@ export default {
       }
       console.log(step)
       this.currentStep = step
+      // console.log(step)
+    },
+    async GetTestNames() {
+      const self = this
+      const params = new FormData()
+      params.append('object', self.GeodeObject)
+      await self.$axios
+        .post(`${self.ID}/validitychecker/testnames`, params)
+        .then((response) => {
+          if (response.status == 200) {
+            console.log(response.data)
+            self.modelChecks = response.data.modelChecks
+          }
+        })
     },
     async InspectFile() {
       const self = this
@@ -336,19 +348,18 @@ export default {
         params.append('object', self.GeodeObject)
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
-        // params.append('responseType', 'blob')
 
         await self.$axios
           .post(`${self.ID}/validitychecker/inspectfile`, params)
           .then((response) => {
             if (response.status == 200) {
-              console.log(response.data)
-              self.modelValid = response.data.valid
+              console.log(response)
+              // self.modelChecks = response.data.modelChecks
             }
           })
       }
       await reader.readAsDataURL(this.files[0])
-      this.SetStep(4)
+      this.currentStep = 4
     },
   },
 }
