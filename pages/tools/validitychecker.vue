@@ -194,59 +194,6 @@ export default {
         },
       ],
       multiple: false,
-      modelChecks: [{}],
-      // modelChecks: [
-      //   {
-      //     is_valid: false,
-      //     validity_sentence: 'The model is not valid',
-      //     is_leaf: false,
-      //     list_invalidity: [
-      //       {
-      //         is_valid: false,
-      //         validity_sentence: 'The adjacency is not valid',
-      //         is_leaf: false,
-      //         list_invalidity: [
-      //           {
-      //             is_valid: false,
-      //             validity_sentence:
-      //               'brep_meshed_components_are_linked_to_a_unique_vertex',
-      //             is_leaf: false,
-      //             list_invalidity: [
-      //               {
-      //                 is_valid: true,
-      //                 validity_sentence:
-      //                   'brep_meshed_components_are_linked_to_a_unique_vertex',
-      //                 is_leaf: true,
-      //                 list_invalidity: ['1', '2'],
-      //               },
-      //               {
-      //                 is_valid: false,
-      //                 validity_sentence:
-      //                   'brep_meshed_components_are_linked_to_a_unique_vertex',
-      //                 is_leaf: true,
-      //                 list_invalidity: ['1', '2'],
-      //               },
-      //             ],
-      //           },
-      //         ],
-      //       },
-      //       {
-      //         is_valid: '',
-      //         validity_sentence: 'The manufold is valid',
-      //         is_leaf: false,
-      //         list_invalidity: [
-      //           {
-      //             is_valid: true,
-      //             validity_sentence:
-      //               'brep_meshed_components_are_linked_to_a_unique_vertex',
-      //             is_leaf: true,
-      //             list_invalidity: ['toto', 'tutu'],
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      // ],
       objects: [],
       success: false,
       versions: [],
@@ -325,7 +272,6 @@ export default {
       }
       console.log(step)
       this.currentStep = step
-      // console.log(step)
     },
     async GetTestNames() {
       const self = this
