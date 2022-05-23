@@ -21,7 +21,7 @@ const tools_list = [
         to: '/tools/validitychecker',
         text: 'Check the validity of your meshes and models',
         badge: 'beta',
-        chip: 'Coming soon!',
+        chip: 'Beta',
     },
     {
         icon: 'mdi-map',

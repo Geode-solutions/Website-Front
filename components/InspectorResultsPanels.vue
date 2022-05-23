@@ -10,7 +10,7 @@
           <div>
             <v-progress-circular
               v-if="modelCheck.value == null"
-              :size="22"
+              size="20"
               color="primary"
               indeterminate
             ></v-progress-circular>
@@ -31,7 +31,7 @@
             :modelChecks="modelCheck.list_invalidity"
             :object="object"
             :filename="filename"
-            @update_result="update_result"
+            @updateResult="updateResult"
           />
           <v-container v-else class="pt-6">
             Result = {{ modelCheck.value }}
@@ -77,25 +77,23 @@ export default {
             continue
           }
           if (current_check.value != current_check.expected_value) {
-            this.$emit('update_result', this.index, false)
+            this.$emit('updateResult', this.index, false)
             return
           }
           nb_results++
         }
         if (nb_results == this.modelChecks.length) {
-          this.$emit('update_result', this.index, true)
+          this.$emit('updateResult', this.index, true)
         }
       },
       deep: true,
     },
   },
   methods: {
-    update_result(index, value) {
-      console.log('update', value)
+    updateResult(index, value) {
       this.modelChecks[index].value = value
-      console.log('update', this.modelChecks)
     },
-    GetTestsResults() {
+    async GetTestsResults() {
       for (let index = 0; index < this.modelChecks.length; index++) {
         const current_check = this.modelChecks[index]
         if (current_check.is_leaf) {
@@ -106,9 +104,7 @@ export default {
           this.$axios
             .post(`${this.ID}/validitychecker/inspectfile`, params)
             .then((response) => {
-              if (response.status == 200) {
-                current_check.value = response.data.Result
-              }
+              current_check.value = response.data.Result
             })
         }
       }

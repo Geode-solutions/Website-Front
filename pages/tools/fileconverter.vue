@@ -264,7 +264,6 @@ export default {
     async GetAllowedObjects(changedFiles) {
       this.success = true
       this.message = 'File(s) selected'
-      console.log('changedFiles', changedFiles)
       if (changedFiles) {
         if (this.multiple) {
           this.files = changedFiles
