@@ -1,0 +1,139 @@
+<template>
+  <v-container>
+    <v-expansion-panels multiple focusable v-model="display">
+      <v-expansion-panel
+        v-for="(modelCheck, index) in modelChecks"
+        :key="index"
+        class="card"
+      >
+        <v-expansion-panel-header>
+          <div>
+            <v-progress-circular
+              v-if="modelCheck.value == null"
+              :size="22"
+              color="primary"
+              indeterminate
+            ></v-progress-circular>
+            <v-icon
+              v-else-if="modelCheck.value == modelCheck.expected_value"
+              color="primary"
+            >
+              mdi-check
+            </v-icon>
+            <v-icon v-else color="error"> mdi-close </v-icon>
+            {{ modelCheck.validity_sentence }}
+          </div>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <InspectorResultsPanels
+            v-if="!modelCheck.is_leaf"
+            :index="index"
+            :modelChecks="modelCheck.list_invalidity"
+            :object="object"
+            :filename="filename"
+            @update_result="update_result"
+          />
+          <v-container v-else class="pt-6">
+            Result = {{ modelCheck.value }}
+          </v-container>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </v-container>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
+
+export default {
+  name: 'InspectorResultsPanels',
+  components: { InspectorResultsPanels },
+  props: {
+    modelChecks: {
+      type: Array,
+      required: true,
+    },
+    object: {
+      type: String,
+      required: true,
+    },
+    filename: {
+      type: String,
+      required: true,
+    },
+    index: {
+      type: Number,
+      default: 0,
+    },
+  },
+  watch: {
+    modelChecks: {
+      handler(value) {
+        let nb_results = 0
+        for (let index = 0; index < this.modelChecks.length; index++) {
+          const current_check = this.modelChecks[index]
+          if (current_check.value == null) {
+            continue
+          }
+          if (current_check.value != current_check.expected_value) {
+            this.$emit('update_result', this.index, false)
+            return
+          }
+          nb_results++
+        }
+        if (nb_results == this.modelChecks.length) {
+          this.$emit('update_result', this.index, true)
+        }
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    update_result(index, value) {
+      console.log('update', value)
+      this.modelChecks[index].value = value
+      console.log('update', this.modelChecks)
+    },
+    GetTestsResults() {
+      for (let index = 0; index < this.modelChecks.length; index++) {
+        const current_check = this.modelChecks[index]
+        if (current_check.is_leaf) {
+          const params = new FormData()
+          params.append('object', this.object)
+          params.append('filename', this.filename)
+          params.append('test', current_check.route)
+          this.$axios
+            .post(`${this.ID}/validitychecker/inspectfile`, params)
+            .then((response) => {
+              if (response.status == 200) {
+                current_check.value = response.data.Result
+              }
+            })
+        }
+      }
+    },
+  },
+  created() {
+    this.GetTestsResults()
+  },
+  computed: {
+    ...mapState(['ID']),
+    display: function () {
+      let values = new Array()
+      for (let i = 0; i < this.modelChecks.length; i++) {
+        if (!this.modelChecks[i].is_leaf) {
+          values.push(i)
+        }
+      }
+      return values
+    },
+  },
+}
+</script>
+
+<style scoped>
+.card {
+  border-radius: 10px;
+}
+</style>

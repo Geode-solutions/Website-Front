@@ -132,7 +132,11 @@
             </v-row>
           </v-stepper-content>
 
-          <v-stepper-step step="3" :complete="currentStep > 3">
+          <v-stepper-step
+            step="3"
+            :complete="currentStep > 3"
+            @click="SetStep(3)"
+          >
             Inspect your file
           </v-stepper-step>
           <v-stepper-content step="3">
@@ -144,7 +148,13 @@
 
           <v-stepper-step step="4"> Inspection results </v-stepper-step>
           <v-stepper-content step="4">
-            <!-- <ExpansionPanels :modelChecks="modelChecks" class="pa-2" /> -->
+            <InspectorResultsPanels
+              v-if="modelChecks.length"
+              :modelChecks="modelChecks"
+              :object="GeodeObject"
+              :filename="this.files[0].name"
+              class="pa-2"
+            />
           </v-stepper-content>
         </v-stepper>
       </v-col>
@@ -158,13 +168,13 @@
 <script>
 import { mapState } from 'vuex'
 import CloudLoading from '@/components/CloudLoading.vue'
-import ExpansionPanels from '@/components/ExpansionPanels.vue'
+import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
 import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'ValidityChecker',
-  components: { CloudLoading, ExpansionPanels, PackagesVersions },
+  components: { CloudLoading, InspectorResultsPanels, PackagesVersions },
   head() {
     return {
       title: 'Validity checker',
@@ -193,14 +203,21 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
         },
       ],
+      modelChecks: [],
       multiple: false,
       objects: [],
+      ResultBoolean: [],
       success: false,
       versions: [],
     }
   },
   computed: {
     ...mapState(['ID', 'cloudRunning']),
+  },
+  created() {
+    for (var i = 0; i < this.modelChecks.length; i++) {
+      this.ResultBoolean.push(null)
+    }
   },
   watch: {
     cloudRunning(newValue) {
@@ -217,12 +234,6 @@ export default {
     }
   },
   methods: {
-    all() {
-      this.panel = [...Array(this.panelsCount).keys()].map((k, i) => i)
-    },
-    none() {
-      this.panel = []
-    },
     async GetAllowedFiles() {
       const data = await this.$axios.$get(
         `${this.ID}/validitychecker/allowedfiles`
@@ -260,52 +271,54 @@ export default {
     },
 
     SetStep(step) {
-      if ((step = 3)) {
-        this.modelValid = ''
-        this.modelChecks = [{}]
+      if (step <= 3) {
+        this.modelChecks = []
       }
-      if ((step = 2)) {
+      if (step <= 2) {
         this.GeodeObject = ''
       }
-      if ((step = 1)) {
+      if (step <= 1) {
         this.files = []
       }
-      console.log(step)
       this.currentStep = step
     },
-    async GetTestNames() {
+
+    async InspectFile() {
+      await this.UploadFile()
+      this.SetStep(4)
+      await this.GetTestsNames()
+    },
+    async GetTestsNames() {
       const self = this
       const params = new FormData()
       params.append('object', self.GeodeObject)
       await self.$axios
-        .post(`${self.ID}/validitychecker/testnames`, params)
+        .post(`${self.ID}/validitychecker/testsnames`, params)
         .then((response) => {
           if (response.status == 200) {
-            console.log(response.data)
             self.modelChecks = response.data.modelChecks
+            for (var i = 0; i < this.modelChecks.length; i++) {
+              this.ResultBoolean.push(null)
+            }
           }
         })
     },
-    async InspectFile() {
+    async UploadFile() {
       const self = this
       const reader = new FileReader()
       reader.onload = async function (event) {
         const params = new FormData()
-        params.append('object', self.GeodeObject)
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
-
         await self.$axios
-          .post(`${self.ID}/validitychecker/inspectfile`, params)
+          .post(`${self.ID}/validitychecker/uploadfile`, params)
           .then((response) => {
             if (response.status == 200) {
               console.log(response)
-              // self.modelChecks = response.data.modelChecks
             }
           })
       }
       await reader.readAsDataURL(this.files[0])
-      this.currentStep = 4
     },
   },
 }
