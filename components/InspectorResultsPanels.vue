@@ -93,7 +93,7 @@ export default {
     updateResult(index, value) {
       this.modelChecks[index].value = value
     },
-    async GetTestsResults() {
+    GetTestsResults() {
       for (let index = 0; index < this.modelChecks.length; index++) {
         const current_check = this.modelChecks[index]
         if (current_check.is_leaf) {
