@@ -223,7 +223,7 @@ export default {
             'Robust to degenerated input meshes',
             'Guaranteed conformal to surface intersections',
           ],
-          readiness: '90',
+          readiness: '95',
         },
         {
           title: '3D tetrahedral meshing',
@@ -234,7 +234,7 @@ export default {
             'Robust to degenerated input meshes',
             'Guaranteed conformal to input boundary surface meshes',
           ],
-          readiness: '80',
+          readiness: '90',
         },
         {
           title: 'Conversion between model and mesh',
@@ -244,7 +244,7 @@ export default {
             'Automatic recovery of model components and topology from mesh',
             'Output mesh gathering all model information as attributes',
           ],
-          readiness: '90',
+          readiness: '95',
         },
         {
           title: 'Watertight model sealing',
@@ -267,7 +267,7 @@ export default {
             'Interactive surface addition and removal from the model',
             'Guaranteed model validity at any time',
           ],
-          readiness: '60',
+          readiness: '80',
         },
         {
           title: 'Mesh/model validity checker',
