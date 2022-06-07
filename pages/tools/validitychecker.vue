@@ -310,6 +310,7 @@ export default {
         const params = new FormData()
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
+        params.append('filesize', self.files[0].size)
         await self.$axios
           .post(`${self.ID}/validitychecker/uploadfile`, params)
           .then((response) => {

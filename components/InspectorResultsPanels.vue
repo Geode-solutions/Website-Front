@@ -33,7 +33,7 @@
             :filename="filename"
             @updateResult="updateResult"
           />
-          <v-container v-else class="pt-6">
+          <v-container v-else-if="modelCheck.value!=null" class="pt-6">
             Result = {{ modelCheck.value }}
           </v-container>
         </v-expansion-panel-content>
@@ -102,7 +102,7 @@ export default {
           params.append('filename', this.filename)
           params.append('test', current_check.route)
           this.$axios
-            .post(`${this.ID}/validitychecker/inspectfile`, params)
+            .post(`${this.ID}/validitychecker/inspectfile`, params, {timeout: 1000*30})
             .then((response) => {
               current_check.value = response.data.Result
             })
