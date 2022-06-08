@@ -173,7 +173,9 @@
             </v-row>
           </v-stepper-content>
 
-          <v-stepper-step step="4"> Convert your file </v-stepper-step>
+          <v-stepper-step step="4" @click="currentStep = 4">
+            Convert your file
+          </v-stepper-step>
           <v-stepper-content step="4">
             <v-btn color="primary" @click="ConvertFile(files[0])">
               Convert
@@ -183,18 +185,7 @@
         </v-stepper>
       </v-col>
       <v-col v-if="cloudRunning">
-        This tool uses our Open-Source codes
-        <v-tooltip right>
-          <template v-slot:activator="{ on }">
-            <v-icon color="primary" class="justify-right" v-on="on">
-              mdi-information-outline
-            </v-icon>
-          </template>
-          <span v-for="version in versions" :key="version.package">
-            {{ version.package }} v{{ version.version }}
-            <br />
-          </span>
-        </v-tooltip>
+        <PackagesVersions :versions="versions" />
       </v-col>
     </v-row>
   </v-container>
@@ -204,11 +195,12 @@
 import { mapState } from 'vuex'
 import fileDownload from 'js-file-download'
 import CloudLoading from '@/components/CloudLoading.vue'
+import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'FileConverter',
-  components: { CloudLoading },
+  components: { CloudLoading, PackagesVersions },
   data() {
     return {
       acceptedExtensions: '',
@@ -251,29 +243,41 @@ export default {
       }
     },
   },
+  activated() {
+    if (this.cloudRunning === true) {
+      this.GetAllowedFiles()
+      this.GetPackagesVersions()
+    }
+  },
   methods: {
     async GetAllowedFiles() {
-      const data = await this.$axios.$post(`${this.ID}/allowedfiles`)
+      const data = await this.$axios.$get(
+        `${this.ID}/fileconverter/allowedfiles`
+      )
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
     },
     async GetPackagesVersions() {
-      const data = await this.$axios.$get(`${this.ID}/versions`)
+      const data = await this.$axios.$get(`${this.ID}/fileconverter/versions`)
       this.versions = data.versions
     },
     async GetAllowedObjects(changedFiles) {
       this.success = true
       this.message = 'File(s) selected'
-      if (this.multiple) {
-        this.files = changedFiles
-      } else {
-        this.files = [changedFiles]
+      if (changedFiles) {
+        if (this.multiple) {
+          this.files = changedFiles
+        } else {
+          this.files = [changedFiles]
+        }
       }
-
       const params = new FormData()
       params.append('filename', this.files[0].name)
 
-      const data = await this.$axios.$post(`${this.ID}/allowedobjects`, params)
+      const data = await this.$axios.$post(
+        `${this.ID}/fileconverter/allowedobjects`,
+        params
+      )
       this.objects = data.objects
       this.currentStep = this.currentStep + 1
     },
@@ -283,7 +287,7 @@ export default {
       this.GeodeObject = object
 
       const data = await this.$axios.$post(
-        `${this.ID}/outputfileextensions`,
+        `${this.ID}/fileconverter/outputfileextensions`,
         params
       )
       this.fileExtensions = data.outputfileextensions
@@ -302,11 +306,12 @@ export default {
         params.append('object', self.GeodeObject)
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
+        params.append('filesize', self.files[0].size)
         params.append('extension', self.extension)
         params.append('responseType', 'blob')
 
         await self.$axios
-          .post(`${self.ID}/convertfile`, params)
+          .post(`${self.ID}/fileconverter/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
               let newFilename =
