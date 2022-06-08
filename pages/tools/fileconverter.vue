@@ -306,6 +306,7 @@ export default {
         params.append('object', self.GeodeObject)
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
+        params.append('filesize', self.files[0].size)
         params.append('extension', self.extension)
         params.append('responseType', 'blob')
 
