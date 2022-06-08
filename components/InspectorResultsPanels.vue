@@ -102,7 +102,7 @@ export default {
           params.append('filename', this.filename)
           params.append('test', current_check.route)
           this.$axios
-            .post(`${this.ID}/validitychecker/inspectfile`, params, {timeout: 1000*30})
+            .post(`${this.ID}/validitychecker/inspectfile`, params)
             .then((response) => {
               current_check.value = response.data.Result
             })
