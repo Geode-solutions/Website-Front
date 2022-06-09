@@ -37,18 +37,24 @@ export const actions = {
   },
   async CreateBackEnd ({ commit, dispatch }) {
     try {
-      const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
-      if (response.status == 200) {
-        commit("setID", response.data.ID)
-        localStorage.setItem('ID', response.data.ID)
-        commit("setCloudRunning", true)
-        return dispatch('PingTask')
+      const botRegex = /bot|googlebot|crawler|spider|robot|crawling/i
+      const isBot = navigator.userAgent && botRegex.test(navigator.userAgent)
+      console.log(isBot)
+      if (!isBot) {
+        const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
+        if (response.status == 200) {
+          commit("setID", response.data.ID)
+          localStorage.setItem('ID', response.data.ID)
+          commit("setCloudRunning", true)
+          return dispatch('PingTask')
+        }
       }
     } catch (e) {
       console.log("error: ", e)
       return dispatch('CreateBackEnd')
     }
   },
+
   PingTask ({ dispatch }) {
     setInterval(() => dispatch('DoPing'), 10 * 1000)
   },

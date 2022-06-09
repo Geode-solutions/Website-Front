@@ -8,19 +8,50 @@
       >
         <v-expansion-panel-header>
           <div>
-            <v-progress-circular
-              v-if="modelCheck.value == null"
-              size="20"
-              color="primary"
-              indeterminate
-            ></v-progress-circular>
-            <v-icon
-              v-else-if="modelCheck.value == modelCheck.expected_value"
-              color="primary"
-            >
-              mdi-check
-            </v-icon>
-            <v-icon v-else color="error"> mdi-close </v-icon>
+            <div v-if="modelCheck.value == null">
+              <v-tooltip right>
+                <template #activator="{ on }">
+                <v-progress-circular
+                  
+                  size="20"
+                  color="primary"
+                  indeterminate
+                  v-on="on"
+                ></v-progress-circular>
+                </template>
+                <span>This check is in progress</span>
+              </v-tooltip>
+            </div>
+            <div v-else-if="modelCheck.value == modelCheck.expected_value">
+              <v-tooltip right>
+                <template #activator="{ on }">
+              <v-icon
+                color="primary"
+                v-on="on"
+              >
+                mdi-check
+              </v-icon>
+              </template>
+              <span>This check has passed</span>
+              </v-tooltip>
+            </div>
+            <div v-else-if="modelCheck.value == 'error'"><v-tooltip right>
+                <template #activator="{ on }">
+              <v-icon
+                color="error"
+                v-on="on"
+              >
+              mdi-alert
+              </v-icon>
+              </template>
+              <span>This check returned an internal error</span>
+              </v-tooltip>
+            </div>
+            <div
+                v-else color="error"
+              >
+            <v-icon > mdi-close </v-icon>
+            </div>
             {{ modelCheck.validity_sentence }}
           </div>
         </v-expansion-panel-header>
@@ -67,6 +98,39 @@ export default {
       default: 0,
     },
   },
+
+
+  data() {
+    return {
+      resultOptions: {
+        in_progress:
+        {
+          icon: 'mdi-file-check',
+          color: 'Supported file formats',
+          tooltip: 'https://docs.geode-solutions.com/formats/',
+        },
+        passed:
+        {
+          icon: 'mdi-check',
+          color: 'Supported file formats',
+          tooltip: 'This check has passed',
+        },
+        failed:
+        {
+          icon: 'mdi-github',
+          color: 'OpenGeode-Inspector GitHub repo',
+          tooltip: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
+        },
+        error:
+        {
+          icon: 'mdi-close',
+          color: 'error',
+          tooltip: 'This check returned an internal error',
+        },
+      },
+
+    }
+  },
   watch: {
     modelChecks: {
       handler(value) {
@@ -104,6 +168,7 @@ export default {
           this.$axios
             .post(`${this.ID}/validitychecker/inspectfile`, params, {timeout: 1000*30})
             .then((response) => {
+              console.log(response.data.Result)
               current_check.value = response.data.Result
             })
         }
