@@ -28,6 +28,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
+      <vue-recaptcha sitekey="Your key here"></vue-recaptcha>
       <nuxt-child keep-alive />
     </v-col>
   </v-row>
@@ -36,9 +37,11 @@
 <script>
 import { mapActions } from 'vuex'
 import tools_list from '@/assets/tools_list'
+// import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
   name: 'FreeTools',
+  // components: { VueRecaptcha },
   data() {
     return {
       tools: tools_list,

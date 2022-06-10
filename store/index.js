@@ -50,7 +50,7 @@ export const actions = {
       }
     } catch (e) {
       console.log("error: ", e)
-      return dispatch('CreateBackEnd')
+      // return dispatch('CreateBackEnd')
     }
   },
   PingTask ({ dispatch }) {
