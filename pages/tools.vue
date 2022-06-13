@@ -28,20 +28,26 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <vue-recaptcha sitekey="Your key here"></vue-recaptcha>
-      <nuxt-child keep-alive />
+      <!-- <vue-recaptcha sitekey="Your key here"></vue-recaptcha> -->
+      <InternalError v-if="internalError" />
+      <UnderMaintenance v-else-if="underMaintenance" />
+      <nuxt-child v-else keep-alive />
     </v-col>
   </v-row>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import tools_list from '@/assets/tools_list'
 // import { VueRecaptcha } from 'vue-recaptcha';
 
+import InternalError from '@/components/InternalError.vue'
+import UnderMaintenance from '@/components/UnderMaintenance.vue'
+
 export default {
   name: 'FreeTools',
-  // components: { VueRecaptcha },
+  components: { InternalError, UnderMaintenance },
+  // VueRecaptcha },
   data() {
     return {
       tools: tools_list,
@@ -63,6 +69,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['ID', 'internalError', 'underMaintenance']),
     mini() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
