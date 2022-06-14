@@ -87,8 +87,8 @@ export default {
 
   recaptcha: {
     hideBadge: false,
-    siteKey: '6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp',
-    version: 3,
+    siteKey: '6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC',
+    version: 2,
   },
 
   vuetify: {
