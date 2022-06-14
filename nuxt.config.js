@@ -81,8 +81,15 @@ export default {
       '@nuxtjs/axios',
       '@aceforth/nuxt-netlify',
       '@nuxtjs/vuetify',
-      ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }]
+      ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }],
+      '@nuxtjs/recaptcha'
     ],
+
+  recaptcha: {
+    hideBadge: false,
+    siteKey: '6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp',
+    version: 3,
+  },
 
   vuetify: {
     theme: {

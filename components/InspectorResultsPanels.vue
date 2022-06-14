@@ -18,9 +18,9 @@
               v-else-if="modelCheck.value == modelCheck.expected_value"
               color="primary"
             >
-              mdi-check
+              mdi-check-circle-outline
             </v-icon>
-            <v-icon v-else color="error"> mdi-close </v-icon>
+            <v-icon v-else color="error"> mdi-close-circle-outline </v-icon>
             {{ modelCheck.validity_sentence }}
           </div>
         </v-expansion-panel-header>
