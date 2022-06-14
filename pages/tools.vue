@@ -28,17 +28,36 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <nuxt-child keep-alive />
+      
+      <!-- <InternalError v-if="internalError" />
+      <UnderMaintenance v-else-if="underMaintenance" />
+      <nuxt-child v-else keep-alive /> -->
+      <!-- <vue-recaptcha ref="recaptcha" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC">
+        
+      </vue-recaptcha> -->
+
+     
+     <recaptcha></recaptcha>
+
+<!-- <vue-recaptcha ref="recaptcha" @verify="onVerify" @expired="onExpired" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"> </vue-recaptcha>
+        <v-btn @click="resetRecaptcha">Reset ReCAPTCHA</v-btn>
+      <v-btn @click="onEvent">Click me</v-btn> -->
     </v-col>
   </v-row>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import tools_list from '@/assets/tools_list'
+// import { VueRecaptcha } from 'vue-recaptcha';
+
+import InternalError from '@/components/InternalError.vue'
+import UnderMaintenance from '@/components/UnderMaintenance.vue'
 
 export default {
   name: 'FreeTools',
+  components: { InternalError, UnderMaintenance },
+  // VueRecaptcha },
   data() {
     return {
       tools: tools_list,
@@ -55,11 +74,30 @@ export default {
       this.createConnexion()
     }
   },
+  async mounted() {
+  try {
+    await this.$recaptcha.init()
+  } catch (e) {
+    console.error(e);
+  }
+},
   methods: {
     ...mapActions(['createConnexion']),
+    async onSubmit() {
+  try {
+    const token = await this.$recaptcha.execute('login')
+    console.log('ReCaptcha token:', token)
+  } catch (error) {
+    console.log('Login error:', error)
+  }
+},
+beforeDestroy() {
+  this.$recaptcha.destroy()
+}
   },
 
   computed: {
+    ...mapState(['ID', 'internalError', 'underMaintenance']),
     mini() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
