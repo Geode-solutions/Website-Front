@@ -29,19 +29,10 @@
     </v-navigation-drawer>
     <v-col class="pa-4">
       
+      <recaptcha></recaptcha>
       <!-- <InternalError v-if="internalError" />
       <UnderMaintenance v-else-if="underMaintenance" />
       <nuxt-child v-else keep-alive /> -->
-      <!-- <vue-recaptcha ref="recaptcha" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC">
-        
-      </vue-recaptcha> -->
-
-     
-     <recaptcha siteKey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"></recaptcha>
-
-<!-- <vue-recaptcha ref="recaptcha" @verify="onVerify" @expired="onExpired" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"> </vue-recaptcha>
-        <v-btn @click="resetRecaptcha">Reset ReCAPTCHA</v-btn>
-      <v-btn @click="onEvent">Click me</v-btn> -->
     </v-col>
   </v-row>
 </template>

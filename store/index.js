@@ -65,16 +65,14 @@ export const actions = {
   PingTask ({ dispatch }) {
     setInterval(() => dispatch('DoPing'), 10 * 1000)
   },
-  async DoPing ({ state, dispatch }) {
+  async DoPing ({ state }) {
     try {
       const response = await this.$axios.post(`${state.ID}/ping`)
       if (response.status != 200) {
         commit("setCloudRunning", false)
-        return dispatch('CreateBackEnd')
       }
     } catch (e) {
       console.log("error: ", e)
-      return dispatch('CreateBackEnd')
     }
   }
 }

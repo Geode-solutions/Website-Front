@@ -6,7 +6,11 @@ export default {
   */
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
-    SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : ''
+    SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
+    recaptcha: {
+      /* reCAPTCHA options */
+      siteKey: '6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC' // for example
+    }
   },
 
   target: 'static',
@@ -87,7 +91,7 @@ export default {
 
   recaptcha: {
     hideBadge: false,
-    siteKey: '6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC',
+    // siteKey: '6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC',
     version: 2,
   },
 
