@@ -37,7 +37,7 @@
       </vue-recaptcha> -->
 
      
-     <recaptcha></recaptcha>
+     <recaptcha siteKey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"></recaptcha>
 
 <!-- <vue-recaptcha ref="recaptcha" @verify="onVerify" @expired="onExpired" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"> </vue-recaptcha>
         <v-btn @click="resetRecaptcha">Reset ReCAPTCHA</v-btn>
@@ -75,12 +75,13 @@ export default {
     }
   },
   async mounted() {
+    if (process.client) {
   try {
     await this.$recaptcha.init()
   } catch (e) {
     console.error(e);
   }
-},
+}},
   methods: {
     ...mapActions(['createConnexion']),
     async onSubmit() {
