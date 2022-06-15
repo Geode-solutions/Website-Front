@@ -28,27 +28,24 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      
-      <recaptcha></recaptcha>
-      <!-- <InternalError v-if="internalError" />
+      <recaptcha v-if="this.$config.NODE_ENV === 'production' && !this.reCaptchaValidated"/>
+      <InternalError v-if="internalError" />
       <UnderMaintenance v-else-if="underMaintenance" />
-      <nuxt-child v-else keep-alive /> -->
+      <nuxt-child v-else keep-alive />
     </v-col>
   </v-row>
 </template>
 
+
 <script>
 import { mapActions, mapState } from 'vuex'
 import tools_list from '@/assets/tools_list'
-// import { VueRecaptcha } from 'vue-recaptcha';
-
 import InternalError from '@/components/InternalError.vue'
 import UnderMaintenance from '@/components/UnderMaintenance.vue'
 
 export default {
   name: 'FreeTools',
   components: { InternalError, UnderMaintenance },
-  // VueRecaptcha },
   data() {
     return {
       tools: tools_list,
@@ -61,17 +58,25 @@ export default {
     }
   },
   created() {
-    if (process.client) {
-      this.createConnexion()
-    }
+   
   },
   async mounted() {
+
+     
     if (process.client) {
   try {
     await this.$recaptcha.init()
   } catch (e) {
     console.error(e);
   }
+
+
+  if (this.$config.NODE_ENV !== 'production'){
+
+  }
+  if (!this.reCaptchaValidated) {
+      this.createConnexion()
+    }
 }},
   methods: {
     ...mapActions(['createConnexion']),
@@ -79,6 +84,7 @@ export default {
   try {
     const token = await this.$recaptcha.execute('login')
     console.log('ReCaptcha token:', token)
+    this.$store.dispatch('setReCaptchaValidated', true)
   } catch (error) {
     console.log('Login error:', error)
   }
@@ -89,7 +95,7 @@ beforeDestroy() {
   },
 
   computed: {
-    ...mapState(['ID', 'internalError', 'underMaintenance']),
+    ...mapState(['ID', 'internalError', 'reCaptchaValidated', 'underMaintenance']),
     mini() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':

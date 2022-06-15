@@ -7,10 +7,7 @@ export default {
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
     SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
-    recaptcha: {
-      /* reCAPTCHA options */
-      siteKey: '6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC' // for example
-    }
+    NODE_ENV: process.env.NODE_ENV
   },
 
   target: 'static',
@@ -90,9 +87,8 @@ export default {
     ],
 
   recaptcha: {
-    hideBadge: false,
-    // siteKey: '6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC',
     version: 2,
+    siteKey: process.env.SITE_KEY
   },
 
   vuetify: {
