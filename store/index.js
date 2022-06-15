@@ -5,7 +5,7 @@ export const state = () => ({
   cloudRunning: false,
   underMaintenance: false,
   internalError: false,
-  reCaptchaValidated: false
+  captchaValidated: false
 })
 export const mutations = {
   setID (state, ID) {
@@ -23,8 +23,8 @@ export const mutations = {
   setInternalError (state, internalError) {
     state.internalError = internalError
   },
-  setReCaptchaValidated (state, reCaptchaValidated) {
-    state.reCaptchaValidated = reCaptchaValidated
+  setCaptchaValidated (state, captchaValidated) {
+    state.captchaValidated = captchaValidated
   }
 }
 export const actions = {

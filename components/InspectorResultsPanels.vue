@@ -49,6 +49,12 @@ import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
 export default {
   name: 'InspectorResultsPanels',
   components: { InspectorResultsPanels },
+  // data() {
+  //   return{
+  //     display: ''
+  //   }
+  // },
+
   props: {
     modelChecks: {
       type: Array,
