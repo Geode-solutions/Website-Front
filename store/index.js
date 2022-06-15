@@ -40,6 +40,8 @@ export const actions = {
         commit("setID", ID)
         commit("setCloudRunning", true)
         return dispatch('PingTask')
+      } else {
+        return dispatch('CreateBackEnd')
       }
     }
   },
