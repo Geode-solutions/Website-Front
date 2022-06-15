@@ -83,12 +83,13 @@ export default {
     }
 }},
   methods: {
-    ...mapActions(['createConnexion']),
+    ...mapActions(['createConnexion', 'setReCaptchaValidated']),
     async onSubmit() {
   try {
-    const token = await this.$recaptcha.execute('login')
+    const token = await this.$recaptcha.getResponse()
     console.log('ReCaptcha token:', token)
     this.$store.dispatch('setReCaptchaValidated', true)
+    await this.$recaptcha.reset()
   } catch (error) {
     console.log('Login error:', error)
   }
