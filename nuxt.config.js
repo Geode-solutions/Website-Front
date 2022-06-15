@@ -7,7 +7,10 @@ export default {
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
     SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
+    recaptcha: {
+      siteKey: process.env.RECAPTCHA_SITE_KEY
+    }
   },
 
   target: 'static',
@@ -88,7 +91,7 @@ export default {
 
   recaptcha: {
     version: 2,
-    siteKey: process.env.SITE_KEY
+    siteKey: process.env.RECAPTCHA_SITE_KEY
   },
 
   vuetify: {

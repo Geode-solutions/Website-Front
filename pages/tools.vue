@@ -76,7 +76,7 @@ export default {
 
 
   if (this.$config.NODE_ENV !== 'production'){
-
+    this.$store.dispatch('setReCaptchaValidated', true)
   }
   if (!this.reCaptchaValidated) {
       this.createConnexion()

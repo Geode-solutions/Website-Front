@@ -1,9 +1,9 @@
 [context.production.environment]
   SITE_BRANCH = ""
-  SITE_KEY = "6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp"
+  RECAPTCHA_SITE_KEY = "6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp"
 [context.deploy-preview.environment]
   SITE_BRANCH = ""
-  SITE_KEY = "6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp"
+  RECAPTCHA_SITE_KEY = "6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp"
 [context."next".environment]
   SITE_BRANCH = "/test"
-  SITE_KEY = "6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp"
+  RECAPTCHA_SITE_KEY = "6Lf3B20gAAAAAD65kdIXw93Qyc6A02lxJ2BKX9zp"
