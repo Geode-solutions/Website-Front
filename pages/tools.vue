@@ -28,10 +28,14 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <recaptcha v-if="this.$config.NODE_ENV === 'production' && !this.reCaptchaValidated"/>
-      <InternalError v-if="internalError" />
-      <UnderMaintenance v-else-if="underMaintenance" />
-      <nuxt-child v-else keep-alive />
+      <v-container v-if="!this.reCaptchaValidated">
+        <recaptcha />    
+      </v-container>
+      <v-container v-else>
+        <InternalError v-if="internalError && this.reCaptchaValidated" />
+        <UnderMaintenance v-else-if="underMaintenance && this.reCaptchaValidated" />
+        <nuxt-child v-else keep-alive />
+      </v-container>
     </v-col>
   </v-row>
 </template>
