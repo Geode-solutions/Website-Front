@@ -11,12 +11,14 @@ exports.handler = async function (event) {
     console.log(response)
     if (response.success) {
       return {
+        statusCode: 200,
         success: true,
         message: 'Token verifyed',
         response: response
       }
     }
     return {
+      statusCode: 400,
       success: false,
       message: 'Invalid token',
       response: response
@@ -24,6 +26,7 @@ exports.handler = async function (event) {
   } catch (e) {
     console.log('ReCaptcha error:', e)
     return {
+      statusCode: 500,
       success: false,
       message: 'Internal error'
     }
