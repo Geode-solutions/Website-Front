@@ -6,10 +6,6 @@ exports.handler = async function(event) {
             statusCode: 405 
         }
     }
-    console.log(process.env)
-    console.log(process.env.RECAPTCHA_SECRET_KEY)
-    console.log(process.env[RECAPTCHA_SECRET_KEY])
-    console.log(event.queryStringParameters)
     if (!RECAPTCHA_SECRET_KEY in process.env) {
         console.error('RECAPTCHA_SECRET_KEY environment variable is not set.')
         return {
