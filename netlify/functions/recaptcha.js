@@ -7,6 +7,8 @@ exports.handler = async function(event) {
         }
     }
     console.log(process.env)
+    console.log(process.env.RECAPTCHA_SECRET_KEY)
+    console.log(process.env[RECAPTCHA_SECRET_KEY])
     console.log(event.queryStringParameters)
     if (!RECAPTCHA_SECRET_KEY in process.env) {
         console.error('RECAPTCHA_SECRET_KEY environment variable is not set.')
@@ -25,6 +27,6 @@ exports.handler = async function(event) {
           'Access-Control-Allow-Origin': 'https://next.geode-solutions.com'
           // 'Access-Control-Allow-Methods': 'POST, OPTIONS'
         }
-    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env[RECAPTCHA_SECRET_KEY]}&response=${event.queryStringParameters.token}`, {headers})
+    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`, {headers})
     return response
 }
