@@ -6,13 +6,14 @@ exports.handler = async function(event) {
             statusCode: 405 
         }
     }
-    if (!(RECAPTCHA_SECRET_KEY in process.env)) {
+    if (!RECAPTCHA_SECRET_KEY in process.env) {
         console.error('RECAPTCHA_SECRET_KEY environment variable is not set.')
+        console.error(process.env)
         return {
             statusCode: 500
         }
     }
-    if (!('token' in event.queryStringParameters)) {
+    if (!'token' in event.queryStringParameters) {
         console.error('Client response token not found in URL query string.')
         return {
             statusCode: 400
