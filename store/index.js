@@ -59,8 +59,8 @@ export const actions = {
   async DoPing ({ state }) {
     try {
       const response = await this.$axios.post(`${state.ID}/ping`)
-      if (response.status != 200) {
-        commit("setCloudRunning", false)
+      if (response.status == 200) {
+        commit("setCloudRunning", true)
       }
     } catch (e) {
       console.log("error: ", e)
