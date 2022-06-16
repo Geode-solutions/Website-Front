@@ -28,7 +28,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <v-container v-if="!this.captchaValidated" fluid fill-height>
+      <v-container v-if="((!this.captchaValidated) && (this.$config.NODE_ENV === 'production'))" fluid fill-height>
         <v-row rows="auto" align-content="center" align="center">
           <v-col cols="12" align-self="center" align="center">
             <recaptcha class="align-center"/>
@@ -73,6 +73,9 @@ export default {
         await this.$recaptcha.init()
       } catch (e) {
         console.error(e);
+      }
+      if(this.$config.NODE_ENV !=='production'){
+        this.$store.commit("setCaptchaValidated", true)
       }
     }
   },
