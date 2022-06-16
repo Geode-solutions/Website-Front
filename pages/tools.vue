@@ -32,7 +32,9 @@
         <v-row class="rows" align-content="center" align="center">
           <v-col class="align" cols="12" align-self="center">
             <recaptcha class="align-center" />
-            <v-btn color="primary" @click="onSubmit()"> Submit </v-btn>
+            <v-btn color="primary" @click="onSubmit()">
+              Submit
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -64,7 +66,38 @@ export default {
       title: 'Geode-solutions free tools',
     }
   },
-  created() {},
+  computed: {
+    ...mapState([
+      'ID',
+      'internalError',
+      'captchaValidated',
+      'underMaintenance',
+    ]),
+    mini() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          return true
+        case 'sm':
+          return true
+        case 'md':
+          return true
+        case 'lg':
+          return false
+        case 'xl':
+          return false
+        default:
+          return false
+      }
+    },
+  },
+  watch: {
+    captchaValidated(newValue) {
+      if (newValue === true) {
+        this.createConnexion()
+        console.log(this.$config.RECAPTCHA_SITE_KEY)
+      }
+    },
+  },
   async mounted() {
     if (process.client) {
       try {
@@ -100,38 +133,6 @@ export default {
     },
     beforeDestroy() {
       this.$recaptcha.destroy()
-    },
-  },
-  watch: {
-    captchaValidated(newValue) {
-      if (newValue === true) {
-        this.createConnexion()
-        console.log(this.$config.RECAPTCHA_SITE_KEY)
-      }
-    },
-  },
-  computed: {
-    ...mapState([
-      'ID',
-      'internalError',
-      'captchaValidated',
-      'underMaintenance',
-    ]),
-    mini() {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          return true
-        case 'sm':
-          return true
-        case 'md':
-          return true
-        case 'lg':
-          return false
-        case 'xl':
-          return false
-        default:
-          return false
-      }
     },
   },
 }

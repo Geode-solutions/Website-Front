@@ -237,7 +237,6 @@ export default {
       loading: false,
       multiple: false,
       versions: [],
-      multiple: false,
       objects: [],
       success: false,
     }

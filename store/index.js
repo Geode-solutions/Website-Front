@@ -74,7 +74,7 @@ export const actions = {
   PingTask ({ dispatch }) {
     setInterval(() => dispatch('DoPing'), 10 * 1000)
   },
-  async DoPing ({ state }) {
+  async DoPing ({ state, commit }) {
     try {
       const response = await this.$axios.post(`${state.ID}/ping`)
       if (response.status == 200) {

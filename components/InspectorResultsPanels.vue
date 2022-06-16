@@ -35,7 +35,7 @@
             :filename="filename"
             @updateResult="updateResult"
           />
-          <v-container v-else-if="modelCheck.value!=null" class="pt-6">
+          <v-container v-else-if="modelCheck.value != null" class="pt-6">
             Result = {{ modelCheck.value }}
           </v-container>
         </v-expansion-panel-content>
@@ -69,9 +69,21 @@ export default {
       default: 0,
     },
   },
+  computed: {
+    ...mapState(['ID']),
+    display: function () {
+      let values = new Array()
+      for (let i = 0; i < this.modelChecks.length; i++) {
+        if (!this.modelChecks[i].is_leaf) {
+          values.push(i)
+        }
+      }
+      return values
+    },
+  },
   watch: {
     modelChecks: {
-      handler(value) {
+      handler() {
         let nb_results = 0
         for (let index = 0; index < this.modelChecks.length; index++) {
           const current_check = this.modelChecks[index]
@@ -113,18 +125,6 @@ export default {
             })
         }
       }
-    },
-  },
-  computed: {
-    ...mapState(['ID']),
-    display: function () {
-      let values = new Array()
-      for (let i = 0; i < this.modelChecks.length; i++) {
-        if (!this.modelChecks[i].is_leaf) {
-          values.push(i)
-        }
-      }
-      return values
     },
   },
 }

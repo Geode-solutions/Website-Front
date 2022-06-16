@@ -163,13 +163,13 @@ export default {
       date: new Date().getFullYear(),
     }
   },
-  methods: {
-    ...mapActions(['setReCaptchaValidated']),
-  },
   created() {
     if (process.client) {
       this.setReCaptchaValidated()
     }
+  },
+  methods: {
+    ...mapActions(['setReCaptchaValidated']),
   },
 }
 </script>
