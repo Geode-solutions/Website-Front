@@ -85,8 +85,8 @@ export default {
         console.log('ReCaptcha token:', token)
 
         const headers = {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS'
+          'Access-Control-Allow-Origin': 'next.geode-solutions.com'
+          // 'Access-Control-Allow-Methods': 'POST, OPTIONS'
         }
 
         const response = await this.$axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${this.$config.RECAPTCHA_SECRET_KEY}&response=${token}`, {headers: headers})
