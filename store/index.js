@@ -2,7 +2,10 @@
 export const state = () => ({
   ID: '',
   connexionLaunched: false,
-  cloudRunning: false
+  cloudRunning: false,
+  underMaintenance: false,
+  internalError: false,
+  captchaValidated: false
 })
 export const mutations = {
   setID (state, ID) {
@@ -13,6 +16,15 @@ export const mutations = {
   },
   setCloudRunning (state, cloudRunning) {
     state.cloudRunning = cloudRunning
+  },
+  setUnderMaintenance (state, underMaintenance) {
+    state.underMaintenance = underMaintenance
+  },
+  setInternalError (state, internalError) {
+    state.internalError = internalError
+  },
+  setCaptchaValidated (state, captchaValidated) {
+    state.captchaValidated = captchaValidated
   }
 }
 export const actions = {
@@ -31,16 +43,16 @@ export const actions = {
           return dispatch('PingTask')
         }
       } catch (e) {
+        // If first ping fails
         return dispatch('CreateBackEnd')
       }
     }
   },
   async CreateBackEnd ({ commit, dispatch }) {
-    try {
-      const botRegex = /bot|googlebot|crawler|spider|robot|crawling/i
-      const isBot = navigator.userAgent && botRegex.test(navigator.userAgent)
-      console.log(isBot)
-      if (!isBot) {
+    const botRegex = /bot|googlebot|crawler|spider|robot|crawling/i
+    const isBot = navigator.userAgent && botRegex.test(navigator.userAgent)
+    if (!isBot) {
+      try {
         const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
         if (response.status == 200) {
           commit("setID", response.data.ID)
@@ -48,26 +60,30 @@ export const actions = {
           commit("setCloudRunning", true)
           return dispatch('PingTask')
         }
+      } catch (e) {
+        let status = e.toJSON().status
+        if (status === 500) {
+          commit("setInternalError", true)
+        } else if (status === 404) {
+          commit("setUnderMaintenance", true)
+        }
+        console.log("error: ", e.toJSON().message)
       }
-    } catch (e) {
-      console.log("error: ", e)
-      return dispatch('CreateBackEnd')
     }
   },
 
   PingTask ({ dispatch }) {
     setInterval(() => dispatch('DoPing'), 10 * 1000)
   },
-  async DoPing ({ state, dispatch }) {
+  async DoPing ({ state }) {
     try {
       const response = await this.$axios.post(`${state.ID}/ping`)
-      if (response.status != 200) {
-        commit("setCloudRunning", false)
-        return dispatch('CreateBackEnd')
+      if (response.status == 200) {
+        commit("setCloudRunning", true)
       }
     } catch (e) {
       console.log("error: ", e)
-      return dispatch('CreateBackEnd')
+      commit("setCloudRunning", false)
     }
   }
 }

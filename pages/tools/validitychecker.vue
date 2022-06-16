@@ -311,12 +311,11 @@ export default {
         params.append('file', event.target.result)
         params.append('filename', self.files[0].name)
         params.append('filesize', self.files[0].size)
+        
         self.$axios
           .post(`${self.ID}/validitychecker/uploadfile`, params)
           .then((response) => {
-            // if (response.status == 200) {
               console.log(response)
-            // }
           })
       }
       await reader.readAsDataURL(this.files[0])
