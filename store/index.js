@@ -35,12 +35,14 @@ export const actions = {
     if (ID === null || typeof ID === 'undefined') {
       return dispatch('CreateBackEnd')
     } else {
-      const response = await this.$axios.post(`${ID}/ping`)
-      if (response.status === 200) {
-        commit("setID", ID)
-        commit("setCloudRunning", true)
-        return dispatch('PingTask')
-      } else {
+      try {
+        const response = await this.$axios.post(`${ID}/ping`)
+        if (response.status === 200) {
+          commit("setID", ID)
+          commit("setCloudRunning", true)
+          return dispatch('PingTask')
+        }
+      } catch (e) {
         return dispatch('CreateBackEnd')
       }
     }
