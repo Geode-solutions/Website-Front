@@ -85,7 +85,7 @@ export default {
         console.log('ReCaptcha token:', token)
 
         const headers = {
-          'Access-Control-Allow-Origin': 'next.geode-solutions.com'
+          'Access-Control-Allow-Origin': 'https://next.geode-solutions.com'
           // 'Access-Control-Allow-Methods': 'POST, OPTIONS'
         }
 
