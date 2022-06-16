@@ -2,7 +2,9 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <h1 class="text-h2 py-5" align="center">File converter</h1>
+        <h1 class="text-h2 py-5" align="center">
+          File converter
+        </h1>
         <v-col>
           <v-row justify="space-around">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
@@ -49,7 +51,9 @@
             @click="currentStep = 1"
           >
             <v-row align="center">
-              <v-col cols="auto"> Please select a file to convert </v-col>
+              <v-col cols="auto">
+                Please select a file to convert
+              </v-col>
               <v-col>
                 <v-chip v-if="files.length">
                   {{ files[0].name }}
@@ -80,7 +84,9 @@
             @click="currentStep = 2"
           >
             <v-row align="center">
-              <v-col cols="auto"> Confirm the data type </v-col>
+              <v-col cols="auto">
+                Confirm the data type
+              </v-col>
               <v-col>
                 <v-chip v-if="GeodeObject">
                   {{ GeodeObject }}
@@ -138,7 +144,9 @@
             @click="currentStep = 3"
           >
             <v-row align="center">
-              <v-col cols="auto"> Select file format </v-col>
+              <v-col cols="auto">
+                Select file format
+              </v-col>
               <v-col>
                 <v-chip v-if="extension">
                   {{ extension }}
@@ -180,7 +188,9 @@
             <v-btn color="primary" @click="ConvertFile(files[0])">
               Convert
             </v-btn>
-            <v-btn text @click="currentStep = 3"> Cancel </v-btn>
+            <v-btn text @click="currentStep = 3">
+              Cancel
+            </v-btn>
           </v-stepper-content>
         </v-stepper>
       </v-col>

@@ -2,7 +2,9 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <h1 class="text-h2 py-5" align="center">Validity checker</h1>
+        <h1 class="text-h2 py-5" align="center">
+          Validity checker
+        </h1>
         <v-col>
           <v-row justify="space-around">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
@@ -49,7 +51,9 @@
             @click="SetStep(1)"
           >
             <v-row align="center">
-              <v-col cols="auto"> Please select a file to check </v-col>
+              <v-col cols="auto">
+                Please select a file to check
+              </v-col>
               <v-col>
                 <v-chip v-if="files.length">
                   {{ files[0].name }}
@@ -80,7 +84,9 @@
             @click="SetStep(2)"
           >
             <v-row align="center">
-              <v-col cols="auto"> Confirm the data type </v-col>
+              <v-col cols="auto">
+                Confirm the data type
+              </v-col>
               <v-col>
                 <v-chip v-if="GeodeObject">
                   {{ GeodeObject }}
@@ -143,16 +149,20 @@
             <v-btn color="primary" @click="InspectFile(files[0])">
               Inspect
             </v-btn>
-            <v-btn text @click="SetStep(2)"> Cancel </v-btn>
+            <v-btn text @click="SetStep(2)">
+              Cancel
+            </v-btn>
           </v-stepper-content>
 
-          <v-stepper-step step="4"> Inspection results </v-stepper-step>
+          <v-stepper-step step="4">
+            Inspection results
+          </v-stepper-step>
           <v-stepper-content step="4">
             <InspectorResultsPanels
               v-if="modelChecks.length"
-              :modelChecks="modelChecks"
+              :model-checks="modelChecks"
               :object="GeodeObject"
-              :filename="this.files[0].name"
+              :filename="files[0].name"
               class="pa-2"
             />
           </v-stepper-content>
@@ -175,11 +185,6 @@ import geode_objects from '@/assets/geode_objects'
 export default {
   name: 'ValidityChecker',
   components: { CloudLoading, InspectorResultsPanels, PackagesVersions },
-  head() {
-    return {
-      title: 'Validity checker',
-    }
-  },
   data() {
     return {
       acceptedExtensions: '',
@@ -211,13 +216,13 @@ export default {
       versions: [],
     }
   },
+  head() {
+    return {
+      title: 'Validity checker',
+    }
+  },
   computed: {
     ...mapState(['ID', 'cloudRunning']),
-  },
-  created() {
-    for (var i = 0; i < this.modelChecks.length; i++) {
-      this.ResultBoolean.push(null)
-    }
   },
   watch: {
     cloudRunning(newValue) {
@@ -226,6 +231,11 @@ export default {
         this.GetPackagesVersions()
       }
     },
+  },
+  created() {
+    for (var i = 0; i < this.modelChecks.length; i++) {
+      this.ResultBoolean.push(null)
+    }
   },
   activated() {
     if (this.cloudRunning === true) {

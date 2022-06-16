@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-expansion-panels multiple focusable v-model="display">
+    <v-expansion-panels v-model="display" multiple focusable>
       <v-expansion-panel
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
@@ -13,14 +13,16 @@
               size="20"
               color="primary"
               indeterminate
-            ></v-progress-circular>
+            />
             <v-icon
               v-else-if="modelCheck.value == modelCheck.expected_value"
               color="primary"
             >
               mdi-check-circle-outline
             </v-icon>
-            <v-icon v-else color="error"> mdi-close-circle-outline </v-icon>
+            <v-icon v-else color="error">
+              mdi-close-circle-outline
+            </v-icon>
             {{ modelCheck.validity_sentence }}
           </div>
         </v-expansion-panel-header>
@@ -28,7 +30,7 @@
           <InspectorResultsPanels
             v-if="!modelCheck.is_leaf"
             :index="index"
-            :modelChecks="modelCheck.list_invalidity"
+            :model-checks="modelCheck.list_invalidity"
             :object="object"
             :filename="filename"
             @updateResult="updateResult"
@@ -89,6 +91,9 @@ export default {
       deep: true,
     },
   },
+  created() {
+    this.GetTestsResults()
+  },
   methods: {
     updateResult(index, value) {
       this.modelChecks[index].value = value
@@ -109,9 +114,6 @@ export default {
         }
       }
     },
-  },
-  created() {
-    this.GetTestsResults()
   },
   computed: {
     ...mapState(['ID']),
