@@ -6,7 +6,7 @@ exports.handler = async function (event) {
       'Access-Control-Allow-Origin': 'https://next.geode-solutions.com'
       // 'Access-Control-Allow-Methods': 'POST, OPTIONS'
     }
-    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`, { headers })
+    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`).data
     console.log(response)
     if (response.success) {
       return {
@@ -14,7 +14,7 @@ exports.handler = async function (event) {
         message: 'Token verifyed',
         response: response
       }
-    } 
+    }
     return {
       success: false,
       message: 'Invalid token',
