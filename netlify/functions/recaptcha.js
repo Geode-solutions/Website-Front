@@ -8,12 +8,12 @@ exports.handler = async function (event) {
     if (response.success) {
       return {
         statusCode: 200,
-        body: response
+        body: JSON.stringify(response)
       }
     }
     return {
       statusCode: 400,
-      body: response
+      body: JSON.stringify(response)
     }
   } catch (e) {
     console.log('ReCaptcha error:', e)
