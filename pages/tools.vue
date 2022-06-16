@@ -83,7 +83,7 @@ export default {
         console.log('coucou')
         const token = await this.$recaptcha.getResponse()
         console.log('ReCaptcha token:', token)
-        const response = await $fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${this.$config.RECAPTCHA_SITE_KEY}&response=${token}`)
+        const response = this.$axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${this.$config.RECAPTCHA_SITE_KEY}&response=${token}`)
         console.log('response :', response)
         if (response.success) {
           this.$store.commit("setCaptchaValidated", true)
