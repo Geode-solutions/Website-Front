@@ -43,6 +43,7 @@ export const actions = {
           return dispatch('PingTask')
         }
       } catch (e) {
+        // If first ping fails
         return dispatch('CreateBackEnd')
       }
     }
@@ -76,11 +77,12 @@ export const actions = {
   async DoPing ({ state }) {
     try {
       const response = await this.$axios.post(`${state.ID}/ping`)
-      if (response.status != 200) {
-        commit("setCloudRunning", false)
+      if (response.status == 200) {
+        commit("setCloudRunning", true)
       }
     } catch (e) {
       console.log("error: ", e)
+      commit("setCloudRunning", false)
     }
   }
 }

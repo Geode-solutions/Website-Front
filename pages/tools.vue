@@ -74,25 +74,15 @@ export default {
       } catch (e) {
         console.error(e);
       }
-
-      // if (this.$config.NODE_ENV !== 'production'){
-      //   await this.setCaptchaValidated(this.$state, true)
-      //   console.log("captchaValidated :", this.captchaValidated)
-      // }
-      // if (this.captchaValidated) {
-      //   console.log('createConnexion')
-      //   this.createConnexion()
-      // }
     }
   },
   methods: {
     ...mapActions(['createConnexion', 'setCaptchaValidated']),
     async onSubmit() {
       try {
-        // console.log('coucou')
-        // const token = await this.$recaptcha.getResponse()
-        // console.log('ReCaptcha token:', token)
-
+        console.log('coucou')
+        const token = await this.$recaptcha.getResponse()
+        console.log('ReCaptcha token:', token)
         this.$store.commit("setCaptchaValidated", true)
         console.log("this.captchaValidated :", this.captchaValidated)
         await this.$recaptcha.reset()
