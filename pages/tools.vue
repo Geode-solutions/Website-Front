@@ -32,7 +32,9 @@
         <v-row class="rows" align-content="center" align="center">
           <v-col class="align" cols="12" align-self="center">
             <recaptcha class="align-center" />
-            <v-btn color="primary" @click="onSubmit()"> Submit </v-btn>
+            <v-btn color="primary" @click="onSubmit()">
+              Submit
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
