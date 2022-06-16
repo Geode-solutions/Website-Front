@@ -6,7 +6,12 @@ export default {
   */
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
-    SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : ''
+    SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
+    NODE_ENV: process.env.NODE_ENV,
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    recaptcha: {
+      siteKey: process.env.RECAPTCHA_SITE_KEY
+    }
   },
 
   target: 'static',
@@ -81,8 +86,14 @@ export default {
       '@nuxtjs/axios',
       '@aceforth/nuxt-netlify',
       '@nuxtjs/vuetify',
-      ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }]
+      ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }],
+      '@nuxtjs/recaptcha'
     ],
+
+  recaptcha: {
+    version: 2,
+    // siteKey: process.env.RECAPTCHA_SITE_KEY
+  },
 
   vuetify: {
     theme: {
