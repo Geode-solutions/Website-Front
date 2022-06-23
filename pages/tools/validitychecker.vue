@@ -270,7 +270,7 @@ export default {
       this.currentStep = this.currentStep + 1
     },
 
-    SetStep(step) {
+    async SetStep(step) {
       if (step <= 3) {
         this.modelChecks = []
       }
@@ -285,7 +285,8 @@ export default {
 
     async InspectFile() {
       await this.UploadFile()
-      this.SetStep(4)
+      console.log('UploadFile okay')
+      await this.SetStep(4)
       await this.GetTestsNames()
     },
     async GetTestsNames() {
@@ -312,11 +313,9 @@ export default {
         params.append('filename', self.files[0].name)
         params.append('filesize', self.files[0].size)
         
-        self.$axios
-          .post(`${self.ID}/validitychecker/uploadfile`, params)
-          .then((response) => {
-              console.log(response)
-          })
+        let response = await self.$axios.post(`${self.ID}/validitychecker/uploadfile`, params)
+        console.log(response)
+        console.log('UploadFile okay')
       }
       await reader.readAsDataURL(this.files[0])
     },
