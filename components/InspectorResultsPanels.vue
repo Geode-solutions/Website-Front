@@ -7,21 +7,14 @@
         class="card"
       >
         <v-expansion-panel-header>
-          <!-- <div> -->
             <v-row dense>
               <v-col cols="auto">
                 <Badge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
-
-
               </v-col>
               <v-col>
                 {{ modelCheck.validity_sentence }}
-
-
               </v-col>
-
             </v-row>
-          <!-- </div> -->
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <InspectorResultsPanels

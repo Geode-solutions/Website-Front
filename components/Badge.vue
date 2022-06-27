@@ -6,9 +6,8 @@
           color="primary"
           indeterminate
           v-on="on"
-      ></v-progress-circular>
-      
-
+      >
+      </v-progress-circular>
       <v-icon
           v-else-if="value == expected_value"
           v-on="on"
@@ -23,9 +22,6 @@
       >
         mdi-alert-circle-outline
       </v-icon>
-
-
-      
     </div>
 </template>
 
@@ -39,9 +35,6 @@ export default {
     expected_value: {
       required: true,
     },
-    // validity_sentence: {
-    //   required: true,
-    // },
   }
 }
 </script>
