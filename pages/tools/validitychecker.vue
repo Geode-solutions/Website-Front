@@ -320,8 +320,6 @@ export default {
           } catch (err) {
             reject(err);
           }
-          console.log(response)
-          // console.log('UploadFile okay')
         }
         reader.readAsDataURL(this.files[0])
       })

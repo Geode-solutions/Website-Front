@@ -8,8 +8,8 @@
       >
         <v-expansion-panel-header>
           <div>
-            <Badge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
-            {{ modelCheck.validity_sentence }}
+            <Badge :value="modelCheck.value" :expected_value="modelCheck.expected_value" :validity_sentence="modelCheck.validity_sentence"/>
+            <!-- {{ modelCheck.validity_sentence }} -->
           </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
