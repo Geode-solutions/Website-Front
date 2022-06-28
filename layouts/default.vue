@@ -58,7 +58,7 @@
       <nuxt />
     </v-main>
 
-    <CookieControl />
+    <CookieControl v-if="this.$config.NODE_ENV === 'production'"/>
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
@@ -124,6 +124,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'GeodeLayout',
   data() {
@@ -155,6 +157,14 @@ export default {
         { icon: 'mdi-email', url: 'mailto:contact@geode-solutions.com' },
       ],
       date: new Date().getFullYear(),
+    }
+  },
+  methods: {
+    ...mapActions(['setReCaptchaValidated']),
+  },
+  created() {
+    if (process.client) {
+      this.setReCaptchaValidated()
     }
   },
 }

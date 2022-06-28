@@ -28,38 +28,91 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <nuxt-child keep-alive />
+      <v-container v-if="((!this.captchaValidated) && (this.$config.NODE_ENV === 'production'))" fluid fill-height>
+        <v-row rows="auto" align-content="center" align="center">
+          <v-col cols="12" align-self="center" align="center">
+            <recaptcha class="align-center"/>
+            <v-btn @click="onSubmit()" color="primary">Submit</v-btn> 
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container v-else>
+        <InternalError v-if="internalError && this.captchaValidated" />
+        <UnderMaintenance v-else-if="underMaintenance && this.captchaValidated" />
+        <nuxt-child v-else keep-alive />
+      </v-container>
     </v-col>
   </v-row>
 </template>
 
+
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import tools_list from '@/assets/tools_list'
+import InternalError from '@/components/InternalError.vue'
+import UnderMaintenance from '@/components/UnderMaintenance.vue'
 
 export default {
   name: 'FreeTools',
+  components: { InternalError, UnderMaintenance },
   data() {
     return {
       tools: tools_list,
     }
   },
-
   head() {
     return {
       title: 'Geode-solutions free tools',
     }
   },
-  created() {
+  async mounted() {
     if (process.client) {
-      this.createConnexion()
+      try {
+        await this.$recaptcha.init()
+      } catch (e) {
+        console.error(e);
+      }
+      if(this.$config.NODE_ENV !=='production'){
+        this.$store.commit("setCaptchaValidated", true)
+      }
     }
   },
   methods: {
-    ...mapActions(['createConnexion']),
-  },
+    ...mapActions(['createConnexion', 'setCaptchaValidated']),
+    async onSubmit() {
+      try {
+        console.log('coucou')
+        const token = await this.$recaptcha.getResponse()
+        console.log('ReCaptcha token:', token)
 
+        const headers = {
+          'Access-Control-Allow-Origin': '*'
+        }
+
+        const response = await this.$axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${this.$config.RECAPTCHA_SITE_KEY}&response=${token}`, {headers: headers})
+        console.log('response :', response)
+        this.$store.commit("setCaptchaValidated", response.success)
+        
+        console.log("this.captchaValidated :", this.captchaValidated)
+        await this.$recaptcha.reset()
+      } catch (error) {
+        console.log('Login error:', error)
+      }
+    },
+    beforeDestroy() {
+      this.$recaptcha.destroy()
+    }
+  },
+  watch: {
+    captchaValidated(newValue) {
+      if (newValue === true) {
+        this.createConnexion()
+        console.log(this.$config.RECAPTCHA_SITE_KEY)
+      }
+    },
+  },
   computed: {
+    ...mapState(['ID', 'internalError', 'captchaValidated', 'underMaintenance']),
     mini() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
