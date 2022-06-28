@@ -28,15 +28,15 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <v-container v-if="((!this.captchaValidated) && (this.$config.NODE_ENV === 'production'))" fluid fill-height>
+      <!-- <v-container v-if="((!this.captchaValidated) && (this.$config.NODE_ENV === 'production'))" fluid fill-height>
         <v-row rows="auto" align-content="center" align="center">
           <v-col cols="12" align-self="center" align="center">
             <recaptcha class="align-center"/>
             <v-btn @click="onSubmit()" color="primary">Submit</v-btn> 
           </v-col>
         </v-row>
-      </v-container>
-      <v-container v-else>
+      </v-container> -->
+      <v-container>
         <InternalError v-if="internalError && this.captchaValidated" />
         <UnderMaintenance v-else-if="underMaintenance && this.captchaValidated" />
         <nuxt-child v-else keep-alive />
