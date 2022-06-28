@@ -1,28 +1,29 @@
 <template>
-    <div>
-      <v-progress-circular
-          v-if="value === null"
-          size="20"
-          color="primary"
-          indeterminate
-          v-on="on"
-      >
-      </v-progress-circular>
-      <v-icon
-          v-else-if="value == expected_value"
-          v-on="on"
-          color="primary"
-      >
-          mdi-check-circle-outline
-      </v-icon>
-      <v-icon
-        v-else
-        v-on="on"
-        color="error"
-      >
-        mdi-alert-circle-outline
-      </v-icon>
-    </div>
+  <v-progress-circular
+    v-if="value == null"
+    size="20"
+    color="primary"
+    indeterminate
+    v-on="on"
+  >
+  </v-progress-circular>
+
+  <v-icon
+    v-else-if="value == 'error'"
+    color="error">
+    mdi-alert-circle-outline
+  </v-icon>
+
+  <v-icon
+    v-else-if="value == expected_value"
+    color="primary">
+    mdi-check-circle-outline
+  </v-icon>
+  <v-icon
+    v-else-if="value != expected_value"
+    color="primary">
+    mdi-check-circle-outline
+  </v-icon>
 </template>
 
 <script>
