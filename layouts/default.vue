@@ -62,7 +62,7 @@
       <nuxt />
     </v-main>
 
-    <CookieControl v-if="$config.NODE_ENV === 'production'" />
+    <CookieControl v-if="this.$config.NODE_ENV === 'production'"/>
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">
@@ -163,13 +163,13 @@ export default {
       date: new Date().getFullYear(),
     }
   },
+  methods: {
+    ...mapActions(['setReCaptchaValidated']),
+  },
   created() {
     if (process.client) {
       this.setReCaptchaValidated()
     }
-  },
-  methods: {
-    ...mapActions(['setReCaptchaValidated']),
   },
 }
 </script>

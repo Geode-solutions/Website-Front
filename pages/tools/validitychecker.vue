@@ -295,6 +295,7 @@ export default {
 
     async InspectFile() {
       await this.UploadFile()
+      console.log('UploadFile okay')
       this.SetStep(4)
       await this.GetTestsNames()
     },
@@ -315,21 +316,23 @@ export default {
     },
     async UploadFile() {
       const self = this
-      const reader = new FileReader()
-      reader.onload = async function (event) {
-        const params = new FormData()
-        params.append('file', event.target.result)
-        params.append('filename', self.files[0].name)
-        params.append('filesize', self.files[0].size)
-        await self.$axios
-          .post(`${self.ID}/validitychecker/uploadfile`, params)
-          .then((response) => {
-            if (response.status == 200) {
-              console.log(response)
-            }
-          })
-      }
-      await reader.readAsDataURL(this.files[0])
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = async function (event) {
+          try {
+            const params = new FormData()
+            params.append('file', event.target.result)
+            params.append('filename', self.files[0].name)
+            params.append('filesize', self.files[0].size)
+          
+            let response = await self.$axios.post(`${self.ID}/validitychecker/uploadfile`, params)
+            resolve(response);
+          } catch (err) {
+            reject(err);
+          }
+        }
+        reader.readAsDataURL(this.files[0])
+      })
     },
   },
 }

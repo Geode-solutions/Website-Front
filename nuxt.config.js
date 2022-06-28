@@ -10,7 +10,7 @@ export default {
     NODE_ENV: process.env.NODE_ENV,
     RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
     recaptcha: {
-      siteKey: process.env.RECAPTCHA_SITE_KEY
+      siteKey: process.env.RECAPTCHA_SECRET_KEY
     }
   },
 

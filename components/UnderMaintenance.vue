@@ -9,6 +9,7 @@
         mdi-traffic-cone
       </v-icon>
     </v-card-title>
+
     <v-card-text>
       This tool is currently under maintenance, please try later
     </v-card-text>

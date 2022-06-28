@@ -7,24 +7,14 @@
         class="card"
       >
         <v-expansion-panel-header>
-          <div>
-            <v-progress-circular
-              v-if="modelCheck.value == null"
-              size="20"
-              color="primary"
-              indeterminate
-            />
-            <v-icon
-              v-else-if="modelCheck.value == modelCheck.expected_value"
-              color="primary"
-            >
-              mdi-check-circle-outline
-            </v-icon>
-            <v-icon v-else color="error">
-              mdi-close-circle-outline
-            </v-icon>
-            {{ modelCheck.validity_sentence }}
-          </div>
+          <v-row dense>
+            <v-col cols="auto">
+              <ValidityBadge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
+            </v-col>
+            <v-col>
+              {{ modelCheck.validity_sentence }}
+            </v-col>
+          </v-row>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <InspectorResultsPanels
@@ -47,10 +37,11 @@
 <script>
 import { mapState } from 'vuex'
 import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
+import ValidityBadge from '@/components/ValidityBadge.vue'
 
 export default {
   name: 'InspectorResultsPanels',
-  components: { InspectorResultsPanels },
+  components: { InspectorResultsPanels, ValidityBadge },
   props: {
     modelChecks: {
       type: Array,
