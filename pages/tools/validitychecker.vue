@@ -270,7 +270,7 @@ export default {
       this.currentStep = this.currentStep + 1
     },
 
-    async SetStep(step) {
+    SetStep(step) {
       if (step <= 3) {
         this.modelChecks = []
       }
@@ -286,7 +286,7 @@ export default {
     async InspectFile() {
       await this.UploadFile()
       console.log('UploadFile okay')
-      await this.SetStep(4)
+      this.SetStep(4)
       await this.GetTestsNames()
     },
     async GetTestsNames() {

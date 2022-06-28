@@ -65,8 +65,6 @@ export default {
       title: 'Geode-solutions free tools',
     }
   },
-  created() {
-  },
   async mounted() {
     if (process.client) {
       try {
@@ -93,11 +91,7 @@ export default {
 
         const response = await this.$axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${this.$config.RECAPTCHA_SITE_KEY}&response=${token}`, {headers: headers})
         console.log('response :', response)
-        if (response.success) {
-          this.$store.commit("setCaptchaValidated", true)
-        } else {
-          this.$store.commit("setCaptchaValidated", false)
-        }
+        this.$store.commit("setCaptchaValidated", response.success)
         
         console.log("this.captchaValidated :", this.captchaValidated)
         await this.$recaptcha.reset()

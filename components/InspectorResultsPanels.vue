@@ -9,7 +9,7 @@
         <v-expansion-panel-header>
             <v-row dense>
               <v-col cols="auto">
-                <Badge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
+                <ValidityBadge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
               </v-col>
               <v-col>
                 {{ modelCheck.validity_sentence }}
@@ -37,11 +37,11 @@
 <script>
 import { mapState } from 'vuex'
 import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
-import Badge from '@/components/Badge.vue'
+import ValidityBadge from '@/components/ValidityBadge.vue'
 
 export default {
   name: 'InspectorResultsPanels',
-  components: { InspectorResultsPanels, Badge },
+  components: { InspectorResultsPanels, ValidityBadge },
   props: {
     modelChecks: {
       type: Array,

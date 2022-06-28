@@ -22,13 +22,13 @@
   <v-icon
     v-else-if="value != expected_value"
     color="primary">
-    mdi-check-circle-outline
+    mdi-close-circle-outline
   </v-icon>
 </template>
 
 <script>
 export default {
-  name: 'Badge',
+  name: 'ValidityBadge',
   props: {
     value: {
       required: true,
