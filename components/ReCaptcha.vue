@@ -1,17 +1,17 @@
 <template>
-    <v-container v-if="((!this.captchaValidated) && (this.$config.NODE_ENV === 'production'))" fluid fill-height>
+    <v-container>
         <v-row rows="auto" align-content="center" align="center">
-            <v-col cols="12" align-self="center" align="center">
-            <recaptcha class="align-center"/>
-            <v-btn @click="SubmitRecaptcha()" color="primary">Submit</v-btn> 
+            <v-col v-if="((!captchaValidated) && (this.$config.NODE_ENV === 'production'))" cols="12" align-self="center" align="center">
+                <recaptcha class="align-center"/>
+                <v-btn @click="SubmitRecaptcha()" color="primary">Submit</v-btn> 
+            </v-col>
+            <v-col v-else-if="internalError" cols="12" align-self="center" align="center">
+                <InternalError />
+            </v-col>
+            <v-col v-else-if="underMaintenance" cols="12" align-self="center" align="center">
+                <UnderMaintenance />
             </v-col>
         </v-row>
-    </v-container>
-    <v-container v-else-if="internalError">
-        <InternalError />
-    </v-container>
-    <v-container v-else-if="underMaintenance">
-        <UnderMaintenance />
     </v-container>
 </template>
 
@@ -66,10 +66,3 @@ export default {
   },
 }
 </script>
-
-<!-- <style scoped>
-.card {
-  border-radius: 10px;
-}
-
-</style> -->

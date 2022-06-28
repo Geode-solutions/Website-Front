@@ -211,7 +211,6 @@ export default {
       modelChecks: [],
       multiple: false,
       objects: [],
-      ResultBoolean: [],
       success: false,
       versions: [],
     }
@@ -231,11 +230,6 @@ export default {
         this.GetPackagesVersions()
       }
     },
-  },
-  created() {
-    for (var i = 0; i < this.modelChecks.length; i++) {
-      this.ResultBoolean.push(null)
-    }
   },
   activated() {
     if (this.cloudRunning === true) {
@@ -308,9 +302,6 @@ export default {
         .then((response) => {
           if (response.status == 200) {
             self.modelChecks = response.data.modelChecks
-            for (var i = 0; i < this.modelChecks.length; i++) {
-              this.ResultBoolean.push(null)
-            }
           }
         })
     },
