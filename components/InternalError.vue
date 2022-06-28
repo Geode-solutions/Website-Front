@@ -8,7 +8,7 @@
       <v-icon color="error" size="20">
         mdi-close-octagon
       </v-icon>
-      </v-card-title>
+    </v-card-title>
     <v-card-subtitle>Oops, something went wrong...</v-card-subtitle>
     <v-card-text>
       The request could not be handled by the server, please try refreshing the page

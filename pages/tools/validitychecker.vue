@@ -2,7 +2,9 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <h1 class="text-h2 py-5" align="center">Validity checker</h1>
+        <h1 class="text-h2 py-5" align="center">
+          Validity checker
+        </h1>
         <v-col>
           <v-row justify="space-around">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
@@ -37,11 +39,11 @@
           </v-row>
         </v-col>
       </v-col>
-      <v-col v-if="!cloudRunning">
-        <cloud-loading />
+      <v-col>
+        <ReCaptcha />
       </v-col>
 
-      <v-col v-else class="pb-5">
+      <v-col  v-if="cloudRunning" class="pb-5">
         <v-stepper v-model="currentStep" class="stepper" vertical>
           <v-stepper-step
             :complete="currentStep > 1"
@@ -49,7 +51,9 @@
             @click="SetStep(1)"
           >
             <v-row align="center">
-              <v-col cols="auto"> Please select a file to check </v-col>
+              <v-col cols="auto">
+                Please select a file to check
+              </v-col>
               <v-col>
                 <v-chip v-if="files.length">
                   {{ files[0].name }}
@@ -80,7 +84,9 @@
             @click="SetStep(2)"
           >
             <v-row align="center">
-              <v-col cols="auto"> Confirm the data type </v-col>
+              <v-col cols="auto">
+                Confirm the data type
+              </v-col>
               <v-col>
                 <v-chip v-if="GeodeObject">
                   {{ GeodeObject }}
@@ -143,16 +149,20 @@
             <v-btn color="primary" @click="InspectFile(files[0])">
               Inspect
             </v-btn>
-            <v-btn text @click="SetStep(2)"> Cancel </v-btn>
+            <v-btn text @click="SetStep(2)">
+              Cancel
+            </v-btn>
           </v-stepper-content>
 
-          <v-stepper-step step="4"> Inspection results </v-stepper-step>
+          <v-stepper-step step="4">
+            Inspection results
+          </v-stepper-step>
           <v-stepper-content step="4">
             <InspectorResultsPanels
               v-if="modelChecks.length"
-              :modelChecks="modelChecks"
+              :model-checks="modelChecks"
               :object="GeodeObject"
-              :filename="this.files[0].name"
+              :filename="files[0].name"
               class="pa-2"
             />
           </v-stepper-content>
@@ -167,19 +177,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import CloudLoading from '@/components/CloudLoading.vue'
+import ReCaptcha from '@/components/ReCaptcha.vue'
 import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
 import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'ValidityChecker',
-  components: { CloudLoading, InspectorResultsPanels, PackagesVersions },
-  head() {
-    return {
-      title: 'Validity checker',
-    }
-  },
+  components: { InspectorResultsPanels, PackagesVersions, ReCaptcha },
   data() {
     return {
       acceptedExtensions: '',
@@ -206,18 +211,17 @@ export default {
       modelChecks: [],
       multiple: false,
       objects: [],
-      ResultBoolean: [],
       success: false,
       versions: [],
     }
   },
+  head() {
+    return {
+      title: 'Validity checker',
+    }
+  },
   computed: {
     ...mapState(['ID', 'cloudRunning']),
-  },
-  created() {
-    for (var i = 0; i < this.modelChecks.length; i++) {
-      this.ResultBoolean.push(null)
-    }
   },
   watch: {
     cloudRunning(newValue) {
@@ -298,9 +302,6 @@ export default {
         .then((response) => {
           if (response.status == 200) {
             self.modelChecks = response.data.modelChecks
-            for (var i = 0; i < this.modelChecks.length; i++) {
-              this.ResultBoolean.push(null)
-            }
           }
         })
     },

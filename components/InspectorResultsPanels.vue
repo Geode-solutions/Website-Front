@@ -1,31 +1,31 @@
 <template>
   <v-container>
-    <v-expansion-panels multiple focusable v-model="display">
+    <v-expansion-panels v-model="display" multiple focusable>
       <v-expansion-panel
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
         class="card"
       >
         <v-expansion-panel-header>
-            <v-row dense>
-              <v-col cols="auto">
-                <ValidityBadge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
-              </v-col>
-              <v-col>
-                {{ modelCheck.validity_sentence }}
-              </v-col>
-            </v-row>
+          <v-row dense>
+            <v-col cols="auto">
+              <ValidityBadge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
+            </v-col>
+            <v-col>
+              {{ modelCheck.validity_sentence }}
+            </v-col>
+          </v-row>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <InspectorResultsPanels
             v-if="!modelCheck.is_leaf"
             :index="index"
-            :modelChecks="modelCheck.list_invalidity"
+            :model-checks="modelCheck.list_invalidity"
             :object="object"
             :filename="filename"
             @updateResult="updateResult"
           />
-          <v-container v-else-if="modelCheck.value!=null" class="pt-6">
+          <v-container v-else-if="modelCheck.value != null" class="pt-6">
             Result = {{ modelCheck.value }}
           </v-container>
         </v-expansion-panel-content>
@@ -60,9 +60,21 @@ export default {
       default: 0,
     },
   },
+  computed: {
+    ...mapState(['ID']),
+    display: function () {
+      let values = new Array()
+      for (let i = 0; i < this.modelChecks.length; i++) {
+        if (!this.modelChecks[i].is_leaf) {
+          values.push(i)
+        }
+      }
+      return values
+    },
+  },
   watch: {
     modelChecks: {
-      handler(value) {
+      handler() {
         let nb_results = 0
         for (let index = 0; index < this.modelChecks.length; index++) {
           const current_check = this.modelChecks[index]
@@ -81,6 +93,9 @@ export default {
       },
       deep: true,
     },
+  },
+  created() {
+    this.GetTestsResults()
   },
   methods: {
     updateResult(index, value) {
@@ -101,21 +116,6 @@ export default {
             })
         }
       }
-    },
-  },
-  created() {
-    this.GetTestsResults()
-  },
-  computed: {
-    ...mapState(['ID']),
-    display: function () {
-      let values = new Array()
-      for (let i = 0; i < this.modelChecks.length; i++) {
-        if (!this.modelChecks[i].is_leaf) {
-          values.push(i)
-        }
-      }
-      return values
     },
   },
 }
