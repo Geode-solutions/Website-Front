@@ -67,14 +67,15 @@ export default {
   },
   async mounted() {
     if (process.client) {
-      try {
-        await this.$recaptcha.init()
-      } catch (e) {
-        console.error(e);
-      }
-      if(this.$config.NODE_ENV !=='production'){
-        this.$store.commit("setCaptchaValidated", true)
-      }
+      this.$store.commit("setCaptchaValidated", true)
+      // try {
+      //   await this.$recaptcha.init()
+      // } catch (e) {
+      //   console.error(e);
+      // }
+      // if(this.$config.NODE_ENV !=='production'){
+      //   this.$store.commit("setCaptchaValidated", true)
+      // }
     }
   },
   methods: {
