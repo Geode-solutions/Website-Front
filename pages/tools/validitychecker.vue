@@ -39,11 +39,11 @@
           </v-row>
         </v-col>
       </v-col>
-      <v-col v-if="!cloudRunning">
-        <cloud-loading />
+      <v-col>
+        <ReCaptcha />
       </v-col>
 
-      <v-col v-else class="pb-5">
+      <v-col  v-if="cloudRunning" class="pb-5">
         <v-stepper v-model="currentStep" class="stepper" vertical>
           <v-stepper-step
             :complete="currentStep > 1"
@@ -177,14 +177,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import CloudLoading from '@/components/CloudLoading.vue'
+import ReCaptcha from '@/components/ReCaptcha.vue'
 import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
 import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'ValidityChecker',
-  components: { CloudLoading, InspectorResultsPanels, PackagesVersions },
+  components: { InspectorResultsPanels, PackagesVersions, ReCaptcha },
   data() {
     return {
       acceptedExtensions: '',

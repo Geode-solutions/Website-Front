@@ -6,6 +6,7 @@ export default {
   */
   publicRuntimeConfig: {
     API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
+    SITE_URL: process.env.SITE_URL,
     SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
     NODE_ENV: process.env.NODE_ENV,
     RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
