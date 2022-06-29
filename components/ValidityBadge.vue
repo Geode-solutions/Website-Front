@@ -7,13 +7,11 @@
     v-on="on"
   >
   </v-progress-circular>
-
   <v-icon
     v-else-if="value == 'error'"
     color="error">
     mdi-alert-circle-outline
   </v-icon>
-
   <v-icon
     v-else-if="value == expected_value"
     color="primary">
@@ -21,7 +19,7 @@
   </v-icon>
   <v-icon
     v-else-if="value != expected_value"
-    color="primary">
+    color="error">
     mdi-close-circle-outline
   </v-icon>
 </template>

@@ -1,18 +1,18 @@
 <template>
-    <v-container>
+    <v-container justify="space-around">
         <v-row rows="auto" align-content="center" align="center">
-            <v-col v-if="((!captchaValidated) && (this.$config.NODE_ENV === 'production'))" cols="12" align-self="center" align="center">
+            <v-col v-if="((!captchaValidated) && (this.$config.NODE_ENV === 'production'))" cols="10" align-self="center" align="center">
                 <recaptcha class="align-center"/>
-                <v-btn @click="SubmitRecaptcha()" color="primary">Submit</v-btn> 
+                <v-btn @click="SubmitRecaptcha()" color="primary">Start tool</v-btn> 
             </v-col>
-            <v-col v-else-if="!cloudRunning" cols="12">
-                <CloudLoading />
-            </v-col>
-            <v-col v-else-if="internalError" cols="12">
+            <v-col v-else-if="internalError">
                 <InternalError />
             </v-col>
-            <v-col v-else-if="underMaintenance" cols="12">
+            <v-col v-else-if="underMaintenance">
                 <UnderMaintenance />
+            </v-col>
+            <v-col v-else-if="!cloudRunning">
+                <CloudLoading />
             </v-col>
         </v-row>
     </v-container>

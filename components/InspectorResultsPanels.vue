@@ -26,7 +26,7 @@
             @updateResult="updateResult"
           />
           <v-container v-else-if="modelCheck.value != null" class="pt-6">
-            Result = {{ modelCheck.value }}
+            Invalid = {{ modelCheck.value }}
           </v-container>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -120,9 +120,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.card {
-  border-radius: 10px;
-}
-</style>

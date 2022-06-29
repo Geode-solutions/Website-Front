@@ -44,7 +44,7 @@
       </v-col>
 
       <v-col v-if="cloudRunning" class="pb-5">
-        <v-stepper v-model="currentStep" class="stepper" vertical>
+        <v-stepper v-model="currentStep" class="stepper" vertical elevation="5">
           <v-stepper-step
             :complete="currentStep > 1"
             step="1"
@@ -337,12 +337,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.card {
-  border-radius: 10px;
-}
-
-.stepper {
-  border-radius: 10px;
-}
-</style>
