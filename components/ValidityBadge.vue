@@ -20,7 +20,7 @@
   <v-icon
     v-else-if="value != expected_value"
     color="error">
-    mdi-close-circle-outline
+    mdi-close-circle
   </v-icon>
 </template>
 
