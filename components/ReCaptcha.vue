@@ -5,13 +5,13 @@
                 <recaptcha class="align-center"/>
                 <v-btn @click="SubmitRecaptcha()" color="primary">Submit</v-btn> 
             </v-col>
-            <v-col v-else-if="!cloudRunning" cols="12" align-self="center" align="center">
+            <v-col v-else-if="!cloudRunning" cols="12">
                 <CloudLoading />
             </v-col>
-            <v-col v-else-if="internalError" cols="12" align-self="center" align="center">
+            <v-col v-else-if="internalError" cols="12">
                 <InternalError />
             </v-col>
-            <v-col v-else-if="underMaintenance" cols="12" align-self="center" align="center">
+            <v-col v-else-if="underMaintenance" cols="12">
                 <UnderMaintenance />
             </v-col>
         </v-row>
@@ -28,7 +28,7 @@ export default {
   name: 'FileConverter',
   components: { CloudLoading, InternalError, UnderMaintenance },
   computed: {
-    ...mapState(['internalError', 'captchaValidated', 'underMaintenance']),
+    ...mapState(['captchaValidated', 'cloudRunning', 'internalError', 'underMaintenance']),
   },
   watch: {
     captchaValidated(newValue) {
