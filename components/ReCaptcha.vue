@@ -5,6 +5,9 @@
                 <recaptcha class="align-center"/>
                 <v-btn @click="SubmitRecaptcha()" color="primary">Submit</v-btn> 
             </v-col>
+            <v-col v-else-if="!cloudRunning" cols="12" align-self="center" align="center">
+                <CloudLoading />
+            </v-col>
             <v-col v-else-if="internalError" cols="12" align-self="center" align="center">
                 <InternalError />
             </v-col>
