@@ -92,7 +92,6 @@ export default {
 
   recaptcha: {
     version: 2,
-    // siteKey: process.env.RECAPTCHA_SITE_KEY
   },
 
   vuetify: {

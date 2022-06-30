@@ -51,15 +51,8 @@ export default {
         try {
         const token = await this.$recaptcha.getResponse()
         console.log('ReCaptcha token:', token)
-        const response = await this.$axios.post(
-            `${this.$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`
-        )
-        console.log('response :', response)
-        if (response.status == 200) {
-            this.$store.commit('setCaptchaValidated', true)
-        } else {
-            this.$store.commit('setCaptchaValidated', false)
-        }
+        const response = await this.$axios.post(`${this.$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
+        this.$store.commit('setCaptchaValidated', response.status == 200)
         console.log('this.captchaValidated :', this.captchaValidated)
         await this.$recaptcha.reset()
         } catch (error) {

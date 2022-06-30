@@ -40,7 +40,7 @@
         </v-col>
       </v-col>
       <v-col>
-        <ReCaptcha />
+        <ToolLauncher />
       </v-col>
 
       <v-col v-if="cloudRunning" class="pb-5">
@@ -177,14 +177,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import ReCaptcha from '@/components/ReCaptcha.vue'
+import ToolLauncher from '@/components/ToolLauncher.vue'
 import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
 import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'ValidityChecker',
-  components: { InspectorResultsPanels, PackagesVersions, ReCaptcha },
+  components: { InspectorResultsPanels, PackagesVersions, ToolLauncher },
   data() {
     return {
       acceptedExtensions: '',

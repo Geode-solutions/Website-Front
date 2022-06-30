@@ -23,7 +23,6 @@
     "nuxt-cookie-control": "^1.9.91",
     "vue-carousel": "^0.18.0",
     "vue-particles": "^1.0.9",
-    "vue-recaptcha": "^2.0.2",
     "vuewordcloud": "^18.7.12",
     "vuex": "^3.6.2"
   },
@@ -35,8 +34,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.1.1",
     "eslint-plugin-vuetify": "1.1.0",
-    "prettier": "^2.5.0",
-    "sass": "^1.53.0",
-    "sass-loader": "^10.3.0"
+    "prettier": "^2.5.0"
   }
 }

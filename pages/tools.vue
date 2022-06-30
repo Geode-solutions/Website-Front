@@ -33,7 +33,6 @@
   </v-row>
 </template>
 
-
 <script>
 import tools_list from '@/assets/tools_list'
 
@@ -49,9 +48,7 @@ export default {
       title: 'Geode-solutions free tools',
     }
   },
-  
   computed: {
-    // ...mapState(['ID', 'internalError', 'captchaValidated', 'underMaintenance']),
     mini() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
@@ -67,11 +64,6 @@ export default {
         default:
           return false
       }
-    },
-  },
-  methods: {
-    beforeDestroy() {
-      this.$recaptcha.destroy()
     },
   },
 }
