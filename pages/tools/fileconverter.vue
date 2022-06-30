@@ -2,7 +2,9 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <h1 class="text-h2 py-5" align="center">File converter</h1>
+        <h1 class="text-h2 py-5" align="center">
+          File converter
+        </h1>
         <v-col>
           <v-row justify="space-around">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
@@ -37,19 +39,21 @@
           </v-row>
         </v-col>
       </v-col>
-      <v-col v-if="!cloudRunning">
-        <cloud-loading />
+      <v-col>
+        <ToolLauncher />
       </v-col>
 
-      <v-col v-else class="pb-5">
-        <v-stepper v-model="currentStep" class="stepper" vertical>
+      <v-col v-if="cloudRunning" class="pb-5">
+        <v-stepper v-model="currentStep" class="stepper" vertical elevation="5">
           <v-stepper-step
             :complete="currentStep > 1"
             step="1"
             @click="currentStep = 1"
           >
             <v-row align="center">
-              <v-col cols="auto"> Please select a file to convert </v-col>
+              <v-col cols="auto">
+                Please select a file to convert
+              </v-col>
               <v-col>
                 <v-chip v-if="files.length">
                   {{ files[0].name }}
@@ -80,7 +84,9 @@
             @click="currentStep = 2"
           >
             <v-row align="center">
-              <v-col cols="auto"> Confirm the data type </v-col>
+              <v-col cols="auto">
+                Confirm the data type
+              </v-col>
               <v-col>
                 <v-chip v-if="GeodeObject">
                   {{ GeodeObject }}
@@ -138,7 +144,9 @@
             @click="currentStep = 3"
           >
             <v-row align="center">
-              <v-col cols="auto"> Select file format </v-col>
+              <v-col cols="auto">
+                Select file format
+              </v-col>
               <v-col>
                 <v-chip v-if="extension">
                   {{ extension }}
@@ -180,7 +188,9 @@
             <v-btn color="primary" @click="ConvertFile(files[0])">
               Convert
             </v-btn>
-            <v-btn text @click="currentStep = 3"> Cancel </v-btn>
+            <v-btn text @click="currentStep = 3">
+              Cancel
+            </v-btn>
           </v-stepper-content>
         </v-stepper>
       </v-col>
@@ -194,13 +204,13 @@
 <script>
 import { mapState } from 'vuex'
 import fileDownload from 'js-file-download'
-import CloudLoading from '@/components/CloudLoading.vue'
+import ToolLauncher from '@/components/ToolLauncher.vue'
 import PackagesVersions from '@/components/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'FileConverter',
-  components: { CloudLoading, PackagesVersions },
+  components: { PackagesVersions, ToolLauncher },
   data() {
     return {
       acceptedExtensions: '',
@@ -227,7 +237,6 @@ export default {
       loading: false,
       multiple: false,
       versions: [],
-      multiple: false,
       objects: [],
       success: false,
     }
@@ -328,12 +337,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.card {
-  border-radius: 10px;
-}
-
-.stepper {
-  border-radius: 10px;
-}
-</style>

@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import tools_list from '@/assets/tools_list'
 
 export default {
@@ -44,21 +43,11 @@ export default {
       tools: tools_list,
     }
   },
-
   head() {
     return {
       title: 'Geode-solutions free tools',
     }
   },
-  created() {
-    if (process.client) {
-      this.createConnexion()
-    }
-  },
-  methods: {
-    ...mapActions(['createConnexion']),
-  },
-
   computed: {
     mini() {
       switch (this.$vuetify.breakpoint.name) {

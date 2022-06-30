@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12">
-        <v-card class="card" elevation="2">
+        <v-card class="card" elevation="5">
           <v-card-title>Coming soon!</v-card-title>
           <v-card-text>
             This free tool is currently under development. Stay tuned!
@@ -23,9 +23,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.card {
-  border-radius: 10px;
-}
-</style>
