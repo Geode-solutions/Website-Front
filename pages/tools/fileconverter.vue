@@ -185,8 +185,20 @@
             Convert your file
           </v-stepper-step>
           <v-stepper-content step="4">
-            <v-btn color="primary" @click="ConvertFile(files[0])">
+             <v-btn
+              :loading="loading"
+              color="primary"
+              @click="ConvertFile(files[0])"
+            >
               Convert
+              <template v-slot:loader>
+                <v-progress-circular
+                  indeterminate
+                  size="20"
+                  color="white"
+                  width="3"
+                ></v-progress-circular>
+              </template>
             </v-btn>
             <v-btn text @click="currentStep = 3">
               Cancel
@@ -235,6 +247,7 @@ export default {
         },
       ],
       loading: false,
+      loader: null,
       multiple: false,
       versions: [],
       objects: [],
@@ -250,6 +263,14 @@ export default {
         this.GetAllowedFiles()
         this.GetPackagesVersions()
       }
+    },
+    loader () {
+      const l = this.loader
+      this[l] = !this[l]
+
+      setTimeout(() => (this[l] = false), 3000)
+
+      this.loader = null
     },
   },
   activated() {
@@ -319,6 +340,8 @@ export default {
         params.append('extension', self.extension)
         params.append('responseType', 'blob')
 
+        self.loading = true
+
         await self.$axios
           .post(`${self.ID}/fileconverter/convertfile`, params)
           .then((response) => {
@@ -329,6 +352,7 @@ export default {
                 self.extension
               fileDownload(response.data, newFilename)
             }
+            self.loading = false
           })
       }
       await reader.readAsDataURL(this.files[0])

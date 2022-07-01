@@ -101,7 +101,7 @@ export default {
     updateResult(index, value) {
       this.modelChecks[index].value = value
     },
-    GetTestsResults() {
+    async GetTestsResults() {
       for (let index = 0; index < this.modelChecks.length; index++) {
         const current_check = this.modelChecks[index]
         if (current_check.is_leaf) {
@@ -109,11 +109,10 @@ export default {
           params.append('object', this.object)
           params.append('filename', this.filename)
           params.append('test', current_check.route)
-          this.$axios
-            .post(`${this.ID}/validitychecker/inspectfile`, params)
-            .then((response) => {
-              current_check.value = response.data.Result
-            })
+          let response = await this.$axios.post(`${this.ID}/validitychecker/inspectfile`, params)
+            // .then((response) => {
+          current_check.value = response.data.Result
+        //     })
         }
       }
     },

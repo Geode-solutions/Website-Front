@@ -5,7 +5,8 @@ export const state = () => ({
   cloudRunning: false,
   underMaintenance: false,
   internalError: false,
-  captchaValidated: false
+  captchaValidated: false,
+  requestCounter: 0
 })
 export const mutations = {
   setID (state, ID) {
@@ -25,6 +26,12 @@ export const mutations = {
   },
   setCaptchaValidated (state, captchaValidated) {
     state.captchaValidated = captchaValidated
+  },
+  startRequest (state) {
+    state.requestCounter++
+  },
+  stopRequest (state) {
+    state.requestCounter--
   }
 }
 export const actions = {
@@ -78,8 +85,10 @@ export const actions = {
         commit("setCloudRunning", true)
       }
     } catch (e) {
-      console.log("error: ", e)
-      commit("setCloudRunning", false)
+      if (state.requestCounter == 0) {
+        console.log("error: ", e)
+        commit("setCloudRunning", false)
+      }
     }
   }
 }
