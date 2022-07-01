@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-expansion-panels v-model="display" multiple focusable>
+    <v-expansion-panels multiple focusable>
       <v-expansion-panel
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
