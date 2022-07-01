@@ -222,7 +222,6 @@ export default {
         },
       ],
       loading: false,
-      loader: null,
       modelChecks: [],
       multiple: false,
       objects: [],
@@ -337,6 +336,7 @@ export default {
 
             resolve(response);
           } catch (err) {
+            self.loading = false
             reject(err);
           }
         }

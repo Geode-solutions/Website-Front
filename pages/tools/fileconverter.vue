@@ -247,7 +247,6 @@ export default {
         },
       ],
       loading: false,
-      loader: null,
       multiple: false,
       versions: [],
       objects: [],
@@ -263,14 +262,6 @@ export default {
         this.GetAllowedFiles()
         this.GetPackagesVersions()
       }
-    },
-    loader () {
-      const l = this.loader
-      this[l] = !this[l]
-
-      setTimeout(() => (this[l] = false), 3000)
-
-      this.loader = null
     },
   },
   activated() {
@@ -342,7 +333,8 @@ export default {
 
         self.loading = true
 
-        await self.$axios
+        try {
+          await self.$axios
           .post(`${self.ID}/fileconverter/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
@@ -354,6 +346,9 @@ export default {
             }
             self.loading = false
           })
+        } catch(err){
+          self.loading = false
+        }
       }
       await reader.readAsDataURL(this.files[0])
     },
