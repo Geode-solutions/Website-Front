@@ -330,10 +330,11 @@ export default {
             params.append('file', event.target.result)
             params.append('filename', self.files[0].name)
             params.append('filesize', self.files[0].size)
-
+            
             self.loading = true
             let response = await self.$axios.post(`${self.ID}/validitychecker/uploadfile`, params)
             self.loading = false
+
             resolve(response);
           } catch (err) {
             reject(err);

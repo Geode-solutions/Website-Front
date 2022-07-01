@@ -109,10 +109,9 @@ export default {
           params.append('object', this.object)
           params.append('filename', this.filename)
           params.append('test', current_check.route)
+          
           let response = await this.$axios.post(`${this.ID}/validitychecker/inspectfile`, params)
-            // .then((response) => {
           current_check.value = response.data.Result
-        //     })
         }
       }
     },
