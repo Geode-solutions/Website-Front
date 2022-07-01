@@ -146,8 +146,21 @@
             Inspect your file
           </v-stepper-step>
           <v-stepper-content step="3">
-            <v-btn color="primary" @click="InspectFile(files[0])">
+
+            <v-btn
+              :loading="loading"
+              color="primary"
+              @click="InspectFile(files[0])"
+            >
               Inspect
+              <template v-slot:loader>
+                <v-progress-circular
+                  indeterminate
+                  size="20"
+                  color="white"
+                  width="3"
+                ></v-progress-circular>
+              </template>
             </v-btn>
             <v-btn text @click="SetStep(2)">
               Cancel
@@ -208,6 +221,7 @@ export default {
           href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
         },
       ],
+      loading: false,
       modelChecks: [],
       multiple: false,
       objects: [],
@@ -315,10 +329,14 @@ export default {
             params.append('file', event.target.result)
             params.append('filename', self.files[0].name)
             params.append('filesize', self.files[0].size)
-          
+            
+            self.loading = true
             let response = await self.$axios.post(`${self.ID}/validitychecker/uploadfile`, params)
+            self.loading = false
+
             resolve(response);
           } catch (err) {
+            self.loading = false
             reject(err);
           }
         }

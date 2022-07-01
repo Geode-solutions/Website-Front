@@ -4,7 +4,6 @@
     size="20"
     color="primary"
     indeterminate
-    v-on="on"
   >
   </v-progress-circular>
   <v-icon

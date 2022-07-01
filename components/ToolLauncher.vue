@@ -36,6 +36,11 @@ export default {
         this.createConnexion()
       }
     },
+    cloudRunning(newValue, oldValue) {
+      if (newValue === false && oldValue == true) {
+        this.$store.commit('setInternalError', true)
+      }
+    },
   },
   mounted(){
     if(process.client){
