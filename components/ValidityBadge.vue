@@ -12,12 +12,12 @@
     mdi-alert-circle-outline
   </v-icon>
   <v-icon
-    v-else-if="value == expected_value"
+    v-else-if="value == true"
     color="primary">
     mdi-check-circle-outline
   </v-icon>
   <v-icon
-    v-else-if="value != expected_value"
+    v-else-if="value == false"
     color="error">
     mdi-close-circle
   </v-icon>
@@ -28,9 +28,6 @@ export default {
   name: 'ValidityBadge',
   props: {
     value: {
-      required: true,
-    },
-    expected_value: {
       required: true,
     },
   }
