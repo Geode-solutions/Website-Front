@@ -9,10 +9,10 @@
         <v-expansion-panel-header>
           <v-row dense>
             <v-col cols="auto">
-              <ValidityBadge :value="modelCheck.value" :expected_value="modelCheck.expected_value"/>
+              <ValidityBadge :value="modelCheck.value"/>
             </v-col>
             <v-col>
-              {{ modelCheck.validity_sentence }}
+              {{ modelCheck.sentence }}
             </v-col>
           </v-row>
         </v-expansion-panel-header>
@@ -20,13 +20,13 @@
           <InspectorResultsPanels
             v-if="!modelCheck.is_leaf"
             :index="index"
-            :model-checks="modelCheck.list_invalidity"
+            :model-checks="modelCheck.children"
             :object="object"
             :filename="filename"
             @updateResult="updateResult"
           />
-          <v-container v-else-if="modelCheck.value != null" class="pt-6">
-            Invalid = {{ modelCheck.value }}
+          <v-container v-else-if="modelCheck.value == false" class="pt-6">
+            Invalid = {{ modelCheck.list_invalidities }}
           </v-container>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -81,7 +81,7 @@ export default {
           if (current_check.value == null) {
             continue
           }
-          if (current_check.value != current_check.expected_value) {
+          if (current_check.value != true) {
             this.$emit('updateResult', this.index, false)
             return
           }
@@ -113,6 +113,7 @@ export default {
           try{
             let response = await this.$axios.post(`${this.ID}/validitychecker/inspectfile`, params)
             current_check.value = response.data.Result
+            current_check.list_invalidities = response.data.list_invalidities
           } catch (err) {
             current_check.value = 'error'
           }
