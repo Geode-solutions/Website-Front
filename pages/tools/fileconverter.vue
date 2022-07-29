@@ -338,7 +338,10 @@ export default {
           .post(`${self.ID}/fileconverter/convertfile`, params)
           .then((response) => {
             if (response.status == 200) {
-              const newFileName = response.headers['new-file-name']
+              let newFilename =
+                self.files[0].name.replace(/\.[^/.]+$/, '') +
+                '.' +
+                self.extension
               fileDownload(response.data, newFileName)
             }
             self.loading = false
