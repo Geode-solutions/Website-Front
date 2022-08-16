@@ -342,7 +342,7 @@ export default {
                 self.files[0].name.replace(/\.[^/.]+$/, '') +
                 '.' +
                 self.extension
-              fileDownload(response.data, newFilename)
+              fileDownload(response.data, newFileName)
             }
             self.loading = false
           })
