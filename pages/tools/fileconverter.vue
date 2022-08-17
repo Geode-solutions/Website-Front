@@ -329,9 +329,8 @@ export default {
         params.append('filename', self.files[0].name)
         params.append('filesize', self.files[0].size)
         params.append('extension', self.extension)
-        params.append('responseType', 'arraybuffer')
+        params.append('responseType', 'blob')
         params.append('responseEncoding', 'binary')
-        console.log(self.files[0].size)
         self.loading = true
 
         try {
