@@ -329,13 +329,14 @@ export default {
         params.append('filename', self.files[0].name)
         params.append('filesize', self.files[0].size)
         params.append('extension', self.extension)
-        params.append('responseType', 'blob')
-
+        params.append('responseType', 'arraybuffer')
+        params.append('responseEncoding', 'binary')
+        console.log(self.files[0].size)
         self.loading = true
 
         try {
           await self.$axios
-          .post(`${self.ID}/fileconverter/convertfile`, params)
+          .post(`${self.ID}/fileconverter/convertfile`, params, {responseType: 'blob'})
           .then((response) => {
             if (response.status == 200) {
               const newFileName = response.headers['new-file-name']
