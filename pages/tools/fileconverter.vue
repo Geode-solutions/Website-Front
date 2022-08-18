@@ -330,19 +330,16 @@ export default {
         params.append('filesize', self.files[0].size)
         params.append('extension', self.extension)
         params.append('responseType', 'blob')
-
+        params.append('responseEncoding', 'binary')
         self.loading = true
 
         try {
           await self.$axios
-          .post(`${self.ID}/fileconverter/convertfile`, params)
+          .post(`${self.ID}/fileconverter/convertfile`, params, {responseType: 'blob'})
           .then((response) => {
             if (response.status == 200) {
-              let newFilename =
-                self.files[0].name.replace(/\.[^/.]+$/, '') +
-                '.' +
-                self.extension
-              fileDownload(response.data, newFilename)
+              const newFileName = response.headers['new-file-name']
+              fileDownload(response.data, newFileName)
             }
             self.loading = false
           })
