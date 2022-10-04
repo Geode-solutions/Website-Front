@@ -274,9 +274,7 @@ export default {
   },
   methods: {
     async GetAllowedFiles() {
-      const data = await this.$axios.$get(
-        `${this.ID}/fileconverter/allowedfiles`
-      )
+      const data = await this.$axios.$get(`${this.ID}/fileconverter/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
     },
@@ -294,11 +292,7 @@ export default {
       for (let i = 0; i < this.files.length; i++) {
         let params = new FormData()
         params.append('filename', this.files[i].name)
-
-        const data = await this.$axios.$post(
-          `${this.ID}/fileconverter/allowedobjects`,
-          params
-        )
+        const data = await this.$axios.$post(`${this.ID}/fileconverter/allowedobjects`, params)
         this.objects = data.objects
       }
       this.currentStep = this.currentStep + 1
@@ -308,10 +302,7 @@ export default {
       params.append('object', object)
       this.GeodeObject = object
 
-      const data = await this.$axios.$post(
-        `${this.ID}/fileconverter/outputfileextensions`,
-        params
-      )
+      const data = await this.$axios.$post(`${this.ID}/fileconverter/outputfileextensions`, params)
       this.fileExtensions = data.outputfileextensions
       this.currentStep = this.currentStep + 1
     },
