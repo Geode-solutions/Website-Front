@@ -131,7 +131,7 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <p>
+              <p class="ma-4">
                 This file format isn't supported! Please check the supported
                 file formats documentation for more information
               </p>
