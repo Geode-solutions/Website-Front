@@ -135,8 +135,8 @@
             </v-row>
             <v-row v-else>
               <p class="ma-4">
-                This file format isn't supported! Please check the supported
-                file formats documentation for more information
+                This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
+                supported file formats documentation</a> for more information
               </p>
             </v-row>
           </v-stepper-content>
@@ -288,7 +288,7 @@ export default {
       this.success = true
       this.message = 'File(s) selected'
       if (changedFiles) {
-          this.files = [changedFiles]
+          this.files = changedFiles
       }
       const params = new FormData()
       params.append('filename', this.files[0].name)
