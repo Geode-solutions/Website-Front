@@ -6,7 +6,7 @@
           Validity checker
         </h1>
         <v-col>
-          <v-row justify="space-around">
+          <v-row class="justify-center">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
               <v-card
                 v-ripple
@@ -17,7 +17,7 @@
                 target="_blank"
                 contain
               >
-                <v-row justify="center" align="center">
+                <v-row class="justify-center">
                   <v-col cols="auto">
                     <v-icon size="128" class="justify-center">
                       {{ item.icon }}
@@ -98,7 +98,7 @@
           <v-stepper-content step="2">
             <v-row v-if="objects.length">
               <v-col>
-                <v-row justify="left">
+                <v-row class="justify-left">
                   <v-col
                     v-for="object in objects"
                     :key="object"

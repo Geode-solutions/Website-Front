@@ -6,7 +6,7 @@
           File converter
         </h1>
         <v-col>
-          <v-row justify="space-around">
+          <v-row class="justify-center">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
               <v-card
                 v-ripple
@@ -17,7 +17,7 @@
                 target="_blank"
                 contain
               >
-                <v-row justify="center" align="center">
+                <v-row class="justify-center">
                   <v-col cols="auto">
                     <v-icon size="128" class="justify-center">
                       {{ item.icon }}
@@ -101,7 +101,7 @@
           <v-stepper-content step="2">
             <v-row v-if="objects.length">
               <v-col>
-                <v-row justify="left">
+                <v-row class="justify-left">
                   <v-col
                     v-for="object in objects"
                     :key="object"
@@ -161,7 +161,7 @@
           <v-stepper-content step="3">
             <v-row v-if="fileExtensions.length" class="flex-column">
               <v-col>
-                <v-row justify="left">
+                <v-row class="justify-left">
                   <v-col
                     v-for="fileExtension in fileExtensions"
                     :key="fileExtension"
@@ -171,7 +171,6 @@
                     <v-card
                       class="card ma-2"
                       hover
-                      v-on="on"
                       @click="setFileFormat(fileExtension)"
                     >
                       <v-card-title class="justify-center">
@@ -191,7 +190,7 @@
              <v-btn
               :loading="loading"
               color="primary"
-              @click="ConvertFile(files[0])"
+              @click="ConvertFile(files)"
             >
               Convert
               <template v-slot:loader>
@@ -319,7 +318,7 @@ export default {
           let params = new FormData()
           
           params.append('object', self.GeodeObject)
-          params.append('file', event.target.result)
+          params.append('file', event.target.result[i])
           params.append('filename', self.files[i].name)
           params.append('filesize', self.files[i].size)
           params.append('extension', self.extension)
@@ -341,7 +340,7 @@ export default {
             self.loading = false
           }
         }
-        await reader.readAsDataURL(this.files[i])
+        await reader.readAsDataURL(self.files[i])
       }
     },
   },
