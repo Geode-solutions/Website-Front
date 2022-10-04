@@ -290,14 +290,17 @@ export default {
       if (changedFiles) {
           this.files = changedFiles
       }
-      const params = new FormData()
-      params.append('filename', this.files[0].name)
 
-      const data = await this.$axios.$post(
-        `${this.ID}/fileconverter/allowedobjects`,
-        params
-      )
-      this.objects = data.objects
+      for (let i = 0; i < this.files.length; i++) {
+        let params = new FormData()
+        params.append('filename', this.files[i].name)
+
+        const data = await this.$axios.$post(
+          `${this.ID}/fileconverter/allowedobjects`,
+          params
+        )
+        this.objects = data.objects
+      }
       this.currentStep = this.currentStep + 1
     },
     async GetOutputFileExtensions(object) {
@@ -322,7 +325,7 @@ export default {
         
         const reader = new FileReader()
         reader.onload = async function (event) {
-          const params = new FormData()
+          let params = new FormData()
           
           params.append('object', self.GeodeObject)
           params.append('file', event.target.result)
