@@ -316,8 +316,6 @@ export default {
         let reader = new FileReader()
         reader.onload = async function (event) {
           let params = new FormData()
-          
-          console.log('event : ', event)
 
           params.append('object', self.GeodeObject)
           params.append('file', event.target.result)
@@ -342,7 +340,6 @@ export default {
             self.loading = false
           }
         }
-        console.log('self.files[i] : ', self.files[i])
         await reader.readAsDataURL(self.files[i])
       }
     },
