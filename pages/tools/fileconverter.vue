@@ -313,12 +313,14 @@ export default {
       const self = this
       for (let i = 0; i < self.files.length; i++) {
         
-        const reader = new FileReader()
+        let reader = new FileReader()
         reader.onload = async function (event) {
           let params = new FormData()
           
+          console.log('event : ', event)
+
           params.append('object', self.GeodeObject)
-          params.append('file', event.target.result[i])
+          params.append('file', event.target.result)
           params.append('filename', self.files[i].name)
           params.append('filesize', self.files[i].size)
           params.append('extension', self.extension)
@@ -340,6 +342,7 @@ export default {
             self.loading = false
           }
         }
+        console.log('self.files[i] : ', self.files[i])
         await reader.readAsDataURL(self.files[i])
       }
     },
