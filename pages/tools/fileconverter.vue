@@ -55,9 +55,6 @@
                 Please select a file to convert
               </v-col>
               <v-col v-if="files.length">
-                <!-- <v-chip v-for="file in files" :key="file.name">
-                  {{ file.name }}
-                </v-chip> -->
                 <v-chip v-for="(file, index) in files" :key="index">
                   {{ file.name }}
                 </v-chip>
@@ -133,9 +130,12 @@
                 </v-row>
               </v-col>
             </v-row>
+
             <v-row v-else>
               <p class="ma-4">
-                This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
+                <span v-if="files.length==1">This file format is not supported! </span>
+                <span v-else>This file format combination is not supported! </span>
+                Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
                 supported file formats documentation</a> for more information
               </p>
             </v-row>
@@ -287,13 +287,23 @@ export default {
       if (changedFiles) {
           this.files = changedFiles
       }
+      this.objects = []
+      let tempObjects = []
 
+      console.log(this.files.length)
       for (let i = 0; i < this.files.length; i++) {
-        let params = new FormData()
+        console.log('i :', i)
+        const params = new FormData()
         params.append('filename', this.files[i].name)
         const data = await this.$axios.$post(`${this.ID}/fileconverter/allowedobjects`, params)
-        this.objects = data.objects
+        if(i===0){
+          tempObjects = data.objects
+        } else {
+          tempObjects = tempObjects.filter(value => data.objects.includes(value))
+        }
+        console.log('tempObjects :', tempObjects)
       }
+      this.objects = tempObjects
       this.currentStep = this.currentStep + 1
     },
     async GetOutputFileExtensions(object) {
