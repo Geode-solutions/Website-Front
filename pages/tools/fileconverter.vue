@@ -6,7 +6,7 @@
           File converter
         </h1>
         <v-col>
-          <v-row justify="space-around">
+          <v-row class="justify-center">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
               <v-card
                 v-ripple
@@ -17,7 +17,7 @@
                 target="_blank"
                 contain
               >
-                <v-row justify="center" align="center">
+                <v-row class="justify-center">
                   <v-col cols="auto">
                     <v-icon size="128" class="justify-center">
                       {{ item.icon }}
@@ -54,9 +54,12 @@
               <v-col cols="auto">
                 Please select a file to convert
               </v-col>
-              <v-col>
-                <v-chip v-if="files.length">
-                  {{ files[0].name }}
+              <v-col v-if="files.length">
+                <!-- <v-chip v-for="file in files" :key="file.name">
+                  {{ file.name }}
+                </v-chip> -->
+                <v-chip v-for="(file, index) in files" :key="index">
+                  {{ file.name }}
                 </v-chip>
               </v-col>
             </v-row>
@@ -66,7 +69,7 @@
             <v-file-input
               chips
               rounded
-              :multiple="multiple"
+              multiple
               color="#3b3b3b"
               :label="inputMessage"
               :accept="acceptedExtensions"
@@ -98,7 +101,7 @@
           <v-stepper-content step="2">
             <v-row v-if="objects.length">
               <v-col>
-                <v-row justify="left">
+                <v-row class="justify-left">
                   <v-col
                     v-for="object in objects"
                     :key="object"
@@ -131,9 +134,9 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <p>
-                This file format isn't supported! Please check the supported
-                file formats documentation for more information
+              <p class="ma-4">
+                This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
+                supported file formats documentation</a> for more information
               </p>
             </v-row>
           </v-stepper-content>
@@ -158,7 +161,7 @@
           <v-stepper-content step="3">
             <v-row v-if="fileExtensions.length" class="flex-column">
               <v-col>
-                <v-row justify="left">
+                <v-row class="justify-left">
                   <v-col
                     v-for="fileExtension in fileExtensions"
                     :key="fileExtension"
@@ -168,7 +171,6 @@
                     <v-card
                       class="card ma-2"
                       hover
-                      v-on="on"
                       @click="setFileFormat(fileExtension)"
                     >
                       <v-card-title class="justify-center">
@@ -188,7 +190,7 @@
              <v-btn
               :loading="loading"
               color="primary"
-              @click="ConvertFile(files[0])"
+              @click="ConvertFile(files)"
             >
               Convert
               <template v-slot:loader>
@@ -247,7 +249,6 @@ export default {
         },
       ],
       loading: false,
-      multiple: false,
       versions: [],
       objects: [],
       success: false,
@@ -272,9 +273,7 @@ export default {
   },
   methods: {
     async GetAllowedFiles() {
-      const data = await this.$axios.$get(
-        `${this.ID}/fileconverter/allowedfiles`
-      )
+      const data = await this.$axios.$get(`${this.ID}/fileconverter/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
     },
@@ -286,20 +285,15 @@ export default {
       this.success = true
       this.message = 'File(s) selected'
       if (changedFiles) {
-        if (this.multiple) {
           this.files = changedFiles
-        } else {
-          this.files = [changedFiles]
-        }
       }
-      const params = new FormData()
-      params.append('filename', this.files[0].name)
 
-      const data = await this.$axios.$post(
-        `${this.ID}/fileconverter/allowedobjects`,
-        params
-      )
-      this.objects = data.objects
+      for (let i = 0; i < this.files.length; i++) {
+        let params = new FormData()
+        params.append('filename', this.files[i].name)
+        const data = await this.$axios.$post(`${this.ID}/fileconverter/allowedobjects`, params)
+        this.objects = data.objects
+      }
       this.currentStep = this.currentStep + 1
     },
     async GetOutputFileExtensions(object) {
@@ -307,10 +301,7 @@ export default {
       params.append('object', object)
       this.GeodeObject = object
 
-      const data = await this.$axios.$post(
-        `${this.ID}/fileconverter/outputfileextensions`,
-        params
-      )
+      const data = await this.$axios.$post(`${this.ID}/fileconverter/outputfileextensions`, params)
       this.fileExtensions = data.outputfileextensions
       this.currentStep = this.currentStep + 1
     },
@@ -320,34 +311,37 @@ export default {
     },
     async ConvertFile() {
       const self = this
-      const reader = new FileReader()
-      reader.onload = async function (event) {
-        const params = new FormData()
+      for (let i = 0; i < self.files.length; i++) {
+        
+        let reader = new FileReader()
+        reader.onload = async function (event) {
+          let params = new FormData()
 
-        params.append('object', self.GeodeObject)
-        params.append('file', event.target.result)
-        params.append('filename', self.files[0].name)
-        params.append('filesize', self.files[0].size)
-        params.append('extension', self.extension)
-        params.append('responseType', 'blob')
-        params.append('responseEncoding', 'binary')
-        self.loading = true
-
-        try {
-          await self.$axios
-          .post(`${self.ID}/fileconverter/convertfile`, params, {responseType: 'blob'})
-          .then((response) => {
-            if (response.status == 200) {
-              const newFileName = response.headers['new-file-name']
-              fileDownload(response.data, newFileName)
-            }
+          params.append('object', self.GeodeObject)
+          params.append('file', event.target.result)
+          params.append('filename', self.files[i].name)
+          params.append('filesize', self.files[i].size)
+          params.append('extension', self.extension)
+          params.append('responseType', 'blob')
+          params.append('responseEncoding', 'binary')
+          self.loading = true
+          
+          try {
+            await self.$axios
+            .post(`${self.ID}/fileconverter/convertfile`, params, {responseType: 'blob'})
+            .then((response) => {
+              if (response.status == 200) {
+                let newFileName = response.headers['new-file-name']
+                fileDownload(response.data, newFileName)
+              }
+              self.loading = false
+            })
+          } catch(err){
             self.loading = false
-          })
-        } catch(err){
-          self.loading = false
+          }
         }
+        await reader.readAsDataURL(self.files[i])
       }
-      await reader.readAsDataURL(this.files[0])
     },
   },
 }
