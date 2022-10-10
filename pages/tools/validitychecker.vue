@@ -6,7 +6,7 @@
           Validity checker
         </h1>
         <v-col>
-          <v-row justify="space-around">
+          <v-row class="justify-center">
             <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
               <v-card
                 v-ripple
@@ -17,7 +17,7 @@
                 target="_blank"
                 contain
               >
-                <v-row justify="center" align="center">
+                <v-row class="justify-center">
                   <v-col cols="auto">
                     <v-icon size="128" class="justify-center">
                       {{ item.icon }}
@@ -98,7 +98,7 @@
           <v-stepper-content step="2">
             <v-row v-if="objects.length">
               <v-col>
-                <v-row justify="left">
+                <v-row class="justify-left">
                   <v-col
                     v-for="object in objects"
                     :key="object"
@@ -131,9 +131,9 @@
               </v-col>
             </v-row>
             <v-row v-else>
-              <p>
-                This file format isn't supported! Please check the supported
-                file formats documentation for more information
+              <p class="ma-4">
+                This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
+                supported file formats documentation</a> for more information
               </p>
             </v-row>
           </v-stepper-content>
