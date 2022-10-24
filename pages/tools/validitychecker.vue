@@ -225,6 +225,7 @@ export default {
       modelChecks: [],
       multiple: false,
       objects: [],
+      panels: [],
       success: false,
       versions: [],
     }

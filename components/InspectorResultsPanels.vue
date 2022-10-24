@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-expansion-panels multiple focusable>
+    <v-expansion-panels multiple focusable v-model="panels">
       <v-expansion-panel
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
@@ -60,6 +60,11 @@ export default {
       default: 0,
     },
   },
+  data() {
+    return {
+      panels: []
+    }
+  },
   computed: {
     ...mapState(['ID']),
     display: function () {
@@ -84,6 +89,9 @@ export default {
           if (current_check.value != true) {
             this.$emit('updateResult', this.index, false)
             return
+          }else if(current_check.value == true){
+            this.panels = []
+            this.panels.splice(index, 1)
           }
           nb_results++
         }
@@ -96,6 +104,8 @@ export default {
   },
   created() {
     this.GetTestsResults()
+    this.panels = Array.from(Array(this.modelChecks.length).keys())
+    console.log('this.panels :', this.panels)
   },
   methods: {
     updateResult(index, value) {
