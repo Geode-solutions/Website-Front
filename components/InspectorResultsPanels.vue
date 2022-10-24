@@ -58,9 +58,9 @@ export default {
     index: {
       type: Number,
       default: 0,
-    },
+    }
   },
-  data() {
+  data() {[]
     return {
       panels: []
     }
@@ -90,8 +90,17 @@ export default {
             this.$emit('updateResult', this.index, false)
             return
           }else if(current_check.value == true){
-            this.panels = []
-            this.panels.splice(index, 1)
+            // if(!current_check.is_leaf){
+              console.log('current_check.sentence :', current_check.sentence)
+            // if(current_check.sentence=='Unique vertices linked to components with invalid topology'){
+              console.log('index :', index)
+              console.log('panels :', this.panels)
+              let index_of = this.panels.indexOf(index, 0)
+              console.log('index_of : ', index_of)
+              this.panels.splice(index_of, 1)
+              console.log('this.panels :', this.panels)
+            // }
+            
           }
           nb_results++
         }
@@ -105,7 +114,6 @@ export default {
   created() {
     this.GetTestsResults()
     this.panels = Array.from(Array(this.modelChecks.length).keys())
-    console.log('this.panels :', this.panels)
   },
   methods: {
     updateResult(index, value) {
