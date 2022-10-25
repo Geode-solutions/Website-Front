@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-expansion-panels multiple focusable v-model="panels">
+    <v-expansion-panels multiple focusable v-model="opened_panels">
       <v-expansion-panel
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
@@ -62,7 +62,7 @@ export default {
   },
   data() {[]
     return {
-      panels: []
+      opened_panels: []
     }
   },
   computed: {
@@ -89,18 +89,13 @@ export default {
           if (current_check.value != true) {
             this.$emit('updateResult', this.index, false)
             return
-          }else if(current_check.value == true){
-            // if(!current_check.is_leaf){
-              console.log('current_check.sentence :', current_check.sentence)
-            // if(current_check.sentence=='Unique vertices linked to components with invalid topology'){
-              console.log('index :', index)
-              console.log('panels :', this.panels)
-              let index_of = this.panels.indexOf(index, 0)
-              console.log('index_of : ', index_of)
-              this.panels.splice(index_of, 1)
-              console.log('this.panels :', this.panels)
-            // }
-            
+          } else if(current_check.value == true){
+            console.log('index :', index)
+            let index_of_index = this.opened_panels.indexOf(index)
+            console.log('this.sopened_panels :', this.opened_panels)
+            console.log('index_of_index :', index_of_index)
+            if (index_of_index > -1) { // only splice array when item is found
+            }
           }
           nb_results++
         }
@@ -113,7 +108,8 @@ export default {
   },
   created() {
     this.GetTestsResults()
-    this.panels = Array.from(Array(this.modelChecks.length).keys())
+    this.opened_panels = Array.from(Array(this.modelChecks.length).keys())
+    // console.log('opened_panels : ', this.index, this.opened_panels)
   },
   methods: {
     updateResult(index, value) {
