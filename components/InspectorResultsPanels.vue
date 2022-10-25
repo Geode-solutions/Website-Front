@@ -95,6 +95,7 @@ export default {
             console.log('this.sopened_panels :', this.opened_panels)
             console.log('index_of_index :', index_of_index)
             if (index_of_index > -1) { // only splice array when item is found
+              this.opened_panels.splice(index_of_index, 1)
             }
           }
           nb_results++
@@ -109,7 +110,6 @@ export default {
   created() {
     this.GetTestsResults()
     this.opened_panels = Array.from(Array(this.modelChecks.length).keys())
-    // console.log('opened_panels : ', this.index, this.opened_panels)
   },
   methods: {
     updateResult(index, value) {
