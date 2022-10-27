@@ -350,7 +350,7 @@ export default {
             self.loading = false
           }
         }
-        await reader.readAsDataURL(self.files[i])
+        reader.readAsDataURL(self.files[i])
       }
     },
   },
