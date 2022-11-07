@@ -52,7 +52,7 @@
                     {{ tool.icon }}
                   </v-icon>
                 </v-col>
-                <v-col v_if="tool.chip" cols="auto">
+                <v-col v-if="tool.chip" cols="auto">
                   <v-chip color="primary">
                     {{ tool.chip }}
                   </v-chip>
