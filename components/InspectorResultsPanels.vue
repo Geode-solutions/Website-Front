@@ -90,11 +90,8 @@ export default {
             this.$emit('updateResult', this.index, false)
             return
           } else if(current_check.value == true){
-            console.log('index :', index)
             let index_of_index = this.opened_panels.indexOf(index)
-            console.log('this.sopened_panels :', this.opened_panels)
-            console.log('index_of_index :', index_of_index)
-            if (index_of_index > -1) { // only splice array when item is found
+            if (index_of_index > -1) {
               this.opened_panels.splice(index_of_index, 1)
             }
           }
