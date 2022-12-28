@@ -1,6 +1,8 @@
-export default = {
+export default {
   root: true,
-  env: { node: true },
+  env: {
+    "browser": true, node: true
+  },
   extends: ['eslint:recommended', 'plugin:vue/recommended'],
   plugins: ['vue', 'vuetify'],
   rules: {

@@ -317,12 +317,13 @@
 </template>
 
 <script>
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import VueWordCloud from 'vuewordcloud'
 
 export default {
   name: 'GeodeIndex',
   components: {
-    VueWordCloud,
+    Carousel, Slide, Pagination, Navigation, VueWordCloud,
   },
   data() {
     return {
