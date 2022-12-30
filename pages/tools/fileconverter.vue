@@ -43,7 +43,7 @@
         <ToolLauncher />
       </v-col>
 
-      <v-col v-if="cloudRunning" class="pb-5">
+      <v-col v-if="is_cloud_running" class="pb-5">
         <v-stepper v-model="currentStep" class="stepper" vertical elevation="5">
           <v-stepper-step
             :complete="currentStep > 1"
@@ -208,7 +208,7 @@
           </v-stepper-content>
         </v-stepper>
       </v-col>
-      <v-col v-if="cloudRunning">
+      <v-col v-if="is_cloud_running">
         <PackagesVersions :versions="versions" />
       </v-col>
     </v-row>
@@ -255,10 +255,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['ID', 'cloudRunning']),
+    ...mapState(['ID', 'is_cloud_running']),
   },
   watch: {
-    cloudRunning(newValue) {
+    is_cloud_running(newValue) {
       if (newValue === true) {
         this.GetAllowedFiles()
         this.GetPackagesVersions()
@@ -266,7 +266,7 @@ export default {
     },
   },
   activated() {
-    if (this.cloudRunning === true) {
+    if (this.is_cloud_running === true) {
       this.GetAllowedFiles()
       this.GetPackagesVersions()
     }

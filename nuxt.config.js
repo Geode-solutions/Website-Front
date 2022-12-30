@@ -1,4 +1,4 @@
-
+import colors from 'vuetify/lib/util/colors'
 
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -55,43 +55,43 @@ export default defineNuxtConfig({
   // */
   modules:
     [
-      // ['nuxt-cookie-control',
-      //     {
-      //     controlButton: true,
-      //     domain: 'geode-solutions.com',
-      //     colors: {
-      //         modalOverlay: '#000',
-      //         barBackground: colors.teal.darken1,
-      //         barButtonColor: '#000',
-      //         modalTextColor: '#000',
-      //         modalOverlayOpacity: 0,
-      //         modalButtonColor: '#fff',
-      //         modalUnsavedColor: '#000',
-      //         modalButtonBackground: colors.teal.darken1,
-      //         controlButtonIconColor: colors.teal.darken1,
-      //         checkboxActiveBackground: colors.teal.darken1,
-      //         checkboxInactiveBackground: '#000',
-      //         modalButtonHoverBackground: '#333',
-      //         checkboxDisabledBackground: '#ddd',
-      //         controlButtonIconHoverColor: colors.amber.accent4,
-      //         controlButtonHoverBackground: colors.brown.darken4
-      //     }
-      //     }
-      // ],
+      ['nuxt-cookie-control',
+        {
+          controlButton: true,
+          domain: 'geode-solutions.com',
+          colors: {
+            modalOverlay: '#000',
+            barBackground: colors.teal.darken1,
+            barButtonColor: '#000',
+            modalTextColor: '#000',
+            modalOverlayOpacity: 0,
+            modalButtonColor: '#fff',
+            modalUnsavedColor: '#000',
+            modalButtonBackground: colors.teal.darken1,
+            controlButtonIconColor: colors.teal.darken1,
+            checkboxActiveBackground: colors.teal.darken1,
+            checkboxInactiveBackground: '#000',
+            modalButtonHoverBackground: '#333',
+            checkboxDisabledBackground: '#ddd',
+            controlButtonIconHoverColor: colors.amber.accent4,
+            controlButtonHoverBackground: colors.brown.darken4
+          }
+        }
+      ],
       // '@nuxtjs/axios',
       // '@aceforth/nuxt-netlify',
       // '@nuxtjs/vuetify',
       // ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }],
       // '@nuxtjs/recaptcha'
       '@pinia/nuxt',
-      {
-        autoImports: [
-          // automatically imports `usePinia()`
-          'defineStore',
-          // automatically imports `usePinia()` as `usePiniaStore()`
-          ['defineStore', 'definePiniaStore'],
-        ],
-      },
+      // {
+      // autoImports: [
+      //   // automatically imports `usePinia()`
+      //   'defineStore',
+      //   // automatically imports `usePinia()` as `usePiniaStore()`
+      //   ['defineStore', 'definePiniaStore'],
+      // ],
+      // },
     ],
 
   // recha: {
