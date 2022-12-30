@@ -201,13 +201,16 @@
               }"
             >
               <client-only>
-                <vue-word-cloud
+                <CloudWords>
+
+                </CloudWords>
+                <!-- <vue-word-cloud
                   style="height: 480px; width: 100%"
                   spacing="0.4"
                   :words="skills"
                   :color="getColor"
                   font-family="Roboto"
-                />
+                /> -->
               </client-only>
             </v-lazy>
           </v-col>
@@ -318,12 +321,12 @@
 
 <script>
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import VueWordCloud from 'vuewordcloud'
+import CloudWords from '@/components/CloudWords.vue'
 
 export default {
   name: 'GeodeIndex',
   components: {
-    Carousel, Slide, Pagination, Navigation, VueWordCloud,
+    CloudWords, Carousel, Slide, Pagination, Navigation,
   },
   data() {
     return {
@@ -430,9 +433,9 @@ export default {
           url: 'https://www.pole-avenia.com',
         },
         {
-          name: 'Total SE',
+          name: 'TotalEnergies SE',
           logo: 'logo_totalenergies.png',
-          url: 'https://www.ep.total.com',
+          url: 'https://totalenergies.com/',
         },
         {
           name: 'RING',
@@ -505,27 +508,6 @@ export default {
           topic: 'Web and microservices',
         },
       ],
-      skills: [
-        ['C++', 5],
-        ['DevOps', 4],
-        ['Meshing', 5],
-        ['Python', 2],
-        ['Algorithms', 3],
-        ['Computational geometry', 4],
-        ['Geomodeling', 2],
-        ['Unstructured meshes', 3],
-        ['BoundaryRepresentation', 2],
-        ['Model editing', 4],
-        ['Mesh repair', 2],
-        ['Model repair', 5],
-        ['Continuous integration', 2],
-        ['Continuous deployment', 2],
-        ['Software engineering', 4],
-        ['Robustness', 3],
-        ['JavaScript', 2],
-        ['Web technologies', 2],
-        ['Visualization', 2],
-      ],
     }
   },
   computed: {
@@ -547,12 +529,6 @@ export default {
   methods: {
     getWindowHeight() {
       this.windowHeight = document.documentElement.clientHeight
-    },
-    getColor() {
-      const number = Math.random()
-      if (number > 0.6) return '#00897B'
-      if (number < 0.3) return '#26A69A'
-      return '#80CBC4'
     },
   },
 }

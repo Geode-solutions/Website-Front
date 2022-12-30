@@ -25,8 +25,8 @@
         accordion
       >
         <v-expansion-panel class="primary">
-          <v-expansion-panel-header>
-            <v-row align="center">
+            <v-expansion-panel-title>
+              <v-row align="center">
               <v-col class="px-2" cols="1">
                 <v-icon large>
                   $vuetify.icons.logo
@@ -36,8 +36,10 @@
                 {{ name }}
               </v-col>
             </v-row>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+            </v-expansion-panel-title>
+            
+
+
             <v-list color="primary" subheader>
               <v-list-item text nuxt to="/" @click="menu = false">
                 <v-list-item-title>Home</v-list-item-title>
@@ -53,7 +55,6 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
-          </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
     </v-app-bar>
@@ -68,7 +69,7 @@
       <v-card text tile dark class="primary flex">
         <v-row align="center" class="mr-0">
           <v-col cols="auto">
-            <v-card-text class="ml-2">
+            <v-card-text>
               <v-btn
                 v-for="icon in icons"
                 :key="icon.icon"

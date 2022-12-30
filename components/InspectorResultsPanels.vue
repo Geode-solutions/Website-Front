@@ -5,18 +5,10 @@
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
         class="card"
+        :title="modelCheck.sentence"
       >
-        <v-expansion-panel-header>
-          <v-row dense>
-            <v-col cols="auto">
-              <ValidityBadge :value="modelCheck.value"/>
-            </v-col>
-            <v-col>
-              {{ modelCheck.sentence }}
-            </v-col>
-          </v-row>
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+
+        <ValidityBadge :value="modelCheck.value"/>
           <InspectorResultsPanels
             v-if="!modelCheck.is_leaf"
             :index="index"
@@ -28,14 +20,13 @@
           <v-container v-else-if="modelCheck.value == false" class="pt-6">
             Invalid = {{ modelCheck.list_invalidities }}
           </v-container>
-        </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
 import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
 import ValidityBadge from '@/components/ValidityBadge.vue'
 
