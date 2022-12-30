@@ -4,8 +4,7 @@
       <v-row class="hidden-sm-and-down px-2">
         <v-btn text active-class="no-active" nuxt to="/">
           <v-app-bar-nav-icon>
-            <v-icon large>
-              $vuetify.icons.logo
+            <v-icon size= "large" icon="mdi-vuetify">
             </v-icon>
           </v-app-bar-nav-icon>
           <v-toolbar-title>{{ name }}</v-toolbar-title>
@@ -28,8 +27,7 @@
             <v-expansion-panel-title>
               <v-row align="center">
               <v-col class="px-2" cols="1">
-                <v-icon large>
-                  $vuetify.icons.logo
+                <v-icon size="large" icon="mdi-vuetify">
                 </v-icon>
               </v-col>
               <v-col class="text-h6 mx-2">
@@ -63,7 +61,7 @@
       <nuxt />
     </v-main>
 
-    <CookieControl v-if="this.$config.NODE_ENV === 'production'"/>
+    <!-- <CookieControl v-if="this.$config.NODE_ENV === 'production'"/> -->
 
     <v-footer padless>
       <v-card text tile dark class="primary flex">

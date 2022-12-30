@@ -9,6 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@mdi/js": "^7.1.96",
     "@pinia/nuxt": "^0.4.6",
     "eslint": "^8.30.0",
     "eslint-plugin-import": "^2.26.0",
@@ -23,8 +24,6 @@
     "d3": "^7.8.0",
     "d3-cloud": "^1.2.5",
     "nuxt": "3.0.0",
-    "nuxt-cookie-control": "^1.9.93",
-    "sass": "^1.57.1",
     "vue3-carousel": "^0.2.9",
     "vue3-particles": "^2.7.1",
     "vuetify": "^3.0.6"
