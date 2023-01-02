@@ -42,7 +42,7 @@
         </v-parallax>
       </client-only>
       <v-container>
-        <v-row>
+        <!-- <v-row>
           <v-col>
             <h2 class="section text-h2" align="center">
               What we do
@@ -97,7 +97,7 @@
               </v-col>
             </v-row>
           </v-col>
-        </v-row>
+        </v-row> -->
       </v-container>
       <v-container fluid style="background-color: white">
         <v-row class="container mx-auto">
@@ -150,7 +150,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-container fluid>
+      <!-- <v-container fluid>
         <v-row class="container mx-auto">
           <v-col>
             <h2 class="section text-h2" align="center">
@@ -195,7 +195,7 @@
             </v-row>
           </v-col>
         </v-row>
-      </v-container>
+      </v-container> -->
       <v-container fluid style="background-color: white">
         <h2 class="section text-h2" align="center">
           What are our skills
@@ -208,9 +208,9 @@
               }"
             >
               <client-only>
-                <CloudWords>
+                <!-- <CloudWords> -->
 
-                </CloudWords>
+                <!-- </CloudWords> -->
                 <!-- <vue-word-cloud
                   style="height: 480px; width: 100%"
                   spacing="0.4"
@@ -224,101 +224,35 @@
         </v-row>
       </v-container>
       <v-container fluid>
-        <h2 class="section text-h2" align="center">
-          Who we are
-        </h2>
-        <v-row justify="space-around" class="container mx-auto">
-          <v-col
-            v-for="(guy, index) in us"
-            :key="index"
-            cols="8"
-            sm="4"
-            class="ma-2"
-          >
-            <v-lazy
-              :options="{
-                threshold: 0.5,
-              }"
-            >
-              <v-card class="elevation-5 text-center">
-                <v-avatar
-                  :size="$vuetify.breakpoint.mdAndUp ? 200 : 150"
-                  class="ma-2"
-                >
-                  <v-img :src="guy.pict" :alt="'Geode-solutions ' + guy.name" />
-                </v-avatar>
-                <v-card-title primary-title class="justify-center text-h5">
-                  {{ guy.name }}
-                  <v-btn icon target="_blank" :href="guy.url">
-                    <v-icon size="24px" color="#0A66C2" :icon="mdi-linkedin">
-                      
-                    </v-icon>
-                  </v-btn>
-                  {{ guy.job }}
-                </v-card-title>
-                <v-card-text class="justify-center text-h5 font-italic">
-                  {{ guy.topic }}
-                </v-card-text>
-              </v-card>
-            </v-lazy>
-          </v-col>
-        </v-row>
+        <v-lazy
+            :options="{
+            threshold: 0.5,
+            }"
+        >
+          <Personnel />
+        </v-lazy>
       </v-container>
       <v-container fluid style="background-color: white">
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="section text-h2" align="center">
-              They support us
-            </h2>
-
             <v-lazy
               :options="{
                 threshold: 0.5,
               }"
             >
-              <carousel autoplay loop :per-page="nbPartners">
-                <slide
-                  v-for="(supporter, index) in supporters"
-                  :key="index"
-                  class="logo"
-                >
-                  <a :href="supporter.url" target="_blank">
-                    <img
-                      width="80%"
-                      :src="require('@/assets/logos/' + supporter.logo)"
-                    >
-                  </a>
-                </slide>
-              </carousel>
+              <Supports />
             </v-lazy>
           </v-col>
         </v-row>
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="section text-h2" align="center">
-              Our partners
-            </h2>
-
-            <v-lazy
+            <!-- <v-lazy
               :options="{
                 threshold: 0.5,
               }"
-            >
-              <carousel autoplay loop :per-page="nbPartners">
-                <slide
-                  v-for="(partner, index) in partners"
-                  :key="index"
-                  class="logo"
-                >
-                  <a :href="partner.url" target="_blank">
-                    <img
-                      width="80%"
-                      :src="require('@/assets/logos/' + partner.logo)"
-                    >
-                  </a>
-                </slide>
-              </carousel>
-            </v-lazy>
+            > -->
+              <Partners />
+            <!-- </v-lazy> -->
           </v-col>
         </v-row>
       </v-container>
@@ -329,11 +263,14 @@
 <script>
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import CloudWords from '@/components/CloudWords.vue'
+import Personnel from '@/components/Personnel.vue'
+import Supports from '@/components/Supports.vue'
+import Partners from '@/components/Partners.vue'
 
 export default {
   name: 'GeodeIndex',
   components: {
-    CloudWords, Carousel, Slide, Pagination, Navigation,
+    CloudWords, Carousel, Slide, Pagination, Navigation, Partners, Personnel, Supports
   },
   data() {
     return {
@@ -406,129 +343,9 @@ export default {
           url: '/services',
         },
       ],
-      supporters: [
-        {
-          name: 'Helioparc',
-          logo: 'logo_helioparc.svg',
-          url: 'http://www.helioparc.fr',
-        },
-        {
-          name: 'LaBanquiz',
-          logo: 'logo_banquiz.png',
-          url: 'https://labanquiz.com',
-        },
-        {
-          name: 'NAOS',
-          logo: 'logo_NAOS.png',
-          url: 'https://naos-cluster.com',
-        },
-        {
-          name: 'Nouvelle-Aquitaine',
-          logo: 'logo_region.png',
-          url: 'https://www.nouvelle-aquitaine.fr',
-        },
-        {
-          name: 'Geoliens',
-          logo: 'logo_geoliens.png',
-          url: 'https://www.geoliens.org',
-        },
-      ],
-      partners: [
-        {
-          name: 'Pole Avenia',
-          logo: 'logo-avenia.svg',
-          url: 'https://www.pole-avenia.com',
-        },
-        {
-          name: 'TotalEnergies SE',
-          logo: 'logo_totalenergies.png',
-          url: 'https://totalenergies.com/',
-        },
-        {
-          name: 'RING',
-          logo: 'logo_ring.png',
-          url: 'https://www.ring-team.org',
-        },
-        {
-          name: 'GeoRessources',
-          logo: 'logo_georessources.jpg',
-          url: 'http://georessources.univ-lorraine.fr/',
-        },
-        {
-          name: 'CNRS',
-          logo: 'logo_cnrs.jpg',
-          url: 'http://georessources.univ-lorraine.fr/',
-        },
-        {
-          name: 'Université de Lorraine',
-          logo: 'logo_UL.png',
-          url: 'http://www.univ-lorraine.fr/',
-        },
-        {
-          name: 'ENEREX',
-          logo: 'logo_enerex.png',
-          url: 'https://enerex.fr/',
-        },
-        {
-          name: 'ARXITEK',
-          logo: 'logo_arxitek.png',
-          url: 'https://arxitek.fr/',
-        },
-        {
-          name: 'Earth Quick',
-          logo: 'logo_earth_quick.jpg',
-          url: 'https://www.earth-quick.com/',
-        },
-        {
-          name: 'MOSART PME',
-          logo: 'LOGOMOSART-PME.png',
-          url: 'https://www.mosart-pme.org/',
-        },
-      ],
-      us: [
-        {
-          name: 'Arnaud Botella',
-          pict: '@/assets/ArnaudB.jpg',
-          job: 'President & co-founder',
-          url: 'https://linkedin.com/in/arnaud-botella',
-          topic: 'Mesh generation',
-        },
-        {
-          name: 'Pierre Anquez',
-          pict: '@/assets/PierreA.jpg',
-          job: 'CEO & co-founder',
-          url: 'https://linkedin.com/in/pierre-anquez',
-          topic: 'Explicit modeling',
-        },
-        {
-          name: 'Melchior Schuh-Senlis',
-          pict: '@/assets/Melchior.jpg',
-          job: 'Research engineer',
-          url: 'https://www.linkedin.com/in/melchior-schuh-senlis-a9573aba',
-          topic: 'Implicit modeling',
-        },
-        {
-          name: 'Julien Champagnol',
-          pict: '@/assets/Julien.jpg',
-          job: 'Cloud developer',
-          url: 'https://www.linkedin.com/in/julien-champagnol-90330b17b',
-          topic: 'Web and microservices',
-        },
-      ],
     }
   },
-  computed: {
-    nbPartners() {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          return 1
-        case 'sm':
-          return 2
-        default:
-          return 3
-      }
-    },
-  },
+  
   mounted() {
     window.addEventListener('resize', this.getWindowHeight)
     this.getWindowHeight()
