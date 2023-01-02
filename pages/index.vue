@@ -105,38 +105,45 @@
             <h2 class="section text-h2" align="center">
               Which applications
             </h2>
-            <v-timeline>
-              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
+            <v-timeline color>
+              <v-timeline-item size="30" dot-color="primary" fill-dot class="text-h4 font-weight-light">
                 Geo&shy;thermal
               </v-timeline-item>
               <v-timeline-item
-                small
+                size="30"
+                dot-color="primary"
                 fill-dot
                 class="text-h4 font-weight-light text-right"
               >
                 Mining
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
+              <v-timeline-item size="30" dot-color="primary" fill-dot class="text-h4 font-weight-light">
                 CCUS
               </v-timeline-item>
               <v-timeline-item
-                small
+                size="30"
+                dot-color="primary"
                 fill-dot
                 class="text-h4 font-weight-light text-right"
               >
                 Oil&shy;Gas
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
+              <v-timeline-item size="30"
+              dot-color="primary"
+              fill-dot class="text-h4 font-weight-light">
                 Geo&shy;mecha&shy;nics
               </v-timeline-item>
               <v-timeline-item
-                small
+                size="30"
+                dot-color="primary"
                 fill-dot
                 class="text-h4 font-weight-light text-right"
               >
                 Hydro&shy;geology
               </v-timeline-item>
-              <v-timeline-item small fill-dot class="text-h4 font-weight-light">
+              <v-timeline-item size="30" 
+              dot-color="primary"
+              fill-dot class="text-h4 font-weight-light">
                 Urban geology
               </v-timeline-item>
             </v-timeline>

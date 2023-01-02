@@ -1,9 +1,10 @@
 <template>
+  
   <v-app>
-    <v-theme-provider></v-theme-provider>
-    <v-app-bar theme="light_theme" color="primary" fixed app>
+    <v-theme-provider>
+    <v-app-bar color="primary" fixed app>
       <v-row class="hidden-sm-and-down px-2">
-        <v-btn text active-class="no-active" nuxt to="/">
+        <v-btn prepend-icon="mdi-vuetify" variant="text" active-class="no-active" nuxt to="/">
           <v-app-bar-nav-icon>
             <v-icon size= "large" icon="mdi-vuetify">
             </v-icon>
@@ -12,7 +13,7 @@
         </v-btn>
         <v-spacer />
         <v-toolbar-items>
-          <v-btn v-for="(item, i) in items" :key="i" text nuxt :to="item.to">
+          <v-btn v-for="(item, i) in items" :key="i" variant="text" nuxt :to="item.to">
             <span>{{ item.title }}</span>
           </v-btn>
         </v-toolbar-items>
@@ -24,9 +25,9 @@
         style="position: absolute; top: 0; left: 0"
         accordion
       >
-        <v-expansion-panel class="primary">
-            <v-expansion-panel-title>
-              <v-row align="center">
+        <!-- <v-expansion-panel class="primary"> -->
+            <v-expansion-panel class="primary" :title="name">
+              <!-- <v-row align="center">
               <v-col class="px-2" cols="1">
                 <v-icon size="large" icon="mdi-vuetify">
                 </v-icon>
@@ -34,12 +35,11 @@
               <v-col class="text-h6 mx-2">
                 {{ name }}
               </v-col>
-            </v-row>
-            </v-expansion-panel-title>
+            </v-row> -->
+            </v-expansion-panel>
             
-
-
-            <v-list color="primary" subheader>
+            <v-expansion-panel-text>
+              <v-list color="primary" subheader>
               <v-list-item text nuxt to="/" @click="menu = false">
                 <v-list-item-title>Home</v-list-item-title>
               </v-list-item>
@@ -54,7 +54,8 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
-        </v-expansion-panel>
+            </v-expansion-panel-text>
+            
       </v-expansion-panels>
     </v-app-bar>
 
@@ -122,7 +123,9 @@
         </v-row>
       </v-card>
     </v-footer>
+  </v-theme-provider>
   </v-app>
+
 </template>
 
 <script>

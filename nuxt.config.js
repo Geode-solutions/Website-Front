@@ -39,7 +39,7 @@ export default defineNuxtConfig({
   // /*
   // ** Global CSS
   // */
-  // css: ['vuetify/lib/styles/main.sass'],
+  css: ['vuetify/lib/styles/main.sass'],
 
   // /*
   // ** Plugins to load before mounting the App
