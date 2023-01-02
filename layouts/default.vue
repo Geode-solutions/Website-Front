@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-app-bar dark color="primary" fixed app>
+    <v-theme-provider></v-theme-provider>
+    <v-app-bar theme="light_theme" color="primary" fixed app>
       <v-row class="hidden-sm-and-down px-2">
         <v-btn text active-class="no-active" nuxt to="/">
           <v-app-bar-nav-icon>
@@ -58,7 +59,7 @@
     </v-app-bar>
 
     <v-main class="secondary">
-      <nuxt />
+      <slot />
     </v-main>
 
     <!-- <CookieControl v-if="this.$config.NODE_ENV === 'production'"/> -->
@@ -77,9 +78,7 @@
                 :href="icon.url"
                 class="mr-4"
               >
-                <v-icon size="28px">
-                  {{ icon.icon }}
-                </v-icon>
+                <v-icon size="small" :icon="icon.icon" />
               </v-btn>
             </v-card-text>
           </v-col>
@@ -116,7 +115,7 @@
                 alt="nuxt logo"
                 height="40px"
                 width="120px"
-                src="@/assets/nuxt.svg"
+                src="~/assets/nuxt.svg"
               >
             </v-btn>
           </v-col>

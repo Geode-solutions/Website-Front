@@ -1,17 +1,21 @@
-// plugins/vuetify.js
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 import colors from 'vuetify/lib/util/colors'
-import { mdi } from "vuetify/lib/iconsets/mdi";
+import '@mdi/font/css/materialdesignicons.css'
 
 const light_theme = {
   dark: false,
   colors: {
+    background: '#FFFFFF',
     primary: colors.teal.darken1,
-    secondaryColor: colors.teal.lighten4,
-    accent: colors.red.darken4
+    secondary: colors.teal.lighten4,
+    accent: colors.red.darken4,
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
   }
 }
 
@@ -25,11 +29,9 @@ export default defineNuxtPlugin(nuxtApp => {
         light_theme,
       }
     },
+    defaultAssets: false,
     icons: {
-      defaultSet: 'mdi',
-      sets: {
-        mdi
-      }
+      defaultSet: 'mdi'
     }
   })
 

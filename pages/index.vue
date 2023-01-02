@@ -3,7 +3,7 @@
     <v-col>
       <client-only>
         <v-parallax
-          :src="require('@/assets/hero.jpg')"
+          src='@/assets/hero.jpg'
           :height="windowHeight"
           alt="Geode-solutions next generation of modeling challenges"
         >
@@ -243,8 +243,8 @@
                 <v-card-title primary-title class="justify-center text-h5">
                   {{ guy.name }}
                   <v-btn icon target="_blank" :href="guy.url">
-                    <v-icon size="24px" color="#0A66C2">
-                      mdi-linkedin
+                    <v-icon size="24px" color="#0A66C2" :icon="mdi-linkedin">
+                      
                     </v-icon>
                   </v-btn>
                   {{ guy.job }}
@@ -481,28 +481,28 @@ export default {
       us: [
         {
           name: 'Arnaud Botella',
-          pict: require('@/assets/ArnaudB.jpg'),
+          pict: '@/assets/ArnaudB.jpg',
           job: 'President & co-founder',
           url: 'https://linkedin.com/in/arnaud-botella',
           topic: 'Mesh generation',
         },
         {
           name: 'Pierre Anquez',
-          pict: require('@/assets/PierreA.jpg'),
+          pict: '@/assets/PierreA.jpg',
           job: 'CEO & co-founder',
           url: 'https://linkedin.com/in/pierre-anquez',
           topic: 'Explicit modeling',
         },
         {
           name: 'Melchior Schuh-Senlis',
-          pict: require('@/assets/Melchior.jpg'),
+          pict: '@/assets/Melchior.jpg',
           job: 'Research engineer',
           url: 'https://www.linkedin.com/in/melchior-schuh-senlis-a9573aba',
           topic: 'Implicit modeling',
         },
         {
           name: 'Julien Champagnol',
-          pict: require('@/assets/Julien.jpg'),
+          pict: '@/assets/Julien.jpg',
           job: 'Cloud developer',
           url: 'https://www.linkedin.com/in/julien-champagnol-90330b17b',
           topic: 'Web and microservices',
