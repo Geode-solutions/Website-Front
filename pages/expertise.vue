@@ -63,7 +63,6 @@
                 <v-btn
                   size="large"
                   color="primary"
-                  dark
                   href="mailto:contact@geode-solutions.com"
                 >
                   Contact us
