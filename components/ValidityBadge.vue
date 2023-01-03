@@ -4,21 +4,23 @@
     size="20"
     color="primary"
     indeterminate
-  >
-  </v-progress-circular>
+  />
   <v-icon
     v-else-if="value == 'error'"
-    color="error">
+    color="error"
+  >
     mdi-alert-circle-outline
   </v-icon>
   <v-icon
     v-else-if="value == true"
-    color="primary">
+    color="primary"
+  >
     mdi-check-circle-outline
   </v-icon>
   <v-icon
     v-else-if="value == false"
-    color="error">
+    color="error"
+  >
     mdi-close-circle
   </v-icon>
 </template>

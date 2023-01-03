@@ -1,5 +1,8 @@
 <template>
-  <img alt="geode-solutions logo" src="@/assets/logo.svg">
+  <img
+    alt="geode-solutions logo"
+    src="@/assets/logo.svg"
+  >
 </template>
 
 <script>

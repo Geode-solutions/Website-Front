@@ -1,9 +1,12 @@
 <template>
-  <v-row class="fill-height" no-gutters>
+  <v-row
+    class="fill-height"
+    no-gutters
+  >
     <v-navigation-drawer
       clipped
       permanent
-      :mini-variant="mini"
+      :rail="mini"
       :expand-on-hover="mini"
     >
       <v-list>
@@ -19,10 +22,18 @@
             <v-icon>{{ tool.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-badge v-if="tool.badge" :content="tool.badge" inline overlap>
+            <v-badge
+              v-if="tool.badge"
+              :content="tool.badge"
+              inline
+              overlap
+            >
               <v-list-item-title v-text="tool.title" />
             </v-badge>
-            <v-list-item-title v-else v-text="tool.title" />
+            <v-list-item-title
+              v-else
+              v-text="tool.title"
+            />
           </v-list-item-content>
         </v-list-item>
       </v-list>

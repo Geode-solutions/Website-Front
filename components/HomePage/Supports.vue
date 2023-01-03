@@ -1,25 +1,46 @@
 <template>
-    <h2 class="section text-h2" align="center">
-        They support us
-    </h2>
-    <Carousel wrapAround :itemsToShow="nb_partners">
-        <Slide
-            v-for="(supporter, index) in supporters"
-            :key="index"
-            class="logo"
+  <v-container
+    fluid
+    style="background-color: white"
+  >
+    <v-row class="container mx-auto">
+      <v-col>
+        <v-lazy
+          :options="{
+            threshold: 0.5,
+          }"
         >
-            {{ supporter }}
-            <!-- <a :href="supporter.url" target="_blank">
-                <v-img
-                    width="80%"
-                    :src="supporter.logo"
-                >
-                </v-img>
-            </a> -->
-            <Navigation />
-            <Pagination />
-        </Slide>
-    </Carousel>
+          <h2
+            class="section text-h2"
+            align="center"
+          >
+            They support us
+          </h2>
+          <Carousel
+            wrap-around
+            :items-to-show="nb_partners"
+          >
+            <Slide
+              v-for="(supporter, index) in supporters"
+              :key="index"
+              class="logo"
+            >
+              {{ supporter }}
+              <!-- <a :href="supporter.url" target="_blank">
+                                <v-img
+                                    width="80%"
+                                    :src="supporter.logo"
+                                >
+                                </v-img>
+                            </a> -->
+              <Navigation />
+              <Pagination />
+            </Slide>
+          </Carousel>
+        </v-lazy>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

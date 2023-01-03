@@ -4,10 +4,16 @@
       <v-container>
         <v-row class="text-center">
           <v-col>
-            <h1 class="text-h2 ma-5" align="center">
+            <h1
+              class="text-h2 ma-5"
+              align="center"
+            >
               Our software
             </h1>
-            <p class="container text-h6 font-weight-light" align="justify">
+            <p
+              class="container text-h6 font-weight-light"
+              align="justify"
+            >
               Geode-solutions provide a set of OpenGeode extensions designed to overcome 
               classical bottlenecks in modeling and meshing applications both 2D and 3D.
               These extensions offer new solutions developed with state-of-the-art technologies 
@@ -20,13 +26,22 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-container fluid style="background-color: white">
+      <v-container
+        fluid
+        style="background-color: white"
+      >
         <v-row class="container mx-auto">
           <v-col>
-            <h2 class="text-h3 font-weight-light ma-5" align="center">
+            <h2
+              class="text-h3 font-weight-light ma-5"
+              align="center"
+            >
               Pilot program
             </h2>
-            <p class="container text-h6 font-weight-light" align="justify">
+            <p
+              class="container text-h6 font-weight-light"
+              align="justify"
+            >
               Join our pilot program to be the first to take advantage of Geode-solutions new high technologies.
               <ul>
                 <li>
@@ -51,12 +66,23 @@
                 </li>
               </ul>
             </p>
-            <h2 class="text-h4 my-5 pb-5" align="center">
-              <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
+            <h2
+              class="text-h4 my-5 pb-5"
+              align="center"
+            >
+              <v-btn
+                size="large"
+                color="primary"
+                dark
+                href="mailto:contact@geode-solutions.com"
+              >
                 Contact us
               </v-btn>
             </h2>
-            <h2 class="text-h4 font-weight-light ma-5" align="center">
+            <h2
+              class="text-h4 font-weight-light ma-5"
+              align="center"
+            >
               Pilot program technologies
             </h2>
             <v-row justify="space-around">
@@ -107,7 +133,12 @@
                       class="text-body-1 font-weight-medium"
                     >
                       Readiness 
-                      <v-progress-linear :value="beta.readiness" height="10" striped rounded />
+                      <v-progress-linear
+                        :model-value="beta.readiness"
+                        height="10"
+                        striped
+                        rounded
+                      />
                     </v-card-text>
                   </v-card>
                 </v-lazy>
@@ -119,7 +150,10 @@
       <v-container>
         <v-row>
           <v-col>
-            <h2 class="text-h3 font-weight-light ma-5" align="center">
+            <h2
+              class="text-h3 font-weight-light ma-5"
+              align="center"
+            >
               Next technologies
             </h2>
             <v-row justify="space-around">
@@ -160,10 +194,18 @@
                 </v-lazy>
               </v-col>
             </v-row>
-            <h2 class="text-h4 my-5 py-5" align="center">
+            <h2
+              class="text-h4 my-5 py-5"
+              align="center"
+            >
               Want to try these solutions or looking for another technology?
               <div class="my-2">
-                <v-btn large color="primary" dark href="mailto:contact@geode-solutions.com">
+                <v-btn
+                  size="large"
+                  color="primary"
+                  dark
+                  href="mailto:contact@geode-solutions.com"
+                >
                   Contact us
                 </v-btn>
               </div>
@@ -171,7 +213,10 @@
           </v-col>  
         </v-row>
       </v-container>
-      <v-container fluid style="background-color: white">
+      <v-container
+        fluid
+        style="background-color: white"
+      >
         <v-row class="container mx-auto">
           <v-col>
             <h2
@@ -186,7 +231,11 @@
                 threshold: .5
               }"
             >
-              <carousel autoplay loop :per-page="nbUsers"> 
+              <carousel
+                autoplay
+                loop
+                :per-page="nbUsers"
+              > 
                 <slide 
                   v-for="(user, index) in users"
                   :key="index"
@@ -196,7 +245,10 @@
                     :href="user.url"
                     target="_blank"
                   >
-                    <img width="80%" :src=" require('@/assets/logos/'+user.logo)">
+                    <img
+                      width="80%"
+                      :src=" require('@/assets/logos/'+user.logo)"
+                    >
                   </a>
                 </slide>
               </carousel>

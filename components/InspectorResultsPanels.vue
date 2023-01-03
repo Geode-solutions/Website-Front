@@ -1,25 +1,31 @@
 <template>
   <v-container>
-    <v-expansion-panels multiple focusable v-model="opened_panels">
+    <v-expansion-panels
+      v-model="opened_panels"
+      multiple
+      focusable
+    >
       <v-expansion-panel
         v-for="(modelCheck, index) in modelChecks"
         :key="index"
         class="card"
         :title="modelCheck.sentence"
       >
-
-        <ValidityBadge :value="modelCheck.value"/>
-          <InspectorResultsPanels
-            v-if="!modelCheck.is_leaf"
-            :index="index"
-            :model-checks="modelCheck.children"
-            :object="object"
-            :filename="filename"
-            @updateResult="updateResult"
-          />
-          <v-container v-else-if="modelCheck.value == false" class="pt-6">
-            Invalid = {{ modelCheck.list_invalidities }}
-          </v-container>
+        <ValidityBadge :value="modelCheck.value" />
+        <InspectorResultsPanels
+          v-if="!modelCheck.is_leaf"
+          :index="index"
+          :model-checks="modelCheck.children"
+          :object="object"
+          :filename="filename"
+          @updateResult="updateResult"
+        />
+        <v-container
+          v-else-if="modelCheck.value == false"
+          class="pt-6"
+        >
+          Invalid = {{ modelCheck.list_invalidities }}
+        </v-container>
       </v-expansion-panel>
     </v-expansion-panels>
   </v-container>

@@ -2,12 +2,18 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1 class="text-h2 my-5 py-5" align="center">
+        <h1
+          class="text-h2 my-5 py-5"
+          align="center"
+        >
           Custom-tailored services
         </h1>
-        <h2 class="text-h4 my-5 pb-5" align="center">
+        <h2
+          class="text-h4 my-5 pb-5"
+          align="center"
+        >
           <v-btn
-            large
+            size="large"
             color="primary"
             dark
             href="mailto:contact@geode-solutions.com"
@@ -21,8 +27,15 @@
           :key="index"
           style="margin-bottom: 40px"
         >
-          <v-row align="center" justify="space-around">
-            <v-col :order-sm="(index + 1) % 2" cols="12" sm="5">
+          <v-row
+            align="center"
+            justify="space-around"
+          >
+            <v-col
+              :order-sm="(index + 1) % 2"
+              cols="12"
+              sm="5"
+            >
               <v-card-text>
                 <v-lazy
                   :options="{
@@ -37,23 +50,35 @@
                 </v-lazy>
               </v-card-text>
             </v-col>
-            <v-col cols="12" sm="7">
+            <v-col
+              cols="12"
+              sm="7"
+            >
               <v-card flat>
-                <v-card-title primary-title class="justify-center text-h4">
+                <v-card-title
+                  primary-title
+                  class="justify-center text-h4"
+                >
                   {{ service.title }}
                 </v-card-title>
-                <v-card-text align="justify" class="text-h6">
+                <v-card-text
+                  align="justify"
+                  class="text-h6"
+                >
                   {{ service.text }}
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
         </v-card>
-        <h2 class="text-h4 my-5 py-5" align="center">
+        <h2
+          class="text-h4 my-5 py-5"
+          align="center"
+        >
           Let us know how we can help!
           <div class="my-2">
             <v-btn
-              large
+              size="large"
               color="primary"
               dark
               href="mailto:contact@geode-solutions.com"

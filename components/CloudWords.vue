@@ -1,5 +1,8 @@
 <template>
-    <div class="wordCloud" ref="wordCloud"></div>
+  <div
+    ref="wordCloud"
+    class="wordCloud"
+  />
 </template>
 
 <script>
@@ -7,34 +10,6 @@ import * as d3 from "d3";
 import * as cloud from 'd3-cloud';
 
 export default {
-    data() {
-        return {
-            layout: {},
-            chart: {},
-            fill: null,
-            skills: [
-                ['C++', 5],
-                ['DevOps', 4],
-                ['Meshing', 5],
-                ['Python', 2],
-                ['Algorithms', 3],
-                ['Computational geometry', 4],
-                ['Geomodeling', 2],
-                ['Unstructured meshes', 3],
-                ['BoundaryRepresentation', 2],
-                ['Model editing', 4],
-                ['Mesh repair', 2],
-                ['Model repair', 5],
-                ['Continuous integration', 2],
-                ['Continuous deployment', 2],
-                ['Software engineering', 4],
-                ['Robustness', 3],
-                ['JavaScript', 2],
-                ['Web technologies', 2],
-                ['Visualization', 2],
-            ],
-        }
-    },
 
     props: {
         data: {
@@ -81,6 +56,34 @@ export default {
         },
         colors: {
             type: Array,
+        }
+    },
+    data() {
+        return {
+            layout: {},
+            chart: {},
+            fill: null,
+            skills: [
+                ['C++', 5],
+                ['DevOps', 4],
+                ['Meshing', 5],
+                ['Python', 2],
+                ['Algorithms', 3],
+                ['Computational geometry', 4],
+                ['Geomodeling', 2],
+                ['Unstructured meshes', 3],
+                ['BoundaryRepresentation', 2],
+                ['Model editing', 4],
+                ['Mesh repair', 2],
+                ['Model repair', 5],
+                ['Continuous integration', 2],
+                ['Continuous deployment', 2],
+                ['Software engineering', 4],
+                ['Robustness', 3],
+                ['JavaScript', 2],
+                ['Web technologies', 2],
+                ['Visualization', 2],
+            ],
         }
     },
 

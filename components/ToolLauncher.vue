@@ -1,21 +1,35 @@
 <template>
-    <v-container justify="space-around">
-        <v-row rows="auto" align-content="center" align="center">
-            <v-col v-if="((!is_captcha_validated) && (this.$config.NODE_ENV === 'production'))" cols="10" align-self="center" align="center">
-                <recaptcha class="align-center"/>
-                <v-btn @click="SubmitRecaptcha()" color="primary">Start tool</v-btn> 
-            </v-col>
-            <v-col v-else-if="internal_error">
-                <InternalError />
-            </v-col>
-            <v-col v-else-if="is_under_maintenance">
-                <UnderMaintenance />
-            </v-col>
-            <v-col v-else-if="!is_cloud_running">
-                <CloudLoading />
-            </v-col>
-        </v-row>
-    </v-container>
+  <v-container justify="space-around">
+    <v-row
+      rows="auto"
+      align-content="center"
+      align="center"
+    >
+      <v-col
+        v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))"
+        cols="10"
+        align-self="center"
+        align="center"
+      >
+        <recaptcha class="align-center" />
+        <v-btn
+          color="primary"
+          @click="SubmitRecaptcha()"
+        >
+          Start tool
+        </v-btn> 
+      </v-col>
+      <v-col v-else-if="internal_error">
+        <InternalError />
+      </v-col>
+      <v-col v-else-if="is_under_maintenance">
+        <UnderMaintenance />
+      </v-col>
+      <v-col v-else-if="!is_cloud_running">
+        <CloudLoading />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

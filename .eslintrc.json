@@ -4,17 +4,16 @@
         "es2021": true
     },
     "extends": [
-        "plugin:vue/vue3-essential",
-        "airbnb-base"
+        "plugin:vue/vue3-recommended",
+        "plugin:vuetify/base",
+        "plugin:nuxt/recommended"
     ],
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "plugins": [
-        "vue"
-    ],
     "rules": {
+        "no-console": "off",
+        "no-debugger": "off"
     }
 }

@@ -2,12 +2,20 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <h1 class="text-h2 py-5" align="center">
+        <h1
+          class="text-h2 py-5"
+          align="center"
+        >
           Validity checker
         </h1>
         <v-col>
           <v-row class="justify-center">
-            <v-col v-for="(item, i) in items" :key="i" cols="11" md="5">
+            <v-col
+              v-for="(item, i) in items"
+              :key="i"
+              cols="11"
+              md="5"
+            >
               <v-card
                 v-ripple
                 class="card"
@@ -19,7 +27,10 @@
               >
                 <v-row class="justify-center">
                   <v-col cols="auto">
-                    <v-icon size="128" class="justify-center">
+                    <v-icon
+                      size="128"
+                      class="justify-center"
+                    >
                       {{ item.icon }}
                     </v-icon>
                   </v-col>
@@ -43,8 +54,16 @@
         <ToolLauncher />
       </v-col>
 
-      <v-col v-if="is_cloud_running" class="pb-5">
-        <v-stepper v-model="currentStep" class="stepper" vertical elevation="5">
+      <v-col
+        v-if="is_cloud_running"
+        class="pb-5"
+      >
+        <v-stepper
+          v-model="currentStep"
+          class="stepper"
+          vertical
+          elevation="5"
+        >
           <v-stepper-step
             :complete="currentStep > 1"
             step="1"
@@ -105,7 +124,7 @@
                     cols="2"
                     md="2"
                   >
-                    <v-tooltip bottom>
+                    <v-tooltip location="bottom">
                       <template #activator="{ on }">
                         <v-card
                           v-ripple
@@ -132,8 +151,11 @@
             </v-row>
             <v-row v-else>
               <p class="ma-4">
-                This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
-                supported file formats documentation</a> for more information
+                This file format isn't supported! Please check the <a
+                  href="https://docs.geode-solutions.com/formats/"
+                  target="_blank"
+                >
+                  supported file formats documentation</a> for more information
               </p>
             </v-row>
           </v-stepper-content>
@@ -146,23 +168,25 @@
             Inspect your file
           </v-stepper-step>
           <v-stepper-content step="3">
-
             <v-btn
               :loading="loading"
               color="primary"
               @click="InspectFile(files[0])"
             >
               Inspect
-              <template v-slot:loader>
+              <template #loader>
                 <v-progress-circular
                   indeterminate
                   size="20"
                   color="white"
                   width="3"
-                ></v-progress-circular>
+                />
               </template>
             </v-btn>
-            <v-btn text @click="SetStep(2)">
+            <v-btn
+              variant="text"
+              @click="SetStep(2)"
+            >
               Cancel
             </v-btn>
           </v-stepper-content>
