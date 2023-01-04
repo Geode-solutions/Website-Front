@@ -23,7 +23,7 @@
                 elevation="5"
                 :href="item.href"
                 target="_blank"
-                contain
+                cover
               >
                 <v-row class="justify-center">
                   <v-col cols="auto">
@@ -87,14 +87,12 @@
           <v-stepper-content step="1">
             <v-file-input
               chips
-              rounded
               multiple
               color="#3b3b3b"
               :label="inputMessage"
               :accept="acceptedExtensions"
               :rules="inputRules"
               show-size
-              :success="success"
               @click:clear="objects = []"
               @change="GetAllowedObjects"
             />
@@ -141,7 +139,7 @@
                               require('@/assets/tools/' +
                                 GeodeObjects[object].image)
                             "
-                            contain
+                            cover
                             @click="GetOutputFileExtensions(object)"
                           />
                         </v-card>
@@ -155,7 +153,7 @@
 
             <v-row v-else>
               <p class="ma-4">
-                <span v-if="files.length==1">This file format is not supported! </span>
+                <span v-if="files.length == 1">This file format is not supported! </span>
                 <span v-else>This file format combination is not supported! </span>
                 Please check the <a
                   href="https://docs.geode-solutions.com/formats/"
@@ -252,14 +250,14 @@
 <script>
 import { mapState } from 'vuex'
 import fileDownload from 'js-file-download'
-import ToolLauncher from '@/components/ToolLauncher.vue'
-import PackagesVersions from '@/components/PackagesVersions.vue'
+import ToolLauncher from '~~/components/Tools/Launcher.vue'
+import PackagesVersions from '~~/components/Tools/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'FileConverter',
   components: { PackagesVersions, ToolLauncher },
-  data() {
+  data () {
     return {
       acceptedExtensions: '',
       extension: '',
@@ -292,34 +290,34 @@ export default {
     ...mapState(['ID', 'is_cloud_running']),
   },
   watch: {
-    is_cloud_running(newValue) {
+    is_cloud_running (newValue) {
       if (newValue === true) {
         this.GetAllowedFiles()
         this.GetPackagesVersions()
       }
     },
   },
-  activated() {
+  activated () {
     if (this.is_cloud_running === true) {
       this.GetAllowedFiles()
       this.GetPackagesVersions()
     }
   },
   methods: {
-    async GetAllowedFiles() {
+    async GetAllowedFiles () {
       const data = await this.$axios.$get(`${this.ID}/fileconverter/allowedfiles`)
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
     },
-    async GetPackagesVersions() {
+    async GetPackagesVersions () {
       const data = await this.$axios.$get(`${this.ID}/fileconverter/versions`)
       this.versions = data.versions
     },
-    async GetAllowedObjects(changedFiles) {
+    async GetAllowedObjects (changedFiles) {
       this.success = true
       this.message = 'File(s) selected'
       if (changedFiles) {
-          this.files = changedFiles
+        this.files = changedFiles
       }
       this.objects = []
       let tempObjects = []
@@ -330,7 +328,7 @@ export default {
         const params = new FormData()
         params.append('filename', this.files[i].name)
         const data = await this.$axios.$post(`${this.ID}/fileconverter/allowedobjects`, params)
-        if(i===0){
+        if (i === 0) {
           tempObjects = data.objects
         } else {
           tempObjects = tempObjects.filter(value => data.objects.includes(value))
@@ -340,7 +338,7 @@ export default {
       this.objects = tempObjects
       this.currentStep = this.currentStep + 1
     },
-    async GetOutputFileExtensions(object) {
+    async GetOutputFileExtensions (object) {
       const params = new FormData()
       params.append('object', object)
       this.GeodeObject = object
@@ -349,14 +347,14 @@ export default {
       this.fileExtensions = data.outputfileextensions
       this.currentStep = this.currentStep + 1
     },
-    setFileFormat(extension) {
+    setFileFormat (extension) {
       this.extension = extension
       this.currentStep = 4
     },
-    async ConvertFile() {
+    async ConvertFile () {
       const self = this
       for (let i = 0; i < self.files.length; i++) {
-        
+
         let reader = new FileReader()
         reader.onload = async function (event) {
           let params = new FormData()
@@ -369,18 +367,18 @@ export default {
           params.append('responseType', 'blob')
           params.append('responseEncoding', 'binary')
           self.loading = true
-          
+
           try {
             await self.$axios
-            .post(`${self.ID}/fileconverter/convertfile`, params, {responseType: 'blob'})
-            .then((response) => {
-              if (response.status == 200) {
-                let newFileName = response.headers['new-file-name']
-                fileDownload(response.data, newFileName)
-              }
-              self.loading = false
-            })
-          } catch(err){
+              .post(`${self.ID}/fileconverter/convertfile`, params, { responseType: 'blob' })
+              .then((response) => {
+                if (response.status == 200) {
+                  let newFileName = response.headers['new-file-name']
+                  fileDownload(response.data, newFileName)
+                }
+                self.loading = false
+              })
+          } catch (err) {
             self.loading = false
           }
         }

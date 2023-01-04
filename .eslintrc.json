@@ -1,19 +1,19 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "plugin:vue/vue3-recommended",
-        "plugin:vuetify/base",
-        "plugin:nuxt/recommended"
-    ],
-    "overrides": [],
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "rules": {
-        "no-console": "off",
-        "no-debugger": "off"
-    }
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "plugin:vuetify/base",
+    "plugin:nuxt/recommended"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "no-console": "off",
+    "no-debugger": "off"
+  }
 }

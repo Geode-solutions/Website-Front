@@ -26,7 +26,6 @@
                   height="500"
                   :elevation="hover ? 20 : 2"
                   :img="require('@/assets/index/' + card.image)"
-                  nuxt
                   :to="card.url"
                   class="d-flex"
                 >

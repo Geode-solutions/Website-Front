@@ -84,14 +84,12 @@
           <v-stepper-content step="1">
             <v-file-input
               chips
-              rounded
               :multiple="multiple"
               color="#3b3b3b"
               :label="inputMessage"
               :accept="acceptedExtensions"
               :rules="inputRules"
               show-size
-              :success="success"
               @click:clear="objects = []"
               @change="GetAllowedObjects"
             />
@@ -138,7 +136,7 @@
                               require('@/assets/tools/' +
                                 GeodeObjects[object].image)
                             "
-                            contain
+                            cover
                             @click="SetGeodeObject(object)"
                           />
                         </v-card>
@@ -214,15 +212,15 @@
 
 <script>
 import { mapState } from 'vuex'
-import ToolLauncher from '@/components/ToolLauncher.vue'
-import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
-import PackagesVersions from '@/components/PackagesVersions.vue'
+import ToolLauncher from '~~/components/Tools/Launcher.vue'
+import InspectorResultsPanels from '~~/components/Tools/Inspector/ResultsPanels.vue'
+import PackagesVersions from '~~/components/Tools/PackagesVersions.vue'
 import geode_objects from '@/assets/geode_objects'
 
 export default {
   name: 'ValidityChecker',
   components: { InspectorResultsPanels, PackagesVersions, ToolLauncher },
-  data() {
+  data () {
     return {
       acceptedExtensions: '',
       extension: '',
@@ -253,7 +251,7 @@ export default {
       versions: [],
     }
   },
-  head() {
+  head () {
     return {
       title: 'Validity checker',
     }
@@ -262,33 +260,33 @@ export default {
     ...mapState(['ID', 'is_cloud_running']),
   },
   watch: {
-    is_cloud_running(newValue) {
+    is_cloud_running (newValue) {
       if (newValue === true) {
         this.GetAllowedFiles()
         this.GetPackagesVersions()
       }
     },
   },
-  activated() {
+  activated () {
     if (this.is_cloud_running === true) {
       this.GetAllowedFiles()
       this.GetPackagesVersions()
     }
   },
   methods: {
-    async GetAllowedFiles() {
+    async GetAllowedFiles () {
       const data = await this.$axios.$get(
         `${this.ID}/validitychecker/allowedfiles`
       )
       const extensions = data.extensions.map((extension) => '.' + extension)
       this.acceptedExtensions = extensions.join(',')
     },
-    async GetPackagesVersions() {
+    async GetPackagesVersions () {
       const data = await this.$axios.$get(`${this.ID}/validitychecker/versions`)
       this.versions = data.versions
     },
 
-    async GetAllowedObjects(changedFiles) {
+    async GetAllowedObjects (changedFiles) {
       this.success = true
       this.message = 'File(s) selected'
       if (this.multiple) {
@@ -307,12 +305,12 @@ export default {
       this.objects = data.objects
       this.currentStep = this.currentStep + 1
     },
-    SetGeodeObject(object) {
+    SetGeodeObject (object) {
       this.GeodeObject = object
       this.currentStep = this.currentStep + 1
     },
 
-    SetStep(step) {
+    SetStep (step) {
       if (step <= 3) {
         this.modelChecks = []
       }
@@ -325,13 +323,13 @@ export default {
       this.currentStep = step
     },
 
-    async InspectFile() {
+    async InspectFile () {
       await this.UploadFile()
       console.log('UploadFile okay')
       this.SetStep(4)
       await this.GetTestsNames()
     },
-    async GetTestsNames() {
+    async GetTestsNames () {
       const self = this
       const params = new FormData()
       params.append('object', self.GeodeObject)
@@ -343,7 +341,7 @@ export default {
           }
         })
     },
-    async UploadFile() {
+    async UploadFile () {
       const self = this
       return new Promise((resolve, reject) => {
         const reader = new FileReader()
@@ -353,7 +351,7 @@ export default {
             params.append('file', event.target.result)
             params.append('filename', self.files[0].name)
             params.append('filesize', self.files[0].size)
-            
+
             self.loading = true
             let response = await self.$axios.post(`${self.ID}/validitychecker/uploadfile`, params)
             self.loading = false

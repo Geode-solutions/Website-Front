@@ -35,7 +35,6 @@
         >
           <v-btn
             color="primary"
-            dark
             href="mailto:contact@geode-solutions.com"
           >
             Contact us
@@ -53,7 +52,6 @@
             <v-card
               v-ripple
               class="card"
-              nuxt
               hover
               elevation="5"
               :to="tool.to"
@@ -106,7 +104,7 @@ export default {
   data: () => ({
     tools: tools_list,
   }),
-  head() {
+  head () {
     return {
       title: 'Geode-solutions free tools',
     }

@@ -3,15 +3,14 @@
     <v-expansion-panels
       v-model="opened_panels"
       multiple
-      focusable
     >
       <v-expansion-panel
-        v-for="(modelCheck, index) in modelChecks"
+        v-for="(modelCheck) in modelChecks"
         :key="index"
         class="card"
         :title="modelCheck.sentence"
       >
-        <ValidityBadge :value="modelCheck.value" />
+        <InspectorValidityBadge :value="modelCheck.value" />
         <InspectorResultsPanels
           v-if="!modelCheck.is_leaf"
           :index="index"
@@ -31,10 +30,9 @@
   </v-container>
 </template>
 
-<script>
+<script setup >
 import { mapState } from 'pinia'
-import InspectorResultsPanels from '@/components/InspectorResultsPanels.vue'
-import ValidityBadge from '@/components/ValidityBadge.vue'
+
 
 export default {
   name: 'InspectorResultsPanels',
@@ -57,7 +55,8 @@ export default {
       default: 0,
     }
   },
-  data() {[]
+  data () {
+    []
     return {
       opened_panels: []
     }
@@ -76,7 +75,7 @@ export default {
   },
   watch: {
     modelChecks: {
-      handler() {
+      handler () {
         let nb_results = 0
         for (let index = 0; index < this.modelChecks.length; index++) {
           const current_check = this.modelChecks[index]
@@ -86,7 +85,7 @@ export default {
           if (current_check.value != true) {
             this.$emit('updateResult', this.index, false)
             return
-          } else if(current_check.value == true){
+          } else if (current_check.value == true) {
             console.log('index :', index)
             let index_of_index = this.opened_panels.indexOf(index)
             console.log('this.sopened_panels :', this.opened_panels)
@@ -104,15 +103,15 @@ export default {
       deep: true,
     },
   },
-  created() {
+  created () {
     this.GetTestsResults()
     this.opened_panels = Array.from(Array(this.modelChecks.length).keys())
   },
   methods: {
-    updateResult(index, value) {
+    updateResult (index, value) {
       this.modelChecks[index].value = value
     },
-    async GetTestsResults() {
+    async GetTestsResults () {
       for (let index = 0; index < this.modelChecks.length; index++) {
         const current_check = this.modelChecks[index]
         if (current_check.is_leaf) {
@@ -120,8 +119,8 @@ export default {
           params.append('object', this.object)
           params.append('filename', this.filename)
           params.append('test', current_check.route)
-          
-          try{
+
+          try {
             let response = await this.$axios.post(`${this.ID}/validitychecker/inspectfile`, params)
             current_check.value = response.data.Result
             current_check.list_invalidities = response.data.list_invalidities

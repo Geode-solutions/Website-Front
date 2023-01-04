@@ -4,7 +4,6 @@
     no-gutters
   >
     <v-navigation-drawer
-      clipped
       permanent
       :rail="mini"
       :expand-on-hover="mini"
@@ -16,7 +15,6 @@
           :to="tool.to"
           router
           exact
-          nuxt
         >
           <v-list-item-action>
             <v-icon>{{ tool.icon }}</v-icon>
@@ -26,7 +24,6 @@
               v-if="tool.badge"
               :content="tool.badge"
               inline
-              overlap
             >
               <v-list-item-title v-text="tool.title" />
             </v-badge>

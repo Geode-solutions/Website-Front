@@ -81,7 +81,7 @@
                   <v-img
                     :src="require('@/assets/opengeode/' + card.image)"
                     :alt="'Geode-solutions ' + card.title"
-                    contain
+                    cover
                   />
                   <v-card-title
                     primary-title
@@ -108,7 +108,6 @@
               <v-btn
                 size="large"
                 color="primary"
-                dark
                 href="mailto:contact@geode-solutions.com"
               >
                 Contact us
@@ -167,7 +166,7 @@
 <script>
 export default {
   name: 'OpenGeode',
-  data() {
+  data () {
     return {
       cards: [
         {
@@ -246,13 +245,13 @@ export default {
       ],
     }
   },
-  head() {
+  head () {
     return {
       title: 'OpenGeode - open source framework for geometric models',
     }
   },
   computed: {
-    display() {
+    display () {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
           return 'display-3'
@@ -260,7 +259,7 @@ export default {
           return 'display-4'
       }
     },
-    nbUsers() {
+    nbUsers () {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
           return 1
@@ -279,16 +278,19 @@ export default {
   width: 100%;
   height: 50vh;
 }
+
 .title {
   position: absolute;
   top: 25vh;
   width: 100%;
   height: 50%;
 }
+
 .section {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+
 .logo {
   display: flex;
   align-items: center;

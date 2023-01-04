@@ -15,7 +15,6 @@
           <v-btn
             size="large"
             color="primary"
-            dark
             href="mailto:contact@geode-solutions.com"
           >
             Contact us
@@ -45,7 +44,7 @@
                   <v-img
                     :src="require('@/assets/services/' + service.image)"
                     :alt="'Geode-solutions ' + service.title"
-                    contain
+                    cover
                   />
                 </v-lazy>
               </v-card-text>
@@ -80,7 +79,6 @@
             <v-btn
               size="large"
               color="primary"
-              dark
               href="mailto:contact@geode-solutions.com"
             >
               Contact us
@@ -127,7 +125,7 @@ export default {
       },
     ],
   }),
-  head() {
+  head () {
     return {
       title: 'Geode-solutions custom-tailored services',
     }

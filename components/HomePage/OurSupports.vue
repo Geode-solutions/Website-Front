@@ -1,45 +1,26 @@
 <template>
-  <v-container
-    fluid
-    style="background-color: white"
-  >
+  <v-container fluid style="background-color: white">
     <v-row class="container mx-auto">
       <v-col>
-        <v-lazy
-          :options="{
-            threshold: 0.5,
-          }"
-        >
-          <h2
-            class="section text-h2"
-            align="center"
-          >
-            They support us
-          </h2>
-          <Carousel
-            wrap-around
-            :items-to-show="nb_partners"
-          >
-            <Slide
-              v-for="(supporter, index) in supporters"
-              :key="index"
-              class="logo"
-            >
-              {{ supporter }}
-              <!-- <a :href="supporter.url" target="_blank">
-                                <v-img
-                                    width="80%"
-                                    :src="supporter.logo"
-                                >
-                                </v-img>
-                            </a> -->
-            </Slide>
-            <template #addons>
-              <Navigation />
-              <Pagination />
-            </template>
-          </Carousel>
-        </v-lazy>
+        <!-- <v-lazy :options="{
+          threshold: 0.5,
+        }"> -->
+        <h2 class="section text-h2" align="center">
+          They support us
+        </h2>
+        <Carousel wrap-around :items-to-show="nb_partners">
+          <Slide v-for="(supporter, index) in supporters" :key="index" class="logo">
+            <a :href="supporter.url" target="_blank">
+              <!-- <v-img width="80%" :scr="partner.logo"></v-img> -->
+              <div class="carousel__item">{{ supporter.name }}</div>
+            </a>
+          </Slide>
+          <template #addons>
+            <Navigation />
+            <Pagination />
+          </template>
+        </Carousel>
+        <!-- </v-lazy> -->
       </v-col>
     </v-row>
   </v-container>
@@ -48,7 +29,6 @@
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-
 
 const supporters = [
   {
@@ -94,10 +74,26 @@ const nb_partners = 3
 </script>
 
 <style scoped>
-.logo {
+.carousel__item {
+  min-height: 200px;
+  width: 100%;
+  background-color: var(--vc-clr-primary);
+  color: var(--vc-clr-white);
+  font-size: 20px;
+  border-radius: 8px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+
+.carousel__slide {
+  padding: 10px;
+}
+
+.carousel__prev,
+.carousel__next {
+  box-sizing: content-box;
+  border: 5px solid white;
 }
 </style>
 
