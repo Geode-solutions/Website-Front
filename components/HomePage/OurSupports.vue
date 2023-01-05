@@ -45,6 +45,8 @@
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
 
 const supporters = [
   {
@@ -73,20 +75,17 @@ const supporters = [
     url: 'https://www.geoliens.org',
   }
 ]
-// computed: {
-const nb_partners = 3
-  // nb_partners() {
-  //           // switch (this.$vuetify.breakpoint.name) {
-  //           //     case 'xs':
-  //           //     return 1
-  //           //     case 'sm':
-  //           //     return 2
-  //           //     default:
-  //           //     return 3
-  //           // }
-  //           return 3
-  //       },
-  //   },
+
+const { name } = useDisplay()
+
+const nb_supports = computed(() => {
+  switch (name.value) {
+    case 'xs': return 1
+    case 'sm': return 2
+    default: return 3
+  }
+})
+
 </script>
 
 <style scoped>

@@ -1,15 +1,15 @@
 <template>
   <v-app>
     <v-theme-provider>
-      <v-app-bar color="primary">toto
+      <!-- <v-app-bar color="primary">toto
         <v-spacer></v-spacer>
-      </v-app-bar>
-      <!-- <CommonHeader /> -->
+      </v-app-bar> -->
+      <CommonHeader />
       <v-main class="bg-secondary">
         <slot />
       </v-main>
       <!-- <CookieControl v-if="this.$config.NODE_ENV === 'production'"/> -->
-      <CommonFooter />
+      <!-- <CommonFooter /> -->
     </v-theme-provider>
   </v-app>
 </template>

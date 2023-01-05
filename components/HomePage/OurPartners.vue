@@ -5,25 +5,12 @@
         <!-- <v-lazy :options="{
           threshold: 0.5,
         }"> -->
-        <h2
-          class="section text-h2"
-          align="center"
-        >
+        <h2 class="section text-h2" align="center">
           Our partners
         </h2>
-        <Carousel
-          wrap-around
-          :items-to-show="nb_partners"
-        >
-          <Slide
-            v-for="(partner, index) in partners"
-            :key="index"
-            class="logo"
-          >
-            <a
-              :href="partner.url"
-              target="_blank"
-            >
+        <Carousel wrap-around :items-to-show="nb_partners">
+          <Slide v-for="(partner, index) in partners" :key="index" class="logo">
+            <a :href="partner.url" target="_blank">
               <!-- <v-img width="80%" :scr="partner.logo"></v-img> -->
               <div class="carousel__item">{{ partner.name }}</div>
             </a>
@@ -42,6 +29,8 @@
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
 
 const partners = [
   {
@@ -95,18 +84,20 @@ const partners = [
     url: 'https://www.mosart-pme.org/',
   },
 ]
-const nb_partners = 3
-        // nb_partners () {
-        //     // switch (this.$vuetify.breakpoint.name) {
-        //     //     case 'xs':
-        //     //     return 1
-        //     //     case 'sm':
-        //     //     return 2
-        //     //     default:
-        //     //     return 3
-        //     // }
-        //     return 3
-        // }
+
+
+const { name } = useDisplay()
+
+const nb_partners = computed(() => {
+  switch (name.value) {
+    case 'xs': return 1
+    case 'sm': return 2
+    default: return 3
+  }
+})
+
+
+
 </script>
 
 <style scoped>

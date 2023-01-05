@@ -98,16 +98,6 @@ export default defineNuxtConfig({
   // version: 2,
   // },capt
 
-  // theme: {
-  //     primaryColor: colors.teal.darken1,
-  //     secondaryColor: colors.teal.lighten4,
-  //     accent: colors.red.darken4
-  //     }
-  // }
-  // },
-  // icons: { iconfont: 'mdi', values: { logo: { component: 'GeodeLogo' } } }
-  // },
-
   // cookies: {
   //   necessary: [
   //     {

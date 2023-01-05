@@ -24,31 +24,27 @@
 <script setup>
 import { useIndexStore } from '../stores/index'
 const index_store = useIndexStore()
-// watch: {
-//   is_captcha_validated(newValue) {
-//     if (newValue === true) {
-//       this.create_connexion()
-//     }
-//   },
-//   is_cloud_running(newValue, oldValue) {
-//     if (newValue === false && oldValue == true) {
-//       this.$store.commit('set_internal_error', true)
-//     }
-//   },
-// },
+watch: {
+  is_captcha_validated(newValue) {
+    if (newValue === true) {
+      this.create_connexion()
+    }
+  },
+  is_cloud_running(newValue, oldValue) {
+    if (newValue === false && oldValue == true) {
+      index_store.$patch({ internal_error: true })
+    }
+  },
+},
 onMounted() {
   if (process.client) {
     if (this.$config.NODE_ENV !== 'production') {
-      this.$store.commit('set_is_captcha_validated', true)
-      index_store.$patch({
-        count: store.count + 1
-      })
+      index_store.$patch({ is_captcha_validated: true })
     }
   }
 },
 
 methods: {
-    ...mapActions(['create_connexion', 'submit_recaptcha']),
     async submit_recaptcha() {
     try {
       const token = await this.$recaptcha.getResponse()

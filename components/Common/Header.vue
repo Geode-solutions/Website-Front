@@ -15,7 +15,8 @@
       </v-toolbar-items>
     </v-row>
 
-    <v-expansion-panels v-model="menu" class="hidden-md-and-up" style="position: absolute; top: 0; left: 0" accordion>
+    <v-expansion-panels v-model="toggle_menu" class="hidden-md-and-up" style="position: absolute; top: 0; left: 0"
+      accordion>
       <!-- <v-expansion-panel class="primary"> -->
       <v-expansion-panel class="bg-primary" :title="name">
         <v-row align="center">
@@ -30,10 +31,10 @@
 
       <v-expansion-panel-text>
         <v-list color="primary">
-          <v-list-item text to="/" @click="menu_boolean = false">
+          <v-list-item text to="/" @click="toggle_menu = false">
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-          <v-list-item v-for="(menu, i) in menus" :key="i" text :to="menu.to" @click="menu_boolean = false">
+          <v-list-item v-for="(menu, i) in menus" :key="i" text :to="menu.to" @click="toggle_menu = false">
             <v-list-item-title>{{ menu.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -45,7 +46,7 @@
 
 <script setup>
 const name = 'Geode-solutions'
-const menu_boolean = false
+const toggle_menu = ref(false)
 const menus = [
   { title: 'OpenGeode', to: '/opengeode' },
   { title: 'Expertise', to: '/expertise' },
