@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar color="primary">
-    <v-row class="hidden-sm-and-down px-2">
-      <v-btn prepend-icon="mdi-vuetify" variant="text" selected-class="no-active" to="/">
+  <v-app-bar color="primary" floating>
+    <v-row class="px-2">
+      <v-btn variant="text" selected-class="no-active" to="/">
         <v-app-bar-nav-icon>
           <GeodeLogo />
         </v-app-bar-nav-icon>
@@ -18,15 +18,14 @@
     <v-expansion-panels v-model="menu" class="hidden-md-and-up" style="position: absolute; top: 0; left: 0" accordion>
       <!-- <v-expansion-panel class="primary"> -->
       <v-expansion-panel class="bg-primary" :title="name">
-        <!-- <v-row align="center">
-              <v-col class="px-2" cols="1">
-                <v-icon size="large" icon="mdi-vuetify">
-                </v-icon>
-              </v-col>
-              <v-col class="text-h6 mx-2">
-                {{ name }}
-              </v-col>
-            </v-row> -->
+        <v-row align="center">
+          <v-col class="px-2" cols="1">
+            <v-icon size="large" icon="mdi-vuetify" />
+          </v-col>
+          <v-col class="text-h6 mx-2">
+            {{ name }}
+          </v-col>
+        </v-row>
       </v-expansion-panel>
 
       <v-expansion-panel-text>
@@ -41,8 +40,6 @@
       </v-expansion-panel-text>
     </v-expansion-panels>
   </v-app-bar>
-
-
 </template>
 
 

@@ -1,17 +1,33 @@
 <template>
-  <v-container fluid style="background-color: white">
+  <v-container
+    fluid
+    style="background-color: white"
+  >
     <v-row class="container mx-auto">
       <v-col>
         <!-- <v-lazy :options="{
           threshold: 0.5,
         }"> -->
-        <h2 class="section text-h2" align="center">
+        <h2
+          class="section text-h2"
+          align="center"
+        >
           They support us
         </h2>
-        <Carousel wrap-around :items-to-show="nb_partners">
-          <Slide v-for="(supporter, index) in supporters" :key="index" class="logo">
-            <a :href="supporter.url" target="_blank">
-              <!-- <v-img width="80%" :scr="partner.logo"></v-img> -->
+        <Carousel
+          wrap-around
+          :items-to-show="nb_partners"
+        >
+          <Slide
+            v-for="(supporter, index) in supporters"
+            :key="index"
+            class="logo"
+          >
+            <a
+              :href="supporter.url"
+              target="_blank"
+            >
+              <!-- <img width="80%" :scr="partner.logo" /> -->
               <div class="carousel__item">{{ supporter.name }}</div>
             </a>
           </Slide>
@@ -33,27 +49,27 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 const supporters = [
   {
     name: 'Helioparc',
-    logo: 'logo_helioparc.svg',
+    logo: '@/static/logos/logo_helioparc.svg',
     url: 'http://www.helioparc.fr',
   },
   {
     name: 'LaBanquiz',
-    logo: 'logo_banquiz.png',
+    logo: '@/static/logos/logo_banquiz.png',
     url: 'https://labanquiz.com',
   },
   {
     name: 'NAOS',
-    logo: 'logo_NAOS.png',
+    logo: '@/static/logos/logo_NAOS.png',
     url: 'https://naos-cluster.com',
   },
   {
     name: 'Nouvelle-Aquitaine',
-    logo: 'logo_region.png',
+    logo: '@/static/logos/logo_region.png',
     url: 'https://www.nouvelle-aquitaine.fr',
   },
   {
     name: 'Geoliens',
-    logo: 'logo_geoliens.png',
+    logo: '@/static/logos/logo_geoliens.png',
     url: 'https://www.geoliens.org',
   }
 ]
