@@ -1,4 +1,5 @@
 import colors from 'vuetify/lib/util/colors'
+import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -131,5 +132,12 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
+  },
+  vite: {
+    plugins: [
+      svgLoader({
+        defaultImport: 'url'
+      })
+    ]
   }
 })

@@ -2,7 +2,7 @@
   <v-container width="100%">
     <v-row no-gutters>
       <v-col>
-        <!-- <HomePageLandingView /> -->
+        <HomePageLandingView />
         <!-- <HomePageOurOffer /> -->
         <!-- <HomePageApplicationFields /> -->
         <!-- <HomePageOurConcepts /> -->

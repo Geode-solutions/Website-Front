@@ -9,8 +9,7 @@
     <v-row justify="space-around" class="container mx-auto">
       <v-col v-for="(guy, index) in us" :key="index" cols="8" sm="4" class="ma-2">
         <v-card class="elevation-5 text-center">
-          <v-avatar size="150" class="ma-2">
-            <!-- :size="$vuetify.breakpoint.mdAndUp ? 200 : 150" -->
+          <v-avatar :size="mdAndUp ? 200 : 150" class="ma-2">
             <v-img :src="guy.pict" :alt="'Geode-solutions ' + guy.name" />
           </v-avatar>
           <v-card-title primary-title class="justify-center text-h5">
@@ -32,6 +31,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
+
 import Arnaud from '@/static/ArnaudB.jpg'
 import PierreA from '@/static/PierreA.jpg'
 import Melchior from '@/static/Melchior.jpg'
@@ -67,4 +69,7 @@ const us = [
     topic: 'Web and microservices',
   },
 ]
+
+const { mdAndUp } = useDisplay()
+
 </script>

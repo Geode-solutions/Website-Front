@@ -25,6 +25,7 @@
     "eslint-plugin-prettier-vue": "^4.2.0",
     "nuxt": "3.0.0",
     "nuxt-cookie-control": "^1.9.93",
+    "vite-svg-loader": "^4.0.0",
     "vue3-carousel": "^0.2.9",
     "vue3-particles": "^2.7.1",
     "vuetify": "^3.0.6"

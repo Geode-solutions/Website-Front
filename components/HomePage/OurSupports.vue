@@ -9,10 +9,13 @@
           They support us
         </h2>
         <Carousel wrap-around :items-to-show="nb_supports">
+          <!-- <div v-for="(supporter, index) in supporters" :key="index">
+        </div> -->
           <Slide v-for="(supporter, index) in supporters" :key="index" class="logo">
             <a :href="supporter.url" target="_blank">
-              <v-img width="80%" :scr="supporter.logo" />
-              <!-- <div class="carousel__item">{{ supporter.name }}</div> -->
+
+              <img width="80%" height="100%" :scr="supporter.logo" class="carousel__item" />
+              <!-- <div class="carousel__item"></div> -->
             </a>
           </Slide>
           <template #addons>
@@ -32,7 +35,8 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 
-import logo_helioparc from '@/static/logos/logo_helioparc.svg'
+import logo_helioparc from '@/static/hero.jpg'
+// import logo_helioparc from '@/static/logos/logo_helioparc.svg'
 import logo_banquiz from '@/static/logos/logo_banquiz.svg'
 import logo_naos from '@/static/logos/logo_NAOS.svg'
 import logo_region from '@/static/logos/logo_region.svg'
@@ -41,8 +45,8 @@ import logo_geoliens from '@/static/logos/logo_geoliens.svg'
 const supporters = [
   {
     name: 'Helioparc',
-    logo: logo_helioparc,
-    url: 'http://www.helioparc.fr',
+    logo: '@/static/logos/logo_helioparc.svg',
+    url: 'https://www.helioparc.fr',
   },
   {
     name: 'LaBanquiz',
@@ -67,7 +71,6 @@ const supporters = [
 ]
 
 const { name } = useDisplay()
-
 const nb_supports = computed(() => {
   switch (name.value) {
     case 'xs': return 1
