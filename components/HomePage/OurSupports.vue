@@ -1,34 +1,18 @@
 <template>
-  <v-container
-    fluid
-    style="background-color: white"
-  >
+  <v-container fluid style="background-color: white">
     <v-row class="container mx-auto">
       <v-col>
         <!-- <v-lazy :options="{
           threshold: 0.5,
         }"> -->
-        <h2
-          class="section text-h2"
-          align="center"
-        >
+        <h2 class="section text-h2" align="center">
           They support us
         </h2>
-        <Carousel
-          wrap-around
-          :items-to-show="nb_partners"
-        >
-          <Slide
-            v-for="(supporter, index) in supporters"
-            :key="index"
-            class="logo"
-          >
-            <a
-              :href="supporter.url"
-              target="_blank"
-            >
-              <!-- <img width="80%" :scr="partner.logo" /> -->
-              <div class="carousel__item">{{ supporter.name }}</div>
+        <Carousel wrap-around :items-to-show="nb_supports">
+          <Slide v-for="(supporter, index) in supporters" :key="index" class="logo">
+            <a :href="supporter.url" target="_blank">
+              <v-img width="80%" :scr="supporter.logo" />
+              <!-- <div class="carousel__item">{{ supporter.name }}</div> -->
             </a>
           </Slide>
           <template #addons>
@@ -48,30 +32,36 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 
+import logo_helioparc from '@/static/logos/logo_helioparc.svg'
+import logo_banquiz from '@/static/logos/logo_banquiz.svg'
+import logo_naos from '@/static/logos/logo_NAOS.svg'
+import logo_region from '@/static/logos/logo_region.svg'
+import logo_geoliens from '@/static/logos/logo_geoliens.svg'
+
 const supporters = [
   {
     name: 'Helioparc',
-    logo: '@/static/logos/logo_helioparc.svg',
+    logo: logo_helioparc,
     url: 'http://www.helioparc.fr',
   },
   {
     name: 'LaBanquiz',
-    logo: '@/static/logos/logo_banquiz.png',
+    logo: logo_banquiz,
     url: 'https://labanquiz.com',
   },
   {
     name: 'NAOS',
-    logo: '@/static/logos/logo_NAOS.png',
+    logo: logo_naos,
     url: 'https://naos-cluster.com',
   },
   {
     name: 'Nouvelle-Aquitaine',
-    logo: '@/static/logos/logo_region.png',
+    logo: logo_region,
     url: 'https://www.nouvelle-aquitaine.fr',
   },
   {
     name: 'Geoliens',
-    logo: '@/static/logos/logo_geoliens.png',
+    logo: logo_geoliens,
     url: 'https://www.geoliens.org',
   }
 ]

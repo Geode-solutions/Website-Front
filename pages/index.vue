@@ -2,13 +2,13 @@
   <v-container width="100%">
     <v-row no-gutters>
       <v-col>
-        <HomePageLandingView />
-        <HomePageOurOffer />
-        <HomePageApplicationFields />
-        <HomePageOurConcepts />
+        <!-- <HomePageLandingView /> -->
+        <!-- <HomePageOurOffer /> -->
+        <!-- <HomePageApplicationFields /> -->
+        <!-- <HomePageOurConcepts /> -->
         <!-- <HomePageOurSkills /> -->
-        <!-- <HomePageOurPersonnel /> -->
-        <!-- <HomePageOurSupports /> -->
+        <HomePageOurPersonnel />
+        <HomePageOurSupports />
         <!-- <HomePageOurPartners /> -->
       </v-col>
     </v-row>

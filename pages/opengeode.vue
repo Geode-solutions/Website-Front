@@ -17,7 +17,7 @@
         :particle-size="5"
         lines-color="00897B"
         :lines-width="1"
-        :line-linked="true"
+        :line-linked="true" 
         :line-opacity="0.8"
         :lines-distance="150"
         :move-speed="4"
