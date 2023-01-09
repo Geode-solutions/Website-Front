@@ -36,7 +36,7 @@ watch: {
     }
   },
 },
-onMounted() {
+onMounted(() => {
   if (process.client) {
     if (this.$config.NODE_ENV !== 'production') {
       index_store.$patch({ is_captcha_validated: true })
@@ -44,19 +44,18 @@ onMounted() {
   }
 },
 
-methods: {
-    async submit_recaptcha() {
-    try {
-      const token = await this.$recaptcha.getResponse()
-      console.log('ReCaptcha token:', token)
-      const response = await this.$axios.post(`${this.$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
-      this.$store.commit('set_is_captcha_validated', response.status == 200)
-      console.log('this.is_captcha_validated :', this.is_captcha_validated)
-      await this.$recaptcha.reset()
-    } catch (error) {
-      console.log('Login error:', error)
-    }
-  },
-},
+async function submit_recaptcha() {
+  try {
+    const token = await this.$recaptcha.getResponse()
+    console.log('ReCaptcha token:', token)
+    const response = await this.$axios.post(`${this.$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
+    this.$store.commit('set_is_captcha_validated', response.status == 200)
+    console.log('this.is_captcha_validated :', this.is_captcha_validated)
+    await this.$recaptcha.reset()
+  } catch (error) {
+    console.log('Login error:', error)
+  }
 }
+
+
 </script>

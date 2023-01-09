@@ -1,4 +1,4 @@
-<template >
+<template>
   <v-container fluid class="pa-10">
     <v-row class="container mx-auto">
       <v-col>

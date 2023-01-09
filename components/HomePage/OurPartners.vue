@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container style="background-color: white">
     <v-row class="container mx-auto">
       <v-col>
         <!-- <v-lazy :options="{
@@ -8,18 +8,7 @@
         <h2 class="section text-h2" align="center">
           Our partners
         </h2>
-        <Carousel wrap-around :items-to-show="nb_partners">
-          <Slide v-for="(partner, index) in partners" :key="index" class="logo">
-            <a :href="partner.url" target="_blank">
-              <!-- <v-img width="80%" :scr="partner.logo"></v-img> -->
-              <div class="carousel__item">{{ partner.name }}</div>
-            </a>
-          </Slide>
-          <template #addons>
-            <Navigation />
-            <Pagination />
-          </template>
-        </Carousel>
+        <CommonCarrousel :items="partners_list" />
         <!-- </v-lazy> -->
       </v-col>
     </v-row>
@@ -27,100 +16,15 @@
 </template>
 
 <script setup>
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { computed } from 'vue'
-import { useDisplay } from 'vuetify'
-
-const partners = [
-  {
-    name: 'Pole Avenia',
-    logo: '@/static/logos/logo-avenia.svg',
-    url: 'https://www.pole-avenia.com',
-  },
-  {
-    name: 'TotalEnergies SE',
-    logo: '@/static/logos/logo_totalenergies.png',
-    url: 'https://totalenergies.com/',
-  },
-  {
-    name: 'RING',
-    logo: '@/static/logos/logo_ring.png',
-    url: 'https://www.ring-team.org',
-  },
-  {
-    name: 'GeoRessources',
-    logo: '@/static/logos/logo_georessources.jpg',
-    url: 'http://georessources.univ-lorraine.fr/',
-  },
-  {
-    name: 'CNRS',
-    logo: '@/static/logos/logo_cnrs.jpg',
-    url: 'http://georessources.univ-lorraine.fr/',
-  },
-  {
-    name: 'Université de Lorraine',
-    logo: '@/static/logos/logo_UL.png',
-    url: 'http://www.univ-lorraine.fr/',
-  },
-  {
-    name: 'ENEREX',
-    logo: '@/static/logos/logo_enerex.png',
-    url: 'https://enerex.fr/',
-  },
-  {
-    name: 'ARXITEK',
-    logo: '@/static/logos/logo_arxitek.png',
-    url: 'https://arxitek.fr/',
-  },
-  {
-    name: 'Earth Quick',
-    logo: '@/static/logos/logo_earth_quick.jpg',
-    url: 'https://www.earth-quick.com/',
-  },
-  {
-    name: 'MOSART PME',
-    logo: '@/static/logos/LOGOMOSART-PME.png',
-    url: 'https://www.mosart-pme.org/',
-  },
-]
-
-
-const { name } = useDisplay()
-
-const nb_partners = computed(() => {
-  switch (name.value) {
-    case 'xs': return 1
-    case 'sm': return 2
-    default: return 3
-  }
-})
-
-
-
+import partners_list from '@/assets/static/partners'
 </script>
 
 <style scoped>
-.carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: var(--vc-clr-primary);
-  color: var(--vc-clr-white);
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
+.section {
+  padding-top: 0;
+  padding-bottom: 50px;
 }
 </style>
+
+
 

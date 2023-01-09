@@ -3,20 +3,19 @@
     <v-row no-gutters>
       <v-col>
         <HomePageLandingView />
-        <!-- <HomePageOurOffer /> -->
-        <!-- <HomePageApplicationFields /> -->
-        <!-- <HomePageOurConcepts /> -->
-        <!-- <HomePageOurSkills /> -->
+        <HomePageOurOffer />
+        <HomePageApplicationFields />
+        <HomePageOurConcepts />
+        <HomePageOurSkills />
         <HomePageOurPersonnel />
         <HomePageOurSupports />
-        <!-- <HomePageOurPartners /> -->
+        <HomePageOurPartners />
       </v-col>
     </v-row>
   </v-container>
-
 </template>
 
-<style scoped>
+<style>
 .section {
   padding-top: 0;
   padding-bottom: 50px;

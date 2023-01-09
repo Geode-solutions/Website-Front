@@ -2,28 +2,56 @@
   <v-container>
     <v-row>
       <v-col>
-        <h2 class="section text-h2" align="center">
+        <h2
+          class="section text-h2"
+          align="center"
+        >
           What we do
         </h2>
         <v-row justify="space-around">
-          <v-col v-for="card in masterCards" :key="card.title" cols="12" md="6">
+          <v-col
+            v-for="card in masterCards"
+            :key="card.title"
+            cols="12"
+            md="6"
+          >
             <v-hover v-slot="{ hover }">
               <!-- <v-lazy
                 :options="{
                   threshold: 0.5,
                 }"
               > -->
-              <v-card dark height="500" :elevation="hover ? 20 : 2" :img="card.image" :to="card.url" class="d-flex">
-                <v-img :src="card.image" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)">
-                  <v-row class="flex-column" no-gutters style="height: 100%">
+              <v-card
+                dark
+                height="500"
+                :elevation="hover ? 20 : 2"
+                :img="card.image"
+                :to="card.url"
+                class="d-flex"
+              >
+                <v-img
+                  :src="card.image"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
+                >
+                  <v-row
+                    class="flex-column"
+                    no-gutters
+                    style="height: 100%"
+                  >
                     <v-spacer />
                     <v-col cols="auto">
-                      <v-card-title class="text-h4" align="end">
+                      <v-card-title
+                        class="text-h4"
+                        align="end"
+                      >
                         {{ card.title }}
                       </v-card-title>
                     </v-col>
                     <v-col cols="auto">
-                      <v-card-text align="justify" class="text-body-1">
+                      <v-card-text
+                        align="justify"
+                        class="text-body-1"
+                      >
                         {{ card.text }}
                       </v-card-text>
                     </v-col>

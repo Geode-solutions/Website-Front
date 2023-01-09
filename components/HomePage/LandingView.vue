@@ -1,14 +1,32 @@
 <template>
   <client-only>
-    <v-parallax :src="hero_img" alt=" Geode-solutions next generation of modeling challenges" width="100%" class="pa-0">
-      <v-card class="container" width="600" style="
+    <v-parallax
+      :src="hero_img"
+      alt=" Geode-solutions next generation of modeling challenges"
+      width="100%"
+      class="pa-0"
+    >
+      <v-card
+        class="container"
+        width="600"
+        style="
               border: 1px solid primary;
               border-radius: 80px 0px;
               background-color: rgba(255, 255, 255, 0.8);
-            " elevation="5">
-        <v-row class="d-flex flex-column align-center pa-3" align="center" align-content="space-around">
+            "
+        elevation="5"
+      >
+        <v-row
+          class="d-flex flex-column align-center pa-3"
+          align="center"
+          align-content="space-around"
+        >
           <v-col>
-            <img src="@/static/logo.svg" alt="Geode-solutions logo" class="mx-auto" />
+            <img
+              src="@/static/logo.svg"
+              alt="Geode-solutions logo"
+              class="mx-auto"
+            >
             <h1 class="text-h2 text-center mb-3 text-primary">
               Geode-solutions
             </h1>

@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import tools_list from '@/assets/tools_list'
+import tools_list from '~~/assets/tools/tools_list'
 
 export default {
   name: 'WelcomePage',

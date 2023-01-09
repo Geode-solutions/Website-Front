@@ -30,7 +30,7 @@
   </v-container>
 </template>
 
-<script setup>
+<script>
 import { mapState } from 'pinia'
 
 

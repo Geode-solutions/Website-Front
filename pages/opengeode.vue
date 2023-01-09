@@ -85,17 +85,11 @@
             They use it
           </h2>
 
-          <!-- <v-lazy :options="{
+          <v-lazy :options="{
             threshold: 0.5,
-          }"> -->
-          <!-- <carousel autoplay loop :per-page="nbUsers">
-              <slide v-for="(user, index) in users" :key="index" class="logo">
-                <a :href="user.url" target="_blank">
-                  <img width="80%" :src="require('@/assets/logos/' + user.logo)">
-                </a>
-              </slide>
-            </carousel> -->
-          <!-- </v-lazy> -->
+          }">
+            <CommonCarrousel :items="users_list" />
+          </v-lazy>
         </v-col>
       </v-row>
     </v-container>
@@ -110,10 +104,7 @@ import ruler from '@/static/opengeode/ruler.jpg'
 import hands from '@/static/opengeode/hands.jpg'
 import jet_engine from '@/static/opengeode/jet-engine.jpg'
 
-import logo_totalenergies from '@static/logos/logo_totalenergies.png'
-import logo_ring from '@static/logos/logo_ring.png'
-import logo_gsc from '@static/logos/logo_GSC.png'
-import logo_bsc from '@static/logos/logo_BSC.png'
+import users_list from '@/assets/static/users'
 
 const cards = [
   {
@@ -165,37 +156,8 @@ const cards = [
 ]
 
 
+const title = 'OpenGeode - open source framework for geometric models'
 
-
-const users = [
-  {
-    name: 'Total SE',
-    logo: logo_totalenergies,
-    url: 'https://totalenergies.com/',
-  },
-  {
-    name: 'RING',
-    logo: logo_ring,
-    url: 'https://www.ring-team.org',
-  },
-  {
-    name: 'GSC',
-    logo: logo_gsc,
-    url: 'https://www.nrcan.gc.ca/home',
-  },
-  {
-    name: 'BSC',
-    logo: logo_bsc,
-    url: 'https://www.bsc.es/',
-  }
-]
-// head() {
-//   return {
-//     title: 'OpenGeode - open source framework for geometric models',
-//   }
-// },
-// ,
-// }
 </script>
 
 <style scoped>
