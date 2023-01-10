@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
-    <!-- <v-lazy :options="{
+    <v-lazy :options="{
       threshold: 0.5,
-    }"> -->
+    }">
     <h2
       class="section text-h2"
       align="center"
@@ -14,7 +14,7 @@
       class="container mx-auto"
     >
       <v-col
-        v-for="(guy, index) in us"
+        v-for="(guy, index) in us_list"
         :key="index"
         cols="8"
         sm="4"
@@ -56,50 +56,13 @@
         </v-card>
       </v-col>
     </v-row>
-    <!-- </v-lazy> -->
+    </v-lazy>
   </v-container>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import us_list from '@/assets/static/us'
 import { useDisplay } from 'vuetify'
 
-import Arnaud from '@/static/ArnaudB.jpg'
-import PierreA from '@/static/PierreA.jpg'
-import Melchior from '@/static/Melchior.jpg'
-import Julien from '@/static/Julien.jpg'
-
-const us = [
-  {
-    name: 'Arnaud Botella',
-    pict: Arnaud,
-    job: 'President & co-founder',
-    url: 'https://linkedin.com/in/arnaud-botella',
-    topic: 'Mesh generation',
-  },
-  {
-    name: 'Pierre Anquez',
-    pict: PierreA,
-    job: 'CEO & co-founder',
-    url: 'https://linkedin.com/in/pierre-anquez',
-    topic: 'Explicit modeling',
-  },
-  {
-    name: 'Melchior Schuh-Senlis',
-    pict: Melchior,
-    job: 'Research engineer',
-    url: 'https://www.linkedin.com/in/melchior-schuh-senlis-a9573aba',
-    topic: 'Implicit modeling',
-  },
-  {
-    name: 'Julien Champagnol',
-    pict: Julien,
-    job: 'Cloud developer',
-    url: 'https://www.linkedin.com/in/julien-champagnol-90330b17b',
-    topic: 'Web and microservices',
-  },
-]
-
 const { mdAndUp } = useDisplay()
-
 </script>

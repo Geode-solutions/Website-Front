@@ -9,7 +9,7 @@
           <CommonContactUsButton />
         </h2>
 
-        <v-card v-for="(service, index) in services" :key="index" style="margin-bottom: 40px">
+        <v-card v-for="(service, index) in services_list" :key="index" style="margin-bottom: 40px">
           <v-row align="center" justify="space-around">
             <v-col :order-sm="(index + 1) % 2" cols="12" sm="5">
               <v-card-text>
@@ -44,37 +44,7 @@
 </template>
 
 <script setup>
-const services = [
-  {
-    title: 'OpenGeode integration',
-    image: '@/static/services/integration.jpg',
-    text: 'You would like to use OpenGeode environment, features and technologies within another software suite. \
-          You are used to specific code and you need its features in an OpenGeode extension. \
-          We offer you the possibility to integrate OpenGeode ecosystem, and your code, through other platform plugins.',
-  },
-  {
-    title: 'Prototyping/Code development',
-    image: '@/static/services/idea.webp',
-    text: 'You need a technical solution to solve a dedicated problem. \
-          You have precise needs on software development and features. \
-          We propose you our skills and experience to design and develop \
-          your solution from a working prototype to a full featured product.',
-  },
-  {
-    title: 'Expertise and Consulting',
-    image: '@/static/services/success.webp',
-    text: 'You have specific questions or needs on meshing tasks or existing tools. \
-            Our experts advices and skills will allow you to reach your objectives faster.',
-  },
-  {
-    title: 'Education',
-    image: '@/static/services/pencil.jpg',
-    text: 'You need to learn how to work with OpenGeode platform and our products. \
-            You ask for courses on modeling and meshing or on software development. \
-            We can build together custom training program designed from your needs.',
-  },
-]
+import services_list from '@/assets/static/services'
 
-const title = 'Geode-solutions custom-tailored services'
-
+useHead({ titleTemplate: 'Geode-solutions custom-tailored services' })
 </script>

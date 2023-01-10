@@ -1,5 +1,5 @@
 <template>
-  <!-- <v-container>
+  <v-container>
     <v-row class="flex-column">
       <v-col>
         <h1 class="text-h2 py-5" align="center">
@@ -141,16 +141,18 @@
         <ToolsPackagesVersions :packages_versions="packages_versions" />
       </v-col>
     </v-row>
-  </v-container> -->
+  </v-container>
 </template>
 
-<!-- <script setup>
-import fileDownload from 'js-file-download'
+<script setup>
+// import fileDownload from 'js-file-download'
 import geode_objects from '@/assets/tools/geode_objects'
+const tools_store = use_tools_store()
+
 
 
 const name = 'FileConverter'
-
+const tool_route = 'fileconverter'
 const accepted_extensions = ''
 const extension = ''
 const current_step = 1
@@ -171,7 +173,6 @@ const items = [
   },
 ]
 const loading = false
-const packages_versions = []
 const objects = []
 const success = false
 
@@ -184,38 +185,13 @@ const success = false
 // })
 onActivated(() => {
   if (this.is_cloud_running === true) {
-    this.get_allowed_files()
-    this.get_packages_versions()
+    tools_store.get_allowed_files(tool_route)
+    tools_store.get_packages_versions(tool_route)
   }
 })
 
 
-async function get_allowed_objects (changedFiles) {
-  this.success = true
-  this.message = 'File(s) selected'
-  if (changedFiles) {
-    this.files = changedFiles
-  }
-  this.objects = []
-  let temp_objects = []
-
-  console.log(this.files.length)
-  for (let i = 0; i < this.files.length; i++) {
-    console.log('i :', i)
-    const params = new FormData()
-    params.append('filename', this.files[i].name)
-    const data = await this.$axios.$post(`${this.ID}/fileconverter/allowedobjects`, params)
-    if (i === 0) {
-      temp_objects = data.objects
-    } else {
-      temp_objects = temp_objects.filter(value => data.objects.includes(value))
-    }
-    console.log('temp_objects :', temp_objects)
-  }
-  this.objects = temp_objects
-  this.current_step = this.current_step + 1
-}
-async function get_output_fle_extensions (object) {
+async function get_output_file_extensions (object) {
   const params = new FormData()
   params.append('object', object)
   this.GeodeObject = object
@@ -251,7 +227,7 @@ async function convert_file () {
           .then((response) => {
             if (response.status == 200) {
               let new_file_name = response.headers['new-file-name']
-              fileDownload(response.data, new_file_name)
+              // fileDownload(response.data, new_file_name)
             }
             self.loading = false
           })
@@ -262,5 +238,5 @@ async function convert_file () {
     reader.readAsDataURL(self.files[i])
   }
 }
-</script> -->
+</script>
 

@@ -29,7 +29,8 @@
       </v-col>
       <v-col>
         <v-row justify="space-around">
-          <v-col v-for="(tool, i) in tools.slice(-tools.length + 1, tools.length)" :key="i" cols="11" md="4">
+          <v-col v-for="(tool, i) in tools_list.slice(-tools_list.length + 1, tools_list.length)" :key="i" cols="11"
+            md="4">
             <v-card v-ripple class="card" hover elevation="5" :to="tool.to" contain>
               <v-row justify="center" align="center">
                 <v-col cols="auto">
@@ -58,18 +59,6 @@
   </v-container>
 </template>
 
-<script>
-import tools_list from '~~/assets/tools/tools_list'
-
-export default {
-  name: 'WelcomePage',
-  data: () => ({
-    tools: tools_list,
-  }),
-  head () {
-    return {
-      title: 'Geode-solutions free tools',
-    }
-  },
-}
+<script setup>
+import tools_list from '@/assets/tools/tools_list'
 </script>

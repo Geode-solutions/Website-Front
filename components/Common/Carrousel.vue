@@ -15,11 +15,10 @@
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 
 const props = defineProps({
-  items: Array
+  items: { type: Array, required: true }
 })
 
 const { name } = useDisplay()
@@ -34,7 +33,7 @@ const nb_items_to_display = computed(() => {
 const carrousel_settings = {
   autoplay: 2000,
   itemsToShow: nb_items_to_display,
-  itemsToScroll: this.items.length / nb_items_to_display,
+  itemsToScroll: props.items.length / nb_items_to_display,
   pauseAutoplayOnHover: true,
   transition: 1000,
   wrapAround: true
@@ -43,7 +42,7 @@ const carrousel_settings = {
 onMounted(() => {
   // For development
   console.log(props.items)
-  console.log(props.nb_items_to_display)
+  console.log(this.nb_items_to_display)
 })
 </script>
 
