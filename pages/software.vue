@@ -52,9 +52,7 @@
             </ul>
             </p>
             <h2 class="text-h4 my-5 pb-5" align="center">
-              <v-btn size="large" color="primary" href="mailto:contact@geode-solutions.com">
-                Contact us
-              </v-btn>
+              <CommonContactUsButton />
             </h2>
             <h2 class="text-h4 font-weight-light ma-5" align="center">
               Pilot program technologies
@@ -114,9 +112,7 @@
             <h2 class="text-h4 my-5 py-5" align="center">
               Want to try these solutions or looking for another technology?
               <div class="my-2">
-                <v-btn size="large" color="primary" href="mailto:contact@geode-solutions.com">
-                  Contact us
-                </v-btn>
+                <CommonContactUsButton />
               </div>
             </h2>
           </v-col>

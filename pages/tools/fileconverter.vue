@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <!-- <v-container>
     <v-row class="flex-column">
       <v-col>
         <h1 class="text-h2 py-5" align="center">
@@ -72,10 +72,7 @@
                     <v-tooltip location="bottom">
                       <template #activator="{ on }">
                         <v-card v-ripple class="card ma-2" hover elevation="5" v-on="on">
-                          <v-img :src="
-                            require('@/assets/tools/' +
-                              geode_objects[object].image)
-                          " cover @click="get_output_fle_extensions(object)" />
+                          <v-img :src="geode_objects[object].image" cover @click="get_output_fle_extensions(object)" />
                         </v-card>
                       </template>
                       <span>{{ GeodeObjects[object].tooltip }}</span>
@@ -141,14 +138,13 @@
         </v-stepper>
       </v-col>
       <v-col v-if="is_cloud_running">
-        <ToolsPackagesVersions :versions="versions" />
+        <ToolsPackagesVersions :packages_versions="packages_versions" />
       </v-col>
     </v-row>
-  </v-container>
+  </v-container> -->
 </template>
 
-<script setup>
-import { mapState } from 'pinia'
+<!-- <script setup>
 import fileDownload from 'js-file-download'
 import geode_objects from '@/assets/tools/geode_objects'
 
@@ -175,18 +171,17 @@ const items = [
   },
 ]
 const loading = false
-const versions = []
+const packages_versions = []
 const objects = []
 const success = false
 
-watch: {
-  is_cloud_running(newValue) {
-    if (newValue === true) {
-      this.GetAllowedFiles()
-      this.GetPackagesVersions()
-    }
-  }
-}
+// watch(is_cloud_running, (newValue, oldValue) => {
+//   if (newValue === true) {
+//     this.get_allowed_files()
+//     this.get_packages_versions()
+//   }
+// }
+// })
 onActivated(() => {
   if (this.is_cloud_running === true) {
     this.get_allowed_files()
@@ -195,15 +190,6 @@ onActivated(() => {
 })
 
 
-async function get_allowed_files () {
-  const data = await this.$axios.$get(`${this.ID}/fileconverter/allowedfiles`)
-  const extensions = data.extensions.map((extension) => '.' + extension)
-  this.accepted_extensions = extensions.join(',')
-}
-async function get_packages_versions () {
-  const data = await this.$axios.$get(`${this.ID}/fileconverter/versions`)
-  this.versions = data.versions
-}
 async function get_allowed_objects (changedFiles) {
   this.success = true
   this.message = 'File(s) selected'
@@ -211,7 +197,7 @@ async function get_allowed_objects (changedFiles) {
     this.files = changedFiles
   }
   this.objects = []
-  let tempObjects = []
+  let temp_objects = []
 
   console.log(this.files.length)
   for (let i = 0; i < this.files.length; i++) {
@@ -220,15 +206,15 @@ async function get_allowed_objects (changedFiles) {
     params.append('filename', this.files[i].name)
     const data = await this.$axios.$post(`${this.ID}/fileconverter/allowedobjects`, params)
     if (i === 0) {
-      tempObjects = data.objects
+      temp_objects = data.objects
     } else {
-      tempObjects = tempObjects.filter(value => data.objects.includes(value))
+      temp_objects = temp_objects.filter(value => data.objects.includes(value))
     }
-    console.log('tempObjects :', tempObjects)
+    console.log('temp_objects :', temp_objects)
   }
-  this.objects = tempObjects
+  this.objects = temp_objects
   this.current_step = this.current_step + 1
-},
+}
 async function get_output_fle_extensions (object) {
   const params = new FormData()
   params.append('object', object)
@@ -264,8 +250,8 @@ async function convert_file () {
           .post(`${self.ID}/fileconverter/convertfile`, params, { responseType: 'blob' })
           .then((response) => {
             if (response.status == 200) {
-              let newFileName = response.headers['new-file-name']
-              fileDownload(response.data, newFileName)
+              let new_file_name = response.headers['new-file-name']
+              fileDownload(response.data, new_file_name)
             }
             self.loading = false
           })
@@ -275,5 +261,6 @@ async function convert_file () {
     }
     reader.readAsDataURL(self.files[i])
   }
-</script>
+}
+</script> -->
 

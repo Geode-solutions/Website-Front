@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useIndexStore = defineStore('index', {
+export const useCloudStore = defineStore('cloud', {
   state: () => {
     return {
       ID: '',

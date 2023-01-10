@@ -6,9 +6,7 @@
           Custom-tailored services
         </h1>
         <h2 class="text-h4 my-5 pb-5" align="center">
-          <v-btn size="large" color="primary" href="mailto:contact@geode-solutions.com">
-            Contact us
-          </v-btn>
+          <CommonContactUsButton />
         </h2>
 
         <v-card v-for="(service, index) in services" :key="index" style="margin-bottom: 40px">
@@ -37,9 +35,7 @@
         <h2 class="text-h4 my-5 py-5" align="center">
           Let us know how we can help!
           <div class="my-2">
-            <v-btn size="large" color="primary" href="mailto:contact@geode-solutions.com">
-              Contact us
-            </v-btn>
+            <CommonContactUsButton />
           </div>
         </h2>
       </v-col>
