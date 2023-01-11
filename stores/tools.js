@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
 
 export const use_tools_store = defineStore('tools', {
-  state: () => {
-    return {
-      accepted_extensions: '',
-      files: [],
-      packages_versions: []
-    }
-  },
+  state: () => ({
+    accepted_extensions: '',
+    files: [],
+    loading: true,
+    packages_versions: []
+  }),
   actions: {
     async get_allowed_files (tool_route) {
       const { data } = await useFetch(`${this.ID}/${tool_route}/allowedfiles`)

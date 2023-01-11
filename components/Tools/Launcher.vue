@@ -1,8 +1,8 @@
 <template>
   <v-container justify="space-around">
     <v-row rows="auto" align-content="center" align="center">
-      <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
-        align="center">
+      <v-col v-if="((!cloud_store.is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10"
+        align-self="center" align="center">
         <!-- <recaptcha class="align-center" /> -->
         <v-btn color="primary" @click="submit_recaptcha()">
           Start tool
@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-import { useCloudStore } from '@/stores/cloud'
-const cloud_store = useCloudStore()
+import { use_cloud_store } from '@/stores/cloud'
+const cloud_store = use_cloud_store()
 
 watch(() => cloud_store.is_captcha_validated, (value) => {
   if (value === true) {
@@ -37,8 +37,10 @@ watch(() => cloud_store.is_cloud_running, (value, oldValue) => {
 })
 
 onMounted(() => {
+  const config = useRuntimeConfig()
   if (process.client) {
-    if (this.$config.NODE_ENV !== 'production') {
+    if (config.public.NODE_ENV !== 'production') {
+      console.log('test')
       cloud_store.$patch({ is_captcha_validated: true })
     }
   }
@@ -48,9 +50,9 @@ async function submit_recaptcha () {
   try {
     const token = await this.$recaptcha.getResponse()
     console.log('ReCaptcha token:', token)
-    const response = await this.$axios.post(`${this.$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
-    this.$store.commit('set_is_captcha_validated', response.status == 200)
-    console.log('this.is_captcha_validated :', this.is_captcha_validated)
+    const response = await this.$axios.post(`${$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
+    cloud_store.$patch({ is_captcha_validated: response.status == 200 })
+    console.log('is_captcha_validated :', cloud_store.is_captcha_validated)
     await this.$recaptcha.reset()
   } catch (error) {
     console.log('Login error:', error)

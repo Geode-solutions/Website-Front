@@ -92,7 +92,7 @@
           </v-stepper-content>
         </v-stepper>
       </v-col> -->
-      <v-col v-if="is_cloud_running">
+      <v-col v-if="cloud_store.is_cloud_running">
         <ToolsPackagesVersions :packages_versions="tools_store.packages_versions" />
       </v-col>
     </v-row>
@@ -100,39 +100,29 @@
 </template>
 
 <script setup>
-// import geode_objects from '@/assets/tools/geode_objects'
-// import use_tools_store from '@/stores/tools'
-// const tools_store = use_tools_store()
+import geode_objects from '@/assets/tools/geode_objects'
+import cards_list from '@/assets/tools/validitychecker/cards'
+import { use_tools_store } from '@/stores/tools'
+import { use_cloud_store } from '@/stores/cloud'
+const tools_store = use_tools_store()
+const cloud_store = use_cloud_store()
 
 // const accepted_extensions = ''
 // const extension = ''
-// const current_step = 1
+const current_step = 1
 // const file_extensions = []
 // const files = []
 // const geode_object = ''
 // const input_message = 'Please select a file'
 // const input_rules = [(value) => !!value || 'The file is mandatory']
-const cards_list = [
-  {
-    icon: 'mdi-file-check',
-    title: 'Supported file formats',
-    href: 'https://docs.geode-solutions.com/formats/',
-  },
-  {
-    icon: 'mdi-github',
-    title: 'OpenGeode-Inspector GitHub repo',
-    href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
-  },
-]
+
 // const loading = false
 // const model_checks = []
 // const multiple = false
 // const objects = []
 // const success = false
 
-
-
-// watch(() => tools_store.is_cloud_running, (value) => {
+// watch(() => cloud_store.is_cloud_running, (value) => {
 //   if (value === true) {
 //     tools_store.get_allowed_files()
 //     tools_store.get_packages_versions()
@@ -140,7 +130,7 @@ const cards_list = [
 // })
 
 // onActivated(() => {
-//   if (this.is_cloud_running === true) {
+//   if (cloud_store.is_cloud_running === true) {
 //     tools_store.get_allowed_files()
 //     tools_store.get_packages_versions()
 //   }

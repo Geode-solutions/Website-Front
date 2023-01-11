@@ -1,15 +1,8 @@
 <template>
   <v-row justify="center">
-    <v-col
-      cols="11"
-      class="ma-3"
-    >
-      <v-card
-        class="card"
-        loading
-        elevation="5"
-      >
-        <v-card-title class="justify-center">
+    <v-col cols="11" class="ma-3">
+      <v-card class=".rounded-xl" loading elevation="5">
+        <v-card-title class="justify-center" align="center">
           Cloud instance is starting...
         </v-card-title>
         <v-card-subtitle align="center">
@@ -20,10 +13,7 @@
           you can use our free tools (up to 30 seconds).
           <br>
           This is aligned with an energy sobriety strategy. So be patient
-          <v-icon
-            color="primary"
-            size="20"
-          >
+          <v-icon color="primary" size="20">
             mdi-emoticon-excited-outline
           </v-icon>
           <br>
@@ -35,5 +25,3 @@
   </v-row>
 </template>
 
-<script setup>
-</script>

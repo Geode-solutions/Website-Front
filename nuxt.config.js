@@ -1,5 +1,3 @@
-import colors from 'vuetify/lib/util/colors'
-
 export default defineNuxtConfig({
   runtimeConfig: {
     // recaptcha: {
@@ -13,46 +11,13 @@ export default defineNuxtConfig({
     }
   },
 
-  // head: {
-  // title: 'Geode-solutions - next generation of modeling tools',
-  // meta:
-  // [
-  //     { charset: 'utf-8' },
-  //     { name: 'viewport', content: 'width=device-width, initial-scale=1' }, {
-  //     hid: 'description',
-  //     name: 'description',
-  //     content:
-  //         'Technology company tackling next generation of modeling challenges using advanced meshing'
-  //     }
-  // ],
-  // link:
-  // [
-  //     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-  // ]
-  // },
-
-  // /*
   // ** Customize the progress-bar color
-  // */
-  // loading: { color: '#fff' },
+  loading: { color: '#fff' },
 
-  // /*
   // ** Global CSS
-  // */
   css: ['vuetify/lib/styles/main.sass'],
 
-  // /*
-  // ** Plugins to load before mounting the App
-  // */
-  // plugins:
-  //   [
-  //     '@/plugins/vuetify_icons', { src: '@/plugins/carousel', ssr: false },
-  //     { src: '@/plugins/particles', ssr: false }, '@/plugins/axios'
-  //   ],
-
-  // /*
   // ** Nuxt.js modules
-  // */
   modules:
     [
       // ['nuxt-cookie-control',
@@ -78,12 +43,10 @@ export default defineNuxtConfig({
       //   }
       // }
       // ],
-      // '@nuxtjs/axios',
       // '@aceforth/nuxt-netlify',
-      // '@nuxtjs/vuetify',
       // ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }],
       // '@nuxtjs/recaptcha'
-      '@pinia/nuxt'
+      '@pinia/nuxt',
       // {
       // autoImports: [
       //   // automatically imports `usePinia()`
@@ -94,9 +57,9 @@ export default defineNuxtConfig({
       // },
     ],
 
-  // recha: {
+  // recaptcha: {
   // version: 2,
-  // },capt
+  // },
 
   // cookies: {
   //   necessary: [
@@ -131,9 +94,5 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
-  },
-  vite: {
-    plugins: [
-    ]
   }
 })
