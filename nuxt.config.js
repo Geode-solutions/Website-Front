@@ -1,5 +1,4 @@
 import colors from 'vuetify/lib/util/colors'
-import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -135,9 +134,6 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
-      svgLoader({
-        defaultImport: 'url'
-      })
     ]
   }
 })

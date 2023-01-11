@@ -13,6 +13,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier-vue": "^4.2.0",
     "eslint-plugin-vue": "^9.8.0",
     "eslint-plugin-vuetify": "^2.0.0-beta.2"
   },
@@ -21,11 +22,10 @@
     "@pinia/nuxt": "^0.4.6",
     "d3": "^7.8.0",
     "d3-cloud": "^1.2.5",
-    "eslint-plugin-prettier-vue": "^4.2.0",
     "nuxt": "3.0.0",
     "nuxt-cookie-control": "^1.9.93",
     "vue3-carousel": "^0.2.9",
     "vue3-particles": "^2.7.1",
-    "vuetify": "^3.0.6"
+    "vuetify": "^3.1.1"
   }
 }
