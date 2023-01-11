@@ -2,17 +2,11 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12">
-        <h1
-          class="text-h2 py-5"
-          align="center"
-        >
+        <h1 class="text-h2 py-5" align="center">
           Free tools home page
         </h1>
 
-        <p
-          class="container text-h6 font-weight-light"
-          align="justify"
-        >
+        <p class="container text-h6 font-weight-light" align="justify">
           All the tools offered here are entirely free to use.
           <br>
           We rely on a cloud technology for computing power. Each cloud instance
@@ -29,54 +23,28 @@
           have ideas for new tools that may be useful to you, or want to share
           your enthusiasm about these tools.
         </p>
-        <div
-          class="my-2"
-          align="center"
-        >
+        <div class="my-2" align="center">
           <CommonContactUsButton />
         </div>
       </v-col>
       <v-col>
         <v-row justify="space-around">
-          <v-col
-            v-for="(tool, i) in tools_list.slice(-tools_list.length + 1, tools_list.length)"
-            :key="i"
-            cols="11"
-            md="4"
-          >
-            <v-card
-              v-ripple
-              class="card"
-              hover
-              elevation="5"
-              :to="tool.to"
-              contain
-            >
-              <v-row
-                justify="center"
-                align="center"
-              >
+          <v-col v-for="(tool, i) in tools_list.slice(-tools_list.length + 1, tools_list.length)" :key="i" cols="11"
+            md="4">
+            <v-card v-ripple class="card" hover elevation="5" :to="tool.to" contain>
+              <v-row justify="center" align="center">
                 <v-col cols="auto">
-                  <v-icon
-                    size="100"
-                    class="justify-center"
-                  >
+                  <v-icon color="primary" size="100" class="justify-center">
                     {{ tool.icon }}
                   </v-icon>
                 </v-col>
-                <v-col
-                  v-if="tool.chip"
-                  cols="auto"
-                >
+                <v-col v-if="tool.chip" cols="auto">
                   <v-chip color="primary">
                     {{ tool.chip }}
                   </v-chip>
                 </v-col>
               </v-row>
-              <v-card-title
-                primary-title
-                class="justify-center text-h4"
-              >
+              <v-card-title primary-title class="justify-center text-h4">
                 <br>
                 {{ tool.title }}
               </v-card-title>

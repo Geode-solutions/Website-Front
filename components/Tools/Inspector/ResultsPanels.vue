@@ -1,28 +1,11 @@
 <template>
   <v-container>
-    <v-expansion-panels
-      v-model="opened_panels"
-      multiple
-    >
-      <v-expansion-panel
-        v-for="(check) in props.model_checks"
-        :key="index"
-        class="card"
-        :title="check.sentence"
-      >
+    <v-expansion-panels v-model="opened_panels" multiple>
+      <v-expansion-panel v-for="(check) in props.model_checks" :key="index" class="card" :title="check.sentence">
         <ToolsInspectorValidityBadge :value="check.value" />
-        <ToolsInspectorResultsPanels
-          v-if="!check.is_leaf"
-          :index="index"
-          :model_checks="check.children"
-          :object="object"
-          :filename="filename"
-          @update_result="update_result"
-        />
-        <v-container
-          v-else-if="check.value == false"
-          class="pt-6"
-        >
+        <ToolsInspectorResultsPanels v-if="!check.is_leaf" :index="index" :model_checks="check.children"
+          :object="object" :filename="filename" @update_result="update_result" />
+        <v-container v-else-if="check.value == false" class="pt-6">
           Invalid = {{ check.list_invalidities }}
         </v-container>
       </v-expansion-panel>

@@ -19,7 +19,11 @@ export const use_cloud_store = defineStore('cloud', {
         return this.create_backend()
       } else {
         try {
-          const response = await this.$axios.post(`${ID}/ping`)
+          const config = useRuntimeConfig()
+          console.log(config.public.API_URL)
+          const response = await useFetch(`${config.public.API_URL}/${ID}/ping`, {
+            method: 'POST'
+          })
           if (response.status === 200) {
             this.ID = ID
             this.is_cloud_running = true
@@ -33,7 +37,8 @@ export const use_cloud_store = defineStore('cloud', {
     },
     async create_backend () {
       try {
-        const response = await this.$axios.post(`${this.$config.SITE_BRANCH}/tools/createbackend`)
+        const config = useRuntimeConfig()
+        const response = await useFetch(`${config.public.BASE_URL}/${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
         if (response.status == 200) {
           this.ID = response.data.ID
           localStorage.setItem('ID', response.data.ID)

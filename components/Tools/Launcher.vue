@@ -27,6 +27,7 @@ const cloud_store = use_cloud_store()
 
 watch(() => cloud_store.is_captcha_validated, (value) => {
   if (value === true) {
+    console.log(value)
     cloud_store.create_connexion()
   }
 })
@@ -42,6 +43,7 @@ onMounted(() => {
     if (config.public.NODE_ENV !== 'production') {
       console.log('test')
       cloud_store.$patch({ is_captcha_validated: true })
+      console.log('cloud_store.is_captcha_validated', cloud_store.is_captcha_validated)
     }
   }
 })

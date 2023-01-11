@@ -72,21 +72,17 @@ export default defineNuxtConfig({
   //   ]
   // },
 
-  // /*
   // ** Netlify configuration
-  // */
-  // netlify: {
-  // redirects: [{
-  // from: 'https://geode-solutions.netlify.com/*',
-  // to: 'https://geode-solutions.com/:splat',
-  // status: 301,
-  // force: true
-  // }]
-  // },
+  netlify: {
+    redirects: [{
+      from: 'https://geode-solutions.netlify.com/*',
+      to: 'https://geode-solutions.com/:splat',
+      status: 301,
+      force: true
+    }]
+  },
 
-  // /*
   // ** Build configuration
-  // */
   build: {
     transpile: ['vuetify'],
   },

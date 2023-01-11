@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="text-h2 py-5" align="center">
+    <h1 class="text-h2 py-2" align="center">
       {{ tool_name }}
     </h1>
     <v-col>
@@ -27,7 +27,7 @@
 
 <script setup>
 const props = defineProps({
-  tool_name: { type: String, required: true },
+  tool_name: { type: string, required: true },
   cards_list: { type: Object, required: true }
 })
 </script>
