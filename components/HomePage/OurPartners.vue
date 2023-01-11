@@ -5,7 +5,10 @@
         <!-- <v-lazy :options="{
           threshold: 0.5,
         }"> -->
-        <h2 class="section text-h2" align="center">
+        <h2
+          class="section text-h2"
+          align="center"
+        >
           Our partners
         </h2>
         <CommonCarrousel :items="partners_list" />

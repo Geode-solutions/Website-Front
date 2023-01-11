@@ -1,8 +1,18 @@
 <template>
   <Carousel :settings="carrousel_settings">
-    <Slide v-for="(item, index) in props.items" :key="index" class="carousel__slide">
-      <a :href="item.url" target="_blank">
-        <img :src="item.logo" class="carousel__item" />
+    <Slide
+      v-for="(item, index) in props.items"
+      :key="index"
+      class="carousel__slide"
+    >
+      <a
+        :href="item.url"
+        target="_blank"
+      >
+        <img
+          :src="item.logo"
+          class="carousel__item"
+        >
       </a>
     </Slide>
     <template #addons>

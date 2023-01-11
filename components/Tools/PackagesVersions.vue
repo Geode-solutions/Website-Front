@@ -16,5 +16,5 @@
 </template>
 
 <script setup>
-const packages_versions = defineProps({ 'packages_versions': array })
+const packages_versions = defineProps({ 'packages_versions': [] })
 </script>

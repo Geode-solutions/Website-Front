@@ -1,12 +1,12 @@
 <template>
   <v-img
     alt="geode-solutions logo"
-    :src="logo_url"
+    src="@/static/logo.svg"
     width="40"
     height="40"
   />
 </template>
 
 <script setup>
-import logo_url from "@/static/logo.svg"
+// import logo_url from "@/static/logo.svg"
 </script>

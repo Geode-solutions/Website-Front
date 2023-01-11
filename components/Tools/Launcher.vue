@@ -3,18 +3,18 @@
     <v-row rows="auto" align-content="center" align="center">
       <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
         align="center">
-        <recaptcha class="align-center" />
+        <!-- <recaptcha class="align-center" /> -->
         <v-btn color="primary" @click="submit_recaptcha()">
           Start tool
         </v-btn>
       </v-col>
-      <v-col v-else-if="internal_error">
+      <v-col v-else-if="cloud_store.internal_error">
         <ToolsErrorsInternalError />
       </v-col>
-      <v-col v-else-if="is_under_maintenance">
+      <v-col v-else-if="cloud_store.is_under_maintenance">
         <ToolsErrorsUnderMaintenance />
       </v-col>
-      <v-col v-else-if="!is_cloud_running">
+      <v-col v-else-if="!cloud_store.is_cloud_running">
         <ToolsLoading />
       </v-col>
     </v-row>
@@ -22,29 +22,29 @@
 </template>
 
 <script setup>
-import { useIndexStore } from '../stores/index'
-const index_store = useIndexStore()
-watch: {
-  is_captcha_validated(newValue) {
-    if (newValue === true) {
-      this.create_connexion()
-    }
-  },
-  is_cloud_running(newValue, oldValue) {
-    if (newValue === false && oldValue == true) {
-      index_store.$patch({ internal_error: true })
-    }
-  },
-},
+import { useCloudStore } from '@/stores/cloud'
+const cloud_store = useCloudStore()
+
+watch(() => cloud_store.is_captcha_validated, (value) => {
+  if (value === true) {
+    cloud_store.create_connexion()
+  }
+})
+watch(() => cloud_store.is_cloud_running, (value, oldValue) => {
+  if (value === false && oldValue == true) {
+    cloud_store.$patch({ internal_error: true })
+  }
+})
+
 onMounted(() => {
   if (process.client) {
     if (this.$config.NODE_ENV !== 'production') {
-      index_store.$patch({ is_captcha_validated: true })
+      cloud_store.$patch({ is_captcha_validated: true })
     }
   }
-},
+})
 
-async function submit_recaptcha() {
+async function submit_recaptcha () {
   try {
     const token = await this.$recaptcha.getResponse()
     console.log('ReCaptcha token:', token)

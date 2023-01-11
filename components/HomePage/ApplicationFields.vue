@@ -34,7 +34,7 @@
 <script setup>
 const applications = [
   {
-    name: '`Geo${&shy;}thermal`'
+    name: 'Geothermal'
   },
   {
     name: 'Mining'
@@ -43,13 +43,13 @@ const applications = [
     name: 'CCUS'
   },
   {
-    name: 'Oil&shy;Gas'
+    name: 'OilGas'
   },
   {
-    name: 'Geo&shy;mecha&shy;nics'
+    name: 'Geomechanics'
   },
   {
-    name: 'Hydro&shy;geology'
+    name: 'Hydrogeology'
   },
   {
     name: 'Urban geology'

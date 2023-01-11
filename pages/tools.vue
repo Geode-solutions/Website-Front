@@ -1,11 +1,31 @@
 <template>
-  <v-row class="fill-height" no-gutters>
-    <v-navigation-drawer permanent :rail="mini" :expand-on-hover="mini">
+  <v-row
+    class="fill-height"
+    no-gutters
+  >
+    <v-navigation-drawer
+      permanent
+      :rail="mini"
+      :expand-on-hover="mini"
+    >
       <v-list>
-        <v-list-item v-for="(tool, i) in tools_list" :key="i" :to="tool.to" link router exact :prepend-icon="tool.icon"
-          :title="tool.title">
+        <v-list-item
+          v-for="(tool, i) in tools_list"
+          :key="i"
+          :to="tool.to"
+          link
+          router
+          exact
+          :prepend-icon="tool.icon"
+          :title="tool.title"
+        >
           <template #append>
-            <v-badge v-if="tool.badge" :content="tool.badge" color="primary" inline></v-badge>
+            <v-badge
+              v-if="tool.badge"
+              :content="tool.badge"
+              color="primary"
+              inline
+            />
           </template>
         </v-list-item>
       </v-list>

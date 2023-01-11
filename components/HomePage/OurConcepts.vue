@@ -1,21 +1,48 @@
 <template>
-  <v-container fluid class="pa-10">
+  <v-container
+    fluid
+    class="pa-10"
+  >
     <v-row class="container mx-auto">
       <v-col>
-        <h2 class="section text-h2" align="center">
+        <h2
+          class="section text-h2"
+          align="center"
+        >
           Why Geode-solutions
         </h2>
-        <v-row justify="center" class="pa-10">
-          <v-col v-for="(card, index) in cards" :key="index" cols="12" sm="5" lg="3" class="ma-3">
+        <v-row
+          justify="center"
+          class="pa-10"
+        >
+          <v-col
+            v-for="(card, index) in cards"
+            :key="index"
+            cols="12"
+            sm="5"
+            lg="3"
+            class="ma-3"
+          >
             <!-- <v-lazy
               :options="{
                 threshold: 0.5,
               }"
             > -->
-            <v-card class="elevation-5" height="100%" cover>
-              <v-img :src="card.image" :alt="`Geode-solutions '${card.title}`" aspect-ratio="2.75"
-                gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)">
-                <v-card-title primary-title class="text-h4 justify-center fill-height">
+            <v-card
+              class="elevation-5"
+              height="100%"
+              cover
+            >
+              <v-img
+                :src="card.image"
+                :alt="`Geode-solutions '${card.title}`"
+                aspect-ratio="2.75"
+                gradient="to top right, rgba(255,255,255,.4), rgba(255,255,255,.8)"
+              >
+                <v-card-title
+                  primary-title
+                  class="text-h4 justify-center fill-height"
+                >
                   {{ card.title }}
                 </v-card-title>
               </v-img>

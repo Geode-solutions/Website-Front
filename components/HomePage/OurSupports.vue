@@ -1,8 +1,14 @@
 <template>
-  <v-container fluid style="background-color: white">
+  <v-container
+    fluid
+    style="background-color: white"
+  >
     <v-row class="container mx-auto">
       <v-col>
-        <h2 class="section text-h2" align="center">
+        <h2
+          class="section text-h2"
+          align="center"
+        >
           They support us
         </h2>
         <CommonCarrousel :items="supports_list" />
