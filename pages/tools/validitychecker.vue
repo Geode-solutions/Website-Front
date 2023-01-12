@@ -7,7 +7,7 @@
       <v-col>
         <ToolsLauncher />
       </v-col>
-
+      <!-- {{ cloud_store.is_cloud_running }} -->
       <v-col v-if="cloud_store.is_cloud_running" class="pb-5">
         <!-- <v-stepper v-model="current_step" class="stepper" vertical elevation="5"> -->
         <!-- <v-stepper-step :complete="current_step > 1" step="1" @click="set_current_step(1)"> -->
@@ -69,26 +69,26 @@
         <!-- </v-stepper-content> -->
 
         <!-- <v-stepper-step step="3" :complete="current_step > 3" @click="set_current_step(3)"> -->
-          Inspect your file
+        Inspect your file
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="3"> -->
-          <v-btn :loading="loading" color="primary" @click="inspect_file(files[0])">
-            Inspect
-            <template #loader>
-              <v-progress-circular indeterminate size="20" color="white" width="3" />
-            </template>
-          </v-btn>
-          <v-btn variant="text" @click="set_current_step(2)">
-            Cancel
-          </v-btn>
+        <v-btn :loading="loading" color="primary" @click="inspect_file(files[0])">
+          Inspect
+          <template #loader>
+            <v-progress-circular indeterminate size="20" color="white" width="3" />
+          </template>
+        </v-btn>
+        <v-btn variant="text" @click="set_current_step(2)">
+          Cancel
+        </v-btn>
         <!-- </v-stepper-content> -->
 
         <!-- <v-stepper-step step="4"> -->
-          Inspection results
+        Inspection results
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="4"> -->
-          <ToolsInspectorResultsPanels v-if="model_checks.length" :model-checks="model_checks" :object="geode_object"
-            :filename="files[0].name" class="pa-2" />
+        <ToolsInspectorResultsPanels v-if="model_checks.length" :model-checks="model_checks" :object="geode_object"
+          :filename="files[0].name" class="pa-2" />
         <!-- </v-stepper-content> -->
         <!-- </v-stepper> -->
       </v-col>
@@ -105,92 +105,109 @@ import cards_list from '@/assets/tools/validitychecker/cards'
 import { use_tools_store } from '@/stores/tools'
 import { use_cloud_store } from '@/stores/cloud'
 const tools_store = use_tools_store()
-const cloud_store = use_cloud_store()
+const cloud_store = ref(use_cloud_store())
 
-// const accepted_extensions = ''
-// const extension = ''
+const accepted_extensions = ''
+const extension = ''
 const current_step = 1
-// const file_extensions = []
-// const files = []
-// const geode_object = ''
-// const input_message = 'Please select a file'
-// const input_rules = [(value) => !!value || 'The file is mandatory']
+const file_extensions = []
+const files = []
+const geode_object = ''
+const input_message = 'Please select a file'
+const input_rules = [(value) => !!value || 'The file is mandatory']
 
-// const loading = false
-// const model_checks = []
-// const multiple = false
-// const objects = []
-// const success = false
+const loading = false
+const model_checks = []
+const multiple = false
+const objects = []
+const success = false
 
-// watch(() => cloud_store.is_cloud_running, (value) => {
-//   if (value === true) {
-//     tools_store.get_allowed_files()
-//     tools_store.get_packages_versions()
-//   }
+watch(() => cloud_store.is_cloud_running, (value) => {
+  console.log('is_cloud_running')
+  if (value === true) {
+    console.log('cloud_store.is_cloud_running', cloud_store.is_cloud_running)
+    tools_store.get_allowed_files()
+    tools_store.get_packages_versions()
+  }
+})
+
+// cloud_store.$subscribe((mutation, state) => {
+//   console.log('store mutation')
+//   // import { MutationType } from 'pinia'
+//   mutation.type // 'direct' | 'patch object' | 'patch function'
+//   // same as cartStore.$id
+//   mutation.storeId // 'cart'
+//   // only available with mutation.type === 'patch object'
+//   mutation.payload // patch object passed to cartStore.$patch()
+
+//   // persist the whole state to the local storage whenever it changes
+//   localStorage.setItem('cart', JSON.stringify(state))
 // })
 
-// onActivated(() => {
-//   if (cloud_store.is_cloud_running === true) {
-//     tools_store.get_allowed_files()
-//     tools_store.get_packages_versions()
-//   }
-// })
+onActivated(() => {
 
-// async function get_allowed_objects (changedFiles) {
-//   this.success = true
-//   this.message = 'File(s) selected'
-//   if (this.multiple) {
-//     this.files = changedFiles
-//   } else {
-//     this.files = [changedFiles]
-//   }
+  console.log('cloud_store', cloud_store)
+  if (cloud_store.is_cloud_running === true) {
+    tools_store.get_allowed_files()
+    tools_store.get_packages_versions()
+  }
+})
 
-//   const params = new FormData()
-//   params.append('filename', this.files[0].name)
+async function get_allowed_objects (changedFiles) {
+  this.success = true
+  this.message = 'File(s) selected'
+  if (this.multiple) {
+    this.files = changedFiles
+  } else {
+    this.files = [changedFiles]
+  }
 
-//   const data = await this.$axios.$post(
-//     `${this.ID}/validitychecker/allowedobjects`,
-//     params
-//   )
-//   this.objects = data.objects
-//   this.current_step = this.current_step + 1
-// }
-// function set_geode_object (object) {
-//   this.geode_object = object
-//   this.current_step = this.current_step + 1
-// }
+  const params = new FormData()
+  params.append('filename', this.files[0].name)
 
-// function set_current_step (step) {
-//   if (step <= 3) {
-//     this.model_checks = []
-//   }
-//   if (step <= 2) {
-//     this.geode_object = ''
-//   }
-//   if (step <= 1) {
-//     this.files = []
-//   }
-//   this.current_step = step
-// }
+  const data = await this.$axios.$post(
+    `${this.ID}/validitychecker/allowedobjects`,
+    params
+  )
+  this.objects = data.objects
+  this.current_step = this.current_step + 1
+}
+function set_geode_object (object) {
+  this.geode_object = object
+  this.current_step = this.current_step + 1
+}
 
-// async function inspect_file () {
-//   await this.upload_file()
-//   console.log('upload_file okay')
-//   this.set_current_step(4)
-//   await this.get_tests_names()
-// }
-// async function get_tests_names () {
-//   const self = this
-//   const params = new FormData()
-//   params.append('object', self.geode_object)
-//   await self.$axios
-//     .post(`${self.ID}/validitychecker/testsnames`, params)
-//     .then((response) => {
-//       if (response.status == 200) {
-//         self.model_checks = response.data.model_checks
-//       }
-//     })
-// }
+function set_current_step (step) {
+  if (step <= 3) {
+    this.model_checks = []
+  }
+  if (step <= 2) {
+    this.geode_object = ''
+  }
+  if (step <= 1) {
+    this.files = []
+  }
+  this.current_step = step
+}
+
+async function inspect_file () {
+  await this.upload_file()
+  console.log('upload_file okay')
+  this.set_current_step(4)
+  await this.get_tests_names()
+}
+async function get_tests_names () {
+  const self = this
+  const params = new FormData()
+  params.append('object', self.geode_object)
+  await self.$axios
+    .post(`${self.ID}/validitychecker/testsnames`, params)
+    .then((response) => {
+      if (response.status == 200) {
+        self.model_checks = response.data.model_checks
+      }
+    })
+}
 // async function upload_file () {
 //   const self = this
 //   return new Promise((resolve, reject) => {
@@ -212,6 +229,7 @@ const current_step = 1
 //         reject(err);
 //       }
 //     }
+
 //     // reader.readAsDataURL(this.files[0])
 //   })
 </script>

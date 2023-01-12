@@ -1,18 +1,8 @@
 <template>
   <Carousel :settings="carrousel_settings">
-    <Slide
-      v-for="(item, index) in props.items"
-      :key="index"
-      class="carousel__slide"
-    >
-      <a
-        :href="item.url"
-        target="_blank"
-      >
-        <img
-          :src="item.logo"
-          class="carousel__item"
-        >
+    <Slide v-for="(item, index) in props.items" :key="index" class="carousel__slide">
+      <a :href="item.url" target="_blank">
+        <img :src="item.logo" class="carousel__item">
       </a>
     </Slide>
     <template #addons>
@@ -25,6 +15,7 @@
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 
 const props = defineProps({

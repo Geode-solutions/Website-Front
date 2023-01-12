@@ -1,13 +1,13 @@
-import logo_pole_avenia from '@/static/logos/logo-avenia.svg'
-import logo_total_energies from '@/static/logos/logo_totalenergies.png'
-import logo_ring from '@/static/logos/logo_ring.png'
-import logo_georessources from '@/static/logos/logo_georessources.jpg'
-import logo_cnrs from '@/static/logos/logo_cnrs.jpg'
-import logo_université_lorraine from '@/static/logos/logo_UL.png'
-import logo_enerex from '@/static/logos/logo_enerex.png'
-import logo_arxitek from '@/static/logos/logo_arxitek.png'
-import logo_earth_quick from '@/static/logos/logo_earth_quick.jpg'
-import logo_mosart_pme from '@/static/logos/LOGOMOSART-PME.png'
+import logo_pole_avenia from '~/static/logos/logo-avenia.svg'
+import logo_total_energies from '~/static/logos/logo_totalenergies.png'
+import logo_ring from '~/static/logos/logo_ring.png'
+import logo_georessources from '~/static/logos/logo_georessources.jpg'
+import logo_cnrs from '~/static/logos/logo_cnrs.jpg'
+import logo_université_lorraine from '~/static/logos/logo_UL.png'
+import logo_enerex from '~/static/logos/logo_enerex.png'
+import logo_arxitek from '~/static/logos/logo_arxitek.png'
+import logo_earth_quick from '~/static/logos/logo_earth_quick.jpg'
+import logo_mosart_pme from '~/static/logos/LOGOMOSART-PME.png'
 
 const partners_list = [
   {

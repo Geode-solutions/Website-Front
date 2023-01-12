@@ -1,25 +1,13 @@
 <template>
   <v-row justify="center">
-    <v-col
-      cols="11"
-      class="ma-3"
-    >
-      <v-card
-        class="card"
-        elevation="5"
-      >
+    <v-col cols="11" class="ma-3">
+      <v-card class="card" elevation="5">
         <v-card-title class="justify-center">
-          <v-icon
-            color="error"
-            size="20"
-          >
+          <v-icon color="error" size="20">
             mdi-close-octagon
           </v-icon>
           Internal error
-          <v-icon
-            color="error"
-            size="20"
-          >
+          <v-icon color="error" size="20">
             mdi-close-octagon
           </v-icon>
         </v-card-title>

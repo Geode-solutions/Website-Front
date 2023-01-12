@@ -14,6 +14,7 @@ export const use_cloud_store = defineStore('cloud', {
     async create_connexion () {
       if (this.is_connexion_launched) { return }
       this.is_connexion_launched = true
+      console.log(this.is_connexion_launched)
       const ID = localStorage.getItem('ID')
       if (ID === null || typeof ID === 'undefined') {
         return this.create_backend()
@@ -46,6 +47,7 @@ export const use_cloud_store = defineStore('cloud', {
           return this.ping_task()
         }
       } catch (e) {
+        console.log(e)
         let status = e.toJSON().status
         if (status === 500) {
           this.internal_error = true
@@ -61,7 +63,9 @@ export const use_cloud_store = defineStore('cloud', {
     },
     async do_ping () {
       try {
-        const response = await this.$axios.post(`${this.ID}/ping`)
+        const response = await useFetch(`${config.public.API_URL}/${ID}/ping`, {
+          method: 'POST'
+        })
         if (response.status == 200) {
           this.is_cloud_running = true
         }

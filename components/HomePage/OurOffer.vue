@@ -67,11 +67,11 @@
   </v-container>
 </template>
 <script setup>
-import web from "@/static/index/cobweb.jpg"
-import nut from "@/static/index/nut.jpg"
-import screw from "@/static/index/screw.jpg"
-import road from "@/static/index/road.jpg"
-import tailoring from "@/static/index/tailoring.jpg"
+import web from "~/static/index/cobweb.jpg"
+import nut from "~/static/index/nut.jpg"
+import screw from "~/static/index/screw.jpg"
+import road from "~/static/index/road.jpg"
+import tailoring from "~/static/index/tailoring.jpg"
 
 
 

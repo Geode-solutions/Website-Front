@@ -1,93 +1,32 @@
 <template>
-  <v-footer rounded>
-    <v-card
-      text
-      rounded="0"
-      dark
-      class="bg-primary flex"
-    >
-      <v-row
-        align="center"
-        class="mr-0"
-      >
-        <v-col cols="auto">
-          <v-card-text>
-            <v-btn
-              v-for="icon in icons"
-              :key="icon.icon"
-              icon
-              target="_blank"
-              color="primary"
-              variant="flat"
-              rel="noopener"
-              :href="icon.url"
-              class="mr-4"
-            >
-              <v-icon
-                size="30"
-                :icon="icon.icon"
-              />
-            </v-btn>
-          </v-card-text>
-        </v-col>
+  <v-footer class="bg-primary pa-0">
+    <v-row>
+      <div class="d-flex h-80 w-100 align-center px-4">
+        <v-btn v-for="icon in icons" :key="icon" class="mx-4" :icon="icon" variant="plain" size="30"></v-btn>
         <v-spacer />
-        <v-col
-          cols="auto"
-          class="text-right"
-        >
-          <v-card-text>
-            <v-btn
-              size="small"
-              class="pa-0 ma-0"
-              variant="text"
-              href="/legalNotice"
-            >
-              Legal notice
-            </v-btn>
-            |
-            <v-btn
-              size="small"
-              class="pa-0 ma-0"
-              variant="text"
-              href="/credits"
-            >
-              Credits
-            </v-btn>
-          </v-card-text>
-        </v-col>
-      </v-row>
-      <v-divider />
-      <v-row
-        align="center"
-        class="px-1 mb-0 pt-1"
-      >
-        <v-col cols="auto">
-          <v-card-text>
-            Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights
-            reserved.
-          </v-card-text>
-        </v-col>
+        <v-btn size="small" class="pa-2 ma-0" variant="plain" href="/legalNotice">
+          Legal notice
+        </v-btn>
+        |
+        <v-btn size="small" class="pa-2 ma-0" variant="plain" href="/credits">
+          Credits
+        </v-btn>
+      </div>
+    </v-row>
+    <v-row>
+
+      <div class="px-4 py-2 w-100">
+        <p class="text-caption">
+          Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights
+          reserved.
+        </p>
+
         <v-spacer />
-        <v-col
-          cols="auto"
-          class="text-right"
-        >
-          <v-btn
-            target="_blank"
-            rel="noopener"
-            variant="text"
-            href="https://js.org/"
-          >
-            <img
-              alt=" logo"
-              height="40px"
-              width="120px"
-              src="@/static/nuxt.svg"
-            >
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
+        <v-btn target="_blank" rel="noopener" variant="text" href="https://js.org/">
+          <img alt="logo" height="40px" width="120px" src="@/static/nuxt.svg">
+        </v-btn>
+      </div>
+    </v-row>
   </v-footer>
 </template>
 
