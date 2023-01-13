@@ -3,11 +3,18 @@
     This tool uses our Open-Source codes
     <v-tooltip location="right">
       <template #activator="{ on }">
-        <v-icon color="primary" class="justify-right" v-on="on">
+        <v-icon
+          color="primary"
+          class="justify-right"
+          v-on="on"
+        >
           mdi-information-outline
         </v-icon>
       </template>
-      <span v-for="package_version in packages_versions" :key="package_version.package">
+      <span
+        v-for="package_version in packages_versions"
+        :key="package_version.package"
+      >
         {{ package_version.package }} v{{ package_version.version }}
         <br>
       </span>
@@ -16,5 +23,5 @@
 </template>
 
 <script setup>
-const packages_versions = defineProps({ 'packages_versions': Object })
+const packages_versions = defineProps({ 'packagesVersions': Object })
 </script>

@@ -1,9 +1,9 @@
 
 import logo_helioparc from '~/static/logos/logo_helioparc.svg'
-import logo_banquiz from '~/static/logos/logo_banquiz.svg'
-import logo_naos from '~/static/logos/logo_NAOS.svg'
-import logo_region from '~/static/logos/logo_region.svg'
-import logo_geoliens from '~/static/logos/logo_geoliens.svg'
+import logo_banquiz from '~/static/logos/logo_banquiz.png'
+import logo_naos from '~/static/logos/logo_NAOS.png'
+import logo_region from '~/static/logos/logo_region.png'
+import logo_geoliens from '~/static/logos/logo_geoliens.png'
 
 const supports_list = [
   {

@@ -16,11 +16,6 @@
             md="6"
           >
             <v-hover v-slot="{ hover }">
-              <!-- <v-lazy
-                :options="{
-                  threshold: 0.5,
-                }"
-              > -->
               <v-card
                 dark
                 height="500"
@@ -58,7 +53,6 @@
                   </v-row>
                 </v-img>
               </v-card>
-              <!-- </v-lazy> -->
             </v-hover>
           </v-col>
         </v-row>

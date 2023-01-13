@@ -23,11 +23,6 @@
             lg="3"
             class="ma-3"
           >
-            <!-- <v-lazy
-              :options="{
-                threshold: 0.5,
-              }"
-            > -->
             <v-card
               class="elevation-5"
               height="100%"
@@ -50,7 +45,6 @@
                 {{ card.text }}
               </v-card-text>
             </v-card>
-            <!-- </v-lazy> -->
           </v-col>
         </v-row>
       </v-col>

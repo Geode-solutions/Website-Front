@@ -86,53 +86,46 @@
                 sm="5"
                 md="6"
               >
-                <v-lazy
-                  :options="{
-                    threshold: .5
-                  }"
-                  min-height="500"
-                >
-                  <v-card height="100%">
-                    <v-img
-                      :src="beta.image"
-                      :alt="'Geode-solutions ' + beta.title"
-                      cover
+                <v-card height="100%">
+                  <v-img
+                    :src="beta.image"
+                    :alt="'Geode-solutions ' + beta.title"
+                    cover
+                  />
+                  <v-card-title
+                    primary-title
+                    class="justify-center text-h4 px-5 ma-4"
+                  >
+                    {{ beta.title }}
+                  </v-card-title>
+                  <v-card-text
+                    align="justify"
+                    class="text-body-1"
+                  >
+                    {{ beta.text }}
+                    <ul class="ma-2">
+                      <li
+                        v-for="feature in beta.features"
+                        :key="feature"
+                        class="text-body-1 font-weight-medium"
+                      >
+                        {{ feature }}
+                      </li>
+                    </ul>
+                  </v-card-text>
+                  <v-card-text
+                    align="center"
+                    class="text-body-1 font-weight-medium"
+                  >
+                    Readiness
+                    <v-progress-linear
+                      :model-value="beta.readiness"
+                      height="10"
+                      striped
+                      rounded
                     />
-                    <v-card-title
-                      primary-title
-                      class="justify-center text-h4 px-5 ma-4"
-                    >
-                      {{ beta.title }}
-                    </v-card-title>
-                    <v-card-text
-                      align="justify"
-                      class="text-body-1"
-                    >
-                      {{ beta.text }}
-                      <ul class="ma-2">
-                        <li
-                          v-for="feature in beta.features"
-                          :key="feature"
-                          class="text-body-1 font-weight-medium"
-                        >
-                          {{ feature }}
-                        </li>
-                      </ul>
-                    </v-card-text>
-                    <v-card-text
-                      align="center"
-                      class="text-body-1 font-weight-medium"
-                    >
-                      Readiness
-                      <v-progress-linear
-                        :model-value="beta.readiness"
-                        height="10"
-                        striped
-                        rounded
-                      />
-                    </v-card-text>
-                  </v-card>
-                </v-lazy>
+                  </v-card-text>
+                </v-card>
               </v-col>
             </v-row>
           </v-col>
@@ -155,32 +148,25 @@
                 sm="5"
                 md="6"
               >
-                <v-lazy
-                  :options="{
-                    threshold: .5
-                  }"
-                  min-height="500"
-                >
-                  <v-card height="100%">
-                    <v-img
-                      :src="coming_soon"
-                      :alt="'Geode-solutions ' + next.title"
-                      cover
-                    />
-                    <v-card-title
-                      primary-title
-                      class="justify-center text-h4 px-5 ma-4"
-                    >
-                      {{ next.title }}
-                    </v-card-title>
-                    <v-card-text
-                      align="justify"
-                      class="text-body-1"
-                    >
-                      {{ next.text }}
-                    </v-card-text>
-                  </v-card>
-                </v-lazy>
+                <v-card height="100%">
+                  <v-img
+                    :src="coming_soon"
+                    :alt="'Geode-solutions ' + next.title"
+                    cover
+                  />
+                  <v-card-title
+                    primary-title
+                    class="justify-center text-h4 px-5 ma-4"
+                  >
+                    {{ next.title }}
+                  </v-card-title>
+                  <v-card-text
+                    align="justify"
+                    class="text-body-1"
+                  >
+                    {{ next.text }}
+                  </v-card-text>
+                </v-card>
               </v-col>
             </v-row>
             <h2
@@ -208,13 +194,7 @@
               Thanks to our pilots
             </h2>
 
-            <v-lazy
-              :options="{
-                threshold: .5
-              }"
-            >
-              <CommonCarrousel :items="pilots_list" />
-            </v-lazy>
+            <CommonCarrousel :items="pilots_list" />
           </v-col>
         </v-row>
       </v-container>

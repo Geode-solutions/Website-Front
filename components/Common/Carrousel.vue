@@ -1,8 +1,18 @@
 <template>
   <Carousel :settings="carrousel_settings">
-    <Slide v-for="(item, index) in props.items" :key="index" class="carousel__slide">
-      <a :href="item.url" target="_blank">
-        <img :src="item.logo" class="carousel__item">
+    <Slide
+      v-for="(item, index) in props.items"
+      :key="index"
+      class="carousel__slide"
+    >
+      <a
+        :href="item.url"
+        target="_blank"
+      >
+        <img
+          :src="item.logo"
+          class="carousel__item"
+        >
       </a>
     </Slide>
     <template #addons>
@@ -33,18 +43,12 @@ const nb_items_to_display = computed(() => {
 
 const carrousel_settings = {
   autoplay: 2000,
-  itemsToShow: nb_items_to_display,
-  itemsToScroll: props.items.length / nb_items_to_display,
+  itemsToShow: nb_items_to_display.value,
+  itemsToScroll: props.items.length / nb_items_to_display.value,
   pauseAutoplayOnHover: true,
   transition: 1000,
   wrapAround: true
 }
-
-onMounted(() => {
-  // For development
-  console.log(props.items)
-  console.log(this.nb_items_to_display)
-})
 </script>
 
 <style scoped>

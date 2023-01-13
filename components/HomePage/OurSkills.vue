@@ -14,24 +14,19 @@
       class="container mx-auto"
     >
       <v-col>
-        <v-lazy
-          :options="{
-            threshold: 0.5,
-          }"
-        >
-          <client-only>
-            <CloudWords :data="skills">
-              -->
-            </CloudWords>
-            <!-- <vue-word-cloud
+        <client-only>
+          <CloudWords
+            :data="skills"
+            :font-size-mapper="fontSizeMapper"
+          />
+          <!-- <vue-word-cloud
                   style="height: 480px; width: 100%"
                   spacing="0.4"
                   :words="skills"
                   :color="getColor"
                   font-family="Roboto"
                 /> -->
-          </client-only>
-        </v-lazy>
+        </client-only>
       </v-col>
     </v-row>
   </v-container>
@@ -39,24 +34,25 @@
 
 <script setup>
 const skills = [
-  ['C++', 5],
-  ['DevOps', 4],
-  ['Meshing', 5],
-  ['Python', 2],
-  ['Algorithms', 3],
-  ['Computational geometry', 4],
-  ['Geomodeling', 2],
-  ['Unstructured meshes', 3],
-  ['BoundaryRepresentation', 2],
-  ['Model editing', 4],
-  ['Mesh repair', 2],
-  ['Model repair', 5],
-  ['Continuous integration', 2],
-  ['Continuous deployment', 2],
-  ['Software engineering', 4],
-  ['Robustness', 3],
-  ['JavaScript', 2],
-  ['Web technologies', 2],
-  ['Visualization', 2],
+  { text: 'C++', value: 5 },
+  { text: 'DevOps', value: 4 },
+  { text: 'Meshing', value: 5 },
+  { text: 'Python', value: 2 },
+  { text: 'Algorithms', value: 3 },
+  { text: 'Computational geometry', value: 4 },
+  { text: 'Geomodeling', value: 2 },
+  { text: 'Unstructured meshes', value: 3 },
+  { text: 'BoundaryRepresentation', value: 2 },
+  { text: 'Model editing', value: 4 },
+  { text: 'Mesh repair', value: 2 },
+  { text: 'Model repair', value: 5 },
+  { text: 'Continuous integration', value: 2 },
+  { text: 'Continuous deployment', value: 2 },
+  { text: 'Software engineering', value: 4 },
+  { text: 'Robustness', value: 3 },
+  { text: 'JavaScript', value: 2 },
+  { text: 'Web technologies', value: 2 },
+  { text: 'Visualization', value: 2 },
 ]
+const fontSizeMapper = word => word.value * 10
 </script>

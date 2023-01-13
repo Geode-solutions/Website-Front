@@ -30,17 +30,11 @@
               sm="5"
             >
               <v-card-text>
-                <v-lazy
-                  :options="{
-                    threshold: 0.5,
-                  }"
-                >
-                  <v-img
-                    :src="service.image"
-                    :alt="'Geode-solutions ' + service.title"
-                    cover
-                  />
-                </v-lazy>
+                <v-img
+                  :src="service.image"
+                  :alt="'Geode-solutions ' + service.title"
+                  cover
+                />
               </v-card-text>
             </v-col>
             <v-col

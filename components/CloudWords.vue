@@ -22,8 +22,8 @@ export default {
         },
         onWordClick: {
             type: Function,
-            default: (word) => { 
-                window.alert(`You clicked ${word.text}`) 
+            default: (word) => {
+                window.alert(`You clicked ${word.text}`)
             },
         },
         rotate: {
@@ -72,7 +72,7 @@ export default {
     },
 
     methods: {
-        createCanvas: function() {
+        createCanvas: function () {
             const wordCounts = this.data.map(
                 text => ({ ...text })
             );
@@ -80,25 +80,25 @@ export default {
             d3.select(this.$el).selectAll('*').remove();
 
             const layout = cloud()
-            .size([this.width, this.height])
-            .words(wordCounts)
-            .padding(this.padding)
-            .spiral(this.spiral)
-            .rotate(this.rotate)
-            .font(this.font)
-            .fontSize(this.fontSizeMapper)
-            .on('end', this.end);
-            
-            if(this.colors)
+                .size([this.width, this.height])
+                .words(wordCounts)
+                .padding(this.padding)
+                .spiral(this.spiral)
+                .rotate(this.rotate)
+                .font(this.font)
+                .fontSize(this.fontSizeMapper)
+                .on('end', this.end);
+
+            if (this.colors)
                 this.fill = d3.scaleOrdinal().range(this.colors)
             else
                 this.fill = d3.scaleOrdinal(d3.schemeCategory10)
 
             layout.start();
         },
-        end: function(words) {
+        end: function (words) {
             let _fill;
-            switch(this.coloring){
+            switch (this.coloring) {
                 case "random":
                     _fill = (d, i) => this.fill(i);
                     break;
@@ -110,26 +110,30 @@ export default {
             }
 
             d3.select(this.$el)
-            .append('svg')
-            .attr('width', this.width)
-            .attr('height', this.height)
-            .append('g')
-            .attr('transform', `translate(${this.width / 2},${this.height / 2})`)
-            .selectAll('text')
-            .data(words)
-            .enter()
-            .append('text')
-            .style('font-family', d => d.font)
-            .style('font-size', d => {
-                return `${d.size}px`
-            })
-            .style('fill', _fill)
-            .attr('text-anchor', 'middle')
-            .attr('transform',d => { 
-                return `translate(${[d.x, d.y]})rotate(${d.rotate})`
-            })
-            .text(d => d.text)
-            .on('click', d => this.onWordClick(d));
+                .append('svg')
+                .attr({
+                    "width": "100%",
+                    "height": "100%"
+                })
+                .attr("viewBox", "0, 0, " + this.width + ", " + this.height)
+                .attr("preserveAspectRatio", "xMidYMid meet")
+                .append('g')
+                .attr('transform', `translate(${this.width / 2},${this.height / 2})`)
+                .selectAll('text')
+                .data(words)
+                .enter()
+                .append('text')
+                .style('font-family', d => d.font)
+                .style('font-size', d => {
+                    return `${d.size}px`
+                })
+                .style('fill', _fill)
+                .attr('text-anchor', 'middle')
+                .attr('transform', d => {
+                    return `translate(${[d.x, d.y]})rotate(${d.rotate})`
+                })
+                .text(d => d.text)
+                .on('click', d => this.onWordClick(d));
         },
         getColor() {
             const number = Math.random()
@@ -138,7 +142,7 @@ export default {
             return '#80CBC4'
         },
     }
- }
+}
 </script>
 
 

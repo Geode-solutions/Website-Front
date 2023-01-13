@@ -1,36 +1,68 @@
 <template>
-  <!-- <v-footer class="bg-primary pa-0 d-flex flex-column">
-    <v-row>
-      <div class="d-flex h-80 w-100 align-center px-4">
-        <v-btn v-for="icon in icons" :key="icon" class="mx-4" :icon="icon" variant="plain" size="30"></v-btn>
-        <v-spacer />
-        <v-btn size="small" class="pa-2 ma-0" variant="plain" href="/legalNotice">
+  <v-footer class="bg-primary flex-column">
+    <v-row style="width:100%">
+      <v-col cols="auto">
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          class="px-5"
+          :icon="icon.icon"
+          variant="plain"
+          size="30"
+        />
+      </v-col>
+      <v-spacer />
+      <v-col align="right">
+        <v-btn
+          size="small"
+          class="pa-2 ma-0"
+          variant="plain"
+          href="/legalNotice"
+        >
           Legal notice
         </v-btn>
         |
-        <v-btn size="small" class="pa-2 ma-0" variant="plain" href="/credits">
+        <v-btn
+          size="small"
+          class="pa-2 ma-0"
+          variant="plain"
+          href="/credits"
+        >
           Credits
         </v-btn>
-      </div>
+      </v-col>
     </v-row>
-    <v-row>
-
-      <div class="px-4 py-2 w-100">
+    <v-row style="width:100%">
+      <v-col cols="auto">
         <p class="text-caption">
           Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights
           reserved.
         </p>
-
-        <v-spacer />
-        <v-btn target="_blank" rel="noopener" variant="text" href="https://js.org/">
-          <img alt="logo" height="40px" width="120px" src="@/static/nuxt.svg">
+      </v-col>
+      <v-spacer />
+      <v-col align="right">
+        <v-btn
+          target="_blank"
+          rel="noopener"
+          variant="text"
+          href="https://js.org/"
+        >
+          <v-img
+            alt="logo"
+            height="40px"
+            width="120px"
+            :src="NuxtLogo"
+          />
         </v-btn>
-      </div>
+      </v-col>
     </v-row>
-  </v-footer> -->
+    <!-- </div> -->
+  </v-footer>
 </template>
 
 <script setup>
+import NuxtLogo from "@/static/nuxt.svg"
+
 const icons = [
   { icon: 'mdi-github', url: 'https://github.com/Geode-solutions' },
   { icon: 'mdi-twitter', url: 'https://twitter.com/GeodeSolutions' },

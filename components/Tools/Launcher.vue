@@ -1,10 +1,21 @@
 <template>
   <v-container justify="space-around">
-    <v-row rows="auto" align-content="center" align="center">
-      <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
-        align="center">
+    <v-row
+      rows="auto"
+      align-content="center"
+      align="center"
+    >
+      <v-col
+        v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))"
+        cols="10"
+        align-self="center"
+        align="center"
+      >
         <!-- <recaptcha class="align-center" /> -->
-        <v-btn color="primary" @click="submit_recaptcha()">
+        <v-btn
+          color="primary"
+          @click="submit_recaptcha()"
+        >
           Start tool
         </v-btn>
       </v-col>

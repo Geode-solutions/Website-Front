@@ -2,13 +2,19 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <ToolsHeader tool_name="Validity checker" :cards_list="cards_list" />
+        <ToolsHeader
+          tool_name="Validity checker"
+          :cards_list="cards_list"
+        />
       </v-col>
       <v-col>
         <ToolsLauncher />
       </v-col>
       {{ is_cloud_running }}
-      <v-col v-if="is_cloud_running" class="pb-5">
+      <v-col
+        v-if="is_cloud_running"
+        class="pb-5"
+      >
         <ToolsStepper />
         <!-- <v-stepper v-model="current_step" class="stepper" vertical elevation="5"> -->
         <!-- <v-stepper-step :complete="current_step > 1" step="1" @click="set_current_step(1)"> -->
@@ -40,11 +46,26 @@
         <v-row v-if="objects.length">
           <v-col>
             <v-row class="justify-left">
-              <v-col v-for="object in objects" :key="object" cols="2" md="2">
+              <v-col
+                v-for="object in objects"
+                :key="object"
+                cols="2"
+                md="2"
+              >
                 <v-tooltip location="bottom">
                   <template #activator="{ on }">
-                    <v-card v-ripple class="card ma-2" hover elevation="5" v-on="on">
-                      <v-img :src="geode_objects[object].image" cover @click="set_geode_object(object)" />
+                    <v-card
+                      v-ripple
+                      class="card ma-2"
+                      hover
+                      elevation="5"
+                      v-on="on"
+                    >
+                      <v-img
+                        :src="geode_objects[object].image"
+                        cover
+                        @click="set_geode_object(object)"
+                      />
                     </v-card>
                   </template>
                   <span>{{ geode_objects[object].tooltip }}</span>
@@ -55,8 +76,10 @@
         </v-row>
         <v-row v-else>
           <p class="ma-4">
-            This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/"
-              target="_blank">
+            This file format isn't supported! Please check the <a
+              href="https://docs.geode-solutions.com/formats/"
+              target="_blank"
+            >
               supported file formats documentation</a> for more information
           </p>
         </v-row>
@@ -66,13 +89,25 @@
         Inspect your file
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="3"> -->
-        <v-btn :loading="loading" color="primary" @click="inspect_file(files[0])">
+        <v-btn
+          :loading="loading"
+          color="primary"
+          @click="inspect_file(files[0])"
+        >
           Inspect
           <template #loader>
-            <v-progress-circular indeterminate size="20" color="white" width="3" />
+            <v-progress-circular
+              indeterminate
+              size="20"
+              color="white"
+              width="3"
+            />
           </template>
         </v-btn>
-        <v-btn variant="text" @click="set_current_step(2)">
+        <v-btn
+          variant="text"
+          @click="set_current_step(2)"
+        >
           Cancel
         </v-btn>
         <!-- </v-stepper-content> -->
@@ -81,8 +116,13 @@
         Inspection results
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="4"> -->
-        <ToolsValidityCheckerResultsPanels v-if="model_checks.length" :model-checks="model_checks" :object="geode_object"
-          :filename="files[0].name" class="pa-2" />
+        <ToolsValidityCheckerResultsPanels
+          v-if="model_checks.length"
+          :model-checks="model_checks"
+          :object="geode_object"
+          :filename="files[0].name"
+          class="pa-2"
+        />
         <!-- </v-stepper-content> -->
         <!-- </v-stepper> -->
       </v-col>

@@ -2,19 +2,28 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <ToolsHeader tool_name="File converter" :cards_list="cards_list" />
+        <ToolsHeader
+          tool_name="File converter"
+          :cards_list="cards_list"
+        />
       </v-col>
       <v-col>
         <ToolsLauncher />
       </v-col>
 
-      <v-col v-if="cloud_store.is_cloud_running" class="pb-5">
-        <v-card v-model="current_step" class="stepper" elevation="5">
-          <v-card v-if="current_step == 1" @click="current_step = 1">
-
-
-          </v-card>
-
+      <v-col
+        v-if="cloud_store.is_cloud_running"
+        class="pb-5"
+      >
+        <v-card
+          v-model="current_step"
+          class="stepper"
+          elevation="5"
+        >
+          <v-card
+            v-if="current_step == 1"
+            @click="current_step = 1"
+          />
         </v-card>
         <!-- <v-stepper v-model="current_step" class="stepper" vertical elevation="5">
           <v-stepper-step :complete="current_step > 1" step="1" @click="current_step = 1"> -->
@@ -23,7 +32,10 @@
             Please select a file to convert
           </v-col>
           <v-col v-if="files.length">
-            <v-chip v-for="(file, index) in files" :key="index">
+            <v-chip
+              v-for="(file, index) in files"
+              :key="index"
+            >
               {{ file.name }}
             </v-chip>
           </v-col>
@@ -31,8 +43,17 @@
         <!-- </v-stepper-step> -->
 
         <!-- <v-stepper-content step="1"> -->
-        <v-file-input chips multiple color="#3b3b3b" label="Please select a file" :accept="accepted_extensions"
-          :rules="input_rules" show-size @click:clear="objects = []" @change="GetAllowedObjects" />
+        <v-file-input
+          chips
+          multiple
+          color="#3b3b3b"
+          label="Please select a file"
+          :accept="accepted_extensions"
+          :rules="input_rules"
+          show-size
+          @click:clear="objects = []"
+          @change="GetAllowedObjects"
+        />
         <!-- </v-stepper-content> -->
 
         <!-- <v-stepper-step :complete="current_step > 2" step="2" @click="current_step = 2"> -->
@@ -52,11 +73,26 @@
         <v-row v-if="objects.length">
           <v-col>
             <v-row class="justify-left">
-              <v-col v-for="object in objects" :key="object" cols="2" md="2">
+              <v-col
+                v-for="object in objects"
+                :key="object"
+                cols="2"
+                md="2"
+              >
                 <v-tooltip location="bottom">
                   <template #activator="{ on }">
-                    <v-card v-ripple class="card ma-2" hover elevation="5" v-on="on">
-                      <v-img :src="geode_objects[object].image" cover @click="get_output_file_extensions(object)" />
+                    <v-card
+                      v-ripple
+                      class="card ma-2"
+                      hover
+                      elevation="5"
+                      v-on="on"
+                    >
+                      <v-img
+                        :src="geode_objects[object].image"
+                        cover
+                        @click="get_output_file_extensions(object)"
+                      />
                     </v-card>
                   </template>
                   <span>{{ GeodeObjects[object].tooltip }}</span>
@@ -70,7 +106,10 @@
           <p class="ma-4">
             <span v-if="files.length == 1">This file format is not supported! </span>
             <span v-else>This file format combination is not supported! </span>
-            Please check the <a href="https://docs.geode-solutions.com/formats/" target="_blank">
+            Please check the <a
+              href="https://docs.geode-solutions.com/formats/"
+              target="_blank"
+            >
               supported file formats documentation</a> for more information
           </p>
         </v-row>
@@ -90,11 +129,23 @@
         <!-- </v-stepper-step> -->
 
         <!-- <v-stepper-content step="3"> -->
-        <v-row v-if="file_extensions.length" class="flex-column">
+        <v-row
+          v-if="file_extensions.length"
+          class="flex-column"
+        >
           <v-col>
             <v-row class="justify-left">
-              <v-col v-for="fileExtension in file_extensions" :key="fileExtension" cols="2" md="2">
-                <v-card class="card ma-2" hover @click="set_file_format(fileExtension)">
+              <v-col
+                v-for="fileExtension in file_extensions"
+                :key="fileExtension"
+                cols="2"
+                md="2"
+              >
+                <v-card
+                  class="card ma-2"
+                  hover
+                  @click="set_file_format(fileExtension)"
+                >
                   <v-card-title class="justify-center">
                     {{ fileExtension }}
                   </v-card-title>
@@ -109,13 +160,25 @@
         Convert your file
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="4"> -->
-        <v-btn :loading="loading" color="primary" @click="convert_file(files)">
+        <v-btn
+          :loading="loading"
+          color="primary"
+          @click="convert_file(files)"
+        >
           Convert
           <template #loader>
-            <v-progress-circular indeterminate size="20" color="white" width="3" />
+            <v-progress-circular
+              indeterminate
+              size="20"
+              color="white"
+              width="3"
+            />
           </template>
         </v-btn>
-        <v-btn variant="text" @click="current_step = 3">
+        <v-btn
+          variant="text"
+          @click="current_step = 3"
+        >
           Cancel
         </v-btn>
         <!-- </v-stepper-content> -->

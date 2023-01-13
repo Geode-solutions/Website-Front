@@ -8,7 +8,7 @@
         OpenGeode
       </h1>
     </v-col>
-
+    <!-- 
     <client-only>
       <Particles
         class="particles-wrapper mb-5"
@@ -25,7 +25,7 @@
         :lines-distance="150"
         :move-speed="4"
       />
-    </client-only>
+    </client-only> -->
 
     <v-container>
       <v-row class="text-center">
@@ -75,31 +75,25 @@
               sm="5"
               md="6"
             >
-              <v-lazy
-                :options="{
-                  threshold: 0.5,
-                }"
-              >
-                <v-card height="100%">
-                  <v-img
-                    :src="card.image"
-                    :alt="'Geode-solutions ' + card.title"
-                    cover
-                  />
-                  <v-card-title
-                    primary-title
-                    class="justify-center text-h4"
-                  >
-                    {{ card.title }}
-                  </v-card-title>
-                  <v-card-text
-                    align="justify"
-                    class="text-body-1"
-                  >
-                    {{ card.text }}
-                  </v-card-text>
-                </v-card>
-              </v-lazy>
+              <v-card height="100%">
+                <v-img
+                  :src="card.image"
+                  :alt="'Geode-solutions ' + card.title"
+                  cover
+                />
+                <v-card-title
+                  primary-title
+                  class="justify-center text-h4"
+                >
+                  {{ card.title }}
+                </v-card-title>
+                <v-card-text
+                  align="justify"
+                  class="text-body-1"
+                >
+                  {{ card.text }}
+                </v-card-text>
+              </v-card>
             </v-col>
           </v-row>
           <h2
@@ -127,13 +121,7 @@
             They use it
           </h2>
 
-          <v-lazy
-            :options="{
-              threshold: 0.5,
-            }"
-          >
-            <CommonCarrousel :items="users_list" />
-          </v-lazy>
+          <CommonCarrousel :items="users_list" />
         </v-col>
       </v-row>
     </v-container>

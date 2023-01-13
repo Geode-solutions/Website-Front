@@ -1,7 +1,15 @@
 <template>
-  <v-file-input :multiple="props.multiple" :label="props.label" :accept="props.accept" :rules="props.rules"
-    @click:clear="props.click" @change="props.change" color="#3b3b3b" chips show-size />
-
+  <v-file-input
+    :multiple="props.multiple"
+    :label="props.label"
+    :accept="props.accept"
+    :rules="props.rules"
+    color="#3b3b3b"
+    chips
+    show-size
+    @click:clear="props.click"
+    @change="props.change"
+  />
 </template>
 
 <script setup>
