@@ -7,8 +7,9 @@
       <v-col>
         <ToolsLauncher />
       </v-col>
-      <!-- {{ cloud_store.is_cloud_running }} -->
-      <v-col v-if="cloud_store.is_cloud_running" class="pb-5">
+      {{ is_cloud_running }}
+      <v-col v-if="is_cloud_running" class="pb-5">
+        <ToolsStepper />
         <!-- <v-stepper v-model="current_step" class="stepper" vertical elevation="5"> -->
         <!-- <v-stepper-step :complete="current_step > 1" step="1" @click="set_current_step(1)"> -->
         <v-row align="center">
@@ -22,13 +23,6 @@
           </v-col>
         </v-row>
         <!-- </v-stepper-step> -->
-
-        <!-- <v-stepper-content step="1"> -->
-        <v-file-input chips :multiple="multiple" color="#3b3b3b" label="Please select a file"
-          :accept="accepted_extensions" :rules="input_rules" show-size @click:clear="objects = []"
-          @change="get_allowed_objects" />
-        <!-- </v-stepper-content> -->
-
         <!-- <v-stepper-step :complete="current_step > 2" step="2" @click="set_current_step(2)"> -->
         <v-row align="center">
           <v-col cols="auto">
@@ -87,12 +81,12 @@
         Inspection results
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="4"> -->
-        <ToolsInspectorResultsPanels v-if="model_checks.length" :model-checks="model_checks" :object="geode_object"
+        <ToolsValidityCheckerResultsPanels v-if="model_checks.length" :model-checks="model_checks" :object="geode_object"
           :filename="files[0].name" class="pa-2" />
         <!-- </v-stepper-content> -->
         <!-- </v-stepper> -->
       </v-col>
-      <v-col v-if="cloud_store.is_cloud_running">
+      <v-col v-if="is_cloud_running">
         <ToolsPackagesVersions :packages_versions="tools_store.packages_versions" />
       </v-col>
     </v-row>
@@ -100,21 +94,20 @@
 </template>
 
 <script setup>
-import geode_objects from '@/assets/tools/geode_objects'
 import cards_list from '@/assets/tools/validitychecker/cards'
 import { use_tools_store } from '@/stores/tools'
 import { use_cloud_store } from '@/stores/cloud'
+import { storeToRefs } from 'pinia';
 const tools_store = use_tools_store()
-const cloud_store = ref(use_cloud_store())
+const cloud_store = use_cloud_store()
+const { is_cloud_running } = storeToRefs(cloud_store)
 
+const tool = 'validitychecker'
 const accepted_extensions = ''
 const extension = ''
-const current_step = 1
 const file_extensions = []
 const files = []
 const geode_object = ''
-const input_message = 'Please select a file'
-const input_rules = [(value) => !!value || 'The file is mandatory']
 
 const loading = false
 const model_checks = []
@@ -122,56 +115,26 @@ const multiple = false
 const objects = []
 const success = false
 
-watch(() => cloud_store.is_cloud_running, (value) => {
-  console.log('is_cloud_running')
+
+
+
+watch(cloud_store.is_cloud_running, (value) => {
+  console.log('is_cloud_running', is_cloud_running)
   if (value === true) {
-    console.log('cloud_store.is_cloud_running', cloud_store.is_cloud_running)
-    tools_store.get_allowed_files()
-    tools_store.get_packages_versions()
+    tools_store.get_allowed_files(this.tool)
+    tools_store.get_packages_versions(this.tool)
   }
 })
-
-// cloud_store.$subscribe((mutation, state) => {
-//   console.log('store mutation')
-//   // import { MutationType } from 'pinia'
-//   mutation.type // 'direct' | 'patch object' | 'patch function'
-//   // same as cartStore.$id
-//   mutation.storeId // 'cart'
-//   // only available with mutation.type === 'patch object'
-//   mutation.payload // patch object passed to cartStore.$patch()
-
-//   // persist the whole state to the local storage whenever it changes
-//   localStorage.setItem('cart', JSON.stringify(state))
-// })
 
 onActivated(() => {
 
   console.log('cloud_store', cloud_store)
-  if (cloud_store.is_cloud_running === true) {
-    tools_store.get_allowed_files()
-    tools_store.get_packages_versions()
+  if (is_cloud_running === true) {
+    tools_store.get_allowed_files(this.tool)
+    tools_store.get_packages_versions(this.tool)
   }
 })
 
-async function get_allowed_objects (changedFiles) {
-  this.success = true
-  this.message = 'File(s) selected'
-  if (this.multiple) {
-    this.files = changedFiles
-  } else {
-    this.files = [changedFiles]
-  }
-
-  const params = new FormData()
-  params.append('filename', this.files[0].name)
-
-  const data = await this.$axios.$post(
-    `${this.ID}/validitychecker/allowedobjects`,
-    params
-  )
-  this.objects = data.objects
-  this.current_step = this.current_step + 1
-}
 function set_geode_object (object) {
   this.geode_object = object
   this.current_step = this.current_step + 1

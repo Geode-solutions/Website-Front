@@ -12,6 +12,7 @@ export const use_cloud_store = defineStore('cloud', {
   }),
   actions: {
     async create_connexion () {
+      console.log("create_connexion")
       if (this.is_connexion_launched) { return }
       this.is_connexion_launched = true
       console.log(this.is_connexion_launched)
@@ -21,17 +22,13 @@ export const use_cloud_store = defineStore('cloud', {
       } else {
         try {
           const config = useRuntimeConfig()
-          console.log(config.public.API_URL)
-          const response = await useFetch(`${config.public.API_URL}/${ID}/ping`, {
-            method: 'POST'
-          })
-          if (response.status === 200) {
-            this.ID = ID
-            this.is_cloud_running = true
-            return this.ping_task()
-          }
+          await $fetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+          this.ID = ID
+          this.is_cloud_running = true
+          return this.ping_task()
         } catch (e) {
           // If first ping fails
+          console.log("e", e)
           return this.create_backend()
         }
       }
@@ -39,15 +36,15 @@ export const use_cloud_store = defineStore('cloud', {
     async create_backend () {
       try {
         const config = useRuntimeConfig()
-        const response = await useFetch(`${config.public.BASE_URL}/${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
-        if (response.status == 200) {
-          this.ID = response.data.ID
-          localStorage.setItem('ID', response.data.ID)
-          this.is_cloud_running = true
-          return this.ping_task()
-        }
+        const { data, error } = await useFetch(`${config.public.BASE_URL}/${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
+        console.log("data", data)
+        console.log("error2", error)
+        this.ID = data.ID
+        localStorage.setItem('ID', data.ID)
+        this.is_cloud_running = true
+        return this.ping_task()
       } catch (e) {
-        console.log(e)
+        console.log("e", e)
         let status = e.toJSON().status
         if (status === 500) {
           this.internal_error = true
@@ -63,12 +60,11 @@ export const use_cloud_store = defineStore('cloud', {
     },
     async do_ping () {
       try {
-        const response = await useFetch(`${config.public.API_URL}/${ID}/ping`, {
+        const config = useRuntimeConfig()
+        await useFetch(`${config.public.API_URL}/${this.ID}/ping`, {
           method: 'POST'
         })
-        if (response.status == 200) {
-          this.is_cloud_running = true
-        }
+        this.is_cloud_running = true
       } catch (e) {
         if (this.request_counter == 0) {
           console.log("error: ", e)

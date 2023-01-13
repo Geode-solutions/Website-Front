@@ -1,20 +1,20 @@
 <template>
   <v-container justify="space-around">
     <v-row rows="auto" align-content="center" align="center">
-      <v-col v-if="((!cloud_store.is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10"
-        align-self="center" align="center">
+      <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
+        align="center">
         <!-- <recaptcha class="align-center" /> -->
         <v-btn color="primary" @click="submit_recaptcha()">
           Start tool
         </v-btn>
       </v-col>
-      <v-col v-else-if="cloud_store.internal_error">
+      <v-col v-else-if="internal_error">
         <ToolsErrorsInternalError />
       </v-col>
-      <v-col v-else-if="cloud_store.is_under_maintenance">
+      <v-col v-else-if="is_under_maintenance">
         <ToolsErrorsUnderMaintenance />
       </v-col>
-      <v-col v-else-if="!cloud_store.is_cloud_running">
+      <v-col v-else-if="!is_cloud_running">
         <ToolsLoading />
       </v-col>
     </v-row>
@@ -23,15 +23,18 @@
 
 <script setup>
 import { use_cloud_store } from '@/stores/cloud'
+import { storeToRefs } from 'pinia'
 const cloud_store = use_cloud_store()
+const { internal_error, is_captcha_validated, is_cloud_running, is_under_maintenance } = storeToRefs(cloud_store)
 
 watch(() => cloud_store.is_captcha_validated, (value) => {
   if (value === true) {
     console.log(value)
+    console.log('is_captcha_validated set to true')
     cloud_store.create_connexion()
   }
 })
-watch(() => cloud_store.is_cloud_running, (value, oldValue) => {
+watch(() => is_cloud_running, (value, oldValue) => {
   if (value === false && oldValue == true) {
     cloud_store.$patch({ internal_error: true })
   }
@@ -41,9 +44,9 @@ onMounted(() => {
   const config = useRuntimeConfig()
   if (process.client) {
     if (config.public.NODE_ENV !== 'production') {
-      console.log('test')
+      console.log('is_captcha_validated', is_captcha_validated)
       cloud_store.$patch({ is_captcha_validated: true })
-      console.log('cloud_store.is_captcha_validated', cloud_store.is_captcha_validated)
+      console.log('is_captcha_validated', is_captcha_validated)
     }
   }
 })
@@ -53,8 +56,8 @@ async function submit_recaptcha () {
     const token = await this.$recaptcha.getResponse()
     console.log('ReCaptcha token:', token)
     const response = await this.$axios.post(`${$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
-    cloud_store.$patch({ is_captcha_validated: response.status == 200 })
-    console.log('is_captcha_validated :', cloud_store.is_captcha_validated)
+    $patch({ is_captcha_validated: response.status == 200 })
+    console.log('is_captcha_validated :', is_captcha_validated)
     await this.$recaptcha.reset()
   } catch (error) {
     console.log('Login error:', error)

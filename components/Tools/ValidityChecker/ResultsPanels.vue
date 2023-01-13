@@ -33,7 +33,6 @@ const display = computed(() => {
   return values
 })
 
-
 watch(() => props.model_checks, () => {
   let nb_results = 0
   for (let index = 0; index < this.model_checks.length; index++) {
