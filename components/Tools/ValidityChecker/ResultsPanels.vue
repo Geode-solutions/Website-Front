@@ -1,28 +1,11 @@
 <template>
   <v-container>
-    <v-expansion-panels
-      v-model="opened_panels"
-      multiple
-    >
-      <v-expansion-panel
-        v-for="(check) in props.model_checks"
-        :key="index"
-        class="card"
-        :title="check.sentence"
-      >
-        <ToolsInspectorValidityBadge :value="check.value" />
-        <ToolsInspectorResultsPanels
-          v-if="!check.is_leaf"
-          :index="index"
-          :model_checks="check.children"
-          :object="object"
-          :filename="filename"
-          @update_result="update_result"
-        />
-        <v-container
-          v-else-if="check.value == false"
-          class="pt-6"
-        >
+    <v-expansion-panels v-model="opened_panels" multiple>
+      <v-expansion-panel v-for="(check) in props.model_checks" :key="index" class="card" :title="check.sentence">
+        <ToolsValidityBadge :value="check.value" />
+        <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" :index="index" :model_checks="check.children"
+          :object="object" :filename="filename" @update_result="update_result" />
+        <v-container v-else-if="check.value == false" class="pt-6">
           Invalid = {{ check.list_invalidities }}
         </v-container>
       </v-expansion-panel>
@@ -31,7 +14,7 @@
 </template>
 
 <script setup>
-const opened_panels = []
+const opened_panels = ref([])
 
 const props = defineProps({
   model_checks: { type: Array, required: true },
@@ -61,17 +44,17 @@ watch(() => props.model_checks, () => {
       this.$emit('update_result', this.index, false)
       return
     } else if (current_check.value == true) {
-      console.log('index :', index)
+      // console.log('index :', index)
       let index_of_index = this.opened_panels.indexOf(index)
-      console.log('this.opened_panels :', this.opened_panels)
-      console.log('index_of_index :', index_of_index)
+      // console.log('this.opened_panels :', this.opened_panels)
+      // console.log('index_of_index :', index_of_index)
       if (index_of_index > -1) { // only splice array when item is found
         this.opened_panels.splice(index_of_index, 1)
       }
     }
     nb_results++
   }
-  if (nb_results == this.model_checks.length) {
+  if (nb_results == props.model_checks.length) {
     this.$emit('update_result', this.index, true)
   }
 },
@@ -79,7 +62,7 @@ watch(() => props.model_checks, () => {
 )
 onCreated(() => {
   this.get_tests_results()
-  this.opened_panels = Array.from(Array(props.model_checks.length).keys())
+  opened_panels = Array.from(Array(props.model_checks.length).keys())
 })
 
 function update_result (index, value) {
@@ -95,7 +78,7 @@ async function get_tests_results () {
       params.append('test', check.route)
 
       try {
-        let response = await this.$axios.post(`${this.ID}/validitychecker/inspectfile`, params)
+        const response = await useFetch(`${config.public.BASE_URL}/${ID}/validitychecker/inspectfile`, { method: 'POST' }, params)
         check.value = response.data.Result
         check.list_invalidities = response.data.list_invalidities
       } catch (err) {

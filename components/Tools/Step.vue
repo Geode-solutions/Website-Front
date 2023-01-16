@@ -1,12 +1,15 @@
 <template>
-  <component :is="props.component.name" />
+  <component :is="props.step.component.name" :component_options="props.step.component.component_options" />
 </template>
 
 <script setup>
 
 const props = defineProps({
-  title: { type: String, required: true },
-  component: { type: Object, required: true }
+  step: { type: Object, required: true }
+})
+
+onMounted(() => {
+  console.log('step', props.step)
 })
 
 </script>

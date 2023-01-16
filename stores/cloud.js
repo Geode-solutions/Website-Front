@@ -12,10 +12,10 @@ export const use_cloud_store = defineStore('cloud', {
   }),
   actions: {
     async create_connexion () {
-      console.log("create_connexion")
+      // console.log("create_connexion")
       if (this.is_connexion_launched) { return }
       this.is_connexion_launched = true
-      console.log(this.is_connexion_launched)
+      // console.log(this.is_connexion_launched)
       const ID = localStorage.getItem('ID')
       if (ID === null || typeof ID === 'undefined') {
         return this.create_backend()
@@ -28,7 +28,7 @@ export const use_cloud_store = defineStore('cloud', {
           return this.ping_task()
         } catch (e) {
           // If first ping fails
-          console.log("e", e)
+          // console.log("e", e)
           return this.create_backend()
         }
       }
@@ -37,8 +37,8 @@ export const use_cloud_store = defineStore('cloud', {
       try {
         const config = useRuntimeConfig()
         const { data, error } = await useFetch(`${config.public.BASE_URL}/${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
-        console.log("data", data)
-        console.log("error2", error)
+        // console.log("data", data)
+        // console.log("error2", error)
         this.ID = data.ID
         localStorage.setItem('ID', data.ID)
         this.is_cloud_running = true

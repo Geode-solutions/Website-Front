@@ -2,23 +2,18 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <ToolsHeader
-          tool_name="Validity checker"
-          :cards_list="cards_list"
-        />
+        <ToolsHeader tool_name="Validity checker" :cards_list="cards_list" />
       </v-col>
-      <v-col>
+      <!-- <v-col>
         <ToolsLauncher />
-      </v-col>
-      {{ is_cloud_running }}
-      <v-col
-        v-if="is_cloud_running"
-        class="pb-5"
-      >
+      </v-col> -->
+      <!-- {{ is_cloud_running }} -->
+      <v-col class="pb-5">
+        <!-- v-if="is_cloud_running" -->
         <ToolsStepper />
         <!-- <v-stepper v-model="current_step" class="stepper" vertical elevation="5"> -->
         <!-- <v-stepper-step :complete="current_step > 1" step="1" @click="set_current_step(1)"> -->
-        <v-row align="center">
+        <!-- <v-row align="center">
           <v-col cols="auto">
             Please select a file to check
           </v-col>
@@ -27,10 +22,10 @@
               {{ files[0].name }}
             </v-chip>
           </v-col>
-        </v-row>
+        </v-row> -->
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-step :complete="current_step > 2" step="2" @click="set_current_step(2)"> -->
-        <v-row align="center">
+        <!-- <v-row align="center">
           <v-col cols="auto">
             Confirm the data type
           </v-col>
@@ -39,33 +34,18 @@
               {{ geode_object }}
             </v-chip>
           </v-col>
-        </v-row>
+        </v-row> -->
         <!-- </v-stepper-step> -->
 
         <!-- <v-stepper-content step="2"> -->
-        <v-row v-if="objects.length">
+        <!-- <v-row v-if="objects.length">
           <v-col>
             <v-row class="justify-left">
-              <v-col
-                v-for="object in objects"
-                :key="object"
-                cols="2"
-                md="2"
-              >
+              <v-col v-for="object in objects" :key="object" cols="2" md="2">
                 <v-tooltip location="bottom">
                   <template #activator="{ on }">
-                    <v-card
-                      v-ripple
-                      class="card ma-2"
-                      hover
-                      elevation="5"
-                      v-on="on"
-                    >
-                      <v-img
-                        :src="geode_objects[object].image"
-                        cover
-                        @click="set_geode_object(object)"
-                      />
+                    <v-card v-ripple class="card ma-2" hover elevation="5" v-on="on">
+                      <v-img :src="geode_objects[object].image" cover @click="set_geode_object(object)" />
                     </v-card>
                   </template>
                   <span>{{ geode_objects[object].tooltip }}</span>
@@ -76,58 +56,39 @@
         </v-row>
         <v-row v-else>
           <p class="ma-4">
-            This file format isn't supported! Please check the <a
-              href="https://docs.geode-solutions.com/formats/"
-              target="_blank"
-            >
+            This file format isn't supported! Please check the <a href="https://docs.geode-solutions.com/formats/"
+              target="_blank">
               supported file formats documentation</a> for more information
           </p>
-        </v-row>
+        </v-row> -->
         <!-- </v-stepper-content> -->
 
         <!-- <v-stepper-step step="3" :complete="current_step > 3" @click="set_current_step(3)"> -->
-        Inspect your file
+        <!-- Inspect your file -->
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="3"> -->
-        <v-btn
-          :loading="loading"
-          color="primary"
-          @click="inspect_file(files[0])"
-        >
+        <!-- <v-btn :loading="loading" color="primary" @click="inspect_file(files[0])">
           Inspect
           <template #loader>
-            <v-progress-circular
-              indeterminate
-              size="20"
-              color="white"
-              width="3"
-            />
+            <v-progress-circular indeterminate size="20" color="white" width="3" />
           </template>
         </v-btn>
-        <v-btn
-          variant="text"
-          @click="set_current_step(2)"
-        >
+        <v-btn variant="text" @click="set_current_step(2)">
           Cancel
-        </v-btn>
+        </v-btn> -->
         <!-- </v-stepper-content> -->
 
         <!-- <v-stepper-step step="4"> -->
-        Inspection results
+        <!-- Inspection results -->
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="4"> -->
-        <ToolsValidityCheckerResultsPanels
-          v-if="model_checks.length"
-          :model-checks="model_checks"
-          :object="geode_object"
-          :filename="files[0].name"
-          class="pa-2"
-        />
+        <!-- <ToolsValidityCheckerResultsPanels v-if="model_checks.length" :model-checks="model_checks"
+          :object="geode_object" :filename="files[0].name" class="pa-2" /> -->
         <!-- </v-stepper-content> -->
         <!-- </v-stepper> -->
       </v-col>
       <v-col v-if="is_cloud_running">
-        <ToolsPackagesVersions :packages_versions="tools_store.packages_versions" />
+        <ToolsPackagesVersions :packages_versions="props.packages_versions" />
       </v-col>
     </v-row>
   </v-container>
@@ -137,38 +98,27 @@
 import cards_list from '@/assets/tools/validitychecker/cards'
 import { use_tools_store } from '@/stores/tools'
 import { use_cloud_store } from '@/stores/cloud'
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 const tools_store = use_tools_store()
 const cloud_store = use_cloud_store()
-const { is_cloud_running } = storeToRefs(cloud_store)
+const { is_cloud_running, is_captcha_validated } = storeToRefs(cloud_store)
+const { packages_versions } = storeToRefs(tools_store)
 
 const tool = 'validitychecker'
-const accepted_extensions = ''
-const extension = ''
-const file_extensions = []
-const files = []
-const geode_object = ''
 
-const loading = false
-const model_checks = []
-const multiple = false
-const objects = []
-const success = false
+watch(is_cloud_running.value, (value) => {
+  // console.log('cloud_store.is_cloud_running', cloud_store.is_cloud_running)
 
-
-
-
-watch(cloud_store.is_cloud_running, (value) => {
-  console.log('is_cloud_running', is_cloud_running)
+  // console.log('is_cloud_running', is_cloud_running)
   if (value === true) {
-    tools_store.get_allowed_files(this.tool)
-    tools_store.get_packages_versions(this.tool)
+    tools_store.get_allowed_files(tool)
+    tools_store.get_packages_versions(tool)
   }
 })
 
 onActivated(() => {
 
-  console.log('cloud_store', cloud_store)
+  // console.log('cloud_store', cloud_store)
   if (is_cloud_running === true) {
     tools_store.get_allowed_files(this.tool)
     tools_store.get_packages_versions(this.tool)
@@ -195,7 +145,7 @@ function set_current_step (step) {
 
 async function inspect_file () {
   await this.upload_file()
-  console.log('upload_file okay')
+  // console.log('upload_file okay')
   this.set_current_step(4)
   await this.get_tests_names()
 }
