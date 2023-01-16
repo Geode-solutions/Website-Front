@@ -1,13 +1,17 @@
 <template>
-  <div v-for="step in stepper.steps">
-    
-    <ToolsStep :step="step" />
-  </div>
+  <v-card>
+
+    <div v-for="step in stepper.steps" class="pa-5">
+      <ToolsStep :step="step" />
+    </div>
+  </v-card>
 </template>
 
 <script setup>
 import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
+import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
+
 import geode_objects from '@/assets/tools/geode_objects'
 import { use_tools_store } from '@/stores/tools'
 const tools_store = use_tools_store()
@@ -37,14 +41,19 @@ const stepper = {
         }
       }
     },
-    // {
-    //   title: 'Inspect your file',
-    //   component: 'ToolsValidityCheckerInspectionButton'
-    // },
-    // {
-    //   title: 'Inspection results',
-    //   component: 'ToolsValidityCheckerResultsPanels'
-    // }
+    {
+      title: 'Inspect your file',
+      component: {
+        name: ToolsValidityCheckerInspectionButton,
+        component_options: {
+
+        }
+      }
+    },
+    {
+      title: 'Inspection results',
+      component: 'ToolsValidityCheckerResultsPanels'
+    }
   ]
 }
 
