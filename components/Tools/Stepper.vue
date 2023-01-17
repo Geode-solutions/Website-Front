@@ -1,60 +1,16 @@
 <template>
-  <v-card>
+  <v-card class="card">
 
-    <div v-for="step in stepper.steps" class="pa-5">
-      <ToolsStep :step="step" />
+    <div v-for="(step, index) in props.stepper_tree.steps" :key="index" class="pa-5">
+      <ToolsStep :step="step" :step_index="index + 1" :current_step_index="props.stepper_tree.current_step_index" />
     </div>
   </v-card>
 </template>
 
 <script setup>
-import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
-import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
-import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 
-import geode_objects from '@/assets/tools/geode_objects'
-import { use_tools_store } from '@/stores/tools'
-const tools_store = use_tools_store()
-
-const tool = 'validitychecker'
-const stepper = {
-  current_step: 0,
-  steps: [
-    {
-      title: 'Please select a file to check',
-      component: {
-        name: ToolsFileSelector,
-        component_options: {
-          multiple: true,
-          label: 'Please select a file',
-          accept: [(value) => !!value || 'The file is mandatory'],
-          click: tools_store.get_allowed_objects(tool)
-        }
-      }
-    }
-    , {
-      title: 'Confirm the data type',
-      component: {
-        name: ToolsObjectSelector,
-        component_options: {
-          geode_objects: geode_objects
-        }
-      }
-    },
-    {
-      title: 'Inspect your file',
-      component: {
-        name: ToolsValidityCheckerInspectionButton,
-        component_options: {
-
-        }
-      }
-    },
-    {
-      title: 'Inspection results',
-      component: 'ToolsValidityCheckerResultsPanels'
-    }
-  ]
-}
+const props = defineProps({
+  stepper_tree: { type: Object, required: true }
+})
 
 </script>

@@ -2,183 +2,26 @@
   <v-container>
     <v-row class="flex-column">
       <v-col>
-        <ToolsHeader
-          tool_name="File converter"
-          :cards_list="cards_list"
-        />
+        <ToolsHeader tool_name="File converter" :cards_list="cards_list" />
       </v-col>
-      <v-col>
+      <!-- <v-col>
         <ToolsLauncher />
-      </v-col>
+      </v-col> -->
+      <!-- v-if="cloud_store.is_cloud_running -->
+      <v-col class="pb-5">
 
-      <v-col
-        v-if="cloud_store.is_cloud_running"
-        class="pb-5"
-      >
-        <v-card
-          v-model="current_step"
-          class="stepper"
-          elevation="5"
-        >
-          <v-card
-            v-if="current_step == 1"
-            @click="current_step = 1"
-          />
-        </v-card>
-        <!-- <v-stepper v-model="current_step" class="stepper" vertical elevation="5">
-          <v-stepper-step :complete="current_step > 1" step="1" @click="current_step = 1"> -->
-        <v-row align="center">
-          <v-col cols="auto">
-            Please select a file to convert
-          </v-col>
-          <v-col v-if="files.length">
-            <v-chip
-              v-for="(file, index) in files"
-              :key="index"
-            >
-              {{ file.name }}
-            </v-chip>
-          </v-col>
-        </v-row>
-        <!-- </v-stepper-step> -->
-
-        <!-- <v-stepper-content step="1"> -->
-        <v-file-input
-          chips
-          multiple
-          color="#3b3b3b"
-          label="Please select a file"
-          :accept="accepted_extensions"
-          :rules="input_rules"
-          show-size
-          @click:clear="objects = []"
-          @change="GetAllowedObjects"
-        />
-        <!-- </v-stepper-content> -->
-
-        <!-- <v-stepper-step :complete="current_step > 2" step="2" @click="current_step = 2"> -->
-        <v-row align="center">
-          <v-col cols="auto">
-            Confirm the data type
-          </v-col>
-          <v-col>
-            <v-chip v-if="GeodeObject">
-              {{ GeodeObject }}
-            </v-chip>
-          </v-col>
-        </v-row>
-        <!-- </v-stepper-step> -->
-
-        <!-- <v-stepper-content step="2"> -->
-        <v-row v-if="objects.length">
-          <v-col>
-            <v-row class="justify-left">
-              <v-col
-                v-for="object in objects"
-                :key="object"
-                cols="2"
-                md="2"
-              >
-                <v-tooltip location="bottom">
-                  <template #activator="{ on }">
-                    <v-card
-                      v-ripple
-                      class="card ma-2"
-                      hover
-                      elevation="5"
-                      v-on="on"
-                    >
-                      <v-img
-                        :src="geode_objects[object].image"
-                        cover
-                        @click="get_output_file_extensions(object)"
-                      />
-                    </v-card>
-                  </template>
-                  <span>{{ GeodeObjects[object].tooltip }}</span>
-                </v-tooltip>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-
-        <v-row v-else>
-          <p class="ma-4">
-            <span v-if="files.length == 1">This file format is not supported! </span>
-            <span v-else>This file format combination is not supported! </span>
-            Please check the <a
-              href="https://docs.geode-solutions.com/formats/"
-              target="_blank"
-            >
-              supported file formats documentation</a> for more information
-          </p>
-        </v-row>
-        <!-- </v-stepper-content> -->
-
-        <!-- <v-stepper-step :complete="current_step > 3" step="3" @click="current_step = 3"> -->
-        <v-row align="center">
-          <v-col cols="auto">
-            Select file format
-          </v-col>
-          <v-col>
-            <v-chip v-if="extension">
-              {{ extension }}
-            </v-chip>
-          </v-col>
-        </v-row>
-        <!-- </v-stepper-step> -->
-
-        <!-- <v-stepper-content step="3"> -->
-        <v-row
-          v-if="file_extensions.length"
-          class="flex-column"
-        >
-          <v-col>
-            <v-row class="justify-left">
-              <v-col
-                v-for="fileExtension in file_extensions"
-                :key="fileExtension"
-                cols="2"
-                md="2"
-              >
-                <v-card
-                  class="card ma-2"
-                  hover
-                  @click="set_file_format(fileExtension)"
-                >
-                  <v-card-title class="justify-center">
-                    {{ fileExtension }}
-                  </v-card-title>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-        <!-- </v-stepper-content> -->
-
+        <ToolsStepper :stepper_tree="stepper_tree" />
         <!-- <v-stepper-step step="4" @click="current_step = 4"> -->
         Convert your file
         <!-- </v-stepper-step> -->
         <!-- <v-stepper-content step="4"> -->
-        <v-btn
-          :loading="loading"
-          color="primary"
-          @click="convert_file(files)"
-        >
+        <v-btn :loading="loading" color="primary" @click="convert_file(files)">
           Convert
           <template #loader>
-            <v-progress-circular
-              indeterminate
-              size="20"
-              color="white"
-              width="3"
-            />
+            <v-progress-circular indeterminate size="20" color="white" width="3" />
           </template>
         </v-btn>
-        <v-btn
-          variant="text"
-          @click="current_step = 3"
-        >
+        <v-btn variant="text" @click="current_step = 3">
           Cancel
         </v-btn>
         <!-- </v-stepper-content> -->
@@ -193,24 +36,13 @@
 
 <script setup>
 // import fileDownload from 'js-file-download'
-import geode_objects from '@/assets/tools/geode_objects'
 import cards_list from '@/assets/tools/fileconverter/cards'
+import stepper_tree from '@/assets/tools/fileconverter/stepper_tree'
+
 import { use_cloud_store } from '@/stores/cloud'
 import { use_tools_store } from '@/stores/tools'
-
-
 const cloud_store = use_cloud_store()
 const tools_store = use_tools_store()
-
-const tool_route = 'fileconverter'
-const accepted_extensions = ''
-const extension = ''
-const current_step = 1
-const file_extensions = []
-const files = []
-const input_rules = [(value) => !!value || 'The file is mandatory']
-const objects = []
-const success = false
 
 onActivated(() => {
   if (cloud_store.is_cloud_running === true) {
@@ -233,39 +65,6 @@ function set_file_format (extension) {
   this.extension = extension
   this.current_step = 4
 }
-async function convert_file () {
-  const self = this
-  for (let i = 0; i < self.files.length; i++) {
 
-    let reader = new FileReader()
-    reader.onload = async function (event) {
-      let params = new FormData()
-
-      params.append('object', self.GeodeObject)
-      params.append('file', event.target.result)
-      params.append('filename', self.files[i].name)
-      params.append('filesize', self.files[i].size)
-      params.append('extension', self.extension)
-      params.append('responseType', 'blob')
-      params.append('responseEncoding', 'binary')
-      self.loading = true
-
-      try {
-        await self.$axios
-          .post(`${self.ID}/fileconverter/convertfile`, params, { responseType: 'blob' })
-          .then((response) => {
-            if (response.status == 200) {
-              let new_file_name = response.headers['new-file-name']
-              // fileDownload(response.data, new_file_name)
-            }
-            self.loading = false
-          })
-      } catch (err) {
-        self.loading = false
-      }
-    }
-    reader.readAsDataURL(self.files[i])
-  }
-}
 </script>
 
