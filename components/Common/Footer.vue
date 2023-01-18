@@ -18,13 +18,13 @@
     <v-row style="width:100%">
       <v-col cols="auto">
         <p class="text-caption">
-          Copyright &copy; 2019 - {{ date }} — {{ name }} SAS. All rights
+          Copyright &copy; 2019 - {{ date }} — Geode-solutions SAS. All rights
           reserved.
         </p>
       </v-col>
       <v-spacer />
       <v-col align="right">
-        <v-btn target="_blank" rel="noopener" variant="text" href="https://js.org/">
+        <v-btn target="_blank" rel="noopener" variant="text" href="https://nuxt.com/">
           <v-img alt="logo" height="40px" width="120px" :src="NuxtLogo" />
         </v-btn>
       </v-col>

@@ -1,8 +1,5 @@
 <template>
-  <div
-    ref="wordCloud"
-    class="wordCloud"
-  />
+    <div ref="wordCloud" class="wordCloud" />
 </template>
 
 <script>
@@ -111,10 +108,8 @@ export default {
 
             d3.select(this.$el)
                 .append('svg')
-                .attr({
-                    "width": "100%",
-                    "height": "100%"
-                })
+                .attr("width", "100%")
+                .attr("height", "100%")
                 .attr("viewBox", "0, 0, " + this.width + ", " + this.height)
                 .attr("preserveAspectRatio", "xMidYMid meet")
                 .append('g')
