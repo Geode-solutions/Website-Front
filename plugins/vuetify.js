@@ -4,6 +4,7 @@ import * as directives from 'vuetify/directives'
 
 import '@mdi/font/css/materialdesignicons.css'
 import colors from 'vuetify/lib/util/colors'
+import 'vuetify/styles'
 
 const light_theme = {
   dark: false,
@@ -32,7 +33,8 @@ export default defineNuxtPlugin(nuxtApp => {
     defaultAssets: false,
     icons: {
       defaultSet: 'mdi'
-    }
+    },
+    ssr: true
   })
 
   nuxtApp.vueApp.use(vuetify)
