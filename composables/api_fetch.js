@@ -1,15 +1,11 @@
-// export default function api_fetch (url, options) {
-//     const config = useRuntimeConfig()
-//     const API_URL = config.public.API_URL
-//     return $fetch(`${url}`, options, { baseURL: API_URL })
-// }
+export async function api_fetch (request, options) {
 
-export function api_fetch (url, options = {}) {
-    const config = useRuntimeConfig()
-    const API_URL = config.public.API_URL
+  const config = useRuntimeConfig()
 
-    // console.log(url)
-    return $fetch(`/${url}`, options, { baseURL: API_URL })
+  const ID = '123456'
+  
+  const base_url = `${config.API_URL}/${ID}`
+  return useFetch(request, { baseURL: base_url, options })
 }
 
-
+export default api_fetch

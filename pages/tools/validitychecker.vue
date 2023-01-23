@@ -9,7 +9,7 @@
       </v-col> -->
       <v-col class="pb-5">
         <!-- v-if="is_cloud_running" -->
-        <ToolsStepper :stepper_tree="stepper_tree" />
+        <ToolsStepper :tool_name="tool_name" :stepper_tree="stepper_tree" />
       </v-col>
       <v-col v-if="is_cloud_running">
         <ToolsPackagesVersions :packages_versions="props.packages_versions" />
@@ -30,7 +30,7 @@ const cloud_store = use_cloud_store()
 const { is_cloud_running, is_captcha_validated } = storeToRefs(cloud_store)
 const { packages_versions } = storeToRefs(tools_store)
 
-const tool = 'validitychecker'
+const tool_name = 'validitychecker'
 
 watch(is_cloud_running.value, (value) => {
   if (value === true) {

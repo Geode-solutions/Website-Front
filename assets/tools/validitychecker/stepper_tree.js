@@ -7,6 +7,7 @@ import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecke
 
 const stepper_tree = {
   current_step_index: 1,
+  tool_name: 'validitychecker',
   steps: [
     {
       title: 'Please select a file to check',

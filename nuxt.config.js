@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   loading: { color: '#fff' },
 
   // ** Global CSS
-  css: ['vuetify/lib/styles/main.sass', '@/assets/css/main.css'],
+  css: ['vuetify/lib/styles/main.sass'],
 
   // ** Nuxt.js modules
   modules:
