@@ -46,15 +46,15 @@ export default defineNuxtConfig({
       // '@aceforth/nuxt-netlify',
       // ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }],
       // '@nuxtjs/recaptcha'
-      '@pinia/nuxt',
-      // {
-      // autoImports: [
-      //   // automatically imports `usePinia()`
-      //   'defineStore',
-      //   // automatically imports `usePinia()` as `usePiniaStore()`
-      //   ['defineStore', 'definePiniaStore'],
-      // ],
-      // },
+      ['@pinia/nuxt',
+        {
+          autoImports: [
+            // automatically imports `usePinia()`
+            'storeToRefs',
+            // automatically imports `usePinia()` as `usePiniaStore()`
+            // ['defineStore', 'definePiniaStore'],
+          ],
+        }],
     ],
 
   // recaptcha: {

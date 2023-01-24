@@ -61,13 +61,16 @@ watch(() => props.model_checks, () => {
   { deep: true }
 )
 onCreated(() => {
-  this.get_tests_results()
-  opened_panels = Array.from(Array(props.model_checks.length).keys())
+  get_tests_results()
+  opened_panels.value = Array.from(Array(props.model_checks.length).keys())
 })
 
 function update_result (index, value) {
   this.model_checks[index].value = value
 }
+
+
+
 async function get_tests_results () {
   for (let index = 0; index < props.model_checks.length; index++) {
     const check = props.model_checks[index]

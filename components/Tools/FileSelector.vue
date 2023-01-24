@@ -13,33 +13,31 @@ const props = defineProps({
 const multiple = props.component_options.multiple
 const label = props.component_options.label
 const rules = props.component_options.rules
-const accept = ref('*')
-const files = ref([])
+const accept = ref('')
+// const files = ref([])
 
 async function get_allowed_files (tool_name) {
-  const { data } = await api_fetch(`${tool_name}/allowedfiles`)
+  const { data } = await api_fetch(`${tool_name}/allowedfiles`, { method: 'GET' })
   const extensions = data.value.extensions.map((extension) => '.' + extension).join(',')
-  console.log(extensions)
   accept.value = extensions
 }
 
 async function get_allowed_objects (changed_files) {
   this.message = 'File(s) selected'
   if (this.multiple) {
-    this.files = changed_files
+    files = changed_files
   } else {
-    this.files = [changed_files]
+    files = [changed_files]
   }
 
   const params = new FormData()
-  params.append('filename', this.files[0].name)
-  const data = await api_fetch(`/${tool_name}/allowedobjects`, params)
+  params.append('filename', files[0].name)
+  const data = await api_fetch(`/${tool_name}/allowedobjects`, params, { method: 'POST' })
   this.objects = data.objects
   this.current_step = this.current_step + 1
 }
 
 onMounted(() => {
-  console.log(props.tool_name)
   get_allowed_files(props.tool_name)
 })
 

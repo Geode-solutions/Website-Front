@@ -5,9 +5,16 @@ import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
 
-const stepper_tree = {
-  current_step_index: 1,
+const files = ref(['tototo'])
+const geode_object = ref('')
+const current_step_index = ref(2)
+const model_checks = ref([])
+
+const stepper_tree = reactive({
+  current_step_index: current_step_index,
   tool_name: 'validitychecker',
+  model_checks: model_checks,
+  geode_object: geode_object,
   steps: [
     {
       title: 'Please select a file to check',
@@ -16,19 +23,21 @@ const stepper_tree = {
         component_options: {
           multiple: true,
           label: 'Please select a file',
-          accept: [(value) => !!value || 'The file is mandatory']
-          // click: tools_store.get_allowed_objects(tool)
+          accept: [(value) => !!value || 'The file is mandatory'],
         }
-      }
-    }
-    , {
+      },
+      chips: files
+      // model_value: { files: this.files }
+    },
+    {
       title: 'Confirm the data type',
       component: {
         name: ToolsObjectSelector,
         component_options: {
-          geode_objects: geode_objects
+          geode_objects: geode_objects,
+
         }
-      }
+      }, chips: [geode_object]
     },
     {
       title: 'Inspect your file',
@@ -37,16 +46,20 @@ const stepper_tree = {
         component_options: {
 
         }
-      }
+      },
+      chips: []
     },
     {
       title: 'Inspection results',
-      component: ToolsValidityCheckerResultsPanels,
-      component_options: {
-        model_checks: []
-      }
+      component: {
+        name: ToolsValidityCheckerResultsPanels,
+        component_options: {
+          model_checks: []
+        }
+      },
+      chips: []
     }
   ]
-}
+})
 
 export default stepper_tree
