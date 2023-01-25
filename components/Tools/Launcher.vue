@@ -25,13 +25,12 @@
 <script setup>
 import { use_cloud_store } from '@/stores/cloud'
 import { storeToRefs } from 'pinia'
+
 const cloud_store = use_cloud_store()
 const { is_cloud_running, is_captcha_validated } = storeToRefs(cloud_store)
 
 watch(() => cloud_store.is_captcha_validated, (value) => {
   if (value === true) {
-    // console.log(value)
-    // console.log('is_captcha_validated set to true')
     cloud_store.create_connexion()
   }
 })

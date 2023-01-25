@@ -25,6 +25,15 @@
 </template>
 
 <script>
-const file_extensions = ['toto', 'tutu']
-const extension = 'toto'
+const file_extensions = ref([])
+const extension = ref('')
+
+
+async function get_output_file_extensions (object, tool_route) {
+  const params = new FormData()
+  params.append('object', object)
+  const { data } = await api_fetch(`${tool_route}/outputfileextensions`, params, { method: 'POST' })
+  file_extensions = data.value.outputfileextensions
+  this.current_step = this.current_step + 1
+}
 </script>

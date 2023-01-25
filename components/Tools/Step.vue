@@ -20,10 +20,8 @@
     </v-row>
     <Transition name="slide-fade">
       <v-row v-if="props.step_index == props.current_step_index">
-
-
         <component :is="props.step.component.name" :component_options="props.step.component.component_options"
-          :v-model="props.model_value" :tool_name="props.tool_name" @enlargeText="onEnlargeText" />
+          v-model="props.model_value" :tool_route="props.tool_route" />
       </v-row>
     </Transition>
   </v-card>
@@ -32,7 +30,7 @@
 <script setup>
 
 const props = defineProps({
-  tool_name: { type: String, required: true },
+  tool_route: { type: String, required: true },
   step: { type: Object, required: true },
   step_index: { type: Number, required: true },
   current_step_index: { type: Number, required: true },
@@ -62,12 +60,12 @@ function parent_set_current_step (step) {
 }
 
 .slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s ease-in;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(100px);
+  transform: translateX(50px);
   opacity: 0;
 }
 </style>

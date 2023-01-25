@@ -5,14 +5,15 @@ import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
 
-const files = ref(['tototo'])
+const current_step_index = ref(1)
+const files = ref([])
 const geode_object = ref('')
-const current_step_index = ref(2)
 const model_checks = ref([])
 
 const stepper_tree = reactive({
   current_step_index: current_step_index,
-  tool_name: 'validitychecker',
+  tool_name: 'Validity checker',
+  tool_route: 'validitychecker',
   model_checks: model_checks,
   geode_object: geode_object,
   steps: [
@@ -23,9 +24,10 @@ const stepper_tree = reactive({
         component_options: {
           multiple: true,
           label: 'Please select a file',
-          accept: [(value) => !!value || 'The file is mandatory'],
+          accept: [(value) => !!value || 'The file is mandatory']
         }
       },
+      v_model: files,
       chips: files
       // model_value: { files: this.files }
     },

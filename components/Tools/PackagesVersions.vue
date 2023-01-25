@@ -23,29 +23,29 @@ const { is_cloud_running } = storeToRefs(cloud_store)
 const packages_versions = ref([])
 
 const props = defineProps({
-  tool_name: { type: String, required: true }
+  tool_route: { type: String, required: true }
 })
 
 watch(is_cloud_running, (value) => {
   if (value === true) {
-    get_packages_versions(props.tool_name)
+    get_packages_versions(props.tool_route)
   }
 })
 
 onMounted(() => {
   // if (is_cloud_running === true) {
-  get_packages_versions(props.tool_name)
+  get_packages_versions(props.tool_route)
   // }
 })
 
 onActivated(() => {
   // if (is_cloud_running === true) {
-  get_packages_versions(props.tool_name)
+  get_packages_versions(props.tool_route)
   // }
 })
 
-async function get_packages_versions (tool_name) {
-  const { data } = await api_fetch(`${tool_name}/versions`, { method: 'GET' })
+async function get_packages_versions (tool_route) {
+  const { data } = await api_fetch(`${tool_route}/versions`, { method: 'GET' })
   packages_versions.value = data.value.versions
 }
 </script>

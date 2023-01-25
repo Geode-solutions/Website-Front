@@ -15,7 +15,7 @@
 <script setup>
 
 const props = defineProps({
-  tool_name: { type: String, required: true },
+  tool_route: { type: String, required: true },
   files: { type: Array, required: true }
 })
 const loading = ref(false)
@@ -40,7 +40,7 @@ async function upload_file () {
         params.append('filesize', props.files[0].size)
 
         loading.value = true
-        await api_fetch(`${props.tool_name}/uploadfile`, params, { method: 'POST' })
+        await api_fetch(`${props.tool_route}/uploadfile`, params, { method: 'POST' })
         loading.value = false
 
         resolve(response);
@@ -59,7 +59,7 @@ async function get_tests_names () {
   const self = this
   const params = new FormData()
   params.append('object', self.geode_object)
-  const { data } = await api_fetch(`${props.tool_name}/testsnames`, params)
+  const { data } = await api_fetch(`${props.tool_route}/testsnames`, params)
   self.model_checks = data.value.model_checks
 
 }

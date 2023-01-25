@@ -5,8 +5,17 @@ import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter/ExtensionSelector.vue'
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
+const current_step_index = ref(1)
+const files = ref([])
+const geode_object = ref('')
+const output_extension = ref('')
+
 const stepper_tree = {
-  current_step_index: 1,
+  current_step_index: current_step_index,
+  tool_name: 'File converter',
+  tool_route: 'fileconverter',
+  output_extension: output_extension,
+  geode_object: geode_object,
   steps: [
     {
       title: 'Please select a file to check',
@@ -16,9 +25,10 @@ const stepper_tree = {
           multiple: true,
           label: 'Please select a file',
           accept: [(value) => !!value || 'The file is mandatory']
-          // click: tools_store.get_allowed_objects(tool)
         }
-      }
+      },
+      v_model: files,
+      chips: files
     },
     {
       title: 'Confirm the data type',
