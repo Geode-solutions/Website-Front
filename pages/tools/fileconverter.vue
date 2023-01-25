@@ -40,17 +40,7 @@ import cards_list from '@/assets/tools/fileconverter/cards'
 import stepper_tree from '@/assets/tools/fileconverter/stepper_tree'
 
 import { use_cloud_store } from '@/stores/cloud'
-import { use_tools_store } from '@/stores/tools'
 const cloud_store = use_cloud_store()
-const tools_store = use_tools_store()
-
-onActivated(() => {
-  if (cloud_store.is_cloud_running === true) {
-    tools_store.get_allowed_files(tool_route)
-    tools_store.get_packages_versions(tool_route)
-  }
-})
-
 
 async function get_output_file_extensions (object, tool_route) {
   const params = new FormData()
