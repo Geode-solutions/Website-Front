@@ -5,12 +5,12 @@ import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter/ExtensionSelector.vue'
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
-const current_step_index = ref(1)
+const current_step_index = ref(3)
 const files = ref([])
 const geode_object = ref('')
 const output_extension = ref('')
 
-const stepper_tree = {
+const stepper_tree = reactive({
   current_step_index: current_step_index,
   tool_name: 'File converter',
   tool_route: 'fileconverter',
@@ -28,7 +28,7 @@ const stepper_tree = {
         }
       },
       v_model: files,
-      chips: files
+      chips: [files]
     },
     {
       title: 'Confirm the data type',
@@ -37,7 +37,8 @@ const stepper_tree = {
         component_options: {
           geode_objects: geode_objects
         }
-      }
+      },
+      chips: ['']
     },
     {
       title: 'Select file format',
@@ -50,12 +51,15 @@ const stepper_tree = {
     },
     {
       title: 'Convert your file',
-      component: ToolsFileSelectorConversionButton,
-      component_options: {
-        loading: true
-      }
+      component: {
+        name: ToolsFileSelectorConversionButton,
+        component_options: {
+          loading: true
+        }
+      },
+      chips: []
     }
   ]
-}
+})
 
 export default stepper_tree

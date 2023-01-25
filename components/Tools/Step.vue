@@ -34,7 +34,7 @@ const props = defineProps({
   step: { type: Object, required: true },
   step_index: { type: Number, required: true },
   current_step_index: { type: Number, required: true },
-  chips: { type: Array, required: true },
+  chips: { type: Array, required: true, default: [] },
   model_value: { type: Object, required: false }
 })
 
@@ -43,11 +43,8 @@ const emit = defineEmits({
 })
 
 function parent_set_current_step (step) {
-  // window.alert(step)
-
   emit("set_current_step", step);
 }
-
 </script>
 
 <style>

@@ -35,7 +35,6 @@ watch(() => cloud_store.is_captcha_validated, (value) => {
   }
 })
 watch(() => is_cloud_running, (value, oldValue) => {
-  // console.log('From launcher')
   if (value === false && oldValue == true) {
     cloud_store.$patch({ internal_error: true })
   }

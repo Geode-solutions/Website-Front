@@ -15,7 +15,6 @@ const props = defineProps({
 })
 
 function set_current_step (step) {
-  // window.alert(step)
   if (step <= 3) {
     props.stepper_tree.model_checks = []
   }

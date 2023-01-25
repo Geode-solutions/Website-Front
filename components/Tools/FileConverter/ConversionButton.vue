@@ -1,5 +1,4 @@
 <template>
-
   <v-btn :loading="loading" color="primary" @click="convert_file(files)">
     Convert
     <template #loader>
@@ -9,7 +8,6 @@
   <v-btn variant="text" @click="current_step = 3">
     Cancel
   </v-btn>
-
 </template>
 
 <script setup>
