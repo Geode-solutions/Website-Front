@@ -22,6 +22,7 @@
     "@pinia/nuxt": "^0.4.6",
     "d3": "^7.8.0",
     "d3-cloud": "^1.2.5",
+    "js-file-download": "^0.4.12",
     "latest": "^0.2.0",
     "nuxt": "^3.1.0",
     "nuxt-cookie-control": "^1.9.93",

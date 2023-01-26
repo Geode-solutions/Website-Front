@@ -21,21 +21,6 @@ async function get_allowed_files (tool_route) {
   accept.value = extensions
 }
 
-async function get_allowed_objects (changed_files) {
-  if (multiple) {
-    files = changed_files
-  } else {
-    files = [changed_files]
-  }
-  window.alert(files)
-  this.$emit("update:modelValue", files[0]);
-  const params = new FormData()
-  params.append('filename', files[0].name)
-  const data = await api_fetch(`/${tool_route}/allowedobjects`, params, { method: 'POST' })
-  this.objects = data.objects
-  this.current_step = this.current_step + 1
-}
-
 onMounted(() => {
   get_allowed_files(props.tool_route)
 })

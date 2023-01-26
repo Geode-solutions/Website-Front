@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     //     siteKey: process.env.RECAPTCHA_SITE_KEY
     // },
     public: {
-      API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
+      API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:443',
       SITE_URL: process.env.SITE_URL,
       SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
       NODE_ENV: process.env.NODE_ENV,

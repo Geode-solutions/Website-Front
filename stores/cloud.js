@@ -22,13 +22,15 @@ export const use_cloud_store = defineStore('cloud', {
       } else {
         try {
           const config = useRuntimeConfig()
-          await $fetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+          const response = await $fetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+          console.log('response :', response)
           this.ID = ID
           this.is_cloud_running = true
           return this.ping_task()
         } catch (e) {
           // If first ping fails
-          // console.log("e", e)
+          console.log("e", e)
+          console.log('create_backend')
           return this.create_backend()
         }
       }
@@ -36,11 +38,13 @@ export const use_cloud_store = defineStore('cloud', {
     async create_backend () {
       try {
         const config = useRuntimeConfig()
-        const { data, error } = await useFetch(`${config.public.BASE_URL}/${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
-        // console.log("data", data)
+        console.log(config.public.API_URL)
+        const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
+        console.log("data", data)
+        // console.log("error", error)
         // console.log("error2", error)
-        this.ID = data.ID
-        localStorage.setItem('ID', data.ID)
+        this.ID = data.value.ID
+        localStorage.setItem('ID', data.value.ID)
         this.is_cloud_running = true
         return this.ping_task()
       } catch (e) {
@@ -61,25 +65,35 @@ export const use_cloud_store = defineStore('cloud', {
     async do_ping () {
       try {
         const config = useRuntimeConfig()
-        await useFetch(`${config.public.API_URL}/${this.ID}/ping`, {
-          method: 'POST'
-        })
-        this.is_cloud_running = true
-      } catch (e) {
-        if (this.request_counter == 0) {
-          console.log("error: ", e)
+        console.log('API_URL :', config.public.API_URL)
+        const { data } = await useFetch(`${config.public.API_URL}/${this.ID}/ping`, { method: 'POST' })
+        if (data) {
+          this.is_cloud_running = true
+        } else {
           this.is_cloud_running = false
         }
+
+        //   console.log('response :', response)
+        //   this.is_cloud_running = true
+        // } catch (e) {
+        //   if (this.request_counter == 0) {
+        //     console.log("error: ", e)
+        //     this.is_cloud_running = false
+        //     return this.create_backend()
+        //   }
+
+      } catch (e) {
+        console.log("e", e)
       }
     },
-  },
 
-  mutations: {
-    start_request (state) {
-      state.request_counter++
-    },
-    stop_request (state) {
-      state.request_counter--
+    mutations: {
+      start_request (state) {
+        state.request_counter++
+      },
+      stop_request (state) {
+        state.request_counter--
+      }
     }
-  },
+  }
 })

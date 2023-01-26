@@ -9,6 +9,7 @@
         </v-tooltip>
       </v-card>
     </v-col>
+    <!-- </v-row> -->
   </v-row>
   <v-row v-else>
     <p class="ma-4">
@@ -21,10 +22,34 @@
 
 
 <script setup>
-const allowed_objects = ['BRep', 'CrossSection']
+const allowed_objects = ref([])
 
 const props = defineProps({
   component_options: { type: Object, required: true }
 })
+
+const tool_route = 'validitychecker'
+const files = ['corbi.og_brep']
+
+async function get_allowed_objects (files) {
+  // if (multiple) {
+  //   files = changed_files
+  // } else {
+  //   files = [changed_files]
+  // }
+  // this.$emit("update:modelValue", files[0]);
+  const params = new FormData()
+  params.append('filename', files[0])
+  console.log(files[0])
+  const { data } = await api_fetch(`/${tool_route}/allowedobjects`, { body: params, method: 'POST' })
+  console.log(data.value)
+  allowed_objects.value = data.value.objects
+}
+
+
+onMounted(() => {
+  get_allowed_objects(files)
+})
+
 
 </script>

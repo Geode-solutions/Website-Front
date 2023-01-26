@@ -15,11 +15,9 @@
 //   component_options: { type: Object, required: true }
 // })
 
-const loading = false
-
+const loading = ref(false)
 
 async function convert_file () {
-  const self = this
   for (let i = 0; i < self.files.length; i++) {
 
     let reader = new FileReader()
@@ -33,23 +31,19 @@ async function convert_file () {
       params.append('extension', self.extension)
       params.append('responseType', 'blob')
       params.append('responseEncoding', 'binary')
-      self.loading = true
+      loading.value = true
 
       try {
-        await self.$axios
-          .post(`${self.ID}/fileconverter/convertfile`, params, { responseType: 'blob' })
-          .then((response) => {
-            if (response.status == 200) {
-              let new_file_name = response.headers['new-file-name']
-              // fileDownload(response.data, new_file_name)
-            }
-            self.loading = false
-          })
+        const { data } = await api_fetch(`/fileconverter/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
+        let new_file_name = data.value.headers['new-file-name']
+        fileDownload(response.data, new_file_name)
+        loading.value = false
       } catch (err) {
-        self.loading = false
+        console.log(err)
+        loading.value = false
       }
     }
-    reader.readAsDataURL(self.files[i])
+    reader.readAsDataURL(files[i])
   }
 }
 
