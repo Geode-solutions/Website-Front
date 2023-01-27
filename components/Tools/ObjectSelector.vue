@@ -2,14 +2,12 @@
   <v-row v-if="allowed_objects.length" class="justify-left">
     <v-col v-for="object in allowed_objects" :key="object" cols="2" md="2">
       <v-card v-ripple class="card ma-2" hover elevation="5" v-bind="on" rounded>
-        <v-img :src="props.component_options.geode_objects[object].image" cover />
-        <!-- @click="props.step.set_geode_object(object)" -->
+        <v-img :src="geode_objects[object].image" @click="set_geode_object(object)" cover />
         <v-tooltip activator="parent" location="bottom">
-          {{ props.component_options.geode_objects[object].tooltip }}
+          {{ geode_objects[object].tooltip }}
         </v-tooltip>
       </v-card>
     </v-col>
-    <!-- </v-row> -->
   </v-row>
   <v-row v-else>
     <p class="ma-4">
@@ -20,35 +18,38 @@
   </v-row>
 </template>
 
-
 <script setup>
-const allowed_objects = ref([])
+import { useVModel } from "@vueuse/core"
 
 const props = defineProps({
-  component_options: { type: Object, required: true }
+  component_options: { type: Object, required: true },
+  step_model: { required: false },
+  tool_route: { type: String, required: true }
 })
 
-const tool_route = 'validitychecker'
-const files = ['corbi.og_brep']
+const { component_options, step_model, tool_route } = props
+const { geode_objects, input_files } = component_options
 
-async function get_allowed_objects (files) {
-  // if (multiple) {
-  //   files = changed_files
-  // } else {
-  //   files = [changed_files]
-  // }
-  // this.$emit("update:modelValue", files[0]);
+const emit = defineEmits(['update:step_model'])
+const value = useVModel(props, "step_model", emit)
+const allowed_objects = ref([])
+
+async function get_allowed_objects (input_files) {
   const params = new FormData()
-  params.append('filename', files[0])
-  console.log(files[0])
+  params.append('filename', input_files[0].name)
+  console.log(input_files[0].name)
   const { data } = await api_fetch(`/${tool_route}/allowedobjects`, { body: params, method: 'POST' })
   console.log(data.value)
   allowed_objects.value = data.value.objects
 }
 
+function set_geode_object (geode_object) {
+  value.value = geode_object
+}
+
 
 onMounted(() => {
-  get_allowed_objects(files)
+  get_allowed_objects(input_files)
 })
 
 

@@ -1,18 +1,19 @@
 <template>
-  <v-file-input :multiple="multiple" :label="label" :accept="accept" :rules="rules"
-    @click:clear="props.component_options.click" @changed="get_allowed_objects()" color="primary" chips counter
-    show-size />
+  <v-file-input v-model="value" :multiple="multiple" :label="label" :accept="accept" :rules="rules"
+    @click:clear="props.component_options.click" color="primary" chips counter show-size />
 </template>
 
 <script setup>
-const props = defineProps({
-  tool_route: { type: String, required: true },
-  component_options: { type: Object, required: true }
-})
+import { useVModel } from "@vueuse/core"
 
-const multiple = props.component_options.multiple
-const label = props.component_options.label
-const rules = props.component_options.rules
+const props = defineProps({
+  component_options: { type: Object, required: true },
+  step_model: { required: false },
+  tool_route: { type: String, required: true }
+})
+const { multiple, label, rules } = props.component_options
+const emit = defineEmits(['update:step_model'])
+const value = useVModel(props, "step_model", emit)
 const accept = ref('')
 
 async function get_allowed_files (tool_route) {

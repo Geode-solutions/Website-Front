@@ -17,11 +17,12 @@
 const opened_panels = ref([])
 
 const props = defineProps({
-  model_checks: { type: Array, required: true },
-  object: { type: String, required: true },
-  filename: { type: String, required: true },
+  input_files: { type: String, required: true },
+  input_geode_object: { type: String, required: true },
+  input_model_checks: { type: Array, required: true },
   index: { type: Number, required: true, default: 0 }
 })
+
 
 const display = computed(() => {
   let values = new Array()

@@ -1,45 +1,60 @@
 <template>
   <v-card class="pa-5 card" elevation="5">
-    <v-row align="center" @click="parent_set_current_step(props.step_index)">
+    <v-row align="center" @click="parent_set_current_step(step_index)">
       <v-col cols="auto">
-        <v-icon v-if="props.current_step_index > props.step_index" icon="mdi-check-circle" color="grey" />
-        <v-icon v-else-if="props.current_step_index == props.step_index"
-          :icon="`mdi-numeric-${props.step_index}-circle`" color="primary" />
-        <v-icon v-else :icon="`mdi-numeric-${props.step_index}-circle`" color="grey" />
+        <v-icon v-if="current_step_index > step_index" icon="mdi-check-circle" color="grey" />
+        <v-icon v-else-if="current_step_index == step_index" :icon="`mdi-numeric-${step_index + 1}-circle`"
+          color="primary" />
+        <v-icon v-else :icon="`mdi-numeric-${step_index + 1}-circle`" color="grey" />
       </v-col>
       <v-col cols="auto">
         <p class="font-weight-bold">
           {{ props.step.title }}
         </p>
       </v-col>
-      <v-col v-if="props.chips.length && props.current_step_index > props.step_index">
-        <v-chip v-for="chip in props.chips">
+      <v-col v-if="chips.length && props.current_step_index >= props.step_index">
+        <v-chip v-for="chip in chips">
           {{ chip }}
         </v-chip>
       </v-col>
     </v-row>
     <Transition name="slide-fade">
-      <v-row v-if="props.step_index == props.current_step_index">
-        <component :is="props.step.component.name" :component_options="props.step.component.component_options"
-          v-model="props.model_value" :tool_route="props.tool_route" />
+      <v-row v-if="step_index == current_step_index">
+        <component :is="component_name" :component_options="component_options"
+          v-model:step_model="value" :tool_route="tool_route" />
       </v-row>
     </Transition>
   </v-card>
 </template>
 
 <script setup>
+import { useVModel } from "@vueuse/core"
 
 const props = defineProps({
+  current_step_index: { type: Number, required: true },
+  step_index: { type: Number, required: true },
   tool_route: { type: String, required: true },
   step: { type: Object, required: true },
-  step_index: { type: Number, required: true },
-  current_step_index: { type: Number, required: true },
-  chips: { type: Array, required: true, default: [] },
-  model_value: { type: Object, required: false }
+  model_value: { required: false }
 })
 
-const emit = defineEmits({
-  e: 'set_current_step', step: Number
+const { current_step_index, step_index, tool_route, step, model_value } = props
+const { component } = step
+const { component_options, component_name } = component
+
+const chips = ref([])
+
+
+const emit = defineEmits([
+  'set_current_step',
+  'update:model_value'
+])
+
+const value = useVModel(props, "model_value", emit)
+watch(value, (value, old) => {
+  console.log(value, old)
+  chips.value = value.map(file => file.name)
+  parent_set_current_step(props.step_index + 1)
 })
 
 function parent_set_current_step (step) {

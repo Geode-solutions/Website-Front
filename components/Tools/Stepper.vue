@@ -1,9 +1,8 @@
 <template>
   <v-card class="card">
-    <div v-for="(step, index) in props.stepper_tree.steps" :key="index" class="pa-3">
-      <ToolsStep :tool_route="props.tool_route" :step="step" :step_index="index + 1"
-        :current_step_index="props.stepper_tree.current_step_index" :chips="step.chips"
-        v-model:step.v_model="step.v_model.value" @set_current_step="set_current_step" />
+    <div v-for="(step, index) in steps" :key="index" class="pa-3">
+      <ToolsStep :tool_route="tool_route" :step="step" :step_index="index" :current_step_index="current_step_index"
+        v-model:model_value="step.v_model" @set_current_step="set_current_step" />
     </div>
   </v-card>
 </template>
@@ -13,15 +12,19 @@ const props = defineProps({
   tool_route: { type: String, required: true },
   stepper_tree: { type: Object, required: true }
 })
+const { tool_route, stepper_tree } = props
+const { current_step_index, steps } = stepper_tree
+
+watch(props.stepper_tree, (value) => { console.log("stepper_tree", value) })
 
 function set_current_step (step) {
-  if (step <= 3) {
+  if (step < 3) {
     props.stepper_tree.model_checks = []
   }
-  if (step <= 2) {
+  if (step < 2) {
     props.stepper_tree.geode_object = ''
   }
-  if (step <= 1) {
+  if (step < 1) {
     props.stepper_tree.files = []
   }
   props.stepper_tree.current_step_index = step

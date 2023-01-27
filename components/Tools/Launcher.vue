@@ -1,25 +1,18 @@
 <template>
-  <v-container justify="space-around">
+  <!-- <v-container justify="space-around">
     <v-row rows="auto" align-content="center" align="center">
-      <!-- <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
+      <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
         align="center">
         <recaptcha class="align-center" />
         <v-btn color="primary" @click="submit_recaptcha()">
           Start tool
         </v-btn>
       </v-col>
-      <v-col v-else-if="internal_error">
-        <ToolsErrorsInternalError />
-      </v-col>
-      <v-col v-else-if="is_under_maintenance">
-        <ToolsErrorsUnderMaintenance />
-      </v-col> -->
       <v-col v-if="!is_cloud_running">
-        {{ is_cloud_running }}
         <ToolsLoading />
       </v-col>
     </v-row>
-  </v-container>
+  </v-container> -->
 </template>
 
 <script setup>

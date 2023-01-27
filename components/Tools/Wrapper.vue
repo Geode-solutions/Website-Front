@@ -4,7 +4,7 @@
       <v-col>
         <ToolsHeader :tool_name="props.stepper_tree.tool_name" :cards_list="props.cards_list" />
       </v-col>
-      <v-col>
+      <v-col v-if="!is_cloud_running">
         <ToolsLauncher />
       </v-col>
       <v-col v-if="is_cloud_running">
@@ -19,7 +19,6 @@
 
 <script setup>
 import { use_cloud_store } from '@/stores/cloud'
-import { storeToRefs } from 'pinia'
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)

@@ -16,7 +16,7 @@
 
 const props = defineProps({
   tool_route: { type: String, required: true },
-  files: { type: Array, required: true }
+  input_files: { type: Array, required: true }
 })
 const loading = ref(false)
 

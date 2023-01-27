@@ -10,12 +10,12 @@
             <v-card-title primary-title class="justify-center text-h6" align="center">
               {{ card.title }}
             </v-card-title>
-            <v-card-text class="justify-center text-body-1">
+            <!-- <v-card-text class="justify-center text-body-1">
               {{ card.text }}
-            </v-card-text>
+            </v-card-text> -->
             <v-row class="justify-center pa-2">
               <v-col cols="auto">
-                <v-icon :icon="card.icon" color="primary" size="128" class="justify-center" />
+                <v-icon :icon="card.icon" color="primary" size="70" class="justify-center" />
               </v-col>
             </v-row>
           </v-card>
