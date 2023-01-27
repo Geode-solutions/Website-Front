@@ -13,9 +13,9 @@ const props = defineProps({
   stepper_tree: { type: Object, required: true }
 })
 const { tool_route, stepper_tree } = props
-const { current_step_index, steps } = stepper_tree
+const { current_step_index, steps } = toRefs(stepper_tree)
 
-watch(props.stepper_tree, (value) => { console.log("stepper_tree", value) })
+watch(stepper_tree, (value) => { console.log("stepper_tree", value) })
 
 function set_current_step (step) {
   // if (step < 3) {
@@ -27,7 +27,7 @@ function set_current_step (step) {
   // if (step < 1) {
   //   props.stepper_tree.files = []
   // }
-  props.stepper_tree.current_step_index = step
+  current_step_index.value = step
 }
 
 </script>

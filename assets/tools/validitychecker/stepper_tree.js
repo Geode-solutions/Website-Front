@@ -1,3 +1,4 @@
+import { ref, reactive, shallowRef } from 'vue'
 import geode_objects from '@/assets/tools/geode_objects'
 
 import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
@@ -17,7 +18,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Please select a file to check',
       component: {
-        component_name: ToolsFileSelector,
+        component_name: shallowRef(ToolsFileSelector),
         component_options: {
           multiple: true,
           label: 'Please select a file'
@@ -28,7 +29,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Confirm the data type',
       component: {
-        component_name: ToolsObjectSelector,
+        component_name: shallowRef(ToolsObjectSelector),
         component_options: {
           geode_objects: geode_objects,
           input_files: files
@@ -39,7 +40,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Inspect your file',
       component: {
-        component_name: ToolsValidityCheckerInspectionButton,
+        component_name: shallowRef(ToolsValidityCheckerInspectionButton),
         component_options: {
           input_files: files,
           input_geode_object: geode_object
@@ -50,7 +51,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Inspection results',
       component: {
-        component_name: ToolsValidityCheckerResultsPanels,
+        component_name: shallowRef(ToolsValidityCheckerResultsPanels),
         component_options: {
           input_model_checks: model_checks
         }

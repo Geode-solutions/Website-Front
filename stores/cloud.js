@@ -12,25 +12,23 @@ export const use_cloud_store = defineStore('cloud', {
   }),
   actions: {
     async create_connexion () {
-      // console.log("create_connexion")
       if (this.is_connexion_launched) { return }
       this.is_connexion_launched = true
-      // console.log(this.is_connexion_launched)
       const ID = localStorage.getItem('ID')
       if (ID === null || typeof ID === 'undefined') {
         return this.create_backend()
       } else {
         try {
           const config = useRuntimeConfig()
-          const response = await $fetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
-          console.log('response :', response)
-          this.ID = ID
-          this.is_cloud_running = true
-          return this.ping_task()
+          const { data } = await useFetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+          if (data) {
+            this.ID = ID
+            this.is_cloud_running = true
+            return this.ping_task()
+          }
         } catch (e) {
           // If first ping fails
           console.log("e", e)
-          console.log('create_backend')
           return this.create_backend()
         }
       }
@@ -40,9 +38,6 @@ export const use_cloud_store = defineStore('cloud', {
         const config = useRuntimeConfig()
         console.log(config.public.API_URL)
         const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
-        console.log("data", data)
-        // console.log("error", error)
-        // console.log("error2", error)
         this.ID = data.value.ID
         localStorage.setItem('ID', data.value.ID)
         this.is_cloud_running = true
@@ -65,7 +60,6 @@ export const use_cloud_store = defineStore('cloud', {
     async do_ping () {
       try {
         const config = useRuntimeConfig()
-        console.log('API_URL :', config.public.API_URL)
         const { data } = await useFetch(`${config.public.API_URL}/${this.ID}/ping`, { method: 'POST' })
         if (data) {
           this.is_cloud_running = true

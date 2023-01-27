@@ -39,9 +39,8 @@ const props = defineProps({
 })
 
 const { current_step_index, step_index, tool_route, step, model_value } = props
-const { component } = step
+const { component, step_title } = step
 const { component_options, component_name } = component
-const { step_title } = step
 
 const chips = ref([])
 
