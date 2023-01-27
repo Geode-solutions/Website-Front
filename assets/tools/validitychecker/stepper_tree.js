@@ -20,8 +20,7 @@ const stepper_tree = reactive({
         component_name: ToolsFileSelector,
         component_options: {
           multiple: true,
-          label: 'Please select a file',
-          accept: [(value) => !!value || 'The file is mandatory']
+          label: 'Please select a file'
         }
       },
       v_model: files

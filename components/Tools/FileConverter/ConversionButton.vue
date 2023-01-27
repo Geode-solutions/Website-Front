@@ -11,24 +11,28 @@
 </template>
 
 <script setup>
-// const props = defineProps({
-//   component_options: { type: Object, required: true }
-// })
+const props = defineProps({
+  component_options: { type: Object, required: true }
+})
+
+const { input_files,
+  input_geode_object,
+  input_output_extension } = props.component_options
 
 const loading = ref(false)
 
 async function convert_file () {
-  for (let i = 0; i < self.files.length; i++) {
+  for (let i = 0; i < input_files.length; i++) {
 
     let reader = new FileReader()
     reader.onload = async function (event) {
       let params = new FormData()
 
-      params.append('object', self.geode_object)
+      params.append('object', input_geode_object)
       params.append('file', event.target.result)
-      params.append('filename', self.files[i].name)
-      params.append('filesize', self.files[i].size)
-      params.append('extension', self.extension)
+      params.append('filename', input_files[i].name)
+      params.append('filesize', input_files[i].size)
+      params.append('extension', input_output_extension)
       params.append('responseType', 'blob')
       params.append('responseEncoding', 'binary')
       loading.value = true

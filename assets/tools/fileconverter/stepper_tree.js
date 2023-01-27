@@ -19,9 +19,8 @@ const stepper_tree = reactive({
       component: {
         component_name: ToolsFileSelector,
         component_options: {
-          multiple: true,
-          label: 'Please select a file',
-          accept: [(value) => !!value || 'The file is mandatory']
+          multiple: false,
+          label: 'Please select a file'
         }
       },
       v_model: files
@@ -51,6 +50,9 @@ const stepper_tree = reactive({
       component: {
         component_name: ToolsFileSelectorConversionButton,
         component_options: {
+          input_files: files,
+          input_geode_object: geode_object,
+          input_output_extension: output_extension,
         }
       }
     }

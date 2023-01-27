@@ -1,6 +1,7 @@
 <template>
-  <v-file-input v-model="value" :multiple="multiple" :label="label" :accept="accept" :rules="rules"
-    @click:clear="props.component_options.click" color="primary" chips counter show-size />
+  <v-file-input v-model="value" :multiple="multiple" :label="label" :accept="accept"
+    :rules="[(value) => !!value || 'The file is mandatory']" @click:clear="component_options.click" color="primary"
+    chips counter show-size />
 </template>
 
 <script setup>
@@ -11,7 +12,10 @@ const props = defineProps({
   step_model: { required: false },
   tool_route: { type: String, required: true }
 })
-const { multiple, label, rules } = props.component_options
+
+const { component_options, step_model, tool_route } = props
+const { multiple, label } = component_options
+
 const emit = defineEmits(['update:step_model'])
 const value = useVModel(props, "step_model", emit)
 const accept = ref('')
@@ -23,7 +27,7 @@ async function get_allowed_files (tool_route) {
 }
 
 onMounted(() => {
-  get_allowed_files(props.tool_route)
+  get_allowed_files(tool_route)
 })
 
 </script>
