@@ -15,7 +15,7 @@ const stepper_tree = reactive({
   tool_route: 'validitychecker',
   steps: [
     {
-      title: 'Please select a file to check',
+      step_title: 'Please select a file to check',
       component: {
         component_name: ToolsFileSelector,
         component_options: {
@@ -26,7 +26,7 @@ const stepper_tree = reactive({
       v_model: files
     },
     {
-      title: 'Confirm the data type',
+      step_title: 'Confirm the data type',
       component: {
         component_name: ToolsObjectSelector,
         component_options: {
@@ -37,7 +37,7 @@ const stepper_tree = reactive({
       v_model: geode_object
     },
     {
-      title: 'Inspect your file',
+      step_title: 'Inspect your file',
       component: {
         component_name: ToolsValidityCheckerInspectionButton,
         component_options: {
@@ -48,7 +48,7 @@ const stepper_tree = reactive({
       v_model: model_checks
     },
     {
-      title: 'Inspection results',
+      step_title: 'Inspection results',
       component: {
         component_name: ToolsValidityCheckerResultsPanels,
         component_options: {

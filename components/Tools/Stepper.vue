@@ -18,15 +18,15 @@ const { current_step_index, steps } = stepper_tree
 watch(props.stepper_tree, (value) => { console.log("stepper_tree", value) })
 
 function set_current_step (step) {
-  if (step < 3) {
-    props.stepper_tree.model_checks = []
-  }
-  if (step < 2) {
-    props.stepper_tree.geode_object = ''
-  }
-  if (step < 1) {
-    props.stepper_tree.files = []
-  }
+  // if (step < 3) {
+  //   props.stepper_tree.model_checks = []
+  // }
+  // if (step < 2) {
+  //   props.stepper_tree.geode_object = ''
+  // }
+  // if (step < 1) {
+  //   props.stepper_tree.files = []
+  // }
   props.stepper_tree.current_step_index = step
 }
 

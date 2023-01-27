@@ -15,7 +15,7 @@ const stepper_tree = reactive({
   tool_route: 'fileconverter',
   steps: [
     {
-      title: 'Please select a file to check',
+      step_title: 'Please select a file to check',
       component: {
         component_name: ToolsFileSelector,
         component_options: {
@@ -26,7 +26,7 @@ const stepper_tree = reactive({
       v_model: files
     },
     {
-      title: 'Confirm the data type',
+      step_title: 'Confirm the data type',
       component: {
         component_name: ToolsObjectSelector,
         component_options: {
@@ -37,7 +37,7 @@ const stepper_tree = reactive({
       v_model: geode_object
     },
     {
-      title: 'Select file format',
+      step_title: 'Select file format',
       component: {
         component_name: ToolsFileSelectorExtensionSelector,
         component_options: {
@@ -46,7 +46,7 @@ const stepper_tree = reactive({
       }
     },
     {
-      title: 'Convert your file',
+      step_title: 'Convert your file',
       component: {
         component_name: ToolsFileSelectorConversionButton,
         component_options: {

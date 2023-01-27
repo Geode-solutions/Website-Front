@@ -9,10 +9,10 @@
       </v-col>
       <v-col cols="auto">
         <p class="font-weight-bold">
-          {{ props.step.title }}
+          {{ step_title }}
         </p>
       </v-col>
-      <v-col v-if="chips.length && props.current_step_index >= props.step_index">
+      <v-col v-if="chips.length && current_step_index >= step_index">
         <v-chip v-for="chip in chips">
           {{ chip }}
         </v-chip>
@@ -20,8 +20,8 @@
     </v-row>
     <Transition name="slide-fade">
       <v-row v-if="step_index == current_step_index">
-        <component :is="component_name" :component_options="component_options"
-          v-model:step_model="value" :tool_route="tool_route" />
+        <component :is="component_name" :component_options="component_options" v-model:step_model="value"
+          :tool_route="tool_route" />
       </v-row>
     </Transition>
   </v-card>
@@ -41,9 +41,9 @@ const props = defineProps({
 const { current_step_index, step_index, tool_route, step, model_value } = props
 const { component } = step
 const { component_options, component_name } = component
+const { step_title } = step
 
 const chips = ref([])
-
 
 const emit = defineEmits([
   'set_current_step',

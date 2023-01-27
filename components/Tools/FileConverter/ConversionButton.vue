@@ -12,12 +12,13 @@
 
 <script setup>
 const props = defineProps({
+  tool_route: { type: String, required: true },
   component_options: { type: Object, required: true }
 })
-
+const { component_options, tool_route } = props
 const { input_files,
   input_geode_object,
-  input_output_extension } = props.component_options
+  input_output_extension } = component_options
 
 const loading = ref(false)
 
@@ -38,7 +39,7 @@ async function convert_file () {
       loading.value = true
 
       try {
-        const { data } = await api_fetch(`/fileconverter/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
+        const { data } = await api_fetch(`/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
         let new_file_name = data.value.headers['new-file-name']
         fileDownload(response.data, new_file_name)
         loading.value = false
