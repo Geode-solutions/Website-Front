@@ -1,14 +1,28 @@
 <template>
-  <v-container width="100%">
-    <v-row no-gutters>
+  <v-container fluid class="pa-0">
+    <v-row class="flex-column">
       <v-col>
         <HomePageLandingView />
+      </v-col>
+      <v-col>
         <HomePageOurOffer />
+      </v-col>
+      <v-col>
         <HomePageApplicationFields />
+      </v-col>
+      <v-col>
         <HomePageOurConcepts />
+      </v-col>
+      <v-col>
         <HomePageOurSkills />
+      </v-col>
+      <v-col>
         <HomePageOurPersonnel />
+      </v-col>
+      <v-col>
         <HomePageOurSupports />
+      </v-col>
+      <v-col>
         <HomePageOurPartners />
       </v-col>
     </v-row>

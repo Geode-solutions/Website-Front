@@ -50,9 +50,6 @@ export default {
         coloring: {
             type: String,
             default: "random",
-        },
-        colors: {
-            type: Array,
         }
     },
     data() {
@@ -65,7 +62,6 @@ export default {
 
     mounted() {
         this.createCanvas()
-        this.colors = this.getColor()
     },
 
     methods: {
@@ -86,10 +82,7 @@ export default {
                 .fontSize(this.fontSizeMapper)
                 .on('end', this.end);
 
-            if (this.colors)
-                this.fill = d3.scaleOrdinal().range(this.colors)
-            else
-                this.fill = d3.scaleOrdinal(d3.schemeCategory10)
+            this.fill = d3.scaleOrdinal(["#00897B", "#26A69A", "#80CBC4"])
 
             layout.start();
         },
@@ -129,12 +122,6 @@ export default {
                 })
                 .text(d => d.text)
                 .on('click', d => this.onWordClick(d));
-        },
-        getColor() {
-            const number = Math.random()
-            if (number > 0.6) return '#00897B'
-            if (number < 0.3) return '#26A69A'
-            return '#80CBC4'
         },
     }
 }
