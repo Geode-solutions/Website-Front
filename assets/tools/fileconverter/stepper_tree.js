@@ -1,4 +1,4 @@
-import { ref, reactive, shallowRef } from 'vue'
+import { computed, ref, reactive, shallowRef } from 'vue'
 import geode_objects from '@/assets/tools/geode_objects'
 
 import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
@@ -7,6 +7,7 @@ import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
 const files = ref([])
+const chips_files = computed(files=>files.map(file=>file.name))
 const geode_object = ref('')
 const output_extension = ref('')
 
@@ -27,7 +28,7 @@ const stepper_tree = reactive({
           label: 'Please select a file'
         }
       },
-      chips: files
+      chips: chips_files
     },
     {
       step_title: 'Confirm the data type',
