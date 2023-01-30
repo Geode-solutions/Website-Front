@@ -15,8 +15,8 @@ const { steps } = stepper_tree
 //   current_step_index.value = step
 // }
 
-onMounted(() => {
-  console.log('Stepper :', stepper_tree)
-})
+// onMounted(() => {
+//   console.log('Stepper :', stepper_tree)
+// })
 
 </script>

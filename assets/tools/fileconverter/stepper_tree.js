@@ -38,7 +38,7 @@ const stepper_tree = reactive({
           input_files: files
         }
       },
-      chips: geode_object
+      chips: [geode_object]
     },
     {
       step_title: 'Select file format',
@@ -48,7 +48,7 @@ const stepper_tree = reactive({
           input_geode_object: geode_object
         }
       },
-      chips: output_extension
+      chips: [output_extension]
     },
     {
       step_title: 'Convert your file',

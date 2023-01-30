@@ -19,19 +19,18 @@
 </template>
 
 <script setup>
-import { useVModel } from "@vueuse/core"
+// import { useVModel } from "@vueuse/core"
 
 const props = defineProps({
   component_options: { type: Object, required: true },
-  step_model: { required: false },
-  tool_route: { type: String, required: true }
 })
+const { geode_objects, input_files } = props.component_options
 
-const { component_options, step_model, tool_route } = props
-const { geode_objects, input_files } = component_options
+const stepper_tree = inject('stepper_tree')
+const { tool_route } = stepper_tree
 
 const emit = defineEmits(['update:step_model'])
-const value = useVModel(props, "step_model", emit)
+// const value = useVModel(props, "step_model", emit)
 const allowed_objects = ref([])
 
 async function get_allowed_objects (input_files) {
@@ -44,7 +43,9 @@ async function get_allowed_objects (input_files) {
 }
 
 function set_geode_object (geode_object) {
-  value.value = geode_object
+  stepper_tree.geode_object = geode_object
+  stepper_tree.current_step_index = geode_object
+  
 }
 
 

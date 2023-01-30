@@ -33,26 +33,21 @@ const props = defineProps({
 })
 const { step_index } = props
 
-
-// const emit = defineEmits([
-//   'set_current_step',
-// ])
-
 const chips = ref([])
 
 const stepper_tree = inject('stepper_tree')
-const { current_step_index, steps } = stepper_tree
+const { current_step_index, steps } = toRefs(stepper_tree)
 
 
 
 function set_current_step (step_index) {
   console.log(step_index)
-  stepper_tree.current_step_index.value = step_index
-  console.log(stepper_tree)
+  stepper_tree.current_step_index = step_index
+  console.log(stepper_tree.current_step_index)
 }
-onMounted(() => {
-  console.log('Step :', stepper_tree)
-})
+// onMounted(() => {
+//   console.log('Step :', stepper_tree)
+// })
 </script>
 
 <style>
