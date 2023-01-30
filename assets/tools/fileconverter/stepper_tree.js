@@ -14,6 +14,9 @@ const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'File converter',
   tool_route: 'fileconverter',
+  files: files,
+  geode_object: geode_object,
+  output_extension: output_extension,
   steps: [
     {
       step_title: 'Please select a file to check',
@@ -23,8 +26,7 @@ const stepper_tree = reactive({
           multiple: false,
           label: 'Please select a file'
         }
-      },
-      v_model: files
+      }
     },
     {
       step_title: 'Confirm the data type',
@@ -34,8 +36,7 @@ const stepper_tree = reactive({
           geode_objects: geode_objects,
           input_files: files
         }
-      },
-      v_model: geode_object
+      }
     },
     {
       step_title: 'Select file format',

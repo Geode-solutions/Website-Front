@@ -8,7 +8,7 @@
         <ToolsLauncher />
       </v-col>
       <v-col v-if="is_cloud_running">
-        <ToolsStepper :tool_route="tool_route" :stepper_tree="stepper_tree" />
+        <ToolsStepper />
       </v-col>
       <v-col v-if="is_cloud_running">
         <ToolsPackagesVersions :tool_route="tool_route" />
@@ -24,10 +24,11 @@ const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 
 const props = defineProps({
-  cards_list: { type: Array, required: true },
-  stepper_tree: { type: Object, required: true }
+  cards_list: { type: Array, required: true }
 })
+const { cards_list } = props
 
-const { cards_list, stepper_tree } = props
+const stepper_tree = inject('stepper_tree')
 const { tool_name, tool_route } = stepper_tree
+
 </script>

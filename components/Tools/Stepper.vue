@@ -1,21 +1,26 @@
 <template>
   <v-card class="card">
     <div v-for="(step, index) in steps" :key="index" class="pa-3">
-      <ToolsStep :tool_route="tool_route" :step="step" :step_index="index" :current_step_index="current_step_index"
-        v-model:model_value="step.v_model" @set_current_step="set_current_step" />
+      <ToolsStep :step_index="index" />
+      <!-- :tool_route="tool_route" :step="step" :step_index="index" :current_step_index="current_step_index"
+      v-model:model_value="step.v_model" @set_current_step="set_current_step" -->
     </div>
   </v-card>
 </template>
 
 <script setup>
-const props = defineProps({
-  tool_route: { type: String, required: true },
-  stepper_tree: { type: Object, required: true }
-})
-const { tool_route, stepper_tree } = props
-const { current_step_index, steps } = toRefs(stepper_tree)
+// const props = defineProps({
+//   tool_route: { type: String, required: true },
+//   stepper_tree: { type: Object, required: true }
+// })
+// const { tool_route, stepper_tree } = props
+// const { current_step_index, steps } = toRefs(stepper_tree)
 
-watch(stepper_tree, (value) => { console.log("stepper_tree", value) })
+
+// watch(stepper_tree, (value) => { console.log("stepper_tree", value) })
+
+const stepper_tree = inject('stepper_tree')
+const { steps } = stepper_tree
 
 function set_current_step (step) {
   // if (step < 3) {
@@ -29,5 +34,9 @@ function set_current_step (step) {
   // }
   current_step_index.value = step
 }
+
+onMounted(() => {
+  console.log('Stepper :', stepper_tree)
+})
 
 </script>
