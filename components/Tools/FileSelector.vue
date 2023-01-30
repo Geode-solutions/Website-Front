@@ -1,7 +1,7 @@
 <template>
-  <v-file-input v-model="files" :multiple="multiple" :label="label" :accept="accept"
-    :rules="[(value) => !!value || 'The file is mandatory']" @click:clear="component_options.click" color="primary"
-    chips counter show-size />
+  <v-file-input v-model="stepper_tree.files" :multiple="multiple" :label="label" :accept="accept"
+    :rules="[(value) => !!value || 'The file is mandatory']" @click:clear="stepper_tree.files = []" color="primary" chips
+    counter show-size />
 </template>
 
 <script setup>
@@ -11,13 +11,12 @@ const { tool_route } = stepper_tree
 const props = defineProps({
   component_options: { type: Object, required: true }
 })
+const { multiple, label } = props
 
 const accept = ref('')
-const files = ref([])
 
-watch(files, (value) => {
+watch(stepper_tree.files, (value) => {
   console.log(value)
-  stepper_tree.files = value
 })
 
 async function get_allowed_files (tool_route) {

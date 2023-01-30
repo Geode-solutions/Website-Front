@@ -28,43 +28,17 @@
 </template>
 
 <script setup>
-// import { useVModel } from "@vueuse/core"
-
-
 const props = defineProps({
   step_index: { type: Number, required: true }
 })
 const { step_index } = props
 
-
 const chips = ref([])
-
-// const emit = defineEmits([
-//   'set_current_step',
-//   'update:model_value'
-// ])
-
-// const value = useVModel(props, "model_value", emit)
-// watch(value, (value, old) => {
-//   console.log(value, old)
-//   chips.value = value.map(file => file.name)
-//   parent_set_current_step(props.step_index + 1)
-// })
-
-// function parent_set_current_step (step) {
-//   emit("set_current_step", step);
-// }
-
 
 const stepper_tree = inject('stepper_tree')
 const { current_step_index, steps } = stepper_tree
 
-
-
-
-
 onMounted(() => {
-  console.log('Step :', stepper_tree)
   console.log('Step :', stepper_tree)
 })
 </script>

@@ -14,6 +14,9 @@ const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'Validity checker',
   tool_route: 'validitychecker',
+  files: files,
+  geode_object: geode_object,
+  model_checks: model_checks,
   steps: [
     {
       step_title: 'Please select a file to check',
