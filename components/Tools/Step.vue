@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-5 card" elevation="5">
-    <v-row align="center" @click="parent_set_current_step(step_index)">
+    <v-row align="center" @click="set_current_step(step_index)">
       <v-col cols="auto">
         <v-icon v-if="current_step_index > step_index" icon="mdi-check-circle" color="grey" />
         <v-icon v-else-if="current_step_index == step_index" :icon="`mdi-numeric-${step_index + 1}-circle`"
@@ -33,11 +33,23 @@ const props = defineProps({
 })
 const { step_index } = props
 
+
+// const emit = defineEmits([
+//   'set_current_step',
+// ])
+
 const chips = ref([])
 
 const stepper_tree = inject('stepper_tree')
 const { current_step_index, steps } = stepper_tree
 
+
+
+function set_current_step (step_index) {
+  console.log(step_index)
+  stepper_tree.current_step_index.value = step_index
+  console.log(stepper_tree)
+}
 onMounted(() => {
   console.log('Step :', stepper_tree)
 })

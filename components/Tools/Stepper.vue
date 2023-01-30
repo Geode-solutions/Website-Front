@@ -3,6 +3,7 @@
     <div v-for="(step, index) in steps" :key="index" class="pa-3">
       <ToolsStep :step_index="index" />
     </div>
+    <!-- @set_current_step="set_current_step(index)" -->
   </v-card>
 </template>
 
@@ -10,9 +11,9 @@
 const stepper_tree = inject('stepper_tree')
 const { steps } = stepper_tree
 
-function set_current_step (step) {
-  current_step_index.value = step
-}
+// function set_current_step (step) {
+//   current_step_index.value = step
+// }
 
 onMounted(() => {
   console.log('Stepper :', stepper_tree)

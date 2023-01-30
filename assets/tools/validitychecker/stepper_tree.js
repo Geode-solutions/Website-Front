@@ -23,11 +23,11 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsFileSelector),
         component_options: {
-          multiple: true,
+          multiple: false,
           label: 'Please select a file'
         }
       },
-      v_model: files
+      chips: files
     },
     {
       step_title: 'Confirm the data type',
@@ -38,7 +38,7 @@ const stepper_tree = reactive({
           input_files: files
         }
       },
-      v_model: geode_object
+      chips: geode_object
     },
     {
       step_title: 'Inspect your file',
@@ -49,7 +49,7 @@ const stepper_tree = reactive({
           input_geode_object: geode_object
         }
       },
-      v_model: model_checks
+      chips: model_checks
     },
     {
       step_title: 'Inspection results',
