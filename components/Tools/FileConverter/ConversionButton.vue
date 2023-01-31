@@ -11,6 +11,11 @@
 </template>
 
 <script setup>
+import fileDownload from 'js-file-download'
+import { use_cloud_store } from '@/stores/cloud'
+const cloud_store = use_cloud_store()
+const { ID } = storeToRefs(cloud_store)
+
 const props = defineProps({
   component_options: { type: Object, required: true }
 })
@@ -44,15 +49,10 @@ async function convert_files () {
       loading.value = true
 
       try {
-        const response = await api_fetch(`/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' }, {
-          onResponse ({ request, response, options }) {
-            // Process the response data
-            console.log(response)
-            return response._data
-          },
-        })
-        // console.log(response)
-        let new_file_name = response.data.value.headers['new-file-name']
+        const config = useRuntimeConfig()
+        const response = await $fetch.raw(`${config.API_URL}/${ID.value}/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
+        console.log(response)
+        let new_file_name = response.headers['new-file-name']
         fileDownload(response.data, new_file_name)
         loading.value = false
       } catch (err) {
