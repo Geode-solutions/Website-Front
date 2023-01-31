@@ -7,7 +7,7 @@ import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
 const files = ref([])
-const chips_files = computed(files => files.map(file => file.name))
+// const chips_files = computed(() => { return files.value.map((file) => file.name) })
 const geode_object = ref('')
 const output_extension = ref('')
 
@@ -28,7 +28,7 @@ const stepper_tree = reactive({
           label: 'Please select a file'
         }
       },
-      chips: chips_files
+      chips: computed(() => { return files.value.map((file) => file.name) })
     },
     {
       step_title: 'Confirm the data type',
@@ -39,7 +39,13 @@ const stepper_tree = reactive({
           input_files: files
         }
       },
-      chips: [geode_object]
+      chips: computed(() => {
+        if (geode_object.value === '') {
+          return []
+        } else {
+          return [geode_object.value]
+        }
+      })
     },
     {
       step_title: 'Select file format',
@@ -49,7 +55,13 @@ const stepper_tree = reactive({
           input_geode_object: geode_object
         }
       },
-      chips: [output_extension]
+      chips: computed(() => {
+        if (output_extension.value === '') {
+          return []
+        } else {
+          return [output_extension.value]
+        }
+      })
     },
     {
       step_title: 'Convert your file',

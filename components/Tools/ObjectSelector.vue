@@ -29,7 +29,7 @@ const { geode_objects, input_files } = props.component_options
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
-const emit = defineEmits(['update:step_model'])
+// const emit = defineEmits(['update:step_model'])
 // const value = useVModel(props, "step_model", emit)
 const allowed_objects = ref([])
 

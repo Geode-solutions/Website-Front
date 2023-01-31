@@ -1,5 +1,5 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="convert_file(files)">
+  <v-btn :loading="loading" color="primary" @click="convert_files()">
     Convert
     <template #loader>
       <v-progress-circular indeterminate size="20" color="white" width="3" />
@@ -12,17 +12,22 @@
 
 <script setup>
 const props = defineProps({
-  tool_route: { type: String, required: true },
   component_options: { type: Object, required: true }
 })
-const { component_options, tool_route } = props
 const { input_files,
   input_geode_object,
-  input_output_extension } = component_options
+  input_output_extension } = props.component_options
+
+const stepper_tree = inject('stepper_tree')
+const { tool_route } = stepper_tree
 
 const loading = ref(false)
 
-async function convert_file () {
+async function convert_files () {
+  console.log(input_files)
+  console.log(input_geode_object)
+  console.log(input_output_extension)
+
   for (let i = 0; i < input_files.length; i++) {
 
     let reader = new FileReader()
@@ -48,7 +53,7 @@ async function convert_file () {
         loading.value = false
       }
     }
-    reader.readAsDataURL(files[i])
+    reader.readAsDataURL(input_files[i])
   }
 }
 
