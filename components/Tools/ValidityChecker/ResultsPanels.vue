@@ -3,8 +3,9 @@
     <v-expansion-panels v-model="opened_panels" multiple>
       <v-expansion-panel v-for="(check) in props.model_checks" :key="index" class="card" :title="check.sentence">
         <ToolsValidityBadge :value="check.value" />
-        <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" :index="index" :model_checks="check.children"
-          :object="object" :filename="filename" @update_result="update_result" />
+        <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf"
+          :component_options="{ index: index, model_checks=check.children, input_geode_object=input_geode_object, input_file_name=input_file_name }"
+          @update_result="update_result" />
         <v-container v-else-if="check.value == false" class="pt-6">
           Invalid = {{ check.list_invalidities }}
         </v-container>
@@ -63,7 +64,7 @@ watch(() => input_model_checks, () => {
 },
   { deep: true }
 )
-onCreated(() => {
+onMounted(() => {
   get_tests_results()
   opened_panels.value = Array.from(Array(input_model_checks.length).keys())
 })
@@ -73,7 +74,7 @@ function update_result (index, value) {
 }
 
 async function get_tests_results () {
-  for (let index = 0; index < props.model_checks.length; index++) {
+  for (let index = 0; index < input_model_checks.length; index++) {
     const check = props.model_checks[index]
     if (check.is_leaf) {
       const params = new FormData()

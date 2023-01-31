@@ -17,7 +17,7 @@
 const props = defineProps({
   component_options: { type: Object, required: true }
 })
-const { input_files } = props.component_options
+const { input_files, input_geode_object } = props.component_options
 
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
@@ -61,7 +61,7 @@ async function upload_file () {
 
 async function get_tests_names () {
   const params = new FormData()
-  params.append('object', self.geode_object)
+  params.append('object', input_geode_object)
   const { data } = await api_fetch(`${tool_route}/testsnames`, { body: params, method: 'POST' })
   console.log(data)
   stepper_tree.model_checks = data.value.modelChecks
