@@ -12,11 +12,11 @@
           {{ steps[step_index].step_title }}
         </p>
       </v-col>
-      <v-col v-if="chips.length && current_step_index >= step_index">
+      <!-- <v-col v-if="chips.length && current_step_index >= step_index">
         <v-chip v-for="chip in steps[step_index].chips">
           {{ chip }}
         </v-chip>
-      </v-col>
+      </v-col> -->
     </v-row>
     <Transition name="slide-fade">
       <v-row v-if="step_index == current_step_index">
@@ -36,7 +36,7 @@ const { step_index } = props
 const stepper_tree = inject('stepper_tree')
 const { current_step_index, steps } = toRefs(stepper_tree)
 
-function set_current_step(step_index) {
+function set_current_step (step_index) {
   console.log(step_index)
   stepper_tree.current_step_index = step_index
   console.log(stepper_tree.current_step_index)

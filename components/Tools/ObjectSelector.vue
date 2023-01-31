@@ -44,8 +44,8 @@ async function get_allowed_objects (input_files) {
 
 function set_geode_object (geode_object) {
   stepper_tree.geode_object = geode_object
-  stepper_tree.current_step_index = geode_object
-  
+  stepper_tree.current_step_index = stepper_tree.current_step_index + 1
+
 }
 
 
