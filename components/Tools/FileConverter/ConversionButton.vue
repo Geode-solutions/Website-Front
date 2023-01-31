@@ -52,8 +52,8 @@ async function convert_files () {
         const config = useRuntimeConfig()
         const response = await $fetch.raw(`${config.API_URL}/${ID.value}/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
         console.log(response)
-        let new_file_name = response.headers['new-file-name']
-        fileDownload(response.data, new_file_name)
+        const new_file_name = response.headers.get('new-file-name')
+        fileDownload(response._data, new_file_name)
         loading.value = false
       } catch (err) {
         console.log(err)
