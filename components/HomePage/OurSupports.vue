@@ -5,7 +5,7 @@
         <h2 class="section text-h2" align="center">
           They support us
         </h2>
-        <CommonCarrousel :items="supports_list" />
+        <CommonCarousel :items="supports_list" />
       </v-col>
     </v-row>
   </v-container>

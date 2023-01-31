@@ -35,10 +35,21 @@
       </v-col>
     </v-row>
   </v-container>
+  <v-container fluid style="background-color: white">
+    <v-row class="container mx-auto">
+      <v-col>
+        <h2 class="section text-h2" align="center">
+          They use our services
+        </h2>
+        <CommonCarousel :items="services_users" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
 import services_list from '@/assets/static/services'
+import services_users from '@/assets/static/services_users'
 
 useHead({ titleTemplate: 'Geode-solutions custom-tailored services' })
 </script>

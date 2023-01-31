@@ -18,9 +18,10 @@ const props = defineProps({
   component_options: { type: Object, required: true }
 })
 
-const { input_files,
-  input_geode_object,
+const {
   input_model_checks,
+  input_geode_object,
+  input_file_name,
   index } = props.component_options
 
 const stepper_tree = inject('stepper_tree')
@@ -30,18 +31,18 @@ const opened_panels = ref([])
 
 const display = computed(() => {
   let values = new Array()
-  for (let i = 0; i < props.model_checks.length; i++) {
-    if (!props.model_checks[i].is_leaf) {
+  for (let i = 0; i < input_file_name.length; i++) {
+    if (!input_file_name[i].is_leaf) {
       values.push(i)
     }
   }
   return values
 })
 
-watch(() => model_checks, () => {
+watch(() => input_model_checks, () => {
   let nb_results = 0
-  for (let index = 0; index < model_checks.length; index++) {
-    const current_check = model_checks[index]
+  for (let index = 0; index < input_model_checks.length; index++) {
+    const current_check = input_model_checks[index]
     if (current_check.value == null) {
       continue
     }
@@ -49,17 +50,14 @@ watch(() => model_checks, () => {
       this.$emit('update_result', this.index, false)
       return
     } else if (current_check.value == true) {
-      // console.log('index :', index)
       let index_of_index = opened_panels.value.indexOf(index)
-      // console.log('this.opened_panels :', this.opened_panels)
-      // console.log('index_of_index :', index_of_index)
       if (index_of_index > -1) { // only splice array when item is found
         opened_panels.value.splice(index_of_index, 1)
       }
     }
     nb_results++
   }
-  if (nb_results == model_checks.length) {
+  if (nb_results == input_model_checks.length) {
     this.$emit('update_result', index, true)
   }
 },
@@ -67,26 +65,24 @@ watch(() => model_checks, () => {
 )
 onCreated(() => {
   get_tests_results()
-  opened_panels.value = Array.from(Array(model_checks.length).keys())
+  opened_panels.value = Array.from(Array(input_model_checks.length).keys())
 })
 
 function update_result (index, value) {
-  model_checks[index].value = value
+  input_model_checks[index].value = value
 }
-
-
 
 async function get_tests_results () {
   for (let index = 0; index < props.model_checks.length; index++) {
     const check = props.model_checks[index]
     if (check.is_leaf) {
       const params = new FormData()
-      params.append('object', this.object)
-      params.append('filename', this.filename)
+      params.append('object', input_geode_object)
+      params.append('filename', input_file_name)
       params.append('test', check.route)
 
       try {
-        const { data } = await api_fetch(`${tool_route}/inspectfile`, { method: 'POST' }, params)
+        const { data } = await api_fetch(`${tool_route}/inspectfile`, { body: params, method: 'POST' })
         check.value = data.value.Result
         check.list_invalidities = data.list_invalidities
       } catch (err) {

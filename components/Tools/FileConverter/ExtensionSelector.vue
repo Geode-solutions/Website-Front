@@ -19,31 +19,23 @@ const { input_geode_object } = props.component_options
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
+const file_extensions = ref([])
 
 onMounted(() => {
   get_output_file_extensions(input_geode_object, tool_route)
-
 })
-
-const file_extensions = ref([])
 
 async function get_output_file_extensions (input_geode_object, tool_route) {
   const params = new FormData()
   params.append('object', input_geode_object)
-
   const { data } = await api_fetch(`${tool_route}/outputfileextensions`, { body: params, method: 'POST' })
   file_extensions.value = data.value.outputfileextensions
 }
 
 function set_output_extension (extension) {
   stepper_tree.output_extension = extension
-  stepper_tree.current_step_index = stepper_tree.current_step_index + 1
+  stepper_tree.current_step_index++
 }
-
-onMounted(() => {
-  console.log(stepper_tree.current_step_index)
-})
-
 </script>
 
 <style scoped>

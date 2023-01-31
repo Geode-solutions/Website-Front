@@ -5,7 +5,7 @@
         <h2 class="section text-h2" align="center">
           Our partners
         </h2>
-        <CommonCarrousel :items="partners_list" />
+        <CommonCarousel :items="partners_list" />
       </v-col>
     </v-row>
   </v-container>

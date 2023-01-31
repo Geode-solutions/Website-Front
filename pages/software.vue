@@ -112,8 +112,7 @@
         <h2 class="section text-h2" align="center">
           Thanks to our pilots
         </h2>
-
-        <CommonCarrousel :items="pilots_list" />
+        <CommonCarousel :items="pilots_list" />
       </v-col>
     </v-row>
   </v-container>

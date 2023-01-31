@@ -1,6 +1,6 @@
 <template>
   <div class="pa-5">
-    <v-btn :loading="loading" color="primary" @click="upload_file()">
+    <v-btn :loading="loading" color="primary" @click="inspect_file()">
       Inspect
       <template #loader>
         <v-progress-circular indeterminate size="20" color="white" width="3" />
@@ -15,8 +15,7 @@
 <script setup>
 
 const props = defineProps({
-  component_options: { type: Object, required: true },
-  input_files: { type: Array, required: true }
+  component_options: { type: Object, required: true }
 })
 const { input_files } = props.component_options
 
@@ -28,10 +27,11 @@ const loading = ref(false)
 
 async function inspect_file () {
   await upload_file()
-  // console.log('upload_file okay')
-  this.set_current_step(4)
   await get_tests_names()
+  stepper_tree.current_step_index++
 }
+
+
 
 
 async function upload_file () {
@@ -45,30 +45,27 @@ async function upload_file () {
         params.append('filesize', input_files[0].size)
 
         loading.value = true
-        const { data } = await api_fetch(`${tool_route}/uploadfile`, params, { method: 'POST' })
+        const { data } = await api_fetch(`${tool_route}/uploadfile`, { body: params, method: 'POST' })
         if (data) {
           loading.value = false
         }
-
-        resolve(response);
+        resolve(data)
       } catch (err) {
         loading.value = false
         reject(err)
       }
     }
-
     reader.readAsDataURL(input_files[0])
   })
 }
 
-
 async function get_tests_names () {
-  const self = this
   const params = new FormData()
   params.append('object', self.geode_object)
-  const { data } = await api_fetch(`${props.tool_route}/testsnames`, params)
-  self.model_checks = data.value.model_checks
-
+  const { data } = await api_fetch(`${tool_route}/testsnames`, { body: params, method: 'POST' })
+  console.log(data)
+  stepper_tree.model_checks = data.value.model_checks
 }
+
 </script>
 

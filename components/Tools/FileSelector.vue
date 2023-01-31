@@ -20,7 +20,7 @@ watch(files, (value) => {
   console.log(value)
   stepper_tree.files = value
   console.log(stepper_tree.files)
-  stepper_tree.current_step_index = stepper_tree.current_step_index + 1
+  stepper_tree.current_step_index++
 })
 
 async function get_allowed_files (tool_route) {
