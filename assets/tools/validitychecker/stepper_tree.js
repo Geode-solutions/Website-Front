@@ -27,7 +27,7 @@ const stepper_tree = reactive({
           label: 'Please select a file'
         }
       },
-      chips: files
+      chips: computed(() => { return files.value.map((file) => file.name) })
     },
     {
       step_title: 'Confirm the data type',
@@ -38,7 +38,13 @@ const stepper_tree = reactive({
           input_files: files
         }
       },
-      chips: geode_object
+      chips: computed(() => {
+        if (geode_object.value === '') {
+          return []
+        } else {
+          return [geode_object.value]
+        }
+      })
     },
     {
       step_title: 'Inspect your file',
@@ -49,7 +55,7 @@ const stepper_tree = reactive({
           input_geode_object: geode_object
         }
       },
-      chips: model_checks
+      chips: []
     },
     {
       step_title: 'Inspection results',
@@ -58,7 +64,8 @@ const stepper_tree = reactive({
         component_options: {
           input_model_checks: model_checks
         }
-      }
+      },
+      chips: []
     }
   ]
 })

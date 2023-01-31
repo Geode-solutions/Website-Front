@@ -7,7 +7,6 @@ import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
 const files = ref([])
-// const chips_files = computed(() => { return files.value.map((file) => file.name) })
 const geode_object = ref('')
 const output_extension = ref('')
 

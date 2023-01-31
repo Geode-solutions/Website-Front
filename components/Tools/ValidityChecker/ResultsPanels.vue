@@ -14,15 +14,19 @@
 </template>
 
 <script setup>
-const opened_panels = ref([])
-
 const props = defineProps({
-  input_files: { type: String, required: true },
-  input_geode_object: { type: String, required: true },
-  input_model_checks: { type: Array, required: true },
-  index: { type: Number, required: true, default: 0 }
+  component_options: { type: Object, required: true }
 })
 
+const { input_files,
+  input_geode_object,
+  input_model_checks,
+  index } = props.component_options
+
+const stepper_tree = inject('stepper_tree')
+const { tool_route } = stepper_tree
+
+const opened_panels = ref([])
 
 const display = computed(() => {
   let values = new Array()
@@ -34,10 +38,10 @@ const display = computed(() => {
   return values
 })
 
-watch(() => props.model_checks, () => {
+watch(() => model_checks, () => {
   let nb_results = 0
-  for (let index = 0; index < this.model_checks.length; index++) {
-    const current_check = this.model_checks[index]
+  for (let index = 0; index < model_checks.length; index++) {
+    const current_check = model_checks[index]
     if (current_check.value == null) {
       continue
     }
@@ -46,28 +50,28 @@ watch(() => props.model_checks, () => {
       return
     } else if (current_check.value == true) {
       // console.log('index :', index)
-      let index_of_index = this.opened_panels.indexOf(index)
+      let index_of_index = opened_panels.value.indexOf(index)
       // console.log('this.opened_panels :', this.opened_panels)
       // console.log('index_of_index :', index_of_index)
       if (index_of_index > -1) { // only splice array when item is found
-        this.opened_panels.splice(index_of_index, 1)
+        opened_panels.value.splice(index_of_index, 1)
       }
     }
     nb_results++
   }
-  if (nb_results == props.model_checks.length) {
-    this.$emit('update_result', this.index, true)
+  if (nb_results == model_checks.length) {
+    this.$emit('update_result', index, true)
   }
 },
   { deep: true }
 )
 onCreated(() => {
   get_tests_results()
-  opened_panels.value = Array.from(Array(props.model_checks.length).keys())
+  opened_panels.value = Array.from(Array(model_checks.length).keys())
 })
 
 function update_result (index, value) {
-  this.model_checks[index].value = value
+  model_checks[index].value = value
 }
 
 
@@ -82,9 +86,9 @@ async function get_tests_results () {
       params.append('test', check.route)
 
       try {
-        const response = await useFetch(`${config.public.BASE_URL}/${ID}/validitychecker/inspectfile`, { method: 'POST' }, params)
-        check.value = response.data.Result
-        check.list_invalidities = response.data.list_invalidities
+        const { data } = await api_fetch(`${tool_route}/inspectfile`, { method: 'POST' }, params)
+        check.value = data.value.Result
+        check.list_invalidities = data.list_invalidities
       } catch (err) {
         check.value = 'error'
       }

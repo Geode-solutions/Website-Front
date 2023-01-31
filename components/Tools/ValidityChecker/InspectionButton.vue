@@ -15,9 +15,14 @@
 <script setup>
 
 const props = defineProps({
-  tool_route: { type: String, required: true },
+  component_options: { type: Object, required: true },
   input_files: { type: Array, required: true }
 })
+const { input_files } = props.component_options
+
+const stepper_tree = inject('stepper_tree')
+const { tool_route } = stepper_tree
+
 const loading = ref(false)
 
 
@@ -36,12 +41,14 @@ async function upload_file () {
       try {
         const params = new FormData()
         params.append('file', event.target.result)
-        params.append('filename', props.files[0].name)
-        params.append('filesize', props.files[0].size)
+        params.append('filename', input_files[0].name)
+        params.append('filesize', input_files[0].size)
 
         loading.value = true
-        await api_fetch(`${props.tool_route}/uploadfile`, params, { method: 'POST' })
-        loading.value = false
+        const { data } = await api_fetch(`${tool_route}/uploadfile`, params, { method: 'POST' })
+        if (data) {
+          loading.value = false
+        }
 
         resolve(response);
       } catch (err) {
@@ -50,7 +57,7 @@ async function upload_file () {
       }
     }
 
-    // reader.readAsDataURL(this.files[0])
+    reader.readAsDataURL(input_files[0])
   })
 }
 
