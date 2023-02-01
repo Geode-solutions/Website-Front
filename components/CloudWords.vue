@@ -1,13 +1,10 @@
 <template>
-  <div
-    ref="wordCloud"
-    class="wordCloud"
-  />
+    <div ref="wordCloud" class="wordCloud" />
 </template>
 
 <script>
-import * as d3 from "d3";
-import * as cloud from 'd3-cloud';
+import d3 from "d3";
+import cloud from 'd3-cloud';
 
 export default {
 
