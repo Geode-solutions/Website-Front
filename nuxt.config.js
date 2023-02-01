@@ -71,5 +71,8 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
+  },
+  nitro: {
+    preset: 'netlify'
   }
 })
