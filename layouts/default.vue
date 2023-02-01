@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-if="!loading">
     <CommonHeader />
     <v-main class="bg-secondary">
       <slot />
@@ -11,6 +11,8 @@
 
 <script setup>
 const config = useRuntimeConfig()
+const loading = ref(true)
+onMounted(() => { loading.value = false })
 </script>
 
 <style scoped>
