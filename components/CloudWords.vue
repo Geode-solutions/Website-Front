@@ -3,8 +3,8 @@
 </template>
 
 <script>
-const d3 = require("d3");
-const cloud = require('d3-cloud');
+import d3 from "d3";
+import cloud from 'd3-cloud';
 
 export default {
 
