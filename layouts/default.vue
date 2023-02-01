@@ -1,17 +1,16 @@
 <template>
-  <v-app v-if="!loading">
+  <v-app>
     <CommonHeader />
     <v-main class="bg-secondary">
       <slot />
     </v-main>
-    <CookieControl v-if="this.$config.NODE_ENV === 'production'" />
+    <CookieControl v-if="config.NODE_ENV === 'production'" />
     <CommonFooter />
   </v-app>
 </template>
 
 <script setup>
-const loading = ref(true)
-onMounted(() => { loading.value = false })
+const config = useRuntimeConfig()
 </script>
 
 <style scoped>
