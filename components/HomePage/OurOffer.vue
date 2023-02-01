@@ -2,23 +2,49 @@
   <v-container>
     <v-row>
       <v-col>
-        <h2 class="section text-h2" align="center">
+        <h2
+          class="section text-h2"
+          align="center"
+        >
           What we do
         </h2>
         <v-row justify="space-around">
-          <v-col v-for="card in masterCards" :key="card.title" cols="12" md="6">
+          <v-col
+            v-for="card in masterCards"
+            :key="card.title"
+            cols="12"
+            md="6"
+          >
             <v-hover v-slot="{ hover }">
-              <v-card height="500" :elevation="hover ? 20 : 2" :to="card.url" class="d-flex">
-                <v-img :src="card.image" cover gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)">
-                  <v-row class="flex-column" no-gutters style="height: 100%">
+              <v-card
+                height="500"
+                :elevation="hover ? 20 : 2"
+                :to="card.url"
+                class="d-flex"
+              >
+                <v-img
+                  :src="card.image"
+                  cover
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
+                >
+                  <v-row
+                    class="flex-column"
+                    no-gutters
+                    style="height: 100%"
+                  >
                     <v-spacer />
                     <v-col cols="auto">
-                      <v-card-title class="text-white text-h4" v-text="card.title">
-                      </v-card-title>
+                      <v-card-title
+                        class="text-white text-h4"
+                        v-text="card.title"
+                      />
                     </v-col>
                     <v-col cols="auto">
-                      <v-card-text align="justify" class="text-white text-body-1" v-text="card.text">
-                      </v-card-text>
+                      <v-card-text
+                        align="justify"
+                        class="text-white text-body-1"
+                        v-text="card.text"
+                      />
                     </v-col>
                   </v-row>
                 </v-img>
@@ -31,11 +57,11 @@
   </v-container>
 </template>
 <script setup>
-import web from "~/static/index/cobweb.jpg"
-import nut from "~/static/index/nut.jpg"
-import screw from "~/static/index/screw.jpg"
-import road from "~/static/index/road.jpg"
-import tailoring from "~/static/index/tailoring.jpg"
+import web from "~/assets/img/index/cobweb.jpg"
+import nut from "~/assets/img/index/nut.jpg"
+import screw from "~/assets/img/index/screw.jpg"
+import road from "~/assets/img/index/road.jpg"
+import tailoring from "~/assets/img/index/tailoring.jpg"
 
 
 

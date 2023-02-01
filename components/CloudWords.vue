@@ -1,5 +1,8 @@
 <template>
-    <div ref="wordCloud" class="wordCloud" />
+  <div
+    ref="wordCloud"
+    class="wordCloud"
+  />
 </template>
 
 <script>

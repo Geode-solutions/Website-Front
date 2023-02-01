@@ -2,12 +2,19 @@
   <v-container>
     This tool uses our Open-Source codes
     <v-tooltip location="end">
-      <span v-for="package_version in packages_versions" :key="package_version.package">
+      <span
+        v-for="package_version in packages_versions"
+        :key="package_version.package"
+      >
         {{ package_version.package }} v{{ package_version.version }}
         <br>
       </span>
-      <template v-slot:activator="{ props }">
-        <v-icon v-bind="props" color="primary" class="justify-right">
+      <template #activator="{ on }">
+        <v-icon
+          v-bind="on"
+          color="primary"
+          class="justify-right"
+        >
           mdi-information-outline
         </v-icon>
       </template>
@@ -44,7 +51,7 @@ onActivated(() => {
   // }
 })
 
-async function get_packages_versions (tool_route) {
+async function get_packages_versions(tool_route) {
   const { data } = await api_fetch(`${tool_route}/versions`, { method: 'GET' })
   packages_versions.value = data.value.versions
 }

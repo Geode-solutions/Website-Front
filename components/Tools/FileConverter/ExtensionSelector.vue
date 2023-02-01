@@ -1,7 +1,16 @@
 <template>
   <v-row class="justify-left">
-    <v-col v-for="file_extension in file_extensions" cols="2">
-      <v-card class="card ma-2" hover elevation="5" @click="set_output_extension(file_extension)">
+    <v-col
+      v-for="file_extension in file_extensions"
+      :key="file_extension"
+      cols="2"
+    >
+      <v-card
+        class="card ma-2"
+        hover
+        elevation="5"
+        @click="set_output_extension(file_extension)"
+      >
         <v-card-title align="center">
           {{ file_extension }}
         </v-card-title>
@@ -25,14 +34,14 @@ onMounted(() => {
   get_output_file_extensions(input_geode_object, tool_route)
 })
 
-async function get_output_file_extensions (input_geode_object, tool_route) {
+async function get_output_file_extensions(input_geode_object, tool_route) {
   const params = new FormData()
   params.append('object', input_geode_object)
   const { data } = await api_fetch(`${tool_route}/outputfileextensions`, { body: params, method: 'POST' })
   file_extensions.value = data.value.outputfileextensions
 }
 
-function set_output_extension (extension) {
+function set_output_extension(extension) {
   stepper_tree.output_extension = extension
   stepper_tree.current_step_index++
 }

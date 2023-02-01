@@ -1,12 +1,24 @@
 <template>
   <div class="pa-5">
-    <v-btn :loading="loading" color="primary" @click="inspect_file()">
+    <v-btn
+      :loading="loading"
+      color="primary"
+      @click="inspect_file()"
+    >
       Inspect
       <template #loader>
-        <v-progress-circular indeterminate size="20" color="white" width="3" />
+        <v-progress-circular
+          indeterminate
+          size="20"
+          color="white"
+          width="3"
+        />
       </template>
     </v-btn>
-    <v-btn variant="text" @click="set_current_step(2)">
+    <v-btn
+      variant="text"
+      @click="set_current_step(2)"
+    >
       Cancel
     </v-btn>
   </div>

@@ -1,11 +1,23 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="convert_files()">
+  <v-btn
+    :loading="loading"
+    color="primary"
+    @click="convert_files()"
+  >
     Convert
     <template #loader>
-      <v-progress-circular indeterminate size="20" color="white" width="3" />
+      <v-progress-circular
+        indeterminate
+        size="20"
+        color="white"
+        width="3"
+      />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="current_step = 3">
+  <v-btn
+    variant="text"
+    @click="current_step = 3"
+  >
     Cancel
   </v-btn>
 </template>

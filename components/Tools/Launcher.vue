@@ -1,10 +1,10 @@
 <template>
-  <!-- <v-container justify="space-around">
+  <v-container justify="space-around">
     <v-row rows="auto" align-content="center" align="center">
-      <v-col v-if="((!is_captcha_validated) && ($config.NODE_ENV === 'production'))" cols="10" align-self="center"
-        align="center">
-        <recaptcha class="align-center" />
-        <v-btn color="primary" @click="submit_recaptcha()">
+      <v-col v-if="!is_captcha_validated" cols="10" align-self="center" align="center">
+        <vue-recaptcha sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC" :loadRecaptchaScript="true"
+          @expired="is_captcha_validated = false" @verify="submit_recaptcha" />
+        <v-btn color="primary">
           Start tool
         </v-btn>
       </v-col>
@@ -12,12 +12,13 @@
         <ToolsLoading />
       </v-col>
     </v-row>
-  </v-container> -->
+  </v-container>
 </template>
 
 <script setup>
 import { use_cloud_store } from '@/stores/cloud'
 import { storeToRefs } from 'pinia'
+import { VueRecaptcha } from "vue-recaptcha";
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running, is_captcha_validated } = storeToRefs(cloud_store)
@@ -38,13 +39,13 @@ onMounted(() => {
   if (process.client) {
     if (config.public.NODE_ENV !== 'production') {
       // console.log('is_captcha_validated', is_captcha_validated)
-      cloud_store.$patch({ is_captcha_validated: true })
+      // cloud_store.$patch({ is_captcha_validated: true })
       // console.log('is_captcha_validated', is_captcha_validated)
     }
   }
 })
 
-async function submit_recaptcha () {
+async function submit_recaptcha() {
   try {
     const token = await this.$recaptcha.getResponse()
     // console.log('ReCaptcha token:', token)

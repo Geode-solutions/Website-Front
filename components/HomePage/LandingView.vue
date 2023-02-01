@@ -1,13 +1,32 @@
 <template>
-  <v-parallax :src="hero_img" alt=" Geode-solutions next generation of modeling challenges">
-    <v-row class="fill-height" align="center" justify="center">
-      <v-col class="text-center" cols="auto">
-        <v-card width="600" style="
+  <v-parallax
+    :src="hero_img"
+    alt=" Geode-solutions next generation of modeling challenges"
+  >
+    <v-row
+      class="fill-height"
+      align="center"
+      justify="center"
+    >
+      <v-col
+        class="text-center"
+        cols="auto"
+      >
+        <v-card
+          width="600"
+          style="
               border: 1px solid primary;
               border-radius: 80px 0px;
               background-color: rgba(255, 255, 255, 0.8);
-            " elevation="5">
-          <v-img :src="logo" alt="Geode-solutions logo" width="60%" class="mx-auto" />
+            "
+          elevation="5"
+        >
+          <v-img
+            :src="logo"
+            alt="Geode-solutions logo"
+            width="60%"
+            class="mx-auto"
+          />
           <h1 class="text-h2 text-center mb-3 text-primary">
             Geode-solutions
           </h1>
@@ -22,6 +41,6 @@
 </template>
 
 <script setup>
-import logo from '@/static/logo.svg'
-import hero_img from "@/static/hero.jpg"
+import logo from '@/assets/img/logo.svg'
+import hero_img from "@/assets/img/hero.jpg"
 </script>

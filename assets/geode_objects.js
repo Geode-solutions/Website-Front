@@ -1,22 +1,22 @@
-import brep from '@/static/tools/BRep.svg'
-import cross_section from '@/static/tools/cross_section.svg'
-import edged_curve2d from '@/static/tools/edged_curve2d.svg'
-import edged_curve3d from '@/static/tools/edged_curve3d.svg'
-import edged_curve from '@/static/tools/edged_curve.svg'
-import hybrid_solid from '@/static/tools/hybrid_solid.svg'
-import point_set2d from '@/static/tools/point_set2d.svg'
-import point_set3d from '@/static/tools/point_set3d.svg'
-import polygonal_surface2d from '@/static/tools/polygonal_surface2d.svg'
-import polygonal_surface3d from '@/static/tools/polygonal_surface3d.svg'
-import polyhedral_solid from '@/static/tools/polyhedral_solid.svg'
-import regular_grid3d from '@/static/tools/regular_grid3d.svg'
-import regular_grid2d from '@/static/tools/regular_grid2d.svg'
-import section from '@/static/tools/section.svg'
-import structural_model from '@/static/tools/structural_model.svg'
-import tetrahedral_solid from '@/static/tools/tetrahedral_solid.svg'
-import triangulated_surface2d from '@/static/tools/triangulated_surface2d.svg'
-import triangulated_surface3d from '@/static/tools/triangulated_surface3d.svg'
-import VertexSet from '@/static/tools/VertexSet.svg'
+import brep from '@/assets/img/tools/BRep.svg'
+import cross_section from '@/assets/img/tools/cross_section.svg'
+import edged_curve2d from '@/assets/img/tools/edged_curve2d.svg'
+import edged_curve3d from '@/assets/img/tools/edged_curve3d.svg'
+import edged_curve from '@/assets/img/tools/edged_curve.svg'
+import hybrid_solid from '@/assets/img/tools/hybrid_solid.svg'
+import point_set2d from '@/assets/img/tools/point_set2d.svg'
+import point_set3d from '@/assets/img/tools/point_set3d.svg'
+import polygonal_surface2d from '@/assets/img/tools/polygonal_surface2d.svg'
+import polygonal_surface3d from '@/assets/img/tools/polygonal_surface3d.svg'
+import polyhedral_solid from '@/assets/img/tools/polyhedral_solid.svg'
+import regular_grid3d from '@/assets/img/tools/regular_grid3d.svg'
+import regular_grid2d from '@/assets/img/tools/regular_grid2d.svg'
+import section from '@/assets/img/tools/section.svg'
+import structural_model from '@/assets/img/tools/structural_model.svg'
+import tetrahedral_solid from '@/assets/img/tools/tetrahedral_solid.svg'
+import triangulated_surface2d from '@/assets/img/tools/triangulated_surface2d.svg'
+import triangulated_surface3d from '@/assets/img/tools/triangulated_surface3d.svg'
+import vertex_set from '@/assets/img/tools/vertex_set.svg'
 
 const geode_objects = {
     BRep: {
@@ -91,9 +91,9 @@ const geode_objects = {
         tooltip: 'TriangulatedSurface3D',
         image: triangulated_surface3d,
     },
-    VertexSet: {
-        tooltip: 'VertexSet',
-        image: VertexSet,
+    vertex_set: {
+        tooltip: 'vertex_set',
+        image: vertex_set,
     }
 }
 

@@ -44,10 +44,8 @@
                   </v-chip>
                 </v-col>
               </v-row>
-              <v-card-title primary-title class="text-center text-h4" v-text="tool.title">
-              </v-card-title>
-              <v-card-text class="text-center text-body-1" v-text="tool.text">
-              </v-card-text>
+              <v-card-title primary-title class="text-center text-h4" v-text="tool.title" />
+              <v-card-text class="text-center text-body-1" v-text="tool.text" />
             </v-card>
           </v-col>
         </v-row>
@@ -57,6 +55,6 @@
 </template>
 
 <script setup>
-import tools_list from '@/assets/tools/tools_list'
+import tools_list from '@/assets/tools_list'
 </script>
 

@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import tools_list from '@/assets/tools/tools_list'
+import tools_list from '@/assets/tools_list'
 import { useDisplay } from 'vuetify'
 
 const title = 'Free tools'

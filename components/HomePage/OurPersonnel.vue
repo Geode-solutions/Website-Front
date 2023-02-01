@@ -57,7 +57,41 @@
 </template>
 
 <script setup>
-import us_list from '~/assets/static/us'
+import ArnaudB from '@/assets/img/ArnaudB.jpg'
+import PierreA from '@/assets/img/PierreA.jpg'
+import MelchiorS from '@/assets/img/Melchior.jpg'
+import JulienC from '@/assets/img/Julien.jpg'
 import { useDisplay } from 'vuetify'
 const { mdAndUp } = useDisplay()
+
+const us_list = [
+  {
+    name: 'Arnaud Botella',
+    pict: ArnaudB,
+    job: 'President & co-founder',
+    url: 'https://linkedin.com/in/arnaud-botella',
+    topic: 'Mesh generation',
+  },
+  {
+    name: 'Pierre Anquez',
+    pict: PierreA,
+    job: 'CEO & co-founder',
+    url: 'https://linkedin.com/in/pierre-anquez',
+    topic: 'Explicit modeling',
+  },
+  {
+    name: 'Melchior Schuh-Senlis',
+    pict: MelchiorS,
+    job: 'Research engineer',
+    url: 'https://www.linkedin.com/in/melchior-schuh-senlis-a9573aba',
+    topic: 'Implicit modeling',
+  },
+  {
+    name: 'Julien Champagnol',
+    pict: JulienC,
+    job: 'Cloud developer',
+    url: 'https://www.linkedin.com/in/julien-champagnol-90330b17b',
+    topic: 'Web and microservices',
+  },
+]
 </script>

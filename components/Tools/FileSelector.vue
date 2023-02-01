@@ -1,7 +1,16 @@
 <template>
-  <v-file-input v-model="files" :multiple="multiple" :label="label" :accept="accept"
-    :rules="[(value) => !!value || 'The file is mandatory']" @click:clear="stepper_tree.files = []" color="primary"
-    chips counter show-size />
+  <v-file-input
+    v-model="files"
+    :multiple="multiple"
+    :label="label"
+    :accept="accept"
+    :rules="[(value) => !!value || 'The file is mandatory']"
+    color="primary"
+    chips
+    counter
+    show-size
+    @click:clear="stepper_tree.files = []"
+  />
 </template>
 
 <script setup>
