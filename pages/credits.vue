@@ -20,8 +20,3 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  name: 'GeodeCredits',
-}
-</script>

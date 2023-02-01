@@ -6,7 +6,7 @@
           Free tools home page
         </h1>
 
-        <p class="container text-h6 font-weight-light" align="justify">
+        <p class="text-h6 font-weight-light" align="justify">
           All the tools offered here are entirely free to use.
           <br>
           We rely on a cloud technology for computing power. Each cloud instance
@@ -24,31 +24,17 @@
           your enthusiasm about these tools.
         </p>
         <div class="my-2" align="center">
-          <v-btn color="primary" dark href="mailto:contact@geode-solutions.com">
-            Contact us
-          </v-btn>
+          <CommonContactUsButton />
         </div>
       </v-col>
       <v-col>
         <v-row justify="space-around">
-          <v-col
-            v-for="(tool, i) in tools.slice(-tools.length + 1, tools.length)"
-            :key="i"
-            cols="11"
-            md="4"
-          >
-            <v-card
-              v-ripple
-              class="card"
-              nuxt
-              hover
-              elevation="5"
-              :to="tool.to"
-              contain
-            >
+          <v-col v-for="(tool, i) in tools_list.slice(-tools_list.length + 1, tools_list.length)" :key="i" cols="11"
+            md="4">
+            <v-card v-ripple class="pa-5" hover elevation="5" :to="tool.to">
               <v-row justify="center" align="center">
                 <v-col cols="auto">
-                  <v-icon size="100" class="justify-center">
+                  <v-icon color="primary" size="100" class="justify-center">
                     {{ tool.icon }}
                   </v-icon>
                 </v-col>
@@ -58,13 +44,8 @@
                   </v-chip>
                 </v-col>
               </v-row>
-              <v-card-title primary-title class="justify-center text-h4">
-                <br>
-                {{ tool.title }}
-              </v-card-title>
-              <v-card-text class="justify-center text-body-1">
-                {{ tool.text }}
-              </v-card-text>
+              <v-card-title primary-title class="text-center text-h4" v-text="tool.title" />
+              <v-card-text class="text-center text-body-1" v-text="tool.text" />
             </v-card>
           </v-col>
         </v-row>
@@ -73,18 +54,7 @@
   </v-container>
 </template>
 
-<script>
+<script setup>
 import tools_list from '@/assets/tools_list'
-
-export default {
-  name: 'WelcomePage',
-  data: () => ({
-    tools: tools_list,
-  }),
-  head() {
-    return {
-      title: 'Geode-solutions free tools',
-    }
-  },
-}
 </script>
+

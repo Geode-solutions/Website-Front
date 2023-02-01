@@ -1,11 +1,9 @@
-const axios = require('axios')
-
 exports.handler = async function (event) {
   try {
-    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`)
+    const { data } = await useFetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`, { method: 'POST' })
       .then(response => response.data)
-    console.log(response)
-    if (response.success) {
+    // console.log(response)
+    if (data) {
       return {
         statusCode: 200,
         body: JSON.stringify(response)
@@ -16,7 +14,7 @@ exports.handler = async function (event) {
       body: JSON.stringify(response)
     }
   } catch (e) {
-    console.log('ReCaptcha error:', e)
+    // console.log('ReCaptcha error:', e)
     return {
       statusCode: 500,
       body: 'Internal error'
