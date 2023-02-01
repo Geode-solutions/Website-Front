@@ -47,9 +47,10 @@ onMounted(() => {
 
 async function submit_recaptcha() {
   try {
+    const config = useRuntimeConfig()
     const token = await this.$recaptcha.getResponse()
     // console.log('ReCaptcha token:', token)
-    const response = await this.$axios.post(`${$config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
+    const response = await this.$axios.post(`${config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
     $patch({ is_captcha_validated: response.status == 200 })
     // console.log('is_captcha_validated :', is_captcha_validated)
     await this.$recaptcha.reset()
