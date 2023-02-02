@@ -20,7 +20,9 @@ export const use_cloud_store = defineStore('cloud', {
       } else {
         try {
           const config = useRuntimeConfig()
-          const { data } = await useFetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+          const { data, error } = await useFetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+          console.log("dat", data)
+          console.log("error", error)
           if (data) {
             this.ID = ID
             this.is_cloud_running = true
