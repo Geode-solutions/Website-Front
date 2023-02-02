@@ -2,7 +2,7 @@
   <v-container justify="space-around">
     <v-row rows="auto" align-content="center" align="center">
       <v-col v-if="!is_captcha_validated" cols="10" align-self="center" align="center">
-        <vue-recaptcha sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC" :loadRecaptchaScript="true"
+        <vue-recaptcha ref="recaptcha" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC" :loadRecaptchaScript="true"
           @expired="is_captcha_validated = false" @verify="submit_recaptcha" />
         <v-btn color="primary">
           Start tool
@@ -23,21 +23,25 @@ import { VueRecaptcha } from "vue-recaptcha";
 const cloud_store = use_cloud_store()
 const { is_cloud_running, is_captcha_validated } = storeToRefs(cloud_store)
 
-watch(() => cloud_store.is_captcha_validated, (value) => {
+watch(is_captcha_validated, (value) => {
+  console.log('is_captcha_validated : ', value)
   if (value === true) {
     cloud_store.create_connexion()
   }
 })
-watch(() => is_cloud_running, (value, oldValue) => {
+
+watch(is_cloud_running, (value, oldValue) => {
   if (value === false && oldValue == true) {
     cloud_store.$patch({ internal_error: true })
   }
 })
 
 onMounted(() => {
-  const config = useRuntimeConfig()
   if (process.client) {
+    recaptcha.execute()
+    const config = useRuntimeConfig()
     if (config.public.NODE_ENV !== 'production') {
+      console.log('patch')
       cloud_store.$patch({ is_captcha_validated: true })
     }
   }
@@ -46,10 +50,11 @@ onMounted(() => {
 async function submit_recaptcha () {
   try {
     const config = useRuntimeConfig()
-    const token = await this.$recaptcha.getResponse()
+    const token = await recaptcha.getResponse()
     console.log('ReCaptcha token:', token)
-    const response = await this.$axios.post(`${config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
-    $patch({ is_captcha_validated: response.status == 200 })
+    const response = await $fetch.raw(`${config.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
+    console.log(response)
+    cloud_store.$patch({ is_captcha_validated: response.status == 200 })
     await this.$recaptcha.reset()
   } catch (error) {
     console.log('ReCaptcha login error:', error)
