@@ -34,15 +34,15 @@ watch(is_cloud_running, (value) => {
 })
 
 onMounted(() => {
-  // if (is_cloud_running === true) {
-  get_packages_versions()
-  // }
+  if (is_cloud_running.value === true) {
+    get_packages_versions()
+  }
 })
 
 onActivated(() => {
-  // if (is_cloud_running === true) {
-  get_packages_versions()
-  // }
+  if (is_cloud_running.value === true) {
+    get_packages_versions()
+  }
 })
 
 async function get_packages_versions () {
