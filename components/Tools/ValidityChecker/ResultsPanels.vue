@@ -14,7 +14,7 @@
             input_geode_object: input_geode_object,
             input_file_name: input_file_name
           }" @update_result="update_result" />
-          <v-container v-else-if="check.value == false" class="pa-2">
+          <v-container v-else-if="check.value == false">
             Invalid = {{ check.list_invalidities }}
           </v-container>
         </v-expansion-panel-text>
@@ -76,11 +76,6 @@ watch(() => input_model_checks, () => {
   { deep: true }
 )
 onMounted(() => {
-  console.log('input_model_checks', input_model_checks)
-  console.log(input_geode_object)
-  console.log(input_file_name)
-  console.log(input_index)
-
   get_tests_results()
   opened_panels.value = Array.from(Array(input_model_checks.length).keys())
 })
@@ -103,6 +98,7 @@ async function get_tests_results () {
         check.value = data.value.Result
         check.list_invalidities = data.list_invalidities
       } catch (err) {
+        console.log('err : ', err)
         check.value = 'error'
       }
     }

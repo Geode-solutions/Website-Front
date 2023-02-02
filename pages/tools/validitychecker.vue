@@ -80,13 +80,7 @@ const stepper_tree = reactive({
         component_options: {
           input_model_checks: model_checks,
           input_geode_object: geode_object,
-          input_file_name: computed(() => {
-            if (files.length) {
-              return files[0].name
-            } else {
-              return ''
-            }
-          }),
+          input_file_name: computed(() => { return files.value.map((file) => file.name) }),
           index: 0,
         }
       },
