@@ -22,8 +22,12 @@ export const use_cloud_store = defineStore('cloud', {
           const config = useRuntimeConfig()
           const { data, error } = await useFetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
           console.log("dat", data)
+          console.log("dat", data != null)
+          console.log("dat", data !== null)
+          console.log("dat", data.value != null)
+          console.log("dat", data.value !== null)
           console.log("error", error)
-          if (data) {
+          if (data !== null) {
             this.ID = ID
             this.is_cloud_running = true
             return this.ping_task()
