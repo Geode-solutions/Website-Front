@@ -1,6 +1,6 @@
 <template>
   <v-row class="fill-height" no-gutters>
-    <v-navigation-drawer :rail="mini" :expand-on-hover="mini">
+    <v-navigation-drawer :rail="mini" :expand-on-hover="mini" absolute>
       <v-list>
         <v-list-item v-for="(tool, i) in tools_list" :key="i" :to="tool.to" link router exact :prepend-icon="tool.icon"
           :title="tool.title">

@@ -1,36 +1,16 @@
 <template>
-  <v-footer
-    class="bg-primary flex-column"
-    app
-  >
+  <v-footer class="bg-primary flex-column pa-5" absolute app :order="0">
     <v-row style="width:100%">
       <v-col cols="auto">
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="px-5"
-          :icon="icon.icon"
-          variant="plain"
-          size="30"
-        />
+        <v-btn v-for="icon in icons" :key="icon" class="px-5" :icon="icon.icon" variant="plain" size="30" />
       </v-col>
       <v-spacer />
       <v-col align="right">
-        <v-btn
-          size="small"
-          class="pa-2 ma-0"
-          variant="plain"
-          href="/legalNotice"
-        >
+        <v-btn size="small" class="pa-2 ma-0" variant="plain" href="/legalNotice">
           Legal notice
         </v-btn>
         |
-        <v-btn
-          size="small"
-          class="pa-2 ma-0"
-          variant="plain"
-          href="/credits"
-        >
+        <v-btn size="small" class="pa-2 ma-0" variant="plain" href="/credits">
           Credits
         </v-btn>
       </v-col>
@@ -44,17 +24,8 @@
       </v-col>
       <v-spacer />
       <v-col align="right">
-        <v-btn
-          target="_blank"
-          rel="noopener"
-          variant="text"
-          href="https://nuxt.com/"
-        >
-          <v-img
-            alt="logo"
-            width="120px"
-            :src="NuxtLogo"
-          />
+        <v-btn target="_blank" rel="noopener" variant="text" href="https://nuxt.com/">
+          <v-img alt="logo" width="120px" :src="NuxtLogo" />
         </v-btn>
       </v-col>
     </v-row>
