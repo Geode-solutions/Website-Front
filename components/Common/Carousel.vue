@@ -1,25 +1,17 @@
 <template>
-  <Carousel :settings="carrousel_settings">
-    <Slide
-      v-for="(item, index) in props.items"
-      :key="index"
-      class="carousel__slide"
-    >
-      <a
-        :href="item.url"
-        target="_blank"
-      >
-        <img
-          :src="item.logo"
-          class="carousel__item"
-        >
-      </a>
-    </Slide>
-    <template #addons>
-      <Navigation />
-      <Pagination />
-    </template>
-  </Carousel>
+  <ClientOnly>
+    <Carousel :settings="carrousel_settings">
+      <Slide v-for="(item, index) in props.items" :key="index" class="carousel__slide">
+        <a :href="item.url" target="_blank">
+          <img :src="item.logo" class="carousel__item">
+        </a>
+      </Slide>
+      <template #addons>
+        <Navigation />
+        <Pagination />
+      </template>
+    </Carousel>
+  </ClientOnly>
 </template>
 
 <script setup>
