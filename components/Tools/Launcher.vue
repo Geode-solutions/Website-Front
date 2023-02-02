@@ -38,7 +38,7 @@ watch(is_cloud_running, (value, oldValue) => {
 
 onMounted(() => {
   if (process.client) {
-    recaptcha.execute()
+    // recaptcha.execute()
     const config = useRuntimeConfig()
     if (config.public.NODE_ENV !== 'production') {
       console.log('patch')
@@ -47,7 +47,8 @@ onMounted(() => {
   }
 })
 
-async function submit_recaptcha () {
+async function submit_recaptcha (response) {
+  console.log("response captre ", response)
   try {
     const config = useRuntimeConfig()
     const token = await recaptcha.getResponse()
