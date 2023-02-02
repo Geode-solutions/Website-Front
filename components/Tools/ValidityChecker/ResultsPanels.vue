@@ -1,10 +1,16 @@
 <template>
   <v-container>
     <v-expansion-panels v-model="opened_panels" multiple elevation="5">
-      <v-expansion-panel v-for="(check, index) in input_model_checks" :key="index" class="card">
+      <v-expansion-panel v-for="(check, index) in input_model_checks" :key="index" class="card pa-0">
         <v-expansion-panel-title>
-          <ToolsValidityBadge :value="check.value" />
-          {{ check.sentence }}
+          <v-row align="center">
+            <v-col cols="auto">
+              <ToolsValidityBadge :value="check.value" />
+            </v-col>
+            <v-col>
+              {{ check.sentence }}
+            </v-col>
+          </v-row>
         </v-expansion-panel-title>
         <v-expansion-panel-text>
 
@@ -87,7 +93,8 @@ function update_result (index, value) {
 async function get_tests_results () {
   for (let index = 0; index < input_model_checks.length; index++) {
     const check = input_model_checks[index]
-    if (check.is_leaf) {
+    if (check.is_leaf && check.value == undefined) {
+
       const params = new FormData()
       params.append('object', input_geode_object)
       params.append('filename', input_file_name)
