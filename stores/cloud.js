@@ -18,25 +18,17 @@ export const use_cloud_store = defineStore('cloud', {
       if (ID === null || typeof ID === 'undefined') {
         return this.create_backend()
       } else {
-        try {
-          const config = useRuntimeConfig()
-          const { data, error } = await useFetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
-          console.log("dat", data)
-          console.log("dat", data != null)
-          console.log("dat", data !== null)
-          console.log("dat", data.value != null)
-          console.log("dat", data.value !== null)
-          console.log("error", error)
-          if (data !== null) {
-            this.ID = ID
-            this.is_cloud_running = true
-            return this.ping_task()
-          }
-        } catch (e) {
-          // If first ping fails
-          console.log("e", e)
+        const config = useRuntimeConfig()
+        const { data, error } = await useFetch(`${config.public.API_URL}/${ID}/ping`, { method: 'POST' })
+        console.log("error", error)
+        if (data.value !== null) {
+          this.ID = ID
+          this.is_cloud_running = true
+          return this.ping_task()
+        } else {
           return this.create_backend()
         }
+
       }
     },
     async create_backend () {
