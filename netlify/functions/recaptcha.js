@@ -1,9 +1,11 @@
+const axios = require('axios')
+
 exports.handler = async function (event) {
   try {
-    console.log(event)
-    const { data } = await useFetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`, { method: 'POST' })
-    console.log(data)
-    if (data) {
+    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`)
+      .then(response => response.data)
+    console.log(response)
+    if (response.success) {
       return {
         statusCode: 200,
         body: JSON.stringify(response)
