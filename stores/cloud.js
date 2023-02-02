@@ -36,7 +36,6 @@ export const use_cloud_store = defineStore('cloud', {
     async create_backend () {
       try {
         const config = useRuntimeConfig()
-        console.log(config.public.API_URL)
         const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
         this.ID = data.value.ID
         localStorage.setItem('ID', data.value.ID)
@@ -66,18 +65,8 @@ export const use_cloud_store = defineStore('cloud', {
         } else {
           this.is_cloud_running = false
         }
-
-        //   console.log('response :', response)
-        //   this.is_cloud_running = true
-        // } catch (e) {
-        //   if (this.request_counter == 0) {
-        //     console.log("error: ", e)
-        //     this.is_cloud_running = false
-        //     return this.create_backend()
-        //   }
-
       } catch (e) {
-        console.log("e", e)
+        console.log("error : ", e)
       }
     },
 

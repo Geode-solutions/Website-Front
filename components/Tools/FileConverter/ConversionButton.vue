@@ -1,23 +1,11 @@
 <template>
-  <v-btn
-    :loading="loading"
-    color="primary"
-    @click="convert_files()"
-  >
+  <v-btn :loading="loading" color="primary" @click="convert_files()">
     Convert
     <template #loader>
-      <v-progress-circular
-        indeterminate
-        size="20"
-        color="white"
-        width="3"
-      />
+      <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn
-    variant="text"
-    @click="current_step = 3"
-  >
+  <v-btn variant="text" @click="current_step = 3">
     Cancel
   </v-btn>
 </template>
@@ -41,10 +29,6 @@ const { tool_route } = stepper_tree
 const loading = ref(false)
 
 async function convert_files () {
-  console.log(input_files)
-  console.log(input_geode_object)
-  console.log(input_output_extension)
-
   for (let i = 0; i < input_files.length; i++) {
 
     let reader = new FileReader()
@@ -63,12 +47,11 @@ async function convert_files () {
       try {
         const config = useRuntimeConfig()
         const response = await $fetch.raw(`${config.API_URL}/${ID.value}/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
-        console.log(response)
         const new_file_name = response.headers.get('new-file-name')
         fileDownload(response._data, new_file_name)
         loading.value = false
       } catch (err) {
-        console.log(err)
+        console.log('error : ', err)
         loading.value = false
       }
     }

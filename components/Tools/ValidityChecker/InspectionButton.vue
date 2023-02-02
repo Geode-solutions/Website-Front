@@ -64,7 +64,6 @@ async function get_tests_names () {
   params.append('object', input_geode_object)
   const { data } = await api_fetch(`${tool_route}/testsnames`, { body: params, method: 'POST' })
   stepper_tree.model_checks = data.value.modelChecks
-  console.log('model_checks', stepper_tree.model_checks)
 }
 
 </script>

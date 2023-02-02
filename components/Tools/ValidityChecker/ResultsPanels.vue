@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="pa-2">
     <v-expansion-panels v-model="opened_panels" multiple elevation="5">
-      <v-expansion-panel v-for="(check, index) in input_model_checks" :key="index" class="card pa-0">
+      <v-expansion-panel v-for="(check, index) in input_model_checks" :key="index" class="card">
         <v-expansion-panel-title>
           <v-row align="center">
             <v-col cols="auto">

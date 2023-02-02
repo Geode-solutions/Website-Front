@@ -14,7 +14,7 @@ exports.handler = async function (event) {
       body: JSON.stringify(response)
     }
   } catch (e) {
-    // console.log('ReCaptcha error:', e)
+    console.log('ReCaptcha error:', e)
     return {
       statusCode: 500,
       body: 'Internal error'
