@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="11" class="ma-3">
-      <v-card loading elevation="5">
+      <v-card loading elevation="5" class="card">
         <v-card-title class="justify-center" align="center">
           Cloud instance is starting...
         </v-card-title>
