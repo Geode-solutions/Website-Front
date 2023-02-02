@@ -8,7 +8,7 @@
           Start tool
         </v-btn>
       </v-col>
-      <v-col v-if="!is_cloud_running">
+      <v-col v-if="!is_cloud_running && is_captcha_validated">
         <ToolsLoading />
       </v-col>
     </v-row>
