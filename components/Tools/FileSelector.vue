@@ -26,9 +26,7 @@ const accept = ref('')
 const files = ref([])
 
 watch(files, (value) => {
-  console.log(value)
   stepper_tree.files = value
-  console.log(stepper_tree.files)
   stepper_tree.current_step_index++
 })
 

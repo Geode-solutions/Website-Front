@@ -78,7 +78,16 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsValidityCheckerResultsPanels),
         component_options: {
-          input_model_checks: model_checks
+          input_model_checks: model_checks,
+          input_geode_object: geode_object,
+          input_file_name: computed(() => {
+            if (files.length) {
+              return files[0].name
+            } else {
+              return ''
+            }
+          }),
+          index: 0,
         }
       },
       chips: []

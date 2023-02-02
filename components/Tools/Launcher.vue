@@ -39,13 +39,13 @@ onMounted(() => {
   if (process.client) {
     if (config.public.NODE_ENV !== 'production') {
       // console.log('is_captcha_validated', is_captcha_validated)
-      // cloud_store.$patch({ is_captcha_validated: true })
+      cloud_store.$patch({ is_captcha_validated: true })
       // console.log('is_captcha_validated', is_captcha_validated)
     }
   }
 })
 
-async function submit_recaptcha() {
+async function submit_recaptcha () {
   try {
     const config = useRuntimeConfig()
     const token = await this.$recaptcha.getResponse()

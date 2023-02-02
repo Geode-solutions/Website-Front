@@ -1,24 +1,12 @@
 <template>
   <div class="pa-5">
-    <v-btn
-      :loading="loading"
-      color="primary"
-      @click="inspect_file()"
-    >
+    <v-btn :loading="loading" color="primary" @click="inspect_file()">
       Inspect
       <template #loader>
-        <v-progress-circular
-          indeterminate
-          size="20"
-          color="white"
-          width="3"
-        />
+        <v-progress-circular indeterminate size="20" color="white" width="3" />
       </template>
     </v-btn>
-    <v-btn
-      variant="text"
-      @click="set_current_step(2)"
-    >
+    <v-btn variant="text" @click="set_current_step(2)">
       Cancel
     </v-btn>
   </div>
@@ -75,8 +63,8 @@ async function get_tests_names () {
   const params = new FormData()
   params.append('object', input_geode_object)
   const { data } = await api_fetch(`${tool_route}/testsnames`, { body: params, method: 'POST' })
-  console.log(data)
   stepper_tree.model_checks = data.value.modelChecks
+  console.log('model_checks', stepper_tree.model_checks)
 }
 
 </script>
