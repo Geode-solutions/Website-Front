@@ -1,8 +1,8 @@
 exports.handler = async function (event) {
   try {
+    console.log(event)
     const { data } = await useFetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`, { method: 'POST' })
-      .then(response => response.data)
-    // console.log(response)
+    console.log(data)
     if (data) {
       return {
         statusCode: 200,
