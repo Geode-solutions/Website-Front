@@ -38,22 +38,21 @@ async function upload_file () {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = async function (event) {
-      try {
-        const params = new FormData()
-        params.append('file', event.target.result)
-        params.append('filename', input_files[0].name)
-        params.append('filesize', input_files[0].size)
+      const params = new FormData()
+      params.append('file', event.target.result)
+      params.append('filename', input_files[0].name)
+      params.append('filesize', input_files[0].size)
 
-        loading.value = true
-        const { data } = await api_fetch(`${tool_route}/uploadfile`, { body: params, method: 'POST' })
-        if (data) {
-          loading.value = false
-        }
-        resolve(data)
-      } catch (err) {
+      loading.value = true
+      const { data, error } = await api_fetch(`${tool_route}/uploadfile`, { body: params, method: 'POST' })
+      if (data.value !== null) {
         loading.value = false
-        reject(err)
+        resolve(data)
+      } else {
+        loading.value = false
+        reject(error)
       }
+
     }
     reader.readAsDataURL(input_files[0])
   })

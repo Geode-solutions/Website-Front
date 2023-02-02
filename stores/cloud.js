@@ -32,22 +32,16 @@ export const use_cloud_store = defineStore('cloud', {
       }
     },
     async create_backend () {
-      try {
-        const config = useRuntimeConfig()
-        const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
+      const config = useRuntimeConfig()
+      const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
+      if (data.value !== null) {
         this.ID = data.value.ID
         localStorage.setItem('ID', data.value.ID)
         this.is_cloud_running = true
         return this.ping_task()
-      } catch (e) {
-        console.log("e", e)
-        let status = e.toJSON().status
-        if (status === 500) {
-          this.internal_error = true
-        } else if (status === 404) {
-          this.is_under_maintenance = true
-        }
-        console.log("error: ", e.toJSON().message)
+      } else {
+        console.log("error : ", error)
+        this.internal_error = true
       }
     },
 
@@ -55,16 +49,13 @@ export const use_cloud_store = defineStore('cloud', {
       setInterval(() => this.do_ping(), 10 * 1000)
     },
     async do_ping () {
-      try {
-        const config = useRuntimeConfig()
-        const { data } = await useFetch(`${config.public.API_URL}/${this.ID}/ping`, { method: 'POST' })
-        if (data) {
-          this.is_cloud_running = true
-        } else {
-          this.is_cloud_running = false
-        }
-      } catch (e) {
-        console.log("error : ", e)
+      const config = useRuntimeConfig()
+      const { data, error } = await useFetch(`${config.public.API_URL}/${this.ID}/ping`, { method: 'POST' })
+      if (data.value !== null) {
+        this.is_cloud_running = true
+      } else {
+        this.is_cloud_running = false
+        console.log("error : ", error)
       }
     },
 
