@@ -5,7 +5,7 @@
         <vue-recaptcha ref="recaptcha" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC" :loadRecaptchaScript="true"
           @expired="is_captcha_validated = false" @verify="submit_recaptcha" align-self="center" />
       </v-col>
-      <v-col v-if="!is_cloud_running && is_captcha_validated">
+      <v-col v-if="!is_cloud_running && is_connexion_launched">
         <ToolsLoading />
       </v-col>
     </v-row>
@@ -18,7 +18,7 @@ import { storeToRefs } from 'pinia'
 import { VueRecaptcha } from "vue-recaptcha";
 
 const cloud_store = use_cloud_store()
-const { is_cloud_running, is_captcha_validated } = storeToRefs(cloud_store)
+const { is_cloud_running, is_captcha_validated, is_connexion_launched } = storeToRefs(cloud_store)
 
 watch(is_captcha_validated, (value) => {
   console.log('is_captcha_validated : ', value)
