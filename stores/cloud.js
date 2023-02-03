@@ -55,6 +55,7 @@ export const use_cloud_store = defineStore('cloud', {
         this.is_cloud_running = true
       } else {
         this.is_cloud_running = false
+        this.internal_error = true
         console.log("error : ", error)
       }
     },

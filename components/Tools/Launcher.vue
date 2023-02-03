@@ -4,9 +4,6 @@
       <v-col v-if="!is_captcha_validated" cols="12" align-self="center" align="center">
         <vue-recaptcha ref="recaptcha" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC" :loadRecaptchaScript="true"
           @expired="is_captcha_validated = false" @verify="submit_recaptcha" align-self="center" />
-        <v-btn color="primary">
-          Start tool
-        </v-btn>
       </v-col>
       <v-col v-if="!is_cloud_running && is_captcha_validated">
         <ToolsLoading />
@@ -38,7 +35,6 @@ watch(is_cloud_running, (value, oldValue) => {
 
 onMounted(() => {
   if (process.client) {
-    // recaptcha.execute()
     const config = useRuntimeConfig()
     if (config.public.NODE_ENV !== 'production') {
       cloud_store.$patch({ is_captcha_validated: true })
