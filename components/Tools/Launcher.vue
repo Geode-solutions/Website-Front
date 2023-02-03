@@ -2,6 +2,9 @@
   <v-container justify="space-around">
     <v-row rows="auto" align-content="center" align="center">
       <v-col v-if="!is_captcha_validated" cols="12" align-self="center" align="center">
+        <h4>
+          Complete the recaptcha to launch the tool
+        </h4>
         <vue-recaptcha ref="recaptcha" sitekey="6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC" :loadRecaptchaScript="true"
           @expired="is_captcha_validated = false" @verify="submit_recaptcha" align-self="center" />
       </v-col>
@@ -37,7 +40,7 @@ onMounted(() => {
   if (process.client) {
     const config = useRuntimeConfig()
     if (config.public.NODE_ENV !== 'production') {
-      cloud_store.$patch({ is_captcha_validated: true })
+      // cloud_store.$patch({ is_captcha_validated: true })
     }
   }
 })
