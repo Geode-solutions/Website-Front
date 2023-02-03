@@ -57,7 +57,7 @@ const display = computed(() => {
   return values
 })
 
-watch(() => input_model_checks, () => {
+watch(input_model_checks, () => {
   let nb_results = 0
   for (let index = 0; index < input_model_checks.length; index++) {
     const current_check = input_model_checks[index]

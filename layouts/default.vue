@@ -28,11 +28,3 @@ onMounted(() => { loading.value = false })
   opacity: 0 !important;
 }
 </style>
-
-<style>
-.v-card__text,
-.v-card__title {
-  word-break: normal;
-  /* maybe !important  */
-}
-</style>

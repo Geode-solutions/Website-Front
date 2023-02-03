@@ -91,8 +91,8 @@ const geode_objects = {
         tooltip: 'TriangulatedSurface3D',
         image: triangulated_surface3d,
     },
-    vertex_set: {
-        tooltip: 'vertex_set',
+    VertexSet: {
+        tooltip: 'VertexSet',
         image: vertex_set,
     }
 }

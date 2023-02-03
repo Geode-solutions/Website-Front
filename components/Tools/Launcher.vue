@@ -1,6 +1,6 @@
 <template>
   <v-container justify="space-around">
-    <v-row rows="auto" align-content="center" align="center">
+    <v-row align-content="center" align="center">
       <v-col v-if="!is_captcha_validated" cols="12" align-self="center" align="center">
         <h4 class="pb-3">
           Please complete the recaptcha to launch the tool
@@ -40,7 +40,7 @@ onMounted(() => {
   if (process.client) {
     const config = useRuntimeConfig()
     if (config.public.NODE_ENV !== 'production') {
-      // cloud_store.$patch({ is_captcha_validated: true })
+      cloud_store.$patch({ is_captcha_validated: true })
     }
   }
 })

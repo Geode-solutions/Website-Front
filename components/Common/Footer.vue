@@ -29,7 +29,6 @@
         </v-btn>
       </v-col>
     </v-row>
-    <!-- </div> -->
   </v-footer>
 </template>
 
