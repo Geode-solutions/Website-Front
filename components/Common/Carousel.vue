@@ -17,30 +17,48 @@
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 
 const props = defineProps({
   items: { type: Array, required: true }
 })
 
-const { name } = useDisplay()
-const nb_items_to_display = computed(() => {
-  switch (name.value) {
-    case 'xs': return 1
-    case 'sm': return 2
-    default: return 3
+const { name } = toRefs(useDisplay())
+const nb_items_to_display = ref(3)
+watch(name, (value) => {
+  console.log(value)
+  switch (value) {
+    case 'xs': {
+      nb_items_to_display.value = 1
+      break
+    }
+    case 'sm': {
+      nb_items_to_display.value = 2
+      break
+    }
+    default: {
+      nb_items_to_display.value = 3
+      break
+    }
   }
-})
+},
+  {
+    immediate: true,
+  }
+)
 
-const carrousel_settings = {
+const carrousel_settings = reactive({
   autoplay: 2000,
   itemsToShow: nb_items_to_display.value,
-  itemsToScroll: props.items.length / nb_items_to_display.value,
+  itemsToScroll: 1,
   pauseAutoplayOnHover: true,
   transition: 1000,
   wrapAround: true
-}
+})
+
+onMounted(() => {
+  console.log(carrousel_settings)
+})
 </script>
 
 <style scoped>
