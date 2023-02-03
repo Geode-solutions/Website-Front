@@ -34,6 +34,7 @@ export const use_cloud_store = defineStore('cloud', {
     async create_backend () {
       const config = useRuntimeConfig()
       const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
+      console.log(data)
       if (data.value !== null) {
         this.ID = data.value.ID
         localStorage.setItem('ID', data.value.ID)
