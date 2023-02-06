@@ -31,7 +31,7 @@
         <v-row justify="space-around">
           <v-col v-for="(tool, i) in tools_list.slice(-tools_list.length + 1, tools_list.length)" :key="i" cols="11"
             md="4">
-            <v-card v-ripple class="pa-5" hover elevation="5" :to="tool.to">
+            <v-card v-ripple class="card pa-5" hover elevation="5" :to="tool.to">
               <v-row justify="center" align="center">
                 <v-col cols="auto">
                   <v-icon color="primary" size="100" class="justify-center">
@@ -57,4 +57,10 @@
 <script setup>
 import tools_list from '@/assets/tools_list'
 </script>
+
+<style scoped>
+.card {
+  border-radius: 15px
+}
+</style>
 
