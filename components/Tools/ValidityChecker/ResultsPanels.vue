@@ -103,7 +103,7 @@ async function get_tests_results () {
       try {
         const { data } = await api_fetch(`${tool_route}/inspectfile`, { body: params, method: 'POST' })
         check.value = data.value.Result
-        check.list_invalidities = data.list_invalidities
+        check.list_invalidities = data.value.list_invalidities
       } catch (err) {
         console.log('err : ', err)
         check.value = 'error'
