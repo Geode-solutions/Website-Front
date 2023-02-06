@@ -151,7 +151,7 @@ import logo_ring from '@/assets/img/logos/logo_ring.png'
 import logo_gsc from '@/assets/img/logos/logo_GSC.png'
 import logo_bsc from '@/assets/img/logos/logo_BSC.png'
 
-import { loadFull } from "tsparticles";
+import { loadFull } from "tsparticles"
 
 const particlesInit = async engine => {
   await loadFull(engine);
