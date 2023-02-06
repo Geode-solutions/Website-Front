@@ -1,3 +1,9 @@
+[[redirects]]
+  from = "https://geode-solutions.netlify.com/*"
+  to = "https://geode-solutions.com/:splat"
+  status = 301
+  force = true
+
 [context.production.environment]
   SITE_BRANCH = ""
   RECAPTCHA_SITE_KEY = "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"

@@ -1,66 +1,27 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from 'vuetify/lib/util/colors'
 
-export default {
-  /*
-    ** Environment variables
-  */
-  publicRuntimeConfig: {
-    API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:5000',
-    SITE_URL: process.env.SITE_URL,
-    SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
-    NODE_ENV: process.env.NODE_ENV,
-    recaptcha: {
-      siteKey: process.env.RECAPTCHA_SITE_KEY
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:443',
+      SITE_URL: process.env.SITE_URL,
+      SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
+      NODE_ENV: process.env.NODE_ENV,
     }
   },
 
   target: 'static',
-  /*
-   ** Headers of the page
-   */
-  head: {
-    title: 'Geode-solutions - next generation of modeling tools',
-    meta:
-      [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' }, {
-          hid: 'description',
-          name: 'description',
-          content:
-            'Technology company tackling next generation of modeling challenges using advanced meshing'
-        }
-      ],
-    link:
-      [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
-  },
 
-  /*
-   ** Customize the progress-bar color
-   */
+  // ** Customize the progress-bar color
   loading: { color: '#fff' },
 
-  /*
-   ** Global CSS
-   */
-  css: ['@/assets/css/global_classes.css'],
+  // ** Global CSS
+  css: ['vuetify/lib/styles/main.sass'],
 
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins:
-    [
-      '@/plugins/vuetify_icons', { src: '@/plugins/carousel', ssr: false },
-      { src: '@/plugins/particles', ssr: false }, '@/plugins/axios'
-    ],
-
-  /*
-   ** Nuxt.js modules
-   */
+  // ** Nuxt.js modules
   modules:
     [
-      ['nuxt-cookie-control',
+      ['@dargmuesli/nuxt-cookie-control',
         {
           controlButton: true,
           domain: 'geode-solutions.com',
@@ -83,29 +44,13 @@ export default {
           }
         }
       ],
-      '@nuxtjs/axios',
-      '@aceforth/nuxt-netlify',
-      '@nuxtjs/vuetify',
-      ['@nuxtjs/google-analytics', { id: 'UA-137823587-1', dev: false }],
-      '@nuxtjs/recaptcha'
+      ['@pinia/nuxt',
+        {
+          autoImports: [
+            'storeToRefs',
+          ],
+        }],
     ],
-
-  recaptcha: {
-    version: 2,
-  },
-
-  vuetify: {
-    theme: {
-      themes: {
-        light: {
-          primary: colors.teal.darken1,
-          secondary: colors.teal.lighten4,
-          accent: colors.red.darken4
-        }
-      }
-    },
-    icons: { iconfont: 'mdi', values: { logo: { component: 'GeodeLogo' } } }
-  },
 
   cookies: {
     necessary: [
@@ -118,27 +63,16 @@ export default {
     ]
   },
 
-  /*
-  ** Netlify configuration
-  */
-  netlify: {
-    redirects: [{
-      from: 'https://geode-solutions.netlify.com/*',
-      to: 'https://geode-solutions.com/:splat',
-      status: 301,
-      force: true
-    }]
-  },
-
-  /*
-   ** Build configuration
-   */
+  // ** Build configuration
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    // extend(config, ctx) {}
+    transpile: ['vuetify'],
+  },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => ['md-linedivider'].includes(tag)
+    }
+  },
+  nitro: {
+    preset: 'netlify'
   }
-}
-
-
+})

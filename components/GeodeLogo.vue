@@ -1,9 +1,7 @@
 <template>
-  <img alt="geode-solutions logo" src="@/assets/logo.svg">
+  <v-img alt="geode-solutions logo" :src="logo_url" width="55" class="pr-5" />
 </template>
 
-<script>
-export default {
-  name: 'GeodeLogo',
-}
+<script setup>
+import logo_url from '@/assets/img/logo.svg'
 </script>
