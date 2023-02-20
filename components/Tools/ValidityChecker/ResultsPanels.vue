@@ -15,11 +15,11 @@
         <v-expansion-panel-text>
 
           <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" :component_options="{
-            input_index: index,
+            input_index_array: input_index_array.push(index),
             input_model_checks: check.children,
             input_geode_object: input_geode_object,
             input_file_name: input_file_name
-          }" @update_result="update_result" />
+          }" />
           <v-container v-else-if="check.value == false">
             Invalid = {{ check.list_invalidities }}
           </v-container>
@@ -30,19 +30,21 @@
 </template>
 
 <script setup>
+const stepper_tree = inject('stepper_tree')
+
 const props = defineProps({
   component_options: { type: Object, required: true }
 })
 
-const emit = defineEmits(['update_result'])
+// const emit = defineEmits(['update_result'])
 
 const {
   input_model_checks,
   input_geode_object,
   input_file_name,
-  input_index } = props.component_options
+  input_index_array } = props.component_options
+console.log(input_index_array)
 
-const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
 const opened_panels = ref([])
@@ -65,7 +67,8 @@ watch(input_model_checks, () => {
       continue
     }
     if (current_check.value != true) {
-      emit('update_result', input_index, false)
+      // emit('update_result', input_index_array, false)
+      update_result(stepper_tree.model_checks, input_index_array, false)
       return
     } else if (current_check.value == true) {
       let index_of_index = opened_panels.value.indexOf(index)
@@ -76,7 +79,8 @@ watch(input_model_checks, () => {
     nb_results++
   }
   if (nb_results == input_model_checks.length) {
-    emit('update_result', input_index, true)
+    // emit('update_result', input_index_array, true)
+    update_result(stepper_tree.model_checks, input_index_array, true)
   }
 },
   { deep: true }
@@ -86,8 +90,12 @@ onMounted(() => {
   opened_panels.value = Array.from(Array(input_model_checks.length).keys())
 })
 
-function update_result (index, value) {
-  input_model_checks[index].value = value
+function update_result (model_checks, input_index_array, value, list_invalidities = []) {
+  model_checks[index].value = value
+  if (model_checks[index].is_leaf) {
+    model_checks[index].list_invalidities = list_invalidities
+  }
+  update_result(model_checks.children, input_index_array.shift(), value, list_invalidities)
 }
 
 async function get_tests_results () {
@@ -99,15 +107,17 @@ async function get_tests_results () {
       params.append('object', input_geode_object)
       params.append('filename', input_file_name)
       params.append('test', check.route)
-
-      try {
-        const { data } = await api_fetch(`${tool_route}/inspectfile`, { body: params, method: 'POST' })
-        check.value = data.value.Result
-        check.list_invalidities = data.value.list_invalidities
-      } catch (err) {
+      // if (check.route == 'intersecting_surfaces_elements') {
+      const { data, error } = await api_fetch(`${tool_route}/inspectfile`, { body: params, method: 'POST' })
+      if (data) {
+        // check.list_invalidities = data.value.list_invalidities
+        update_result(stepper_tree.model_checks, input_index_array, data.value.Result, list_invalidities)
+      } else if (error) {
         console.log('err : ', err)
-        check.value = 'error'
+        update_result(stepper_tree.model_checks, input_index_array, 'error')
+
       }
+      // }
     }
   }
 }
