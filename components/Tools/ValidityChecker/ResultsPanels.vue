@@ -99,25 +99,35 @@ async function get_tests_results () {
   for (let index = 0; index < input_model_checks.length; index++) {
     const check = input_model_checks[index]
     if (check.is_leaf && check.value == undefined) {
-      const params = new FormData()
-      params.append('object', input_geode_object)
-      params.append('filename', input_file_name)
-      params.append('test', check.route)
-
       const children_array = input_index_array.concat(index)
-      const { data, error } = await api_fetch(`${tool_route}/inspectfile`, {
-        body: params, method: 'POST',
-
-        onResponse ({ request, response, options }) {
-          if (response.status == 200) {
-            update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
-          }
-          else {
-            update_result(stepper_tree.model_checks, children_array, 'error')
-          }
-        }
-      })
+      get_test_result(input_geode_object, input_file_name, check.route, children_array, 10)
     }
+  }
+}
+
+
+async function get_test_result (object, filename, test, children_array, max_retry) {
+  const params = new FormData()
+  params.append('object', object)
+  params.append('filename', filename)
+  params.append('test', test)
+
+  for (let retry = 0; retry < max_retry; retry++) {
+    api_fetch(`${tool_route}/inspectfile`, {
+      body: params, method: 'POST',
+      onResponse ({ response }) {
+        if (response.status == 200) {
+          update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
+          return
+        }
+        else if (response.status == 504) {
+          get_test_result(object, filename, test, children_array, max_retry)
+
+        } else {
+          update_result(stepper_tree.model_checks, children_array, 'error')
+        }
+      }
+    })
   }
 }
 </script>
