@@ -121,7 +121,6 @@ async function get_test_result (object, filename, test, children_array, max_retr
           return
         }
         else if (response.status == 504) {
-          get_test_result(object, filename, test, children_array, max_retry)
 
         } else {
           update_result(stepper_tree.model_checks, children_array, 'error')
