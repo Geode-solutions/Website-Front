@@ -105,7 +105,7 @@ async function get_tests_results () {
       params.append('test', check.route)
 
       const children_array = input_index_array.concat(index)
-      const { data, error } = api_fetch(`${tool_route}/inspectfile`, {
+      const { data, error } = await api_fetch(`${tool_route}/inspectfile`, {
         body: params, method: 'POST',
 
         onResponse ({ request, response, options }) {
