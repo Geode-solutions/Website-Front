@@ -9,6 +9,7 @@ import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
 
+
 const cards_list = [
   {
     icon: 'mdi-file-check',
@@ -81,7 +82,7 @@ const stepper_tree = reactive({
           input_model_checks: model_checks,
           input_geode_object: geode_object,
           input_file_name: computed(() => { return files.value.map((file) => file.name) }),
-          index: 0,
+          input_index_array: [],
         }
       },
       chips: []

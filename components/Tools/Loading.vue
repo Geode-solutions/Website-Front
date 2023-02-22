@@ -9,8 +9,8 @@
           Why do you have to wait?
         </v-card-subtitle>
         <v-card-text align="center">
-          We start our server only on demand... and this takes a few seconds before
-          you can use our free tools (up to 30 seconds).
+          We start our server only on demand... and this takes a few seconds (up to 30) before
+          you can use our free tools.
           <br>
           This is aligned with an energy sobriety strategy. So be patient
           <v-icon color="primary" size="20">
