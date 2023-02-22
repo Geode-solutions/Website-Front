@@ -112,21 +112,17 @@ async function get_test_result (object, filename, test, children_array, max_retr
   params.append('filename', filename)
   params.append('test', test)
 
-  for (let retry = 0; retry < max_retry; retry++) {
-    api_fetch(`${tool_route}/inspectfile`, {
-      body: params, method: 'POST',
-      onResponse ({ response }) {
-        if (response.status == 200) {
-          update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
-          return
-        }
-        else if (response.status == 504) {
-
-        } else {
-          update_result(stepper_tree.model_checks, children_array, 'error')
-        }
+  api_fetch(`${tool_route}/inspectfile`, {
+    body: params, method: 'POST', retry: max_retry,
+    onResponse ({ response }) {
+      if (response.status == 200) {
+        update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
+        return
+      } else {
+        update_result(stepper_tree.model_checks, children_array, 'error')
       }
-    })
-  }
+    }
+  })
 }
+
 </script>
