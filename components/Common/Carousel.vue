@@ -26,7 +26,6 @@ const props = defineProps({
 const { name } = toRefs(useDisplay())
 const nb_items_to_display = ref(3)
 watch(name, (value) => {
-  console.log(value)
   switch (value) {
     case 'xs': {
       nb_items_to_display.value = 1

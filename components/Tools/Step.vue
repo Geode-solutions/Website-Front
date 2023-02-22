@@ -35,14 +35,6 @@ const { step_index } = props
 const stepper_tree = inject('stepper_tree')
 const { current_step_index, steps } = toRefs(stepper_tree)
 
-
-onMounted(() => {
-  // if (step_index.value === 3) {
-  // console.log(steps[step_index].component.component_options)
-  // }
-})
-
-
 function set_current_step (step_index) {
   stepper_tree.current_step_index = step_index
 }

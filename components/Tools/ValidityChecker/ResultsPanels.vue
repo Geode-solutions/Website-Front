@@ -53,7 +53,6 @@ watch(input_model_checks, () => {
       continue
     }
     if (current_check.value != true) {
-      console.log("watcher false", index)
       update_result(stepper_tree.model_checks, input_index_array, false)
       return
     }
@@ -63,7 +62,6 @@ watch(input_model_checks, () => {
     }
     nb_results++
   }
-  console.log("watcher true")
   if (nb_results == input_model_checks.length) {
     update_result(stepper_tree.model_checks, input_index_array, true)
   }
@@ -77,7 +75,6 @@ onMounted(() => {
 
 function update_array (index) {
   const array = input_index_array.concat(index)
-  console.log("array", array, index)
   return array
 }
 
