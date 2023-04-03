@@ -26,7 +26,7 @@
     "d3-cloud": "^1.2.5",
     "js-file-download": "^0.4.12",
     "latest": "^0.2.0",
-    "nuxt": "^3.2.3",
+    "nuxt": "^3.3.3",
     "sass": "^1.58.0",
     "tsparticles": "^2.8.0",
     "vue-gtag": "^2.0.1",
