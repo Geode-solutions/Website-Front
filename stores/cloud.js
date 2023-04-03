@@ -6,8 +6,6 @@ export const use_cloud_store = defineStore('cloud', {
     is_captcha_validated: false,
     is_cloud_running: false,
     is_connexion_launched: false,
-    is_under_maintenance: false,
-    internal_error: false,
     request_counter: 0
   }),
   actions: {

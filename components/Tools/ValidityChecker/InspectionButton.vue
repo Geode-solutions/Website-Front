@@ -13,6 +13,8 @@
 </template>
 
 <script setup>
+import { use_errors_store } from '@/stores/errors'
+const errors_store = use_errors_store()
 
 const props = defineProps({
   component_options: { type: Object, required: true }
@@ -31,9 +33,6 @@ async function inspect_file () {
   stepper_tree.current_step_index++
 }
 
-
-
-
 async function upload_file () {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -44,12 +43,14 @@ async function upload_file () {
       params.append('filesize', input_files[0].size)
 
       loading.value = true
-      const { data, error } = await api_fetch(`${tool_route}/uploadfile`, { body: params, method: 'POST' })
+      const request_route = `${tool_route}/uploadfile`
+      const { data, error } = await api_fetch(request_route, { body: params, method: 'POST' })
       if (data.value !== null) {
         loading.value = false
         resolve(data)
       } else {
         loading.value = false
+        errors_store.add_error({ 'code': code, 'route': route, 'message': 'toto' })
         reject(error)
       }
 

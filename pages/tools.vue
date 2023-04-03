@@ -1,4 +1,10 @@
 <template>
+  <v-row rows="1">
+    <v-col cols="12">
+
+      <ToolsErrorsBanner />
+    </v-col>
+  </v-row>
   <v-row class="fill-height" no-gutters>
     <v-navigation-drawer :rail="mini" :expand-on-hover="mini" absolute>
       <v-list>
