@@ -1,16 +1,7 @@
 <template>
   <v-row class="justify-left">
-    <v-col
-      v-for="file_extension in file_extensions"
-      :key="file_extension"
-      cols="2"
-    >
-      <v-card
-        class="card ma-2"
-        hover
-        elevation="5"
-        @click="set_output_extension(file_extension)"
-      >
+    <v-col v-for="file_extension in file_extensions" :key="file_extension" cols="2">
+      <v-card class="card ma-2" hover elevation="5" @click="set_output_extension(file_extension)">
         <v-card-title align="center">
           {{ file_extension }}
         </v-card-title>
@@ -20,6 +11,9 @@
 </template>
 
 <script setup>
+import { use_errors_store } from '@/stores/errors'
+const errors_store = use_errors_store()
+
 const props = defineProps({
   component_options: { type: Object, required: true },
 })
@@ -34,14 +28,23 @@ onMounted(() => {
   get_output_file_extensions(input_geode_object, tool_route)
 })
 
-async function get_output_file_extensions(input_geode_object, tool_route) {
+async function get_output_file_extensions (input_geode_object, tool_route) {
   const params = new FormData()
   params.append('object', input_geode_object)
-  const { data } = await api_fetch(`${tool_route}/outputfileextensions`, { body: params, method: 'POST' })
-  file_extensions.value = data.value.outputfileextensions
+  const route = `${tool_route}/outputfileextensions`
+  await api_fetch(route, {
+    method: 'POST', body: params, async onResponse ({ response }) {
+      file_extensions.value = response._data.outputfileextensions
+    },
+    onResponseError ({ response }) {
+      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      console.log(error)
+      console.log(response)
+    }
+  })
 }
 
-function set_output_extension(extension) {
+function set_output_extension (extension) {
   stepper_tree.output_extension = extension
   stepper_tree.current_step_index++
 }

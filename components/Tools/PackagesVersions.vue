@@ -17,7 +17,10 @@
 
 <script setup>
 import { use_cloud_store } from '@/stores/cloud'
+import { use_errors_store } from '@/stores/errors'
+
 const cloud_store = use_cloud_store()
+const errors_store = use_errors_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 
 const packages_versions = ref([])
@@ -46,7 +49,16 @@ onActivated(() => {
 })
 
 async function get_packages_versions () {
-  const { data } = await api_fetch(`${tool_route}/versions`, { method: 'GET' })
-  packages_versions.value = data.value.versions
+  const route = `${tool_route}/versions`
+  await api_fetch(route, {
+    method: 'GET', async onResponse ({ response }) {
+      packages_versions.value = response._data.versions
+    },
+    onResponseError ({ response }) {
+      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      console.log(error)
+      console.log(response)
+    }
+  })
 }
 </script>

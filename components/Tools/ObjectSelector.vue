@@ -19,6 +19,8 @@
 </template>
 
 <script setup>
+import { use_errors_store } from '@/stores/errors'
+const errors_store = use_errors_store()
 
 const props = defineProps({
   component_options: { type: Object, required: true },
@@ -31,10 +33,19 @@ const { tool_route } = stepper_tree
 const allowed_objects = ref([])
 
 async function get_allowed_objects (input_files) {
+  const route = `/${tool_route}/allowedobjects`
   const params = new FormData()
   params.append('filename', input_files[0].name)
-  const { data } = await api_fetch(`/${tool_route}/allowedobjects`, { body: params, method: 'POST' })
-  allowed_objects.value = data.value.objects
+  await api_fetch(route, {
+    method: 'POST', body: params, async onResponse ({ response }) {
+      allowed_objects.value = response._data.objects
+    },
+    onResponseError ({ response, error }) {
+      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      console.log(error)
+      console.log(response)
+    }
+  })
 }
 
 function set_geode_object (geode_object) {

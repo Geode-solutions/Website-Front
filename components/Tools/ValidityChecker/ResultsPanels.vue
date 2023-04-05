@@ -28,6 +28,9 @@
 </template>
 
 <script setup>
+import { use_errors_store } from '@/stores/errors'
+const errors_store = use_errors_store()
+
 const stepper_tree = inject('stepper_tree')
 
 const props = defineProps({

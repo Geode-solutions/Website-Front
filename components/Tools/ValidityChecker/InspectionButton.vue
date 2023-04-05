@@ -43,17 +43,20 @@ async function upload_file () {
       params.append('filesize', input_files[0].size)
 
       loading.value = true
-      const request_route = `${tool_route}/uploadfile`
-      const { data, error } = await api_fetch(request_route, { body: params, method: 'POST' })
-      if (data.value !== null) {
-        loading.value = false
-        resolve(data)
-      } else {
-        loading.value = false
-        errors_store.add_error({ 'code': code, 'route': route, 'message': 'toto' })
-        reject(error)
-      }
-
+      const route = `${tool_route}/uploadfile`
+      await api_fetch(route, {
+        method: 'POST', body: params, async onResponse ({ response }) {
+          loading.value = false
+          resolve(data)
+        },
+        onResponseError ({ response, error }) {
+          loading.value = false
+          errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+          console.log(error)
+          reject(error)
+          console.log(response)
+        }
+      })
     }
     reader.readAsDataURL(input_files[0])
   })
@@ -62,8 +65,17 @@ async function upload_file () {
 async function get_tests_names () {
   const params = new FormData()
   params.append('object', input_geode_object)
-  const { data } = await api_fetch(`${tool_route}/testsnames`, { body: params, method: 'POST' })
-  stepper_tree.model_checks = data.value.modelChecks
+  const route = `${tool_route}/testsnames`
+  await api_fetch(route, {
+    method: 'POST', body: params, async onResponse ({ response }) {
+      stepper_tree.model_checks = response._data.modelChecks
+    },
+    onResponseError ({ response }) {
+      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      console.log(error)
+      console.log(response)
+    }
+  })
 }
 
 </script>
