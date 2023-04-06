@@ -26,15 +26,35 @@ watch(files, (value) => {
 
 async function get_allowed_files (tool_route) {
   const route = `${tool_route}/allowedfiles`
+  // await api_fetch(route, {
+  //   method: 'GET', async onResponse ({ response }) {
+  //     console.log(response)
+  //     const extensions = response._data.extensions.map((extension) => '.' + extension).join(',')
+  //     accept.value = extensions
+  //   },
+  //   onResponseError ({ response, error }) {
+  //     errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+  //     console.log(error)
+  //     console.log(response)
+  //   }
+  // })
+
+
   await api_fetch(route, {
-    method: 'GET', async onResponse ({ response }) {
-      console.log(response)
-      const extensions = response._data.extensions.map((extension) => '.' + extension).join(',')
-      accept.value = extensions
+    onRequest ({ options }) {
+      options.method = 'GET'
     },
-    onResponseError ({ response, error }) {
+    onRequestError ({ error }) {
+      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+    },
+    onResponse ({ response }) {
+      if (response.ok) {
+        const extensions = response._data.extensions.map((extension) => '.' + extension).join(',')
+        accept.value = extensions
+      }
+    },
+    onResponseError ({ response }) {
       errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-      console.log(error)
       console.log(response)
     }
   })

@@ -47,37 +47,29 @@ async function convert_files () {
       params.append('responseEncoding', 'binary')
       loading.value = true
 
-      const route = `${tool_route}/allowedfiles`
+      const route = `${tool_route}/convertfile`
       await api_fetch(route, {
-        method: 'POST', body: params, responseType: 'blob', async onResponse ({ response }) {
-          console.log(response)
-          const new_file_name = response.headers.get('new-file-name')
-          fileDownload(response._data, new_file_name)
+        onRequest ({ options }) {
+          options.method = 'POST'
+          options.body = params
+        },
+        onRequestError ({ error }) {
+          errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
           loading.value = false
         },
-        onResponseError ({ response, error }) {
+        onResponse ({ response }) {
+          if (response.ok) {
+            const new_file_name = response.headers.get('new-file-name')
+            fileDownload(response._data, new_file_name)
+            loading.value = false
+          }
+        },
+        onResponseError ({ response }) {
           errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-          console.log(error)
           console.log(response)
-          loading.value = false
-        },
-        onError ({ error }) {
-          console.log(error)
           loading.value = false
         }
       })
-
-
-      // try {
-      //   const config = useRuntimeConfig()
-      //   const response = await $fetch.raw(`${config.API_URL}/${ID.value}/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
-      //   const new_file_name = response.headers.get('new-file-name')
-      //   fileDownload(response._data, new_file_name)
-      //   loading.value = false
-      // } catch (err) {
-      //   console.log('error : ', err)
-      //   loading.value = false
-      // }
     }
     reader.readAsDataURL(input_files[i])
   }

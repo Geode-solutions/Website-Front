@@ -123,6 +123,31 @@ async function get_test_result (object, filename, test, children_array, max_retr
       }
     }
   })
+
+
+  // const route = `${tool_route}/inspectfile`
+  // api_fetch(route, {
+  //   onRequest ({ options }) {
+  //     options.method = 'POST'
+  //     options.body = params
+  //     options.retry = max_retry
+  //   },
+  //   onRequestError ({ error }) {
+  //     errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+  //     loading.value = false
+  //   },
+  //   onResponse ({ response }) {
+  //     if (response.ok) {
+  //       update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
+  //       return
+  //     }
+  //   },
+  //   onResponseError ({ response, error }) {
+  //     update_result(stepper_tree.model_checks, children_array, 'error')
+  //     errors_store.add_error({ "code": response.status, "route": route, 'message': error.message })
+  //     console.log(response)
+  //   }
+  // })
 }
 
 </script>

@@ -44,10 +44,21 @@ async function upload_file () {
 
       loading.value = true
       const route = `${tool_route}/uploadfile`
+
       await api_fetch(route, {
-        method: 'POST', body: params, async onResponse ({ response }) {
+        onRequest ({ options }) {
+          options.method = 'POST'
+          options.body = params
+        },
+        onRequestError ({ error }) {
+          errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
           loading.value = false
-          resolve(data)
+        },
+        onResponse ({ response }) {
+          if (response.ok) {
+            loading.value = false
+            // resolve(data)
+          }
         },
         onResponseError ({ response, error }) {
           loading.value = false
@@ -66,9 +77,31 @@ async function get_tests_names () {
   const params = new FormData()
   params.append('object', input_geode_object)
   const route = `${tool_route}/testsnames`
+  // await api_fetch(route, {
+  //   method: 'POST', body: params, async onResponse ({ response }) {
+  //     stepper_tree.model_checks = response._data.modelChecks
+  //   },
+  //   onResponseError ({ response }) {
+  //     errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+  //     console.log(error)
+  //     console.log(response)
+  //   }
+  // })
+
+
   await api_fetch(route, {
-    method: 'POST', body: params, async onResponse ({ response }) {
-      stepper_tree.model_checks = response._data.modelChecks
+    onRequest ({ options }) {
+      options.method = 'POST'
+      options.body = params
+    },
+    onRequestError ({ error }) {
+      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+      loading.value = false
+    },
+    onResponse ({ response }) {
+      if (response.ok) {
+        stepper_tree.model_checks = response._data.modelChecks
+      }
     },
     onResponseError ({ response }) {
       errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })

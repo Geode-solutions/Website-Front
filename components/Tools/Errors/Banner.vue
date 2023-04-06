@@ -1,6 +1,6 @@
 <template>
   <v-snackbar :style="{ 'margin-bottom': calcMargin(index) }" v-for="(error, index) in errors" :key="index" v-model="show"
-    color="error" location="bottom right" absolute transition="slide-x-transition">
+    color="error" location="bottom right" transition="slide-x-reverse-transition">
     <v-row>
       <v-col cols="1" class="white--text">
         <v-tooltip location="left">

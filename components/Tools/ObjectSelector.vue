@@ -33,17 +33,26 @@ const { tool_route } = stepper_tree
 const allowed_objects = ref([])
 
 async function get_allowed_objects (input_files) {
-  const route = `/${tool_route}/allowedobjects`
   const params = new FormData()
   params.append('filename', input_files[0].name)
+
+  const route = `/${tool_route}/allowedobjects`
   await api_fetch(route, {
-    method: 'POST', body: params, async onResponse ({ response }) {
-      allowed_objects.value = response._data.objects
+    onRequest ({ options }) {
+      options.method = 'POST'
+      options.body = params
     },
-    onResponseError ({ response, error }) {
+    onRequestError ({ error }) {
+      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+      loading.value = false
+    },
+    onResponse ({ response }) {
+      if (response.ok) {
+        allowed_objects.value = response._data.objects
+      }
+    },
+    onResponseError ({ response }) {
       errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-      console.log(error)
-      console.log(response)
     }
   })
 }
