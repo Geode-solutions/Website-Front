@@ -1,7 +1,7 @@
 <template>
-  <v-banner v-if="server_error" class="banner" position='fixed' style='z-index:100;' elevation="2">
+  <v-banner v-if="server_error" class="banner" elevation="2" style='z-index:100;' position="fixed">
     <v-row>
-      <v-col cols="auto" class="white--text text-center">
+      <v-col cols="1" class="white--text text-center">
         <v-tooltip location="end">
           <span>
             We turn off our server automatically after 5 minutes of inactivity
@@ -41,7 +41,6 @@ function reload () {
   window.location.reload()
 }
 </script>
-
 
 <style scoped>
 .v-btn {

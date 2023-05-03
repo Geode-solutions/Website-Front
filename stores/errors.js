@@ -10,7 +10,6 @@ export const use_errors_store = defineStore('errors', {
   }),
   actions: {
     add_error (error_object) {
-      console.log('toto')
       this.errors.push(error_object)
       console.log(this.errors)
     },

@@ -36,7 +36,7 @@ const { errors } = storeToRefs(errors_store)
 const show = true
 
 function calc_margin (index) {
-  return (index * 60) + 'px'
+  return (index * 60) + 8 + 'px'
 }
 </script>
 

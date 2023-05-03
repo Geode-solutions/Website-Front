@@ -1,5 +1,5 @@
 <template>
-  <v-row rows="1">
+  <v-row>
     <v-col cols="12">
       <ToolsErrorsBanner />
       <ToolsErrorsSnackers />
@@ -17,6 +17,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
+
       <NuxtPage keep-alive />
     </v-col>
   </v-row>
