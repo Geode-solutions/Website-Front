@@ -1,12 +1,10 @@
 <template>
-  <v-snackbar :style="{ 'margin-bottom': calcMargin(index) }" v-for="(error, index) in errors" :key="index" v-model="show"
-    color="error" location="bottom right" transition="slide-x-reverse-transition">
+  <v-banner v-if="server_error" class="banner" position='fixed' style='z-index:100;' elevation="2">
     <v-row>
-      <v-col cols="1" class="white--text">
-        <v-tooltip location="left">
+      <v-col cols="auto" class="white--text text-center">
+        <v-tooltip location="end">
           <span>
-            {{ error.code }} {{ error.route }}
-            <br>
+            We turn off our server automatically after 5 minutes of inactivity
           </span>
           <template #activator="{ props }">
             <v-icon v-bind="props" color="white" class="justify-right">
@@ -15,38 +13,42 @@
           </template>
         </v-tooltip>
       </v-col>
-      <v-col cols="auto" class="banner_item">{{ error.message }}</v-col>
+      <v-col cols="auto" class="banner_item">Server timed out due to inactivity, please reload this page
+        or click here:
+      </v-col>
+      <v-col cols="auto" align-items="center">
+        <v-btn @click="reload()" color="grey" density='compact'>
+          Reload
+        </v-btn>
+      </v-col>
       <v-spacer />
       <v-col cols="auto">
-        <v-btn icon flat size="20" @click="errors_store.delete_error(index)" color="error">
+        <v-btn icon flat size="20" @click="errors_store.delete_server_error()" color="grey" class=".align-center">
           <v-icon icon="mdi-close" size="20" color="white" />
         </v-btn>
       </v-col>
     </v-row>
-  </v-snackbar>
+  </v-banner>
 </template>
 
 <script setup>
 import { use_errors_store } from '@/stores/errors'
 const errors_store = use_errors_store()
 
-const { errors } = storeToRefs(errors_store)
+const { server_error } = storeToRefs(errors_store)
 
-const timeout = 10000
-const show = true
-
-function calcMargin (i) {
-  return (i * 55) + 'px'
+function reload () {
+  window.location.reload()
 }
 </script>
 
-<style>
-.banners {
-  background-color: #D50000;
+
+<style scoped>
+.v-btn {
+  text-transform: unset !important;
 }
 
-.banner_item {
-  color: white;
-  font-style: bold;
+.banner {
+  background-color: grey
 }
 </style>
