@@ -2,10 +2,7 @@ import { defineStore } from 'pinia'
 
 export const use_errors_store = defineStore('errors', {
   state: () => ({
-    errors: [
-      { 'code': 500, 'route': '/fileconverter/convert_file', 'message': 'Couldn\'t cast string to number' },
-      { 'code': 404, 'route': '/fileconverter/ping', 'message': 'Not found' },
-    ],
+    errors: [],
     server_error: false,
   }),
   actions: {
