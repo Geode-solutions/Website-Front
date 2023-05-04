@@ -1,11 +1,14 @@
 <template>
   <v-snackbar :style="{ 'margin-bottom': calc_margin(index) }" v-for="(error, index) in errors" :key="index"
-    v-model="show" color="error" location="bottom right" transition="slide-x-reverse-transition">
-    <v-row>
-      <v-col cols="1" class="white--text">
+    v-model="show" color="error" location="bottom right" transition="slide-x-reverse-transition" max-width="30%"
+    height="20px">
+    <v-row dense class="flex-nowrap">
+      <v-col cols="auto">
         <v-tooltip location="left">
           <span>
-            {{ error.code }} {{ error.route }}
+            {{ error.code }}<br />
+            {{ error.route }}<br />
+            {{ error.description }}
             <br>
           </span>
           <template #activator="{ props }">
@@ -15,7 +18,9 @@
           </template>
         </v-tooltip>
       </v-col>
-      <v-col cols="auto" class="banner_item">{{ error.message }}</v-col>
+      <v-col cols="9" class="text-no-wrap overflow-hidden">
+        {{ error.name }}
+      </v-col>
       <v-spacer />
       <v-col cols="auto">
         <v-btn icon flat size="20" @click="errors_store.delete_error(index)" color="error">
@@ -40,13 +45,8 @@ function calc_margin (index) {
 }
 </script>
 
-<style>
-.banners {
-  background-color: #D50000;
-}
-
-.banner_item {
-  color: white;
-  font-style: bold;
+<style scoped>
+.v-snackbar :deep(.v-snackbar__content) {
+  width: 100%;
 }
 </style>

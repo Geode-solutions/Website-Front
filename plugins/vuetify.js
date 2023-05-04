@@ -13,7 +13,7 @@ const light_theme = {
     primary: colors.teal.darken1,
     secondary: colors.teal.lighten4,
     accent: colors.amber.accent4,
-    error: colors.red.accent4,
+    error: colors.red.lighten2,
     info: colors.yellow.accent4,
     success: colors.green.accent4,
     warning: colors.orange.accent4,

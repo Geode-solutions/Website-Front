@@ -1,6 +1,6 @@
 <template>
-  <v-row>
-    <v-col cols="12">
+  <v-row no-gutters>
+    <v-col cols="12" style="contain:layout">
       <ToolsErrorsBanner />
       <ToolsErrorsSnackers />
     </v-col>
