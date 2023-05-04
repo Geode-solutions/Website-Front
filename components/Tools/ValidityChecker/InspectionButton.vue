@@ -1,12 +1,12 @@
 <template>
-  <div class="pa-5">
-    <v-btn :loading="loading" color="primary" @click="inspect_file()">
+  <div class='pa-5'>
+    <v-btn :loading='loading' color='primary' @click='inspect_file()'>
       Inspect
       <template #loader>
-        <v-progress-circular indeterminate size="20" color="white" width="3" />
+        <v-progress-circular indeterminate size='20' color='white' width='3' />
       </template>
     </v-btn>
-    <v-btn variant="text" @click="set_current_step(2)">
+    <v-btn variant='text' @click='set_current_step(2)'>
       Cancel
     </v-btn>
   </div>
@@ -43,7 +43,7 @@ async function upload_file () {
       params.append('filesize', input_files[0].size)
 
       loading.value = true
-      const route = `${tool_route}/uploadfile`
+      const route = `${tool_route}/upload_file`
 
       await api_fetch(route, {
         onRequest ({ options }) {
@@ -51,7 +51,7 @@ async function upload_file () {
           options.body = params
         },
         onRequestError ({ error }) {
-          errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+          errors_store.add_error({ 'code': 400, 'route': route, 'message': error.message })
           loading.value = false
         },
         onResponse ({ response }) {
@@ -60,9 +60,9 @@ async function upload_file () {
             // resolve(data)
           }
         },
-        onResponseError ({ response, error }) {
+        onResponseError ({ response }) {
           loading.value = false
-          errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+          errors_store.add_error({ 'code': response.status, 'route': route, 'description': response._data.description, 'name': response._data.name })
           console.log(error)
           reject(error)
           console.log(response)
@@ -76,18 +76,7 @@ async function upload_file () {
 async function get_tests_names () {
   const params = new FormData()
   params.append('object', input_geode_object)
-  const route = `${tool_route}/testsnames`
-  // await api_fetch(route, {
-  //   method: 'POST', body: params, async onResponse ({ response }) {
-  //     stepper_tree.model_checks = response._data.modelChecks
-  //   },
-  //   onResponseError ({ response }) {
-  //     errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-  //     console.log(error)
-  //     console.log(response)
-  //   }
-  // })
-
+  const route = `${tool_route}/tests_names`
 
   await api_fetch(route, {
     onRequest ({ options }) {
@@ -95,16 +84,16 @@ async function get_tests_names () {
       options.body = params
     },
     onRequestError ({ error }) {
-      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+      errors_store.add_error({ 'code': 400, 'route': route, 'description': error.message })
       loading.value = false
     },
     onResponse ({ response }) {
       if (response.ok) {
-        stepper_tree.model_checks = response._data.modelChecks
+        stepper_tree.model_checks = response._data.model_checks
       }
     },
     onResponseError ({ response }) {
-      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      errors_store.add_error({ 'code': response.status, 'route': route, 'description': response._data.description, 'name': response._data.description })
       console.log(error)
       console.log(response)
     }

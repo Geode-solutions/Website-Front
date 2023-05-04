@@ -47,7 +47,7 @@ async function convert_files () {
       params.append('responseEncoding', 'binary')
       loading.value = true
 
-      const route = `${tool_route}/convertfile`
+      const route = `${tool_route}/convert_file`
       await api_fetch(route, {
         onRequest ({ options }) {
           options.method = 'POST'
@@ -65,7 +65,7 @@ async function convert_files () {
           }
         },
         onResponseError ({ response }) {
-          errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+          errors_store.add_error({ "code": response.status, "route": route, "description": response._data.description, "name": response._data.name })
           console.log(response)
           loading.value = false
         }

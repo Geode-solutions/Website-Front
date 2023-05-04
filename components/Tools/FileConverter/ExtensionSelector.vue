@@ -31,18 +31,7 @@ onMounted(() => {
 async function get_output_file_extensions (input_geode_object, tool_route) {
   const params = new FormData()
   params.append('object', input_geode_object)
-  const route = `${tool_route}/outputfileextensions`
-  await api_fetch(route, {
-    method: 'POST', body: params, async onResponse ({ response }) {
-      file_extensions.value = response._data.outputfileextensions
-    },
-    onResponseError ({ response }) {
-      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-      console.log(error)
-      console.log(response)
-    }
-  })
-
+  const route = `${tool_route}/output_file_extensions`
 
   await api_fetch(route, {
     onRequest ({ options }) {
@@ -55,12 +44,11 @@ async function get_output_file_extensions (input_geode_object, tool_route) {
     },
     onResponse ({ response }) {
       if (response.ok) {
-        file_extensions.value = response._data.outputfileextensions
+        file_extensions.value = response._data.output_file_extensions
       }
     },
     onResponseError ({ response }) {
-      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-      console.log(response)
+      errors_store.add_error({ "code": response.status, "route": route, "name": response._data.name, 'description': response._data.description })
     }
   })
 }

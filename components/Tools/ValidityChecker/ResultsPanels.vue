@@ -14,10 +14,10 @@
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" :component_options="{
-            input_model_checks: check.children,
-            input_geode_object: input_geode_object,
-            input_file_name: input_file_name
-          }" :index="index" :input_index_array="update_array(index)" />
+              input_model_checks: check.children,
+              input_geode_object: input_geode_object,
+              input_file_name: input_file_name
+            }" :index="index" :input_index_array="update_array(index)" />
           <v-container v-else-if="check.value == false">
             Invalid = {{ check.list_invalidities }}
           </v-container>
@@ -112,42 +112,28 @@ async function get_test_result (object, filename, test, children_array, max_retr
   params.append('filename', filename)
   params.append('test', test)
 
-  api_fetch(`${tool_route}/inspectfile`, {
-    body: params, method: 'POST', retry: max_retry,
+  const route = `${tool_route}/inspect_file`
+  api_fetch(route, {
+    onRequest ({ options }) {
+      options.method = 'POST'
+      options.body = params
+      options.retry = max_retry
+    },
+    onRequestError ({ error }) {
+      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
+      loading.value = false
+    },
     onResponse ({ response }) {
-      if (response.status == 200) {
+      if (response.ok) {
         update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
         return
-      } else {
-        update_result(stepper_tree.model_checks, children_array, 'error')
       }
+    },
+    onResponseError ({ response }) {
+      update_result(stepper_tree.model_checks, children_array, 'error')
+      errors_store.add_error({ "code": response.status, "route": route, 'name': response._data.name, 'description': response._data.description })
     }
   })
-
-
-  // const route = `${tool_route}/inspectfile`
-  // api_fetch(route, {
-  //   onRequest ({ options }) {
-  //     options.method = 'POST'
-  //     options.body = params
-  //     options.retry = max_retry
-  //   },
-  //   onRequestError ({ error }) {
-  //     errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
-  //     loading.value = false
-  //   },
-  //   onResponse ({ response }) {
-  //     if (response.ok) {
-  //       update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
-  //       return
-  //     }
-  //   },
-  //   onResponseError ({ response, error }) {
-  //     update_result(stepper_tree.model_checks, children_array, 'error')
-  //     errors_store.add_error({ "code": response.status, "route": route, 'message': error.message })
-  //     console.log(response)
-  //   }
-  // })
 }
 
 </script>

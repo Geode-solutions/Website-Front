@@ -50,16 +50,6 @@ onActivated(() => {
 
 async function get_packages_versions () {
   const route = `${tool_route}/versions`
-  // await api_fetch(route, {
-  //   method: 'GET', async onResponse ({ response }) {
-  //     packages_versions.value = response._data.versions
-  //   },
-  //   onResponseError ({ response }) {
-  //     errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
-  //     console.log(error)
-  //     console.log(response)
-  //   }
-  // })
 
   await api_fetch(route, {
     onRequest ({ options }) {
@@ -74,7 +64,7 @@ async function get_packages_versions () {
       }
     },
     onResponseError ({ response }) {
-      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      errors_store.add_error({ "code": response.status, "route": route, 'description': response._data.description, 'name': response._data.name })
       console.log(response)
     }
   })

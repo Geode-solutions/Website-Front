@@ -36,7 +36,7 @@ async function get_allowed_objects (input_files) {
   const params = new FormData()
   params.append('filename', input_files[0].name)
 
-  const route = `/${tool_route}/allowedobjects`
+  const route = `/${tool_route}/allowed_objects`
   await api_fetch(route, {
     onRequest ({ options }) {
       options.method = 'POST'
@@ -52,7 +52,7 @@ async function get_allowed_objects (input_files) {
       }
     },
     onResponseError ({ response }) {
-      errors_store.add_error({ "code": response.status, "route": route, 'message': response._data.error_message })
+      errors_store.add_error({ "code": response.status, "route": route, 'description': response._data.description, 'name': response._data.name })
     }
   })
 }
