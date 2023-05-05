@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { use_errors_store } from '@/stores/errors'
+
 const errors_store = use_errors_store()
 
 const stepper_tree = inject('stepper_tree')
@@ -24,27 +24,15 @@ watch(files, (value) => {
   stepper_tree.current_step_index++
 })
 
+function fill_extensions (response) {
+  const extensions = response._data.extensions.map((extension) => '.' + extension).join(',')
+  accept.value = extensions
+}
+
 async function get_allowed_files (tool_route) {
   const route = `${tool_route}/allowed_files`
-
-  await api_fetch(route, {
-    onRequest ({ options }) {
-      options.method = 'GET'
-    },
-    onRequestError ({ error }) {
-      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
-    },
-    onResponse ({ response }) {
-      if (response.ok) {
-        const extensions = response._data.extensions.map((extension) => '.' + extension).join(',')
-        accept.value = extensions
-      }
-    },
-    onResponseError ({ response }) {
-      errors_store.add_error({ "code": response.status, "route": route, 'description': response._data.description, 'name': response._data.name })
-      console.log(response)
-    }
-  })
+  await api_fetch(route, { method: 'GET' },
+    { 'response_function': fill_extensions })
 }
 
 onMounted(async () => {

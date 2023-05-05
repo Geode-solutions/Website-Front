@@ -32,12 +32,9 @@
 </template>
 
 <script setup>
-import { use_errors_store } from '@/stores/errors'
 const errors_store = use_errors_store()
-
 const { errors } = storeToRefs(errors_store)
 
-// const timeout = 10000
 const show = true
 
 function calc_margin (index) {

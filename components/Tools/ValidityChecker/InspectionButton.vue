@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { use_errors_store } from '@/stores/errors'
 const errors_store = use_errors_store()
 
 const props = defineProps({
@@ -26,9 +25,14 @@ const { tool_route } = stepper_tree
 
 const loading = ref(false)
 
+function disable_loading (response) {
+  loading.value = false
+}
 
 async function inspect_file () {
+  console.log('titi')
   await upload_file()
+  console.log('tuut')
   await get_tests_names()
   stepper_tree.current_step_index++
 }
@@ -45,29 +49,21 @@ async function upload_file () {
       loading.value = true
       const route = `${tool_route}/upload_file`
 
-      await api_fetch(route, {
-        onRequest ({ options }) {
-          options.method = 'POST'
-          options.body = params
-        },
-        onRequestError ({ error }) {
-          errors_store.add_error({ 'code': 400, 'route': route, 'message': error.message })
-          loading.value = false
-        },
-        onResponse ({ response }) {
-          if (response.ok) {
-            loading.value = false
-            // resolve(data)
+      await api_fetch(route, { method: 'POST', body: params },
+        {
+          'request_error_function': disable_loading,
+          'response_function': (response) => {
+            disable_loading(response)
+            console.log('toto')
+            resolve()
+            console.log('toto2')
+          },
+          'response_error_function': (response) => {
+            disable_loading(response)
+            reject()
           }
-        },
-        onResponseError ({ response }) {
-          loading.value = false
-          errors_store.add_error({ 'code': response.status, 'route': route, 'description': response._data.description, 'name': response._data.name })
-          console.log(error)
-          reject(error)
-          console.log(response)
         }
-      })
+      )
     }
     reader.readAsDataURL(input_files[0])
   })
@@ -78,26 +74,11 @@ async function get_tests_names () {
   params.append('object', input_geode_object)
   const route = `${tool_route}/tests_names`
 
-  await api_fetch(route, {
-    onRequest ({ options }) {
-      options.method = 'POST'
-      options.body = params
-    },
-    onRequestError ({ error }) {
-      errors_store.add_error({ 'code': 400, 'route': route, 'description': error.message })
-      loading.value = false
-    },
-    onResponse ({ response }) {
-      if (response.ok) {
-        stepper_tree.model_checks = response._data.model_checks
-      }
-    },
-    onResponseError ({ response }) {
-      errors_store.add_error({ 'code': response.status, 'route': route, 'description': response._data.description, 'name': response._data.description })
-      console.log(error)
-      console.log(response)
-    }
-  })
+  await api_fetch(route, { method: 'POST', body: params },
+    {
+      'request_error_function': disable_loading,
+      'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
+    })
 }
 
 </script>

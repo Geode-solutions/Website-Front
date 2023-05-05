@@ -14,10 +14,10 @@
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" :component_options="{
-              input_model_checks: check.children,
-              input_geode_object: input_geode_object,
-              input_file_name: input_file_name
-            }" :index="index" :input_index_array="update_array(index)" />
+            input_model_checks: check.children,
+            input_geode_object: input_geode_object,
+            input_file_name: input_file_name
+          }" :index="index" :input_index_array="update_array(index)" />
           <v-container v-else-if="check.value == false">
             Invalid = {{ check.list_invalidities }}
           </v-container>
@@ -28,7 +28,6 @@
 </template>
 
 <script setup>
-import { use_errors_store } from '@/stores/errors'
 const errors_store = use_errors_store()
 
 const stepper_tree = inject('stepper_tree')
@@ -105,6 +104,10 @@ async function get_tests_results () {
   }
 }
 
+function disable_loading (response) {
+  loading.value = false
+}
+
 
 async function get_test_result (object, filename, test, children_array, max_retry) {
   const params = new FormData()
@@ -113,27 +116,16 @@ async function get_test_result (object, filename, test, children_array, max_retr
   params.append('test', test)
 
   const route = `${tool_route}/inspect_file`
-  api_fetch(route, {
-    onRequest ({ options }) {
-      options.method = 'POST'
-      options.body = params
-      options.retry = max_retry
-    },
-    onRequestError ({ error }) {
-      errors_store.add_error({ "code": 400, "route": route, 'message': error.message })
-      loading.value = false
-    },
-    onResponse ({ response }) {
-      if (response.ok) {
+  api_fetch(route, { method: 'POST', body: params, retry: max_retry },
+    {
+      'request_error_function': (response) => { disable_loading(response) },
+      'response_function': () => {
         update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
         return
-      }
-    },
-    onResponseError ({ response }) {
-      update_result(stepper_tree.model_checks, children_array, 'error')
-      errors_store.add_error({ "code": response.status, "route": route, 'name': response._data.name, 'description': response._data.description })
+      },
+      'response_error_function': () => { update_result(stepper_tree.model_checks, children_array, 'error') }
     }
-  })
+  )
 }
 
 </script>
