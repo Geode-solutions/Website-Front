@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const use_errors_store = defineStore('errors', {
   state: () => ({
     errors: [],
-    server_error: true,
+    server_error: false,
   }),
   actions: {
     add_error (error_object) {

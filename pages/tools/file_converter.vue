@@ -29,7 +29,7 @@ const output_extension = ref('')
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'File converter',
-  tool_route: 'fileconverter',
+  tool_route: 'file_converter',
   files: files,
   geode_object: geode_object,
   output_extension: output_extension,

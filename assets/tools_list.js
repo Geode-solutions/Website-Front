@@ -28,8 +28,8 @@ const tools_list = [
         title: 'CRS converter',
         to: '/tools/crs_converter',
         text: 'Convert your file from a coordinate system to another one',
-        badge: 'soon',
-        chip: 'Coming soon!',
+        badge: 'beta',
+        chip: 'beta',
     },
 ]
 
