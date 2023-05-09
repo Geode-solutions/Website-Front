@@ -17,7 +17,6 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-
       <NuxtPage keep-alive />
     </v-col>
   </v-row>
