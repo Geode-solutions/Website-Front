@@ -30,9 +30,7 @@ function disable_loading (response) {
 }
 
 async function inspect_file () {
-  console.log('titi')
   await upload_file()
-  console.log('tuut')
   await get_tests_names()
   stepper_tree.current_step_index++
 }
@@ -54,9 +52,7 @@ async function upload_file () {
           'request_error_function': disable_loading,
           'response_function': (response) => {
             disable_loading(response)
-            console.log('toto')
             resolve()
-            console.log('toto2')
           },
           'response_error_function': (response) => {
             disable_loading(response)

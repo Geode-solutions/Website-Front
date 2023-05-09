@@ -119,9 +119,8 @@ async function get_test_result (object, filename, test, children_array, max_retr
   api_fetch(route, { method: 'POST', body: params, retry: max_retry },
     {
       'request_error_function': (response) => { disable_loading(response) },
-      'response_function': () => {
-        update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
-        return
+      'response_function': (response) => {
+        update_result(stepper_tree.model_checks, children_array, response._data.result, response._data.list_invalidities)
       },
       'response_error_function': () => { update_result(stepper_tree.model_checks, children_array, 'error') }
     }
