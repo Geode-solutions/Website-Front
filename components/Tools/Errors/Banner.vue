@@ -1,5 +1,5 @@
 <template>
-  <v-banner v-if="server_error" class="banner" elevation="2" style="z-index:100;" position="fixed">
+  <v-banner v-if="server_error" elevation="2" style="background-color: grey; z-index:100;" position="fixed">
     <v-row>
       <v-col cols="auto" class="white--text text-center">
         <v-tooltip location="end">
@@ -13,7 +13,8 @@
           </template>
         </v-tooltip>
       </v-col>
-      <v-col cols="auto" class="banner_item">Server timed out due to inactivity, please reload this page
+      <v-col cols="auto" class="text-white font-weight-bold">Server timed out due to inactivity,
+        please reload this page
         or click here:
       </v-col>
       <v-col cols="auto" align-items="center">
@@ -43,14 +44,5 @@ function reload () {
 <style scoped>
 .v-btn {
   text-transform: unset !important;
-}
-
-.banner {
-  background-color: grey
-}
-
-.banner_item {
-  color: white;
-  font-style: bold;
 }
 </style>
