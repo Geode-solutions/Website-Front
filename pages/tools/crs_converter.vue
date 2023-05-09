@@ -6,7 +6,7 @@
 import geode_objects from '@/assets/geode_objects'
 import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
-import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter/ExtensionSelector.vue'
+import ToolsCrsConverterCrsSelector from '@/components/Tools/CrsConverter/CrsSelector.vue'
 import ToolsCrsSelectorConversionButton from '@/components/Tools/CrsConverter/ConversionButton.vue'
 
 const cards_list = [
@@ -66,7 +66,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select an input coordinate reference system',
       component: {
-        component_name: shallowRef(ToolsFileSelectorExtensionSelector),
+        component_name: shallowRef(ToolsCrsConverterCrsSelector),
         component_options: {
           input_geode_object: geode_object
         }
@@ -82,7 +82,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select an output coordinate reference system',
       component: {
-        component_name: shallowRef(ToolsCrsSelectorConversionButton),
+        component_name: shallowRef(ToolsCrsConverterCrsSelector),
         component_options: {
           input_files: files,
           input_geode_object: geode_object,

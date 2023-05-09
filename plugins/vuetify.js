@@ -24,7 +24,7 @@ const light_theme = {
 export default defineNuxtPlugin(nuxtApp => {
   const vuetify = createVuetify({
     components: {
-      components,
+      ...components,
       VDataTable,
     },
     directives,
