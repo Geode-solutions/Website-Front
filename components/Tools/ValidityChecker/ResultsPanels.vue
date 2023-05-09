@@ -28,6 +28,8 @@
 </template>
 
 <script setup>
+const errors_store = use_errors_store()
+
 const stepper_tree = inject('stepper_tree')
 
 const props = defineProps({
@@ -102,6 +104,10 @@ async function get_tests_results () {
   }
 }
 
+function disable_loading (response) {
+  loading.value = false
+}
+
 
 async function get_test_result (object, filename, test, children_array, max_retry) {
   const params = new FormData()
@@ -109,17 +115,16 @@ async function get_test_result (object, filename, test, children_array, max_retr
   params.append('filename', filename)
   params.append('test', test)
 
-  api_fetch(`${tool_route}/inspectfile`, {
-    body: params, method: 'POST', retry: max_retry,
-    onResponse ({ response }) {
-      if (response.status == 200) {
-        update_result(stepper_tree.model_checks, children_array, response._data.Result, response._data.list_invalidities)
-        return
-      } else {
-        update_result(stepper_tree.model_checks, children_array, 'error')
-      }
+  const route = `${tool_route}/inspect_file`
+  api_fetch(route, { method: 'POST', body: params, retry: max_retry },
+    {
+      'request_error_function': (response) => { disable_loading(response) },
+      'response_function': (response) => {
+        update_result(stepper_tree.model_checks, children_array, response._data.result, response._data.list_invalidities)
+      },
+      'response_error_function': () => { update_result(stepper_tree.model_checks, children_array, 'error') }
     }
-  })
+  )
 }
 
 </script>

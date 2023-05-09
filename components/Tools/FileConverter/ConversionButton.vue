@@ -12,9 +12,8 @@
 
 <script setup>
 import fileDownload from 'js-file-download'
-import { use_cloud_store } from '@/stores/cloud'
-const cloud_store = use_cloud_store()
-const { ID } = storeToRefs(cloud_store)
+
+const errors_store = use_errors_store()
 
 const props = defineProps({
   component_options: { type: Object, required: true }
@@ -27,6 +26,16 @@ const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
 const loading = ref(false)
+
+function response_function (response) {
+  const new_file_name = response.headers.get('new-file-name')
+  fileDownload(response._data, new_file_name)
+  loading.value = false
+}
+
+function disable_loading (response) {
+  loading.value = false
+}
 
 async function convert_files () {
   for (let i = 0; i < input_files.length; i++) {
@@ -44,16 +53,12 @@ async function convert_files () {
       params.append('responseEncoding', 'binary')
       loading.value = true
 
-      try {
-        const config = useRuntimeConfig()
-        const response = await $fetch.raw(`${config.API_URL}/${ID.value}/${tool_route}/convertfile`, { body: params, method: 'POST', responseType: 'blob' })
-        const new_file_name = response.headers.get('new-file-name')
-        fileDownload(response._data, new_file_name)
-        loading.value = false
-      } catch (err) {
-        console.log('error : ', err)
-        loading.value = false
-      }
+      const route = `${tool_route}/convert_file`
+      await api_fetch(route, { method: 'POST', body: params },
+        {
+          'request_error_function': disable_loading, response_function, 'response_error_function': disable_loading
+        }
+      )
     }
     reader.readAsDataURL(input_files[i])
   }

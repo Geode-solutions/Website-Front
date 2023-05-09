@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-import { use_cloud_store } from '@/stores/cloud'
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 
@@ -45,8 +44,14 @@ onActivated(() => {
   }
 })
 
+function test (response) {
+  packages_versions.value = response._data.versions
+}
+
 async function get_packages_versions () {
-  const { data } = await api_fetch(`${tool_route}/versions`, { method: 'GET' })
-  packages_versions.value = data.value.versions
+  const route = `${tool_route}/versions`
+  await api_fetch(route, { method: 'GET' }, {
+    'response_function': (response) => { test(response) }
+  })
 }
 </script>

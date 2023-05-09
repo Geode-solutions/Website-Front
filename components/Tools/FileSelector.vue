@@ -1,19 +1,13 @@
 <template>
-  <v-file-input
-    v-model="files"
-    :multiple="multiple"
-    :label="label"
-    :accept="accept"
-    :rules="[(value) => !!value || 'The file is mandatory']"
-    color="primary"
-    chips
-    counter
-    show-size
-    @click:clear="stepper_tree.files = []"
-  />
+  <v-file-input v-model="files" :multiple="multiple" :label="label" :accept="accept"
+    :rules="[(value) => !!value || 'The file is mandatory']" color="primary" chips counter show-size
+    @click:clear="stepper_tree.files = []" />
 </template>
 
 <script setup>
+
+const errors_store = use_errors_store()
+
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
@@ -30,14 +24,19 @@ watch(files, (value) => {
   stepper_tree.current_step_index++
 })
 
-async function get_allowed_files (tool_route) {
-  const { data } = await api_fetch(`${tool_route}/allowedfiles`, { method: 'GET' })
-  const extensions = data.value.extensions.map((extension) => '.' + extension).join(',')
+function fill_extensions (response) {
+  const extensions = response._data.extensions.map((extension) => '.' + extension).join(',')
   accept.value = extensions
 }
 
-onMounted(() => {
-  get_allowed_files(tool_route)
+async function get_allowed_files (tool_route) {
+  const route = `${tool_route}/allowed_files`
+  await api_fetch(route, { method: 'GET' },
+    { 'response_function': fill_extensions })
+}
+
+onMounted(async () => {
+  await get_allowed_files(tool_route)
 })
 
 </script>

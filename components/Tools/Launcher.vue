@@ -16,8 +16,6 @@
 </template>
 
 <script setup>
-import { use_cloud_store } from '@/stores/cloud'
-import { storeToRefs } from 'pinia'
 import { VueRecaptcha } from "vue-recaptcha";
 
 const cloud_store = use_cloud_store()

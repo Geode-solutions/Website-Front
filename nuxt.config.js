@@ -63,6 +63,10 @@ export default defineNuxtConfig({
     ]
   },
 
+  imports: {
+    dirs: ['stores']
+  },
+
   // ** Build configuration
   build: {
     transpile: ['vuetify'],
