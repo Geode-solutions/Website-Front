@@ -28,11 +28,7 @@ const loading = ref(false)
 function response_function (response) {
     const new_file_name = response.headers.get('new-file-name')
     fileDownload(response._data, new_file_name)
-    loading.value = false
-}
-
-function disable_loading (response) {
-    loading.value = false
+    useToggle(loading)
 }
 
 async function convert_files () {
@@ -49,12 +45,13 @@ async function convert_files () {
             params.append('extension', input_output_extension)
             params.append('responseType', 'blob')
             params.append('responseEncoding', 'binary')
-            loading.value = true
+            useToggle(loading)
 
             const route = `${tool_route}/convert_file`
             await api_fetch(route, { method: 'POST', body: params },
                 {
-                    'request_error_function': disable_loading, response_function, 'response_error_function': disable_loading
+                    'request_error_function': useToggle(loading), response_function,
+                    'response_error_function': useToggle(loading)
                 }
             )
         }

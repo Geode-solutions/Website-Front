@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-const errors_store = use_errors_store()
+import { useToggle } from '@vueuse/core'
 
 const props = defineProps({
   component_options: { type: Object, required: true }
@@ -24,10 +24,6 @@ const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
 const loading = ref(false)
-
-function disable_loading (response) {
-  loading.value = false
-}
 
 async function inspect_file () {
   await upload_file()
@@ -49,13 +45,13 @@ async function upload_file () {
 
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': disable_loading,
+          'request_error_function': useToggle(loading),
           'response_function': (response) => {
-            disable_loading(response)
+            useToggle(loading)
             resolve()
           },
           'response_error_function': (response) => {
-            disable_loading(response)
+            useToggle(loading)
             reject()
           }
         }
@@ -72,7 +68,7 @@ async function get_tests_names () {
 
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'request_error_function': disable_loading,
+      'request_error_function': useToggle(loading),
       'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
     })
 }

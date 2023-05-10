@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-const errors_store = use_errors_store()
+import { useToggle } from '@vueuse/core'
 
 const props = defineProps({
   component_options: { type: Object, required: true },
@@ -27,9 +27,6 @@ onMounted(() => {
   get_output_file_extensions(input_geode_object, tool_route)
 })
 
-function disable_loading () {
-  loading.value = false
-}
 
 async function get_output_file_extensions (input_geode_object, tool_route) {
   const params = new FormData()
@@ -38,9 +35,9 @@ async function get_output_file_extensions (input_geode_object, tool_route) {
 
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'request_error_function': disable_loading,
+      'request_error_function': useToggle(loading),
       'response_function': (response) => { file_extensions.value = response._data.output_file_extensions },
-      'response_error_function': disable_loading
+      'response_error_function': useToggle(loading)
     }
   )
 }

@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-const errors_store = use_errors_store()
+import { useToggle } from '@vueuse/core'
 
 const props = defineProps({
   component_options: { type: Object, required: true },
@@ -37,7 +37,7 @@ async function get_allowed_objects (input_files) {
   const route = `/${tool_route}/allowed_objects`
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'request_error_function': () => { loading.value = false },
+      'request_error_function': () => { useToggle(loading) },
       'response_function': (response) => { allowed_objects.value = response._data.objects }
     })
 }
