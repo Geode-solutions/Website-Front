@@ -5,9 +5,6 @@
 </template>
 
 <script setup>
-
-const errors_store = use_errors_store()
-
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
