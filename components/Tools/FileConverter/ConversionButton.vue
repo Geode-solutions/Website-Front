@@ -11,7 +11,6 @@
 </template>
 
 <script setup>
-import { useToggle } from '@vueuse/core'
 import fileDownload from 'js-file-download'
 
 const props = defineProps({

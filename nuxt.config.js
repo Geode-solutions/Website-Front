@@ -50,6 +50,7 @@ export default defineNuxtConfig({
             'storeToRefs',
           ],
         }],
+      '@vueuse/core'
     ],
 
   cookies: {

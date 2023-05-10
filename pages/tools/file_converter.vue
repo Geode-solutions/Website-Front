@@ -6,7 +6,7 @@
 import geode_objects from '@/assets/geode_objects'
 import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
-import ToolsFileSelectorExtensionSelector from '@/components/Tools/FileConverter/ExtensionSelector.vue'
+import ToolsExtensionSelector from '@/components/Tools/ExtensionSelector.vue'
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
 const cards_list = [
@@ -65,7 +65,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select file format',
       component: {
-        component_name: shallowRef(ToolsFileSelectorExtensionSelector),
+        component_name: shallowRef(ToolsExtensionSelector),
         component_options: {
           input_geode_object: geode_object
         }
