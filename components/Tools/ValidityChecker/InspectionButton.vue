@@ -13,6 +13,7 @@
 </template>
 
 <script setup>
+import { useToggle } from '@vueuse/core'
 
 const props = defineProps({
   component_options: { type: Object, required: true }
