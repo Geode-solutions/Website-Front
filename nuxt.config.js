@@ -50,6 +50,7 @@ export default defineNuxtConfig({
             'storeToRefs',
           ],
         }],
+      '@nuxt/devtools',
     ],
 
   cookies: {
@@ -82,7 +83,7 @@ export default defineNuxtConfig({
     preset: 'netlify'
   },
 
-  // devtools: {
-  //   enabled: process.env.NODE_ENV === 'production' ? false : true
-  // }
+  devtools: {
+    enabled: true
+  }
 })
