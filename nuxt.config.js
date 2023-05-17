@@ -50,7 +50,6 @@ export default defineNuxtConfig({
             'storeToRefs',
           ],
         }],
-      // '@VueUse/core'
     ],
 
   cookies: {
@@ -72,12 +71,18 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+
   vue: {
     compilerOptions: {
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
   },
+
   nitro: {
     preset: 'netlify'
-  }
+  },
+
+  // devtools: {
+  //   enabled: process.env.NODE_ENV === 'production' ? false : true
+  // }
 })
