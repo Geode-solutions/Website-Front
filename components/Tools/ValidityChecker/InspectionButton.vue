@@ -24,6 +24,7 @@ const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
 const loading = ref(false)
+const toggle_loading = useToggle(loading)
 
 async function inspect_file () {
   await upload_file()
@@ -40,18 +41,18 @@ async function upload_file () {
       params.append('filename', input_files[0].name)
       params.append('filesize', input_files[0].size)
 
-      loading.value = true
+      toggle_loading()
       const route = `${tool_route}/upload_file`
 
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': useToggle(loading),
-          'response_function': (response) => {
-            useToggle(loading)
+          'request_error_function': toggle_loading(),
+          'response_function': () => {
+            toggle_loading()
             resolve()
           },
-          'response_error_function': (response) => {
-            useToggle(loading)
+          'response_error_function': () => {
+            toggle_loading()
             reject()
           }
         }
@@ -68,7 +69,6 @@ async function get_tests_names () {
 
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'request_error_function': useToggle(loading),
       'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
     })
 }

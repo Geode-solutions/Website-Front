@@ -5,7 +5,7 @@
         <v-expansion-panel-title>
           <v-row align="center">
             <v-col cols="auto">
-              <ToolsValidityBadge :value="check.value" />
+              <ToolsValidityCheckerValidityBadge :value="check.value" />
             </v-col>
             <v-col>
               {{ check.sentence }}
