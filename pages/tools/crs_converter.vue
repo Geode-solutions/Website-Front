@@ -35,6 +35,8 @@ const stepper_tree = reactive({
   tool_route: 'crs_converter',
   files: files,
   geode_object: geode_object,
+  input_crs: input_crs,
+  output_crs: output_crs,
   output_extension: output_extension,
   steps: [
     {
@@ -73,10 +75,10 @@ const stepper_tree = reactive({
         }
       },
       chips: computed(() => {
-        if (output_extension.value === '') {
+        if (input_crs.value === {}) {
           return []
         } else {
-          return [output_extension.value]
+          return [input_crs.authority, input_crs.code]
         }
       })
     },
@@ -87,7 +89,13 @@ const stepper_tree = reactive({
         component_options: {
         }
       },
-      chips: []
+      chips: computed(() => {
+        if (output_crs.value === {}) {
+          return []
+        } else {
+          return [output_crs.authority, output_crs.code]
+        }
+      })
     },
     {
       step_title: 'Select file format',
@@ -99,7 +107,13 @@ const stepper_tree = reactive({
           input_output_extension: output_extension,
         }
       },
-      chips: []
+      chips: computed(() => {
+        if (output_extension.value === '') {
+          return []
+        } else {
+          return [output_extension.value]
+        }
+      })
     },
     {
       step_title: 'Convert your file',
@@ -108,6 +122,8 @@ const stepper_tree = reactive({
         component_options: {
           input_files: files,
           input_geode_object: geode_object,
+          input_crs: input_crs,
+          output_crs: output_crs,
           input_output_extension: output_extension,
         }
       },

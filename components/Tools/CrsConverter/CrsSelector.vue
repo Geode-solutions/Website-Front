@@ -1,6 +1,6 @@
 <template>
   <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
-  <v-data-table v-value="selected_crs" :v-model:items-per-page="10" :headers="headers" :items="crs_list" item-value="name"
+  <v-data-table v-model="selected_crs" :v-model:items-per-page="10" :headers="headers" :items="crs_list" item-value="name"
     class="elevation-1" density='compact' fixed-header select-strategy='single' show-select :search="search"
     :loading="data_table_loading" loading-text="Loading... Please wait"></v-data-table>
 </template>
@@ -21,10 +21,8 @@ const crs_list = ref([])
 const selected_crs = ref([])
 const toggle_loading = useToggle(data_table_loading)
 
-watch(selected_crs, (new_value, old_value) => {
-  console.log(new_value)
-  console.log(old_value)
-
+watch(selected_crs, (new_value) => {
+  console.log('selected_crs', new_value)
 })
 
 async function get_crs_table () {
