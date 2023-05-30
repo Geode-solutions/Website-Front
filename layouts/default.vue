@@ -13,7 +13,8 @@
 import { useToggle } from '@vueuse/core'
 const config = useRuntimeConfig()
 const loading = ref(true)
-onMounted(() => { useToggle(loading) })
+const toggle_loading = useToggle(loading)
+onMounted(() => { toggle_loading() })
 </script>
 
 <style scoped>

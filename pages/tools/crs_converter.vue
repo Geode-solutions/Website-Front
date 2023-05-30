@@ -70,7 +70,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsCrsConverterCrsSelector),
         component_options: {
-          input_geode_object: geode_object
         }
       },
       chips: computed(() => {
@@ -86,9 +85,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsCrsConverterCrsSelector),
         component_options: {
-          input_files: files,
-          input_geode_object: geode_object,
-          input_output_extension: output_extension,
         }
       },
       chips: []
