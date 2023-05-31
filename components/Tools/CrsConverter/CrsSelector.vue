@@ -1,6 +1,6 @@
 <template>
   <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
-  <v-data-table v-model="selected_crs" :v-model:items-per-page="10" :headers="headers" :items="crs_list" item-value="name"
+  <v-data-table v-model="selected_crs" :v-model:items-per-page="10" :headers="headers" :items="crs_list" item-value="code"
     class="elevation-1" density='compact' fixed-header select-strategy='single' show-select :search="search"
     :loading="data_table_loading" loading-text="Loading... Please wait"></v-data-table>
 </template>
@@ -16,7 +16,7 @@ const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
 const search = ref('')
-const data_table_loading = ref(true)
+const data_table_loading = ref(false)
 const crs_list = ref([])
 const selected_crs = ref([])
 const toggle_loading = useToggle(data_table_loading)
@@ -30,9 +30,12 @@ async function get_crs_table () {
   toggle_loading()
   await api_fetch(route, { method: 'GET' },
     {
-      'request_error_function': toggle_loading(),
-      'response_function': (response) => { crs_list.value = response._data.crs_list },
-      'response_error_function': toggle_loading()
+      'request_error_function': () => { toggle_loading() },
+      'response_function': (response) => {
+        toggle_loading()
+        crs_list.value = response._data.crs_list
+      },
+      'response_error_function': () => { toggle_loading() }
     }
   )
 }
