@@ -35,10 +35,16 @@ async function convert_files () {
     reader.onload = async function (event) {
       let params = new FormData()
 
-      params.append('object', input_geode_object)
+      params.append('geode_object', input_geode_object)
       params.append('file', event.target.result)
       params.append('filename', input_files[i].name)
       params.append('filesize', input_files[i].size)
+      params.append('input_crs_authority', 'EPSG')
+      params.append('input_crs_code', '2000')
+      params.append('input_crs_name', 'I')
+      params.append('output_crs_authority', 'EPSG')
+      params.append('output_crs_code', '2001')
+      params.append('output_crs_name', 'II')
       params.append('extension', input_output_extension)
       params.append('responseType', 'blob')
       params.append('responseEncoding', 'binary')
@@ -47,13 +53,13 @@ async function convert_files () {
       const route = `${tool_route}/convert_file`
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': toggle_loading(),
+          'request_error_function': () => { toggle_loading() },
           'response_function': (response) => {
             const new_file_name = response.headers.get('new-file-name')
             fileDownload(response._data, new_file_name)
             toggle_loading()
           },
-          'response_error_function': toggle_loading()
+          'response_error_function': () => { toggle_loading() }
         }
       )
     }

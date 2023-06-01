@@ -19,7 +19,6 @@
 </template>
 
 <script setup>
-import { useToggle } from '@vueuse/core'
 
 const props = defineProps({
   component_options: { type: Object, required: true },
@@ -37,7 +36,7 @@ async function get_allowed_objects (input_files) {
   const route = `/${tool_route}/allowed_objects`
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'response_function': (response) => { allowed_objects.value = response._data.objects }
+      'response_function': (response) => { allowed_objects.value = response._data.allowed_objects }
     })
 }
 

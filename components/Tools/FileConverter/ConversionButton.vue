@@ -41,7 +41,7 @@ async function convert_files () {
     reader.onload = async function (event) {
       let params = new FormData()
 
-      params.append('object', input_geode_object)
+      params.append('geode_object', input_geode_object)
       params.append('file', event.target.result)
       params.append('filename', input_files[i].name)
       params.append('filesize', input_files[i].size)

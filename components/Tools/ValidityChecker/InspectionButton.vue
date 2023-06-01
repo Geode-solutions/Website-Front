@@ -64,7 +64,7 @@ async function upload_file () {
 
 async function get_tests_names () {
   const params = new FormData()
-  params.append('object', input_geode_object)
+  params.append('geode_object', input_geode_object)
   const route = `${tool_route}/tests_names`
 
   await api_fetch(route, { method: 'POST', body: params },

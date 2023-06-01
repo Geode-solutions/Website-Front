@@ -12,6 +12,8 @@ const props = defineProps({
   component_options: { type: Object, required: true },
 })
 
+const { input_geode_object } = props.component_options
+
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
@@ -26,9 +28,11 @@ watch(selected_crs, (new_value) => {
 })
 
 async function get_crs_table () {
+  let params = new FormData()
+  params.append('geode_object', input_geode_object)
   const route = `${tool_route}/geographic_coordinate_systems`
   toggle_loading()
-  await api_fetch(route, { method: 'GET' },
+  await api_fetch(route, { method: 'POST', body: params },
     {
       'request_error_function': () => { toggle_loading() },
       'response_function': (response) => {

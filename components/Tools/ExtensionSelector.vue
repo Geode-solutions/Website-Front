@@ -29,7 +29,7 @@ onMounted(() => {
 
 async function get_output_file_extensions (input_geode_object, tool_route) {
   const params = new FormData()
-  params.append('object', input_geode_object)
+  params.append('geode_object', input_geode_object)
   const route = `${tool_route}/output_file_extensions`
 
   await api_fetch(route, { method: 'POST', body: params },

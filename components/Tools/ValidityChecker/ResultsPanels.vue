@@ -104,7 +104,7 @@ async function get_tests_results () {
 
 async function get_test_result (object, filename, test, children_array, max_retry) {
   const params = new FormData()
-  params.append('object', object)
+  params.append('geode_object', object)
   params.append('filename', filename)
   params.append('test', test)
 
