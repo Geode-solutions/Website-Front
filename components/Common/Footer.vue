@@ -39,7 +39,7 @@ const icons = [
   { icon: 'mdi-github', url: 'https://github.com/Geode-solutions' },
   { icon: 'mdi-twitter', url: 'https://twitter.com/GeodeSolutions' },
   { icon: 'mdi-linkedin', url: 'https://linkedin.com/company/geode-solutions' },
-  { icon: 'mdi-slack', url: 'https://slackin-opengeode.herokuapp.com' },
+  { icon: 'mdi-slack', url: 'https://opengeode-slack-invite.herokuapp.com' },
   { icon: 'mdi-youtube', url: 'https://www.youtube.com/channel/UCkzmIOpr3H8I8kDLCGZBiXA' },
   { icon: 'mdi-email', url: 'mailto:contact@geode-solutions.com' },
 ]
