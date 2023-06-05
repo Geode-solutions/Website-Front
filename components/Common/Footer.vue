@@ -2,7 +2,8 @@
   <v-footer class="bg-primary flex-column pa-5" absolute app :order="0">
     <v-row style="width:100%">
       <v-col cols="auto">
-        <v-btn v-for="icon in icons" :key="icon" class="px-5" :icon="icon.icon" variant="plain" size="30" />
+        <v-btn v-for="icon in icons" :key="icon" class="px-5" :icon="icon.icon" :href="icon.url" target="_blank"
+          variant="plain" size="30" />
       </v-col>
       <v-spacer />
       <v-col align="right">
@@ -39,7 +40,7 @@ const icons = [
   { icon: 'mdi-github', url: 'https://github.com/Geode-solutions' },
   { icon: 'mdi-twitter', url: 'https://twitter.com/GeodeSolutions' },
   { icon: 'mdi-linkedin', url: 'https://linkedin.com/company/geode-solutions' },
-  { icon: 'mdi-slack', url: 'https://slackin-opengeode.herokuapp.com' },
+  { icon: 'mdi-slack', url: 'https://opengeode-slack-invite.herokuapp.com' },
   { icon: 'mdi-youtube', url: 'https://www.youtube.com/channel/UCkzmIOpr3H8I8kDLCGZBiXA' },
   { icon: 'mdi-email', url: 'mailto:contact@geode-solutions.com' },
 ]
