@@ -2,7 +2,8 @@
   <v-footer class="bg-primary flex-column pa-5" absolute app :order="0">
     <v-row style="width:100%">
       <v-col cols="auto">
-        <v-btn v-for="icon in icons" :key="icon" class="px-5" :icon="icon.icon" variant="plain" size="30" />
+        <v-btn v-for="icon in icons" :key="icon" class="px-5" :icon="icon.icon" :href="icon.url" target="_blank"
+          variant="plain" size="30" />
       </v-col>
       <v-spacer />
       <v-col align="right">

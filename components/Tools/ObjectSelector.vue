@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+const errors_store = use_errors_store()
 
 const props = defineProps({
   component_options: { type: Object, required: true },
@@ -33,8 +34,12 @@ const allowed_objects = ref([])
 async function get_allowed_objects (input_files) {
   const params = new FormData()
   params.append('filename', input_files[0].name)
-  const { data } = await api_fetch(`/${tool_route}/allowedobjects`, { body: params, method: 'POST' })
-  allowed_objects.value = data.value.objects
+  const route = `/${tool_route}/allowed_objects`
+  await api_fetch(route, { method: 'POST', body: params },
+    {
+      'request_error_function': () => { loading.value = false },
+      'response_function': (response) => { allowed_objects.value = response._data.objects }
+    })
 }
 
 function set_geode_object (geode_object) {

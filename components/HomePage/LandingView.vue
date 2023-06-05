@@ -1,5 +1,5 @@
 <template>
-  <v-parallax :src="hero_img" alt=" Geode-solutions next generation of modeling challenges">
+  <v-parallax :src="hero_img" alt="Geode-solutions next generation of modeling challenges">
     <v-row class="fill-height" align="center" justify="center">
       <v-col class="text-center justify-center" cols="auto">
         <v-card width="600" style="

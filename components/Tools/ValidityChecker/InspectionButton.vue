@@ -1,12 +1,12 @@
 <template>
-  <div class="pa-5">
-    <v-btn :loading="loading" color="primary" @click="inspect_file()">
+  <div class='pa-5'>
+    <v-btn :loading='loading' color='primary' @click='inspect_file()'>
       Inspect
       <template #loader>
-        <v-progress-circular indeterminate size="20" color="white" width="3" />
+        <v-progress-circular indeterminate size='20' color='white' width='3' />
       </template>
     </v-btn>
-    <v-btn variant="text" @click="set_current_step(2)">
+    <v-btn variant='text' @click='set_current_step(2)'>
       Cancel
     </v-btn>
   </div>
@@ -24,15 +24,15 @@ const { tool_route } = stepper_tree
 
 const loading = ref(false)
 
+function disable_loading (response) {
+  loading.value = false
+}
 
 async function inspect_file () {
   await upload_file()
   await get_tests_names()
   stepper_tree.current_step_index++
 }
-
-
-
 
 async function upload_file () {
   return new Promise((resolve, reject) => {
@@ -44,15 +44,21 @@ async function upload_file () {
       params.append('filesize', input_files[0].size)
 
       loading.value = true
-      const { data, error } = await api_fetch(`${tool_route}/uploadfile`, { body: params, method: 'POST' })
-      if (data.value !== null) {
-        loading.value = false
-        resolve(data)
-      } else {
-        loading.value = false
-        reject(error)
-      }
+      const route = `${tool_route}/upload_file`
 
+      await api_fetch(route, { method: 'POST', body: params },
+        {
+          'request_error_function': () => { disable_loading() },
+          'response_function': (response) => {
+            disable_loading(response)
+            resolve()
+          },
+          'response_error_function': (response) => {
+            disable_loading(response)
+            reject()
+          }
+        }
+      )
     }
     reader.readAsDataURL(input_files[0])
   })
@@ -61,8 +67,13 @@ async function upload_file () {
 async function get_tests_names () {
   const params = new FormData()
   params.append('object', input_geode_object)
-  const { data } = await api_fetch(`${tool_route}/testsnames`, { body: params, method: 'POST' })
-  stepper_tree.model_checks = data.value.modelChecks
+  const route = `${tool_route}/tests_names`
+
+  await api_fetch(route, { method: 'POST', body: params },
+    {
+      'request_error_function': () => { disable_loading() },
+      'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
+    })
 }
 
 </script>

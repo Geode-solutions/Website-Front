@@ -1,4 +1,7 @@
 import { defineStore } from 'pinia'
+import { use_errors_store } from './errors'
+const errors_store = use_errors_store()
+
 
 export const use_cloud_store = defineStore('cloud', {
   state: () => ({
@@ -6,8 +9,6 @@ export const use_cloud_store = defineStore('cloud', {
     is_captcha_validated: false,
     is_cloud_running: false,
     is_connexion_launched: false,
-    is_under_maintenance: false,
-    internal_error: false,
     request_counter: 0
   }),
   actions: {
@@ -40,7 +41,7 @@ export const use_cloud_store = defineStore('cloud', {
         return this.ping_task()
       } else {
         console.log("error : ", error)
-        this.internal_error = true
+        errors_store.server_error = true
       }
     },
 
@@ -53,8 +54,7 @@ export const use_cloud_store = defineStore('cloud', {
       if (data.value !== null) {
         this.is_cloud_running = true
       } else {
-        this.is_cloud_running = false
-        this.internal_error = true
+        errors_store.server_error = true
         console.log("error : ", error)
       }
     },

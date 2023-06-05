@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" floating>
+  <v-app-bar color="primary">
     <v-row class="px-2">
       <v-col>
         <v-btn variant="text" to="/" :active="false">
