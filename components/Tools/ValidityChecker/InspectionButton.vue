@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-const errors_store = use_errors_store()
 
 const props = defineProps({
   component_options: { type: Object, required: true }
@@ -49,7 +48,7 @@ async function upload_file () {
 
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': disable_loading,
+          'request_error_function': () => { disable_loading() },
           'response_function': (response) => {
             disable_loading(response)
             resolve()
@@ -72,7 +71,7 @@ async function get_tests_names () {
 
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'request_error_function': disable_loading,
+      'request_error_function': () => { disable_loading() },
       'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
     })
 }

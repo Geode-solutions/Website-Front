@@ -13,8 +13,6 @@
 <script setup>
 import fileDownload from 'js-file-download'
 
-const errors_store = use_errors_store()
-
 const props = defineProps({
   component_options: { type: Object, required: true }
 })
@@ -56,7 +54,13 @@ async function convert_files () {
       const route = `${tool_route}/convert_file`
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': disable_loading, response_function, 'response_error_function': disable_loading
+          'request_error_function': () => {
+            disable_loading()
+            response_function()
+          },
+          'response_error_function': () => {
+            disable_loading()
+          }
         }
       )
     }
