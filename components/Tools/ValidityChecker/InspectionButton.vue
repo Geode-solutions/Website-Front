@@ -46,7 +46,9 @@ async function upload_file () {
 
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': toggle_loading(),
+          'request_error_function': () => {
+            toggle_loading()
+          },
           'response_function': () => {
             toggle_loading()
             resolve()
