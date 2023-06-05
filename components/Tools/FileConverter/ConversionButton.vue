@@ -54,12 +54,15 @@ async function convert_files () {
       const route = `${tool_route}/convert_file`
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': () => {
-            disable_loading()
-            response_function()
+          'request_error_function': (response) => {
+            disable_loading(response)
           },
-          'response_error_function': () => {
-            disable_loading()
+          'response_function': (response) => {
+            response_function(response)
+            disable_loading(response)
+          },
+          'response_error_function': (response) => {
+            disable_loading(response)
           }
         }
       )
