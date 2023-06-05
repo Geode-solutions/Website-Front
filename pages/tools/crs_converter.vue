@@ -72,13 +72,15 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsCrsConverterCrsSelector),
         component_options: {
+          input_geode_object: geode_object,
+          crs_key: 'input_crs'
         }
       },
       chips: computed(() => {
-        if (input_crs.value === {}) {
+        if (input_crs === {}) {
           return []
         } else {
-          return [input_crs.authority, input_crs.code]
+          return [input_crs['authority'], input_crs['code'], input_crs['name']]
         }
       })
     },
@@ -87,13 +89,15 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsCrsConverterCrsSelector),
         component_options: {
+          input_geode_object: geode_object,
+          crs_key: 'output_crs'
         }
       },
       chips: computed(() => {
-        if (output_crs.value === {}) {
+        if (output_crs === {}) {
           return []
         } else {
-          return [output_crs.authority, output_crs.code]
+          return [output_crs['authority'], output_crs['code'], output_crs['name']]
         }
       })
     },

@@ -12,7 +12,7 @@ const props = defineProps({
   component_options: { type: Object, required: true },
 })
 
-const { input_geode_object } = props.component_options
+const { input_geode_object, } = props.component_options
 
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
@@ -24,13 +24,26 @@ const selected_crs = ref([])
 const toggle_loading = useToggle(data_table_loading)
 
 watch(selected_crs, (new_value) => {
-  console.log('selected_crs', new_value)
+  const crs = get_selected_crs(new_value[0])
+  set_crs()
 })
+
+function set_crs (key, crs_value) {
+  stepper_tree.key = crs_value
+  stepper_tree.current_step_index++
+}
+
+function get_selected_crs (crs_code) {
+  for (let i = 0; i <= crs_list.value.length; i++) {
+    if (crs_list.value[i]['code'] == crs_code) {
+      return crs_list.value[i]
+    }
+  }
+}
 
 async function get_crs_table () {
   let params = new FormData()
   params.append('geode_object', input_geode_object)
-  console.log(geode_object)
   const route = `${tool_route}/geographic_coordinate_systems`
   toggle_loading()
   await api_fetch(route, { method: 'POST', body: params },
