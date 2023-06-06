@@ -1,14 +1,13 @@
 <template>
-  <ToolsWrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <ToolsWrapper :cards_list="cards_list" />
 </template>
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
 import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
-import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
-import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
-
+import ToolsExtensionSelector from '@/components/Tools/ExtensionSelector.vue'
+import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
 const cards_list = [
   {
@@ -18,29 +17,29 @@ const cards_list = [
   },
   {
     icon: 'mdi-github',
-    title: 'OpenGeode-Inspector GitHub repo',
-    href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
+    title: 'OpenGeode GitHub repo',
+    href: 'https://github.com/Geode-solutions/OpenGeode',
   },
 ]
 
 const files = ref([])
 const geode_object = ref('')
-const model_checks = ref([])
+const output_extension = ref('')
 
 const stepper_tree = reactive({
   current_step_index: ref(0),
-  tool_name: 'Validity checker',
-  tool_route: 'validitychecker',
+  tool_name: 'File converter',
+  tool_route: 'file_converter',
   files: files,
   geode_object: geode_object,
-  model_checks: model_checks,
+  output_extension: output_extension,
   steps: [
     {
-      step_title: 'Please select a file to check',
+      step_title: 'Please select a file to convert',
       component: {
         component_name: shallowRef(ToolsFileSelector),
         component_options: {
-          multiple: false,
+          multiple: true,
           label: 'Please select a file'
         }
       },
@@ -64,25 +63,29 @@ const stepper_tree = reactive({
       })
     },
     {
-      step_title: 'Inspect your file',
+      step_title: 'Select file format',
       component: {
-        component_name: shallowRef(ToolsValidityCheckerInspectionButton),
+        component_name: shallowRef(ToolsExtensionSelector),
         component_options: {
-          input_files: files,
           input_geode_object: geode_object
         }
       },
-      chips: []
+      chips: computed(() => {
+        if (output_extension.value === '') {
+          return []
+        } else {
+          return [output_extension.value]
+        }
+      })
     },
     {
-      step_title: 'Inspection results',
+      step_title: 'Convert your file',
       component: {
-        component_name: shallowRef(ToolsValidityCheckerResultsPanels),
+        component_name: shallowRef(ToolsFileSelectorConversionButton),
         component_options: {
-          input_model_checks: model_checks,
+          input_files: files,
           input_geode_object: geode_object,
-          input_file_name: computed(() => { return files.value.map((file) => file.name) }),
-          input_index_array: [],
+          input_output_extension: output_extension,
         }
       },
       chips: []
@@ -92,3 +95,4 @@ const stepper_tree = reactive({
 
 provide('stepper_tree', stepper_tree)
 </script>
+

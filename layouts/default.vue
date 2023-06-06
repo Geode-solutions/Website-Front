@@ -10,9 +10,11 @@
 </template>
 
 <script setup>
+import { useToggle } from '@vueuse/core'
 const config = useRuntimeConfig()
 const loading = ref(true)
-onMounted(() => { loading.value = false })
+const toggle_loading = useToggle(loading)
+onMounted(() => { toggle_loading() })
 </script>
 
 <style scoped>

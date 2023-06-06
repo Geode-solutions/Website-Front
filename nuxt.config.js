@@ -50,6 +50,7 @@ export default defineNuxtConfig({
             'storeToRefs',
           ],
         }],
+      '@nuxt/devtools',
     ],
 
   cookies: {
@@ -71,12 +72,18 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+
   vue: {
     compilerOptions: {
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
   },
+
   nitro: {
     preset: 'netlify'
+  },
+
+  devtools: {
+    enabled: process.env.NODE_ENV === 'production' ? false : true
   }
 })

@@ -10,7 +10,7 @@ const tools_list = [
     {
         icon: 'mdi-file-replace-outline',
         title: 'File converter',
-        to: '/tools/fileconverter',
+        to: '/tools/file_converter',
         text: 'Convert a file into another file format',
         badge: '',
         chip: '',
@@ -18,7 +18,7 @@ const tools_list = [
     {
         icon: 'mdi-format-list-checks',
         title: 'Validity checker',
-        to: '/tools/validitychecker',
+        to: '/tools/validity_checker',
         text: 'Check the validity of your meshes and models',
         badge: '',
         chip: '',
@@ -26,10 +26,10 @@ const tools_list = [
     {
         icon: 'mdi-map',
         title: 'CRS converter',
-        to: '/tools/filetransposer',
+        to: '/tools/crs_converter',
         text: 'Convert your file from a coordinate system to another one',
-        badge: 'soon',
-        chip: 'Coming soon!',
+        badge: 'beta',
+        chip: 'beta',
     },
 ]
 

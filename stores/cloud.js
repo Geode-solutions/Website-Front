@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
 import { use_errors_store } from './errors'
-const errors_store = use_errors_store()
-
 
 export const use_cloud_store = defineStore('cloud', {
   state: () => ({
@@ -32,6 +30,7 @@ export const use_cloud_store = defineStore('cloud', {
       }
     },
     async create_backend () {
+      const errors_store = use_errors_store()
       const config = useRuntimeConfig()
       const { data, error } = await useFetch(`${config.public.API_URL}${config.public.SITE_BRANCH}/tools/createbackend`, { method: 'POST' })
       if (data.value !== null) {
@@ -49,6 +48,7 @@ export const use_cloud_store = defineStore('cloud', {
       setInterval(() => this.do_ping(), 10 * 1000)
     },
     async do_ping () {
+      const errors_store = use_errors_store()
       const config = useRuntimeConfig()
       const { data, error } = await useFetch(`${config.public.API_URL}/${this.ID}/ping`, { method: 'POST' })
       if (data.value !== null) {

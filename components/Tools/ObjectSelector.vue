@@ -37,8 +37,7 @@ async function get_allowed_objects (input_files) {
   const route = `/${tool_route}/allowed_objects`
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'request_error_function': () => { loading.value = false },
-      'response_function': (response) => { allowed_objects.value = response._data.objects }
+      'response_function': (response) => { allowed_objects.value = response._data.allowed_objects }
     })
 }
 

@@ -6,8 +6,6 @@
 
 <script setup>
 
-const errors_store = use_errors_store()
-
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
@@ -32,7 +30,11 @@ function fill_extensions (response) {
 async function get_allowed_files (tool_route) {
   const route = `${tool_route}/allowed_files`
   await api_fetch(route, { method: 'GET' },
-    { 'response_function': () => { fill_extensions } })
+    {
+      'response_function': () => {
+        fill_extensions()
+      }
+    })
 }
 
 onMounted(async () => {

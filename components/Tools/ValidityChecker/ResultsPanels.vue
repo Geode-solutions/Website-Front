@@ -5,7 +5,7 @@
         <v-expansion-panel-title>
           <v-row align="center">
             <v-col cols="auto">
-              <ToolsValidityBadge :value="check.value" />
+              <ToolsValidityCheckerValidityBadge :value="check.value" />
             </v-col>
             <v-col>
               {{ check.sentence }}
@@ -28,7 +28,6 @@
 </template>
 
 <script setup>
-const errors_store = use_errors_store()
 
 const stepper_tree = inject('stepper_tree')
 
@@ -104,21 +103,15 @@ async function get_tests_results () {
   }
 }
 
-function disable_loading (response) {
-  loading.value = false
-}
-
-
 async function get_test_result (object, filename, test, children_array, max_retry) {
   const params = new FormData()
-  params.append('object', object)
+  params.append('geode_object', object)
   params.append('filename', filename)
   params.append('test', test)
 
   const route = `${tool_route}/inspect_file`
   api_fetch(route, { method: 'POST', body: params, retry: max_retry },
     {
-      'request_error_function': (response) => { disable_loading(response) },
       'response_function': (response) => {
         update_result(stepper_tree.model_checks, children_array, response._data.result, response._data.list_invalidities)
       },

@@ -9,7 +9,7 @@
     Cancel
   </v-btn>
 </template>
-
+  
 <script setup>
 import { useToggle } from '@vueuse/core'
 import fileDownload from 'js-file-download'
@@ -19,12 +19,15 @@ const props = defineProps({
 })
 const { input_files,
   input_geode_object,
+  input_crs,
+  output_crs,
   input_output_extension } = props.component_options
 
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
 
 const loading = ref(false)
+
 const toggle_loading = useToggle(loading)
 
 async function convert_files () {
@@ -38,6 +41,12 @@ async function convert_files () {
       params.append('file', event.target.result)
       params.append('filename', input_files[i].name)
       params.append('filesize', input_files[i].size)
+      params.append('input_crs_authority', input_crs['authority'])
+      params.append('input_crs_code', input_crs['code'])
+      params.append('input_crs_name', input_crs['name'])
+      params.append('output_crs_authority', output_crs['authority'])
+      params.append('output_crs_code', output_crs['code'])
+      params.append('output_crs_name', output_crs['name'])
       params.append('extension', input_output_extension)
       params.append('responseType', 'blob')
       params.append('responseEncoding', 'binary')
@@ -46,17 +55,13 @@ async function convert_files () {
       const route = `${tool_route}/convert_file`
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': () => {
-            toggle_loading()
-          },
+          'request_error_function': () => { toggle_loading() },
           'response_function': (response) => {
             const new_file_name = response.headers.get('new-file-name')
             fileDownload(response._data, new_file_name)
             toggle_loading()
           },
-          'response_error_function': () => {
-            toggle_loading()
-          }
+          'response_error_function': () => { toggle_loading() }
         }
       )
     }
