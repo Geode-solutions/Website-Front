@@ -1,10 +1,9 @@
-const errors_store = use_errors_store()
-const cloud_store = use_cloud_store()
-const { ID } = storeToRefs(cloud_store)
-
 export async function api_fetch (request_url, request_options, { request_error_function, response_function, response_error_function } = {}) {
+  const errors_store = use_errors_store()
+  const cloud_store = use_cloud_store()
+  const { ID } = storeToRefs(cloud_store)
   const config = useRuntimeConfig()
-  const base_url = `${config.API_URL}/${ID.value}`
+  const base_url = `${config.public.API_URL}/${ID.value}`
 
   return useFetch(request_url,
     {

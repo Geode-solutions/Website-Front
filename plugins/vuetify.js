@@ -1,5 +1,6 @@
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 import * as directives from 'vuetify/directives'
 
 import '@mdi/font/css/materialdesignicons.css'
@@ -22,7 +23,10 @@ const light_theme = {
 
 export default defineNuxtPlugin(nuxtApp => {
   const vuetify = createVuetify({
-    components,
+    components: {
+      ...components,
+      VDataTable,
+    },
     directives,
     theme: {
       defaultTheme: 'light_theme',
