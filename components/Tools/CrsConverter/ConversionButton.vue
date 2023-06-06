@@ -19,6 +19,8 @@ const props = defineProps({
 })
 const { input_files,
   input_geode_object,
+  input_crs,
+  output_crs,
   input_output_extension } = props.component_options
 
 const stepper_tree = inject('stepper_tree')
@@ -39,12 +41,12 @@ async function convert_files () {
       params.append('file', event.target.result)
       params.append('filename', input_files[i].name)
       params.append('filesize', input_files[i].size)
-      params.append('input_crs_authority', 'EPSG')
-      params.append('input_crs_code', '2000')
-      params.append('input_crs_name', 'Anguilla 1957 / British West Indies Grid')
-      params.append('output_crs_authority', 'EPSG')
-      params.append('output_crs_code', '2001')
-      params.append('output_crs_name', 'Antigua 1943 / British West Indies Grid')
+      params.append('input_crs_authority', input_crs['authority'])
+      params.append('input_crs_code', input_crs['code'])
+      params.append('input_crs_name', input_crs['name'])
+      params.append('output_crs_authority', output_crs['authority'])
+      params.append('output_crs_code', output_crs['code'])
+      params.append('output_crs_name', output_crs['name'])
       params.append('extension', input_output_extension)
       params.append('responseType', 'blob')
       params.append('responseEncoding', 'binary')

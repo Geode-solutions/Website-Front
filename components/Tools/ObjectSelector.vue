@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+const errors_store = use_errors_store()
 
 const props = defineProps({
   component_options: { type: Object, required: true },

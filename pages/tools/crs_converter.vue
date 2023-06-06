@@ -77,11 +77,7 @@ const stepper_tree = reactive({
         }
       },
       chips: computed(() => {
-        if (input_crs === {}) {
-          return []
-        } else {
-          return [input_crs['authority'], input_crs['code'], input_crs['name']]
-        }
+        return Object.values(input_crs.value)
       })
     },
     {
@@ -94,11 +90,7 @@ const stepper_tree = reactive({
         }
       },
       chips: computed(() => {
-        if (output_crs === {}) {
-          return []
-        } else {
-          return [output_crs['authority'], output_crs['code'], output_crs['name']]
-        }
+        return Object.values(output_crs.value)
       })
     },
     {

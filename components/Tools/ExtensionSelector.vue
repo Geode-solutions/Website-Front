@@ -26,7 +26,6 @@ onMounted(() => {
   get_output_file_extensions(input_geode_object, tool_route)
 })
 
-
 async function get_output_file_extensions (input_geode_object, tool_route) {
   const params = new FormData()
   params.append('geode_object', input_geode_object)

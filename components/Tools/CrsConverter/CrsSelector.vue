@@ -12,7 +12,7 @@ const props = defineProps({
   component_options: { type: Object, required: true },
 })
 
-const { input_geode_object, } = props.component_options
+const { input_geode_object, crs_key } = props.component_options
 
 const stepper_tree = inject('stepper_tree')
 const { tool_route } = stepper_tree
@@ -25,12 +25,15 @@ const toggle_loading = useToggle(data_table_loading)
 
 watch(selected_crs, (new_value) => {
   const crs = get_selected_crs(new_value[0])
-  set_crs()
+  set_crs(crs_key, crs)
 })
 
-function set_crs (key, crs_value) {
-  stepper_tree.key = crs_value
+function set_crs (crs_key, crs_value) {
+  stepper_tree[crs_key] = crs_value
+  console.log('crs_key', crs_key)
+  console.log('crs_value', crs_value)
   stepper_tree.current_step_index++
+  console.log('stepper_tree', stepper_tree)
 }
 
 function get_selected_crs (crs_code) {

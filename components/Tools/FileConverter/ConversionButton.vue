@@ -27,13 +27,6 @@ const { tool_route } = stepper_tree
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
-function response_function (response) {
-  const new_file_name = response.headers.get('new-file-name')
-  fileDownload(response._data, new_file_name)
-  toggle_loading()
-}
-
-
 async function convert_files () {
   for (let i = 0; i < input_files.length; i++) {
 
@@ -53,9 +46,17 @@ async function convert_files () {
       const route = `${tool_route}/convert_file`
       await api_fetch(route, { method: 'POST', body: params },
         {
-          'request_error_function': () => { toggle_loading() },
-          'response_function': (response) => { response_function(response) },
-          'response_error_function': () => { toggle_loading() }
+          'request_error_function': () => {
+            toggle_loading()
+          },
+          'response_function': (response) => {
+            const new_file_name = response.headers.get('new-file-name')
+            fileDownload(response._data, new_file_name)
+            toggle_loading()
+          },
+          'response_error_function': () => {
+            toggle_loading()
+          }
         }
       )
     }
