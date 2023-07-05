@@ -43,11 +43,10 @@ onMounted(() => {
   }
 })
 
-async function submit_recaptcha (token) {
+async function submit_recaptcha(token) {
   try {
-    const config = useRuntimeConfig()
     console.log('ReCaptcha token:', token)
-    const response = await $fetch.raw(`${config.public.SITE_URL}/.netlify/functions/recaptcha?token=${token}`)
+    const response = await $fetch.raw(`/.netlify/functions/recaptcha?token=${token}`)
     console.log(response)
     cloud_store.$patch({ is_captcha_validated: response.status == 200 })
     recaptcha.reset()
