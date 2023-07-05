@@ -45,7 +45,6 @@ onMounted(() => {
 
 async function submit_recaptcha(token) {
   try {
-    const config = useRuntimeConfig()
     console.log('ReCaptcha token:', token)
     const response = await $fetch.raw(`/.netlify/functions/recaptcha?token=${token}`)
     console.log(response)
