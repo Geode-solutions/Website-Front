@@ -35,6 +35,7 @@ const menus = [
   { title: 'Software', to: '/software' },
   { title: 'Services', to: '/services' },
   { title: 'Free tools', to: '/tools' },
+  { title: 'Workflows', to: '/workflows' },
 ]
 
 </script>
