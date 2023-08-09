@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-h2 py-2" align="center">Simplex remesh</h1>
+    <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     <v-col v-if="!is_cloud_running">
         <ToolsLauncher />
     </v-col>
@@ -81,7 +81,7 @@
     watch(is_cloud_running, async () => {
         toggle_loading()
 
-        await api_fetch('http://127.0.0.1:443/123456/simplexRemesh/get_brep_info', { method: 'POST'},
+        await api_fetch('simplexRemesh/get_brep_info', { method: 'POST'},
             {
                 'request_error_function': () => { 
                     toggle_loading() 
@@ -106,7 +106,7 @@
         const json_blocks = JSON.stringify(blockMetrics.value)
         params.append('blockMetrics',json_blocks)
 
-        await api_fetch('http://127.0.0.1:443/123456/simplexRemesh/remesh', { method: 'POST', body: params },
+        await api_fetch('simplexRemesh/remesh', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 

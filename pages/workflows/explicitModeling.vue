@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-h2 py-2" align="center">Explicit modeling</h1>
+    <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
     <v-col v-if="!is_cloud_running">
         <ToolsLauncher />
     </v-col>
@@ -45,7 +45,7 @@
     watch(is_cloud_running, async () => {
         toggle_loading()
 
-        await api_fetch('http://127.0.0.1:443/123456/explicitModeling/get_brep_stats', { method: 'POST'},
+        await api_fetch('explicitModeling/get_brep_stats', { method: 'POST'},
             {
                 'request_error_function': () => { 
                     toggle_loading() 
