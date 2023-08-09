@@ -78,7 +78,7 @@
         params.append('function_type', scalar_function.value);
         params.append('cell_size', cellSize.value[0]);
         
-        await api_fetch('ong/step1', { method: 'POST', body: params },
+        await api_fetch('workflows/ong/step1', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 
@@ -99,7 +99,7 @@
         params.append('axis', axis.value[0]._rawValue);
         params.append('direction', direction.value[0]._rawValue);
 
-        await api_fetch('ong/step2', { method: 'POST', body: params },
+        await api_fetch('workflows/ong/step2', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 
@@ -119,7 +119,7 @@
         const params = new FormData();
         params.append('metric', metric.value[0]._rawValue);
 
-        await api_fetch('ong/step3', { method: 'POST', body: params },
+        await api_fetch('workflows/ong/step3', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 

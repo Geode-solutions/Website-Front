@@ -88,7 +88,7 @@
     async function getBRepIDs () {
         toggle_loading()
 
-        await api_fetch('simplexRemesh/get_brep_info', { method: 'POST'},
+        await api_fetch('workflows/simplexRemesh/get_brep_info', { method: 'POST'},
             {
                 'request_error_function': () => { 
                     toggle_loading() 
@@ -113,7 +113,7 @@
         const json_blocks = JSON.stringify(blockMetrics.value)
         params.append('blockMetrics',json_blocks)
 
-        await api_fetch('simplexRemesh/remesh', { method: 'POST', body: params },
+        await api_fetch('workflows/simplexRemesh/remesh', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 
