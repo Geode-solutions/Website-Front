@@ -46,9 +46,7 @@
         titleTemplate: (title) => `${title} - Geode-solutions`
     })
 
-    getBRepStats()
-
-    async function getBRepStats () {
+    watch(is_cloud_running, async () => {
         toggle_loading()
 
         await api_fetch('http://127.0.0.1:443/123456/explicitModeling/get_brep_stats', { method: 'POST'},
@@ -66,6 +64,6 @@
                 'response_error_function': () => { toggle_loading() }
             }
         )
-    }
+    })
 
 </script>

@@ -82,9 +82,7 @@
         panel.value = []
     }
 
-    getBRepIDs()
-
-    async function getBRepIDs () {
+    watch(is_cloud_running, async () => {
         toggle_loading()
 
         await api_fetch('http://127.0.0.1:443/123456/simplexRemesh/get_brep_info', { method: 'POST'},
@@ -100,7 +98,7 @@
                 'response_error_function': () => { toggle_loading() }
             }
         )
-    }
+    })
 
     async function sendMetrics () {
         toggle_loading()

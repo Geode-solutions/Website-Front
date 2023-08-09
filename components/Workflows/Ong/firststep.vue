@@ -48,8 +48,11 @@
 
 <script setup>
     import {useInputStore} from "@/stores/inputs"
+    import {use_cloud_store} from "@/stores/cloud"
 
     const inputsStore = useInputStore()
+    const cloud_store = use_cloud_store()
+    const { is_cloud_running } = storeToRefs(cloud_store)
 
     const nb_constraints = ref(0)
     const function_type = ref("")
@@ -58,10 +61,8 @@
     const autofilled = ref(false)
     const autofilled_constrains = ref([])
 
-    getConstraints()
 
-
-    async function getConstraints () {
+    watch(is_cloud_running, async () => {
 
         await api_fetch('http://127.0.0.1:443/123456/ong/get_constraints', { method: 'POST'},
             {
@@ -70,7 +71,7 @@
                 }
             }
         )
-    }
+    })
 
     const alterFunction = () => {
         inputsStore.setFunction(function_type.value)
