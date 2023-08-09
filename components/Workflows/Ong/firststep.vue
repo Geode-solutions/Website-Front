@@ -64,7 +64,7 @@
 
     watch(is_cloud_running, async () => {
 
-        await api_fetch('ong/get_constraints', { method: 'POST'},
+        await api_fetch('workflows/ong/get_constraints', { method: 'POST'},
             {
                 'response_function': (response) => {
                     autofilled_constrains.value = JSON.parse(response._data.constraints)

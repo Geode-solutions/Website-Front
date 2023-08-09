@@ -45,7 +45,7 @@
     watch(is_cloud_running, async () => {
         toggle_loading()
 
-        await api_fetch('explicitModeling/get_brep_stats', { method: 'POST'},
+        await api_fetch('workflows/explicitModeling/get_brep_stats', { method: 'POST'},
             {
                 'request_error_function': () => { 
                     toggle_loading() 
