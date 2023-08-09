@@ -1,44 +1,50 @@
-
-
 <template>
-    <v-container class="mt-10 w-50">
-        <v-row justify="center">
-            <h1 v-if="!firstDisabled">First step</h1>
-            <h1 v-else-if="!secondDisabled">Second step</h1>
-            <h1 v-else-if="!thirdDisabled">Third step</h1>
-            <h1 v-else>X step</h1>
-        </v-row>
-            
-
-        <v-container rounded="lg" class="my-10 pa-0" color="black">
-            <WorkflowsOngFirststep :class="{disabled: firstDisabled}"></WorkflowsOngFirststep>
+    <v-col v-if="!is_cloud_running">
+        <ToolsLauncher />
+    </v-col>
+    <v-col v-if="is_cloud_running">
+        <v-container class="mt-10 w-50">
             <v-row justify="center">
-                <v-btn :class="{disabled: firstDisabled}" class="mx-5" :loading="loading" @click="sendStepOne" color="primary">Send data</v-btn>
-                <v-btn :class="{disabled:!oneDone||firstDisabled}" class="mx-5" @click="goToStepTwo">Go to next step</v-btn>
+                <h1 v-if="!firstDisabled">First step</h1>
+                <h1 v-else-if="!secondDisabled">Second step</h1>
+                <h1 v-else-if="!thirdDisabled">Third step</h1>
+                <h1 v-else>X step</h1>
             </v-row>
-            
-            <WorkflowsOngSecondstep :class="{disabled: secondDisabled}"></WorkflowsOngSecondstep>
-            <v-row justify="center">
-                <v-btn :class="{disabled: secondDisabled}" class="ma-5" @click="goToStepOne">Go back</v-btn>
-                <v-btn :class="{disabled: secondDisabled}" class="ma-5" :loading="loading" @click="sendStepTwo" color="primary">Send data</v-btn>
-                <v-btn :class="{disabled:!twoDone||secondDisabled}" class="ma-5" @click="goToStepThree">Go to next step</v-btn>
-            </v-row>
-            
-            <WorkflowsOngThirdstep :class="{disabled: thirdDisabled}"></WorkflowsOngThirdstep>
-            <v-row justify="center">
-                <v-btn :class="{disabled: thirdDisabled}" class="ma-5" @click="goToStepTwo">Go back</v-btn>
-                <v-btn :class="{disabled: thirdDisabled}" class="ma-5" :loading="loading" @click="sendStepThree" color="primary">Send data</v-btn>
-            </v-row>
-        </v-container> 
-    </v-container>
+                
+    
+            <v-container rounded="lg" class="my-10 pa-0" color="black">
+                <WorkflowsOngFirststep :class="{disabled: firstDisabled}"></WorkflowsOngFirststep>
+                <v-row justify="center">
+                    <v-btn :class="{disabled: firstDisabled}" class="mx-5" :loading="loading" @click="sendStepOne" color="primary">Send data</v-btn>
+                    <v-btn :class="{disabled:!oneDone||firstDisabled}" class="mx-5" @click="goToStepTwo">Go to next step</v-btn>
+                </v-row>
+                
+                <WorkflowsOngSecondstep :class="{disabled: secondDisabled}"></WorkflowsOngSecondstep>
+                <v-row justify="center">
+                    <v-btn :class="{disabled: secondDisabled}" class="ma-5" @click="goToStepOne">Go back</v-btn>
+                    <v-btn :class="{disabled: secondDisabled}" class="ma-5" :loading="loading" @click="sendStepTwo" color="primary">Send data</v-btn>
+                    <v-btn :class="{disabled:!twoDone||secondDisabled}" class="ma-5" @click="goToStepThree">Go to next step</v-btn>
+                </v-row>
+                
+                <WorkflowsOngThirdstep :class="{disabled: thirdDisabled}"></WorkflowsOngThirdstep>
+                <v-row justify="center">
+                    <v-btn :class="{disabled: thirdDisabled}" class="ma-5" @click="goToStepTwo">Go back</v-btn>
+                    <v-btn :class="{disabled: thirdDisabled}" class="ma-5" :loading="loading" @click="sendStepThree" color="primary">Send data</v-btn>
+                </v-row>
+            </v-container> 
+        </v-container>
+    </v-col>
 </template>
 
 
 <script setup>
-    import {useInputStore} from "@/stores/inputs"
-    import { storeToRefs } from 'pinia'
     import { useToggle } from '@vueuse/core'
+    import {useInputStore} from "@/stores/inputs"
+    import {use_cloud_store} from "@/stores/cloud"
+    import { storeToRefs } from 'pinia'
 
+    const cloud_store = use_cloud_store()
+    const { is_cloud_running } = storeToRefs(cloud_store)
     const inputsStore = useInputStore()
     const { constraints, isovalues, bbox_points, cellSize, scalar_function, axis, direction, metric } = storeToRefs(inputsStore)
     inputsStore.setDefault()

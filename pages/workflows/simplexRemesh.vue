@@ -1,59 +1,65 @@
-
-
 <template>
-    <v-container class="mt-10 w-50">
-        <v-row justify="center">
-            <h1>Simplex remesh</h1>
-        </v-row>
-            
-
-        <v-container rounded="lg" class="my-10 pa-0" color="black">
-            <label class="text-medium-emphasis text-body-2">Global metric</label>
-            <v-text-field v-model="metric" id="metric" name="metric" @input="setGlobalMetric"></v-text-field>
-            <v-container>
-                <v-expansion-panels v-model="panel">
-                    <v-expansion-panel class="mb-4">
-                        <v-expansion-panel-title>
-                            Set individual surface metrics
-                        </v-expansion-panel-title>
-                        <v-expansion-panel-text>
-                            <v-sheet :max-height="260" class="overflow-auto" color="transparent">
-                                <div v-for="n in surfaceIDS.length-1">
-                                    <WorkflowsSimplexRemeshSurfaceMetric :num="n" :id="surfaceIDS[n]" ></WorkflowsSimplexRemeshSurfaceMetric>
-                                </div>
-                            </v-sheet>
-                        </v-expansion-panel-text>
-                    </v-expansion-panel>
-    
-                    <v-expansion-panel class="mb-4">
-                        <v-expansion-panel-title>
-                            Set individual block metrics
-                        </v-expansion-panel-title>
-                        <v-expansion-panel-text>
-                            <v-sheet :max-height="260" class="overflow-auto" color="transparent">
-                                <div v-for="n in blockIDS.length-1">
-                                    <WorkflowsSimplexRemeshBlockMetric :num="n" :id="blockIDS[n]" ></WorkflowsSimplexRemeshBlockMetric>
-                                </div>
-                            </v-sheet>
-                        </v-expansion-panel-text>
-                    </v-expansion-panel>
-                </v-expansion-panels>
-            </v-container>
-
-            
+    <v-col v-if="!is_cloud_running">
+        <ToolsLauncher />
+    </v-col>
+    <v-col v-if="is_cloud_running">
+        <v-container class="mt-10 w-50">
             <v-row justify="center">
-                <v-btn class="ma-5" :loading="loading" @click="sendMetrics" color="primary">Send data</v-btn>
+                <h1>Simplex remesh</h1>
             </v-row>
-        </v-container> 
-    </v-container>
+                
+    
+            <v-container rounded="lg" class="my-10 pa-0" color="black">
+                <label class="text-medium-emphasis text-body-2">Global metric</label>
+                <v-text-field v-model="metric" id="metric" name="metric" @input="setGlobalMetric"></v-text-field>
+                <v-container>
+                    <v-expansion-panels v-model="panel">
+                        <v-expansion-panel class="mb-4">
+                            <v-expansion-panel-title>
+                                Set individual surface metrics
+                            </v-expansion-panel-title>
+                            <v-expansion-panel-text>
+                                <v-sheet :max-height="260" class="overflow-auto" color="transparent">
+                                    <div v-for="n in surfaceIDS.length-1">
+                                        <WorkflowsSimplexRemeshSurfaceMetric :num="n" :id="surfaceIDS[n]" ></WorkflowsSimplexRemeshSurfaceMetric>
+                                    </div>
+                                </v-sheet>
+                            </v-expansion-panel-text>
+                        </v-expansion-panel>
+        
+                        <v-expansion-panel class="mb-4">
+                            <v-expansion-panel-title>
+                                Set individual block metrics
+                            </v-expansion-panel-title>
+                            <v-expansion-panel-text>
+                                <v-sheet :max-height="260" class="overflow-auto" color="transparent">
+                                    <div v-for="n in blockIDS.length-1">
+                                        <WorkflowsSimplexRemeshBlockMetric :num="n" :id="blockIDS[n]" ></WorkflowsSimplexRemeshBlockMetric>
+                                    </div>
+                                </v-sheet>
+                            </v-expansion-panel-text>
+                        </v-expansion-panel>
+                    </v-expansion-panels>
+                </v-container>
+    
+                
+                <v-row justify="center">
+                    <v-btn class="ma-5" :loading="loading" @click="sendMetrics" color="primary">Send data</v-btn>
+                </v-row>
+            </v-container> 
+        </v-container>
+    </v-col>
 </template>
 
 
 <script setup>
     import { useToggle } from '@vueuse/core'
     import {useInputStore} from "@/stores/inputs"
+    import {use_cloud_store} from "@/stores/cloud"
     import { storeToRefs } from 'pinia'
 
+    const cloud_store = use_cloud_store()
+    const { is_cloud_running } = storeToRefs(cloud_store)
     const inputsStore = useInputStore()
     inputsStore.setDefault()
     const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
