@@ -81,7 +81,7 @@
     watch(is_cloud_running, async () => {
         toggle_loading()
 
-        await api_fetch('workflows/simplexRemesh/get_brep_info', { method: 'POST'},
+        await api_fetch('simplexRemesh/get_brep_info', { method: 'POST'},
             {
                 'request_error_function': () => { 
                     toggle_loading() 
