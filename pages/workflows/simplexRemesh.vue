@@ -78,7 +78,14 @@
         panel.value = []
     }
 
-    watch(is_cloud_running, async () => {
+    if (is_cloud_running) {
+        getBRepIDs()
+    } else {
+        watch(is_cloud_running, getBRepIDs())
+    }
+
+
+    async function getBRepIDs () {
         toggle_loading()
 
         await api_fetch('simplexRemesh/get_brep_info', { method: 'POST'},
@@ -94,7 +101,7 @@
                 'response_error_function': () => { toggle_loading() }
             }
         )
-    })
+    }
 
     async function sendMetrics () {
         toggle_loading()

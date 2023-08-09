@@ -62,7 +62,13 @@
     const autofilled_constrains = ref([])
 
 
-    watch(is_cloud_running, async () => {
+    if (is_cloud_running) {
+        getConstraints()
+    } else {
+        watch(is_cloud_running, getConstraints())
+    }
+
+    async function getConstraints () {
 
         await api_fetch('ong/get_constraints', { method: 'POST'},
             {
@@ -71,7 +77,7 @@
                 }
             }
         )
-    })
+    }
 
     const alterFunction = () => {
         inputsStore.setFunction(function_type.value)
