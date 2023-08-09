@@ -1,14 +1,10 @@
 <template>
+    <h1 class="text-h2 py-2" align="center">Simplex remesh</h1>
     <v-col v-if="!is_cloud_running">
         <ToolsLauncher />
     </v-col>
     <v-col v-if="is_cloud_running">
         <v-container class="mt-10 w-50">
-            <v-row justify="center">
-                <h1>Simplex remesh</h1>
-            </v-row>
-                
-    
             <v-container rounded="lg" class="my-10 pa-0" color="black">
                 <label class="text-medium-emphasis text-body-2">Global metric</label>
                 <v-text-field v-model="metric" id="metric" name="metric" @input="setGlobalMetric"></v-text-field>

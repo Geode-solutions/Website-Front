@@ -1,4 +1,5 @@
 <template>
+    <h1 class="text-h2 py-2" align="center">ONG</h1>
     <v-col v-if="!is_cloud_running">
         <ToolsLauncher />
     </v-col>
