@@ -20,8 +20,12 @@ const files = ref([])
 watch(files, (value) => {
   stepper_tree.files = value
   stepper_tree.current_step_index++
+  console.log(stepper_tree.current_step_index++)
+  console.log(stepper_tree.steps[current_step_index].component.display_step)
   if (!(stepper_tree.steps[current_step_index].component.display_step)) {
+    console.log("ok")
     stepper_tree.current_step_index++
+    console.log(stepper_tree.current_step_index++)
   }
 })
 
