@@ -32,7 +32,7 @@ const output_extension = ref('')
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'CRS converter',
-  tool_route: 'tools/crs_converter',
+  tool_route: 'crs_converter',
   files: files,
   geode_object: geode_object,
   input_crs: input_crs,
@@ -46,7 +46,8 @@ const stepper_tree = reactive({
         component_options: {
           multiple: true,
           label: 'Please select a file'
-        }
+        }, display_step: true,
+        skippable: false
       },
       chips: computed(() => { return files.value.map((file) => file.name) })
     },
@@ -57,7 +58,8 @@ const stepper_tree = reactive({
         component_options: {
           geode_objects: geode_objects,
           input_files: files
-        }
+        }, display_step: true,
+        skippable: false
       },
       chips: computed(() => {
         if (geode_object.value === '') {
@@ -74,7 +76,8 @@ const stepper_tree = reactive({
         component_options: {
           input_geode_object: geode_object,
           crs_key: 'input_crs'
-        }
+        }, display_step: true,
+        skippable: false
       },
       chips: computed(() => {
         return Object.values(input_crs.value)
@@ -87,7 +90,8 @@ const stepper_tree = reactive({
         component_options: {
           input_geode_object: geode_object,
           crs_key: 'output_crs'
-        }
+        }, display_step: true,
+        skippable: false
       },
       chips: computed(() => {
         return Object.values(output_crs.value)
@@ -101,7 +105,8 @@ const stepper_tree = reactive({
           input_files: files,
           input_geode_object: geode_object,
           input_output_extension: output_extension,
-        }
+        }, display_step: true,
+        skippable: false
       },
       chips: computed(() => {
         if (output_extension.value === '') {
@@ -121,7 +126,8 @@ const stepper_tree = reactive({
           input_crs: input_crs,
           output_crs: output_crs,
           input_output_extension: output_extension,
-        }
+        }, display_step: true,
+        skippable: false
       },
       chips: []
     }

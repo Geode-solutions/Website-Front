@@ -23,14 +23,26 @@ const cards_list = [
 ]
 
 const files = ref([])
+const additional_files = ref([])
 const geode_object = ref('')
 const output_extension = ref('')
+
+function display_step(){
+  for (const file of files.value) {
+    if (file.name.split(".").pop() == "vo") {
+      return true
+    }
+  }
+  return false
+}
 
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'File converter',
-  tool_route: 'tools/file_converter',
+  tool_route: 'file_converter',
   files: files,
+  additional_files: additional_files,
+  additional_step: computed(() => { return display_step() }),
   geode_object: geode_object,
   output_extension: output_extension,
   steps: [
@@ -41,9 +53,24 @@ const stepper_tree = reactive({
         component_options: {
           multiple: true,
           label: 'Please select a file'
-        }
+        }, 
+        display_step: true,
+        skippable: false
       },
       chips: computed(() => { return files.value.map((file) => file.name) })
+    },
+    {
+      step_title: 'Please select additionnal files',
+      component: {
+        component_name: shallowRef(ToolsFileSelector),
+        component_options: {
+          multiple: true,
+          label: 'Please select a file'
+        }, 
+        display_step: computed(() => { return display_step() }),
+        skippable: true
+      },
+      chips: computed(() => { return additional_files.value.map((additional_file) => additional_file.name) })
     },
     {
       step_title: 'Confirm the data type',
@@ -52,7 +79,9 @@ const stepper_tree = reactive({
         component_options: {
           geode_objects: geode_objects,
           input_files: files
-        }
+        }, 
+        display_step: true,
+        skippable: false
       },
       chips: computed(() => {
         if (geode_object.value === '') {
@@ -68,7 +97,9 @@ const stepper_tree = reactive({
         component_name: shallowRef(ToolsExtensionSelector),
         component_options: {
           input_geode_object: geode_object
-        }
+        }, 
+        display_step: true,
+        skippable: false
       },
       chips: computed(() => {
         if (output_extension.value === '') {
@@ -84,9 +115,12 @@ const stepper_tree = reactive({
         component_name: shallowRef(ToolsFileSelectorConversionButton),
         component_options: {
           input_files: files,
+          input_additional_files: additional_files,
           input_geode_object: geode_object,
           input_output_extension: output_extension,
-        }
+        }, 
+        display_step: true,
+        skippable: false
       },
       chips: []
     }

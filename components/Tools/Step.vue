@@ -3,9 +3,11 @@
     <v-row align="center" @click="set_current_step(step_index)">
       <v-col cols="auto">
         <v-icon v-if="current_step_index > step_index" icon="mdi-check-circle" color="grey" />
-        <v-icon v-else-if="current_step_index == step_index" :icon="`mdi-numeric-${step_index + 1}-circle`"
-          color="primary" />
-        <v-icon v-else :icon="`mdi-numeric-${step_index + 1}-circle`" color="grey" />
+        <v-icon v-else-if="(current_step_index == step_index) && (additional_step)" :icon="`mdi-numeric-${step_index + 1}-circle`" color="primary" />
+        <v-icon v-else-if="(current_step_index == step_index) && (current_step_index == 0)" :icon="`mdi-numeric-${step_index + 1}-circle`" color="primary" />
+        <v-icon v-else-if="current_step_index == step_index" :icon="`mdi-numeric-${step_index}-circle`" color="primary" />
+        <v-icon v-else-if="(current_step_index < step_index) && (additional_step)" :icon="`mdi-numeric-${step_index + 1}-circle`" color="grey" />
+        <v-icon v-else :icon="`mdi-numeric-${step_index}-circle`" color="grey" />
       </v-col>
       <v-col cols="auto">
         <p class="font-weight-bold">
@@ -24,6 +26,9 @@
           :component_options="steps[step_index].component.component_options" />
       </v-row>
     </Transition>
+    <v-row>
+      <v-btn v-if="(steps[step_index].component.skippable) && (current_step_index == step_index)" @click="skipStep()" color="primary" class="ml-6 mb-2">Skip step</v-btn>
+    </v-row>
   </v-card>
 </template>
 
@@ -33,7 +38,11 @@ const props = defineProps({
 })
 const { step_index } = props
 const stepper_tree = inject('stepper_tree')
-const { current_step_index, steps } = toRefs(stepper_tree)
+const { current_step_index, steps, additional_step } = toRefs(stepper_tree)
+
+function skipStep() {
+  stepper_tree.current_step_index++ 
+}
 
 function set_current_step (step_index) {
   stepper_tree.current_step_index = step_index
