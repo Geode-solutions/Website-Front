@@ -39,7 +39,7 @@ function display_step(){
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'File converter',
-  tool_route: 'file_converter',
+  tool_route: 'tools/file_converter',
   files: files,
   additional_files: additional_files,
   additional_step: computed(() => { return display_step() }),
