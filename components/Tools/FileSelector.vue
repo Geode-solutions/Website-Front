@@ -20,6 +20,9 @@ const files = ref([])
 watch(files, (value) => {
   stepper_tree.files = value
   stepper_tree.current_step_index++
+  if (!(stepper_tree.steps[current_step_index].component.display_step)) {
+    stepper_tree.current_step_index++
+  }
 })
 
 function fill_extensions (response) {
