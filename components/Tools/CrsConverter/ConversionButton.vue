@@ -18,6 +18,7 @@ const props = defineProps({
   component_options: { type: Object, required: true }
 })
 const { input_files,
+  input_additional_files,
   input_geode_object,
   input_crs,
   output_crs,
@@ -31,6 +32,34 @@ const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
 async function convert_files () {
+  for (let i = 0; i < input_additional_files.length; i++) {
+    const reader = new FileReader()
+    reader.onload = async function (event) {
+      const params = new FormData()
+      params.append('file', event.target.result)
+      params.append('filename', input_additional_files[i].name)
+      params.append('filesize', input_additional_files[i].size)
+
+      toggle_loading()
+      const route = `${tool_route}/upload_file`
+
+      await api_fetch(route, { method: 'POST', body: params },
+        {
+          'request_error_function': () => {
+            toggle_loading()
+          },
+          'response_function': () => {
+            toggle_loading()
+          },
+          'response_error_function': () => {
+            toggle_loading()
+          }
+        }
+      )
+    }
+    reader.readAsDataURL(input_files[0])
+  }
+  
   for (let i = 0; i < input_files.length; i++) {
 
     let reader = new FileReader()
