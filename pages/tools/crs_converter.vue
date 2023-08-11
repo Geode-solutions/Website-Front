@@ -4,7 +4,7 @@
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
-import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
+import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsCrsConverterCrsSelector from '@/components/Tools/CrsConverter/CrsSelector.vue'
 import ToolsExtensionSelector from '@/components/Tools/ExtensionSelector.vue'
@@ -42,7 +42,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Please select a file to convert',
       component: {
-        component_name: shallowRef(ToolsFileSelector),
+        component_name: shallowRef(FileSelector),
         component_options: {
           multiple: true,
           label: 'Please select a file'

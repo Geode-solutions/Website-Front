@@ -65,7 +65,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['stores', './node_modules/@geode/opengeodeweb-front/components']
+    dirs: ['stores']
   },
 
   // ** Build configuration

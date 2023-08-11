@@ -57,7 +57,7 @@
 
 <script setup>
 import tools_list from '@/assets/tools_list'
-import { FileSelector } from '@geode/opengeodeweb-front/components/FileSelector.vue'
+
 </script>
 
 <style scoped>

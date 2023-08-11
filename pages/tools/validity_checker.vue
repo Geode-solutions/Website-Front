@@ -4,7 +4,7 @@
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
-import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
+import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
@@ -38,7 +38,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Please select a file to check',
       component: {
-        component_name: shallowRef(ToolsFileSelector),
+        component_name: shallowRef(FileSelector),
         component_options: {
           multiple: false,
           label: 'Please select a file'

@@ -4,7 +4,7 @@
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
-import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
+import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
 import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
 import ToolsExtensionSelector from '@/components/Tools/ExtensionSelector.vue'
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
@@ -27,7 +27,7 @@ const additional_files = ref([])
 const geode_object = ref('')
 const output_extension = ref('')
 
-function display_step(){
+function display_step () {
   for (const file of files.value) {
     if (file.name.split(".").pop() == "vo") {
       return true
@@ -49,11 +49,11 @@ const stepper_tree = reactive({
     {
       step_title: 'Please select a file to convert',
       component: {
-        component_name: shallowRef(ToolsFileSelector),
+        component_name: shallowRef(FileSelector),
         component_options: {
           multiple: true,
           label: 'Please select a file'
-        }, 
+        },
         display_step: true,
         skippable: false
       },
@@ -66,7 +66,7 @@ const stepper_tree = reactive({
         component_options: {
           multiple: true,
           label: 'Please select a file'
-        }, 
+        },
         display_step: computed(() => { return display_step() }),
         skippable: true
       },
@@ -79,7 +79,7 @@ const stepper_tree = reactive({
         component_options: {
           geode_objects: geode_objects,
           input_files: files
-        }, 
+        },
         display_step: true,
         skippable: false
       },
@@ -97,7 +97,7 @@ const stepper_tree = reactive({
         component_name: shallowRef(ToolsExtensionSelector),
         component_options: {
           input_geode_object: geode_object
-        }, 
+        },
         display_step: true,
         skippable: false
       },
@@ -118,7 +118,7 @@ const stepper_tree = reactive({
           input_additional_files: additional_files,
           input_geode_object: geode_object,
           input_output_extension: output_extension,
-        }, 
+        },
         display_step: true,
         skippable: false
       },
