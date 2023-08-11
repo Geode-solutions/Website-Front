@@ -1,12 +1,13 @@
 <template>
-  <ToolsWrapper :cards_list="cards_list" />
+  <Wrapper :cards_list="cards_list" />
 </template>
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
+import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
 import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
-import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
-import ToolsExtensionSelector from '@/components/Tools/ExtensionSelector.vue'
+import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
+import ExtensionSelector from '@geode/opengeodeweb-front/components/ExtensionSelector.vue'
 import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
 
 const cards_list = [
@@ -62,7 +63,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Please select additionnal files',
       component: {
-        component_name: shallowRef(ToolsFileSelector),
+        component_name: shallowRef(FileSelector),
         component_options: {
           multiple: true,
           label: 'Please select a file'
@@ -75,7 +76,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Confirm the data type',
       component: {
-        component_name: shallowRef(ToolsObjectSelector),
+        component_name: shallowRef(ObjectSelector),
         component_options: {
           geode_objects: geode_objects,
           input_files: files
@@ -94,7 +95,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select file format',
       component: {
-        component_name: shallowRef(ToolsExtensionSelector),
+        component_name: shallowRef(ExtensionSelector),
         component_options: {
           input_geode_object: geode_object
         },

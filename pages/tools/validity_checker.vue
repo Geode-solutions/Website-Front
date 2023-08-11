@@ -1,11 +1,12 @@
 <template>
-  <ToolsWrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <Wrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
 </template>
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
+import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
 import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
-import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
+import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
 import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
 
@@ -50,7 +51,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Confirm the data type',
       component: {
-        component_name: shallowRef(ToolsObjectSelector),
+        component_name: shallowRef(ObjectSelector),
         component_options: {
           geode_objects: geode_objects,
           input_files: files

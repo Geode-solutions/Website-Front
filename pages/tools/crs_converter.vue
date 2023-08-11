@@ -1,13 +1,14 @@
 <template>
-  <ToolsWrapper :cards_list="cards_list" />
+  <Wrapper :cards_list="cards_list" />
 </template>
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
+import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
 import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
-import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
-import ToolsCrsConverterCrsSelector from '@/components/Tools/CrsConverter/CrsSelector.vue'
-import ToolsExtensionSelector from '@/components/Tools/ExtensionSelector.vue'
+import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
+import CrsSelector from '@geode/opengeodeweb-front/components/CrsSelector.vue'
+import ExtensionSelector from '@geode/opengeodeweb-front/components/ExtensionSelector.vue'
 import ToolsCrsSelectorConversionButton from '@/components/Tools/CrsConverter/ConversionButton.vue'
 
 const cards_list = [
@@ -54,7 +55,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Confirm the data type',
       component: {
-        component_name: shallowRef(ToolsObjectSelector),
+        component_name: shallowRef(ObjectSelector),
         component_options: {
           geode_objects: geode_objects,
           input_files: files
@@ -72,7 +73,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select an input coordinate reference system',
       component: {
-        component_name: shallowRef(ToolsCrsConverterCrsSelector),
+        component_name: shallowRef(CrsSelector),
         component_options: {
           input_geode_object: geode_object,
           crs_key: 'input_crs'
@@ -86,7 +87,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select an output coordinate reference system',
       component: {
-        component_name: shallowRef(ToolsCrsConverterCrsSelector),
+        component_name: shallowRef(CrsSelector),
         component_options: {
           input_geode_object: geode_object,
           crs_key: 'output_crs'
@@ -100,7 +101,7 @@ const stepper_tree = reactive({
     {
       step_title: 'Select file format',
       component: {
-        component_name: shallowRef(ToolsExtensionSelector),
+        component_name: shallowRef(ExtensionSelector),
         component_options: {
           input_files: files,
           input_geode_object: geode_object,
