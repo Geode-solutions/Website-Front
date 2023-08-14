@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-    import {useInputStore} from "@/stores/inputs"
     import { storeToRefs } from 'pinia'
 
     const inputsStore = useInputStore()

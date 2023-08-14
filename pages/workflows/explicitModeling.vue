@@ -19,8 +19,6 @@
 
 <script setup>
     import { useToggle } from '@vueuse/core'
-    import {useInputStore} from "@/stores/inputs"
-    import {use_cloud_store} from "@/stores/cloud"
     import { storeToRefs } from 'pinia'
 
     const cloud_store = use_cloud_store()

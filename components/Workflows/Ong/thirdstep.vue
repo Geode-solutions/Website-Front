@@ -6,7 +6,6 @@
 </template>
 
 <script setup>
-    import {useInputStore} from "@/stores/inputs"
 
     const inputsStore = useInputStore()
     const metric = ref();

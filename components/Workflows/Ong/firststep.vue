@@ -47,8 +47,6 @@
 </template>
 
 <script setup>
-    import {useInputStore} from "@/stores/inputs"
-    import {use_cloud_store} from "@/stores/cloud"
 
     const inputsStore = useInputStore()
     const cloud_store = use_cloud_store()
