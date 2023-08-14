@@ -51,6 +51,7 @@
 <script setup>
     import { useToggle } from '@vueuse/core'
     import { storeToRefs } from 'pinia'
+    import { use_cloud_store } from '~/.nuxt/imports';
 
     const cloud_store = use_cloud_store()
     const { is_cloud_running } = storeToRefs(cloud_store)

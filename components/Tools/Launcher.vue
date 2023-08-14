@@ -17,7 +17,7 @@
 
 <script setup>
 import { VueRecaptcha } from "vue-recaptcha";
-
+import { use_cloud_store } from '~/.nuxt/imports';
 const cloud_store = use_cloud_store()
 const { is_cloud_running, is_captcha_validated, is_connexion_launched } = storeToRefs(cloud_store)
 

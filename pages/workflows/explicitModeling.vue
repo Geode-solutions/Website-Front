@@ -19,6 +19,7 @@
 
 <script setup>
     import { useToggle } from '@vueuse/core'
+    import { use_cloud_store } from '~/.nuxt/imports';
     import { storeToRefs } from 'pinia'
 
     const cloud_store = use_cloud_store()

@@ -47,6 +47,7 @@
 </template>
 
 <script setup>
+    import { use_cloud_store } from '~/.nuxt/imports';
 
     const inputsStore = useInputStore()
     const cloud_store = use_cloud_store()
