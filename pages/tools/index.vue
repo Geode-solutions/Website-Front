@@ -4,7 +4,7 @@
     <v-row justify="center">
       <v-col cols="12">
         <h1 class="text-h2 py-5" align="center">
-          Free tools home page
+          Free tools home page Test
         </h1>
 
         <p class="text-h6 font-weight-light" align="justify">
