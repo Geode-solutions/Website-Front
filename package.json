@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^5.9.2",
-    "@geode/opengeodeweb-front": "^0.0.9",
+    "@geode/opengeodeweb-front": "^0.0.10",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
     "@vueuse/core": "^10.1.2",
@@ -32,7 +32,6 @@
     "sass": "^1.62.1",
     "tsparticles": "^2.9.3",
     "vue-gtag": "^2.0.1",
-    "vue-recaptcha": "^2.0.3",
     "vue3-carousel": "^0.3.1",
     "vue3-particles": "^2.9.3",
     "vuetify": "^3.3.2"
