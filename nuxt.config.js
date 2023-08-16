@@ -14,8 +14,6 @@ export default defineNuxtConfig({
     '@geode/opengeodeweb-front'
   ],
 
-  target: 'static',
-
   // ** Customize the progress-bar color
   loading: { color: '#fff' },
 
