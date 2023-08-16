@@ -1,7 +1,7 @@
 <template>
     <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
     <v-col v-if="!is_cloud_running">
-        <ToolsLauncher :site_key="site_key"/>
+        <Launcher :site_key="site_key"/>
     </v-col>
     <v-col v-if="is_cloud_running">
         <v-container class="mt-10 w-50">
