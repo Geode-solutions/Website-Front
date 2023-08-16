@@ -1,5 +1,5 @@
 <template>
-  <Wrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <Wrapper :site_key="site_key" :cards_list="cards_list" :stepper_tree="stepper_tree" />
 </template>
 
 <script setup>
@@ -23,6 +23,7 @@ const cards_list = [
     href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
   },
 ]
+const site_key = useRuntimeConfig().public.SITE_KEY
 
 const files = ref([])
 const geode_object = ref('')
