@@ -81,10 +81,6 @@ export default defineNuxtConfig({
     }
   },
 
-  nitro: {
-    preset: 'netlify'
-  },
-
   devtools: {
     enabled: process.env.NODE_ENV === 'production' ? false : true
   }
