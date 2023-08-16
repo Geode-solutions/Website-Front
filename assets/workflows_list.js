@@ -8,7 +8,7 @@ const workflows_list = [
         chip: '',
     },
     {
-        icon: 'icon-park-outline-coordinate-system',
+        icon: 'mdi-earth-box',
         title: 'ONG',
         to: '/workflows/ong',
         text: 'Do some things',
@@ -16,7 +16,7 @@ const workflows_list = [
         chip: '',
     },
     {
-        icon: 'gg-size',
+        icon: 'mdi-resize',
         title: 'Simplex Remesh',
         to: '/workflows/simplexRemesh',
         text: 'Do some other things',
@@ -24,7 +24,7 @@ const workflows_list = [
         chip: '',
     },
     {
-        icon: 'iconoir-combine',
+        icon: 'mdi-vector-combine',
         title: 'Explicit Modeling',
         to: '/workflows/explicitModeling',
         text: 'Do some other other things',
