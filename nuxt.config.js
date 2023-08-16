@@ -7,6 +7,7 @@ export default defineNuxtConfig({
       SITE_URL: process.env.SITE_URL,
       SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
       NODE_ENV: process.env.NODE_ENV,
+      SITE_KEY: "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC",
     }
   },
 
