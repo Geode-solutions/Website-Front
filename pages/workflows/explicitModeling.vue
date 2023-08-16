@@ -1,7 +1,7 @@
 <template>
     <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
     <v-col v-if="!is_cloud_running">
-        <ToolsLauncher />
+        <ToolsLauncher :site_key="site_key"/>
     </v-col>
     <v-col v-if="is_cloud_running">
         <v-container class="mt-10 w-50">
@@ -27,6 +27,7 @@
     const inputsStore = useInputStore()
     inputsStore.setDefault()
     const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
+    const site_key = useRuntimeConfig().public.SITE_KEY
 
     const loading = ref(false)
     const toggle_loading = useToggle(loading)
