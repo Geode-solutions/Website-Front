@@ -43,8 +43,10 @@
 
     onActivated(()=>{
         if (is_cloud_running) {
+            console.log("coucou")
             getBRepStats()
         } else {
+            console.log("hello")
             watch(is_cloud_running, getBRepStats())
         }
     })
