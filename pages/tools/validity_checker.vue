@@ -32,7 +32,7 @@ const model_checks = ref([])
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'Validity checker',
-  tool_route: 'tools/validity_checker',
+  route_prefix: 'tools/validity_checker',
   files: files,
   geode_object: geode_object,
   model_checks: model_checks,
