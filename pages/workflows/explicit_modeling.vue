@@ -47,7 +47,11 @@
             getBRepStats()
         } else {
             console.log("hello")
-            watch(is_cloud_running, getBRepStats())
+            watch(is_cloud_running, (newValue, oldValue) => {
+                if ((newValue)&&(!(oldValue))) {
+                    getBRepStats()
+                }
+            })
         }
     })
 
