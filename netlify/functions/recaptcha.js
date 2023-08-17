@@ -1,7 +1,6 @@
 exports.handler = async function (event) {
   try {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         console.log(xhr.status);
@@ -19,6 +18,9 @@ exports.handler = async function (event) {
         }
       }
     };
+
+
+    xhr.open("POST", `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${event.queryStringParameters.token}`);
     xhr.send();
   } catch (e) {
     console.log('ReCaptcha error:', e)
