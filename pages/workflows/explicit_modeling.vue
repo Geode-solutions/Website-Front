@@ -41,12 +41,13 @@
         titleTemplate: (title) => `${title} - Geode-solutions`
     })
 
-
-    if (is_cloud_running) {
-        getBRepStats()
-    } else {
-        watch(is_cloud_running, getBRepStats())
-    }
+    onActivated(()=>{
+        if (is_cloud_running) {
+            getBRepStats()
+        } else {
+            watch(is_cloud_running, getBRepStats())
+        }
+    })
 
 
     async function getBRepStats () {
