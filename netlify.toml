@@ -17,3 +17,6 @@
   RECAPTCHA_SITE_KEY = "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"
   SITE_URL = "https://next.geode-solutions.com"
 
+[[plugins]]
+  package = @netlify/plugin-functions-install-core
+
