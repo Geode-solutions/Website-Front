@@ -31,14 +31,6 @@ const geode_object = ref('')
 const output_extension = ref('')
 const route_prefix = 'tools/file_converter'
 
-function display_step () {
-  for (const file of files.value) {
-    if (file.name.split(".").pop() == "vo") {
-      return true
-    }
-  }
-  return false
-}
 
 const stepper_tree = reactive({
   current_step_index: ref(0),
@@ -46,7 +38,6 @@ const stepper_tree = reactive({
   route_prefix: route_prefix,
   files: files,
   additional_files: additional_files,
-  additional_step: computed(() => { return display_step() }),
   geode_object: geode_object,
   output_extension: output_extension,
   steps: [
@@ -58,8 +49,6 @@ const stepper_tree = reactive({
           multiple: true,
           label: 'Please select a file'
         },
-        display_step: true,
-        skippable: false
       },
       chips: computed(() => { return files.value.map((file) => file.name) })
     },
@@ -71,8 +60,6 @@ const stepper_tree = reactive({
           multiple: true,
           label: 'Please select a file'
         },
-        display_step: computed(() => { return display_step() }),
-        skippable: true
       },
       chips: computed(() => { return additional_files.value.map((additional_file) => additional_file.name) })
     },
@@ -84,8 +71,6 @@ const stepper_tree = reactive({
           geode_objects: geode_objects,
           input_files: files
         },
-        display_step: true,
-        skippable: false
       },
       chips: computed(() => {
         if (geode_object.value === '') {
@@ -102,8 +87,6 @@ const stepper_tree = reactive({
         component_options: {
           input_geode_object: geode_object
         },
-        display_step: true,
-        skippable: false
       },
       chips: computed(() => {
         if (output_extension.value === '') {
@@ -123,8 +106,6 @@ const stepper_tree = reactive({
           input_geode_object: geode_object,
           input_output_extension: output_extension,
         },
-        display_step: true,
-        skippable: false
       },
       chips: []
     }
