@@ -28,11 +28,12 @@ const site_key = useRuntimeConfig().public.SITE_KEY
 const files = ref([])
 const geode_object = ref('')
 const model_checks = ref([])
+const route_prefix = 'tools/validity_checker'
 
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'Validity checker',
-  route_prefix: 'tools/validity_checker',
+  route_prefix: route_prefix,
   files: files,
   geode_object: geode_object,
   model_checks: model_checks,

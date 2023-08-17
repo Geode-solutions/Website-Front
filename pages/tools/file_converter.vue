@@ -29,6 +29,7 @@ const files = ref([])
 const additional_files = ref([])
 const geode_object = ref('')
 const output_extension = ref('')
+const route_prefix = 'tools/file_converter'
 
 function display_step () {
   for (const file of files.value) {
@@ -42,7 +43,7 @@ function display_step () {
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'File converter',
-  route_prefix: 'tools/file_converter',
+  route_prefix: route_prefix,
   files: files,
   additional_files: additional_files,
   additional_step: computed(() => { return display_step() }),
