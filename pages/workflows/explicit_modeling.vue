@@ -42,6 +42,7 @@
     })
     console.log(is_cloud_running.value)
     onActivated(()=>{
+        console.log(is_cloud_running.value)
         if (is_cloud_running) {
             console.log("coucou")
             getBRepStats()
