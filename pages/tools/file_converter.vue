@@ -64,6 +64,7 @@ const stepper_tree = reactive({
           variable_to_update: 'additional_files',
           variable_to_increment: 'current_step_index'
         },
+        skippable: true,
       },
       chips: computed(() => { return additional_files.value.map((additional_file) => additional_file.name) })
     },
