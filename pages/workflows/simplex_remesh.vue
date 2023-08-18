@@ -77,11 +77,15 @@
         panel.value = []
     }
 
-    if (is_cloud_running) {
-        getBRepIDs()
-    } else {
-        watch(is_cloud_running, getBRepIDs())
-    }
+    onMounted(()=>{
+        if (is_cloud_running.value) {
+            getBRepIDs()
+        } else {
+            watch(is_cloud_running, () => {
+                getBRepIDs()
+            })
+        }
+    })
 
 
     async function getBRepIDs () {

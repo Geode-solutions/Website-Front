@@ -40,37 +40,12 @@
         title: title,
         titleTemplate: (title) => `${title} - Geode-solutions`
     })
-    console.log(is_cloud_running.value)
-    onActivated(()=>{
-        console.log("activated")
-        console.log(is_cloud_running.value)
-        if (is_cloud_running.value) {
-            console.log("coucou")
-            getBRepStats()
-        } else {
-            console.log("hello")
-            watch(is_cloud_running.value, (newValue, oldValue) => {
-                if ((newValue)&&(!(oldValue))) {
-                    console.log("watch ok")
-                    getBRepStats()
-                } else {
-                    console.log("salut")
-                    console.log(is_cloud_running.value)
-                }
-            })
-        }
-    })
 
     onMounted(()=>{
-        console.log("mounted")
-        console.log(is_cloud_running.value)
         if (is_cloud_running.value) {
-            console.log("coucou")
             getBRepStats()
         } else {
-            console.log("hello")
             watch(is_cloud_running, () => {
-                console.log("watch ok")
                 getBRepStats()
             })
         }

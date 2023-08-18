@@ -59,12 +59,15 @@
     const autofilled = ref(false)
     const autofilled_constrains = ref([])
 
-
-    if (is_cloud_running) {
-        getConstraints()
-    } else {
-        watch(is_cloud_running, getConstraints())
-    }
+    onMounted(()=>{
+        if (is_cloud_running.value) {
+            getConstraints()
+        } else {
+            watch(is_cloud_running, () => {
+                getConstraints()
+            })
+        }
+    })
 
     async function getConstraints () {
 
