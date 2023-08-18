@@ -74,6 +74,7 @@ async function get_tests_names () {
   await api_fetch(route, { method: 'POST', body: params },
     {
       'response_function': (response) => {
+        console.log(response._data)
         stepper_tree[variable_to_update] = response._data.model_checks
         console.log('variable_to_update', stepper_tree[variable_to_update])
       }
