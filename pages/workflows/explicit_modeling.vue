@@ -40,7 +40,7 @@
         title: title,
         titleTemplate: (title) => `${title} - Geode-solutions`
     })
-    console.log(is_cloud_running)
+    console.log(is_cloud_running.value)
     onActivated(()=>{
         if (is_cloud_running) {
             console.log("coucou")
