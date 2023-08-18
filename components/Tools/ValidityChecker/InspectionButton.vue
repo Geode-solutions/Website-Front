@@ -76,7 +76,6 @@ async function get_tests_names () {
       'response_function': (response) => {
         stepper_tree[variable_to_update] = response._data.model_checks
         console.log('variable_to_update', stepper_tree[variable_to_update])
-        console.log('model_checks', stepper_tree["model_checks"])
       }
     })
 }
