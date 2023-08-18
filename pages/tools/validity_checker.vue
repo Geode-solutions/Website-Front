@@ -1,6 +1,5 @@
 <template>
   <Wrapper :site_key="site_key" :cards_list="cards_list" :stepper_tree="stepper_tree" />
-  <v-container>{{ stepper_tree.model_checks }}</v-container>
 </template>
 
 <script setup>
