@@ -43,7 +43,6 @@ const {
   input_file_name,
   input_index_array } = props
 
-console.log(input_model_checks)
 const { route_prefix } = stepper_tree
 const opened_panels = ref([])
 
