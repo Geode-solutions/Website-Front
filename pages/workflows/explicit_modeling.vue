@@ -40,7 +40,7 @@
         title: title,
         titleTemplate: (title) => `${title} - Geode-solutions`
     })
-
+    console.log(is_cloud_running)
     onActivated(()=>{
         if (is_cloud_running) {
             console.log("coucou")
@@ -49,6 +49,7 @@
             console.log("hello")
             watch(is_cloud_running, (newValue, oldValue) => {
                 if ((newValue)&&(!(oldValue))) {
+                    console.log("watch ok")
                     getBRepStats()
                 }
             })
