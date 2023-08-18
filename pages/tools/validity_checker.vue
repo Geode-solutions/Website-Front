@@ -56,8 +56,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ObjectSelector),
         component_options: {
-          geode_objects: geode_objects,
-          input_files: files,
           variable_to_update: 'geode_object',
           variable_to_increment: 'current_step_index'
         },
@@ -75,8 +73,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsValidityCheckerInspectionButton),
         component_options: {
-          input_files: files,
-          input_geode_object: geode_object,
           variable_to_update: 'model_checks',
           variable_to_increment: 'current_step_index'
         },

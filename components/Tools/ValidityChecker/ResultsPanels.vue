@@ -28,22 +28,23 @@
 </template>
 
 <script setup>
-
 const stepper_tree = inject('stepper_tree')
 
 const props = defineProps({
-  component_options: { type: Object, required: true },
+  input_model_checks: { type: Array, required: true },
+  input_geode_object: { type: String, required: true },
+  input_file_name: { type: String, required: true },
   input_index_array: { type: Array, required: false, default: [] },
 })
 
 const {
   input_model_checks,
   input_geode_object,
-  input_file_name } = props.component_options
+  input_file_name,
+  input_index_array } = props
 
-const { input_index_array } = props
 
-const { tool_route } = stepper_tree
+const { route_prefix } = stepper_tree
 const opened_panels = ref([])
 
 watch(input_model_checks, () => {
@@ -70,6 +71,7 @@ watch(input_model_checks, () => {
   { deep: true }
 )
 onMounted(() => {
+  console.log('input_model_checks', input_model_checks)
   get_tests_results()
   opened_panels.value = Array.from(Array(input_model_checks.length).keys())
 })
@@ -109,7 +111,7 @@ async function get_test_result (object, filename, test, children_array, max_retr
   params.append('filename', filename)
   params.append('test', test)
 
-  const route = `${tool_route}/inspect_file`
+  const route = `${route_prefix}/inspect_file`
   api_fetch(route, { method: 'POST', body: params, retry: max_retry },
     {
       'response_function': (response) => {

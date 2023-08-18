@@ -60,8 +60,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ObjectSelector),
         component_options: {
-          geode_objects: geode_objects,
-          input_files: files,
           variable_to_update: 'geode_object',
           variable_to_increment: 'current_step_index',
         },
@@ -79,8 +77,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(CrsSelector),
         component_options: {
-          input_geode_object: geode_object,
-          crs_key: 'input_crs',
           variable_to_update: 'input_crs',
           variable_to_increment: 'current_step_index',
         },
@@ -94,8 +90,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(CrsSelector),
         component_options: {
-          input_geode_object: geode_object,
-          crs_key: 'output_crs',
           variable_to_update: 'output_crs',
           variable_to_increment: 'current_step_index',
         },
@@ -109,9 +103,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ExtensionSelector),
         component_options: {
-          input_files: files,
-          input_geode_object: geode_object,
-          input_output_extension: output_extension,
           variable_to_update: 'output_extension',
           variable_to_increment: 'current_step_index',
         },
@@ -129,11 +120,6 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsCrsSelectorConversionButton),
         component_options: {
-          input_files: files,
-          input_geode_object: geode_object,
-          input_crs: input_crs,
-          output_crs: output_crs,
-          input_output_extension: output_extension,
         },
       },
       chips: []
