@@ -16,7 +16,6 @@
     </v-col>
 </template>
 
-
 <script setup>
     import { useToggle } from '@vueuse/core'
     import { storeToRefs } from 'pinia'
@@ -27,7 +26,6 @@
     inputsStore.setDefault()
     const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
     const site_key = useRuntimeConfig().public.SITE_KEY
-
     const loading = ref(false)
     const toggle_loading = useToggle(loading)
     const nb_corners = ref()
@@ -51,10 +49,8 @@
         }
     })
 
-
     async function getBRepStats () {
         toggle_loading()
-
         await api_fetch('workflows/explicit/get_brep_stats', { method: 'POST'},
             {
                 'request_error_function': () => { 
@@ -71,5 +67,4 @@
             }
         )
     }
-
 </script>

@@ -6,10 +6,8 @@
 </template>
 
 <script setup>
-
     const inputsStore = useInputStore()
     const metric = ref();
-
     const alterMetric = () => {
         inputsStore.setMetric(metric)
     }

@@ -1,4 +1,3 @@
-
 <template>
     <v-row>
         <v-col>
@@ -22,27 +21,26 @@
             <v-text-field  v-model="constraint.weight" :id="`${id}_weight`" :name="`${id}_weight`" @input="alterConstraint"></v-text-field>
         </v-col>
     </v-row>
-
 </template>
-
 
 <script setup>
     import { storeToRefs } from 'pinia'
 
     const inputsStore = useInputStore()    
     const { constraints } = storeToRefs(inputsStore)
-
-
     const props = defineProps({
         id: { type: Number, required: true },
     })
     const { id } = props
     const index = ref(id-1)
-
-    const constraint = ref({"x":constraints.value[index.value]["x"], "y":constraints.value[index.value]["y"], "z":constraints.value[index.value]["z"], "value":constraints.value[index.value]["value"], "weight":constraints.value[index.value]["weight"]});
-
+    const constraint = ref({
+        "x":constraints.value[index.value]["x"], 
+        "y":constraints.value[index.value]["y"], 
+        "z":constraints.value[index.value]["z"], 
+        "value":constraints.value[index.value]["value"], 
+        "weight":constraints.value[index.value]["weight"]
+    });
     const alterConstraint = () => {
         inputsStore.modifyConstraint(index.value, constraint)
     }
-
 </script>

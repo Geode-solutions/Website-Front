@@ -31,7 +31,6 @@
     titleTemplate: (title) => `${title} - Geode-solutions`
     })
 
-
     const { name } = useDisplay()
     const mini = computed(() => {
     switch (name.value) {

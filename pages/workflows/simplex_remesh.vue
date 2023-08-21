@@ -22,7 +22,6 @@
                                 </v-sheet>
                             </v-expansion-panel-text>
                         </v-expansion-panel>
-        
                         <v-expansion-panel class="mb-4">
                             <v-expansion-panel-title>
                                 Set individual block metrics
@@ -37,8 +36,6 @@
                         </v-expansion-panel>
                     </v-expansion-panels>
                 </v-container>
-    
-                
                 <v-row justify="center">
                     <v-btn class="ma-5" :loading="loading" @click="sendMetrics" color="primary">Send data</v-btn>
                 </v-row>
@@ -46,7 +43,6 @@
         </v-container>
     </v-col>
 </template>
-
 
 <script setup>
     import { useToggle } from '@vueuse/core'
@@ -58,7 +54,6 @@
     inputsStore.setDefault()
     const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
     const site_key = useRuntimeConfig().public.SITE_KEY
-
     const loading = ref(false)
     const toggle_loading = useToggle(loading)
     const surfaceIDS = ref([])
@@ -87,10 +82,8 @@
         }
     })
 
-
     async function getBRepIDs () {
         toggle_loading()
-
         await api_fetch('workflows/simplex/get_brep_info', { method: 'POST'},
             {
                 'request_error_function': () => { 
@@ -108,14 +101,12 @@
 
     async function sendMetrics () {
         toggle_loading()
-
         const params = new FormData()
         params.append('globalMetric', globalMetric.value[0]._rawValue)
         const json_surfaces = JSON.stringify(surfaceMetrics.value)
         params.append('surfaceMetrics',json_surfaces)
         const json_blocks = JSON.stringify(blockMetrics.value)
         params.append('blockMetrics',json_blocks)
-
         await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
@@ -128,13 +119,4 @@
             }
         )
     }
-
-
 </script>
-
-
-<style scoped>
-.disabled {
-    display: none;
-}
-</style>

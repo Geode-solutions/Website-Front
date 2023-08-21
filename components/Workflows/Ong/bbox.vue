@@ -1,4 +1,3 @@
-
 <template>
     <v-row>
         <v-col align="center" class="mx-3">
@@ -34,20 +33,14 @@
                     <v-text-field v-model="bbox.z_max" id="z_max" name="z_max" @input="alterBbox"></v-text-field>
                 </v-col>
             </v-row>
-            
         </v-col>
     </v-row>
 </template>
 
-
 <script setup>
-
     const inputsStore = useInputStore()    
-
     const bbox = ref({x_min:"", y_min:"", z_min:"", x_max:"", y_max:"", z_max:""});
-
     const alterBbox = () => {
         inputsStore.modifyBBoxPoints(bbox)
     }
-
 </script>
