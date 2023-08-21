@@ -68,7 +68,6 @@ async function upload_file () {
 
 async function get_tests_names () {
   const params = new FormData()
-<<<<<<< HEAD
   params.append('geode_object', geode_object)
   const route = `${route_prefix}/tests_names`
 
@@ -78,14 +77,6 @@ async function get_tests_names () {
         stepper_tree[variable_to_update] = response._data.model_checks
         console.log('variable_to_update', stepper_tree[variable_to_update])
       }
-=======
-  params.append('geode_object', input_geode_object)
-  const route = `${tool_route}/tests_names`
-
-  await api_fetch(route, { method: 'POST', body: params },
-    {
-      'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
->>>>>>> next
     })
 }
 
