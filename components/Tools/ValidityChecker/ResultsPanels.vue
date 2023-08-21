@@ -13,11 +13,12 @@
           </v-row>
         </v-expansion-panel-title>
         <v-expansion-panel-text>
-          <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" :component_options="{
+          <ToolsValidityCheckerResultsPanels v-if="!check.is_leaf" v-bind="{
             input_model_checks: check.children,
-            input_geode_object: input_geode_object,
-            input_file_name: input_file_name
-          }" :index="index" :input_index_array="update_array(index)" />
+            input_geode_object,
+            input_file_name,
+            input_index_array: update_array(index)
+          }" />
           <v-container v-else-if="check.value == false">
             Invalid = {{ check.list_invalidities }}
           </v-container>
@@ -28,22 +29,22 @@
 </template>
 
 <script setup>
-
 const stepper_tree = inject('stepper_tree')
 
 const props = defineProps({
-  component_options: { type: Object, required: true },
+  input_model_checks: { type: Array, required: true },
+  input_geode_object: { type: String, required: true },
+  input_file_name: { type: String, required: true },
   input_index_array: { type: Array, required: false, default: [] },
 })
 
 const {
   input_model_checks,
   input_geode_object,
-  input_file_name } = props.component_options
+  input_file_name,
+  input_index_array } = props
 
-const { input_index_array } = props
-
-const { tool_route } = stepper_tree
+const { route_prefix } = stepper_tree
 const opened_panels = ref([])
 
 watch(input_model_checks, () => {
@@ -70,16 +71,17 @@ watch(input_model_checks, () => {
   { deep: true }
 )
 onMounted(() => {
+  console.log('input_model_checks', input_model_checks)
   get_tests_results()
   opened_panels.value = Array.from(Array(input_model_checks.length).keys())
 })
 
-function update_array (index) {
+function update_array(index) {
   const array = input_index_array.concat(index)
   return array
 }
 
-function update_result (model_checks, index_array, value, list_invalidities = []) {
+function update_result(model_checks, index_array, value, list_invalidities = []) {
   if (!index_array.length) { return }
   if (index_array.length == 1) {
     const index = index_array[0]
@@ -93,7 +95,7 @@ function update_result (model_checks, index_array, value, list_invalidities = []
   }
 }
 
-async function get_tests_results () {
+async function get_tests_results() {
   for (let index = 0; index < input_model_checks.length; index++) {
     const check = input_model_checks[index]
     if (check.is_leaf && check.value == undefined) {
@@ -103,13 +105,13 @@ async function get_tests_results () {
   }
 }
 
-async function get_test_result (object, filename, test, children_array, max_retry) {
+async function get_test_result(object, filename, test, children_array, max_retry) {
   const params = new FormData()
   params.append('geode_object', object)
   params.append('filename', filename)
   params.append('test', test)
 
-  const route = `${tool_route}/inspect_file`
+  const route = `${route_prefix}/inspect_file`
   api_fetch(route, { method: 'POST', body: params, retry: max_retry },
     {
       'response_function': (response) => {

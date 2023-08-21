@@ -57,6 +57,7 @@
 
 <script setup>
 import tools_list from '@/assets/tools_list'
+
 </script>
 
 <style scoped>
