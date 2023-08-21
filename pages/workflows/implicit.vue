@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-h2 py-6" align="center">ONG</h1>
+    <h1 class="text-h2 py-6" align="center">Implicit</h1>
     <v-col v-if="!is_cloud_running">
         <Launcher :site_key="site_key"/>
     </v-col>
@@ -52,7 +52,7 @@
     const loading = ref(false);
     const toggle_loading = useToggle(loading)
 
-    const title = 'ONG'
+    const title = 'Implicit'
     useHead({
         title: title,
         titleTemplate: (title) => `${title} - Geode-solutions`
@@ -69,7 +69,7 @@
         params.append('isovalues', JSON.stringify(isovalues_json));
         params.append('function_type', scalar_function.value);
         params.append('cell_size', cellSize.value[0]);
-        await api_fetch('workflows/ong/step1', { method: 'POST', body: params },
+        await api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 
@@ -88,7 +88,7 @@
         const params = new FormData();
         params.append('axis', axis.value[0]._rawValue);
         params.append('direction', direction.value[0]._rawValue);
-        await api_fetch('workflows/ong/step2', { method: 'POST', body: params },
+        await api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 
@@ -106,7 +106,7 @@
         loading.value = true;
         const params = new FormData();
         params.append('metric', metric.value[0]._rawValue);
-        await api_fetch('workflows/ong/step3', { method: 'POST', body: params },
+        await api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
             {
                 'request_error_function': () => { 
                     toggle_loading() 
