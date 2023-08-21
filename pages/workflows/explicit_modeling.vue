@@ -55,7 +55,7 @@
     async function getBRepStats () {
         toggle_loading()
 
-        await api_fetch('workflows/explicit_modeling/get_brep_stats', { method: 'POST'},
+        await api_fetch('workflows/explicit/get_brep_stats', { method: 'POST'},
             {
                 'request_error_function': () => { 
                     toggle_loading() 
