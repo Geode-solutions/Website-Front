@@ -12,18 +12,18 @@
                 <h1 v-else>X step</h1>
             </v-row>
             <v-container rounded="lg" class="my-10 pa-0" color="black">
-                <WorkflowsOngFirststep :class="{disabled: firstDisabled}"></WorkflowsOngFirststep>
+                <WorkflowsImplicitFirststep :class="{disabled: firstDisabled}"></WorkflowsImplicitFirststep>
                 <v-row justify="center">
                     <v-btn :class="{disabled: firstDisabled}" class="mx-5" :loading="loading" @click="sendStepOne" color="primary">Send data</v-btn>
                     <v-btn :class="{disabled:!oneDone||firstDisabled}" class="mx-5" @click="goToStepTwo">Go to next step</v-btn>
                 </v-row>
-                <WorkflowsOngSecondstep :class="{disabled: secondDisabled}"></WorkflowsOngSecondstep>
+                <WorkflowsImplicitSecondstep :class="{disabled: secondDisabled}"></WorkflowsImplicitSecondstep>
                 <v-row justify="center">
                     <v-btn :class="{disabled: secondDisabled}" class="ma-5" @click="goToStepOne">Go back</v-btn>
                     <v-btn :class="{disabled: secondDisabled}" class="ma-5" :loading="loading" @click="sendStepTwo" color="primary">Send data</v-btn>
                     <v-btn :class="{disabled:!twoDone||secondDisabled}" class="ma-5" @click="goToStepThree">Go to next step</v-btn>
                 </v-row>
-                <WorkflowsOngThirdstep :class="{disabled: thirdDisabled}"></WorkflowsOngThirdstep>
+                <WorkflowsImplicitThirdstep :class="{disabled: thirdDisabled}"></WorkflowsImplicitThirdstep>
                 <v-row justify="center">
                     <v-btn :class="{disabled: thirdDisabled}" class="ma-5" @click="goToStepTwo">Go back</v-btn>
                     <v-btn :class="{disabled: thirdDisabled}" class="ma-5" :loading="loading" @click="sendStepThree" color="primary">Send data</v-btn>

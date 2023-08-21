@@ -3,7 +3,7 @@
         <v-sheet rounded="lg" class="mb-8 pa-3 text-center" elevation="5">
             <p class="mb-2 text-medium-emphasis text-body-2">Bounding box points : </p>
             <v-divider class="border-opacity-50 mb-3"></v-divider>
-            <WorkflowsOngBbox></WorkflowsOngBbox>
+            <WorkflowsImplicitBbox></WorkflowsImplicitBbox>
         </v-sheet>
         <v-row justify="center" align="center" class="mb-3">
             <v-sheet rounded="lg" class="pa-3 text-center" elevation="5" width="72%">
@@ -17,7 +17,7 @@
         <br/>
         <v-sheet :max-height="260" class="overflow-auto elevation-4 px-10 pt-2 mb-3 mt-n5" color="transparent" rounded="lg" :class="{disabled: nb_constraints==0}">
             <div v-for="n in nb_constraints" :key="n">
-                <WorkflowsOngConstraint :id="n" ></WorkflowsOngConstraint>
+                <WorkflowsImplicitConstraint :id="n" ></WorkflowsImplicitConstraint>
             </div>
         </v-sheet>
         <label class="text-medium-emphasis text-body-2">Minimization scheme</label>
@@ -33,7 +33,7 @@
         <br/>
         <v-sheet :max-height="210" class="overflow-auto elevation-4 mb-6 px-10" color="transparent" rounded="lg" :class="{disabled: nb_isovalues==0}">
             <div v-for="n in nb_isovalues">
-                <WorkflowsOngIsovalue :id="n"></WorkflowsOngIsovalue>
+                <WorkflowsImplicitIsovalue :id="n"></WorkflowsImplicitIsovalue>
             </div>
         </v-sheet>
         <br/>

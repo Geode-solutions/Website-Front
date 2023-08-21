@@ -17,7 +17,7 @@
                             <v-expansion-panel-text>
                                 <v-sheet :max-height="260" class="overflow-auto" color="transparent">
                                     <div v-for="n in surfaceIDS.length-1">
-                                        <WorkflowsSimplexRemeshSurfaceMetric :num="n" :id="surfaceIDS[n]" ></WorkflowsSimplexRemeshSurfaceMetric>
+                                        <WorkflowsSimplexSurfaceMetric :num="n" :id="surfaceIDS[n]" ></WorkflowsSimplexSurfaceMetric>
                                     </div>
                                 </v-sheet>
                             </v-expansion-panel-text>
@@ -29,7 +29,7 @@
                             <v-expansion-panel-text>
                                 <v-sheet :max-height="260" class="overflow-auto" color="transparent">
                                     <div v-for="n in blockIDS.length-1">
-                                        <WorkflowsSimplexRemeshBlockMetric :num="n" :id="blockIDS[n]" ></WorkflowsSimplexRemeshBlockMetric>
+                                        <WorkflowsSimplexBlockMetric :num="n" :id="blockIDS[n]" ></WorkflowsSimplexBlockMetric>
                                     </div>
                                 </v-sheet>
                             </v-expansion-panel-text>
