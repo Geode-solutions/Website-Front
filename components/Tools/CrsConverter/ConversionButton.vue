@@ -17,14 +17,12 @@ import fileDownload from 'js-file-download'
 const stepper_tree = inject('stepper_tree')
 const { files, geode_object, input_crs, output_crs, output_extension, route_prefix } = stepper_tree
 
-
 const loading = ref(false)
 
 const toggle_loading = useToggle(loading)
 
 async function convert_files () {
   for (let i = 0; i < files.length; i++) {
-
     let reader = new FileReader()
     reader.onload = async function (event) {
       let params = new FormData()
