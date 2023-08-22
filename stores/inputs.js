@@ -1,12 +1,19 @@
-
-
-
-
 import { defineStore } from 'pinia'
 
-
 export const useInputStore = defineStore('inputs', {
-    state: () => ({ constraints: [], isovalues: [], bbox_points: [], scalar_function: "",cellSize: [""], axis: [""], direction: [""], metric: [""],surfaceMetrics: {}, blockMetrics: {}, globalMetric: [""]}),
+    state: () => ({ 
+        constraints: [], 
+        isovalues: [], 
+        bbox_points: [], 
+        scalar_function: "",
+        cellSize: [""], 
+        axis: [""], 
+        direction: [""], 
+        metric: [""],
+        surfaceMetrics: {}, 
+        blockMetrics: {}, 
+        globalMetric: [""]
+    }),
     actions: {
         addConstraint(x) {
             this.constraints.push(x)
@@ -68,4 +75,3 @@ export const useInputStore = defineStore('inputs', {
         }
     },  
 })
-

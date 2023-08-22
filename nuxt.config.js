@@ -8,7 +8,6 @@ export default defineNuxtConfig({
       GEODE_PROTOCOL: process.env.NODE_ENV === 'production' ? 'https' : 'http',
       VIEWER_PORT: process.env.NODE_ENV === 'production' ? '443' : '1234',
       GEODE_PORT: process.env.NODE_ENV === 'production' ? '443' : '5000',
-      SITE_URL: process.env.SITE_URL,
       SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
       NODE_ENV: process.env.NODE_ENV,
       SITE_KEY: "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC",

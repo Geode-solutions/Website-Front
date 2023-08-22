@@ -17,15 +17,11 @@ import { useToggle } from '@vueuse/core'
 
 const stepper_tree = inject('stepper_tree')
 const { files, geode_object, route_prefix } = stepper_tree
-
 const props = defineProps({
   variable_to_update: { type: String, required: true },
   variable_to_increment: { type: String, required: true }
 })
 const { variable_to_update, variable_to_increment } = props
-
-
-
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
@@ -43,9 +39,7 @@ async function upload_file () {
       params.append('file', event.target.result)
       params.append('filename', files[0].name)
       params.append('filesize', files[0].size)
-
       toggle_loading()
-
       await api_fetch(`${route_prefix}/upload_file`, { method: 'POST', body: params },
         {
           'request_error_function': () => {
@@ -70,7 +64,6 @@ async function get_tests_names () {
   const params = new FormData()
   params.append('geode_object', geode_object)
   const route = `${route_prefix}/tests_names`
-
   await api_fetch(route, { method: 'POST', body: params },
     {
       'response_function': (response) => {
@@ -79,5 +72,4 @@ async function get_tests_names () {
       }
     })
 }
-
 </script>

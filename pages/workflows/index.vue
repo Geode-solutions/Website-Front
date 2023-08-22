@@ -5,14 +5,10 @@
                 <h1 class="text-h2 py-5" align="center">
                     Workflows home page
                 </h1>
-
                 <p class="text-h6 font-weight-light" align="justify">
                     Some workflows entirely free to use.
                     <br>
-                    
-
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pellentesque, urna quis pretium congue, quam orci gravida dui, dictum pulvinar tortor lacus at nunc. Morbi consectetur, est nec aliquam varius, nisi diam semper libero, non hendrerit libero dolor a purus. In sollicitudin justo nec dui congue, ac eleifend mi dapibus. Duis consequat, lacus fringilla tempus luctus, odio nulla molestie magna, et mollis nisi orci et nunc. Sed sed nisl vitae quam dapibus auctor. Proin sed pretium nisl. Proin nisl nulla, molestie vitae tortor ut, vulputate tincidunt odio. Vestibulum mattis nisi orci, ac pellentesque mauris porta in.
-
                 </p>
                 <div class="my-2" align="center">
                     <CommonContactUsButton />
