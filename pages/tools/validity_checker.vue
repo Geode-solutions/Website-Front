@@ -3,6 +3,13 @@
 </template>
 
 <script setup>
+import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
+import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
+import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
+import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
+import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
+
+
 const cards_list = [
   {
     icon: 'mdi-file-check',
