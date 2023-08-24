@@ -19,6 +19,7 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
+    '/tools/**': { ssr: false },
     '/workflows/**': { ssr: false },
   },
 

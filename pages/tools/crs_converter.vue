@@ -3,14 +3,6 @@
 </template>
 
 <script setup>
-import geode_objects from '@/assets/geode_objects'
-import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
-import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
-import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
-import CrsSelector from '@geode/opengeodeweb-front/components/CrsSelector.vue'
-import ExtensionSelector from '@geode/opengeodeweb-front/components/ExtensionSelector.vue'
-import ToolsCrsSelectorConversionButton from '@/components/Tools/CrsConverter/ConversionButton.vue'
-
 const cards_list = [
   {
     icon: 'mdi-file-check',
