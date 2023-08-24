@@ -1,11 +1,12 @@
 <template>
-  <ToolsWrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <Wrapper :site_key="site_key" :cards_list="cards_list" :stepper_tree="stepper_tree" />
 </template>
 
 <script setup>
 import geode_objects from '@/assets/geode_objects'
-import ToolsFileSelector from '@/components/Tools/FileSelector.vue'
-import ToolsObjectSelector from '@/components/Tools/ObjectSelector.vue'
+import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
+import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
+import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
 import ToolsValidityCheckerInspectionButton from '@/components/Tools/ValidityChecker/InspectionButton.vue'
 import ToolsValidityCheckerResultsPanels from '@/components/Tools/ValidityChecker/ResultsPanels.vue'
 
@@ -22,15 +23,17 @@ const cards_list = [
     href: 'https://github.com/Geode-solutions/OpenGeode-Inspector',
   },
 ]
+const site_key = useRuntimeConfig().public.SITE_KEY
 
 const files = ref([])
 const geode_object = ref('')
 const model_checks = ref([])
+const route_prefix = 'tools/validity_checker'
 
 const stepper_tree = reactive({
   current_step_index: ref(0),
   tool_name: 'Validity checker',
-  tool_route: 'validity_checker',
+  route_prefix: route_prefix,
   files: files,
   geode_object: geode_object,
   model_checks: model_checks,
@@ -38,22 +41,24 @@ const stepper_tree = reactive({
     {
       step_title: 'Please select a file to check',
       component: {
-        component_name: shallowRef(ToolsFileSelector),
+        component_name: shallowRef(FileSelector),
         component_options: {
           multiple: false,
-          label: 'Please select a file'
-        }
+          label: 'Please select a file',
+          variable_to_update: 'files',
+          variable_to_increment: 'current_step_index'
+        },
       },
       chips: computed(() => { return files.value.map((file) => file.name) })
     },
     {
       step_title: 'Confirm the data type',
       component: {
-        component_name: shallowRef(ToolsObjectSelector),
+        component_name: shallowRef(ObjectSelector),
         component_options: {
-          geode_objects: geode_objects,
-          input_files: files
-        }
+          variable_to_update: 'geode_object',
+          variable_to_increment: 'current_step_index'
+        },
       },
       chips: computed(() => {
         if (geode_object.value === '') {
@@ -68,9 +73,9 @@ const stepper_tree = reactive({
       component: {
         component_name: shallowRef(ToolsValidityCheckerInspectionButton),
         component_options: {
-          input_files: files,
-          input_geode_object: geode_object
-        }
+          variable_to_update: 'model_checks',
+          variable_to_increment: 'current_step_index'
+        },
       },
       chips: []
     },
@@ -83,7 +88,7 @@ const stepper_tree = reactive({
           input_geode_object: geode_object,
           input_file_name: computed(() => { return files.value.map((file) => file.name) }),
           input_index_array: [],
-        }
+        },
       },
       chips: []
     }

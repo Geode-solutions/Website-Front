@@ -10,10 +10,13 @@ export default defineNuxtConfig({
       GEODE_PORT: process.env.NODE_ENV === 'production' ? '443' : '5000',
       SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
       NODE_ENV: process.env.NODE_ENV,
+      SITE_KEY: "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC",
     }
   },
 
-  target: 'static',
+  extends: [
+    '@geode/opengeodeweb-front'
+  ],
 
   routeRules: {
     '/workflows/**': { ssr: false },
@@ -72,7 +75,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['stores']
+    dirs: ['stores', '@geode/opengeodeweb-front/stores']
   },
 
   // ** Build configuration
@@ -85,7 +88,6 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
   },
-
 
   devtools: {
     enabled: process.env.NODE_ENV === 'production' ? false : true

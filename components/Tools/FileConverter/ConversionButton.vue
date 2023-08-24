@@ -14,37 +14,29 @@
 import { useToggle } from '@vueuse/core'
 import fileDownload from 'js-file-download'
 
-const props = defineProps({
-  component_options: { type: Object, required: true }
-})
-const { input_files,
-  input_geode_object,
-  input_output_extension } = props.component_options
-
 const stepper_tree = inject('stepper_tree')
-const { tool_route } = stepper_tree
+const { files, geode_object, route_prefix, output_extension } = stepper_tree
 
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
 async function convert_files () {
-  for (let i = 0; i < input_files.length; i++) {
+  for (let i = 0; i < files.length; i++) {
 
     let reader = new FileReader()
     reader.onload = async function (event) {
       let params = new FormData()
 
-      params.append('geode_object', input_geode_object)
+      params.append('geode_object', geode_object)
       params.append('file', event.target.result)
-      params.append('filename', input_files[i].name)
-      params.append('filesize', input_files[i].size)
-      params.append('extension', input_output_extension)
+      params.append('filename', files[i].name)
+      params.append('filesize', files[i].size)
+      params.append('extension', output_extension)
       params.append('responseType', 'blob')
       params.append('responseEncoding', 'binary')
       toggle_loading()
 
-      const route = `${tool_route}/convert_file`
-      await api_fetch(route, { method: 'POST', body: params },
+      await api_fetch(`${route_prefix}/convert_file`, { method: 'POST', body: params },
         {
           'request_error_function': () => {
             toggle_loading()
@@ -60,7 +52,7 @@ async function convert_files () {
         }
       )
     }
-    reader.readAsDataURL(input_files[i])
+    reader.readAsDataURL(files[i])
   }
 }
 
