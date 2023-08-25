@@ -2,7 +2,7 @@
     <v-container align="center">
         <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key" />
+            <Launcher :site_key="site_key"/>
         </v-col>
         <v-col v-else class="my-10 w-50" align="center">
             <v-btn :loading="loading" @click="getBRepStats" color="primary">Generate BRep</v-btn>
@@ -14,7 +14,7 @@
                 <p>{{ nb_corners }} Corners</p>
             </v-card>
         </v-col>
-        <RemoteRenderingView :client="client" />
+        <RemoteRenderingView :client="client"/>
     </v-container>
 </template>
 
@@ -56,7 +56,7 @@ onMounted(() => {
 
 async function displayBase() {
     toggle_loading()
-    await api_fetch('workflows/explicit/get_base_data', { method: 'POST' },
+    await api_fetch('geode/workflows/explicit/get_base_data', { method: 'POST' },
         {
             'request_error_function': () => {
                 toggle_loading()
@@ -75,7 +75,7 @@ async function displayBase() {
 
 async function getBRepStats() {
     toggle_loading()
-    await api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
+    await api_fetch('geode/workflows/explicit/get_brep_stats', { method: 'POST' },
         {
             'request_error_function': () => {
                 toggle_loading()

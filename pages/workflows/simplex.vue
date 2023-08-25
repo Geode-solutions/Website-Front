@@ -43,7 +43,7 @@
                 </v-container> 
             </v-container>
         </v-col>
-        <RemoteRenderingView :client="client" />
+        <RemoteRenderingView :client="client"/>
     </v-container>
 </template>
 
@@ -88,9 +88,9 @@ const setGlobalMetric = () => {
         }
     })   
 
-async function initialize () {
+async function initialize() {
     toggle_loading()
-    await api_fetch('workflows/simplex/initialize', { method: 'POST'},
+    await api_fetch('geode/workflows/simplex/initialize', { method: 'POST'},
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -107,7 +107,7 @@ async function initialize () {
     )
 }
 
-async function sendMetrics () {
+async function sendMetrics() {
     toggle_loading()
     const params = new FormData()
     params.append('globalMetric', globalMetric.value[0]._rawValue)
@@ -115,7 +115,7 @@ async function sendMetrics () {
     params.append('surfaceMetrics',json_surfaces)
     const json_blocks = JSON.stringify(blockMetrics.value)
     params.append('blockMetrics',json_blocks)
-    await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
+    await api_fetch('geode/workflows/simplex/remesh', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 

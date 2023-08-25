@@ -32,7 +32,7 @@
                 </v-container>
             </v-container>
         </v-col>
-        <RemoteRenderingView :client="client" />
+        <RemoteRenderingView :client="client"/>
     </v-container>
 </template>
 
@@ -64,7 +64,7 @@ useHead({
     titleTemplate: (title) => `${title} - Geode-solutions`
 })
 
-async function sendStepOne () {
+async function sendStepOne() {
     toggle_loading()
     const params = new FormData();
     const bbox_json = alterBbox()
@@ -75,7 +75,7 @@ async function sendStepOne () {
     params.append('isovalues', JSON.stringify(isovalues_json));
     params.append('function_type', scalar_function.value);
     params.append('cell_size', cellSize.value[0]);
-    await api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
+    await api_fetch('geode/workflows/implicit/step1', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -91,12 +91,12 @@ async function sendStepOne () {
     )
 }
 
-async function sendStepTwo () {
+async function sendStepTwo() {
     loading.value = true;
     const params = new FormData();
     params.append('axis', axis.value[0]._rawValue);
     params.append('direction', direction.value[0]._rawValue);
-    await api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
+    await api_fetch('geode/workflows/implicit/step2', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -112,11 +112,11 @@ async function sendStepTwo () {
     )
 }
 
-async function sendStepThree () {
+async function sendStepThree() {
     loading.value = true;
     const params = new FormData();
     params.append('metric', metric.value[0]._rawValue);
-    await api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
+    await api_fetch('geode/workflows/implicit/step3', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -148,7 +148,7 @@ function alterConstraints() {
     }
 }
 
-function alterIsovalues () {
+function alterIsovalues() {
     let isovalues_json = []
     for (let i = 0; i < isovalues.value.length; i++) {
         isovalues_json.push(isovalues.value[i]._rawValue)

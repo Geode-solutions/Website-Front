@@ -73,8 +73,8 @@ onMounted(() => {
     }
 })
 
-async function getConstraints () {
-    await api_fetch('workflows/implicit/get_constraints', { method: 'POST'},
+async function getConstraints() {
+    await api_fetch('geode/workflows/implicit/get_constraints', { method: 'POST'},
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -84,32 +84,32 @@ async function getConstraints () {
     )
 }
 
-function increment () {
+function increment() {
     if (nb_constraints.value < 50) {
         // .value is needed in javascript
         inputsStore.addConstraint({ "x": "", "y": "", "z": "", "value": "", "weight": "" })
         nb_constraints.value++
     }
 }
-function decrement () {
+function decrement() {
     if (nb_constraints.value > 0) {
         nb_constraints.value--
         inputsStore.popConstraint()
     }
 }
-function incrementISO () {
+function incrementISO() {
     if (nb_isovalues.value < 50) {
         nb_isovalues.value++
         inputsStore.addIsovalue(0)
     }
 }
-function decrementISO () {
+function decrementISO() {
     if (nb_isovalues.value > 0) {
         nb_isovalues.value--
         inputsStore.popIsovalue()
     }
 }
-function autofillConstraint () {
+function autofillConstraint() {
     autofilled.value = true
     for (let i = 0; i < autofilled_constrains.value.length; i++) {
         const constraint = autofilled_constrains.value[i]
