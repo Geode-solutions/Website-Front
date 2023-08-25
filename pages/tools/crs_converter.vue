@@ -30,7 +30,7 @@ const geode_object = ref('')
 const input_crs = ref({})
 const output_crs = ref({})
 const output_extension = ref('')
-const route_prefix = 'tools/crs_converter'
+const route_prefix = 'geode/tools/crs_converter'
 
 const stepper_tree = reactive({
   current_step_index: ref(0),
