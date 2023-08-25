@@ -48,35 +48,35 @@
 </template>
 
 <script setup>
-    import { useToggle } from '@vueuse/core'
-    import { storeToRefs } from 'pinia'
+import { useToggle } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
 
-    const cloud_store = use_cloud_store()
-    const { is_cloud_running } = storeToRefs(cloud_store)
-    const inputsStore = useInputStore()
-    inputsStore.setDefault()
-    const viewer_store = use_viewer_store()
-    const websocket_store = use_websocket_store()
-    const { client, is_client_created } = storeToRefs(websocket_store)
-    const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
-    const site_key = useRuntimeConfig().public.SITE_KEY
-    const loading = ref(false)
-    const toggle_loading = useToggle(loading)
-    const surfaceIDS = ref([])
-    const blockIDS = ref([])
-    const panel = ref([]) //to close expansion panels when typing new gobal metric
-    const metric = ref()
+const cloud_store = use_cloud_store()
+const { is_cloud_running } = storeToRefs(cloud_store)
+const inputsStore = useInputStore()
+inputsStore.setDefault()
+const viewer_store = use_viewer_store()
+const websocket_store = use_websocket_store()
+const { client, is_client_created } = storeToRefs(websocket_store)
+const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
+const site_key = useRuntimeConfig().public.SITE_KEY
+const loading = ref(false)
+const toggle_loading = useToggle(loading)
+const surfaceIDS = ref([])
+const blockIDS = ref([])
+const panel = ref([]) //to close expansion panels when typing new gobal metric
+const metric = ref()
 
-    const title = 'Remesh'
-    useHead({
-        title: title,
-        titleTemplate: (title) => `${title} - Geode-solutions`
-    })
+const title = 'Remesh'
+useHead({
+    title: title,
+    titleTemplate: (title) => `${title} - Geode-solutions`
+})
 
-    const setGlobalMetric = () => {
-        inputsStore.setGlobalMetric(metric)
-        panel.value = []
-    }
+const setGlobalMetric = () => {
+    inputsStore.setGlobalMetric(metric)
+    panel.value = []
+}
 
     onMounted(()=>{
         if (is_cloud_running.value) {
@@ -86,47 +86,47 @@
                 initialize()
             })
         }
-    })
+    })   
 
-    async function initialize () {
-        toggle_loading()
-        await api_fetch('workflows/simplex/initialize', { method: 'POST'},
-            {
-                'request_error_function': () => { 
-                    toggle_loading() 
-                },
-                'response_function': (response) => {
-                    viewer_store.reset()
-                    viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                    surfaceIDS.value = response._data.surfacesIDS
-                    blockIDS.value = response._data.blocksIDS
-                    toggle_loading()
-                },
-                'response_error_function': () => { toggle_loading() }
-            }
-        )
-    }
+async function initialize () {
+    toggle_loading()
+    await api_fetch('workflows/simplex/initialize', { method: 'POST'},
+        {
+            'request_error_function': () => { 
+                toggle_loading() 
+            },
+            'response_function': (response) => {
+                viewer_store.reset()
+                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
+                surfaceIDS.value = response._data.surfacesIDS
+                blockIDS.value = response._data.blocksIDS
+                toggle_loading()
+            },
+            'response_error_function': () => { toggle_loading() }
+        }
+    )
+}
 
-    async function sendMetrics () {
-        toggle_loading()
-        const params = new FormData()
-        params.append('globalMetric', globalMetric.value[0]._rawValue)
-        const json_surfaces = JSON.stringify(surfaceMetrics.value)
-        params.append('surfaceMetrics',json_surfaces)
-        const json_blocks = JSON.stringify(blockMetrics.value)
-        params.append('blockMetrics',json_blocks)
-        await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
-            {
-                'request_error_function': () => { 
-                    toggle_loading() 
-                },
-                'response_function': (response) => {
-                    viewer_store.reset()
-                    viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                    toggle_loading()
-                },
-                'response_error_function': () => { toggle_loading() }
-            }
-        )
-    }
+async function sendMetrics () {
+    toggle_loading()
+    const params = new FormData()
+    params.append('globalMetric', globalMetric.value[0]._rawValue)
+    const json_surfaces = JSON.stringify(surfaceMetrics.value)
+    params.append('surfaceMetrics',json_surfaces)
+    const json_blocks = JSON.stringify(blockMetrics.value)
+    params.append('blockMetrics',json_blocks)
+    await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
+        {
+            'request_error_function': () => { 
+                toggle_loading() 
+            },
+            'response_function': (response) => {
+                viewer_store.reset()
+                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
+                toggle_loading()
+            },
+            'response_error_function': () => { toggle_loading() }
+        }
+    )
+}
 </script>
