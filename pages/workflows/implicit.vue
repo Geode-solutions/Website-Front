@@ -75,7 +75,7 @@ async function sendStepOne() {
     params.append('isovalues', JSON.stringify(isovalues_json));
     params.append('function_type', scalar_function.value);
     params.append('cell_size', cellSize.value[0]);
-    await api_fetch('geode/workflows/implicit/step1', { method: 'POST', body: params },
+    await api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -96,7 +96,7 @@ async function sendStepTwo() {
     const params = new FormData();
     params.append('axis', axis.value[0]._rawValue);
     params.append('direction', direction.value[0]._rawValue);
-    await api_fetch('geode/workflows/implicit/step2', { method: 'POST', body: params },
+    await api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -116,7 +116,7 @@ async function sendStepThree() {
     loading.value = true;
     const params = new FormData();
     params.append('metric', metric.value[0]._rawValue);
-    await api_fetch('geode/workflows/implicit/step3', { method: 'POST', body: params },
+    await api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 

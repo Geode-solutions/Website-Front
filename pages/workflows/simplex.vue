@@ -90,7 +90,7 @@ const setGlobalMetric = () => {
 
 async function initialize() {
     toggle_loading()
-    await api_fetch('geode/workflows/simplex/initialize', { method: 'POST'},
+    await api_fetch('workflows/simplex/initialize', { method: 'POST'},
         {
             'request_error_function': () => { 
                 toggle_loading() 
@@ -115,7 +115,7 @@ async function sendMetrics() {
     params.append('surfaceMetrics',json_surfaces)
     const json_blocks = JSON.stringify(blockMetrics.value)
     params.append('blockMetrics',json_blocks)
-    await api_fetch('geode/workflows/simplex/remesh', { method: 'POST', body: params },
+    await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
         {
             'request_error_function': () => { 
                 toggle_loading() 

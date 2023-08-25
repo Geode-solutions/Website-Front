@@ -74,7 +74,7 @@ onMounted(() => {
 })
 
 async function getConstraints() {
-    await api_fetch('geode/workflows/implicit/get_constraints', { method: 'POST'},
+    await api_fetch('workflows/implicit/get_constraints', { method: 'POST'},
         {
             'response_function': (response) => {
                 viewer_store.reset()

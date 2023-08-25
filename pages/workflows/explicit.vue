@@ -56,7 +56,7 @@ onMounted(() => {
 
 async function displayBase() {
     toggle_loading()
-    await api_fetch('geode/workflows/explicit/get_base_data', { method: 'POST' },
+    await api_fetch('workflows/explicit/get_base_data', { method: 'POST' },
         {
             'request_error_function': () => {
                 toggle_loading()
@@ -75,7 +75,7 @@ async function displayBase() {
 
 async function getBRepStats() {
     toggle_loading()
-    await api_fetch('geode/workflows/explicit/get_brep_stats', { method: 'POST' },
+    await api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
         {
             'request_error_function': () => {
                 toggle_loading()
