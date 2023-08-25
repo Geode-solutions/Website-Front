@@ -28,7 +28,7 @@ const files = ref([])
 const additional_files = ref([])
 const geode_object = ref('')
 const output_extension = ref('')
-const route_prefix = '/geode/tools/file_converter'
+const route_prefix = 'tools/file_converter'
 
 
 const stepper_tree = reactive({
