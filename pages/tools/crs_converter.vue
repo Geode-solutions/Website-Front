@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import geode_objects from '@/assets/geode_objects'
 import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
 import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
 import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
@@ -30,7 +29,7 @@ const geode_object = ref('')
 const input_crs = ref({})
 const output_crs = ref({})
 const output_extension = ref('')
-const route_prefix = 'geode/tools/crs_converter'
+const route_prefix = 'tools/crs_converter'
 
 const stepper_tree = reactive({
   current_step_index: ref(0),

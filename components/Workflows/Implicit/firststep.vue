@@ -3,7 +3,7 @@
         <v-sheet rounded="lg" class="mb-8 pa-3 text-center" elevation="5">
             <p class="mb-2 text-medium-emphasis text-body-2">Bounding box points : </p>
             <v-divider class="border-opacity-50 mb-3"></v-divider>
-            <WorkflowsImplicitBbox></WorkflowsImplicitBbox>
+            <WorkflowsImplicitBbox/>
         </v-sheet>
         <v-row justify="center" align="center" class="mb-3">
             <v-sheet rounded="lg" class="pa-3 text-center" elevation="5" width="72%">
@@ -18,7 +18,7 @@
         <v-sheet :max-height="260" class="overflow-auto elevation-4 px-10 pt-2 mb-3 mt-n5" color="transparent" rounded="lg"
             :class="{ disabled: nb_constraints == 0 }">
             <div v-for="n in nb_constraints" :key="n">
-                <WorkflowsImplicitConstraint :id="n"></WorkflowsImplicitConstraint>
+                <WorkflowsImplicitConstraint :id="n"/>
             </div>
         </v-sheet>
         <label class="text-medium-emphasis text-body-2">Minimization scheme</label>
@@ -37,7 +37,7 @@
         <v-sheet :max-height="210" class="overflow-auto elevation-4 mb-6 px-10" color="transparent" rounded="lg"
             :class="{ disabled: nb_isovalues == 0 }">
             <div v-for="n in nb_isovalues">
-                <WorkflowsImplicitIsovalue :id="n"></WorkflowsImplicitIsovalue>
+                <WorkflowsImplicitIsovalue :id="n"/>
             </div>
         </v-sheet>
         <br />
@@ -45,15 +45,16 @@
 </template>
 
 <script setup>
-const inputsStore = useInputStore()
-const cloud_store = use_cloud_store()
-const { is_cloud_running } = storeToRefs(cloud_store)
-const nb_constraints = ref(0)
-const function_type = ref("")
-const cell_size = ref()
-const nb_isovalues = ref(0)
-const autofilled = ref(false)
-const autofilled_constrains = ref([])
+    const inputsStore = useInputStore()
+    const cloud_store = use_cloud_store()
+    const { is_cloud_running } = storeToRefs(cloud_store)
+    const viewer_store = use_viewer_store()
+    const nb_constraints = ref(0)
+    const function_type = ref("")
+    const cell_size = ref()
+    const nb_isovalues= ref(0)
+    const autofilled = ref(false)
+    const autofilled_constrains = ref([])
 
 const alterFunction = () => {
     inputsStore.setFunction(function_type.value)
@@ -72,42 +73,43 @@ onMounted(() => {
     }
 })
 
-async function getConstraints () {
-    await api_fetch('geode/workflows/implicit/get_constraints', { method: 'POST' },
+async function getConstraints() {
+    await api_fetch('workflows/implicit/get_constraints', { method: 'POST'},
         {
             'response_function': (response) => {
+                viewer_store.reset()
                 autofilled_constrains.value = JSON.parse(response._data.constraints)
             }
         }
     )
 }
 
-function increment () {
+function increment() {
     if (nb_constraints.value < 50) {
         // .value is needed in javascript
         inputsStore.addConstraint({ "x": "", "y": "", "z": "", "value": "", "weight": "" })
         nb_constraints.value++
     }
 }
-function decrement () {
+function decrement() {
     if (nb_constraints.value > 0) {
         nb_constraints.value--
         inputsStore.popConstraint()
     }
 }
-function incrementISO () {
+function incrementISO() {
     if (nb_isovalues.value < 50) {
         nb_isovalues.value++
         inputsStore.addIsovalue(0)
     }
 }
-function decrementISO () {
+function decrementISO() {
     if (nb_isovalues.value > 0) {
         nb_isovalues.value--
         inputsStore.popIsovalue()
     }
 }
-function autofillConstraint () {
+function autofillConstraint() {
     autofilled.value = true
     for (let i = 0; i < autofilled_constrains.value.length; i++) {
         const constraint = autofilled_constrains.value[i]
@@ -117,7 +119,3 @@ function autofillConstraint () {
     }
 }
 </script>
-
-<style scoped>.disabled {
-    display: none;
-}</style>

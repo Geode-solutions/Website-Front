@@ -3,7 +3,7 @@ import colors from 'vuetify/lib/util/colors'
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:443',
+      API_URL: process.env.NODE_ENV === 'production' ? 'api.geode-solutions.com' : 'localhost',
       VIEWER_PROTOCOL: process.env.NODE_ENV === 'production' ? 'wss' : 'ws',
       GEODE_PROTOCOL: process.env.NODE_ENV === 'production' ? 'https' : 'http',
       VIEWER_PORT: process.env.NODE_ENV === 'production' ? '443' : '1234',
@@ -17,6 +17,11 @@ export default defineNuxtConfig({
   extends: [
     '@geode/opengeodeweb-front'
   ],
+
+  routeRules: {
+    '/tools/**': { ssr: false },
+    '/workflows/**': { ssr: false },
+  },
 
   // ** Customize the progress-bar color
   loading: { color: '#fff' },

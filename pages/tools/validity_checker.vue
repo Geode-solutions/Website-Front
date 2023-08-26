@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import geode_objects from '@/assets/geode_objects'
 import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
 import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
 import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
@@ -28,7 +27,7 @@ const site_key = useRuntimeConfig().public.SITE_KEY
 const files = ref([])
 const geode_object = ref('')
 const model_checks = ref([])
-const route_prefix = 'geode/tools/validity_checker'
+const route_prefix = 'tools/validity_checker'
 
 const stepper_tree = reactive({
   current_step_index: ref(0),

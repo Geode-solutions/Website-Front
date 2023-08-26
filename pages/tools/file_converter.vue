@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import geode_objects from '@/assets/geode_objects'
 import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
 import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
 import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
@@ -29,7 +28,7 @@ const files = ref([])
 const additional_files = ref([])
 const geode_object = ref('')
 const output_extension = ref('')
-const route_prefix = '/geode/tools/file_converter'
+const route_prefix = 'tools/file_converter'
 
 
 const stepper_tree = reactive({
