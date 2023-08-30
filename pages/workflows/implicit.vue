@@ -2,61 +2,58 @@
     <v-container>
         <h1 class="text-h2 py-6" align="center">Implicit</h1>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key"/>
+            <Launcher :site_key="site_key" />
         </v-col>
-        <v-col v-if="is_cloud_running">
+        <v-col v-else>
             <v-container class="mt-10 w-75">
-                <v-row justify="center">
-                    <h1 v-if="!firstDisabled">First step</h1>
-                    <h1 v-else-if="!secondDisabled">Second step</h1>
-                    <h1 v-else-if="!thirdDisabled">Third step</h1>
-                    <h1 v-else>X step</h1>
-                </v-row>
-                <v-container rounded="lg" class="my-10 pa-0" color="black">
-                    <WorkflowsImplicitFirststep :class="{disabled: firstDisabled}"/>
-                    <v-row justify="center">
-                        <v-btn :class="{disabled: firstDisabled}" class="mx-5" :loading="loading" @click="sendStepOne" color="primary">Send data</v-btn>
-                        <v-btn :class="{disabled:!oneDone||firstDisabled}" class="mx-5" @click="goToStepTwo">Go to next step</v-btn>
-                    </v-row>
-                    <WorkflowsImplicitSecondstep :class="{disabled: secondDisabled}"/>
-                    <v-row justify="center">
-                        <v-btn :class="{disabled: secondDisabled}" class="ma-5" @click="goToStepOne">Go back</v-btn>
-                        <v-btn :class="{disabled: secondDisabled}" class="ma-5" :loading="loading" @click="sendStepTwo" color="primary">Send data</v-btn>
-                        <v-btn :class="{disabled:!twoDone||secondDisabled}" class="ma-5" @click="goToStepThree">Go to next step</v-btn>
-                    </v-row>
-                    <WorkflowsImplicitThirdstep :class="{disabled: thirdDisabled}"/>
-                    <v-row justify="center">
-                        <v-btn :class="{disabled: thirdDisabled}" class="ma-5" @click="goToStepTwo">Go back</v-btn>
-                        <v-btn :class="{disabled: thirdDisabled}" class="ma-5" :loading="loading" @click="sendStepThree" color="primary">Send data</v-btn>
-                    </v-row>
-                </v-container>
+                <v-stepper v-model="step" hide-actions :items="items">
+                    <template v-slot:item.1>
+                        <WorkflowsImplicitFirststep />
+                    </template>
+
+                    <template v-slot:item.2>
+                        <WorkflowsImplicitSecondstep />
+                    </template>
+
+                    <template v-slot:item.3>
+                        <WorkflowsImplicitThirdstep />
+                    </template>
+
+                    <v-container>
+                        <v-row class="mx-5">
+                            <v-col cols="auto">
+                                <v-btn :disabled="step == 1">back</v-btn>
+                            </v-col>
+                            <v-spacer />
+                            <v-col cols="auto">
+                                <v-btn :disabled="step == items.length" :loading="loading" @click="next">next</v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-stepper>
+                <v-col>
+                    <RemoteRenderingView />
+                </v-col>
             </v-container>
         </v-col>
-        <RemoteRenderingView :client="client"/>
     </v-container>
 </template>
 
 <script setup>
 import { useToggle } from '@vueuse/core'
-import { storeToRefs } from 'pinia'
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
+console.log(is_cloud_running)
 const inputsStore = useInputStore()
 const viewer_store = use_viewer_store()
-const websocket_store = use_websocket_store()
-const { client, is_client_created } = storeToRefs(websocket_store)
-const { constraints, isovalues, bbox_points, cellSize, scalar_function, axis, direction, metric } = storeToRefs(inputsStore)
-inputsStore.setDefault()
+const { constraints, isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
 const site_key = useRuntimeConfig().public.SITE_KEY
-const firstDisabled = ref(false);
-const secondDisabled = ref(true);
-const thirdDisabled = ref(true);
-const oneDone = ref(false);
-const twoDone = ref(false);
-const threeDone = ref(false);
 const loading = ref(false);
 const toggle_loading = useToggle(loading)
+const step = ref(1)
+const items = ['Select data', 'Extract section', 'Remesh', 'Result']
+
 
 const title = 'Implicit'
 useHead({
@@ -65,116 +62,62 @@ useHead({
 })
 
 async function sendStepOne() {
-    toggle_loading()
     const params = new FormData();
-    const bbox_json = alterBbox()
-    const constraints_json = alterConstraints()
-    const isovalues_json = alterIsovalues()
-    params.append('bbox_points', JSON.stringify(bbox_json))
-    params.append('constraints', JSON.stringify(constraints_json));
-    params.append('isovalues', JSON.stringify(isovalues_json));
-    params.append('function_type', scalar_function.value);
-    params.append('cell_size', cellSize.value[0]);
+    params.append('constraints', JSON.stringify(constraints.value));
+    params.append('isovalues', JSON.stringify(isovalues.value));
     await api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
         {
-            'request_error_function': () => { 
-                toggle_loading() 
-            },
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                oneDone.value = true
-                toggle_loading()
             },
-            'response_error_function': () => { toggle_loading() }
         }
     )
 }
 
 async function sendStepTwo() {
-    loading.value = true;
+    console.log("axis", axis)
+    console.log("coordinate", coordinate)
     const params = new FormData();
-    params.append('axis', axis.value[0]._rawValue);
-    params.append('direction', direction.value[0]._rawValue);
+    params.append('axis', axis.value);
+    params.append('coordinate', coordinate.value);
     await api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
         {
-            'request_error_function': () => { 
-                toggle_loading() 
-            },
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                twoDone.value = true
-                toggle_loading()
             },
-            'response_error_function': () => { toggle_loading() }
         }
     )
 }
 
 async function sendStepThree() {
-    loading.value = true;
     const params = new FormData();
-    params.append('metric', metric.value[0]._rawValue);
+    params.append('metric', metric.value);
     await api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
         {
-            'request_error_function': () => { 
-                toggle_loading() 
-            },
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                threeDone.value = true
-                toggle_loading()
+                viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
             },
-            'response_error_function': () => { toggle_loading() }
         }
     )
 }
 
-function alterBbox() {
-    let bbox_json = JSON.stringify(bbox_points.value[0]._rawValue)
-    return bbox_json
-}
-
-function alterConstraints() {
-    let constraints_json = []
-    for (let i = 0; i < constraints.value.length; i++) {
-        if (constraints.value[i]._rawValue != undefined) {
-            constraints_json.push(JSON.stringify(constraints.value[i]._rawValue))
-        } else {
-            constraints_json.push(JSON.stringify(constraints.value[i]))
-        }
+function next() {
+    toggle_loading()
+    console.log("next", step.value)
+    if (step.value == 1) {
+        sendStepOne()
     }
-}
-
-function alterIsovalues() {
-    let isovalues_json = []
-    for (let i = 0; i < isovalues.value.length; i++) {
-        isovalues_json.push(isovalues.value[i]._rawValue)
+    else if (step.value == 2) {
+        sendStepTwo()
     }
-    return isovalues_json
+    else if (step.value == 3) {
+        sendStepThree()
+    }
+    step.value++
+    toggle_loading()
 }
-
-const goToStepOne = () => {
-    firstDisabled.value = false
-    secondDisabled.value = true
-    thirdDisabled.value = true
-};
-const goToStepTwo = () => {
-    firstDisabled.value = true
-    secondDisabled.value = false
-    thirdDisabled.value = true
-};
-const goToStepThree = () => {
-    firstDisabled.value = true
-    secondDisabled.value = true
-    thirdDisabled.value = false
-};
 </script>
-
-<style scoped>
-.disabled {
-    display: none;
-}
-</style>

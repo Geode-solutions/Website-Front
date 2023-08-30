@@ -12,7 +12,7 @@ const workflows_list = [
         title: 'Implicit',
         to: '/workflows/implicit',
         text: 'Generate a BRep from your inputs, then remesh a Section extracted from it',
-        badge: '',
+        badge: 'beta',
         chip: '',
     },
     {
@@ -20,7 +20,7 @@ const workflows_list = [
         title: 'Simplex',
         to: '/workflows/simplex',
         text: 'Adjust the mesh size in your model, specific blocks and surfaces can be targeted',
-        badge: '',
+        badge: 'beta',
         chip: '',
     },
     {
@@ -28,7 +28,7 @@ const workflows_list = [
         title: 'Explicit',
         to: '/workflows/explicit',
         text: 'Combine different meshes and models into a unique merged model',
-        badge: '',
+        badge: 'beta',
         chip: '',
     },
 ]

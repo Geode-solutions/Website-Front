@@ -4,12 +4,9 @@ export const useInputStore = defineStore('inputs', {
     state: () => ({ 
         constraints: [], 
         isovalues: [], 
-        bbox_points: [], 
-        scalar_function: "",
-        cellSize: [""], 
-        axis: [""], 
-        direction: [""], 
-        metric: [""],
+        axis: 0, 
+        coordinate: 0, 
+        metric: 0,
         surfaceMetrics: {}, 
         blockMetrics: {}, 
         globalMetric: [""]
@@ -33,23 +30,14 @@ export const useInputStore = defineStore('inputs', {
         popIsovalue() {
             this.isovalues.pop()
         },
-        modifyBBoxPoints(x) {
-            this.bbox_points[0] = x
-        },
-        setFunction(x) {
-            this.scalar_function = x
-        },
-        setCellSize(x) {
-            this.cellSize[0] = x
-        },
         setAxis(x) {
-            this.axis[0] = x  //weirdly not working when just defined as axis: "0"
+            this.axis = x
         },
-        setDirection(x) {
-            this.direction[0] = x
+        setCoordinate(x) {
+            this.coordinate = x
         },
         setMetric(x) {
-            this.metric[0] = x
+            this.metric = x
         },
         setGlobalMetric(x) {
             this.globalMetric[0] = x
@@ -59,19 +47,6 @@ export const useInputStore = defineStore('inputs', {
         },
         setBlockMetric(x,id) {
             this.blockMetrics[id] = x
-        },
-        setDefault() {
-            this.constraints = []
-            this.isovalues = []
-            this.bbox_points = [{x_min:"", y_min:"", z_min:"", x_max:"", y_max:"", z_max:""}]
-            this.scalar_function = ""
-            this.cellSize = [""]
-            this.axis = [""]
-            this.direction = [""]
-            this.metric = [""]
-            this.globalMetric = [""]
-            this.surfaceMetrics = {}
-            this.blockMetrics = {}
         }
     },  
 })
