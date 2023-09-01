@@ -2,7 +2,7 @@
     <v-container align="center">
         <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key"/>
+            <Launcher :site_key="site_key" />
         </v-col>
         <v-col v-else class="my-10 w-50" align="center">
             <v-btn :loading="loading" @click="getBRepStats" color="primary">Generate BRep</v-btn>
@@ -14,22 +14,19 @@
                 <p>{{ nb_corners }} Corners</p>
             </v-card>
         </v-col>
-        <RemoteRenderingView :client="client"/>
+        <RemoteRenderingView />
     </v-container>
 </template>
 
 <script setup>
 import { useToggle } from '@vueuse/core'
-import { storeToRefs } from 'pinia'
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 const inputsStore = useInputStore()
-inputsStore.setDefault()
 const viewer_store = use_viewer_store()
 const websocket_store = use_websocket_store()
-const { client, is_client_created } = storeToRefs(websocket_store)
-const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
+const { is_client_created } = storeToRefs(websocket_store)
 const site_key = useRuntimeConfig().public.SITE_KEY
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
@@ -44,11 +41,15 @@ useHead({
     titleTemplate: (title) => `${title} - Geode-solutions`
 })
 
+const cloud_socket_ready = computed(() => {
+    return is_cloud_running.value && is_client_created.value
+})
+
 onMounted(() => {
-    if (is_cloud_running.value) {
+    if (cloud_socket_ready.value) {
         displayBase()
     } else {
-        watch(is_cloud_running, () => {
+        watch(cloud_socket_ready, () => {
             displayBase()
         })
     }

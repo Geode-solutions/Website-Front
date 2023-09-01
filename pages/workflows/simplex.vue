@@ -2,12 +2,12 @@
     <v-container>
         <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key"/>
+            <Launcher :site_key="site_key" />
         </v-col>
         <v-col v-if="is_cloud_running">
             <v-container class="w-50">
                 <v-container rounded="lg" class="my-10 pa-0" color="black">
-                    <label class="text-medium-emphasis text-body-2">Global metric</label>
+                    <label class="text-medium-emphasis text-body-1">Global metric</label>
                     <v-text-field v-model="metric" id="metric" name="metric" @input="setGlobalMetric"></v-text-field>
                     <v-container>
                         <v-expansion-panels v-model="panel">
@@ -17,8 +17,8 @@
                                 </v-expansion-panel-title>
                                 <v-expansion-panel-text>
                                     <v-sheet :max-height="260" class="overflow-auto" color="transparent">
-                                        <div v-for="n in surfaceIDS.length-1">
-                                            <WorkflowsSimplexSurfaceMetric :num="n" :id="surfaceIDS[n]"/>
+                                        <div v-for="n in surfaceIDS.length - 1">
+                                            <WorkflowsSimplexSurfaceMetric :num="n" :id="surfaceIDS[n]" />
                                         </div>
                                     </v-sheet>
                                 </v-expansion-panel-text>
@@ -29,8 +29,8 @@
                                 </v-expansion-panel-title>
                                 <v-expansion-panel-text>
                                     <v-sheet :max-height="260" class="overflow-auto" color="transparent">
-                                        <div v-for="n in blockIDS.length-1">
-                                            <WorkflowsSimplexBlockMetric :num="n" :id="blockIDS[n]"/>
+                                        <div v-for="n in blockIDS.length - 1">
+                                            <WorkflowsSimplexBlockMetric :num="n" :id="blockIDS[n]" />
                                         </div>
                                     </v-sheet>
                                 </v-expansion-panel-text>
@@ -40,24 +40,20 @@
                     <v-row justify="center">
                         <v-btn class="ma-5" :loading="loading" @click="sendMetrics" color="primary">Send data</v-btn>
                     </v-row>
-                </v-container> 
+                </v-container>
             </v-container>
         </v-col>
-        <RemoteRenderingView :client="client"/>
+        <RemoteRenderingView />
     </v-container>
 </template>
 
 <script setup>
 import { useToggle } from '@vueuse/core'
-import { storeToRefs } from 'pinia'
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 const inputsStore = useInputStore()
-inputsStore.setDefault()
 const viewer_store = use_viewer_store()
-const websocket_store = use_websocket_store()
-const { client, is_client_created } = storeToRefs(websocket_store)
 const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
 const site_key = useRuntimeConfig().public.SITE_KEY
 const loading = ref(false)
@@ -78,22 +74,22 @@ const setGlobalMetric = () => {
     panel.value = []
 }
 
-    onMounted(()=>{
-        if (is_cloud_running.value) {
+onMounted(() => {
+    if (is_cloud_running.value) {
+        initialize()
+    } else {
+        watch(is_cloud_running, () => {
             initialize()
-        } else {
-            watch(is_cloud_running, () => {
-                initialize()
-            })
-        }
-    })   
+        })
+    }
+})
 
 async function initialize() {
     toggle_loading()
-    await api_fetch('workflows/simplex/initialize', { method: 'POST'},
+    await api_fetch('workflows/simplex/initialize', { method: 'POST' },
         {
-            'request_error_function': () => { 
-                toggle_loading() 
+            'request_error_function': () => {
+                toggle_loading()
             },
             'response_function': (response) => {
                 viewer_store.reset()
@@ -112,13 +108,13 @@ async function sendMetrics() {
     const params = new FormData()
     params.append('globalMetric', globalMetric.value[0]._rawValue)
     const json_surfaces = JSON.stringify(surfaceMetrics.value)
-    params.append('surfaceMetrics',json_surfaces)
+    params.append('surfaceMetrics', json_surfaces)
     const json_blocks = JSON.stringify(blockMetrics.value)
-    params.append('blockMetrics',json_blocks)
+    params.append('blockMetrics', json_blocks)
     await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
         {
-            'request_error_function': () => { 
-                toggle_loading() 
+            'request_error_function': () => {
+                toggle_loading()
             },
             'response_function': (response) => {
                 viewer_store.reset()
