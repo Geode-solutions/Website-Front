@@ -2,7 +2,7 @@
     <v-container>
         <v-select v-model="selected_axis" :items="axis" label="Axis" @click="alterAxis"></v-select>
         <label class="text-medium-emphasis text-body-1">Axis coordinate</label>
-        <v-slider v-model="coordinate" min="0" max="40" step="1" thumb-label @input="alterCoordinate"></v-slider>
+        <v-slider v-model="coordinate" min="0" max="40" step="1" thumb-label></v-slider>
     </v-container>
 </template>
 
@@ -22,10 +22,7 @@ function alterAxis() {
     }
 }
 alterAxis()
-const coordinate = ref(13);
-function alterCoordinate() {
-    inputsStore.setCoordinate(coordinate.value)
-}
-alterCoordinate()
+const { coordinate } = storeToRefs(inputsStore)
+coordinate.value = 13;
 </script>
 
