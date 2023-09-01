@@ -5,6 +5,20 @@
                 <v-sheet max-height="30em" rounded="lg" class="pa-3 text-center overflow-auto" elevation="3">
                     <p class="mb-2 text-medium-emphasis text-body-1">Data constraints</p>
                     <p v-if="nb_constraints == 0">Getting data. Please wait...</p>
+                    <v-row no-gutters>
+                        <v-col>
+                            <label>X</label>
+                        </v-col>
+                        <v-col>
+                            <label>Y</label>
+                        </v-col>
+                        <v-col>
+                            <label>Z</label>
+                        </v-col>
+                        <v-col>
+                            <label>Value</label>
+                        </v-col>
+                    </v-row>
                     <WorkflowsImplicitConstraint v-for="n in nb_constraints" :key="n" :id="n" />
                 </v-sheet>
             </v-col>

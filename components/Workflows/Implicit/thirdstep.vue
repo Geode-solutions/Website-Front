@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <label class="text-medium-emphasis text-body-1">Metric</label>
-        <v-slider v-model="metric" min="1" max="40" step="1" thumb-label @input="alterMetric"></v-slider>
+        <v-slider v-model="metric" min="1" max="10" step="1" thumb-label @input="alterMetric"></v-slider>
     </v-container>
 </template>
 

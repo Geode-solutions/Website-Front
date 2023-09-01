@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" align="center">
+    <v-row no-gutters justify="center" align="center">
         <v-col cols="3">
             <label>Isovalue {{ id ? `${id}` : '' }}</label>
         </v-col>

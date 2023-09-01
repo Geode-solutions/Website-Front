@@ -1,19 +1,15 @@
 <template>
-    <v-row>
-        <v-col>
-            <label>X</label>
+    <v-row no-gutters justify="space-around">
+        <v-col cols="2">
             <v-text-field v-model="constraint.x" disabled class="centered-input"></v-text-field>
         </v-col>
-        <v-col>
-            <label>Y</label>
+        <v-col cols="2">
             <v-text-field v-model="constraint.y" disabled class="centered-input"></v-text-field>
         </v-col>
-        <v-col>
-            <label>Z</label>
+        <v-col cols="2">
             <v-text-field v-model="constraint.z" disabled class="centered-input"></v-text-field>
         </v-col>
-        <v-col>
-            <label>Value</label>
+        <v-col cols="2">
             <v-text-field v-model="constraint.value" class="centered-input" @input="alterConstraint"></v-text-field>
         </v-col>
     </v-row>

@@ -70,6 +70,7 @@ async function sendStepOne() {
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
+                viewer_store.set_vertex_attribute({ "id": response._data.id, "name": "geode_implicit_attribute" })
             },
         }
     )
@@ -86,6 +87,7 @@ async function sendStepTwo() {
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
+                viewer_store.set_vertex_attribute({ "id": response._data.id, "name": "geode_implicit_attribute" })
             },
         }
     )
