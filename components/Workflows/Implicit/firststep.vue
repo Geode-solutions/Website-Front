@@ -79,6 +79,7 @@ async function getConstraints() {
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_points, "id": response._data.points })
                 viewer_store.point_size({ "id": response._data.points, "size": 10 })
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_box, "id": response._data.box })
+                viewer_store.set_vertex_attribute({ "id": response._data.points, "name": "geode_implicit_value" })
             },
         }
     )
