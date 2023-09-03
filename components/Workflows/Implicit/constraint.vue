@@ -18,6 +18,7 @@
 <script setup>
 const inputsStore = useInputStore()
 const { constraints } = storeToRefs(inputsStore)
+const viewer_store = use_viewer_store()
 const props = defineProps({
     id: { type: Number, required: true },
 })
@@ -30,6 +31,9 @@ const constraint = ref({
     "value": constraints.value[index.value]["value"]
 });
 async function alterConstraint() {
+    if (isNaN(constraint.value.value)) {
+        return
+    }
     inputsStore.modifyConstraint(index.value, constraint)
     const params = new FormData();
     params.append('point', index.value);
@@ -37,9 +41,7 @@ async function alterConstraint() {
     await api_fetch('workflows/implicit/update_value', { method: 'POST', body: params },
         {
             'response_function': (response) => {
-                console.log("update_toto", response)
-                viewer_store.update_data({ "id": response._data.points })
-                console.log("update_value end")
+                viewer_store.update_data({ "id": response._data.points });
             },
         }
     )
