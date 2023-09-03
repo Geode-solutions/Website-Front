@@ -38,7 +38,7 @@ async function alterConstraint() {
         {
             'response_function': (response) => {
                 console.log("update_toto", response)
-                viewer_store.update_toto({ "id": response._data.points })
+                viewer_store.update_data({ "id": response._data.points })
                 console.log("update_value end")
             },
         }
