@@ -21,9 +21,6 @@
 
                     <v-container>
                         <v-row class="mx-5">
-                            <v-col cols="auto">
-                                <v-btn :disabled="step == 1">back</v-btn>
-                            </v-col>
                             <v-spacer />
                             <v-col cols="auto">
                                 <v-btn :disabled="step == items.length" :loading="loading" @click="next">next</v-btn>
