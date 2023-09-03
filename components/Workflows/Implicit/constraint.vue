@@ -29,8 +29,20 @@ const constraint = ref({
     "z": constraints.value[index.value]["z"],
     "value": constraints.value[index.value]["value"]
 });
-function alterConstraint() {
+async function alterConstraint() {
     inputsStore.modifyConstraint(index.value, constraint)
+    const params = new FormData();
+    params.append('point', index.value);
+    params.append('value', constraint.value.value);
+    await api_fetch('workflows/implicit/update_value', { method: 'POST', body: params },
+        {
+            'response_function': (response) => {
+                console.log("update_toto", response)
+                viewer_store.update_toto({ "id": response._data.points })
+                console.log("update_value end")
+            },
+        }
+    )
 }
 </script>
 
