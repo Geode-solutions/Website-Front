@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters justify="center" align="center">
         <v-col cols="3">
-            <label>Isovalue {{ id ? `${id}` : '' }}</label>
+            <p>Isovalue {{ id }}</p>
         </v-col>
         <v-col cols="3">
             <v-text-field v-model="isovalue" class="centered-input" @input="alterIsovalue"></v-text-field>
@@ -17,7 +17,7 @@ const props = defineProps({
 const { id } = props
 const isovalue = ref((id - 1) / 2);
 function alterIsovalue() {
-    inputsStore.modifyIsovalue(id - 1, isovalue.value)
+    inputsStore.modifyIsovalue(id - 1, parseFloat(isovalue.value))
 }
 alterIsovalue()
 </script>

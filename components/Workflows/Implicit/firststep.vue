@@ -7,16 +7,16 @@
                     <p v-if="nb_constraints == 0">Getting data. Please wait...</p>
                     <v-row no-gutters>
                         <v-col>
-                            <label>X</label>
+                            <p>X</p>
                         </v-col>
                         <v-col>
-                            <label>Y</label>
+                            <p>Y</p>
                         </v-col>
                         <v-col>
-                            <label>Z</label>
+                            <p>Z</p>
                         </v-col>
                         <v-col>
-                            <label>Value</label>
+                            <p>Value</p>
                         </v-col>
                     </v-row>
                     <WorkflowsImplicitConstraint v-for="n in nb_constraints" :key="n" :id="n" />
@@ -63,6 +63,7 @@ onMounted(() => {
 })
 
 async function getConstraints() {
+    console.log("getConstraints")
     await api_fetch('workflows/implicit/step0', { method: 'POST' },
         {
             'response_function': (response) => {

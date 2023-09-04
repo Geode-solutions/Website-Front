@@ -23,7 +23,6 @@ const props = defineProps({
     id: { type: Number, required: true },
 })
 const index = ref(props.id - 1)
-console.log(constraints)
 const constraint = ref({
     "x": constraints.value[index.value]["x"],
     "y": constraints.value[index.value]["y"],

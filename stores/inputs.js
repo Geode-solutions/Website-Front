@@ -6,10 +6,8 @@ export const useInputStore = defineStore('inputs', {
         isovalues: [], 
         axis: 0, 
         coordinate: 0, 
-        metric: 0,
-        surfaceMetrics: {}, 
-        blockMetrics: {}, 
-        globalMetric: [""]
+        metric: 200,
+        faults_metric: 50
     }),
     actions: {
         addConstraint(x) {
@@ -39,14 +37,8 @@ export const useInputStore = defineStore('inputs', {
         setMetric(x) {
             this.metric = x
         },
-        setGlobalMetric(x) {
-            this.globalMetric[0] = x
-        },
-        setSurfaceMetric(x,id) {
-            this.surfaceMetrics[id] = x
-        },
-        setBlockMetric(x,id) {
-            this.blockMetrics[id] = x
+        setFaultsMetric(x) {
+            this.faults_metric = x
         }
     },  
 })

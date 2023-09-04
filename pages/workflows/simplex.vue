@@ -1,49 +1,52 @@
 <template>
     <v-container>
-        <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
+        <v-col>
+            <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
+        </v-col>
         <v-col v-if="!is_cloud_running">
             <Launcher :site_key="site_key" />
         </v-col>
-        <v-col v-if="is_cloud_running">
-            <v-container class="w-50">
-                <v-container rounded="lg" class="my-10 pa-0" color="black">
-                    <label class="text-medium-emphasis text-body-1">Global metric</label>
-                    <v-text-field v-model="metric" id="metric" name="metric" @input="setGlobalMetric"></v-text-field>
+        <v-col v-else>
+            <v-container class="w-75">
+                <v-stepper v-model="step" hide-actions :items="items">
+                    <template v-slot:item.1>
+                        <v-container>
+                            <v-row>
+                                <v-col>
+                                    <p class="text-medium-emphasis text-body-1">Global metric</p>
+                                    <v-slider v-model="metric" :min="min_metric" :max="max_metric" :step="step_metric"
+                                        thumb-label></v-slider>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </template>
+
+                    <template v-slot:item.2>
+                        <v-container>
+                            <v-row>
+                                <v-col>
+                                    <p class="text-medium-emphasis text-body-1">Faults metric</p>
+                                    <v-slider v-model="faults_metric" :min="min_metric" :max="max_metric"
+                                        :step="step_metric" thumb-label></v-slider>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </template>
+
                     <v-container>
-                        <v-expansion-panels v-model="panel">
-                            <v-expansion-panel class="mb-4">
-                                <v-expansion-panel-title>
-                                    Set individual surface metrics
-                                </v-expansion-panel-title>
-                                <v-expansion-panel-text>
-                                    <v-sheet :max-height="260" class="overflow-auto" color="transparent">
-                                        <div v-for="n in surfaceIDS.length - 1">
-                                            <WorkflowsSimplexSurfaceMetric :num="n" :id="surfaceIDS[n]" />
-                                        </div>
-                                    </v-sheet>
-                                </v-expansion-panel-text>
-                            </v-expansion-panel>
-                            <v-expansion-panel class="mb-4">
-                                <v-expansion-panel-title>
-                                    Set individual block metrics
-                                </v-expansion-panel-title>
-                                <v-expansion-panel-text>
-                                    <v-sheet :max-height="260" class="overflow-auto" color="transparent">
-                                        <div v-for="n in blockIDS.length - 1">
-                                            <WorkflowsSimplexBlockMetric :num="n" :id="blockIDS[n]" />
-                                        </div>
-                                    </v-sheet>
-                                </v-expansion-panel-text>
-                            </v-expansion-panel>
-                        </v-expansion-panels>
+                        <v-row class="mx-5">
+                            <v-spacer />
+                            <v-col cols="auto">
+                                <v-btn :disabled="step == items.length" :loading="loading" @click="next">next</v-btn>
+                            </v-col>
+                        </v-row>
                     </v-container>
-                    <v-row justify="center">
-                        <v-btn class="ma-5" :loading="loading" @click="sendMetrics" color="primary">Send data</v-btn>
-                    </v-row>
-                </v-container>
+                </v-stepper>
+                <v-col>
+                    <RemoteRenderingView />
+                </v-col>
             </v-container>
         </v-col>
-        <RemoteRenderingView />
     </v-container>
 </template>
 
@@ -52,16 +55,21 @@ import { useToggle } from '@vueuse/core'
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
-const inputsStore = useInputStore()
 const viewer_store = use_viewer_store()
-const { globalMetric, surfaceMetrics, blockMetrics } = storeToRefs(inputsStore)
+const websocket_store = use_websocket_store()
+const { is_client_created } = storeToRefs(websocket_store)
 const site_key = useRuntimeConfig().public.SITE_KEY
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
-const surfaceIDS = ref([])
-const blockIDS = ref([])
-const panel = ref([]) //to close expansion panels when typing new gobal metric
-const metric = ref()
+const inputsStore = useInputStore()
+const { metric, faults_metric } = storeToRefs(inputsStore)
+metric.value = 200
+faults_metric.value = 50
+const min_metric = 10
+const max_metric = 300
+const step_metric = 10
+const step = ref(1)
+const items = ['Set global metric', 'Set faults metric', 'Result']
 
 const title = 'Remesh'
 useHead({
@@ -69,16 +77,15 @@ useHead({
     titleTemplate: (title) => `${title} - Geode-solutions`
 })
 
-const setGlobalMetric = () => {
-    inputsStore.setGlobalMetric(metric)
-    panel.value = []
-}
+const cloud_socket_ready = computed(() => {
+    return is_cloud_running.value && is_client_created.value
+})
 
 onMounted(() => {
-    if (is_cloud_running.value) {
+    if (cloud_socket_ready.value) {
         initialize()
     } else {
-        watch(is_cloud_running, () => {
+        watch(cloud_socket_ready, () => {
             initialize()
         })
     }
@@ -88,41 +95,36 @@ async function initialize() {
     toggle_loading()
     await api_fetch('workflows/simplex/initialize', { method: 'POST' },
         {
-            'request_error_function': () => {
-                toggle_loading()
-            },
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                surfaceIDS.value = response._data.surfacesIDS
-                blockIDS.value = response._data.blocksIDS
-                toggle_loading()
             },
-            'response_error_function': () => { toggle_loading() }
         }
     )
+    toggle_loading()
 }
 
 async function sendMetrics() {
     toggle_loading()
     const params = new FormData()
-    params.append('globalMetric', globalMetric.value[0]._rawValue)
-    const json_surfaces = JSON.stringify(surfaceMetrics.value)
-    params.append('surfaceMetrics', json_surfaces)
-    const json_blocks = JSON.stringify(blockMetrics.value)
-    params.append('blockMetrics', json_blocks)
+    params.append('metric', metric.value)
+    params.append('faults_metric', faults_metric.value)
     await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
         {
-            'request_error_function': () => {
-                toggle_loading()
-            },
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                toggle_loading()
+                viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
             },
-            'response_error_function': () => { toggle_loading() }
         }
     )
+    toggle_loading()
+}
+
+function next() {
+    if (step.value == 2) {
+        sendMetrics()
+    }
+    step.value++
 }
 </script>

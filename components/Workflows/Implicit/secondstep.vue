@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-select v-model="selected_axis" :items="axis" label="Axis" @click="alterAxis"></v-select>
-        <label class="text-medium-emphasis text-body-1">Axis coordinate</label>
+        <p class="text-medium-emphasis text-body-1">Axis coordinate</p>
         <v-slider v-model="coordinate" min="0" max="40" step="1" thumb-label></v-slider>
     </v-container>
 </template>

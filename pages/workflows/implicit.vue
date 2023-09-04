@@ -1,11 +1,13 @@
 <template>
     <v-container>
-        <h1 class="text-h2 py-6" align="center">Implicit</h1>
+        <v-col>
+            <h1 class="text-h2 py-6" align="center">Implicit</h1>
+        </v-col>
         <v-col v-if="!is_cloud_running">
             <Launcher :site_key="site_key" />
         </v-col>
         <v-col v-else>
-            <v-container class="mt-10 w-75">
+            <v-container class="w-75">
                 <v-stepper v-model="step" hide-actions :items="items">
                     <template v-slot:item.1>
                         <WorkflowsImplicitFirststep />
@@ -41,7 +43,6 @@ import { useToggle } from '@vueuse/core'
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
-console.log(is_cloud_running)
 const inputsStore = useInputStore()
 const viewer_store = use_viewer_store()
 const { constraints, isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
@@ -58,11 +59,11 @@ useHead({
     titleTemplate: (title) => `${title} - Geode-solutions`
 })
 
-async function sendStepOne() {
+function sendStepOne() {
     const params = new FormData();
     params.append('constraints', JSON.stringify(constraints.value));
     params.append('isovalues', JSON.stringify(isovalues.value));
-    await api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
+    return api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -73,13 +74,11 @@ async function sendStepOne() {
     )
 }
 
-async function sendStepTwo() {
-    console.log("axis", axis)
-    console.log("coordinate", coordinate)
+function sendStepTwo() {
     const params = new FormData();
     params.append('axis', axis.value);
     params.append('coordinate', coordinate.value);
-    await api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
+    return api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -90,10 +89,10 @@ async function sendStepTwo() {
     )
 }
 
-async function sendStepThree() {
+function sendStepThree() {
     const params = new FormData();
     params.append('metric', metric.value);
-    await api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
+    return api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -104,17 +103,16 @@ async function sendStepThree() {
     )
 }
 
-function next() {
+async function next() {
     toggle_loading()
-    console.log("next", step.value)
     if (step.value == 1) {
-        sendStepOne()
+        await sendStepOne()
     }
     else if (step.value == 2) {
-        sendStepTwo()
+        await sendStepTwo()
     }
     else if (step.value == 3) {
-        sendStepThree()
+        await sendStepThree()
     }
     step.value++
     toggle_loading()
