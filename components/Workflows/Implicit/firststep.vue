@@ -64,6 +64,7 @@ onMounted(() => {
 
 async function getConstraints() {
     console.log("getConstraints")
+    viewer_store.reset()
     await api_fetch('workflows/implicit/step0', { method: 'POST' },
         {
             'response_function': (response) => {

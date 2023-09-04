@@ -93,6 +93,7 @@ onMounted(() => {
 
 async function initialize() {
     toggle_loading()
+    viewer_store.reset()
     await api_fetch('workflows/simplex/initialize', { method: 'POST' },
         {
             'response_function': (response) => {
