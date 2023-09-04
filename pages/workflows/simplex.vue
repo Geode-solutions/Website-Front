@@ -35,6 +35,9 @@
 
                     <v-container>
                         <v-row class="mx-5">
+                            <v-col cols="auto">
+                                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
+                            </v-col>
                             <v-spacer />
                             <v-col cols="auto">
                                 <v-btn :disabled="step == items.length" :loading="loading" @click="next">next</v-btn>
@@ -90,6 +93,11 @@ onMounted(() => {
         })
     }
 })
+
+function reset() {
+    step.value = 1
+    initialize()
+}
 
 async function initialize() {
     toggle_loading()

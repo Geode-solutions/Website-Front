@@ -48,6 +48,19 @@ const { is_client_created } = storeToRefs(websocket_store)
 const nb_constraints = ref(0)
 const nb_isovalues = ref(3)
 
+const props = defineProps({
+    reset: { type: Boolean, required: true },
+})
+const { reset } = toRefs(props)
+watch(reset, (reset) => {
+    if (reset) {
+        console.log("reset")
+        nb_constraints.value = 0
+        nb_isovalues.value = 3
+        getConstraints()
+    }
+})
+
 const cloud_socket_ready = computed(() => {
     return is_cloud_running.value && is_client_created.value
 })

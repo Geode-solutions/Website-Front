@@ -10,7 +10,7 @@
             <v-container class="w-75">
                 <v-stepper v-model="step" hide-actions :items="items">
                     <template v-slot:item.1>
-                        <WorkflowsImplicitFirststep />
+                        <WorkflowsImplicitFirststep :reset="reset_first_step" />
                     </template>
 
                     <template v-slot:item.2>
@@ -23,6 +23,9 @@
 
                     <v-container>
                         <v-row class="mx-5">
+                            <v-col cols="auto">
+                                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
+                            </v-col>
                             <v-spacer />
                             <v-col cols="auto">
                                 <v-btn :disabled="step == items.length" :loading="loading" @click="next">next</v-btn>
@@ -58,6 +61,12 @@ useHead({
     title: title,
     titleTemplate: (title) => `${title} - Geode-solutions`
 })
+
+const reset_first_step = ref(false)
+function reset() {
+    step.value = 1
+    reset_first_step.value = true
+}
 
 function sendStepOne() {
     const params = new FormData();
@@ -115,6 +124,7 @@ async function next() {
         await sendStepThree()
     }
     step.value++
+    reset_first_step.value = false
     toggle_loading()
 }
 </script>
