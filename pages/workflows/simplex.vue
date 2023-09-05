@@ -13,7 +13,8 @@
                         <v-container>
                             <v-row>
                                 <v-col>
-                                    <p class="text-medium-emphasis text-body-1">Global metric</p>
+                                    <p class="mb-2 text-medium-emphasis text-body-1">Choose the metric to apply to the
+                                        blocks</p>
                                     <v-slider v-model="metric" :min="min_metric" :max="max_metric" :step="step_metric"
                                         thumb-label></v-slider>
                                 </v-col>
@@ -25,12 +26,18 @@
                         <v-container>
                             <v-row>
                                 <v-col>
-                                    <p class="text-medium-emphasis text-body-1">Faults metric</p>
+                                    <p class="mb-2 text-medium-emphasis text-body-1">Choose the metric to apply to the
+                                        faults</p>
                                     <v-slider v-model="faults_metric" :min="min_metric" :max="max_metric"
                                         :step="step_metric" thumb-label></v-slider>
                                 </v-col>
                             </v-row>
                         </v-container>
+                    </template>
+
+                    <template v-slot:item.3>
+                        <p class="mb-2 text-body-1 text-center">Congratulations! <br />
+                            You just generate aa tetrahedral mesh with heterogeneous metric, all in a few clicks </p>
                     </template>
 
                     <v-container>
@@ -72,7 +79,7 @@ const min_metric = 10
 const max_metric = 300
 const step_metric = 10
 const step = ref(1)
-const items = ['Set global metric', 'Set faults metric', 'Result']
+const items = ['Set blocks metric', 'Set faults metric', 'Result']
 
 const title = 'Remesh'
 useHead({

@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <p class="text-medium-emphasis text-body-1">Metric</p>
+        <p class="mb-2 text-medium-emphasis text-body-1 text-center">Give a metric for remeshing the extracted Section</p>
         <v-slider v-model="metric" min="0.5" max="10" step="0.5" thumb-label></v-slider>
     </v-container>
 </template>

@@ -9,7 +9,7 @@
         <v-navigation-drawer :rail="mini" :expand-on-hover="mini" absolute>
             <v-list>
                 <v-list-item v-for="(workflow, i) in workflows_list" :key="i" :to="workflow.to" link router exact
-                    :prepend-icon="workflow.icon" :title="workflow.title">
+                    :prepend-icon="workflow.icon" :title="workflow.short_title ? workflow.short_title : workflow.title">
                     <template #append>
                         <v-badge v-if="workflow.badge" :content="workflow.badge" color="primary" inline />
                     </template>

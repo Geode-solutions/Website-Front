@@ -3,7 +3,8 @@
         <v-row>
             <v-col>
                 <v-sheet max-height="30em" rounded="lg" class="pa-3 text-center overflow-auto" elevation="3">
-                    <p class="mb-2 text-medium-emphasis text-body-1">Data constraints</p>
+                    <p class="mb-2 text-medium-emphasis text-body-1">Choose the value to set on the data points for the
+                        implicit function computation</p>
                     <p v-if="nb_constraints == 0">Getting data. Please wait...</p>
                     <v-row no-gutters>
                         <v-col>
@@ -26,6 +27,8 @@
         <v-row>
             <v-col>
                 <v-sheet max-height="30em" rounded="lg" width="100%" class="overflow-auto pa-3 text-center " elevation="5">
+                    <p class="mb-2 text-medium-emphasis text-body-1">Choose the isovalues to explicit on the model after the
+                        implicit function computation</p>
                     <p class="mb-2 text-medium-emphasis text-body-1">Number of isovalues</p>
                     <v-btn class="ma-1" size="x-small" elevation="5" icon="mdi-minus" @click=decrementISO></v-btn>
                     {{ nb_isovalues }}
