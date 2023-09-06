@@ -41,7 +41,7 @@
 
                     <template v-slot:item.3>
                         <p class="mb-2 text-body-1 text-center">Congratulations! <br />
-                            You just build a BRep from a set of surfaces, all in a few clicks </p>
+                            You just build and remeshed a BRep from a set of surfaces, all in a few clicks </p>
                     </template>
 
                     <v-container>
