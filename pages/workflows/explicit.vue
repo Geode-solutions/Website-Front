@@ -21,15 +21,27 @@
                     </template>
 
                     <template v-slot:item.2>
+                        <v-container>
+                            <v-row>
+                                <v-col>
+                                    <v-card rounded="lg" class="my-6 pa-5 elevation-5" color="transparent" align="center">
+                                        <h3 class="mb-5">The generated BRep has:</h3>
+                                        <p>{{ nb_blocks }} Blocks</p>
+                                        <p>{{ nb_surfaces }} Surfaces</p>
+                                        <p>{{ nb_lines }} Lines</p>
+                                        <p>{{ nb_corners }} Corners</p>
+                                    </v-card>
+                                    <p class="mb-2 text-medium-emphasis text-body-1">Choose the metric</p>
+                                    <v-slider v-model="metric" :min="min_metric" :max="max_metric" :step="step_metric"
+                                        thumb-label></v-slider>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </template>
+
+                    <template v-slot:item.3>
                         <p class="mb-2 text-body-1 text-center">Congratulations! <br />
                             You just build a BRep from a set of surfaces, all in a few clicks </p>
-                        <v-card rounded="lg" class="mt-6 pa-5 elevation-5" color="transparent" align="center">
-                            <h3 class="mb-5">The generated BRep has:</h3>
-                            <p>{{ nb_blocks }} Blocks</p>
-                            <p>{{ nb_surfaces }} Surfaces</p>
-                            <p>{{ nb_lines }} Lines</p>
-                            <p>{{ nb_corners }} Corners</p>
-                        </v-card>
                     </template>
 
                     <v-container>
@@ -71,8 +83,14 @@ const nb_corners = ref("-")
 const nb_lines = ref("-")
 const nb_surfaces = ref("-")
 const nb_blocks = ref("-")
+const inputsStore = useInputStore()
+const { metric } = storeToRefs(inputsStore)
+metric.value = 200
+const min_metric = 50
+const max_metric = 500
+const step_metric = 10
 const step = ref(1)
-const items = ['Input data', 'Result']
+const items = ['Input data', 'Remesh', 'Result']
 
 const title = 'Explicit modeling'
 useHead({
@@ -110,10 +128,8 @@ async function displayBase() {
     toggle_loading()
 }
 
-async function getBRepStats() {
-    toggle_loading()
-    viewer_store.reset()
-    await api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
+function getBRepStats() {
+    return api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -126,14 +142,33 @@ async function getBRepStats() {
             },
         }
     )
-    toggle_loading()
 }
 
-function next() {
+
+function remesh() {
+    const params = new FormData()
+    params.append('metric', metric.value)
+    return api_fetch('workflows/explicit/remesh', { method: 'POST', body: params },
+        {
+            'response_function': (response) => {
+                viewer_store.reset()
+                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
+                viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
+            },
+        }
+    )
+}
+
+async function next() {
+    toggle_loading()
     if (step.value == 1) {
-        getBRepStats()
+        await getBRepStats()
+    }
+    if (step.value == 2) {
+        await remesh()
     }
     step.value++
+    toggle_loading()
 }
 
 function reset() {

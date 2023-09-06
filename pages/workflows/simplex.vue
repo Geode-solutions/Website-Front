@@ -126,7 +126,6 @@ async function initialize() {
 
 async function sendMetrics() {
     toggle_loading()
-    viewer_store.reset()
     const params = new FormData()
     params.append('metric', metric.value)
     params.append('faults_metric', faults_metric.value)
