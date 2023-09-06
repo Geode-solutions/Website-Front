@@ -47,6 +47,10 @@
                 <v-col>
                     <RemoteRenderingView />
                 </v-col>
+                <v-col>
+                    <p class="text-body-2 text-center">Data courtesy of Pellerin et al. (2015). Elements for measuring the
+                        complexity of 3D structural models: Connectivity and geometry</p>
+                </v-col>
             </v-container>
         </v-col>
     </v-container>
@@ -100,8 +104,6 @@ async function displayBase() {
                 viewer_store.toggle_edge_visibility({ "id": response._data.id1, "visibility": true })
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_2, "id": response._data.id2 })
                 viewer_store.toggle_edge_visibility({ "id": response._data.id2, "visibility": true })
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_3, "id": response._data.id3 })
-                viewer_store.toggle_edge_visibility({ "id": response._data.id3, "visibility": true })
             },
         }
     )
@@ -110,6 +112,7 @@ async function displayBase() {
 
 async function getBRepStats() {
     toggle_loading()
+    viewer_store.reset()
     await api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
         {
             'response_function': (response) => {

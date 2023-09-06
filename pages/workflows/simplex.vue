@@ -55,6 +55,10 @@
                 <v-col>
                     <RemoteRenderingView />
                 </v-col>
+                <v-col>
+                    <p class="text-body-2 text-center">Data courtesy of Caumon et al. (2009). Surface-Based 3D Modeling of
+                        Geological Structures</p>
+                </v-col>
             </v-container>
         </v-col>
     </v-container>
@@ -122,6 +126,7 @@ async function initialize() {
 
 async function sendMetrics() {
     toggle_loading()
+    viewer_store.reset()
     const params = new FormData()
     params.append('metric', metric.value)
     params.append('faults_metric', faults_metric.value)
