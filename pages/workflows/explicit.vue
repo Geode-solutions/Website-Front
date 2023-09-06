@@ -31,7 +31,8 @@
                                         <p>{{ nb_lines }} Lines</p>
                                         <p>{{ nb_corners }} Corners</p>
                                     </v-card>
-                                    <p class="mb-2 text-medium-emphasis text-body-1">Choose the metric</p>
+                                    <p class="mb-2 text-medium-emphasis text-body-1">Choose a metric for remeshing the BRep
+                                    </p>
                                     <v-slider v-model="metric" :min="min_metric" :max="max_metric" :step="step_metric"
                                         thumb-label></v-slider>
                                 </v-col>
@@ -41,7 +42,8 @@
 
                     <template v-slot:item.3>
                         <p class="mb-2 text-body-1 text-center">Congratulations! <br />
-                            You just build and remeshed a BRep from a set of surfaces, all in a few clicks </p>
+                            You just went from a set of intersecting surfaces to a nicely meshed, fully conformal BRep, all
+                            in a few clicks</p>
                     </template>
 
                     <v-container>

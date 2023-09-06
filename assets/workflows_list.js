@@ -30,7 +30,7 @@ const workflows_list = [
         title: 'Explicit modeling',
         short_title: 'Explicit',
         to: '/workflows/explicit',
-        text: 'Intersect and combine several meshes and models into a unique model.',
+        text: 'Intersect and combine several meshes and models into a unique model and remesh it.',
         badge: 'beta',
         chip: '',
     },
