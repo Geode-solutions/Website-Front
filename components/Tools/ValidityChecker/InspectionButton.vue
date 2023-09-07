@@ -15,36 +15,32 @@
 <script setup>
 import { useToggle } from '@vueuse/core'
 
-const props = defineProps({
-  component_options: { type: Object, required: true }
-})
-const { input_files, input_geode_object } = props.component_options
-
 const stepper_tree = inject('stepper_tree')
-const { tool_route } = stepper_tree
-
+const { files, geode_object, route_prefix } = stepper_tree
+const props = defineProps({
+  variable_to_update: { type: String, required: true },
+  variable_to_increment: { type: String, required: true }
+})
+const { variable_to_update, variable_to_increment } = props
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
-async function inspect_file () {
+async function inspect_file() {
   await upload_file()
   await get_tests_names()
-  stepper_tree.current_step_index++
+  stepper_tree[variable_to_increment]++
 }
 
-async function upload_file () {
+async function upload_file() {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = async function (event) {
       const params = new FormData()
       params.append('file', event.target.result)
-      params.append('filename', input_files[0].name)
-      params.append('filesize', input_files[0].size)
-
+      params.append('filename', files[0].name)
+      params.append('filesize', files[0].size)
       toggle_loading()
-      const route = `${tool_route}/upload_file`
-
-      await api_fetch(route, { method: 'POST', body: params },
+      await api_fetch(`${route_prefix}/upload_file`, { method: 'POST', body: params },
         {
           'request_error_function': () => {
             toggle_loading()
@@ -60,20 +56,20 @@ async function upload_file () {
         }
       )
     }
-    reader.readAsDataURL(input_files[0])
+    reader.readAsDataURL(files[0])
   })
 }
 
-async function get_tests_names () {
+async function get_tests_names() {
   const params = new FormData()
-  params.append('geode_object', input_geode_object)
-  const route = `${tool_route}/tests_names`
-
+  params.append('geode_object', geode_object)
+  const route = `${route_prefix}/tests_names`
   await api_fetch(route, { method: 'POST', body: params },
     {
-      'response_function': (response) => { stepper_tree.model_checks = response._data.model_checks }
+      'response_function': (response) => {
+        stepper_tree[variable_to_update] = response._data.model_checks
+        console.log('variable_to_update', stepper_tree[variable_to_update])
+      }
     })
 }
-
 </script>
-

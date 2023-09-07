@@ -3,14 +3,25 @@ import colors from 'vuetify/lib/util/colors'
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      API_URL: process.env.NODE_ENV === 'production' ? 'https://api.geode-solutions.com' : 'http://localhost:443',
-      SITE_URL: process.env.SITE_URL,
+      API_URL: process.env.NODE_ENV === 'production' ? 'api.geode-solutions.com' : 'localhost',
+      VIEWER_PROTOCOL: process.env.NODE_ENV === 'production' ? 'wss' : 'ws',
+      GEODE_PROTOCOL: process.env.NODE_ENV === 'production' ? 'https' : 'http',
+      VIEWER_PORT: process.env.NODE_ENV === 'production' ? '443' : '1234',
+      GEODE_PORT: process.env.NODE_ENV === 'production' ? '443' : '5000',
       SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
       NODE_ENV: process.env.NODE_ENV,
+      SITE_KEY: "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC",
     }
   },
 
-  target: 'static',
+  extends: [
+    '@geode/opengeodeweb-front'
+  ],
+
+  routeRules: {
+    '/tools/**': { ssr: false },
+    '/workflows/**': { ssr: false },
+  },
 
   // ** Customize the progress-bar color
   loading: { color: '#fff' },
@@ -65,7 +76,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['stores']
+    dirs: ['stores', '@geode/opengeodeweb-front/stores']
   },
 
   // ** Build configuration
@@ -77,10 +88,6 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => ['md-linedivider'].includes(tag)
     }
-  },
-
-  nitro: {
-    preset: 'netlify'
   },
 
   devtools: {
