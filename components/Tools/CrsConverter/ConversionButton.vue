@@ -21,7 +21,7 @@ const loading = ref(false)
 
 const toggle_loading = useToggle(loading)
 
-async function convert_files () {
+async function convert_files() {
   for (let i = 0; i < files.length; i++) {
     let reader = new FileReader()
     reader.onload = async function (event) {

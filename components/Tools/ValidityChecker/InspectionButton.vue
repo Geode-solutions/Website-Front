@@ -25,13 +25,13 @@ const { variable_to_update, variable_to_increment } = props
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
-async function inspect_file () {
+async function inspect_file() {
   await upload_file()
   await get_tests_names()
   stepper_tree[variable_to_increment]++
 }
 
-async function upload_file () {
+async function upload_file() {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = async function (event) {
@@ -60,7 +60,7 @@ async function upload_file () {
   })
 }
 
-async function get_tests_names () {
+async function get_tests_names() {
   const params = new FormData()
   params.append('geode_object', geode_object)
   const route = `${route_prefix}/tests_names`

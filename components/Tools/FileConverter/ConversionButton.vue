@@ -20,7 +20,7 @@ const { files, geode_object, route_prefix, output_extension } = stepper_tree
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 
-async function convert_files () {
+async function convert_files() {
   for (let i = 0; i < files.length; i++) {
 
     let reader = new FileReader()
