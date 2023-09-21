@@ -1,8 +1,8 @@
 <template>
   <v-row no-gutters>
     <v-col cols="12" style="contain:layout">
-      <ToolsErrorsBanner />
-      <ToolsErrorsSnackers />
+      <ErrorsBanner />
+      <ErrorsSnackers />
     </v-col>
   </v-row>
   <v-row class="fill-height" no-gutters>
@@ -17,7 +17,6 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-
       <NuxtPage keep-alive />
     </v-col>
   </v-row>
