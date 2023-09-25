@@ -9,8 +9,8 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.8.4",
-    "eslint": "^8.49.0",
+    "@nuxt/devtools": "^0.8.5",
+    "eslint": "^8.50.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^6.4.3",
-    "@geode/opengeodeweb-front": "^2.0.0",
+    "@geode/opengeodeweb-front": "^2.1.0",
     "@kitware/vtk.js": "^28.12.0",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
