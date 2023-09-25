@@ -4,14 +4,14 @@
     <v-main class="bg-secondary">
       <slot />
     </v-main>
-    <CookieControl v-if="config.NODE_ENV === 'production'" />
+    <CookieControl v-if="public_config.NODE_ENV === 'production'" />
     <CommonFooter />
   </v-app>
 </template>
 
 <script setup>
 import { useToggle } from '@vueuse/core'
-const config = useRuntimeConfig()
+const public_config = useRuntimeConfig().public
 const loading = ref(true)
 const toggle_loading = useToggle(loading)
 onMounted(() => { toggle_loading() })
