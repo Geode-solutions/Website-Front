@@ -9,19 +9,19 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.8.5",
-    "eslint": "^8.50.0",
+    "@nuxt/devtools": "^0.8.0",
+    "eslint": "^8.47.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-prettier-vue": "^5.0.0",
+    "eslint-plugin-prettier-vue": "^4.2.0",
     "eslint-plugin-vue": "^9.17.0",
     "eslint-plugin-vuetify": "^2.0.5"
   },
   "dependencies": {
-    "@dargmuesli/nuxt-cookie-control": "^6.4.3",
-    "@geode/opengeodeweb-front": "^2.1.0",
-    "@kitware/vtk.js": "^28.12.0",
+    "@dargmuesli/nuxt-cookie-control": "^6.4.1",
+    "@geode/opengeodeweb-front": "^1.0.0",
+    "@kitware/vtk.js": "^28.7.0",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
     "@vueuse/core": "^10.4.1",
@@ -30,14 +30,14 @@
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",
-    "nuxt": "^3.7.3",
+    "nuxt": "^3.6.5",
     "pinia": "^2.1.6",
-    "sass": "^1.68.0",
+    "sass": "^1.66.1",
     "tsparticles": "^2.12.0",
     "vue-gtag": "^2.0.1",
     "vue3-carousel": "^0.3.1",
     "vue3-particles": "^2.12.0",
-    "vuetify": "^3.3.17"
+    "vuetify": "^3.3.15"
   },
   "overrides": {
     "vue": "latest"
