@@ -50,6 +50,11 @@
 <script setup>
 import { useToggle } from '@vueuse/core'
 
+import Ajv from "ajv"
+const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
+
+import implicit_json from "./implicit.json"
+
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 const inputsStore = useInputStore()
@@ -75,7 +80,10 @@ function reset() {
 }
 
 function sendStepOne() {
-    const params = new FormData();
+    const params = {
+        constraints: constraints.value,
+        isovalues: isovalues.value
+    }
     params.append('constraints', JSON.stringify(constraints.value));
     params.append('isovalues', JSON.stringify(isovalues.value));
     return api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
@@ -90,9 +98,16 @@ function sendStepOne() {
 }
 
 function sendStepTwo() {
-    const params = new FormData();
-    params.append('axis', axis.value);
-    params.append('coordinate', coordinate.value);
+    const params = {
+        axis: axis.value,
+        coordinate: coordinate.value,
+    }
+
+    const validate = ajv.compile(implicit_json)
+    const valid = validate(params)
+    console.log("AJV")
+    if (!valid) console.log(validate.errors)
+
     return api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
         {
             'response_function': (response) => {
@@ -105,8 +120,9 @@ function sendStepTwo() {
 }
 
 function sendStepThree() {
-    const params = new FormData();
-    params.append('metric', metric.value);
+    const params = {
+        metric: metric.value
+    }
     return api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
         {
             'response_function': (response) => {

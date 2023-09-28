@@ -25,21 +25,20 @@ async function convert_files() {
   for (let i = 0; i < files.length; i++) {
     let reader = new FileReader()
     reader.onload = async function (event) {
-      let params = new FormData()
-
-      params.append('geode_object', geode_object)
-      params.append('file', event.target.result)
-      params.append('filename', files[i].name)
-      params.append('filesize', files[i].size)
-      params.append('input_crs_authority', input_crs['authority'])
-      params.append('input_crs_code', input_crs['code'])
-      params.append('input_crs_name', input_crs['name'])
-      params.append('output_crs_authority', output_crs['authority'])
-      params.append('output_crs_code', output_crs['code'])
-      params.append('output_crs_name', output_crs['name'])
-      params.append('extension', output_extension)
-      params.append('responseType', 'blob')
-      params.append('responseEncoding', 'binary')
+      let params = {
+        geode_object: geode_object,
+        file: event.target.result,
+        filename: files[i].name,
+        filesize: files[i].size,
+        input_crs_authority: input_crs['authority'], 
+        input_crs_code: input_crs['code'],  
+        output_crs_authority: output_crs['authority'],
+        output_crs_code: output_crs['code'],
+        output_crs_name: output_crs['name'],
+        extension: output_extension,
+        responseType: 'blob',
+        responseEncoding: 'binary'
+      }
       toggle_loading()
 
       await api_fetch(`${route_prefix}/convert_file`, { method: 'POST', body: params },

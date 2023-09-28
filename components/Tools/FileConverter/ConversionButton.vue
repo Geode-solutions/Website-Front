@@ -25,15 +25,15 @@ async function convert_files() {
 
     let reader = new FileReader()
     reader.onload = async function (event) {
-      let params = new FormData()
-
-      params.append('geode_object', geode_object)
-      params.append('file', event.target.result)
-      params.append('filename', files[i].name)
-      params.append('filesize', files[i].size)
-      params.append('extension', output_extension)
-      params.append('responseType', 'blob')
-      params.append('responseEncoding', 'binary')
+      let params = {
+        geode_object: geode_object,
+        file: event.target.result,
+        filename: files[i].name,
+        filesize: files[i].size, 
+        extension: output_extension,
+        responseType: 'blob',
+        responseEncoding: 'binary'
+      }
       toggle_loading()
 
       await api_fetch(`${route_prefix}/convert_file`, { method: 'POST', body: params },

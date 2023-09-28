@@ -34,9 +34,10 @@ async function alterConstraint() {
         return
     }
     inputsStore.modifyConstraint(index.value, constraint)
-    const params = new FormData();
-    params.append('point', index.value);
-    params.append('value', constraint.value.value);
+    const params = {
+        points: index.value,
+        value: constraint.value
+    }
     await api_fetch('workflows/implicit/update_value', { method: 'POST', body: params },
         {
             'response_function': (response) => {

@@ -103,11 +103,11 @@ async function get_tests_results() {
 }
 
 async function get_test_result(object, filename, test, children_array, max_retry) {
-  const params = new FormData()
-  params.append('geode_object', object)
-  params.append('filename', filename)
-  params.append('test', test)
-
+  const params = {
+    geode_object: object,
+    filename: filename,
+    test: test
+  }
   const route = `${route_prefix}/inspect_file`
   api_fetch(route, { method: 'POST', body: params, retry: max_retry },
     {

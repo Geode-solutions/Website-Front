@@ -1,0 +1,14 @@
+{
+    "$id": "/workflows/simplex/remesh",
+    "type": "object",
+    "properties": {
+        "metric": {
+            "type": "number"
+        },
+        "faults_metric": {
+            "type": "number"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["metric", "faults_metric"]
+}

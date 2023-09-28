@@ -45,8 +45,9 @@ function get_selected_crs (crs_code) {
 }
 
 async function get_crs_table () {
-  let params = new FormData()
-  params.append('geode_object', input_geode_object)
+  let params = {
+    geode_object: input_geode_object
+  }
   const route = `${tool_route}/geographic_coordinate_systems`
   toggle_loading()
   await api_fetch(route, { method: 'POST', body: params },

@@ -73,6 +73,11 @@
 <script setup>
 import { useToggle } from '@vueuse/core'
 
+import Ajv from "ajv"
+const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
+
+import explicit_json from "./explicit.json"
+
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
 const viewer_store = use_viewer_store()
@@ -148,8 +153,15 @@ function getBRepStats() {
 
 
 function remesh() {
-    const params = new FormData()
-    params.append('metric', metric.value)
+    const params = {
+        metric: metric.value
+    }
+
+    const validate = ajv.compile(explicit_json)
+    const valid = validate(params)
+    console.log("AJV")
+    if (!valid) console.log(validate.errors)
+
     return api_fetch('workflows/explicit/remesh', { method: 'POST', body: params },
         {
             'response_function': (response) => {

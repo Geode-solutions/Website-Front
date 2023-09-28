@@ -64,8 +64,14 @@
     </v-container>
 </template>
 
+
 <script setup>
 import { useToggle } from '@vueuse/core'
+
+import Ajv from "ajv"
+const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
+
+import simplex_json from "./simplex.json"
 
 const cloud_store = use_cloud_store()
 const { is_cloud_running } = storeToRefs(cloud_store)
@@ -126,10 +132,18 @@ async function initialize() {
 
 async function sendMetrics() {
     toggle_loading()
-    const params = new FormData()
-    params.append('metric', metric.value)
-    params.append('faults_metric', faults_metric.value)
-    await api_fetch('workflows/simplex/remesh', { method: 'POST', body: params },
+    const params = {
+        metric: metric.value,
+        faults_metric: faults_metric.value
+    }
+
+    const validate = ajv.compile(simplex_json)
+    const valid = validate(params)
+    console.log("AJV")
+    if (!valid) console.log(validate.errors)
+
+
+    await api_fetch(simplex_json.$id, { method: 'POST', body: params },
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -147,4 +161,6 @@ function next() {
     }
     step.value++
 }
+
+
 </script>

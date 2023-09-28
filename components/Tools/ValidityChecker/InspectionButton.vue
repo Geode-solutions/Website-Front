@@ -35,10 +35,11 @@ async function upload_file() {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = async function (event) {
-      const params = new FormData()
-      params.append('file', event.target.result)
-      params.append('filename', files[0].name)
-      params.append('filesize', files[0].size)
+      const params = {
+        file:event.target.result,
+        filename:files[0].name,
+        filesize:files[0].size
+      }
       toggle_loading()
       await api_fetch(`${route_prefix}/upload_file`, { method: 'POST', body: params },
         {
@@ -61,8 +62,9 @@ async function upload_file() {
 }
 
 async function get_tests_names() {
-  const params = new FormData()
-  params.append('geode_object', geode_object)
+  const params = {
+    geode_object: geode_object
+  }
   const route = `${route_prefix}/tests_names`
   await api_fetch(route, { method: 'POST', body: params },
     {
