@@ -13,7 +13,7 @@ const cards_list = [
   {
     icon: 'mdi-file-check',
     title: 'Supported file formats',
-    href: 'https://docs.geode-solutions.com/formats/',
+    href: 'https://docs.geode-solutions.com/guides/formats/',
   },
   {
     icon: 'mdi-github',
