@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       SITE_BRANCH: process.env.NODE_ENV === 'production' ? process.env.SITE_BRANCH : '',
       PROJECT: 'website',
       NODE_ENV: process.env.NODE_ENV,
-      SITE_KEY: "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC",
+      RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     }
   },
 

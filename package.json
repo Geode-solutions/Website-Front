@@ -19,9 +19,9 @@
     "eslint-plugin-vuetify": "^2.0.5"
   },
   "dependencies": {
-    "@dargmuesli/nuxt-cookie-control": "^6.4.3",
+    "@dargmuesli/nuxt-cookie-control": "^6.4.4",
     "@geode/opengeodeweb-front": "^2.1.1",
-    "@kitware/vtk.js": "^28.12.0",
+    "@kitware/vtk.js": "^28.12.2",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
     "@vueuse/core": "^10.4.1",
@@ -37,7 +37,7 @@
     "vue-gtag": "^2.0.1",
     "vue3-carousel": "^0.3.1",
     "vue3-particles": "^2.12.0",
-    "vuetify": "^3.3.17"
+    "vuetify": "^3.3.19"
   },
   "overrides": {
     "vue": "latest"

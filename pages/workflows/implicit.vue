@@ -39,7 +39,7 @@
                         </v-row>
                     </v-container>
                 </v-stepper>
-                <v-col class="h-100">
+                <v-col style="height:600px;">
                     <RemoteRenderingView />
                 </v-col>
             </v-container>
