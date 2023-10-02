@@ -1,5 +1,5 @@
 <template>
-  <Wrapper :site_key="site_key" :cards_list="cards_list" />
+  <Wrapper :cards_list="cards_list" />
 </template>
 
 <script setup>
@@ -22,7 +22,6 @@ const cards_list = [
   },
 ]
 
-const site_key = useRuntimeConfig().public.SITE_KEY
 
 const files = ref([])
 const additional_files = ref([])

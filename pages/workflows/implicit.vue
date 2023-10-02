@@ -4,7 +4,7 @@
             <h1 class="text-h2 py-6" align="center">Implicit modeling</h1>
         </v-col>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key" />
+            <Launcher />
         </v-col>
         <v-col v-else>
             <v-container class="w-75">
@@ -39,7 +39,7 @@
                         </v-row>
                     </v-container>
                 </v-stepper>
-                <v-col>
+                <v-col style="height:600px;">
                     <RemoteRenderingView />
                 </v-col>
             </v-container>
@@ -55,7 +55,6 @@ const { is_cloud_running } = storeToRefs(cloud_store)
 const inputsStore = useInputStore()
 const viewer_store = use_viewer_store()
 const { constraints, isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
-const site_key = useRuntimeConfig().public.SITE_KEY
 const loading = ref(false);
 const toggle_loading = useToggle(loading)
 const step = ref(1)
@@ -69,12 +68,12 @@ useHead({
 })
 
 const reset_first_step = ref(false)
-function reset() {
+function reset () {
     step.value = 1
     reset_first_step.value = true
 }
 
-function sendStepOne() {
+function sendStepOne () {
     const params = new FormData();
     params.append('constraints', JSON.stringify(constraints.value));
     params.append('isovalues', JSON.stringify(isovalues.value));
@@ -89,7 +88,7 @@ function sendStepOne() {
     )
 }
 
-function sendStepTwo() {
+function sendStepTwo () {
     const params = new FormData();
     params.append('axis', axis.value);
     params.append('coordinate', coordinate.value);
@@ -104,7 +103,7 @@ function sendStepTwo() {
     )
 }
 
-function sendStepThree() {
+function sendStepThree () {
     const params = new FormData();
     params.append('metric', metric.value);
     return api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
@@ -118,7 +117,7 @@ function sendStepThree() {
     )
 }
 
-async function next() {
+async function next () {
     toggle_loading()
     if (step.value == 1) {
         await sendStepOne()

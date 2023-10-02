@@ -4,7 +4,7 @@
             <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
         </v-col>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key" />
+            <Launcher />
         </v-col>
         <v-col v-else>
             <v-container class="w-75">
@@ -52,7 +52,7 @@
                         </v-row>
                     </v-container>
                 </v-stepper>
-                <v-col>
+                <v-col style="height:600px;">
                     <RemoteRenderingView />
                 </v-col>
                 <v-col>
@@ -72,7 +72,6 @@ const { is_cloud_running } = storeToRefs(cloud_store)
 const viewer_store = use_viewer_store()
 const websocket_store = use_websocket_store()
 const { is_client_created } = storeToRefs(websocket_store)
-const site_key = useRuntimeConfig().public.SITE_KEY
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 const inputsStore = useInputStore()
@@ -105,12 +104,12 @@ onMounted(() => {
     }
 })
 
-function reset() {
+function reset () {
     step.value = 1
     initialize()
 }
 
-async function initialize() {
+async function initialize () {
     toggle_loading()
     viewer_store.reset()
     await api_fetch('workflows/simplex/initialize', { method: 'POST' },
@@ -124,7 +123,7 @@ async function initialize() {
     toggle_loading()
 }
 
-async function sendMetrics() {
+async function sendMetrics () {
     toggle_loading()
     const params = new FormData()
     params.append('metric', metric.value)
@@ -141,7 +140,7 @@ async function sendMetrics() {
     toggle_loading()
 }
 
-function next() {
+function next () {
     if (step.value == 2) {
         sendMetrics()
     }

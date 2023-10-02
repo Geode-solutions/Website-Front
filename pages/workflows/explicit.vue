@@ -4,7 +4,7 @@
             <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
         </v-col>
         <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key" />
+            <Launcher />
         </v-col>
         <v-col v-else>
             <v-container class="w-75">
@@ -58,7 +58,7 @@
                         </v-row>
                     </v-container>
                 </v-stepper>
-                <v-col>
+                <v-col style="height:600px;">
                     <RemoteRenderingView />
                 </v-col>
                 <v-col>
@@ -78,7 +78,6 @@ const { is_cloud_running } = storeToRefs(cloud_store)
 const viewer_store = use_viewer_store()
 const websocket_store = use_websocket_store()
 const { is_client_created } = storeToRefs(websocket_store)
-const site_key = useRuntimeConfig().public.SITE_KEY
 const loading = ref(false)
 const toggle_loading = useToggle(loading)
 const nb_corners = ref("-")
@@ -114,7 +113,7 @@ onMounted(() => {
     }
 })
 
-async function displayBase() {
+async function displayBase () {
     toggle_loading()
     await api_fetch('workflows/explicit/get_base_data', { method: 'POST' },
         {
@@ -130,7 +129,7 @@ async function displayBase() {
     toggle_loading()
 }
 
-function getBRepStats() {
+function getBRepStats () {
     return api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
         {
             'response_function': (response) => {
@@ -147,7 +146,7 @@ function getBRepStats() {
 }
 
 
-function remesh() {
+function remesh () {
     const params = new FormData()
     params.append('metric', metric.value)
     return api_fetch('workflows/explicit/remesh', { method: 'POST', body: params },
@@ -161,7 +160,7 @@ function remesh() {
     )
 }
 
-async function next() {
+async function next () {
     toggle_loading()
     if (step.value == 1) {
         await getBRepStats()
@@ -173,7 +172,7 @@ async function next() {
     toggle_loading()
 }
 
-function reset() {
+function reset () {
     step.value = 1
     displayBase()
 }
