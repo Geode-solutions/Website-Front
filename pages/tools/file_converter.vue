@@ -3,115 +3,117 @@
 </template>
 
 <script setup>
-import Wrapper from '@geode/opengeodeweb-front/components/Wrapper.vue'
-import FileSelector from '@geode/opengeodeweb-front/components/FileSelector.vue'
-import ObjectSelector from '@geode/opengeodeweb-front/components/ObjectSelector.vue'
-import ExtensionSelector from '@geode/opengeodeweb-front/components/ExtensionSelector.vue'
-import ToolsFileSelectorConversionButton from '@/components/Tools/FileConverter/ConversionButton.vue'
+  import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
+  import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
+  import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
+  import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
+  import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
 
-const cards_list = [
-  {
-    icon: 'mdi-file-check',
-    title: 'Supported file formats',
-    href: 'https://docs.geode-solutions.com/guides/formats/',
-  },
-  {
-    icon: 'mdi-github',
-    title: 'OpenGeode GitHub repo',
-    href: 'https://github.com/Geode-solutions/OpenGeode',
-  },
-]
-
-
-const files = ref([])
-const additional_files = ref([])
-const geode_object = ref('')
-const output_extension = ref('')
-const route_prefix = 'tools/file_converter'
-
-
-const stepper_tree = reactive({
-  current_step_index: ref(0),
-  tool_name: 'File converter',
-  route_prefix: route_prefix,
-  files: files,
-  additional_files: additional_files,
-  geode_object: geode_object,
-  output_extension: output_extension,
-  steps: [
+  const cards_list = [
     {
-      step_title: 'Please select a file to convert',
-      component: {
-        component_name: shallowRef(FileSelector),
-        component_options: {
-          multiple: true,
-          label: 'Please select a file',
-          variable_to_update: 'files',
-          variable_to_increment: 'current_step_index'
-        },
-      },
-      chips: computed(() => { return files.value.map((file) => file.name) })
+      icon: "mdi-file-check",
+      title: "Supported file formats",
+      href: "https://docs.geode-solutions.com/guides/formats/",
     },
     {
-      step_title: 'Please select additionnal files',
-      component: {
-        component_name: shallowRef(FileSelector),
-        component_options: {
-          multiple: true,
-          label: 'Please select a file',
-          variable_to_update: 'additional_files',
-          variable_to_increment: 'current_step_index'
-        },
-        skippable: true,
-      },
-      chips: computed(() => { return additional_files.value.map((additional_file) => additional_file.name) })
+      icon: "mdi-github",
+      title: "OpenGeode GitHub repo",
+      href: "https://github.com/Geode-solutions/OpenGeode",
     },
-    {
-      step_title: 'Confirm the data type',
-      component: {
-        component_name: shallowRef(ObjectSelector),
-        component_options: {
-          variable_to_update: 'geode_object',
-          variable_to_increment: 'current_step_index'
-        },
-      },
-      chips: computed(() => {
-        if (geode_object.value === '') {
-          return []
-        } else {
-          return [geode_object.value]
-        }
-      })
-    },
-    {
-      step_title: 'Select file format',
-      component: {
-        component_name: shallowRef(ExtensionSelector),
-        component_options: {
-          variable_to_update: 'output_extension',
-          variable_to_increment: 'current_step_index'
-        },
-      },
-      chips: computed(() => {
-        if (output_extension.value === '') {
-          return []
-        } else {
-          return [output_extension.value]
-        }
-      })
-    },
-    {
-      step_title: 'Convert your file',
-      component: {
-        component_name: shallowRef(ToolsFileSelectorConversionButton),
-        component_options: {
-        },
-      },
-      chips: []
-    }
   ]
-})
 
-provide('stepper_tree', stepper_tree)
+  const files = ref([])
+  const additional_files = ref([])
+  const geode_object = ref("")
+  const output_extension = ref("")
+  const route_prefix = "tools/file_converter"
+
+  const stepper_tree = reactive({
+    current_step_index: ref(0),
+    tool_name: "File converter",
+    route_prefix: route_prefix,
+    files: files,
+    additional_files: additional_files,
+    geode_object: geode_object,
+    output_extension: output_extension,
+    steps: [
+      {
+        step_title: "Please select a file to convert",
+        component: {
+          component_name: shallowRef(FileSelector),
+          component_options: {
+            multiple: true,
+            label: "Please select a file",
+            variable_to_update: "files",
+            variable_to_increment: "current_step_index",
+          },
+        },
+        chips: computed(() => {
+          return files.value.map((file) => file.name)
+        }),
+      },
+      {
+        step_title: "Please select additionnal files",
+        component: {
+          component_name: shallowRef(FileSelector),
+          component_options: {
+            multiple: true,
+            label: "Please select a file",
+            variable_to_update: "additional_files",
+            variable_to_increment: "current_step_index",
+          },
+          skippable: true,
+        },
+        chips: computed(() => {
+          return additional_files.value.map(
+            (additional_file) => additional_file.name,
+          )
+        }),
+      },
+      {
+        step_title: "Confirm the data type",
+        component: {
+          component_name: shallowRef(ObjectSelector),
+          component_options: {
+            variable_to_update: "geode_object",
+            variable_to_increment: "current_step_index",
+          },
+        },
+        chips: computed(() => {
+          if (geode_object.value === "") {
+            return []
+          } else {
+            return [geode_object.value]
+          }
+        }),
+      },
+      {
+        step_title: "Select file format",
+        component: {
+          component_name: shallowRef(ExtensionSelector),
+          component_options: {
+            variable_to_update: "output_extension",
+            variable_to_increment: "current_step_index",
+          },
+        },
+        chips: computed(() => {
+          if (output_extension.value === "") {
+            return []
+          } else {
+            return [output_extension.value]
+          }
+        }),
+      },
+      {
+        step_title: "Convert your file",
+        component: {
+          component_name: shallowRef(ToolsFileSelectorConversionButton),
+          component_options: {},
+        },
+        chips: [],
+      },
+    ],
+  })
+
+  provide("stepper_tree", stepper_tree)
 </script>
-
