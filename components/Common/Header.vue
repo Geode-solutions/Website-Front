@@ -2,11 +2,7 @@
   <v-app-bar color="primary">
     <v-row class="px-2">
       <v-col>
-        <v-btn
-          variant="text"
-          to="/"
-          :active="false"
-        >
+        <v-btn variant="text" to="/" :active="false">
           <GeodeLogo />
           {{ company_name }}
         </v-btn>
@@ -24,11 +20,7 @@
         </v-btn>
         <v-menu>
           <template #activator="{ props }">
-            <v-btn
-              class="hidden-md-and-up"
-              icon="mdi-menu"
-              v-bind="props"
-            />
+            <v-btn class="hidden-md-and-up" icon="mdi-menu" v-bind="props" />
           </template>
           <v-list>
             <v-list-item

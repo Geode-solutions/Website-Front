@@ -1,28 +1,13 @@
 <template>
-  <v-row
-    no-gutters
-    justify="space-around"
-  >
+  <v-row no-gutters justify="space-around">
     <v-col cols="2">
-      <v-text-field
-        v-model="constraint.x"
-        disabled
-        class="centered-input"
-      />
+      <v-text-field v-model="constraint.x" disabled class="centered-input" />
     </v-col>
     <v-col cols="2">
-      <v-text-field
-        v-model="constraint.y"
-        disabled
-        class="centered-input"
-      />
+      <v-text-field v-model="constraint.y" disabled class="centered-input" />
     </v-col>
     <v-col cols="2">
-      <v-text-field
-        v-model="constraint.z"
-        disabled
-        class="centered-input"
-      />
+      <v-text-field v-model="constraint.z" disabled class="centered-input" />
     </v-col>
     <v-col cols="2">
       <v-text-field

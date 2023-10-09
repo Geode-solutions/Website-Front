@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <p class="mb-2 text-medium-emphasis text-body-1 text-center">
-      Choose and axis and a coordinate on this axis <br>
+      Choose and axis and a coordinate on this axis <br />
       an Implicit Cross will be extracted on the plane normal to this axis at
       the given coordinate
     </p>
@@ -11,16 +11,8 @@
       label="Axis"
       @click="alterAxis"
     />
-    <p class="text-medium-emphasis text-body-1">
-      Axis coordinate
-    </p>
-    <v-slider
-      v-model="coordinate"
-      min="0"
-      max="40"
-      step="1"
-      thumb-label
-    />
+    <p class="text-medium-emphasis text-body-1">Axis coordinate</p>
+    <v-slider v-model="coordinate" min="0" max="40" step="1" thumb-label />
   </v-container>
 </template>
 

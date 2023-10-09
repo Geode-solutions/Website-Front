@@ -12,9 +12,7 @@
             Choose the value to set on the data points for the implicit function
             computation
           </p>
-          <p v-if="nb_constraints == 0">
-            Getting data. Please wait...
-          </p>
+          <p v-if="nb_constraints == 0">Getting data. Please wait...</p>
           <v-row no-gutters>
             <v-col>
               <p>X</p>
@@ -68,11 +66,8 @@
             icon="mdi-plus"
             @click="incrementISO"
           />
-          <br>
-          <WorkflowsImplicitIsovalue
-            v-for="n in nb_isovalues"
-            :id="n"
-          />
+          <br />
+          <WorkflowsImplicitIsovalue v-for="n in nb_isovalues" :id="n" />
         </v-sheet>
       </v-col>
     </v-row>

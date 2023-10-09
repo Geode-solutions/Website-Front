@@ -2,9 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h2 class="text-h5">
-          Credits
-        </h2>
+        <h2 class="text-h5">Credits</h2>
 
         <h4>
           All pictures in "Expertise" and "Software" pages are Copyright —

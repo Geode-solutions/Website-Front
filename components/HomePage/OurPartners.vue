@@ -1,17 +1,8 @@
 <template>
-  <v-container
-    fluid
-    style="background-color: white"
-    class="pt-0"
-  >
+  <v-container fluid style="background-color: white" class="pt-0">
     <v-row class="container mx-auto">
       <v-col>
-        <h2
-          class="section text-h2"
-          align="center"
-        >
-          Our partners
-        </h2>
+        <h2 class="section text-h2" align="center">Our partners</h2>
         <CommonCarousel :items="partners_list" />
       </v-col>
     </v-row>

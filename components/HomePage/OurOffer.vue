@@ -2,19 +2,9 @@
   <v-container>
     <v-row>
       <v-col>
-        <h2
-          class="section text-h2"
-          align="center"
-        >
-          What we do
-        </h2>
+        <h2 class="section text-h2" align="center">What we do</h2>
         <v-row justify="space-around">
-          <v-col
-            v-for="card in masterCards"
-            :key="card.title"
-            cols="12"
-            md="6"
-          >
+          <v-col v-for="card in masterCards" :key="card.title" cols="12" md="6">
             <v-hover v-slot="{ hover }">
               <v-card
                 height="500"
@@ -27,11 +17,7 @@
                   cover
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
                 >
-                  <v-row
-                    class="flex-column"
-                    no-gutters
-                    style="height: 100%"
-                  >
+                  <v-row class="flex-column" no-gutters style="height: 100%">
                     <v-spacer />
                     <v-col cols="auto">
                       <v-card-title

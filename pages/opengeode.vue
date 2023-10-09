@@ -1,9 +1,6 @@
 <template>
   <v-row>
-    <v-col
-      class="text-center text-h4 text-h6"
-      cols="12"
-    >
+    <v-col class="text-center text-h4 text-h6" cols="12">
       <h1>OpenGeode</h1>
     </v-col>
     <client-only>
@@ -88,7 +85,7 @@
       <v-row class="text-center">
         <v-col>
           <h2 class="text-h4 text-primary my-5">
-            Open source framework <br>
+            Open source framework <br />
             for representing and manipulating geometric models
           </h2>
 
@@ -101,29 +98,18 @@
               href="https://github.com/Geode-solutions/OpenGeode"
               target="_blank"
             >
-              <v-card-title
-                primary-title
-                class="justify-center text-h3"
-              >
+              <v-card-title primary-title class="justify-center text-h3">
                 Visit GitHub repo
               </v-card-title>
               <v-card-text>
-                <v-icon
-                  :size="smAndUp ? 180 : 100"
-                  color="#000000"
-                >
+                <v-icon :size="smAndUp ? 180 : 100" color="#000000">
                   mdi-github
                 </v-icon>
               </v-card-text>
             </v-card>
           </v-hover>
 
-          <h2
-            class="section text-h2 mt-5"
-            align="center"
-          >
-            Key features
-          </h2>
+          <h2 class="section text-h2 mt-5" align="center">Key features</h2>
           <v-row justify="space-around">
             <v-col
               v-for="card in cards_list"
@@ -138,25 +124,16 @@
                   :alt="'Geode-solutions ' + card.title"
                   cover
                 />
-                <v-card-title
-                  primary-title
-                  class="justify-center text-h4"
-                >
+                <v-card-title primary-title class="justify-center text-h4">
                   {{ card.title }}
                 </v-card-title>
-                <v-card-text
-                  align="justify"
-                  class="text-body-1"
-                >
+                <v-card-text align="justify" class="text-body-1">
                   {{ card.text }}
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
-          <h2
-            class="text-h4 my-5 py-5"
-            align="center"
-          >
+          <h2 class="text-h4 my-5 py-5" align="center">
             Interested by OpenGeode features?
             <div class="my-2">
               <CommonContactUsButton />
@@ -165,18 +142,10 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container
-      fluid
-      style="background-color: white"
-    >
+    <v-container fluid style="background-color: white">
       <v-row class="container mx-auto">
         <v-col>
-          <h2
-            class="section text-h2"
-            align="center"
-          >
-            They use it
-          </h2>
+          <h2 class="section text-h2" align="center">They use it</h2>
           <CommonCarousel :items="users_list" />
         </v-col>
       </v-row>

@@ -1,8 +1,5 @@
 <template>
-  <v-app
-    v-if="!loading"
-    style="contain: layout"
-  >
+  <v-app v-if="!loading" style="contain: layout">
     <CommonHeader />
     <v-main class="bg-secondary">
       <slot />

@@ -2,16 +2,10 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1
-          class="text-h2 my-5 py-5"
-          align="center"
-        >
+        <h1 class="text-h2 my-5 py-5" align="center">
           Custom-tailored services
         </h1>
-        <h2
-          class="text-h4 my-5 pb-5"
-          align="center"
-        >
+        <h2 class="text-h4 my-5 pb-5" align="center">
           <CommonContactUsButton />
         </h2>
 
@@ -20,15 +14,8 @@
           :key="index"
           style="margin-bottom: 40px"
         >
-          <v-row
-            align="center"
-            justify="space-around"
-          >
-            <v-col
-              :order-sm="(index + 1) % 2"
-              cols="12"
-              sm="5"
-            >
+          <v-row align="center" justify="space-around">
+            <v-col :order-sm="(index + 1) % 2" cols="12" sm="5">
               <v-card-text>
                 <v-img
                   :src="service.image"
@@ -37,10 +24,7 @@
                 />
               </v-card-text>
             </v-col>
-            <v-col
-              cols="12"
-              sm="7"
-            >
+            <v-col cols="12" sm="7">
               <v-card flat>
                 <v-card-title
                   primary-title
@@ -56,10 +40,7 @@
             </v-col>
           </v-row>
         </v-card>
-        <h2
-          class="text-h4 my-5 py-5"
-          align="center"
-        >
+        <h2 class="text-h4 my-5 py-5" align="center">
           Let us know how we can help!
           <div class="my-2">
             <CommonContactUsButton />
@@ -68,18 +49,10 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-container
-    fluid
-    style="background-color: white"
-  >
+  <v-container fluid style="background-color: white">
     <v-row class="container mx-auto">
       <v-col>
-        <h2
-          class="section text-h2"
-          align="center"
-        >
-          They use our services
-        </h2>
+        <h2 class="section text-h2" align="center">They use our services</h2>
         <CommonCarousel :items="services_users" />
       </v-col>
     </v-row>

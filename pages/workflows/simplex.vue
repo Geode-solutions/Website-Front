@@ -1,23 +1,14 @@
 <template>
   <v-container>
     <v-col>
-      <h1
-        class="text-h2 py-6"
-        align="center"
-      >
-        Simplex remesh
-      </h1>
+      <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     </v-col>
     <v-col v-if="!is_cloud_running">
       <Launcher />
     </v-col>
     <v-col v-else>
       <v-container class="w-75">
-        <v-stepper
-          v-model="step"
-          hide-actions
-          :items="items"
-        >
+        <v-stepper v-model="step" hide-actions :items="items">
           <template #item.1>
             <v-container>
               <v-row>
@@ -58,7 +49,7 @@
 
           <template #item.3>
             <p class="mb-2 text-body-1 text-center">
-              Congratulations! <br>
+              Congratulations! <br />
               You just generated a tetrahedral mesh with heterogeneous metric,
               all in a few clicks
             </p>
@@ -67,12 +58,7 @@
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
-                <v-btn
-                  :disabled="step == 1"
-                  @click="reset"
-                >
-                  reset
-                </v-btn>
+                <v-btn :disabled="step == 1" @click="reset"> reset </v-btn>
               </v-col>
               <v-spacer />
               <v-col cols="auto">

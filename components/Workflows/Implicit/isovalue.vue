@@ -1,9 +1,5 @@
 <template>
-  <v-row
-    no-gutters
-    justify="center"
-    align="center"
-  >
+  <v-row no-gutters justify="center" align="center">
     <v-col cols="3">
       <p>Isovalue {{ id }}</p>
     </v-col>

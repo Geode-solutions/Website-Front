@@ -1,22 +1,12 @@
 <template>
   <v-row no-gutters>
-    <v-col
-      cols="12"
-      style="contain: layout"
-    >
+    <v-col cols="12" style="contain: layout">
       <ErrorsBanner />
       <ErrorsSnackers />
     </v-col>
   </v-row>
-  <v-row
-    class="fill-height"
-    no-gutters
-  >
-    <v-navigation-drawer
-      :rail="mini"
-      :expand-on-hover="mini"
-      absolute
-    >
+  <v-row class="fill-height" no-gutters>
+    <v-navigation-drawer :rail="mini" :expand-on-hover="mini" absolute>
       <v-list>
         <v-list-item
           v-for="(tool, i) in tools_list"
