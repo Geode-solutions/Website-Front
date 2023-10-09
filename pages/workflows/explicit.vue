@@ -1,15 +1,24 @@
 <template>
   <v-container>
     <v-col>
-      <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
+      <h1
+        class="text-h2 py-6"
+        align="center"
+      >
+        Explicit modeling
+      </h1>
     </v-col>
     <v-col v-if="!is_cloud_running">
       <Launcher />
     </v-col>
     <v-col v-else>
       <v-container class="w-75">
-        <v-stepper v-model="step" hide-actions :items="items">
-          <template v-slot:item.1>
+        <v-stepper
+          v-model="step"
+          hide-actions
+          :items="items"
+        >
+          <template #item.1>
             <v-container>
               <v-row>
                 <v-col>
@@ -21,7 +30,7 @@
             </v-container>
           </template>
 
-          <template v-slot:item.2>
+          <template #item.2>
             <v-container>
               <v-row>
                 <v-col>
@@ -31,7 +40,9 @@
                     color="transparent"
                     align="center"
                   >
-                    <h3 class="mb-5">The generated BRep has:</h3>
+                    <h3 class="mb-5">
+                      The generated BRep has:
+                    </h3>
                     <p>{{ nb_blocks }} Blocks</p>
                     <p>{{ nb_surfaces }} Surfaces</p>
                     <p>{{ nb_lines }} Lines</p>
@@ -46,15 +57,15 @@
                     :max="max_metric"
                     :step="step_metric"
                     thumb-label
-                  ></v-slider>
+                  />
                 </v-col>
               </v-row>
             </v-container>
           </template>
 
-          <template v-slot:item.3>
+          <template #item.3>
             <p class="mb-2 text-body-1 text-center">
-              Congratulations! <br />
+              Congratulations! <br>
               You just went from a set of intersecting surfaces to a nicely
               meshed, fully conformal BRep, all in a few clicks
             </p>
@@ -63,7 +74,12 @@
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
-                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
+                <v-btn
+                  :disabled="step == 1"
+                  @click="reset"
+                >
+                  reset
+                </v-btn>
               </v-col>
               <v-spacer />
               <v-col cols="auto">
@@ -71,8 +87,9 @@
                   :disabled="step == items.length"
                   :loading="loading"
                   @click="next"
-                  >next</v-btn
                 >
+                  next
+                </v-btn>
               </v-col>
             </v-row>
           </v-container>

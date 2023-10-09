@@ -9,7 +9,7 @@
       max="10"
       step="0.5"
       thumb-label
-    ></v-slider>
+    />
   </v-container>
 </template>
 

@@ -2,7 +2,11 @@
   <v-app-bar color="primary">
     <v-row class="px-2">
       <v-col>
-        <v-btn variant="text" to="/" :active="false">
+        <v-btn
+          variant="text"
+          to="/"
+          :active="false"
+        >
           <GeodeLogo />
           {{ company_name }}
         </v-btn>
@@ -10,21 +14,21 @@
       <v-spacer />
       <v-col cols="auto">
         <v-btn
-          class="hidden-sm-and-down"
           v-for="(menu, i) in menus"
           :key="i"
+          class="hidden-sm-and-down"
           variant="text"
           :to="menu.to"
         >
           {{ menu.title }}
         </v-btn>
         <v-menu>
-          <template v-slot:activator="{ props }">
+          <template #activator="{ props }">
             <v-btn
               class="hidden-md-and-up"
               icon="mdi-menu"
               v-bind="props"
-            ></v-btn>
+            />
           </template>
           <v-list>
             <v-list-item

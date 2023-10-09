@@ -5,7 +5,7 @@
     label="Search"
     single-line
     hide-details
-  ></v-text-field>
+  />
   <v-data-table
     v-model="selected_crs"
     :v-model:items-per-page="10"
@@ -20,7 +20,7 @@
     :search="search"
     :loading="data_table_loading"
     loading-text="Loading... Please wait"
-  ></v-data-table>
+  />
 </template>
 
 <script setup>

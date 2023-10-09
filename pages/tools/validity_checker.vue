@@ -1,5 +1,8 @@
 <template>
-  <Wrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+  />
 </template>
 
 <script setup>

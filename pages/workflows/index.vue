@@ -2,13 +2,24 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12">
-        <h1 class="text-h2 py-5" align="center">Workflows home page</h1>
-        <p class="text-h6 font-weight-light" align="justify">
+        <h1
+          class="text-h2 py-5"
+          align="center"
+        >
+          Workflows home page
+        </h1>
+        <p
+          class="text-h6 font-weight-light"
+          align="justify"
+        >
           These pages demonstrate some workflows that can be realized by
           combining several of our tools. Feel free to contact us if you want to
           use our tools with workflows tailored specifically for your own uses.
         </p>
-        <div class="my-2" align="center">
+        <div
+          class="my-2"
+          align="center"
+        >
           <CommonContactUsButton />
         </div>
       </v-col>
@@ -30,13 +41,23 @@
               elevation="5"
               :to="workflow.to"
             >
-              <v-row justify="center" align="center">
+              <v-row
+                justify="center"
+                align="center"
+              >
                 <v-col cols="auto">
-                  <v-icon color="primary" size="100" class="justify-center">
+                  <v-icon
+                    color="primary"
+                    size="100"
+                    class="justify-center"
+                  >
                     {{ workflow.icon }}
                   </v-icon>
                 </v-col>
-                <v-col v-if="workflow.chip" cols="auto">
+                <v-col
+                  v-if="workflow.chip"
+                  cols="auto"
+                >
                   <v-chip color="primary">
                     {{ workflow.chip }}
                   </v-chip>

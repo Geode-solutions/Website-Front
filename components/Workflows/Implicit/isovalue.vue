@@ -1,5 +1,9 @@
 <template>
-  <v-row no-gutters justify="center" align="center">
+  <v-row
+    no-gutters
+    justify="center"
+    align="center"
+  >
     <v-col cols="3">
       <p>Isovalue {{ id }}</p>
     </v-col>
@@ -7,8 +11,8 @@
       <v-text-field
         v-model="isovalue"
         class="centered-input"
-        @input="alterIsovalue"
-      ></v-text-field>
+        @update:model-value="alterIsovalue"
+      />
     </v-col>
   </v-row>
 </template>

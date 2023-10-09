@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid class="pa-0">
+  <v-container
+    fluid
+    class="pa-0"
+  >
     <v-row class="flex-column">
       <v-col>
         <HomePageLandingView />

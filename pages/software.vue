@@ -2,8 +2,16 @@
   <v-container>
     <v-row class="text-center">
       <v-col>
-        <h1 class="text-h2 ma-5" align="center">Our software</h1>
-        <p class="container text-h6 font-weight-light" align="justify">
+        <h1
+          class="text-h2 ma-5"
+          align="center"
+        >
+          Our software
+        </h1>
+        <p
+          class="container text-h6 font-weight-light"
+          align="justify"
+        >
           Geode-solutions provide a set of OpenGeode extensions designed to
           overcome classical bottlenecks in modeling and meshing applications
           both 2D and 3D. These extensions offer new solutions developed with
@@ -17,13 +25,22 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-container fluid style="background-color: white">
+  <v-container
+    fluid
+    style="background-color: white"
+  >
     <v-row class="mx-auto justify-center">
       <v-col cols="11">
-        <h2 class="text-h3 font-weight-light ma-5" align="center">
+        <h2
+          class="text-h3 font-weight-light ma-5"
+          align="center"
+        >
           Pilot program
         </h2>
-        <p class="container text-h6 font-weight-light" align="start">
+        <p
+          class="container text-h6 font-weight-light"
+          align="start"
+        >
           Join our pilot program to be the first to take advantage of
           Geode-solutions new high technologies.
         </p>
@@ -53,10 +70,16 @@
           </li>
         </ul>
 
-        <h2 class="text-h4 my-5 pb-5" align="center">
+        <h2
+          class="text-h4 my-5 pb-5"
+          align="center"
+        >
           <CommonContactUsButton />
         </h2>
-        <h2 class="text-h4 font-weight-light ma-5" align="center">
+        <h2
+          class="text-h4 font-weight-light ma-5"
+          align="center"
+        >
           Pilot program technologies
         </h2>
         <v-row justify="space-around">
@@ -79,7 +102,10 @@
               >
                 {{ beta.title }}
               </v-card-title>
-              <v-card-text align="justify" class="text-body-1">
+              <v-card-text
+                align="justify"
+                class="text-body-1"
+              >
                 {{ beta.text }}
                 <ul class="ma-2">
                   <li
@@ -113,7 +139,10 @@
   <v-container>
     <v-row>
       <v-col>
-        <h2 class="text-h3 font-weight-light ma-5" align="center">
+        <h2
+          class="text-h3 font-weight-light ma-5"
+          align="center"
+        >
           Next technologies
         </h2>
         <v-row justify="space-around">
@@ -142,7 +171,10 @@
             </v-card>
           </v-col>
         </v-row>
-        <h2 class="text-h4 my-5 py-5" align="center">
+        <h2
+          class="text-h4 my-5 py-5"
+          align="center"
+        >
           Want to try these solutions or looking for another technology?
           <div class="my-2">
             <CommonContactUsButton />
@@ -151,10 +183,18 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-container fluid style="background-color: white">
+  <v-container
+    fluid
+    style="background-color: white"
+  >
     <v-row class="container mx-auto">
       <v-col>
-        <h2 class="section text-h2" align="center">Thanks to our pilots</h2>
+        <h2
+          class="section text-h2"
+          align="center"
+        >
+          Thanks to our pilots
+        </h2>
         <CommonCarousel :items="pilots_list" />
       </v-col>
     </v-row>
