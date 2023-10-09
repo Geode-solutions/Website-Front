@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import logo_url from '@/assets/img/logo.svg'
+  import logo_url from "@/assets/img/logo.svg"
 </script>
