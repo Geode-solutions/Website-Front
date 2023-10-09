@@ -3,25 +3,25 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Implicit modeling</h1>
     </v-col>
-    <v-col v-if="!is_cloud_running">
+    <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
       <v-container class="w-75">
         <v-stepper v-model="step" hide-actions :items="items">
-          <template #item.1>
+          <template v-slot:item.1>
             <WorkflowsImplicitFirststep :reset="reset_first_step" />
           </template>
 
-          <template #item.2>
+          <template v-slot:item.2>
             <WorkflowsImplicitSecondstep />
           </template>
 
-          <template #item.3>
+          <template v-slot:item.3>
             <WorkflowsImplicitThirdstep />
           </template>
 
-          <template #item.4>
+          <template v-slot:item.4>
             <p class="mb-2 text-body-1 text-center">
               Congratulations! <br />
               You just went from a 3D data point set to a nicely meshed fully
@@ -32,7 +32,7 @@
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
-                <v-btn :disabled="step == 1" @click="reset"> reset </v-btn>
+                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
               </v-col>
               <v-spacer />
               <v-col cols="auto">
@@ -40,9 +40,8 @@
                   :disabled="step == items.length"
                   :loading="loading"
                   @click="next"
+                  >next</v-btn
                 >
-                  next
-                </v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -59,7 +58,7 @@
   import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
-  const { is_cloud_running } = storeToRefs(cloud_store)
+  const { is_running } = storeToRefs(cloud_store)
   const inputsStore = useInputStore()
   const viewer_store = use_viewer_store()
   const { constraints, isovalues, axis, coordinate, metric } =

@@ -3,13 +3,13 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     </v-col>
-    <v-col v-if="!is_cloud_running">
+    <v-col v-if="!cloud_store.is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
       <v-container class="w-75">
         <v-stepper v-model="step" hide-actions :items="items">
-          <template #item.1>
+          <template v-slot:item.1>
             <v-container>
               <v-row>
                 <v-col>
@@ -22,13 +22,13 @@
                     :max="max_metric"
                     :step="step_metric"
                     thumb-label
-                  />
+                  ></v-slider>
                 </v-col>
               </v-row>
             </v-container>
           </template>
 
-          <template #item.2>
+          <template v-slot:item.2>
             <v-container>
               <v-row>
                 <v-col>
@@ -41,13 +41,13 @@
                     :max="max_metric"
                     :step="step_metric"
                     thumb-label
-                  />
+                  ></v-slider>
                 </v-col>
               </v-row>
             </v-container>
           </template>
 
-          <template #item.3>
+          <template v-slot:item.3>
             <p class="mb-2 text-body-1 text-center">
               Congratulations! <br />
               You just generated a tetrahedral mesh with heterogeneous metric,
@@ -58,7 +58,7 @@
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
-                <v-btn :disabled="step == 1" @click="reset"> reset </v-btn>
+                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
               </v-col>
               <v-spacer />
               <v-col cols="auto">
@@ -66,9 +66,8 @@
                   :disabled="step == items.length"
                   :loading="loading"
                   @click="next"
+                  >next</v-btn
                 >
-                  next
-                </v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -91,10 +90,7 @@
   import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
-  const { is_cloud_running } = storeToRefs(cloud_store)
   const viewer_store = use_viewer_store()
-  const websocket_store = use_websocket_store()
-  const { is_client_created } = storeToRefs(websocket_store)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const inputsStore = useInputStore()
@@ -111,20 +107,6 @@
   useHead({
     title: title,
     titleTemplate: (title) => `${title} - Geode-solutions`,
-  })
-
-  const cloud_socket_ready = computed(() => {
-    return is_cloud_running.value && is_client_created.value
-  })
-
-  onMounted(() => {
-    if (cloud_socket_ready.value) {
-      initialize()
-    } else {
-      watch(cloud_socket_ready, () => {
-        initialize()
-      })
-    }
   })
 
   function reset() {
@@ -182,4 +164,10 @@
     }
     step.value++
   }
+
+  onMounted(() => {
+    runFunctionIfCloudRunning(() => {
+      initialize()
+    })
+  })
 </script>

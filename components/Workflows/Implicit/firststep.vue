@@ -29,8 +29,8 @@
           </v-row>
           <WorkflowsImplicitConstraint
             v-for="n in nb_constraints"
-            :id="n"
             :key="n"
+            :id="n"
           />
         </v-sheet>
       </v-col>
@@ -57,7 +57,7 @@
             elevation="5"
             icon="mdi-minus"
             @click="decrementISO"
-          />
+          ></v-btn>
           {{ nb_isovalues }}
           <v-btn
             class="ma-1"
@@ -65,7 +65,7 @@
             elevation="5"
             icon="mdi-plus"
             @click="incrementISO"
-          />
+          ></v-btn>
           <br />
           <WorkflowsImplicitIsovalue v-for="n in nb_isovalues" :id="n" />
         </v-sheet>
@@ -76,11 +76,7 @@
 
 <script setup>
   const inputsStore = useInputStore()
-  const cloud_store = use_cloud_store()
-  const { is_cloud_running } = storeToRefs(cloud_store)
   const viewer_store = use_viewer_store()
-  const websocket_store = use_websocket_store()
-  const { is_client_created } = storeToRefs(websocket_store)
   const nb_constraints = ref(0)
   const nb_isovalues = ref(3)
 
@@ -94,20 +90,6 @@
       nb_constraints.value = 0
       nb_isovalues.value = 3
       getConstraints()
-    }
-  })
-
-  const cloud_socket_ready = computed(() => {
-    return is_cloud_running.value && is_client_created.value
-  })
-
-  onMounted(() => {
-    if (cloud_socket_ready.value) {
-      getConstraints()
-    } else {
-      watch(cloud_socket_ready, () => {
-        getConstraints()
-      })
     }
   })
 
@@ -164,4 +146,10 @@
       inputsStore.popIsovalue()
     }
   }
+
+  onMounted(() => {
+    runFunctionIfCloudRunning(() => {
+      getConstraints()
+    })
+  })
 </script>
