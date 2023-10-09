@@ -3,7 +3,7 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Implicit modeling</h1>
     </v-col>
-    <v-col v-if="!is_running">
+    <v-col v-if="!cloud_store.is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -58,7 +58,6 @@
   import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
-  const { is_running } = storeToRefs(cloud_store)
   const inputsStore = useInputStore()
   const viewer_store = use_viewer_store()
   const { constraints, isovalues, axis, coordinate, metric } =
