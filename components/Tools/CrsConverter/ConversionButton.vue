@@ -5,21 +5,26 @@
       <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="current_step = 3">
-    Cancel
-  </v-btn>
+  <v-btn variant="text" @click="current_step = 3"> Cancel </v-btn>
 </template>
-  
+
 <script setup>
-import { useToggle } from '@vueuse/core'
-import fileDownload from 'js-file-download'
+  import { useToggle } from "@vueuse/core"
+  import fileDownload from "js-file-download"
 
-const stepper_tree = inject('stepper_tree')
-const { files, geode_object, input_crs, output_crs, output_extension, route_prefix } = stepper_tree
+  const stepper_tree = inject("stepper_tree")
+  const {
+    files,
+    geode_object,
+    input_crs,
+    output_crs,
+    output_extension,
+    route_prefix,
+  } = stepper_tree
 
-const loading = ref(false)
+  const loading = ref(false)
 
-const toggle_loading = useToggle(loading)
+  const toggle_loading = useToggle(loading)
 
 async function convert_files() {
   for (let i = 0; i < files.length; i++) {
@@ -49,12 +54,9 @@ async function convert_files() {
             fileDownload(response._data, new_file_name)
             toggle_loading()
           },
-          'response_error_function': () => { toggle_loading() }
         }
       )
+      reader.readAsDataURL(files[i])
     }
-    reader.readAsDataURL(files[i])
   }
-}
-
 </script>

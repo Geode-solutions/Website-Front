@@ -1,59 +1,43 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="convert_files()">
+  <v-btn :loading="loading" color="primary" @click="convertFiles()">
     Convert
     <template #loader>
       <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="current_step = 3">
-    Cancel
-  </v-btn>
+  <v-btn variant="text" @click="currentStep = 3"> Cancel </v-btn>
 </template>
 
 <script setup>
-import { useToggle } from '@vueuse/core'
-import fileDownload from 'js-file-download'
+import { useToggle } from "@vueuse/core";
+import fileDownload from "js-file-download";
 
-const stepper_tree = inject('stepper_tree')
-const { files, geode_object, route_prefix, output_extension } = stepper_tree
+const { files, geodeObject, routePrefix, outputExtension } = stepperTree;
+const loading = ref(false);
+const toggleLoading = useToggle(loading);
 
-const loading = ref(false)
-const toggle_loading = useToggle(loading)
-
-async function convert_files() {
+async function convertFiles() {
   for (let i = 0; i < files.length; i++) {
-
-    let reader = new FileReader()
+    let reader = new FileReader();
     reader.onload = async function (event) {
       let params = {
-        geode_object: geode_object,
+        geodeObject: geodeObject,
         file: event.target.result,
         filename: files[i].name,
-        filesize: files[i].size, 
-        extension: output_extension,
+        filesize: files[i].size,
+        extension: outputExtension,
         responseType: 'blob',
         responseEncoding: 'binary'
-      }
-      toggle_loading()
+      };
+      toggleLoading();
 
-      await api_fetch(ConversionButton_json.remesh, params,
-        {
-          'request_error_function': () => {
-            toggle_loading()
-          },
-          'response_function': (response) => {
-            const new_file_name = response.headers.get('new-file-name')
-            fileDownload(response._data, new_file_name)
-            toggle_loading()
-          },
-          'response_error_function': () => {
-            toggle_loading()
-          }
-        }
-      )
-    }
-    reader.readAsDataURL(files[i])
+      await apiFetch(ConversionButton_json.remesh, params, {
+        requestErrorFunction: () => {
+          toggleLoading();
+        },
+      });
+    };
+    reader.readAsDataURL(files[i]);
   }
 }
-
 </script>

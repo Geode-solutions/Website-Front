@@ -1,77 +1,99 @@
 <template>
-    <v-container>
-        <v-col>
-            <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
-        </v-col>
-        <v-col v-if="!is_cloud_running">
-            <Launcher :site_key="site_key" />
-        </v-col>
-        <v-col v-else>
-            <v-container class="w-75">
-                <v-stepper v-model="step" hide-actions :items="items">
-                    <template v-slot:item.1>
-                        <v-container>
-                            <v-row>
-                                <v-col>
-                                    <p class="mb-2 text-medium-emphasis text-body-1">Several independant input surfaces with
-                                        intersections</p>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </template>
-
-                    <template v-slot:item.2>
-                        <v-container>
-                            <v-row>
-                                <v-col>
-                                    <v-card rounded="lg" class="my-6 pa-5 elevation-5" color="transparent" align="center">
-                                        <h3 class="mb-5">The generated BRep has:</h3>
-                                        <p>{{ nb_blocks }} Blocks</p>
-                                        <p>{{ nb_surfaces }} Surfaces</p>
-                                        <p>{{ nb_lines }} Lines</p>
-                                        <p>{{ nb_corners }} Corners</p>
-                                    </v-card>
-                                    <p class="mb-2 text-medium-emphasis text-body-1">Choose a metric for remeshing the BRep
-                                    </p>
-                                    <v-slider v-model="metric" :min="min_metric" :max="max_metric" :step="step_metric"
-                                        thumb-label></v-slider>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </template>
-
-                    <template v-slot:item.3>
-                        <p class="mb-2 text-body-1 text-center">Congratulations! <br />
-                            You just went from a set of intersecting surfaces to a nicely meshed, fully conformal BRep, all
-                            in a few clicks</p>
-                    </template>
-
-                    <v-container>
-                        <v-row class="mx-5">
-                            <v-col cols="auto">
-                                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
-                            </v-col>
-                            <v-spacer />
-                            <v-col cols="auto">
-                                <v-btn :disabled="step == items.length" :loading="loading" @click="next">next</v-btn>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-stepper>
+  <v-container>
+    <v-col>
+      <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
+    </v-col>
+    <v-col v-if="!is_cloud_running">
+      <Launcher />
+    </v-col>
+    <v-col v-else>
+      <v-container class="w-75">
+        <v-stepper v-model="step" hide-actions :items="items">
+          <template #item.1>
+            <v-container>
+              <v-row>
                 <v-col>
-                    <RemoteRenderingView />
+                  <p class="mb-2 text-medium-emphasis text-body-1">
+                    Several independant input surfaces with intersections
+                  </p>
                 </v-col>
-                <v-col>
-                    <p class="text-body-2 text-center">Data courtesy of Pellerin et al. (2015). Elements for measuring the
-                        complexity of 3D structural models: Connectivity and geometry</p>
-                </v-col>
+              </v-row>
             </v-container>
+          </template>
+
+          <template #item.2>
+            <v-container>
+              <v-row>
+                <v-col>
+                  <v-card
+                    rounded="lg"
+                    class="my-6 pa-5 elevation-5"
+                    color="transparent"
+                    align="center"
+                  >
+                    <h3 class="mb-5">The generated BRep has:</h3>
+                    <p>{{ nb_blocks }} Blocks</p>
+                    <p>{{ nb_surfaces }} Surfaces</p>
+                    <p>{{ nb_lines }} Lines</p>
+                    <p>{{ nb_corners }} Corners</p>
+                  </v-card>
+                  <p class="mb-2 text-medium-emphasis text-body-1">
+                    Choose a metric for remeshing the BRep
+                  </p>
+                  <v-slider
+                    v-model="metric"
+                    :min="min_metric"
+                    :max="max_metric"
+                    :step="step_metric"
+                    thumb-label
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
+
+          <template #item.3>
+            <p class="mb-2 text-body-1 text-center">
+              Congratulations! <br />
+              You just went from a set of intersecting surfaces to a nicely
+              meshed, fully conformal BRep, all in a few clicks
+            </p>
+          </template>
+
+          <v-container>
+            <v-row class="mx-5">
+              <v-col cols="auto">
+                <v-btn :disabled="step == 1" @click="reset"> reset </v-btn>
+              </v-col>
+              <v-spacer />
+              <v-col cols="auto">
+                <v-btn
+                  :disabled="step == items.length"
+                  :loading="loading"
+                  @click="next"
+                >
+                  next
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-stepper>
+        <v-col style="height: 600px">
+          <RemoteRenderingView />
         </v-col>
-    </v-container>
+        <v-col>
+          <p class="text-body-2 text-center">
+            Data courtesy of Pellerin et al. (2015). Elements for measuring the
+            complexity of 3D structural models: Connectivity and geometry
+          </p>
+        </v-col>
+      </v-container>
+    </v-col>
+  </v-container>
 </template>
 
 <script setup>
-import { useToggle } from '@vueuse/core'
+  import { useToggle } from "@vueuse/core"
 
 import Ajv from "ajv"
 const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
@@ -99,27 +121,27 @@ const step_metric = 10
 const step = ref(1)
 const items = ['Input data', 'Remesh', 'Result']
 
-const title = 'Explicit modeling'
-useHead({
+  const title = "Explicit modeling"
+  useHead({
     title: title,
-    titleTemplate: (title) => `${title} - Geode-solutions`
-})
+    titleTemplate: (title) => `${title} - Geode-solutions`,
+  })
 
-const cloud_socket_ready = computed(() => {
+  const cloud_socket_ready = computed(() => {
     return is_cloud_running.value && is_client_created.value
-})
+  })
 
-onMounted(() => {
+  onMounted(() => {
     if (cloud_socket_ready.value) {
-        displayBase()
+      displayBase()
     } else {
-        watch(cloud_socket_ready, () => {
-            displayBase()
-        })
+      watch(cloud_socket_ready, () => {
+        displayBase()
+      })
     }
-})
+  })
 
-async function displayBase() {
+  async function displayBase() {
     toggle_loading()
     return api_fetch(explicit_json.remesh, params,
         {
@@ -133,7 +155,7 @@ async function displayBase() {
         }
     )
     toggle_loading()
-}
+  }
 
 function getBRepStats() {
     return api_fetch(explicit_json.remesh, params,
@@ -149,7 +171,7 @@ function getBRepStats() {
             },
         }
     )
-}
+  }
 
 
 function remesh() {
@@ -171,22 +193,22 @@ function remesh() {
             },
         }
     )
-}
+  }
 
-async function next() {
+  async function next() {
     toggle_loading()
     if (step.value == 1) {
-        await getBRepStats()
+      await getBRepStats()
     }
     if (step.value == 2) {
-        await remesh()
+      await remesh()
     }
     step.value++
     toggle_loading()
-}
+  }
 
-function reset() {
+  function reset() {
     step.value = 1
     displayBase()
-}
+  }
 </script>
