@@ -50,7 +50,7 @@ async function get_crs_table () {
   }
   const route = `${tool_route}/geographic_coordinate_systems`
   toggle_loading()
-  await api_fetch(route, { method: 'POST', body: params },
+  await api_fetch(explicit_json.remesh, params,
     {
       'request_error_function': () => { toggle_loading() },
       'response_function': (response) => {

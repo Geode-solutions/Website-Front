@@ -84,9 +84,7 @@ function sendStepOne() {
         constraints: constraints.value,
         isovalues: isovalues.value
     }
-    params.append('constraints', JSON.stringify(constraints.value));
-    params.append('isovalues', JSON.stringify(isovalues.value));
-    return api_fetch('workflows/implicit/step1', { method: 'POST', body: params },
+    return api_fetch(implicit_json.id, params,
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -103,12 +101,12 @@ function sendStepTwo() {
         coordinate: coordinate.value,
     }
 
-    const validate = ajv.compile(implicit_json)
-    const valid = validate(params)
-    console.log("AJV")
+    // const validate = ajv.compile(implicit_json)
+    // const valid = validate(params)
+    // console.log("AJV",valid)
     if (!valid) console.log(validate.errors)
 
-    return api_fetch('workflows/implicit/step2', { method: 'POST', body: params },
+    return api_fetch(implicit_json, params,
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -123,7 +121,7 @@ function sendStepThree() {
     const params = {
         metric: metric.value
     }
-    return api_fetch('workflows/implicit/step3', { method: 'POST', body: params },
+    return api_fetch(implicit_json.params,
         {
             'response_function': (response) => {
                 viewer_store.reset()

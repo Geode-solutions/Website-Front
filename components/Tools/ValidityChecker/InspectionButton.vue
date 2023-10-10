@@ -41,7 +41,7 @@ async function upload_file() {
         filesize:files[0].size
       }
       toggle_loading()
-      await api_fetch(`${route_prefix}/upload_file`, { method: 'POST', body: params },
+      await api_fetch(explicit_json.remesh, params,
         {
           'request_error_function': () => {
             toggle_loading()
@@ -66,7 +66,7 @@ async function get_tests_names() {
     geode_object: geode_object
   }
   const route = `${route_prefix}/tests_names`
-  await api_fetch(route, { method: 'POST', body: params },
+  await api_fetch(explicit_json.remesh, params,
     {
       'response_function': (response) => {
         stepper_tree[variable_to_update] = response._data.model_checks

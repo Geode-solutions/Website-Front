@@ -119,16 +119,15 @@ function reset() {
 async function initialize() {
     toggle_loading()
     viewer_store.reset()
-    await api_fetch('workflows/simplex/initialize', { method: 'POST' },
+    return api_fetch(simplex_json.params,
         {
             'response_function': (response) => {
                 viewer_store.reset()
                 viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
             },
-        }
+        }                  
     )
-    toggle_loading()
-}
+    }
 
 async function sendMetrics() {
     toggle_loading()
@@ -137,11 +136,12 @@ async function sendMetrics() {
         faults_metric: faults_metric.value
     }
 
-    const validate = ajv.compile(simplex_json)
-    const valid = validate(params)
-    console.log("AJV")
-    if (!valid) console.log(validate.errors)
+    // const validate = ajv.compile(simplex_json)
+    // const valid = validate(params)
+    // console.log("AJV", valid)
+    if (!validate) console.log(validate.errors)
 
+    return api_fetch(simplex_json.id, params,
 
     await api_fetch(simplex_json.$id, { method: 'POST', body: params },
         {
@@ -151,11 +151,12 @@ async function sendMetrics() {
                 viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
             },
         }
-    )
-    toggle_loading()
+    ))
+
 }
 
-function next() {
+async function next() {
+    toggle_loading()
     if (step.value == 2) {
         sendMetrics()
     }

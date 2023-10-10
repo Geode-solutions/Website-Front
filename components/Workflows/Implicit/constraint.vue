@@ -38,7 +38,7 @@ async function alterConstraint() {
         points: index.value,
         value: constraint.value
     }
-    await api_fetch('workflows/implicit/update_value', { method: 'POST', body: params },
+    await api_fetch(explicit_json.remesh, params,
         {
             'response_function': (response) => {
                 viewer_store.update_data({ "id": response._data.points });

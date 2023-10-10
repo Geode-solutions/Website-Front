@@ -1,5 +1,6 @@
 {
     "$id": "/workflows/implicit/",
+    "method": "POST",
     "type": "object",
     "properties": {
         "constraints": {
@@ -82,6 +83,21 @@
         },
         "value": {
             "type": "number"
+        },
+        "faults_metric": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "number"
+                    }
+                },
+                "required": ["name", "value"]
+            }
         }
     },
     "additionalProperties": false,

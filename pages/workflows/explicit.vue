@@ -121,7 +121,7 @@ onMounted(() => {
 
 async function displayBase() {
     toggle_loading()
-    await api_fetch('workflows/explicit/get_base_data', { method: 'POST' },
+    return api_fetch(explicit_json.remesh, params,
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -136,7 +136,7 @@ async function displayBase() {
 }
 
 function getBRepStats() {
-    return api_fetch('workflows/explicit/get_brep_stats', { method: 'POST' },
+    return api_fetch(explicit_json.remesh, params,
         {
             'response_function': (response) => {
                 viewer_store.reset()
@@ -156,13 +156,13 @@ function remesh() {
     const params = {
         metric: metric.value
     }
-
-    const validate = ajv.compile(explicit_json)
-    const valid = validate(params)
-    console.log("AJV")
-    if (!valid) console.log(validate.errors)
-
-    return api_fetch('workflows/explicit/remesh', { method: 'POST', body: params },
+    // const validate = ajv.compile(explicit_json)
+    // const valid = validate(params)
+    // console.log("AJV", "explicit/remesh")
+    // if (!valid) console.log(validate.errors)
+    // 'workflows/explicit/remesh'
+    
+    return api_fetch(explicit_json.remesh, params,
         {
             'response_function': (response) => {
                 viewer_store.reset()

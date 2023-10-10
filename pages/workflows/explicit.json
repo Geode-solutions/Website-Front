@@ -1,0 +1,26 @@
+{
+    "data": {
+        "$id": "/workflows/explicit/get_base_data",
+        "method": "POST",
+        "additionalProperties": false
+    },
+    "brepstats": {
+        "$id": "workflows/explicit/get_brep_stats",
+        "method": "POST",
+        "additionalProperties": false
+    },
+    "remesh": {
+        "$id": "/workflows/explicit/remesh",
+        "method": "POST",
+        "type": "object",
+        "properties": {
+            "metric": {
+                "type": "number"
+            }
+        },
+        "additionalProperties": false,
+        "required": [
+            "metric"
+        ]
+    }
+}

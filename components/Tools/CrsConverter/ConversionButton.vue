@@ -41,7 +41,7 @@ async function convert_files() {
       }
       toggle_loading()
 
-      await api_fetch(`${route_prefix}/convert_file`, { method: 'POST', body: params },
+      await api_fetch(explicit_json.remesh, params,
         {
           'request_error_function': () => { toggle_loading() },
           'response_function': (response) => {
