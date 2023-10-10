@@ -58,7 +58,6 @@
 <script setup>
   import { useToggle } from "@vueuse/core"
 
-<<<<<<< HEAD
 import Ajv from "ajv"
 const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
 
@@ -74,18 +73,6 @@ const loading = ref(false);
 const toggle_loading = useToggle(loading)
 const step = ref(1)
 const items = ['Select data', 'Extract section', 'Remesh', 'Result']
-=======
-  const cloud_store = use_cloud_store()
-  const { is_cloud_running } = storeToRefs(cloud_store)
-  const inputsStore = useInputStore()
-  const viewer_store = use_viewer_store()
-  const { constraints, isovalues, axis, coordinate, metric } =
-    storeToRefs(inputsStore)
-  const loading = ref(false)
-  const toggle_loading = useToggle(loading)
-  const step = ref(1)
-  const items = ["Select data", "Extract section", "Remesh", "Result"]
->>>>>>> b9825c6fe042b0736a57eec3dedc33b6661155f5
 
   const title = "Implicit"
   useHead({
@@ -99,7 +86,6 @@ const items = ['Select data', 'Extract section', 'Remesh', 'Result']
     reset_first_step.value = true
   }
 
-<<<<<<< HEAD
 function sendStepOne() {
     const params = {
         constraints: constraints.value,
@@ -113,32 +99,9 @@ function sendStepOne() {
                 viewer_store.set_vertex_attribute({ "id": response._data.id, "name": "geode_implicit_attribute" })
             },
         }
-=======
-  function sendStepOne() {
-    const params = new FormData()
-    params.append("constraints", JSON.stringify(constraints.value))
-    params.append("isovalues", JSON.stringify(isovalues.value))
-    return api_fetch(
-      "workflows/implicit/step1",
-      { method: "POST", body: params },
-      {
-        response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
-          })
-          viewer_store.set_vertex_attribute({
-            id: response._data.id,
-            name: "geode_implicit_attribute",
-          })
-        },
-      },
->>>>>>> b9825c6fe042b0736a57eec3dedc33b6661155f5
     )
   }
 
-<<<<<<< HEAD
 function sendStepTwo() {
     const params = {
         axis: axis.value,
@@ -158,32 +121,9 @@ function sendStepTwo() {
                 viewer_store.set_vertex_attribute({ "id": response._data.id, "name": "geode_implicit_attribute" })
             },
         }
-=======
-  function sendStepTwo() {
-    const params = new FormData()
-    params.append("axis", axis.value)
-    params.append("coordinate", coordinate.value)
-    return api_fetch(
-      "workflows/implicit/step2",
-      { method: "POST", body: params },
-      {
-        response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
-          })
-          viewer_store.set_vertex_attribute({
-            id: response._data.id,
-            name: "geode_implicit_attribute",
-          })
-        },
-      },
->>>>>>> b9825c6fe042b0736a57eec3dedc33b6661155f5
     )
   }
 
-<<<<<<< HEAD
 function sendStepThree() {
     const params = {
         metric: metric.value
@@ -196,27 +136,6 @@ function sendStepThree() {
                 viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
             },
         }
-=======
-  function sendStepThree() {
-    const params = new FormData()
-    params.append("metric", metric.value)
-    return api_fetch(
-      "workflows/implicit/step3",
-      { method: "POST", body: params },
-      {
-        response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
-          })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id,
-            visibility: true,
-          })
-        },
-      },
->>>>>>> b9825c6fe042b0736a57eec3dedc33b6661155f5
     )
   }
 
