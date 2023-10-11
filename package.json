@@ -16,11 +16,13 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-prettier-vue": "^5.0.0",
     "eslint-plugin-vue": "^9.17.0",
-    "eslint-plugin-vuetify": "^2.0.5"
+    "eslint-plugin-vuetify": "^2.0.5",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1"
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^6.4.4",
-    "@geode/opengeodeweb-front": "^3.0.0",
+    "@geode/opengeodeweb-front": "^2.0.0-rc.18",
     "@kitware/vtk.js": "^28.12.2",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
