@@ -1,0 +1,53 @@
+{
+    "$id": "/workflows/model_checks/",
+    "type": "object",
+    "properties": {
+      "input_model_checks": {
+        "type": "array",
+        "items": {
+          "$id": "/workflows/model_checks/check",
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "boolean",
+              "nullable": true
+            },
+            "is_leaf": {
+              "type": "boolean"
+            },
+            "sentence": {
+              "type": "string"
+            },
+            "list_invalidities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "$ref": "/workflows/model_checks/check"
+              }
+            }
+          },
+          "required": ["sentence"]
+        }
+      },
+      "input_geode_object": {
+        "type": "string"
+      },
+      "input_file_name": {
+        "type": "string"
+      },
+      "input_index_array": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "additionalProperties": false,
+    "required": ["input_model_checks", "input_geode_object", "input_file_name"]
+  }
+  

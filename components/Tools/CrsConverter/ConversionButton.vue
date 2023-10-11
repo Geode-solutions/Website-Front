@@ -43,10 +43,10 @@ async function convert_files() {
         extension: output_extension,
         responseType: 'blob',
         responseEncoding: 'binary'
-      }
+      }}
       toggle_loading()
 
-      await api_fetch(explicit_json.remesh, params,
+      await api_fetch(ConversionButton_json.remesh, params,
         {
           'request_error_function': () => { toggle_loading() },
           'response_function': (response) => {

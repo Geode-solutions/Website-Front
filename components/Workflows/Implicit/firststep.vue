@@ -114,7 +114,7 @@
   async function getConstraints() {
     console.log("getConstraints")
     viewer_store.reset()
-    await api_fetch(explicit_json.remesh, params,
+    await api_fetch(firststep_json.remesh, params,
         {
             'response_function': (response) => {
                 console.log("coucou", response)
