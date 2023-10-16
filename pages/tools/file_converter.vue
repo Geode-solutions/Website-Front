@@ -6,6 +6,7 @@
   import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
+  import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
 
@@ -38,12 +39,12 @@
     output_extension: output_extension,
     steps: [
       {
-        step_title: "Please select a file to convert",
+        step_title: "Please select file(s) to convert",
         component: {
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
+            label: "Please select file(s)",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
           },
@@ -52,24 +53,7 @@
           return files.value.map((file) => file.name)
         }),
       },
-      {
-        step_title: "Please select additionnal files",
-        component: {
-          component_name: shallowRef(FileSelector),
-          component_options: {
-            multiple: true,
-            label: "Please select a file",
-            variable_to_update: "additional_files",
-            variable_to_increment: "current_step_index",
-          },
-          skippable: true,
-        },
-        chips: computed(() => {
-          return additional_files.value.map(
-            (additional_file) => additional_file.name,
-          )
-        }),
-      },
+
       {
         step_title: "Confirm the data type",
         component: {
@@ -88,7 +72,27 @@
         }),
       },
       {
-        step_title: "Select file format",
+        step_title: "Please select additionnal files",
+        component: {
+          component_name: shallowRef(MissingFilesSelector),
+          component_options: {
+            multiple: true,
+            label: "Please select the additional file(s)",
+            geode_object: geode_object,
+            files: files,
+            variable_to_update: "additional_files",
+            variable_to_increment: "current_step_index",
+          },
+          skippable: true,
+        },
+        chips: computed(() => {
+          return additional_files.value.map(
+            (additional_file) => additional_file.name,
+          )
+        }),
+      },
+      {
+        step_title: "Please select the output file format",
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {

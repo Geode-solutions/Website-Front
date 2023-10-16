@@ -6,6 +6,7 @@
   import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
+  import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import CrsSelector from "@geode/opengeodeweb-front/components/CrsSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
@@ -70,6 +71,24 @@
           } else {
             return [geode_object.value]
           }
+        }),
+      },
+      {
+        step_title: "Please select additionnal files",
+        component: {
+          component_name: shallowRef(FileSelector),
+          component_options: {
+            multiple: true,
+            label: "Please select a file",
+            variable_to_update: "additional_files",
+            variable_to_increment: "current_step_index",
+          },
+          skippable: true,
+        },
+        chips: computed(() => {
+          return additional_files.value.map(
+            (additional_file) => additional_file.name,
+          )
         }),
       },
       {

@@ -24,40 +24,8 @@
   const toggle_loading = useToggle(loading)
 
   async function inspect_file() {
-    await upload_file()
     await get_tests_names()
     stepper_tree[variable_to_increment]++
-  }
-
-  async function upload_file() {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = async function (event) {
-        const params = new FormData()
-        params.append("file", event.target.result)
-        params.append("filename", files[0].name)
-        params.append("filesize", files[0].size)
-        toggle_loading()
-        await api_fetch(
-          `${route_prefix}/upload_file`,
-          { method: "POST", body: params },
-          {
-            request_error_function: () => {
-              toggle_loading()
-            },
-            response_function: () => {
-              toggle_loading()
-              resolve()
-            },
-            response_error_function: () => {
-              toggle_loading()
-              reject()
-            },
-          },
-        )
-      }
-      reader.readAsDataURL(files[0])
-    })
   }
 
   async function get_tests_names() {
