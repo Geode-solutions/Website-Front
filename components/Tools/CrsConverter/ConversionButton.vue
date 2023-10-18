@@ -27,15 +27,14 @@
   const toggle_loading = useToggle(loading)
 
   async function convert_files() {
+    toggle_loading()
     for (let i = 0; i < files.length; i++) {
       let reader = new FileReader()
       reader.onload = async function (event) {
         let params = new FormData()
 
         params.append("geode_object", geode_object)
-        params.append("file", event.target.result)
         params.append("filename", files[i].name)
-        params.append("filesize", files[i].size)
         params.append("input_crs_authority", input_crs["authority"])
         params.append("input_crs_code", input_crs["code"])
         params.append("input_crs_name", input_crs["name"])
@@ -45,27 +44,20 @@
         params.append("extension", output_extension)
         params.append("responseType", "blob")
         params.append("responseEncoding", "binary")
-        toggle_loading()
 
         await api_fetch(
           `${route_prefix}/convert_file`,
           { method: "POST", body: params },
           {
-            request_error_function: () => {
-              toggle_loading()
-            },
             response_function: (response) => {
               const new_file_name = response.headers.get("new-file-name")
               fileDownload(response._data, new_file_name)
-              toggle_loading()
-            },
-            response_error_function: () => {
-              toggle_loading()
             },
           },
         )
       }
       reader.readAsDataURL(files[i])
     }
+    toggle_loading()
   }
 </script>

@@ -44,7 +44,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            label: "Please select file(s)",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
           },
@@ -55,7 +54,7 @@
       },
 
       {
-        step_title: "Confirm the data type",
+        step_title: "Please confirm the data type",
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
@@ -77,7 +76,6 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            label: "Please select the additional file(s)",
             geode_object: geode_object,
             files: files,
             variable_to_update: "additional_files",

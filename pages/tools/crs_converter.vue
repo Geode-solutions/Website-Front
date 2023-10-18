@@ -26,6 +26,7 @@
 
   const files = ref([])
   const geode_object = ref("")
+  const additional_files = ref([])
   const input_crs = ref({})
   const output_crs = ref({})
   const output_extension = ref("")
@@ -47,7 +48,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
           },
@@ -79,7 +79,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
             variable_to_update: "additional_files",
             variable_to_increment: "current_step_index",
           },

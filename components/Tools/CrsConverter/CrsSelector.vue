@@ -71,18 +71,12 @@
       route,
       { method: "POST", body: params },
       {
-        request_error_function: () => {
-          toggle_loading()
-        },
         response_function: (response) => {
-          toggle_loading()
           crs_list.value = response._data.crs_list
-        },
-        response_error_function: () => {
-          toggle_loading()
         },
       },
     )
+    toggle_loading()
   }
 
   const headers = [

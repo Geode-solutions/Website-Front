@@ -25,6 +25,7 @@
 
   const files = ref([])
   const geode_object = ref("")
+  const additional_files = ref([])
   const model_checks = ref([])
   const route_prefix = "tools/validity_checker"
 
@@ -42,7 +43,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: false,
-            label: "Please select a file",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
           },
@@ -74,7 +74,8 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
+            geode_object: geode_object,
+            files: files,
             variable_to_update: "additional_files",
             variable_to_increment: "current_step_index",
           },

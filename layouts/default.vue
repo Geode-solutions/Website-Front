@@ -1,5 +1,5 @@
 <template>
-  <v-app v-if="!loading" style="contain: layout">
+  <v-app style="contain: layout">
     <CommonHeader />
     <v-main class="bg-secondary">
       <slot />
@@ -10,13 +10,7 @@
 </template>
 
 <script setup>
-  import { useToggle } from "@vueuse/core"
   const public_config = useRuntimeConfig().public
-  const loading = ref(true)
-  const toggle_loading = useToggle(loading)
-  onMounted(() => {
-    toggle_loading()
-  })
 </script>
 
 <style scoped>
