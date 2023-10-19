@@ -29,35 +29,37 @@
   async function convert_files() {
     toggle_loading()
     for (let i = 0; i < files.length; i++) {
-      let reader = new FileReader()
-      reader.onload = async function (event) {
-        let params = new FormData()
+      let params = new FormData()
 
-        params.append("geode_object", geode_object)
-        params.append("filename", files[i].name)
-        params.append("input_crs_authority", input_crs["authority"])
-        params.append("input_crs_code", input_crs["code"])
-        params.append("input_crs_name", input_crs["name"])
-        params.append("output_crs_authority", output_crs["authority"])
-        params.append("output_crs_code", output_crs["code"])
-        params.append("output_crs_name", output_crs["name"])
-        params.append("extension", output_extension)
-        params.append("responseType", "blob")
-        params.append("responseEncoding", "binary")
+      params.append("geode_object", geode_object)
+      params.append("filename", files[i].name)
+      params.append("input_crs_authority", input_crs["authority"])
+      params.append("input_crs_code", input_crs["code"])
+      params.append("input_crs_name", input_crs["name"])
+      params.append("output_crs_authority", output_crs["authority"])
+      params.append("output_crs_code", output_crs["code"])
+      params.append("output_crs_name", output_crs["name"])
+      params.append("extension", output_extension)
+      params.append("responseType", "blob")
+      params.append("responseEncoding", "binary")
 
-        await api_fetch(
-          `${route_prefix}/convert_file`,
-          { method: "POST", body: params },
-          {
-            response_function: (response) => {
-              const new_file_name = response.headers.get("new-file-name")
-              fileDownload(response._data, new_file_name)
-            },
+      await api_fetch(
+        `${route_prefix}/convert_file`,
+        { method: "POST", body: params },
+        {
+          response_function: (response) => {
+            const new_file_name = response.headers.get("new-file-name")
+            fileDownload(response._data, new_file_name)
           },
-        )
-      }
-      reader.readAsDataURL(files[i])
+        },
+      )
     }
     toggle_loading()
   }
 </script>
+
+<style scoped>
+  .v-btn {
+    text-transform: unset !important;
+  }
+</style>

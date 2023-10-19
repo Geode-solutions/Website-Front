@@ -76,9 +76,11 @@
       {
         step_title: "Please select additionnal files",
         component: {
-          component_name: shallowRef(FileSelector),
+          component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
+            geode_object: geode_object,
+            files: files,
             variable_to_update: "additional_files",
             variable_to_increment: "current_step_index",
           },
