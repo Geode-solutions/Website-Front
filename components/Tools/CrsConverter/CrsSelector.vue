@@ -62,22 +62,25 @@
     }
   }
 
-async function get_crs_table () {
-  let params = {
-    geode_object: input_geode_object
-  }
-  const route = `${tool_route}/geographic_coordinate_systems`
-  toggle_loading()
-  await api_fetch(CrsSelector_json.remesh, params,
-    {
-      'request_error_function': () => { toggle_loading() },
-      'response_function': (response) => {
-        toggle_loading()
-        crs_list.value = response._data.crs_list
-      },
+  async function get_crs_table() {
+    let params = {
+      geode_object: input_geode_object,
     }
-  )
-}
+    const route = `${tool_route}/geographic_coordinate_systems`
+    toggle_loading()
+    await api_fetch(
+      { schema: CrsSelector_json.remesh, params },
+      {
+        request_error_function: () => {
+          toggle_loading()
+        },
+        response_function: (response) => {
+          toggle_loading()
+          crs_list.value = response._data.crs_list
+        },
+      },
+    )
+  }
 
   const headers = [
     {

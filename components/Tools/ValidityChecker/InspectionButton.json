@@ -1,22 +1,22 @@
 {
-  "$id": "/tools/validity_checker/inspect_file/",
+  "$id": "/tools/validity_checker/upload_file",
   "method": "POST",
   "type": "object",
   "properties": {
-    "geode_object": {
+    "file": {
       "type": "string"
     },
     "filename": {
       "type": "string"
     },
-    "test": {
-      "type": "string"
+    "filesize": {
+      "type": "number"
     }
   },
   "required": [
-    "geode_object",
+    "file",
     "filename",
-    "test"
+    "filesize"
   ],
   "additionalProperties": false
 }

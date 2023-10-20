@@ -3,13 +3,13 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     </v-col>
-    <v-col v-if="!is_cloud_running">
+    <v-col v-if="!cloud_store.is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
       <v-container class="w-75">
         <v-stepper v-model="step" hide-actions :items="items">
-          <template #item.1>
+          <template v-slot:item.1>
             <v-container>
               <v-row>
                 <v-col>
@@ -22,13 +22,13 @@
                     :max="max_metric"
                     :step="step_metric"
                     thumb-label
-                  />
+                  ></v-slider>
                 </v-col>
               </v-row>
             </v-container>
           </template>
 
-          <template #item.2>
+          <template v-slot:item.2>
             <v-container>
               <v-row>
                 <v-col>
@@ -41,13 +41,13 @@
                     :max="max_metric"
                     :step="step_metric"
                     thumb-label
-                  />
+                  ></v-slider>
                 </v-col>
               </v-row>
             </v-container>
           </template>
 
-          <template #item.3>
+          <template v-slot:item.3>
             <p class="mb-2 text-body-1 text-center">
               Congratulations! <br />
               You just generated a tetrahedral mesh with heterogeneous metric,
@@ -58,7 +58,7 @@
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
-                <v-btn :disabled="step == 1" @click="reset"> reset </v-btn>
+                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
               </v-col>
               <v-spacer />
               <v-col cols="auto">
@@ -66,9 +66,8 @@
                   :disabled="step == items.length"
                   :loading="loading"
                   @click="next"
+                  >next</v-btn
                 >
-                  next
-                </v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -87,51 +86,27 @@
   </v-container>
 </template>
 
-
 <script setup>
   import { useToggle } from "@vueuse/core"
 
-import Ajv from "ajv"
-const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
-
-import simplex_json from "./simplex.json"
-
-const cloud_store = use_cloud_store()
-const { is_cloud_running } = storeToRefs(cloud_store)
-const viewer_store = use_viewer_store()
-const websocket_store = use_websocket_store()
-const { is_client_created } = storeToRefs(websocket_store)
-const site_key = useRuntimeConfig().public.SITE_KEY
-const loading = ref(false)
-const toggle_loading = useToggle(loading)
-const inputsStore = useInputStore()
-const { metric, faults_metric } = storeToRefs(inputsStore)
-metric.value = 200
-faults_metric.value = 50
-const min_metric = 10
-const max_metric = 300
-const step_metric = 10
-const step = ref(1)
-const items = ['Set blocks metric', 'Set faults metric', 'Result']
+  const cloud_store = use_cloud_store()
+  const viewer_store = use_viewer_store()
+  const loading = ref(false)
+  const toggle_loading = useToggle(loading)
+  const inputsStore = useInputStore()
+  const { metric, faults_metric } = storeToRefs(inputsStore)
+  metric.value = 200
+  faults_metric.value = 50
+  const min_metric = 10
+  const max_metric = 300
+  const step_metric = 10
+  const step = ref(1)
+  const items = ["Set blocks metric", "Set faults metric", "Result"]
 
   const title = "Tetrahedral meshing"
   useHead({
     title: title,
     titleTemplate: (title) => `${title} - Geode-solutions`,
-  })
-
-  const cloud_socket_ready = computed(() => {
-    return is_cloud_running.value && is_client_created.value
-  })
-
-  onMounted(() => {
-    if (cloud_socket_ready.value) {
-      initialize()
-    } else {
-      watch(cloud_socket_ready, () => {
-        initialize()
-      })
-    }
   })
 
   function reset() {
@@ -142,49 +117,62 @@ const items = ['Set blocks metric', 'Set faults metric', 'Result']
   async function initialize() {
     toggle_loading()
     viewer_store.reset()
-    return api_fetch(simplex_json.params,
-        {
-            'response_function': (response) => {
-                viewer_store.reset()
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-            },
-        }                  
+    return api_fetch(
+      { schema: simplex_json.params },
+      {
+        response_function: (response) => {
+          viewer_store.reset()
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_file_name,
+            id: response._data.id,
+          })
+        },
+      },
     )
-    }
+  }
 
   async function sendMetrics() {
     toggle_loading()
     const params = {
-        metric: metric.value,
-        faults_metric: faults_metric.value
+      metric: metric.value,
+      faults_metric: faults_metric.value,
     }
 
-    // const validate = ajv.compile(simplex_json)
-    // const valid = validate(params)
-    // console.log("AJV", valid)
     if (!validate) console.log(validate.errors)
 
-    return api_fetch(simplex_json.id, params,
+    return api_fetch(
+      { schema: simplex_json, params },
 
-    await api_fetch(simplex_json.$id, { method: 'POST', body: params },
+      await api_fetch(
+        { schema: simplex_json.$id, params },
         {
-            'response_function': (response) => {
-                viewer_store.reset()
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
-            },
-        }
-    ))
+          response_function: (response) => {
+            viewer_store.reset()
+            viewer_store.create_object_pipeline({
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            })
+            viewer_store.toggle_edge_visibility({
+              id: response._data.id,
+              visibility: true,
+            })
+          },
+        },
+      ),
+    )
+  }
 
-}
-
-async function next() {
+  async function next() {
     toggle_loading()
     if (step.value == 2) {
       sendMetrics()
     }
     step.value++
-}
+  }
 
-
+  onMounted(() => {
+    runFunctionIfCloudRunning(() => {
+      initialize()
+    })
+  })
 </script>

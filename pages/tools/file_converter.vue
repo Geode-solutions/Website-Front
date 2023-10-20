@@ -1,5 +1,9 @@
 <template>
-  <Wrapper :cards_list="cards_list" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+    :versions_schema="versions_schema"
+  />
 </template>
 
 <script setup>
@@ -8,6 +12,10 @@
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
+  import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
+  import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/FileConverter/ObjectSelector.json"
+  import ExtensionSelectorSchema from "@/components/Tools/FileConverter/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -46,6 +54,7 @@
             label: "Please select a file",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -61,6 +70,7 @@
             label: "Please select a file",
             variable_to_update: "additional_files",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
           skippable: true,
         },
@@ -77,6 +87,7 @@
           component_options: {
             variable_to_update: "geode_object",
             variable_to_increment: "current_step_index",
+            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -94,6 +105,7 @@
           component_options: {
             variable_to_update: "output_extension",
             variable_to_increment: "current_step_index",
+            schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {

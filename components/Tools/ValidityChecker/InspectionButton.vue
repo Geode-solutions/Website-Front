@@ -11,58 +11,83 @@
 </template>
 
 <script setup>
-import { useToggle } from "@vueuse/core";
+  import { useToggle } from "@vueuse/core"
+  // import explicit_json from "/explicit.json"
+  import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
+  import InspectionButtonSchema2 from "@/components/Tools/ValidityChecker/InspectionButton2.json"
 
-const stepperTree = inject('stepper_tree');
-const { files, geodeObject, routePrefix } = stepperTree;
-const props = defineProps({
-  variableToUpdate: { type: String, required: true },
-  variableToIncrement: { type: String, required: true }
-});
-const { variableToUpdate, variableToIncrement } = props;
-const loading = ref(false);
-const toggleLoading = useToggle(loading);
+  const stepper_tree = inject("stepper_tree")
+  const { files, geode_object, route_prefix } = stepper_tree
+  const props = defineProps({
+    variable_to_update: { type: String, required: true },
+    variable_to_increment: { type: String, required: true },
+  })
+  const { variable_to_update, variable_to_increment } = props
+  const loading = ref(false)
+  const toggle_loading = useToggle(loading)
 
-async function inspectFile() {
-  await uploadFile();
-  await getTestsNames();
-  stepperTree[variableToIncrement]++;
-}
+  async function inspectFile() {
+    await uploadFile()
+    await getTestsNames()
+    stepper_tree[variable_to_increment]++
+  }
 
-async function uploadFile() {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = async function (event) {
-      const params = {
-        file: event.target.result,
-        filename: files[0].name,
-        filesize: files[0].size
-      };
-      toggleLoading();
-      await apiFetch(explicit_json.remesh, params, {
-        request_error_function: () => {
-          toggleLoading();
-          reject();
-        },
-        response_function: () => {
-          toggleLoading();
-          resolve();
-        }
-      });
-    };
-    reader.readAsDataURL(files[0]);
-  });
-}
-
-async function getTestsNames() {
-  const params = new FormData();
-  params.append("geode_object", geodeObject);
-  const route = `${routePrefix}/tests_names`;
-  await apiFetch(route, { method: "POST", body: params }, {
-    response_function: (response) => {
-      stepperTree[variableToUpdate] = response._data.model_checks;
-      console.log("variableToUpdate", stepperTree[variableToUpdate]);
+  async function uploadFile() {
+    toggle_loading()
+    const params = {
+      file: await readFileAsync(files[0]),
+      filename: files[0].name,
+      filesize: files[0].size,
     }
-  });
-}
+
+    await api_fetch(
+      { schema: InspectionButtonSchema, params },
+      {
+        request_error_function: () => {
+          toggle_loading()
+        },
+        response_function: (response) => {
+          toggle_loading()
+          stepper_tree[variable_to_update] = response._data.model_checks
+        },
+      },
+    )
+
+    stepper_tree[variable_to_increment]++
+  }
+  async function getTestsNames() {
+    const params = { geode_object: geode_object }
+    await api_fetch(
+      { schema: InspectionButtonSchema2, params },
+      {
+        response_function: (response) => {
+          console.log("model_checks", response._data.model_checks)
+          stepper_tree[variable_to_update].value = response._data.model_checks
+          console.log("variable_to_update", variable_to_update)
+          console.log(
+            "stepper_tree[variable_to_update]",
+            stepper_tree[variable_to_update],
+          )
+        },
+      },
+    )
+  }
+  async function readFileAsync(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = function (event) {
+        resolve(event.target.result)
+      }
+      reader.onerror = function () {
+        reject(new Error("Error reading file"))
+      }
+      reader.readAsDataURL(file)
+    })
+  }
 </script>
+
+<style scoped>
+  .card {
+    border-radius: 15px;
+  }
+</style>

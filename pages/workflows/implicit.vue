@@ -3,25 +3,25 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Implicit modeling</h1>
     </v-col>
-    <v-col v-if="!is_cloud_running">
+    <v-col v-if="!cloud_store.is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
       <v-container class="w-75">
         <v-stepper v-model="step" hide-actions :items="items">
-          <template #item.1>
+          <template v-slot:item.1>
             <WorkflowsImplicitFirststep :reset="reset_first_step" />
           </template>
 
-          <template #item.2>
+          <template v-slot:item.2>
             <WorkflowsImplicitSecondstep />
           </template>
 
-          <template #item.3>
+          <template v-slot:item.3>
             <WorkflowsImplicitThirdstep />
           </template>
 
-          <template #item.4>
+          <template v-slot:item.4>
             <p class="mb-2 text-body-1 text-center">
               Congratulations! <br />
               You just went from a 3D data point set to a nicely meshed fully
@@ -32,7 +32,7 @@
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
-                <v-btn :disabled="step == 1" @click="reset"> reset </v-btn>
+                <v-btn :disabled="step == 1" @click="reset">reset</v-btn>
               </v-col>
               <v-spacer />
               <v-col cols="auto">
@@ -40,9 +40,8 @@
                   :disabled="step == items.length"
                   :loading="loading"
                   @click="next"
+                  >next</v-btn
                 >
-                  next
-                </v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -58,21 +57,15 @@
 <script setup>
   import { useToggle } from "@vueuse/core"
 
-import Ajv from "ajv"
-const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
-
-import implicit_json from "./implicit.json"
-
-const cloud_store = use_cloud_store()
-const { is_cloud_running } = storeToRefs(cloud_store)
-const inputsStore = useInputStore()
-const viewer_store = use_viewer_store()
-const { constraints, isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
-const site_key = useRuntimeConfig().public.SITE_KEY
-const loading = ref(false);
-const toggle_loading = useToggle(loading)
-const step = ref(1)
-const items = ['Select data', 'Extract section', 'Remesh', 'Result']
+  const cloud_store = use_cloud_store()
+  const inputsStore = useInputStore()
+  const viewer_store = use_viewer_store()
+  const { constraints, isovalues, axis, coordinate, metric } =
+    storeToRefs(inputsStore)
+  const loading = ref(false)
+  const toggle_loading = useToggle(loading)
+  const step = ref(1)
+  const items = ["Select data", "Extract section", "Remesh", "Result"]
 
   const title = "Implicit"
   useHead({
@@ -86,56 +79,74 @@ const items = ['Select data', 'Extract section', 'Remesh', 'Result']
     reset_first_step.value = true
   }
 
-function sendStepOne() {
+  function sendStepOne() {
     const params = {
-        constraints: constraints.value,
-        isovalues: isovalues.value
+      constraints: constraints.value,
+      isovalues: isovalues.value,
     }
-    return api_fetch(implicit_json.id, params,
-        {
-            'response_function': (response) => {
-                viewer_store.reset()
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                viewer_store.set_vertex_attribute({ "id": response._data.id, "name": "geode_implicit_attribute" })
-            },
-        }
+    return api_fetch(
+      { schema: implicit_json, params },
+      {
+        response_function: (response) => {
+          viewer_store.reset()
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_file_name,
+            id: response._data.id,
+          })
+          viewer_store.set_vertex_attribute({
+            id: response._data.id,
+            name: "geode_implicit_attribute",
+          })
+        },
+      },
     )
   }
 
-function sendStepTwo() {
+  function sendStepTwo() {
     const params = {
-        axis: axis.value,
-        coordinate: coordinate.value,
+      axis: axis.value,
+      coordinate: coordinate.value,
     }
 
-    // const validate = ajv.compile(implicit_json)
-    // const valid = validate(params)
-    // console.log("AJV",valid)
     if (!valid) console.log(validate.errors)
 
-    return api_fetch(implicit_json, params,
-        {
-            'response_function': (response) => {
-                viewer_store.reset()
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                viewer_store.set_vertex_attribute({ "id": response._data.id, "name": "geode_implicit_attribute" })
-            },
-        }
+    return api_fetch(
+      { schema: implicit_json, params },
+      {
+        response_function: (response) => {
+          viewer_store.reset()
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_file_name,
+            id: response._data.id,
+          })
+          viewer_store.set_vertex_attribute({
+            id: response._data.id,
+            name: "geode_implicit_attribute",
+          })
+        },
+      },
     )
   }
 
-function sendStepThree() {
+  function sendStepThree() {
     const params = {
-        metric: metric.value
+      metric: metric.value,
     }
-    return api_fetch(implicit_json.params,
-        {
-            'response_function': (response) => {
-                viewer_store.reset()
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_file_name, "id": response._data.id })
-                viewer_store.toggle_edge_visibility({ "id": response._data.id, "visibility": true })
-            },
-        }
+    return api_fetch(
+      { schema: implicit_json.params },
+      {
+        response_function: (response) => {
+          viewer_store.reset()
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_file_name,
+            id: response._data.id,
+          })
+          viewer_store.toggle_edge_visibility({
+            id: response._data.id,
+            visibility: true,
+          })
+        },
+      },
     )
   }
 

@@ -1,5 +1,9 @@
 <template>
-  <Wrapper :cards_list="cards_list" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+    :versions_schema="versions_schema"
+  />
 </template>
 
 <script setup>
@@ -9,6 +13,7 @@
   import CrsSelector from "@geode/opengeodeweb-front/components/CrsSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
+  import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
 
   const cards_list = [
     {
@@ -49,6 +54,7 @@
             label: "Please select a file",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -62,6 +68,7 @@
           component_options: {
             variable_to_update: "geode_object",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -79,6 +86,7 @@
           component_options: {
             variable_to_update: "input_crs",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -92,6 +100,7 @@
           component_options: {
             variable_to_update: "output_crs",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {

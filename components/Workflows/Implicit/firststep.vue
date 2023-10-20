@@ -29,8 +29,8 @@
           </v-row>
           <WorkflowsImplicitConstraint
             v-for="n in nb_constraints"
-            :id="n"
             :key="n"
+            :id="n"
           />
         </v-sheet>
       </v-col>
@@ -57,7 +57,7 @@
             elevation="5"
             icon="mdi-minus"
             @click="decrementISO"
-          />
+          ></v-btn>
           {{ nb_isovalues }}
           <v-btn
             class="ma-1"
@@ -65,7 +65,7 @@
             elevation="5"
             icon="mdi-plus"
             @click="incrementISO"
-          />
+          ></v-btn>
           <br />
           <WorkflowsImplicitIsovalue v-for="n in nb_isovalues" :id="n" />
         </v-sheet>
@@ -76,11 +76,7 @@
 
 <script setup>
   const inputsStore = useInputStore()
-  const cloud_store = use_cloud_store()
-  const { is_cloud_running } = storeToRefs(cloud_store)
   const viewer_store = use_viewer_store()
-  const websocket_store = use_websocket_store()
-  const { is_client_created } = storeToRefs(websocket_store)
   const nb_constraints = ref(0)
   const nb_isovalues = ref(3)
 
@@ -97,42 +93,43 @@
     }
   })
 
-  const cloud_socket_ready = computed(() => {
-    return is_cloud_running.value && is_client_created.value
-  })
-
-  onMounted(() => {
-    if (cloud_socket_ready.value) {
-      getConstraints()
-    } else {
-      watch(cloud_socket_ready, () => {
-        getConstraints()
-      })
-    }
-  })
-
   async function getConstraints() {
     console.log("getConstraints")
     viewer_store.reset()
-    await api_fetch(firststep_json.remesh, params,
-        {
-            'response_function': (response) => {
-                console.log("coucou", response)
-                const autofilled_constrains = JSON.parse(response._data.constraints)
-                console.log(autofilled_constrains)
-                for (let i = 0; i < autofilled_constrains.length; i++) {
-                    const constraint = autofilled_constrains[i]
-                    const x = { "x": constraint[0], "y": constraint[1], "z": constraint[2], "value": constraint[3] }
-                    nb_constraints.value++
-                    inputsStore.addConstraint(x)
-                }
-                viewer_store.reset()
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_points, "id": response._data.points })
-                viewer_store.point_size({ "id": response._data.points, "size": 10 })
-                viewer_store.create_object_pipeline({ "file_name": response._data.viewable_box, "id": response._data.box })
-                viewer_store.set_vertex_attribute({ "id": response._data.points, "name": "geode_implicit_value" })
-            },
-        }
+    await api_fetch(
+      { schema: firststep_json.remesh, params },
+      {
+        response_function: (response) => {
+          console.log("coucou", response)
+          const autofilled_constrains = JSON.parse(response._data.constraints)
+          console.log(autofilled_constrains)
+          for (let i = 0; i < autofilled_constrains.length; i++) {
+            const constraint = autofilled_constrains[i]
+            const x = {
+              x: constraint[0],
+              y: constraint[1],
+              z: constraint[2],
+              value: constraint[3],
+            }
+            nb_constraints.value++
+            inputsStore.addConstraint(x)
+          }
+          viewer_store.reset()
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_points,
+            id: response._data.points,
+          })
+          viewer_store.point_size({ id: response._data.points, size: 10 })
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_box,
+            id: response._data.box,
+          })
+          viewer_store.set_vertex_attribute({
+            id: response._data.points,
+            name: "geode_implicit_value",
+          })
+        },
+      },
     )
   }
 
@@ -148,4 +145,10 @@
       inputsStore.popIsovalue()
     }
   }
+
+  onMounted(() => {
+    runFunctionIfCloudRunning(() => {
+      getConstraints()
+    })
+  })
 </script>

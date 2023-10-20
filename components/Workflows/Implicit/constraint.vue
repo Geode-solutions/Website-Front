@@ -39,15 +39,16 @@
     }
     inputsStore.modifyConstraint(index.value, constraint)
     const params = {
-        points: index.value,
-        value: constraint.value
+      points: index.value,
+      value: constraint.value,
     }
-    await api_fetch(constraint_json.remesh, params,
-        {
-            'response_function': (response) => {
-                viewer_store.update_data({ "id": response._data.points });
-            },
-        }
+    await api_fetch(
+      { schema: constraint_json.remesh, params },
+      {
+        response_function: (response) => {
+          viewer_store.update_data({ id: response._data.points })
+        },
+      },
     )
   }
 </script>

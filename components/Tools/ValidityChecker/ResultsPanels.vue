@@ -36,11 +36,12 @@
 </template>
 
 <script setup>
+  import schema from "@/components/ResultsPanels.json"
   const stepper_tree = inject("stepper_tree")
   const props = defineProps({
     input_model_checks: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
-    input_file_name: { type: String, required: true },
+    input_file_name: { type: Array, required: true },
     input_index_array: { type: Array, required: false, default: [] },
   })
   const {
@@ -49,7 +50,6 @@
     input_file_name,
     input_index_array,
   } = props
-  const { route_prefix } = stepper_tree
   const opened_panels = ref([])
 
   watch(
@@ -78,8 +78,9 @@
     { deep: true },
   )
   onMounted(() => {
-    console.log("input_model_checks", input_model_checks)
+    console.log("props", props)
     get_tests_results()
+    console.log("input_model_checks", input_model_checks)
     opened_panels.value = Array.from(Array(input_model_checks.length).keys())
   })
 
@@ -114,18 +115,46 @@
     }
   }
 
-async function get_test_result(object, filename, test, children_array, max_retry) {
-  const params = {
-    geode_object: object,
-    filename: filename,
-    test: test
-  }
-  const route = `${route_prefix}/inspect_file`
- api_fetch(ResultsPanels_json.remesh, params,
-    {
-      'response_function': (response) => {
-        update_result(stepper_tree.model_checks, children_array, response._data.result, response._data.list_invalidities)
-      },
+  async function get_tests_results() {
+    for (let index = 0; index < input_model_checks.length; index++) {
+      const check = input_model_checks[index]
+      if (check.is_leaf && check.value == undefined) {
+        const children_array = input_index_array.concat(index)
+        get_test_result(
+          input_geode_object,
+          input_file_name[0].name,
+          check.route,
+          children_array,
+          10,
+        )
+      }
     }
- )
+  }
+
+  async function get_test_result(
+    object,
+    filename,
+    test,
+    children_array,
+    max_retry,
+  ) {
+    const params = {
+      geode_object: object,
+      filename: filename,
+      test: test,
+    }
+    api_fetch(
+      { schema, params },
+      {
+        response_function: (response) => {
+          update_result(
+            stepper_tree.model_checks,
+            children_array,
+            response._data.result,
+            response._data.list_invalidities,
+          )
+        },
+      },
+    )
+  }
 </script>
