@@ -12,7 +12,8 @@
   import fileDownload from "js-file-download"
 
   const stepper_tree = inject("stepper_tree")
-  const { files, geode_object, route_prefix, output_extension } = stepper_tree
+  const { files, input_geode_object, route_prefix, output_params } =
+    stepper_tree
 
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
@@ -20,30 +21,24 @@
   async function convert_files() {
     toggle_loading()
     for (let i = 0; i < files.length; i++) {
-      let reader = new FileReader()
-      reader.onload = async function (event) {
-        let params = new FormData()
+      let params = new FormData()
+      params.append("input_geode_object", input_geode_object)
+      params.append("filename", files[i].name)
+      params.append("output_geode_object", output_params["output_geode_object"])
+      params.append("output_extension", output_params["output_extension"])
+      params.append("responseType", "blob")
+      params.append("responseEncoding", "binary")
 
-        params.append("geode_object", geode_object)
-        params.append("file", event.target.result)
-        params.append("filename", files[i].name)
-        params.append("filesize", files[i].size)
-        params.append("extension", output_extension)
-        params.append("responseType", "blob")
-        params.append("responseEncoding", "binary")
-
-        await api_fetch(
-          `${route_prefix}/convert_file`,
-          { method: "POST", body: params },
-          {
-            response_function: (response) => {
-              const new_file_name = response.headers.get("new-file-name")
-              fileDownload(response._data, new_file_name)
-            },
+      await api_fetch(
+        `${route_prefix}/convert_file`,
+        { method: "POST", body: params },
+        {
+          response_function: (response) => {
+            const new_file_name = response.headers.get("new-file-name")
+            fileDownload(response._data, new_file_name)
           },
-        )
-      }
-      reader.readAsDataURL(files[i])
+        },
+      )
     }
     toggle_loading()
   }

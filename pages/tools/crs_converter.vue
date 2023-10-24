@@ -119,7 +119,7 @@
         }),
       },
       {
-        step_title: "Select file format",
+        step_title: "Select output representation and file format",
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {

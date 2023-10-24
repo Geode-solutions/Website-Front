@@ -14,10 +14,10 @@
   const stepper_tree = inject("stepper_tree")
   const {
     files,
-    geode_object,
+    input_geode_object,
     input_crs,
     output_crs,
-    output_extension,
+    output_params,
     route_prefix,
   } = stepper_tree
 
@@ -27,18 +27,24 @@
 
   async function convert_files() {
     toggle_loading()
+    console.log("input_geode_object", input_geode_object)
     for (let i = 0; i < files.length; i++) {
       let params = new FormData()
 
-      params.append("geode_object", geode_object)
+      params.append("input_geode_object", input_geode_object)
+      console.log("input_geode_object")
       params.append("filename", files[i].name)
       params.append("input_crs_authority", input_crs["authority"])
       params.append("input_crs_code", input_crs["code"])
       params.append("input_crs_name", input_crs["name"])
       params.append("output_crs_authority", output_crs["authority"])
       params.append("output_crs_code", output_crs["code"])
-      params.append("output_crs_name", output_crs["name"])
-      params.append("extension", output_extension)
+      params.append("output_crs_name", output_crs["name"]),
+        params.append(
+          "output_geode_object",
+          output_params["output_geode_object"],
+        ),
+        params.append("output_extension", output_params["output_extension"])
       params.append("responseType", "blob")
       params.append("responseEncoding", "binary")
 
