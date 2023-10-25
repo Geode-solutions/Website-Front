@@ -25,11 +25,11 @@
   ]
 
   const files = ref([])
-  const geode_object = ref("")
+  const input_geode_object = ref("")
   const additional_files = ref([])
   const input_crs = ref({})
   const output_crs = ref({})
-  const output_extension = ref("")
+  const output_params = ref({})
   const route_prefix = "tools/crs_converter"
 
   const stepper_tree = reactive({
@@ -37,10 +37,10 @@
     tool_name: "CRS converter",
     route_prefix: route_prefix,
     files: files,
-    geode_object: geode_object,
+    input_geode_object: input_geode_object,
     input_crs: input_crs,
     output_crs: output_crs,
-    output_extension: output_extension,
+    output_params: output_params,
     steps: [
       {
         step_title: "Please select a file to convert",
@@ -61,15 +61,15 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            variable_to_update: "geode_object",
+            variable_to_update: "input_geode_object",
             variable_to_increment: "current_step_index",
           },
         },
         chips: computed(() => {
-          if (geode_object.value === "") {
+          if (input_geode_object.value === "") {
             return []
           } else {
-            return [geode_object.value]
+            return [input_geode_object.value]
           }
         }),
       },
@@ -79,7 +79,7 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            geode_object: geode_object,
+            input_geode_object: input_geode_object,
             files: files,
             variable_to_update: "additional_files",
             variable_to_increment: "current_step_index",
@@ -128,10 +128,14 @@
           },
         },
         chips: computed(() => {
-          if (output_extension.value === "") {
+          if (_.isEmpty(output_params)) {
             return []
           } else {
-            return [output_extension.value]
+            const array = []
+            for (const property in output_params.value) {
+              array.push(output_params.value[property])
+            }
+            return array
           }
         }),
       },

@@ -6,18 +6,20 @@
         <v-progress-circular indeterminate size="20" color="white" width="3" />
       </template>
     </v-btn>
-    <v-btn variant="text" @click="set_current_step(2)"> Cancel </v-btn>
+    <v-btn variant="text" @click="decrement_current_step()">Cancel</v-btn>
   </div>
 </template>
 
 <script setup>
   const stepper_tree = inject("stepper_tree")
-  const { files, geode_object, route_prefix } = stepper_tree
+  const { route_prefix } = stepper_tree
   const props = defineProps({
+    input_geode_object: { type: String, required: true },
     variable_to_update: { type: String, required: true },
     variable_to_increment: { type: String, required: true },
   })
-  const { variable_to_update, variable_to_increment } = props
+  const { input_geode_object, variable_to_update, variable_to_increment } =
+    props
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
@@ -26,10 +28,16 @@
     stepper_tree[variable_to_increment]++
   }
 
+  function decrement_current_step(step) {
+    stepper_tree[variable_to_increment]--
+  }
+
   async function get_tests_names() {
     const params = new FormData()
-    params.append("geode_object", geode_object)
+    console.log("input_geode_object", input_geode_object)
+    params.append("input_geode_object", input_geode_object)
     const route = `${route_prefix}/tests_names`
+    toggle_loading()
     await api_fetch(
       route,
       { method: "POST", body: params },
@@ -40,6 +48,7 @@
         },
       },
     )
+    toggle_loading()
   }
 </script>
 

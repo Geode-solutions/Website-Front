@@ -39,17 +39,11 @@
   const stepper_tree = inject("stepper_tree")
   const props = defineProps({
     input_model_checks: { type: Array, required: true },
-    input_geode_object: { type: String, required: true },
     input_file_name: { type: String, required: true },
     input_index_array: { type: Array, required: false, default: [] },
   })
-  const {
-    input_model_checks,
-    input_geode_object,
-    input_file_name,
-    input_index_array,
-  } = props
-  const { route_prefix } = stepper_tree
+  const { input_model_checks, input_file_name, input_index_array } = props
+  const { input_geode_object, route_prefix } = stepper_tree
   const opened_panels = ref([])
 
   watch(
@@ -131,14 +125,14 @@
   }
 
   async function get_test_result(
-    object,
+    geode_object,
     filename,
     test,
     children_array,
     max_retry,
   ) {
     const params = new FormData()
-    params.append("geode_object", object)
+    params.append("input_geode_object", geode_object)
     params.append("filename", filename)
     params.append("test", test)
 

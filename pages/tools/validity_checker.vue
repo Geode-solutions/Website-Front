@@ -24,7 +24,7 @@
   ]
 
   const files = ref([])
-  const geode_object = ref("")
+  const input_geode_object = ref("")
   const additional_files = ref([])
   const model_checks = ref([])
   const route_prefix = "tools/validity_checker"
@@ -34,7 +34,7 @@
     tool_name: "Validity checker",
     route_prefix: route_prefix,
     files: files,
-    geode_object: geode_object,
+    input_geode_object: input_geode_object,
     model_checks: model_checks,
     steps: [
       {
@@ -56,15 +56,15 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            variable_to_update: "geode_object",
+            variable_to_update: "input_geode_object",
             variable_to_increment: "current_step_index",
           },
         },
         chips: computed(() => {
-          if (geode_object.value === "") {
+          if (input_geode_object.value === "") {
             return []
           } else {
-            return [geode_object.value]
+            return [input_geode_object.value]
           }
         }),
       },
@@ -74,7 +74,7 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            geode_object: geode_object,
+            input_geode_object: input_geode_object,
             files: files,
             variable_to_update: "additional_files",
             variable_to_increment: "current_step_index",
@@ -92,6 +92,7 @@
         component: {
           component_name: shallowRef(ToolsValidityCheckerInspectionButton),
           component_options: {
+            input_geode_object: input_geode_object,
             variable_to_update: "model_checks",
             variable_to_increment: "current_step_index",
           },
@@ -104,7 +105,7 @@
           component_name: shallowRef(ToolsValidityCheckerResultsPanels),
           component_options: {
             input_model_checks: model_checks,
-            input_geode_object: geode_object,
+            input_geode_object: input_geode_object,
             input_file_name: computed(() => {
               return files.value.map((file) => file.name)
             }),
