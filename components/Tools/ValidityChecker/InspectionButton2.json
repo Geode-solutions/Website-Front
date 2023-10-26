@@ -1,14 +1,12 @@
 {
-    "$id": "/tools/validity_checker/tests_names",
-    "method": "POST",
-    "type": "object",
-    "properties": {
-        "geode_object": {
-            "type": "string"
-        }
-    },
-    "required": [
-        "geode_object"
-    ],
-    "additionalProperties": false
+  "$id": "/tools/validity_checker/tests_names",
+  "method": "POST",
+  "type": "object",
+  "properties": {
+    "geode_object": {
+      "type": "string"
+    }
+  },
+  "required": ["geode_object"],
+  "additionalProperties": false
 }

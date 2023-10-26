@@ -1,105 +1,114 @@
 {
-    "$id": "/workflows/implicit/",
-    "method": "POST",
-    "type": "object",
-    "properties": {
-        "constraints": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "number"
-                    }
-                },
-                "required": ["name", "value"]
-            }
-        },
-        "isovalues": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "number"
-                    }
-                },
-                "required": ["name", "value"]
-            }
-        },
-        "axis": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "number"
-                    }
-                },
-                "required": ["name", "value"]
-            }
-        },
-        "coordinate": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "number"
-                    }
-                },
-                "required": ["name", "value"]
-            }
-        },
-        "metric": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "number"
-                    }
-                },
-                "required": ["name", "value"]
-            }
-        },
-        "point": {
+  "$id": "/workflows/implicit/",
+  "method": "POST",
+  "type": "object",
+  "properties": {
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
             "type": "number"
+          }
         },
-        "value": {
-            "type": "number"
-        },
-        "faults_metric": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "number"
-                    }
-                },
-                "required": ["name", "value"]
-            }
-        }
+        "required": ["name", "value"]
+      }
     },
-    "additionalProperties": false,
-    "required": ["constraints", "isovalues", "axis", "coordinate", "metric", "point", "value", "faults_metric"]
+    "isovalues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": ["name", "value"]
+      }
+    },
+    "axis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": ["name", "value"]
+      }
+    },
+    "coordinate": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": ["name", "value"]
+      }
+    },
+    "metric": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": ["name", "value"]
+      }
+    },
+    "point": {
+      "type": "number"
+    },
+    "value": {
+      "type": "number"
+    },
+    "faults_metric": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": ["name", "value"]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "constraints",
+    "isovalues",
+    "axis",
+    "coordinate",
+    "metric",
+    "point",
+    "value",
+    "faults_metric"
+  ]
 }
