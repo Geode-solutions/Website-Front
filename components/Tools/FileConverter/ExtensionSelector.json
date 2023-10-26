@@ -5,8 +5,6 @@
   "properties": {
     "geode_object": {}
   },
-  "required": [
-    "geode_object"
-  ],
+  "required": ["geode_object"],
   "additionalProperties": false
 }

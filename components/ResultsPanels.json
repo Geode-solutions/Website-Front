@@ -13,10 +13,6 @@
       "type": "string"
     }
   },
-  "required": [
-    "geode_object",
-    "filename",
-    "test"
-  ],
+  "required": ["geode_object", "filename", "test"],
   "additionalProperties": false
 }

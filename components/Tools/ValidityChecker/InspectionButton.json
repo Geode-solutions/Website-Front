@@ -13,10 +13,6 @@
       "type": "number"
     }
   },
-  "required": [
-    "file",
-    "filename",
-    "filesize"
-  ],
+  "required": ["file", "filename", "filesize"],
   "additionalProperties": false
 }

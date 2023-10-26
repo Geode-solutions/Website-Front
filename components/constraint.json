@@ -1,29 +1,28 @@
 {
-    "$id": "/workflows/constraint",
-    "type": "object",
-    "properties": {
-      "constraint": {
-        "type": "object",
-        "properties": {
-          "x": {
-            "type": "string"
-          },
-          "y": {
-            "type": "string"
-          },
-          "z": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
+  "$id": "/workflows/constraint",
+  "type": "object",
+  "properties": {
+    "constraint": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "string"
         },
-        "required": ["x", "y", "z", "value"]
+        "y": {
+          "type": "string"
+        },
+        "z": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
       },
-      "id": {
-        "type": "number"
-      }
+      "required": ["x", "y", "z", "value"]
     },
-    "required": ["constraint", "id"]
-  }
-  
+    "id": {
+      "type": "number"
+    }
+  },
+  "required": ["constraint", "id"]
+}

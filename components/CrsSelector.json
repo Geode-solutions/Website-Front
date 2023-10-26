@@ -1,15 +1,14 @@
 {
-    "$id": "/workflows/crs/",
-    "type": "object",
-    "properties": {
-      "input_geode_object": {
-        "type": "string"
-      },
-      "crs_key": {
-        "type": "string"
-      }
+  "$id": "/workflows/crs/",
+  "type": "object",
+  "properties": {
+    "input_geode_object": {
+      "type": "string"
     },
-    "additionalProperties": false,
-    "required": ["input_geode_object", "crs_key"]
-  }
-  
+    "crs_key": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["input_geode_object", "crs_key"]
+}
