@@ -48,7 +48,7 @@
         },
         response_function: (response) => {
           toggle_loading()
-          stepper_tree[variable_to_update] = response._data.model_checks
+          stepper_tree[variable_to_update].value = response._data.model_checks
         },
       },
     )
@@ -62,7 +62,7 @@
       {
         response_function: (response) => {
           console.log("model_checks", response._data.model_checks)
-          stepper_tree[variable_to_update].value = response._data.model_checks
+          stepper_tree[variable_to_update] = response._data.model_checks
           console.log("variable_to_update", variable_to_update)
           console.log(
             "stepper_tree[variable_to_update]",

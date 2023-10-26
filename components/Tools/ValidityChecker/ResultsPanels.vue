@@ -79,8 +79,8 @@
   )
   onMounted(() => {
     console.log("props", props)
-    get_tests_results()
     console.log("input_model_checks", input_model_checks)
+    get_tests_results()
     opened_panels.value = Array.from(Array(input_model_checks.length).keys())
   })
 
