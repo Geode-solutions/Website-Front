@@ -1,5 +1,5 @@
 {
-  "$id": "/workflows/constraint",
+  "$id": "/workflows/implicit/update_value",
   "type": "object",
   "properties": {
     "constraint": {
@@ -20,9 +20,6 @@
       },
       "required": ["x", "y", "z", "value"]
     },
-    "id": {
-      "type": "number"
-    }
-  },
-  "required": ["constraint", "id"]
+    "required": ["constraint", "id"]
+  }
 }

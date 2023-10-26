@@ -1,6 +1,7 @@
 {
-  "$id": "/workflows/implicit",
+  "$id": "/workflows/implicit/step0",
   "type": "object",
+  "method": "POST",
   "properties": {
     "nb_constraints": {
       "type": "number"

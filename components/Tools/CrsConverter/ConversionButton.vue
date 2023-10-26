@@ -11,7 +11,7 @@
 <script setup>
   import { useToggle } from "@vueuse/core"
   import fileDownload from "js-file-download"
-  import schema from "@/components/Tools/FileConverter/ConversionButton.json"
+  import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const stepper_tree = inject("stepper_tree")
   const { files, geode_object, input_crs, output_crs, output_extension } =
@@ -45,9 +45,7 @@
       await api_fetch(
         { schema, params },
         {
-          request_error_function: () => {
-            toggle_loading()
-          },
+          request_error_function: () => {},
           response_function: (response) => {
             const new_file_name = response.headers.get("new-file-name")
             fileDownload(response._data, new_file_name)
@@ -55,6 +53,7 @@
           },
         },
       )
+      toggle_loading()
       reader.readAsDataURL(files[i])
     }
   }

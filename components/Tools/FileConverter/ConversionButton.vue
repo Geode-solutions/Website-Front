@@ -36,9 +36,7 @@
         await api_fetch(
           { schema, params },
           {
-            requestErrorFunction: () => {
-              toggle_loading()
-            },
+            requestErrorFunction: () => {},
             response_function: (response) => {
               const new_file_name = response.headers.get("new-file-name")
               fileDownload(response._data, new_file_name)
@@ -47,6 +45,7 @@
           },
         )
       }
+      toggle_loading()
       reader.readAsDataURL(files[i])
     }
   }

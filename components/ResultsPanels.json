@@ -1,7 +1,8 @@
 {
-  "$id": "/tools/validity_checker/inspect_file/",
+  "$id": "/tools/validity_checker/inspect_file",
   "method": "POST",
   "type": "object",
+  "max_retry": 10,
   "properties": {
     "geode_object": {
       "type": "string"

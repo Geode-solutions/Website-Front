@@ -142,27 +142,23 @@
 
     return api_fetch(
       { schema: simplex_json, params },
-
-      await api_fetch(
-        { schema: simplex_json.$id, params },
-        {
-          response_function: (response) => {
-            viewer_store.reset()
-            viewer_store.create_object_pipeline({
-              file_name: response._data.viewable_file_name,
-              id: response._data.id,
-            })
-            viewer_store.toggle_edge_visibility({
-              id: response._data.id,
-              visibility: true,
-            })
-          },
+      {
+        response_function: (response) => {
+          viewer_store.reset()
+          viewer_store.create_object_pipeline({
+            file_name: response._data.viewable_file_name,
+            id: response._data.id,
+          })
+          viewer_store.toggle_edge_visibility({
+            id: response._data.id,
+            visibility: true,
+          })
         },
-      ),
+      },
     )
   }
 
-  async function next() {
+  function next() {
     toggle_loading()
     if (step.value == 2) {
       sendMetrics()
