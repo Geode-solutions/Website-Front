@@ -26,9 +26,10 @@
   ]
 
   const files = ref([])
-  const additional_files = ref([])
   const input_geode_object = ref("")
-  const output_params = ref({})
+  const additional_files = ref([])
+  const output_geode_object = ref("")
+  const output_extension = ref("")
   const route_prefix = "tools/file_converter"
 
   const stepper_tree = reactive({
@@ -36,9 +37,10 @@
     tool_name: "File converter",
     route_prefix: route_prefix,
     files: files,
-    additional_files: additional_files,
     input_geode_object: input_geode_object,
-    output_params: output_params,
+    additional_files: additional_files,
+    output_geode_object: output_geode_object,
+    output_extension: output_extension,
     steps: [
       {
         step_title: "Please select file(s) to convert",
@@ -46,8 +48,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            variable_to_update: "files",
-            variable_to_increment: "current_step_index",
           },
         },
         chips: computed(() => {
@@ -60,8 +60,7 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            variable_to_update: "input_geode_object",
-            variable_to_increment: "current_step_index",
+            files: files,
           },
         },
         chips: computed(() => {
@@ -80,8 +79,6 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
-            variable_to_update: "additional_files",
-            variable_to_increment: "current_step_index",
           },
           skippable: true,
         },
@@ -96,11 +93,14 @@
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {
-            variable_to_update: "output_params",
-            variable_to_increment: "current_step_index",
+            input_geode_object: input_geode_object,
+            variable_to_update: "input_crs",
           },
         },
         chips: computed(() => {
+          const output_params = computed(() => {
+            return [output_geode_object, output_extension]
+          })
           if (_.isEmpty(output_params)) {
             return []
           } else {
@@ -116,7 +116,12 @@
         step_title: "Convert your file",
         component: {
           component_name: shallowRef(ToolsFileSelectorConversionButton),
-          component_options: {},
+          component_options: {
+            files: files,
+            input_geode_object: input_geode_object,
+            output_geode_object: output_geode_object,
+            output_extension: output_extension,
+          },
         },
         chips: [],
       },

@@ -43,8 +43,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: false,
-            variable_to_update: "files",
-            variable_to_increment: "current_step_index",
           },
         },
         chips: computed(() => {
@@ -56,8 +54,7 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            variable_to_update: "input_geode_object",
-            variable_to_increment: "current_step_index",
+            files: files,
           },
         },
         chips: computed(() => {
@@ -76,10 +73,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
-            variable_to_update: "additional_files",
-            variable_to_increment: "current_step_index",
           },
-          skippable: true,
         },
         chips: computed(() => {
           return additional_files.value.map(
@@ -94,7 +88,6 @@
           component_options: {
             input_geode_object: input_geode_object,
             variable_to_update: "model_checks",
-            variable_to_increment: "current_step_index",
           },
         },
         chips: [],

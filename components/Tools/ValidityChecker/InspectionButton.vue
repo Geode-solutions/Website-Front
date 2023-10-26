@@ -15,26 +15,22 @@
   const { route_prefix } = stepper_tree
   const props = defineProps({
     input_geode_object: { type: String, required: true },
-    variable_to_update: { type: String, required: true },
-    variable_to_increment: { type: String, required: true },
   })
-  const { input_geode_object, variable_to_update, variable_to_increment } =
-    props
+  const { input_geode_object } = props
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
   async function inspect_file() {
     await get_tests_names()
-    stepper_tree[variable_to_increment]++
+    stepper_tree["current_step_index"]++
   }
 
-  function decrement_current_step(step) {
-    stepper_tree[variable_to_increment]--
+  function decrement_current_step() {
+    stepper_tree["current_step_index"]--
   }
 
   async function get_tests_names() {
     const params = new FormData()
-    console.log("input_geode_object", input_geode_object)
     params.append("input_geode_object", input_geode_object)
     const route = `${route_prefix}/tests_names`
     toggle_loading()
@@ -43,8 +39,7 @@
       { method: "POST", body: params },
       {
         response_function: (response) => {
-          stepper_tree[variable_to_update] = response._data.model_checks
-          console.log("variable_to_update", stepper_tree[variable_to_update])
+          stepper_tree["model_checks"] = response._data.model_checks
         },
       },
     )

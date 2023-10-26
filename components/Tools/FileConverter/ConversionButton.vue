@@ -12,8 +12,17 @@
   import fileDownload from "js-file-download"
 
   const stepper_tree = inject("stepper_tree")
-  const { files, input_geode_object, route_prefix, output_params } =
-    stepper_tree
+  const { route_prefix } = stepper_tree
+
+  const props = defineProps({
+    files: { type: Array, required: true },
+    input_geode_object: { type: String, required: true },
+    output_geode_object: { type: String, required: true },
+    output_extension: { type: String, required: true },
+  })
+
+  const { files, input_geode_object, output_geode_object, output_extension } =
+    props
 
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
@@ -24,8 +33,8 @@
       let params = new FormData()
       params.append("input_geode_object", input_geode_object)
       params.append("filename", files[i].name)
-      params.append("output_geode_object", output_params["output_geode_object"])
-      params.append("output_extension", output_params["output_extension"])
+      params.append("output_geode_object", output_geode_object)
+      params.append("output_extension", output_extension)
       params.append("responseType", "blob")
       params.append("responseEncoding", "binary")
 

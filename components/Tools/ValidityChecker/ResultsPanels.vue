@@ -141,6 +141,9 @@
       route,
       { method: "POST", body: params, retry: max_retry },
       {
+        request_error_function: () => {
+          update_result(stepper_tree.model_checks, children_array, "error")
+        },
         response_function: (response) => {
           update_result(
             stepper_tree.model_checks,
