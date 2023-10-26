@@ -41,7 +41,7 @@
   const props = defineProps({
     input_model_checks: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
-    input_file_name: { type: Array, required: true },
+    input_file_name: { type: String, required: true },
     input_index_array: { type: Array, required: false, default: [] },
   })
   const {
@@ -125,34 +125,25 @@
           input_file_name[0].name,
           check.route,
           children_array,
-          10,
         )
       }
     }
   }
 
-  async function get_test_result(
-    object,
-    filename,
-    test,
-    children_array,
-    max_retry,
-  ) {
+  async function get_test_result(object, filename, test, children_array) {
     const params = {
       geode_object: object,
-      filename: filename,
-      test: test,
+      filename,
+      test,
     }
     api_fetch(
       { schema, params },
       {
         response_function: (response) => {
-          update_result(
-            stepper_tree.model_checks,
-            children_array,
-            response._data.result,
-            response._data.list_invalidities,
-          )
+          update_result(response._data.list_invalidities)
+        },
+        response_error_function: () => {
+          update_result(stepper_tree.model_checks, children_array, "error")
         },
       },
     )

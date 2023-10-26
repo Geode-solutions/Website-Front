@@ -1,0 +1,14 @@
+{
+    "$id": "/tools/crs_converter/geographic_coordinate_systems",
+    "type": "object",
+    "method": "POST",
+    "properties": {
+        "geode_object": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "geode_object"
+    ],
+    "additionalProperties": false
+}

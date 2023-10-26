@@ -97,7 +97,7 @@
     console.log("getConstraints")
     viewer_store.reset()
     await api_fetch(
-      { schema: firststep_json.remesh, params },
+      { schema: firststep_json.remesh },
       {
         response_function: (response) => {
           console.log("coucou", response)

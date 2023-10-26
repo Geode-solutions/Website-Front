@@ -14,6 +14,9 @@
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
+  import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/CrsConverter/ObjectSelector.json"
+  import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
 
   const cards_list = [
     {
@@ -68,7 +71,7 @@
           component_options: {
             variable_to_update: "geode_object",
             variable_to_increment: "current_step_index",
-            schema: FileSelectorSchema,
+            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -86,7 +89,7 @@
           component_options: {
             variable_to_update: "input_crs",
             variable_to_increment: "current_step_index",
-            schema: FileSelectorSchema,
+            schema: CrsSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -100,7 +103,7 @@
           component_options: {
             variable_to_update: "output_crs",
             variable_to_increment: "current_step_index",
-            schema: FileSelectorSchema,
+            schema: CrsSelectorSchema,
           },
         },
         chips: computed(() => {

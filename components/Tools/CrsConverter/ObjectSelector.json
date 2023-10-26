@@ -1,14 +1,14 @@
 {
-  "$id": "/tools/file_converter/output_file_extensions",
+  "$id": "/tools/crs_converter/allowed_objects",
   "type": "object",
   "method": "POST",
   "properties": {
-    "geode_object": {
+    "filename": {
       "type": "string"
     }
   },
   "required": [
-    "geode_object"
+    "filename"
   ],
   "additionalProperties": false
 }

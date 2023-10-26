@@ -1,17 +1,21 @@
 {
-    "$id": "/workflows/implicit",
-    "type": "object",
-    "properties": {
-      "nb_constraints": {
-        "type": "number"
-      },
-      "nb_isovalues": {
-        "type": "number"
-      },
-      "reset": {
-        "type": "boolean"
-      }
+  "$id": "/workflows/implicit/step0",
+  "type": "object",
+  "method": "POST",
+  "properties": {
+    "nb_constraints": {
+      "type": "number"
     },
-    "required": ["nb_constraints", "nb_isovalues", "reset"]
-  }
-  
+    "nb_isovalues": {
+      "type": "number"
+    },
+    "reset": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nb_constraints",
+    "nb_isovalues",
+    "reset"
+  ]
+}

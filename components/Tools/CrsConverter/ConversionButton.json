@@ -1,0 +1,53 @@
+{
+  "$id": "/tools/file_converter/convert_file",
+  "type": "object",
+  "method": "POST",
+  "properties": {
+    "geode_object": {
+      "type": "string"
+    },
+    "file": {
+      "type": "string"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "filesize": {
+      "type": "number"
+    },
+    "input_crs_authority": {
+      "type": "string"
+    },
+    "input_crs_code": {
+      "type": "number"
+    },
+    "output_crs_authority": {
+      "type": "string"
+    },
+    "output_crs_code": {
+      "type": "number"
+    },
+    "output_crs_name": {
+      "type": "string"
+    },
+    "extension": {
+      "type": "string"
+    },
+    "responseType": {
+      "type": "string"
+    },
+    "responseEncoding": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "geode_object",
+    "file",
+    "filename",
+    "filesize",
+    "extension",
+    "responseType",
+    "responseEncoding"
+  ],
+  "additionalProperties": false
+}
