@@ -13,9 +13,5 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "nb_constraints",
-    "nb_isovalues",
-    "reset"
-  ]
+  "required": ["nb_constraints", "nb_isovalues", "reset"]
 }

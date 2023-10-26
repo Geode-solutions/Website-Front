@@ -18,16 +18,8 @@
           "type": "string"
         }
       },
-      "required": [
-        "x",
-        "y",
-        "z",
-        "value"
-      ]
+      "required": ["x", "y", "z", "value"]
     },
-    "required": [
-      "constraint",
-      "id"
-    ]
+    "required": ["constraint", "id"]
   }
 }
