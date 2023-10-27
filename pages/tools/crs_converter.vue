@@ -17,6 +17,8 @@
   import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
   import ObjectSelectorSchema from "@/components/Tools/CrsConverter/ObjectSelector.json"
   import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
+  import ExtensionSelectorSchema from "@/components/Tools/CrsConverter/ExtensionSelector.json"
+  import ConversionButtonSchema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const cards_list = [
     {
@@ -117,6 +119,7 @@
           component_options: {
             variable_to_update: "output_extension",
             variable_to_increment: "current_step_index",
+            schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -131,7 +134,9 @@
         step_title: "Convert your file",
         component: {
           component_name: shallowRef(ToolsCrsSelectorConversionButton),
-          component_options: {},
+          component_options: {
+            schema: ConversionButtonSchema,
+          },
         },
         chips: [],
       },

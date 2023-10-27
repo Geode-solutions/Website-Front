@@ -36,12 +36,12 @@
 </template>
 
 <script setup>
-  import schema from "@/components/ResultsPanels.json"
+  import schema from "@/components/Tools/ValidityChecker/ResultsPanels.json"
   const stepper_tree = inject("stepper_tree")
   const props = defineProps({
     input_model_checks: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
-    input_file_name: { type: String, required: true },
+    input_file_name: { type: Array, required: true },
     input_index_array: { type: Array, required: false, default: [] },
   })
   const {
@@ -122,7 +122,7 @@
         const children_array = input_index_array.concat(index)
         get_test_result(
           input_geode_object,
-          input_file_name[0].name,
+          input_file_name[0],
           check.route,
           children_array,
         )
@@ -139,6 +139,9 @@
     api_fetch(
       { schema, params },
       {
+        response_error_function: () => {
+          update_result(stepper_tree.model_checks, children_array, "error")
+        },
         response_function: (response) => {
           update_result(response._data.list_invalidities)
         },

@@ -19,13 +19,13 @@
       "type": "string"
     },
     "input_crs_code": {
-      "type": "number"
+      "type": "string"
     },
     "output_crs_authority": {
       "type": "string"
     },
     "output_crs_code": {
-      "type": "number"
+      "type": "string"
     },
     "output_crs_name": {
       "type": "string"

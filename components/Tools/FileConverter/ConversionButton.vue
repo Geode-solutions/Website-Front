@@ -14,7 +14,7 @@
   import schema from "@/components/Tools/FileConverter/ConversionButton.json"
 
   const stepper_tree = inject("stepper_tree")
-  const { files, geode_object, route_prefix, output_extension } = stepper_tree
+  const { files, geode_object, output_extension } = stepper_tree
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
@@ -40,7 +40,6 @@
             response_function: (response) => {
               const new_file_name = response.headers.get("new-file-name")
               fileDownload(response._data, new_file_name)
-              toggle_loading()
             },
           },
         )

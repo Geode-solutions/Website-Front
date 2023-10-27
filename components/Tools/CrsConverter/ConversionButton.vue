@@ -13,6 +13,11 @@
   import fileDownload from "js-file-download"
   import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
+  // const props = defineProps({
+  //   schema: { type: Object, required: true },
+  // })
+  // const { schema } = props
+
   const stepper_tree = inject("stepper_tree")
   const { files, geode_object, input_crs, output_crs, output_extension } =
     stepper_tree
@@ -25,7 +30,7 @@
     for (let i = 0; i < files.length; i++) {
       let reader = new FileReader()
       reader.onload = async function (event) {
-        let params = {
+        const params = {
           geode_object: geode_object,
           file: event.target.result,
           filename: files[i].name,
@@ -39,20 +44,20 @@
           responseType: "blob",
           responseEncoding: "binary",
         }
-      }
-      toggle_loading()
 
-      await api_fetch(
-        { schema, params },
-        {
-          request_error_function: () => {},
-          response_function: (response) => {
-            const new_file_name = response.headers.get("new-file-name")
-            fileDownload(response._data, new_file_name)
-            toggle_loading()
+        toggle_loading()
+
+        await api_fetch(
+          { schema, params },
+          {
+            request_error_function: () => {},
+            response_function: (response) => {
+              const new_file_name = response.headers.get("new-file-name")
+              fileDownload(response._data, new_file_name)
+            },
           },
-        },
-      )
+        )
+      }
       toggle_loading()
       reader.readAsDataURL(files[i])
     }
