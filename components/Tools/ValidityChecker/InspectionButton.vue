@@ -17,7 +17,7 @@
   import InspectionButtonSchema2 from "@/components/Tools/ValidityChecker/InspectionButton2.json"
 
   const stepper_tree = inject("stepper_tree")
-  const { files, geode_object, route_prefix } = stepper_tree
+  const { files, geode_object } = stepper_tree
   const props = defineProps({
     variable_to_update: { type: String, required: true },
     variable_to_increment: { type: String, required: true },
@@ -52,8 +52,6 @@
         },
       },
     )
-
-    stepper_tree[variable_to_increment]++
   }
   async function getTestsNames() {
     const params = { geode_object: geode_object }

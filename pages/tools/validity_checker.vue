@@ -15,7 +15,6 @@
   import schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
   import FileSelectorSchema from "@/components/Tools/ValidityChecker/FileSelector.json"
   import ObjectSelectorSchema from "@/components/Tools/ValidityChecker/ObjectSelector.json"
-  // import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
 
   const cards_list = [
     {

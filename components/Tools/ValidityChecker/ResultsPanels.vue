@@ -78,8 +78,6 @@
     { deep: true },
   )
   onMounted(() => {
-    console.log("props", props)
-    console.log("input_model_checks", input_model_checks)
     get_tests_results()
     opened_panels.value = Array.from(Array(input_model_checks.length).keys())
   })
@@ -120,7 +118,7 @@
       const check = input_model_checks[index]
       if (check.is_leaf && check.value == undefined) {
         const children_array = input_index_array.concat(index)
-        get_test_result(
+        await get_test_result(
           input_geode_object,
           input_file_name[0],
           check.route,
@@ -136,14 +134,20 @@
       filename,
       test,
     }
-    api_fetch(
+    await api_fetch(
       { schema, params },
       {
         response_error_function: () => {
           update_result(stepper_tree.model_checks, children_array, "error")
         },
         response_function: (response) => {
-          update_result(response._data.list_invalidities)
+          console.log("response", response)
+          update_result(
+            stepper_tree.model_checks,
+            children_array,
+            response._data.result,
+            response._data.list_invalidities,
+          )
         },
         response_error_function: () => {
           update_result(stepper_tree.model_checks, children_array, "error")
