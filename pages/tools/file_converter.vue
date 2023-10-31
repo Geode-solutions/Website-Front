@@ -106,7 +106,9 @@
           } else {
             const array = []
             for (const property in output_params.value) {
-              array.push(output_params.value[property])
+              if (output_params.value[property].value !== "") {
+                array.push(output_params.value[property].value)
+              }
             }
             return array
           }

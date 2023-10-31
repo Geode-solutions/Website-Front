@@ -125,13 +125,17 @@
           },
         },
         chips: computed(() => {
-          const output_params = { output_geode_object, output_extension }
+          const output_params = computed(() => {
+            return [output_geode_object, output_extension]
+          })
           if (_.isEmpty(output_params)) {
             return []
           } else {
             const array = []
             for (const property in output_params.value) {
-              array.push(output_params.value[property])
+              if (output_params.value[property].value !== "") {
+                array.push(output_params.value[property].value)
+              }
             }
             return array
           }
