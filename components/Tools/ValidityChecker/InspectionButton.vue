@@ -13,8 +13,8 @@
 <script setup>
   import { useToggle } from "@vueuse/core"
   // import explicit_json from "/explicit.json"
+  // import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
   import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
-  import InspectionButtonSchema2 from "@/components/Tools/ValidityChecker/InspectionButton2.json"
 
   const stepper_tree = inject("stepper_tree")
   const { files, geode_object } = stepper_tree
@@ -35,28 +35,15 @@
   async function uploadFile() {
     toggle_loading()
     const params = {
-      file: await readFileAsync(files[0]),
-      filename: files[0].name,
-      filesize: files[0].size,
+      file: files[0],
     }
-
-    await api_fetch(
-      { schema: InspectionButtonSchema, params },
-      {
-        request_error_function: () => {
-          toggle_loading()
-        },
-        response_function: (response) => {
-          toggle_loading()
-          stepper_tree[variable_to_update].value = response._data.model_checks
-        },
-      },
-    )
+    await upload_file({ route: "tools/upload_file", params })
+    toggle_loading()
   }
   async function getTestsNames() {
     const params = { geode_object: geode_object }
     await api_fetch(
-      { schema: InspectionButtonSchema2, params },
+      { schema: InspectionButtonSchema, params },
       {
         response_function: (response) => {
           console.log("model_checks", response._data.model_checks)
