@@ -1,5 +1,5 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="convert_files()">
+  <v-btn :loading="loading" color="primary" @click="wrapper()">
     Convert
     <template #loader>
       <v-progress-circular indeterminate size="20" color="white" width="3" />
@@ -16,11 +16,22 @@
   const stepper_tree = inject("stepper_tree")
   const { files, geode_object, input_crs, output_crs, output_extension } =
     stepper_tree
-
   const loading = ref(false)
-
   const toggle_loading = useToggle(loading)
 
+  async function wrapper() {
+    toggle_loading()
+    await upload_files()
+    convert_files()
+    toggle_loading()
+  }
+
+  function upload_files() {
+    return upload_file({
+      route: "tools/upload_file",
+      files,
+    })
+  }
   async function convert_files() {
     for (let i = 0; i < files.length; i++) {
       const params = {
@@ -28,6 +39,7 @@
         filename: files[i].name,
         input_crs_authority: input_crs["authority"],
         input_crs_code: input_crs["code"],
+        input_crs_name: input_crs["name"],
         output_crs_authority: output_crs["authority"],
         output_crs_code: output_crs["code"],
         output_crs_name: output_crs["name"],
@@ -36,12 +48,9 @@
         responseEncoding: "binary",
       }
 
-      toggle_loading()
-
       await api_fetch(
         { schema, params },
         {
-          request_error_function: () => {},
           response_function: (response) => {
             const new_file_name = response.headers.get("new-file-name")
             fileDownload(response._data, new_file_name)
@@ -49,6 +58,5 @@
         },
       )
     }
-    toggle_loading()
   }
 </script>

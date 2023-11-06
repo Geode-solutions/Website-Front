@@ -108,8 +108,6 @@
       coordinate: coordinate.value,
     }
 
-    if (!valid) console.log(validate.errors)
-
     return api_fetch(
       { schema: implicit_json, params },
       {

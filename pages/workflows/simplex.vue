@@ -138,8 +138,6 @@
       faults_metric: faults_metric.value,
     }
 
-    if (!validate) console.log(validate.errors)
-
     return api_fetch(
       { schema: simplex_json, params },
       {

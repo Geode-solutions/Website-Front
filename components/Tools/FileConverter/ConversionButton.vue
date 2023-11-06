@@ -19,8 +19,10 @@
   const toggle_loading = useToggle(loading)
 
   async function wrapper() {
+    toggle_loading()
     await upload_files()
     convert_files()
+    toggle_loading()
   }
 
   function upload_files() {
@@ -31,7 +33,6 @@
   }
 
   async function convert_files() {
-    toggle_loading()
     for (let i = 0; i < files.length; i++) {
       let params = {
         geode_object: geode_object,
@@ -51,6 +52,5 @@
         },
       )
     }
-    toggle_loading()
   }
 </script>
