@@ -1,5 +1,5 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="convertFiles()">
+  <v-btn :loading="loading" color="primary" @click="wrapper()">
     Convert
     <template #loader>
       <v-progress-circular indeterminate size="20" color="white" width="3" />
@@ -18,34 +18,39 @@
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
-  async function convertFiles() {
-    for (let i = 0; i < files.length; i++) {
-      let reader = new FileReader()
-      reader.onload = async function (event) {
-        let params = {
-          geode_object: geode_object,
-          file: event.target.result,
-          filename: files[i].name,
-          filesize: files[i].size,
-          extension: output_extension,
-          responseType: "blob",
-          responseEncoding: "binary",
-        }
-        toggle_loading()
+  async function wrapper() {
+    await upload_files()
+    convert_files()
+  }
 
-        await api_fetch(
-          { schema, params },
-          {
-            requestErrorFunction: () => {},
-            response_function: (response) => {
-              const new_file_name = response.headers.get("new-file-name")
-              fileDownload(response._data, new_file_name)
-            },
-          },
-        )
+  function upload_files() {
+    return upload_file({
+      route: "tools/upload_file",
+      files,
+    })
+  }
+
+  async function convert_files() {
+    toggle_loading()
+    for (let i = 0; i < files.length; i++) {
+      let params = {
+        geode_object: geode_object,
+        filename: files[i].name,
+        extension: output_extension,
+        responseType: "blob",
+        responseEncoding: "binary",
       }
-      toggle_loading()
-      reader.readAsDataURL(files[i])
+      await api_fetch(
+        { schema, params },
+        {
+          requestErrorFunction: () => {},
+          response_function: (response) => {
+            const new_file_name = response.headers.get("new-file-name")
+            fileDownload(response._data, new_file_name)
+          },
+        },
+      )
     }
+    toggle_loading()
   }
 </script>

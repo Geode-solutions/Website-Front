@@ -13,11 +13,6 @@
   import fileDownload from "js-file-download"
   import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
-  // const props = defineProps({
-  //   schema: { type: Object, required: true },
-  // })
-  // const { schema } = props
-
   const stepper_tree = inject("stepper_tree")
   const { files, geode_object, input_crs, output_crs, output_extension } =
     stepper_tree
@@ -28,38 +23,32 @@
 
   async function convert_files() {
     for (let i = 0; i < files.length; i++) {
-      let reader = new FileReader()
-      reader.onload = async function (event) {
-        const params = {
-          geode_object: geode_object,
-          file: event.target.result,
-          filename: files[i].name,
-          filesize: files[i].size,
-          input_crs_authority: input_crs["authority"],
-          input_crs_code: input_crs["code"],
-          output_crs_authority: output_crs["authority"],
-          output_crs_code: output_crs["code"],
-          output_crs_name: output_crs["name"],
-          extension: output_extension,
-          responseType: "blob",
-          responseEncoding: "binary",
-        }
-
-        toggle_loading()
-
-        await api_fetch(
-          { schema, params },
-          {
-            request_error_function: () => {},
-            response_function: (response) => {
-              const new_file_name = response.headers.get("new-file-name")
-              fileDownload(response._data, new_file_name)
-            },
-          },
-        )
+      const params = {
+        geode_object: geode_object,
+        filename: files[i].name,
+        input_crs_authority: input_crs["authority"],
+        input_crs_code: input_crs["code"],
+        output_crs_authority: output_crs["authority"],
+        output_crs_code: output_crs["code"],
+        output_crs_name: output_crs["name"],
+        extension: output_extension,
+        responseType: "blob",
+        responseEncoding: "binary",
       }
+
       toggle_loading()
-      reader.readAsDataURL(files[i])
+
+      await api_fetch(
+        { schema, params },
+        {
+          request_error_function: () => {},
+          response_function: (response) => {
+            const new_file_name = response.headers.get("new-file-name")
+            fileDownload(response._data, new_file_name)
+          },
+        },
+      )
     }
+    toggle_loading()
   }
 </script>

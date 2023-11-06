@@ -1,24 +1,21 @@
 {
-  "$id": "/tools/file_converter/convert_file",
+  "$id": "/tools/crs_converter/convert_file",
   "type": "object",
   "method": "POST",
   "properties": {
     "geode_object": {
       "type": "string"
     },
-    "file": {
-      "type": "string"
-    },
     "filename": {
       "type": "string"
-    },
-    "filesize": {
-      "type": "number"
     },
     "input_crs_authority": {
       "type": "string"
     },
     "input_crs_code": {
+      "type": "string"
+    },
+    "input_crs_name": {
       "type": "string"
     },
     "output_crs_authority": {
@@ -42,9 +39,13 @@
   },
   "required": [
     "geode_object",
-    "file",
     "filename",
-    "filesize",
+    "input_crs_authority",
+    "input_crs_code",
+    "input_crs_name",
+    "output_crs_authority",
+    "output_crs_code",
+    "output_crs_name",
     "extension",
     "responseType",
     "responseEncoding"
