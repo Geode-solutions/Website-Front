@@ -6,7 +6,7 @@
     "additionalProperties": false
   },
   "brep_stats": {
-    "$id": "workflows/explicit/get_brep_stats",
+    "$id": "/workflows/explicit/get_brep_stats",
     "method": "POST",
     "type": "object",
     "additionalProperties": false
