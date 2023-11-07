@@ -28,7 +28,6 @@
               valid Cross Section, all in a few clicks
             </p>
           </template>
-
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
@@ -46,7 +45,7 @@
             </v-row>
           </v-container>
         </v-stepper>
-        <v-col style="height: 600px">
+        <v-col style="height: 600px; width: 100%">
           <RemoteRenderingView />
         </v-col>
       </v-container>
@@ -55,6 +54,7 @@
 </template>
 
 <script setup>
+  import implicit_json from "./implicit.json"
   import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
@@ -79,13 +79,12 @@
     reset_first_step.value = true
   }
 
-  function sendStepOne() {
+  async function sendStepOne() {
     const params = {
-      constraints: constraints.value,
-      isovalues: isovalues.value,
+      isovalues: JSON.stringify(isovalues.value),
     }
-    return api_fetch(
-      { schema: implicit_json, params },
+    await api_fetch(
+      { schema: implicit_json.step_1, params },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -102,14 +101,13 @@
     )
   }
 
-  function sendStepTwo() {
+  async function sendStepTwo() {
     const params = {
       axis: axis.value,
       coordinate: coordinate.value,
     }
-
-    return api_fetch(
-      { schema: implicit_json, params },
+    await api_fetch(
+      { schema: implicit_json.step_2, params },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -126,12 +124,12 @@
     )
   }
 
-  function sendStepThree() {
+  async function sendStepThree() {
     const params = {
       metric: metric.value,
     }
-    return api_fetch(
-      { schema: implicit_json.params },
+    await api_fetch(
+      { schema: implicit_json.step_3, params },
       {
         response_function: (response) => {
           viewer_store.reset()

@@ -119,9 +119,8 @@
   })
 
   async function displayBase() {
-    toggle_loading()
     return api_fetch(
-      { schema: explicit_json.remesh, params },
+      { schema: explicit_json.base_data },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -144,12 +143,11 @@
         },
       },
     )
-    toggle_loading()
   }
 
   function getBRepStats() {
     return api_fetch(
-      { schema: explicit_json.remesh, params },
+      { schema: explicit_json.brep_stats },
       {
         response_function: (response) => {
           viewer_store.reset()

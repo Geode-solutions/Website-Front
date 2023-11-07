@@ -1,12 +1,14 @@
 {
-  "data": {
+  "base_data": {
     "$id": "/workflows/explicit/get_base_data",
     "method": "POST",
+    "type": "object",
     "additionalProperties": false
   },
-  "brepstats": {
+  "brep_stats": {
     "$id": "workflows/explicit/get_brep_stats",
     "method": "POST",
+    "type": "object",
     "additionalProperties": false
   },
   "remesh": {
