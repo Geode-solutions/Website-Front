@@ -1,0 +1,30 @@
+{
+  "$id": "/tools/file_converter/convert_file",
+  "type": "object",
+  "method": "POST",
+  "properties": {
+    "geode_object": {
+      "type": "string"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "extension": {
+      "type": "string"
+    },
+    "responseType": {
+      "type": "string"
+    },
+    "responseEncoding": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "geode_object",
+    "filename",
+    "extension",
+    "responseType",
+    "responseEncoding"
+  ],
+  "additionalProperties": false
+}

@@ -94,6 +94,7 @@
 <script setup>
   import { useToggle } from "@vueuse/core"
 
+  import explicit_json from "./explicit.json"
   const cloud_store = use_cloud_store()
   const viewer_store = use_viewer_store()
   const loading = ref(false)
@@ -118,10 +119,8 @@
   })
 
   async function displayBase() {
-    toggle_loading()
-    await api_fetch(
-      "workflows/explicit/get_base_data",
-      { method: "POST" },
+    return api_fetch(
+      { schema: explicit_json.base_data },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -144,13 +143,11 @@
         },
       },
     )
-    toggle_loading()
   }
 
   function getBRepStats() {
     return api_fetch(
-      "workflows/explicit/get_brep_stats",
-      { method: "POST" },
+      { schema: explicit_json.brep_stats },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -172,11 +169,12 @@
   }
 
   function remesh() {
-    const params = new FormData()
-    params.append("metric", metric.value)
+    const params = {
+      metric: metric.value,
+    }
+
     return api_fetch(
-      "workflows/explicit/remesh",
-      { method: "POST", body: params },
+      { schema: explicit_json.remesh, params },
       {
         response_function: (response) => {
           viewer_store.reset()

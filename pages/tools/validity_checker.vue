@@ -1,5 +1,9 @@
 <template>
-  <Wrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+    :versions_schema="schema"
+  />
 </template>
 
 <script setup>
@@ -8,6 +12,9 @@
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import ToolsValidityCheckerInspectionButton from "@/components/Tools/ValidityChecker/InspectionButton.vue"
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
+  import schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
+  import FileSelectorSchema from "@/components/Tools/ValidityChecker/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ValidityChecker/ObjectSelector.json"
 
   const cards_list = [
     {
@@ -44,6 +51,7 @@
             label: "Please select a file",
             variable_to_update: "files",
             variable_to_increment: "current_step_index",
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -57,6 +65,7 @@
           component_options: {
             variable_to_update: "geode_object",
             variable_to_increment: "current_step_index",
+            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {

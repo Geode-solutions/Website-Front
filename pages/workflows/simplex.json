@@ -1,0 +1,24 @@
+{
+  "initialize": {
+    "$id": "/workflows/simplex/initialize",
+    "method": "POST",
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
+  "remesh": {
+    "$id": "/workflows/simplex/remesh",
+    "method": "POST",
+    "type": "object",
+    "properties": {
+      "metric": {
+        "type": "number"
+      },
+      "faults_metric": {
+        "type": "number"
+      }
+    },
+    "additionalProperties": false,
+    "required": ["metric", "faults_metric"]
+  }
+}

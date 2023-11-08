@@ -36,11 +36,12 @@
 </template>
 
 <script setup>
+  import schema from "@/components/Tools/ValidityChecker/ResultsPanels.json"
   const stepper_tree = inject("stepper_tree")
   const props = defineProps({
     input_model_checks: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
-    input_file_name: { type: String, required: true },
+    input_file_name: { type: Array, required: true },
     input_index_array: { type: Array, required: false, default: [] },
   })
   const {
@@ -49,7 +50,6 @@
     input_file_name,
     input_index_array,
   } = props
-  const { route_prefix } = stepper_tree
   const opened_panels = ref([])
 
   watch(
@@ -78,7 +78,6 @@
     { deep: true },
   )
   onMounted(() => {
-    console.log("input_model_checks", input_model_checks)
     get_tests_results()
     opened_panels.value = Array.from(Array(input_model_checks.length).keys())
   })
@@ -119,35 +118,30 @@
       const check = input_model_checks[index]
       if (check.is_leaf && check.value == undefined) {
         const children_array = input_index_array.concat(index)
-        get_test_result(
+        await get_test_result(
           input_geode_object,
-          input_file_name,
+          input_file_name[0],
           check.route,
           children_array,
-          10,
         )
       }
     }
   }
 
-  async function get_test_result(
-    object,
-    filename,
-    test,
-    children_array,
-    max_retry,
-  ) {
-    const params = new FormData()
-    params.append("geode_object", object)
-    params.append("filename", filename)
-    params.append("test", test)
-
-    const route = `${route_prefix}/inspect_file`
-    api_fetch(
-      route,
-      { method: "POST", body: params, retry: max_retry },
+  async function get_test_result(object, filename, test, children_array) {
+    const params = {
+      geode_object: object,
+      filename,
+      test,
+    }
+    await api_fetch(
+      { schema, params },
       {
+        response_error_function: () => {
+          update_result(stepper_tree.model_checks, children_array, "error")
+        },
         response_function: (response) => {
+          console.log("response", response)
           update_result(
             stepper_tree.model_checks,
             children_array,
