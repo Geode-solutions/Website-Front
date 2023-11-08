@@ -76,7 +76,7 @@
         },
         chips: computed(() => {
           return additional_files.value.map(
-            (additional_file) => additional_file.name,
+            (additional_file) => additional_file.name
           )
         }),
       },
@@ -128,4 +128,8 @@
   })
 
   provide("stepper_tree", stepper_tree)
+
+  onMounted(() => {
+    console.log("useRuntimeConfig", useRuntimeConfig())
+  })
 </script>
