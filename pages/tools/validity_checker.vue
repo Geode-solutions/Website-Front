@@ -2,7 +2,7 @@
   <Wrapper
     :cards_list="cards_list"
     :stepper_tree="stepper_tree"
-    :versions_schema="schema"
+    :versions_schema="versions_schema"
   />
 </template>
 
@@ -12,7 +12,7 @@
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import ToolsValidityCheckerInspectionButton from "@/components/Tools/ValidityChecker/InspectionButton.vue"
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
-  import schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
+  import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
   import FileSelectorSchema from "@/components/Tools/ValidityChecker/FileSelector.json"
   import ObjectSelectorSchema from "@/components/Tools/ValidityChecker/ObjectSelector.json"
 

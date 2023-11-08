@@ -13,7 +13,7 @@
   import CrsSelector from "@geode/opengeodeweb-front/components/CrsSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
-  import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
+  import versions_schema from "@/components/Tools/CrsConverter/PackagesVersions.json"
   import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
   import ObjectSelectorSchema from "@/components/Tools/CrsConverter/ObjectSelector.json"
   import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
