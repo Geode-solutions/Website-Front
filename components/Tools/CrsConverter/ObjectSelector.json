@@ -1,0 +1,12 @@
+{
+  "$id": "/tools/crs_converter/allowed_objects",
+  "type": "object",
+  "method": "POST",
+  "properties": {
+    "filename": {
+      "type": "string"
+    }
+  },
+  "required": ["filename"],
+  "additionalProperties": false
+}

@@ -1,0 +1,63 @@
+{
+  "step_0": {
+    "$id": "/workflows/implicit/step0",
+    "type": "object",
+    "method": "POST",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "update_value": {
+    "$id": "/workflows/implicit/update_value",
+    "type": "object",
+    "properties": {
+      "point": {
+        "type": "number"
+      },
+      "value": {
+        "type": "number"
+      },
+      "required": ["point", "value"]
+    },
+    "additionalProperties": false
+  },
+  "step_1": {
+    "$id": "/workflows/implicit/step1",
+    "type": "object",
+    "method": "POST",
+    "properties": {
+      "isovalues": {
+        "type": "string"
+      }
+    },
+    "required": ["isovalues"],
+    "additionalProperties": false
+  },
+  "step_2": {
+    "$id": "/workflows/implicit/step2",
+    "type": "object",
+    "method": "POST",
+    "properties": {
+      "axis": {
+        "type": "number"
+      },
+      "coordinate": {
+        "type": "number"
+      }
+    },
+    "required": ["axis", "coordinate"],
+    "additionalProperties": false
+  },
+  "step_3": {
+    "$id": "/workflows/implicit/step3",
+    "type": "object",
+    "method": "POST",
+    "properties": {
+      "metric": {
+        "type": "number"
+      }
+    },
+    "required": ["metric"],
+    "additionalProperties": false
+  }
+}
