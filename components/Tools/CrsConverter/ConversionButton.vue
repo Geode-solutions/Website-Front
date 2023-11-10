@@ -5,7 +5,7 @@
       <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="current_step = 3"> Cancel </v-btn>
+  <v-btn variant="text" @click="current_step = 3">Cancel</v-btn>
 </template>
 
 <script setup>
@@ -40,7 +40,6 @@
     convert_files()
     toggle_loading()
   }
-
   function upload_files() {
     return upload_file({
       route: "tools/upload_file",
@@ -74,7 +73,6 @@
         },
       )
     }
-    toggle_loading()
   }
 </script>
 

@@ -101,6 +101,7 @@
         component: {
           component_name: shallowRef(ToolsValidityCheckerInspectionButton),
           component_options: {
+            files: files,
             input_geode_object: input_geode_object,
           },
         },

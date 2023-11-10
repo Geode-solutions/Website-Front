@@ -7,9 +7,11 @@
 </template>
 
 <script setup>
+  import _ from "lodash"
+
   import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
-  import MissingFileSelector from "@geode/opengeodeweb-front/components/MissingFileSelector.vue"
+  import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import CrsSelector from "@geode/opengeodeweb-front/components/CrsSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
@@ -20,7 +22,6 @@
   import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
   import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
   import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
-  import ConversionButtonSchema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const cards_list = [
     {
@@ -43,6 +44,7 @@
   const output_geode_object = ref("")
   const output_extension = ref("")
   const route_prefix = "tools/crs_converter"
+  const key = "crs"
 
   const stepper_tree = reactive({
     current_step_index: ref(0),
@@ -54,7 +56,7 @@
     output_crs: output_crs,
     output_geode_object: output_geode_object,
     output_extension: output_extension,
-    key: "crs",
+    key: key,
     steps: [
       {
         step_title: "Please select a file to convert",
@@ -92,7 +94,7 @@
       {
         step_title: "Please select additionnal files",
         component: {
-          component_name: shallowRef(MissingFileSelector),
+          component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
             input_geode_object: input_geode_object,

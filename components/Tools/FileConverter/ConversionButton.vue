@@ -39,8 +39,9 @@
   }
 
   async function convert_files() {
+    toggle_loading()
     for (let i = 0; i < files.length; i++) {
-      let params = {
+      const params = {
         input_geode_object: input_geode_object,
         filename: files[i].name,
         output_geode_object: output_geode_object,
@@ -48,7 +49,7 @@
         responseType: "blob",
         responseEncoding: "binary",
       }
-      toggle_loading()
+
       await api_fetch(
         { schema, params },
         {

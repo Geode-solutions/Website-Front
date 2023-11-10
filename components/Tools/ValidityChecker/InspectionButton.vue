@@ -14,7 +14,7 @@
   import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
 
   const props = defineProps({
-    files: { type: String, required: true },
+    files: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
   })
   const { files, input_geode_object } = props

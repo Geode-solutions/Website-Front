@@ -3,10 +3,10 @@
   "type": "object",
   "method": "POST",
   "properties": {
-    "geode_object": {
+    "input_geode_object": {
       "type": "string"
     }
   },
-  "required": ["geode_object"],
+  "required": ["input_geode_object"],
   "additionalProperties": false
 }
