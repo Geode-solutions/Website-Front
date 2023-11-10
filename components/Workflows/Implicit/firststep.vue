@@ -75,6 +75,8 @@
 </template>
 
 <script setup>
+  import implicit_json from "@/pages/workflows/implicit.json"
+
   const inputsStore = useInputStore()
   const viewer_store = use_viewer_store()
   const nb_constraints = ref(0)
@@ -86,7 +88,6 @@
   const { reset } = toRefs(props)
   watch(reset, (reset) => {
     if (reset) {
-      console.log("reset")
       nb_constraints.value = 0
       nb_isovalues.value = 3
       getConstraints()
@@ -94,16 +95,12 @@
   })
 
   async function getConstraints() {
-    console.log("getConstraints")
     viewer_store.reset()
     await api_fetch(
-      "workflows/implicit/step0",
-      { method: "POST" },
+      { schema: implicit_json.step_0 },
       {
         response_function: (response) => {
-          console.log("coucou", response)
           const autofilled_constrains = JSON.parse(response._data.constraints)
-          console.log(autofilled_constrains)
           for (let i = 0; i < autofilled_constrains.length; i++) {
             const constraint = autofilled_constrains[i]
             const x = {

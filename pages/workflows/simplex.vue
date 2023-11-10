@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-  const cloud_store = use_cloud_store()
+  import simplex_json from "./simplex.json"
   const viewer_store = use_viewer_store()
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
@@ -113,11 +113,10 @@
   }
 
   async function initialize() {
-    toggle_loading()
     viewer_store.reset()
+    toggle_loading()
     await api_fetch(
-      "workflows/simplex/initialize",
-      { method: "POST" },
+      { schema: simplex_json.initialize },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -128,17 +127,15 @@
         },
       },
     )
-    toggle_loading()
   }
 
   async function sendMetrics() {
-    toggle_loading()
-    const params = new FormData()
-    params.append("metric", metric.value)
-    params.append("faults_metric", faults_metric.value)
+    const params = {
+      metric: metric.value,
+      faults_metric: faults_metric.value,
+    }
     await api_fetch(
-      "workflows/simplex/remesh",
-      { method: "POST", body: params },
+      { schema: simplex_json.remesh, params },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -153,14 +150,15 @@
         },
       },
     )
-    toggle_loading()
   }
 
   function next() {
+    toggle_loading()
     if (step.value == 2) {
       sendMetrics()
     }
     step.value++
+    toggle_loading()
   }
 
   onMounted(() => {

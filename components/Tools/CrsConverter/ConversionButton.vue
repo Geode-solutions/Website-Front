@@ -1,5 +1,5 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="convert_files()">
+  <v-btn :loading="loading" color="primary" @click="wrapper()">
     Convert
     <template #loader>
       <v-progress-circular indeterminate size="20" color="white" width="3" />
@@ -9,10 +9,9 @@
 </template>
 
 <script setup>
+  import { useToggle } from "@vueuse/core"
   import fileDownload from "js-file-download"
-
-  const stepper_tree = inject("stepper_tree")
-  const { route_prefix } = stepper_tree
+  import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const props = defineProps({
     files: { type: Array, required: true },
@@ -33,30 +32,40 @@
   } = props
 
   const loading = ref(false)
-
   const toggle_loading = useToggle(loading)
 
-  async function convert_files() {
+  async function wrapper() {
     toggle_loading()
-    for (let i = 0; i < files.length; i++) {
-      let params = new FormData()
+    await upload_files()
+    convert_files()
+    toggle_loading()
+  }
 
-      params.append("input_geode_object", input_geode_object)
-      params.append("filename", files[i].name)
-      params.append("input_crs_authority", input_crs["authority"])
-      params.append("input_crs_code", input_crs["code"])
-      params.append("input_crs_name", input_crs["name"])
-      params.append("output_crs_authority", output_crs["authority"])
-      params.append("output_crs_code", output_crs["code"])
-      params.append("output_crs_name", output_crs["name"])
-      params.append("output_geode_object", output_geode_object)
-      params.append("output_extension", output_extension)
-      params.append("responseType", "blob")
-      params.append("responseEncoding", "binary")
+  function upload_files() {
+    return upload_file({
+      route: "tools/upload_file",
+      files,
+    })
+  }
+  async function convert_files() {
+    for (let i = 0; i < files.length; i++) {
+      const params = {
+        input_geode_object: input_geode_object,
+        filename: files[i].name,
+        input_crs_authority: input_crs["authority"],
+        input_crs_code: input_crs["code"],
+        input_crs_name: input_crs["name"],
+        output_crs_authority: output_crs["authority"],
+        output_crs_code: output_crs["code"],
+        output_crs_name: output_crs["name"],
+        output_geode_object: output_geode_object,
+        output_extension: output_extension,
+        responseType: "blob",
+        responseEncoding: "binary",
+      }
 
       await api_fetch(
-        `${route_prefix}/convert_file`,
-        { method: "POST", body: params },
+        { schema, params },
         {
           response_function: (response) => {
             const new_file_name = response.headers.get("new-file-name")

@@ -1,0 +1,7 @@
+{
+  "$id": "/tools/crs_converter/allowed_files",
+  "type": "object",
+  "method": "GET",
+  "properties": {},
+  "additionalProperties": false
+}

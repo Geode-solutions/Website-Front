@@ -1,5 +1,9 @@
 <template>
-  <Wrapper :cards_list="cards_list" :stepper_tree="stepper_tree" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+    :versions_schema="versions_schema"
+  />
 </template>
 
 <script setup>
@@ -9,6 +13,9 @@
   import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ToolsValidityCheckerInspectionButton from "@/components/Tools/ValidityChecker/InspectionButton.vue"
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
+  import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
+  import FileSelectorSchema from "@/components/Tools/ValidityChecker/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ValidityChecker/ObjectSelector.json"
 
   const cards_list = [
     {
@@ -43,6 +50,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: false,
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -55,6 +63,7 @@
           component_name: shallowRef(ObjectSelector),
           component_options: {
             files: files,
+            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -87,7 +96,6 @@
           component_name: shallowRef(ToolsValidityCheckerInspectionButton),
           component_options: {
             input_geode_object: input_geode_object,
-            variable_to_update: "model_checks",
           },
         },
         chips: [],

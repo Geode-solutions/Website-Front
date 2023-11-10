@@ -1,17 +1,25 @@
 <template>
-  <Wrapper :cards_list="cards_list" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+    :versions_schema="versions_schema"
+  />
 </template>
 
 <script setup>
-  import _ from "lodash"
-
   import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
+  import MissingFileSelector from "@geode/opengeodeweb-front/components/MissingFileSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
-  import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import CrsSelector from "@geode/opengeodeweb-front/components/CrsSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
+  import versions_schema from "@/components/Tools/CrsConverter/PackagesVersions.json"
+  import FileSelectorSchema from "@/components/Tools/CrsConverter/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/CrsConverter/ObjectSelector.json"
+  import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
+  import ExtensionSelectorSchema from "@/components/Tools/CrsConverter/ExtensionSelector.json"
+  import ConversionButtonSchema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const cards_list = [
     {
@@ -31,7 +39,6 @@
   const additional_files = ref([])
   const input_crs = ref({})
   const output_crs = ref({})
-  const output_geode_object = ref("")
   const output_extension = ref("")
   const route_prefix = "tools/crs_converter"
 
@@ -52,6 +59,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -64,6 +72,7 @@
           component_name: shallowRef(ObjectSelector),
           component_options: {
             files: files,
+            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -74,6 +83,7 @@
           }
         }),
       },
+
       {
         step_title: "Please select additionnal files",
         component: {
@@ -82,6 +92,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
+            // schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -97,6 +108,7 @@
           component_options: {
             input_geode_object: input_geode_object,
             variable_to_update: "input_crs",
+            schema: CrsSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -110,6 +122,7 @@
           component_options: {
             input_geode_object: input_geode_object,
             variable_to_update: "output_crs",
+            schema: CrsSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -122,6 +135,7 @@
           component_name: shallowRef(ExtensionSelector),
           component_options: {
             input_geode_object: input_geode_object,
+            schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {

@@ -20,6 +20,8 @@
 </template>
 
 <script setup>
+  import implicit_json from "@/pages/workflows/implicit.json"
+
   const inputsStore = useInputStore()
   const { constraints } = storeToRefs(inputsStore)
   const viewer_store = use_viewer_store()
@@ -38,12 +40,12 @@
       return
     }
     inputsStore.modifyConstraint(index.value, constraint)
-    const params = new FormData()
-    params.append("point", index.value)
-    params.append("value", constraint.value.value)
+    const params = {
+      points: index.value,
+      value: constraint.value,
+    }
     await api_fetch(
-      "workflows/implicit/update_value",
-      { method: "POST", body: params },
+      { schema: implicit_json.update_value, params },
       {
         response_function: (response) => {
           viewer_store.update_data({ id: response._data.points })

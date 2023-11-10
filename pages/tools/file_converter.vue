@@ -1,5 +1,9 @@
 <template>
-  <Wrapper :cards_list="cards_list" />
+  <Wrapper
+    :cards_list="cards_list"
+    :stepper_tree="stepper_tree"
+    :versions_schema="versions_schema"
+  />
 </template>
 
 <script setup>
@@ -11,6 +15,10 @@
   import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
+  import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
+  import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/FileConverter/ObjectSelector.json"
+  import ExtensionSelectorSchema from "@/components/Tools/FileConverter/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -37,30 +45,30 @@
     tool_name: "File converter",
     route_prefix: route_prefix,
     files: files,
-    input_geode_object: input_geode_object,
     additional_files: additional_files,
-    output_geode_object: output_geode_object,
+    geode_object: geode_object,
     output_extension: output_extension,
     steps: [
       {
-        step_title: "Please select file(s) to convert",
+        step_title: "Please select a file(s) to convert",
         component: {
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
+            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
           return files.value.map((file) => file.name)
         }),
       },
-
       {
         step_title: "Please confirm the data type",
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
             files: files,
+            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -79,6 +87,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
+            schema: FileSelectorSchema,
           },
           skippable: true,
         },
@@ -95,6 +104,7 @@
           component_options: {
             input_geode_object: input_geode_object,
             variable_to_update: "input_crs",
+            schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {

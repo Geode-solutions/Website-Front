@@ -11,17 +11,23 @@
 </template>
 
 <script setup>
-  const stepper_tree = inject("stepper_tree")
-  const { route_prefix } = stepper_tree
+  import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
+
   const props = defineProps({
+    files: { type: String, required: true },
     input_geode_object: { type: String, required: true },
   })
-  const { input_geode_object } = props
+  const { files, input_geode_object } = props
+
+  const stepper_tree = inject("stepper_tree")
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
   async function inspect_file() {
+    toggle_loading()
+    await upload_files()
     await get_tests_names()
+    toggle_loading()
     stepper_tree["current_step_index"]++
   }
 
@@ -29,25 +35,31 @@
     stepper_tree["current_step_index"]--
   }
 
+  function upload_files() {
+    return upload_file({
+      route: "tools/upload_file",
+      files,
+    })
+  }
+
   async function get_tests_names() {
-    const params = new FormData()
-    params.append("input_geode_object", input_geode_object)
-    const route = `${route_prefix}/tests_names`
-    toggle_loading()
+    const params = { input_geode_object }
     await api_fetch(
-      route,
-      { method: "POST", body: params },
+      { schema: InspectionButtonSchema, params },
       {
         response_function: (response) => {
           stepper_tree["model_checks"] = response._data.model_checks
         },
       },
     )
-    toggle_loading()
   }
 </script>
 
 <style scoped>
+  .card {
+    border-radius: 15px;
+  }
+
   .v-btn {
     text-transform: unset !important;
   }

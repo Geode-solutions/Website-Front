@@ -46,7 +46,7 @@
             </v-row>
           </v-container>
         </v-stepper>
-        <v-col style="height: 600px">
+        <v-col style="height: 600px; width: 100%">
           <RemoteRenderingView />
         </v-col>
       </v-container>
@@ -55,11 +55,13 @@
 </template>
 
 <script setup>
+  import implicit_json from "./implicit.json"
+  // import { useToggle } from "@vueuse/core"
+
   const cloud_store = use_cloud_store()
   const inputsStore = useInputStore()
   const viewer_store = use_viewer_store()
-  const { constraints, isovalues, axis, coordinate, metric } =
-    storeToRefs(inputsStore)
+  const { isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const step = ref(1)
@@ -77,13 +79,12 @@
     reset_first_step.value = true
   }
 
-  function sendStepOne() {
-    const params = new FormData()
-    params.append("constraints", JSON.stringify(constraints.value))
-    params.append("isovalues", JSON.stringify(isovalues.value))
-    return api_fetch(
-      "workflows/implicit/step1",
-      { method: "POST", body: params },
+  async function sendStepOne() {
+    const params = {
+      isovalues: JSON.stringify(isovalues.value),
+    }
+    await api_fetch(
+      { schema: implicit_json.step_1, params },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -100,13 +101,13 @@
     )
   }
 
-  function sendStepTwo() {
-    const params = new FormData()
-    params.append("axis", axis.value)
-    params.append("coordinate", coordinate.value)
-    return api_fetch(
-      "workflows/implicit/step2",
-      { method: "POST", body: params },
+  async function sendStepTwo() {
+    const params = {
+      axis: axis.value,
+      coordinate: coordinate.value,
+    }
+    await api_fetch(
+      { schema: implicit_json.step_2, params },
       {
         response_function: (response) => {
           viewer_store.reset()
@@ -123,12 +124,13 @@
     )
   }
 
-  function sendStepThree() {
-    const params = new FormData()
-    params.append("metric", metric.value)
-    return api_fetch(
-      "workflows/implicit/step3",
-      { method: "POST", body: params },
+  async function sendStepThree() {
+    const params = {
+      metric: metric.value,
+    }
+    await api_fetch(
+      { schema: implicit_json.step_3, params },
+
       {
         response_function: (response) => {
           viewer_store.reset()
