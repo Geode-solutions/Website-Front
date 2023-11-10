@@ -40,6 +40,7 @@
   const additional_files = ref([])
   const input_crs = ref({})
   const output_crs = ref({})
+  const output_geode_object = ref("")
   const output_extension = ref("")
   const route_prefix = "tools/crs_converter"
 

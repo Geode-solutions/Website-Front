@@ -48,6 +48,7 @@
     files: files,
     additional_files: additional_files,
     input_geode_object: input_geode_object,
+    output_geode_object: output_geode_object,
     output_extension: output_extension,
     steps: [
       {
