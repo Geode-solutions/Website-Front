@@ -19,7 +19,7 @@
   import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
   import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
   import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
-  import ExtensionSelectorSchema from "@/components/Tools/CrsConverter/ExtensionSelector.json"
+  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
   import ConversionButtonSchema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const cards_list = [

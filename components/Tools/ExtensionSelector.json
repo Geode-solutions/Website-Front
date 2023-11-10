@@ -1,5 +1,5 @@
 {
-  "$id": "/tools/output_file_extensions",
+  "$id": "/tools/geode_objects_and_output_extensions",
   "type": "object",
   "method": "POST",
   "properties": {

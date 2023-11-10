@@ -19,7 +19,7 @@
   import FileSelectorSchema from "@/components/Tools/FileSelector.json"
   import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
   import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
-  import ExtensionSelectorSchema from "@/components/Tools/FileConverter/ExtensionSelector.json"
+  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
 
   const cards_list = [
     {
