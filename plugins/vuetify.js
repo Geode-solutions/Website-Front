@@ -1,7 +1,7 @@
 import { createVuetify } from "vuetify"
 import * as components from "vuetify/components"
-import { VDataTable } from "vuetify/labs/VDataTable"
-import { VStepper } from "vuetify/labs/VStepper"
+// import { VDataTable } from "vuetify/labs/VDataTable"
+// import { VStepper } from "vuetify/labs/VStepper"
 import * as directives from "vuetify/directives"
 
 import "@mdi/font/css/materialdesignicons.css"
@@ -26,8 +26,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     components: {
       ...components,
-      VDataTable,
-      VStepper,
+      // VDataTable,
+      // VStepper,
     },
     directives,
     theme: {
