@@ -1,0 +1,9 @@
+{
+  "$id": "/tools/allowed_files",
+  "type": "object",
+  "method": "POST",
+  "properties": {
+    "key": { "type": ["string", "null"] }
+  },
+  "additionalProperties": false
+}

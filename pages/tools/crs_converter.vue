@@ -15,8 +15,9 @@
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
   import versions_schema from "@/components/Tools/CrsConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/CrsConverter/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/CrsConverter/ObjectSelector.json"
+  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
   import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
   import ExtensionSelectorSchema from "@/components/Tools/CrsConverter/ExtensionSelector.json"
   import ConversionButtonSchema from "@/components/Tools/CrsConverter/ConversionButton.json"
@@ -52,6 +53,7 @@
     output_crs: output_crs,
     output_geode_object: output_geode_object,
     output_extension: output_extension,
+    key: "crs",
     steps: [
       {
         step_title: "Please select a file to convert",
@@ -59,6 +61,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
+            key: key,
             schema: FileSelectorSchema,
           },
         },
@@ -72,6 +75,7 @@
           component_name: shallowRef(ObjectSelector),
           component_options: {
             files: files,
+            key: key,
             schema: ObjectSelectorSchema,
           },
         },
@@ -87,12 +91,12 @@
       {
         step_title: "Please select additionnal files",
         component: {
-          component_name: shallowRef(MissingFilesSelector),
+          component_name: shallowRef(MissingFileSelector),
           component_options: {
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
-            // schema: FileSelectorSchema,
+            schema: MissingFileSelectorSchema,
           },
         },
         chips: computed(() => {

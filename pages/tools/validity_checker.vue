@@ -14,8 +14,9 @@
   import ToolsValidityCheckerInspectionButton from "@/components/Tools/ValidityChecker/InspectionButton.vue"
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
   import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/ValidityChecker/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ValidityChecker/ObjectSelector.json"
+  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
 
   const cards_list = [
     {
@@ -35,6 +36,7 @@
   const additional_files = ref([])
   const model_checks = ref([])
   const route_prefix = "tools/validity_checker"
+  const key = "inspector"
 
   const stepper_tree = reactive({
     current_step_index: ref(0),
@@ -43,6 +45,7 @@
     files: files,
     input_geode_object: input_geode_object,
     model_checks: model_checks,
+    key: key,
     steps: [
       {
         step_title: "Please select a file to check",
@@ -50,6 +53,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: false,
+            key: key,
             schema: FileSelectorSchema,
           },
         },
@@ -63,6 +67,7 @@
           component_name: shallowRef(ObjectSelector),
           component_options: {
             files: files,
+            key: key,
             schema: ObjectSelectorSchema,
           },
         },
@@ -82,6 +87,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
+            schema: MissingFileSelectorSchema,
           },
         },
         chips: computed(() => {

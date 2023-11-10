@@ -16,8 +16,9 @@
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/FileConverter/ObjectSelector.json"
+  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
   import ExtensionSelectorSchema from "@/components/Tools/FileConverter/ExtensionSelector.json"
 
   const cards_list = [
@@ -46,7 +47,7 @@
     route_prefix: route_prefix,
     files: files,
     additional_files: additional_files,
-    geode_object: geode_object,
+    input_geode_object: input_geode_object,
     output_extension: output_extension,
     steps: [
       {
@@ -87,7 +88,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
-            schema: FileSelectorSchema,
+            schema: MissingFileSelectorSchema,
           },
           skippable: true,
         },

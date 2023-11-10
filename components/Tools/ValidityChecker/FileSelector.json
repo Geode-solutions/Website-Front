@@ -1,7 +1,0 @@
-{
-  "$id": "/tools/validity_checker/allowed_files",
-  "type": "object",
-  "method": "GET",
-  "properties": {},
-  "additionalProperties": false
-}
