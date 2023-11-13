@@ -9,7 +9,7 @@
         sm="4"
         class="ma-2"
       >
-        <v-card class="elevation-5 text-center">
+        <v-card class="text-center">
           <v-avatar :size="mdAndUp ? 200 : 150" class="ma-2">
             <v-img :src="guy.pict" :alt="'Geode-solutions ' + guy.name" />
           </v-avatar>

@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-5">
+  <div class="pa-0">
     <v-btn :loading="loading" color="primary" @click="inspect_file()">
       Inspect
       <template #loader>
@@ -54,13 +54,3 @@
     )
   }
 </script>
-
-<style scoped>
-  .card {
-    border-radius: 15px;
-  }
-
-  .v-btn {
-    text-transform: unset !important;
-  }
-</style>

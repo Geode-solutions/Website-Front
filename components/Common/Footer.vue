@@ -70,9 +70,3 @@
   ]
   const date = new Date().getFullYear()
 </script>
-
-<style scoped>
-  .v-btn {
-    text-transform: unset !important;
-  }
-</style>

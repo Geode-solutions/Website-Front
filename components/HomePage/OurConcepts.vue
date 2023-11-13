@@ -10,7 +10,7 @@
         lg="3"
         class="ma-3"
       >
-        <v-card class="elevation-5">
+        <v-card>
           <v-img
             class="align-center"
             :src="card.image"

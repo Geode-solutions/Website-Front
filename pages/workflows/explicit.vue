@@ -27,7 +27,7 @@
                 <v-col>
                   <v-card
                     rounded="lg"
-                    class="my-6 pa-5 elevation-5"
+                    class="my-6 pa-5"
                     color="transparent"
                     align="center"
                   >
