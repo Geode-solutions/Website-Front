@@ -56,7 +56,6 @@
 
 <script setup>
   import implicit_json from "./implicit.json"
-  // import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
   const inputsStore = useInputStore()
@@ -130,7 +129,6 @@
     }
     await api_fetch(
       { schema: implicit_json.step_3, params },
-
       {
         response_function: (response) => {
           viewer_store.reset()
