@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-  import { useToggle } from "@vueuse/core"
   import fileDownload from "js-file-download"
   import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
@@ -51,12 +50,8 @@
       const params = {
         input_geode_object: input_geode_object,
         filename: files[i].name,
-        input_crs_authority: input_crs["authority"],
-        input_crs_code: input_crs["code"],
-        input_crs_name: input_crs["name"],
-        output_crs_authority: output_crs["authority"],
-        output_crs_code: output_crs["code"],
-        output_crs_name: output_crs["name"],
+        input_crs: input_crs,
+        output_crs: output_crs,
         output_geode_object: output_geode_object,
         output_extension: output_extension,
         responseType: "blob",
