@@ -12,6 +12,11 @@
   import fileDownload from "js-file-download"
   import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
+  const emit = defineEmits([
+    "update_values",
+    "increment_current_step",
+    "decrement_current_step",
+  ])
   const props = defineProps({
     files: { type: Array, required: true },
     input_geode_object: { type: String, required: true },

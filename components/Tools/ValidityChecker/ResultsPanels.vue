@@ -38,6 +38,12 @@
 <script setup>
   import schema from "@/components/Tools/ValidityChecker/ResultsPanels.json"
 
+  const emit = defineEmits([
+    "update_values",
+    "increment_current_step",
+    "decrement_current_step",
+  ])
+
   const stepper_tree = inject("stepper_tree")
 
   const props = defineProps({

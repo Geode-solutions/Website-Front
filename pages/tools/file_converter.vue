@@ -9,12 +9,12 @@
 <script setup>
   import _ from "lodash"
 
-  import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
+
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
   import FileSelectorSchema from "@/components/Tools/FileSelector.json"
   import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
@@ -105,7 +105,6 @@
           component_name: shallowRef(ExtensionSelector),
           component_options: {
             input_geode_object: input_geode_object,
-            variable_to_update: "input_crs",
             schema: ExtensionSelectorSchema,
           },
         },

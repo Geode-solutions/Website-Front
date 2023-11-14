@@ -45,6 +45,10 @@ export default defineNuxtPlugin((nuxtApp) => {
         elevation: 5,
         style: "border-radius: 15px;",
       },
+      VExpansionPanel: {
+        elevation: 5,
+        style: "border-radius: 15px;",
+      },
     },
   })
 

@@ -6,20 +6,24 @@
         <v-progress-circular indeterminate size="20" color="white" width="3" />
       </template>
     </v-btn>
-    <v-btn variant="text" @click="decrement_current_step()">Cancel</v-btn>
+    <v-btn variant="text" @click="emit('decrement_current_step')">Cancel</v-btn>
   </div>
 </template>
 
 <script setup>
   import InspectionButtonSchema from "@/components/Tools/ValidityChecker/InspectionButton.json"
 
+  const emit = defineEmits([
+    "update_values",
+    "increment_current_step",
+    "decrement_current_step",
+  ])
   const props = defineProps({
     files: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
   })
   const { files, input_geode_object } = props
 
-  const stepper_tree = inject("stepper_tree")
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
@@ -28,11 +32,7 @@
     await upload_files()
     await get_tests_names()
     toggle_loading()
-    stepper_tree["current_step_index"]++
-  }
-
-  function decrement_current_step() {
-    stepper_tree["current_step_index"]--
+    emit("increment_current_step")
   }
 
   function upload_files() {
@@ -48,7 +48,7 @@
       { schema: InspectionButtonSchema, params },
       {
         response_function: (response) => {
-          stepper_tree["model_checks"] = response._data.model_checks
+          emit("update_values", { model_checks: response._data.model_checks })
         },
       },
     )
