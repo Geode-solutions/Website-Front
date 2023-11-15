@@ -54,6 +54,7 @@
           component_options: {
             multiple: false,
             key: key,
+            route: "tools/upload_file",
             schema: FileSelectorSchema,
           },
         },
@@ -87,6 +88,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
+            route: "tools/upload_file",
             schema: MissingFileSelectorSchema,
           },
         },

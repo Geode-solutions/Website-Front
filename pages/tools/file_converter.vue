@@ -57,6 +57,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
+            route: "tools/upload_file",
             schema: FileSelectorSchema,
           },
         },
@@ -89,6 +90,7 @@
             multiple: true,
             input_geode_object: input_geode_object,
             files: files,
+            route: "tools/upload_file",
             schema: MissingFileSelectorSchema,
           },
           skippable: true,
