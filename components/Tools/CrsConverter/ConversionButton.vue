@@ -5,17 +5,36 @@
       <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="current_step = 3"> Cancel </v-btn>
+  <v-btn variant="text" @click="current_step = 3">Cancel</v-btn>
 </template>
 
 <script setup>
-  import { useToggle } from "@vueuse/core"
   import fileDownload from "js-file-download"
   import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
-  const stepper_tree = inject("stepper_tree")
-  const { files, geode_object, input_crs, output_crs, output_extension } =
-    stepper_tree
+  const emit = defineEmits([
+    "update_values",
+    "increment_step",
+    "decrement_step",
+  ])
+  const props = defineProps({
+    files: { type: Array, required: true },
+    input_geode_object: { type: String, required: true },
+    input_crs: { type: Object, required: true },
+    output_crs: { type: Object, required: true },
+    output_geode_object: { type: String, required: true },
+    output_extension: { type: String, required: true },
+  })
+
+  const {
+    files,
+    input_geode_object,
+    input_crs,
+    output_crs,
+    output_geode_object,
+    output_extension,
+  } = props
+
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
@@ -25,7 +44,6 @@
     convert_files()
     toggle_loading()
   }
-
   function upload_files() {
     return upload_file({
       route: "tools/upload_file",
@@ -35,15 +53,12 @@
   async function convert_files() {
     for (let i = 0; i < files.length; i++) {
       const params = {
-        geode_object: geode_object,
+        input_geode_object: input_geode_object,
         filename: files[i].name,
-        input_crs_authority: input_crs["authority"],
-        input_crs_code: input_crs["code"],
-        input_crs_name: input_crs["name"],
-        output_crs_authority: output_crs["authority"],
-        output_crs_code: output_crs["code"],
-        output_crs_name: output_crs["name"],
-        extension: output_extension,
+        input_crs: input_crs,
+        output_crs: output_crs,
+        output_geode_object: output_geode_object,
+        output_extension: output_extension,
         responseType: "blob",
         responseEncoding: "binary",
       }
@@ -60,3 +75,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .v-btn {
+    text-transform: unset !important;
+  }
+</style>

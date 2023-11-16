@@ -1,7 +1,5 @@
 import { createVuetify } from "vuetify"
 import * as components from "vuetify/components"
-import { VDataTable } from "vuetify/labs/VDataTable"
-import { VStepper } from "vuetify/labs/VStepper"
 import * as directives from "vuetify/directives"
 
 import "@mdi/font/css/materialdesignicons.css"
@@ -26,8 +24,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     components: {
       ...components,
-      VDataTable,
-      VStepper,
     },
     directives,
     theme: {
@@ -41,6 +37,19 @@ export default defineNuxtPlugin((nuxtApp) => {
       defaultSet: "mdi",
     },
     ssr: true,
+    defaults: {
+      VBtn: {
+        style: "text-transform: none;",
+      },
+      VCard: {
+        elevation: 5,
+        style: "border-radius: 15px;",
+      },
+      VExpansionPanel: {
+        elevation: 5,
+        style: "border-radius: 15px;",
+      },
+    },
   })
 
   nuxtApp.vueApp.use(vuetify)

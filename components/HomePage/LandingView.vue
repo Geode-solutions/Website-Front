@@ -12,7 +12,6 @@
             border-radius: 80px 0px;
             background-color: rgba(255, 255, 255, 0.8);
           "
-          elevation="5"
         >
           <v-img
             :src="logo"

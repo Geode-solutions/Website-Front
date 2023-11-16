@@ -3,7 +3,7 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Implicit modeling</h1>
     </v-col>
-    <v-col v-if="!cloud_store.is_running">
+    <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -28,6 +28,7 @@
               valid Cross Section, all in a few clicks
             </p>
           </template>
+
           <v-container>
             <v-row class="mx-5">
               <v-col cols="auto">
@@ -55,13 +56,12 @@
 
 <script setup>
   import implicit_json from "./implicit.json"
-  import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
+  const { is_running } = storeToRefs(cloud_store)
   const inputsStore = useInputStore()
   const viewer_store = use_viewer_store()
-  const { constraints, isovalues, axis, coordinate, metric } =
-    storeToRefs(inputsStore)
+  const { isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const step = ref(1)
@@ -81,7 +81,7 @@
 
   async function sendStepOne() {
     const params = {
-      isovalues: JSON.stringify(isovalues.value),
+      isovalues: isovalues.value,
     }
     await api_fetch(
       { schema: implicit_json.step_1, params },

@@ -3,7 +3,7 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     </v-col>
-    <v-col v-if="!cloud_store.is_running">
+    <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -88,9 +88,9 @@
 
 <script setup>
   import simplex_json from "./simplex.json"
-  import { useToggle } from "@vueuse/core"
 
   const cloud_store = use_cloud_store()
+  const { is_running } = storeToRefs(cloud_store)
   const viewer_store = use_viewer_store()
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
@@ -117,6 +117,7 @@
 
   async function initialize() {
     viewer_store.reset()
+    toggle_loading()
     await api_fetch(
       { schema: simplex_json.initialize },
       {
@@ -129,6 +130,7 @@
         },
       },
     )
+    toggle_loading()
   }
 
   async function sendMetrics() {
@@ -136,7 +138,6 @@
       metric: metric.value,
       faults_metric: faults_metric.value,
     }
-
     await api_fetch(
       { schema: simplex_json.remesh, params },
       {

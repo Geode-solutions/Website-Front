@@ -1,12 +1,15 @@
 {
-  "$id": "/tools/crs_converter/allowed_objects",
+  "$id": "/tools/missing_files",
   "type": "object",
   "method": "POST",
   "properties": {
+    "input_geode_object": {
+      "type": "string"
+    },
     "filename": {
       "type": "string"
     }
   },
-  "required": ["filename"],
+  "required": ["input_geode_object", "filename"],
   "additionalProperties": false
 }
