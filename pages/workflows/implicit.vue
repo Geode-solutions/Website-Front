@@ -81,7 +81,7 @@
 
   async function sendStepOne() {
     const params = {
-      isovalues: JSON.stringify(isovalues.value),
+      isovalues: isovalues.value,
     }
     await api_fetch(
       { schema: implicit_json.step_1, params },
