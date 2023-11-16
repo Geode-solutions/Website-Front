@@ -3,7 +3,7 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
     </v-col>
-    <v-col v-if="!cloud_store.is_running">
+    <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -95,6 +95,7 @@
   import explicit_json from "./explicit.json"
 
   const cloud_store = use_cloud_store()
+  const { is_running } = storeToRefs(cloud_store)
   const viewer_store = use_viewer_store()
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
