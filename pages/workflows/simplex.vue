@@ -130,6 +130,7 @@
         },
       },
     )
+    toggle_loading()
   }
 
   async function sendMetrics() {
