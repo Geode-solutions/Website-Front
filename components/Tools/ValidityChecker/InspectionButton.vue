@@ -6,7 +6,7 @@
         <v-progress-circular indeterminate size="20" color="white" width="3" />
       </template>
     </v-btn>
-    <v-btn variant="text" @click="emit('decrement_current_step')">Cancel</v-btn>
+    <v-btn variant="text" @click="emit('decrement_step')">Cancel</v-btn>
   </div>
 </template>
 
@@ -15,8 +15,8 @@
 
   const emit = defineEmits([
     "update_values",
-    "increment_current_step",
-    "decrement_current_step",
+    "increment_step",
+    "decrement_step",
   ])
   const props = defineProps({
     files: { type: Array, required: true },
@@ -32,7 +32,7 @@
     await upload_files()
     await get_tests_names()
     toggle_loading()
-    emit("increment_current_step")
+    emit("increment_step")
   }
 
   function upload_files() {

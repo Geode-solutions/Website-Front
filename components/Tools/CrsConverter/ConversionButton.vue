@@ -14,8 +14,8 @@
 
   const emit = defineEmits([
     "update_values",
-    "increment_current_step",
-    "decrement_current_step",
+    "increment_step",
+    "decrement_step",
   ])
   const props = defineProps({
     files: { type: Array, required: true },
