@@ -3,13 +3,16 @@
   "type": "object",
   "method": "POST",
   "properties": {
-    "geode_object": {
+    "input_geode_object": {
       "type": "string"
     },
     "filename": {
       "type": "string"
     },
-    "extension": {
+    "output_geode_object": {
+      "type": "string"
+    },
+    "output_extension": {
       "type": "string"
     },
     "responseType": {
@@ -20,9 +23,10 @@
     }
   },
   "required": [
-    "geode_object",
+    "input_geode_object",
     "filename",
-    "extension",
+    "output_geode_object",
+    "output_extension",
     "responseType",
     "responseEncoding"
   ],

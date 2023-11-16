@@ -7,18 +7,21 @@
 </template>
 
 <script setup>
-  import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
+  import _ from "lodash"
+
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
+  import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import CrsSelector from "@geode/opengeodeweb-front/components/CrsSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
+
   import versions_schema from "@/components/Tools/CrsConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/CrsConverter/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/CrsConverter/ObjectSelector.json"
+  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
   import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
-  import ExtensionSelectorSchema from "@/components/Tools/CrsConverter/ExtensionSelector.json"
-  import ConversionButtonSchema from "@/components/Tools/CrsConverter/ConversionButton.json"
+  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -34,21 +37,26 @@
   ]
 
   const files = ref([])
-  const geode_object = ref("")
+  const input_geode_object = ref("")
+  const additional_files = ref([])
   const input_crs = ref({})
   const output_crs = ref({})
+  const output_geode_object = ref("")
   const output_extension = ref("")
   const route_prefix = "tools/crs_converter"
+  const key = "crs"
 
   const stepper_tree = reactive({
     current_step_index: ref(0),
     tool_name: "CRS converter",
     route_prefix: route_prefix,
     files: files,
-    geode_object: geode_object,
+    input_geode_object: input_geode_object,
     input_crs: input_crs,
     output_crs: output_crs,
+    output_geode_object: output_geode_object,
     output_extension: output_extension,
+    key: key,
     steps: [
       {
         step_title: "Please select a file to convert",
@@ -56,9 +64,8 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
-            variable_to_update: "files",
-            variable_to_increment: "current_step_index",
+            key: key,
+            route: "tools/upload_file",
             schema: FileSelectorSchema,
           },
         },
@@ -71,17 +78,36 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            variable_to_update: "geode_object",
-            variable_to_increment: "current_step_index",
+            files: files,
+            key: key,
             schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
-          if (geode_object.value === "") {
+          if (input_geode_object.value === "") {
             return []
           } else {
-            return [geode_object.value]
+            return [input_geode_object.value]
           }
+        }),
+      },
+
+      {
+        step_title: "Please select additionnal files",
+        component: {
+          component_name: shallowRef(MissingFilesSelector),
+          component_options: {
+            multiple: true,
+            input_geode_object: input_geode_object,
+            files: files,
+            route: "tools/upload_file",
+            schema: MissingFileSelectorSchema,
+          },
+        },
+        chips: computed(() => {
+          return additional_files.value.map(
+            (additional_file) => additional_file.name,
+          )
         }),
       },
       {
@@ -89,8 +115,8 @@
         component: {
           component_name: shallowRef(CrsSelector),
           component_options: {
-            variable_to_update: "input_crs",
-            variable_to_increment: "current_step_index",
+            input_geode_object: input_geode_object,
+            key_to_update: "input_crs",
             schema: CrsSelectorSchema,
           },
         },
@@ -103,8 +129,8 @@
         component: {
           component_name: shallowRef(CrsSelector),
           component_options: {
-            variable_to_update: "output_crs",
-            variable_to_increment: "current_step_index",
+            input_geode_object: input_geode_object,
+            key_to_update: "output_crs",
             schema: CrsSelectorSchema,
           },
         },
@@ -113,20 +139,28 @@
         }),
       },
       {
-        step_title: "Select file format",
+        step_title: "Select output representation and file format",
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {
-            variable_to_update: "output_extension",
-            variable_to_increment: "current_step_index",
+            input_geode_object: input_geode_object,
             schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {
-          if (output_extension.value === "") {
+          const output_params = computed(() => {
+            return [output_geode_object, output_extension]
+          })
+          if (_.isEmpty(output_params)) {
             return []
           } else {
-            return [output_extension.value]
+            const array = []
+            for (const property in output_params.value) {
+              if (output_params.value[property].value !== "") {
+                array.push(output_params.value[property].value)
+              }
+            }
+            return array
           }
         }),
       },
@@ -135,7 +169,12 @@
         component: {
           component_name: shallowRef(ToolsCrsSelectorConversionButton),
           component_options: {
-            schema: ConversionButtonSchema,
+            files,
+            input_geode_object,
+            input_crs,
+            output_crs,
+            output_geode_object,
+            output_extension,
           },
         },
         chips: [],

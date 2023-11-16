@@ -7,15 +7,19 @@
 </template>
 
 <script setup>
-  import Wrapper from "@geode/opengeodeweb-front/components/Wrapper.vue"
+  import _ from "lodash"
+
   import FileSelector from "@geode/opengeodeweb-front/components/FileSelector.vue"
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
+  import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ExtensionSelector from "@geode/opengeodeweb-front/components/ExtensionSelector.vue"
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
+
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileConverter/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/FileConverter/ObjectSelector.json"
-  import ExtensionSelectorSchema from "@/components/Tools/FileConverter/ExtensionSelector.json"
+  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
+  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
+  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -31,8 +35,9 @@
   ]
 
   const files = ref([])
+  const input_geode_object = ref("")
   const additional_files = ref([])
-  const geode_object = ref("")
+  const output_geode_object = ref("")
   const output_extension = ref("")
   const route_prefix = "tools/file_converter"
 
@@ -42,18 +47,17 @@
     route_prefix: route_prefix,
     files: files,
     additional_files: additional_files,
-    geode_object: geode_object,
+    input_geode_object: input_geode_object,
+    output_geode_object: output_geode_object,
     output_extension: output_extension,
     steps: [
       {
-        step_title: "Please select a file to convert",
+        step_title: "Please select a file(s) to convert",
         component: {
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
-            variable_to_update: "files",
-            variable_to_increment: "current_step_index",
+            route: "tools/upload_file",
             schema: FileSelectorSchema,
           },
         },
@@ -62,57 +66,64 @@
         }),
       },
       {
+        step_title: "Please confirm the data type",
+        component: {
+          component_name: shallowRef(ObjectSelector),
+          component_options: {
+            files: files,
+            schema: ObjectSelectorSchema,
+          },
+        },
+        chips: computed(() => {
+          if (input_geode_object.value === "") {
+            return []
+          } else {
+            return [input_geode_object.value]
+          }
+        }),
+      },
+      {
         step_title: "Please select additionnal files",
         component: {
-          component_name: shallowRef(FileSelector),
+          component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            label: "Please select a file",
-            variable_to_update: "additional_files",
-            variable_to_increment: "current_step_index",
-            schema: FileSelectorSchema,
+            input_geode_object: input_geode_object,
+            files: files,
+            route: "tools/upload_file",
+            schema: MissingFileSelectorSchema,
           },
           skippable: true,
         },
         chips: computed(() => {
           return additional_files.value.map(
-            (additional_file) => additional_file.name
+            (additional_file) => additional_file.name,
           )
         }),
       },
       {
-        step_title: "Confirm the data type",
-        component: {
-          component_name: shallowRef(ObjectSelector),
-          component_options: {
-            variable_to_update: "geode_object",
-            variable_to_increment: "current_step_index",
-            schema: ObjectSelectorSchema,
-          },
-        },
-        chips: computed(() => {
-          if (geode_object.value === "") {
-            return []
-          } else {
-            return [geode_object.value]
-          }
-        }),
-      },
-      {
-        step_title: "Select file format",
+        step_title: "Select output representation and file format",
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {
-            variable_to_update: "output_extension",
-            variable_to_increment: "current_step_index",
+            input_geode_object: input_geode_object,
             schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {
-          if (output_extension.value === "") {
+          const output_params = computed(() => {
+            return [output_geode_object, output_extension]
+          })
+          if (_.isEmpty(output_params)) {
             return []
           } else {
-            return [output_extension.value]
+            const array = []
+            for (const property in output_params.value) {
+              if (output_params.value[property].value !== "") {
+                array.push(output_params.value[property].value)
+              }
+            }
+            return array
           }
         }),
       },
@@ -120,7 +131,12 @@
         step_title: "Convert your file",
         component: {
           component_name: shallowRef(ToolsFileSelectorConversionButton),
-          component_options: {},
+          component_options: {
+            files: files,
+            input_geode_object: input_geode_object,
+            output_geode_object: output_geode_object,
+            output_extension: output_extension,
+          },
         },
         chips: [],
       },
@@ -128,8 +144,4 @@
   })
 
   provide("stepper_tree", stepper_tree)
-
-  onMounted(() => {
-    console.log("useRuntimeConfig", useRuntimeConfig())
-  })
 </script>

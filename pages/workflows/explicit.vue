@@ -27,7 +27,7 @@
                 <v-col>
                   <v-card
                     rounded="lg"
-                    class="my-6 pa-5 elevation-5"
+                    class="my-6 pa-5"
                     color="transparent"
                     align="center"
                   >
@@ -92,9 +92,8 @@
 </template>
 
 <script setup>
-  import { useToggle } from "@vueuse/core"
-
   import explicit_json from "./explicit.json"
+
   const cloud_store = use_cloud_store()
   const viewer_store = use_viewer_store()
   const loading = ref(false)
@@ -172,7 +171,6 @@
     const params = {
       metric: metric.value,
     }
-
     return api_fetch(
       { schema: explicit_json.remesh, params },
       {

@@ -88,9 +88,6 @@
 
 <script setup>
   import simplex_json from "./simplex.json"
-  import { useToggle } from "@vueuse/core"
-
-  const cloud_store = use_cloud_store()
   const viewer_store = use_viewer_store()
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
@@ -117,6 +114,7 @@
 
   async function initialize() {
     viewer_store.reset()
+    toggle_loading()
     await api_fetch(
       { schema: simplex_json.initialize },
       {
@@ -136,7 +134,6 @@
       metric: metric.value,
       faults_metric: faults_metric.value,
     }
-
     await api_fetch(
       { schema: simplex_json.remesh, params },
       {

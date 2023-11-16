@@ -37,7 +37,15 @@
 
 <script setup>
   import schema from "@/components/Tools/ValidityChecker/ResultsPanels.json"
+
+  const emit = defineEmits([
+    "update_values",
+    "increment_step",
+    "decrement_step",
+  ])
+
   const stepper_tree = inject("stepper_tree")
+
   const props = defineProps({
     input_model_checks: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
@@ -118,7 +126,7 @@
       const check = input_model_checks[index]
       if (check.is_leaf && check.value == undefined) {
         const children_array = input_index_array.concat(index)
-        await get_test_result(
+        get_test_result(
           input_geode_object,
           input_file_name[0],
           check.route,
@@ -128,9 +136,14 @@
     }
   }
 
-  async function get_test_result(object, filename, test, children_array) {
+  async function get_test_result(
+    input_geode_object,
+    filename,
+    test,
+    children_array,
+  ) {
     const params = {
-      geode_object: object,
+      input_geode_object,
       filename,
       test,
     }
@@ -141,7 +154,6 @@
           update_result(stepper_tree.model_checks, children_array, "error")
         },
         response_function: (response) => {
-          console.log("response", response)
           update_result(
             stepper_tree.model_checks,
             children_array,

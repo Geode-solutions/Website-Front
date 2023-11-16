@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-  import { useToggle } from "@vueuse/core"
   const public_config = useRuntimeConfig().public
   const loading = ref(true)
   const toggle_loading = useToggle(loading)

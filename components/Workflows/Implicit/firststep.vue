@@ -6,7 +6,6 @@
           max-height="30em"
           rounded="lg"
           class="pa-3 text-center overflow-auto"
-          elevation="3"
         >
           <p class="mb-2 text-medium-emphasis text-body-1">
             Choose the value to set on the data points for the implicit function
@@ -42,7 +41,6 @@
           rounded="lg"
           width="100%"
           class="overflow-auto pa-3 text-center"
-          elevation="5"
         >
           <p class="mb-2 text-medium-emphasis text-body-1">
             Choose the isovalues to explicit on the model after the implicit
@@ -54,7 +52,6 @@
           <v-btn
             class="ma-1"
             size="x-small"
-            elevation="5"
             icon="mdi-minus"
             @click="decrementISO"
           ></v-btn>
@@ -62,7 +59,6 @@
           <v-btn
             class="ma-1"
             size="x-small"
-            elevation="5"
             icon="mdi-plus"
             @click="incrementISO"
           ></v-btn>
@@ -76,6 +72,7 @@
 
 <script setup>
   import implicit_json from "@/pages/workflows/implicit.json"
+
   const inputsStore = useInputStore()
   const viewer_store = use_viewer_store()
   const nb_constraints = ref(0)

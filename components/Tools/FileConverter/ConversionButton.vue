@@ -5,16 +5,28 @@
       <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="currentStep = 3"> Cancel </v-btn>
+  <v-btn variant="text" @click="current_step_index = 3"> Cancel </v-btn>
 </template>
 
 <script setup>
-  import { useToggle } from "@vueuse/core"
   import fileDownload from "js-file-download"
   import schema from "@/components/Tools/FileConverter/ConversionButton.json"
 
-  const stepper_tree = inject("stepper_tree")
-  const { files, geode_object, output_extension } = stepper_tree
+  const emit = defineEmits([
+    "update_values",
+    "increment_step",
+    "decrement_step",
+  ])
+
+  const props = defineProps({
+    files: { type: Array, required: true },
+    input_geode_object: { type: String, required: true },
+    output_geode_object: { type: String, required: true },
+    output_extension: { type: String, required: true },
+  })
+  const { files, input_geode_object, output_geode_object, output_extension } =
+    props
+
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
@@ -33,14 +45,17 @@
   }
 
   async function convert_files() {
+    toggle_loading()
     for (let i = 0; i < files.length; i++) {
-      let params = {
-        geode_object: geode_object,
+      const params = {
+        input_geode_object: input_geode_object,
         filename: files[i].name,
-        extension: output_extension,
+        output_geode_object: output_geode_object,
+        output_extension: output_extension,
         responseType: "blob",
         responseEncoding: "binary",
       }
+
       await api_fetch(
         { schema, params },
         {
@@ -52,5 +67,6 @@
         },
       )
     }
+    toggle_loading()
   }
 </script>
