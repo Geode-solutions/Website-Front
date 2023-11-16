@@ -27,7 +27,10 @@
     "method": "POST",
     "properties": {
       "isovalues": {
-        "type": "string"
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
       }
     },
     "required": ["isovalues"],
