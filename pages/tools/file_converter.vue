@@ -16,10 +16,6 @@
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
 
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/FileSelector.json"
-  import ObjectSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/MissingFilesSelector.json"
-  import ExtensionSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -58,7 +54,6 @@
           component_options: {
             multiple: true,
             route: "tools/upload_file",
-            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -71,7 +66,6 @@
           component_name: shallowRef(ObjectSelector),
           component_options: {
             files: files,
-            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -91,7 +85,6 @@
             input_geode_object: input_geode_object,
             files: files,
             route: "tools/upload_file",
-            schema: MissingFileSelectorSchema,
           },
           skippable: true,
         },
@@ -107,7 +100,6 @@
           component_name: shallowRef(ExtensionSelector),
           component_options: {
             input_geode_object: input_geode_object,
-            schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {
