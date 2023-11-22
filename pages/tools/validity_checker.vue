@@ -14,9 +14,9 @@
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
 
   import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
+  import FileSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/FileSelector.json"
+  import ObjectSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/MissingFilesSelector.json"
 
   const cards_list = [
     {

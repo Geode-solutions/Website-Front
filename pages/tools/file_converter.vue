@@ -16,10 +16,10 @@
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
 
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
-  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
+  import FileSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/FileSelector.json"
+  import ObjectSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/ObjectSelector.json"
+  import MissingFileSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/MissingFilesSelector.json"
+  import ExtensionSelectorSchema from "@geode/opengeodeweb-front/assets/schemas/ExtensionSelector.json"
 
   const cards_list = [
     {
