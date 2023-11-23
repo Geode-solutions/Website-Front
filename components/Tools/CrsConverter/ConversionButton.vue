@@ -10,7 +10,7 @@
 
 <script setup>
   import fileDownload from "js-file-download"
-  import schema from "@geode/opengeodeweb-front/assets/schemas/ConversionButton.json"
+  import schema from "@/components/Tools/CrsConverter/ConversionButton.json"
 
   const emit = defineEmits([
     "update_values",
