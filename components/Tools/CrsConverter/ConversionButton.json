@@ -22,11 +22,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "name",
-        "code",
-        "authority"
-      ],
+      "required": ["name", "code", "authority"],
       "additionalProperties": false
     },
     "output_crs": {
@@ -42,11 +38,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "name",
-        "code",
-        "authority"
-      ],
+      "required": ["name", "code", "authority"],
       "additionalProperties": false
     },
     "output_geode_object": {
