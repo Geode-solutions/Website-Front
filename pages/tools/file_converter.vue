@@ -70,7 +70,9 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             schema: ObjectSelectorSchema,
           },
         },
@@ -89,7 +91,9 @@
           component_options: {
             multiple: true,
             input_geode_object: input_geode_object,
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             route: "tools/upload_file",
             schema: MissingFileSelectorSchema,
           },
@@ -107,6 +111,9 @@
           component_name: shallowRef(ExtensionSelector),
           component_options: {
             input_geode_object: input_geode_object,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             schema: ExtensionSelectorSchema,
           },
         },
