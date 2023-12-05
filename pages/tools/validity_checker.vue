@@ -14,9 +14,6 @@
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
 
   import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
 
   const cards_list = [
     {
@@ -55,7 +52,6 @@
             multiple: false,
             key: key,
             route: "tools/upload_file",
-            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -69,7 +65,6 @@
           component_options: {
             files: files,
             key: key,
-            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -89,7 +84,6 @@
             input_geode_object: input_geode_object,
             files: files,
             route: "tools/upload_file",
-            schema: MissingFileSelectorSchema,
           },
         },
         chips: computed(() => {

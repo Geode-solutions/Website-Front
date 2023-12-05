@@ -16,10 +16,6 @@
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
 
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
-  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -58,7 +54,6 @@
           component_options: {
             multiple: true,
             route: "tools/upload_file",
-            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -73,7 +68,6 @@
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -95,7 +89,6 @@
               return files.value.map((file) => file.name)
             }),
             route: "tools/upload_file",
-            schema: MissingFileSelectorSchema,
           },
           skippable: true,
         },
@@ -114,7 +107,6 @@
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            schema: ExtensionSelectorSchema,
           },
         },
         chips: computed(() => {
