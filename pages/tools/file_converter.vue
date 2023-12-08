@@ -131,7 +131,9 @@
         component: {
           component_name: shallowRef(ToolsFileSelectorConversionButton),
           component_options: {
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             input_geode_object: input_geode_object,
             output_geode_object: output_geode_object,
             output_extension: output_extension,

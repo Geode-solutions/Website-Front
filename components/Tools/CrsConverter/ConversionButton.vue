@@ -1,11 +1,11 @@
 <template>
-  <v-btn :loading="loading" color="primary" @click="wrapper()">
+  <v-btn :loading="loading" color="primary" @click="convert_files()">
     Convert
     <template #loader>
       <v-progress-circular indeterminate size="20" color="white" width="3" />
     </template>
   </v-btn>
-  <v-btn variant="text" @click="current_step = 3">Cancel</v-btn>
+  <v-btn variant="text" @click="$emit('decrement_step')">Cancel</v-btn>
 </template>
 
 <script setup>
@@ -18,7 +18,7 @@
     "decrement_step",
   ])
   const props = defineProps({
-    files: { type: Array, required: true },
+    filenames: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
     input_crs: { type: Object, required: true },
     output_crs: { type: Object, required: true },
@@ -27,7 +27,7 @@
   })
 
   const {
-    files,
+    filenames,
     input_geode_object,
     input_crs,
     output_crs,
@@ -38,32 +38,21 @@
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
-  async function wrapper() {
+  function convert_files() {
     toggle_loading()
-    await upload_files()
-    convert_files()
-    toggle_loading()
-  }
-  function upload_files() {
-    return upload_file({
-      route: "tools/upload_file",
-      files,
-    })
-  }
-  async function convert_files() {
-    for (let i = 0; i < files.length; i++) {
+    for (const filename of filenames) {
       const params = {
-        input_geode_object: input_geode_object,
-        filename: files[i].name,
-        input_crs: input_crs,
-        output_crs: output_crs,
-        output_geode_object: output_geode_object,
-        output_extension: output_extension,
+        input_geode_object,
+        filename,
+        input_crs,
+        output_crs,
+        output_geode_object,
+        output_extension,
         responseType: "blob",
         responseEncoding: "binary",
       }
 
-      await api_fetch(
+      api_fetch(
         { schema, params },
         {
           response_function: (response) => {
@@ -73,6 +62,7 @@
         },
       )
     }
+    toggle_loading()
   }
 </script>
 
