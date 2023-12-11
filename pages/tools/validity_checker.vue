@@ -112,10 +112,10 @@
         component: {
           component_name: shallowRef(ToolsValidityCheckerResultsPanels),
           component_options: {
-            input_model_checks: model_checks,
-            input_geode_object: input_geode_object,
-            input_file_name: computed(() => {
-              return files.value.map((file) => file.name)
+            model_checks,
+            input_geode_object,
+            filename: computed(() => {
+              return files.value[0].name
             }),
             input_index_array: [],
           },
