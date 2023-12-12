@@ -1,6 +1,6 @@
 <template>
   <div class="pa-0">
-    <v-btn :loading="loading" color="primary" @click="inspect_file()">
+    <v-btn :loading="loading" color="primary" @click="get_tests_names()">
       Inspect
       <template #loader>
         <v-progress-circular indeterminate size="20" color="white" width="3" />
@@ -19,38 +19,25 @@
     "decrement_step",
   ])
   const props = defineProps({
-    files: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
   })
-  const { files, input_geode_object } = props
+  const { input_geode_object } = props
 
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
 
-  async function inspect_file() {
-    toggle_loading()
-    await upload_files()
-    await get_tests_names()
-    toggle_loading()
-    emit("increment_step")
-  }
-
-  function upload_files() {
-    return upload_file({
-      route: "tools/upload_file",
-      files,
-    })
-  }
-
   async function get_tests_names() {
+    toggle_loading()
     const params = { input_geode_object }
     await api_fetch(
       { schema: InspectionButtonSchema, params },
       {
         response_function: (response) => {
           emit("update_values", { model_checks: response._data.model_checks })
+          emit("increment_step")
         },
       },
     )
+    toggle_loading()
   }
 </script>

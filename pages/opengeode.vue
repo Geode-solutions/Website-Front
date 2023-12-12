@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col class="text-center text-h4 text-h6" cols="12">
-      <h1>OpenGeode</h1>
+      <h1 class="text-h2 my-5 py-5" align="center">OpenGeode</h1>
     </v-col>
     <client-only>
       <Particles

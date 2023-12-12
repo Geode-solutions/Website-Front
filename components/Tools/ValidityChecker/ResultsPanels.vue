@@ -2,7 +2,7 @@
   <v-container class="pa-2">
     <v-expansion-panels v-model="opened_panels" multiple elevation="5">
       <v-expansion-panel
-        v-for="(check, index) in input_model_checks"
+        v-for="(check, index) in model_checks"
         :key="index"
         class="card"
       >
@@ -20,9 +20,9 @@
           <ToolsValidityCheckerResultsPanels
             v-if="!check.is_leaf"
             v-bind="{
-              input_model_checks: check.children,
+              model_checks: check.children,
               input_geode_object,
-              input_file_name,
+              filename,
               input_index_array: update_array(index),
             }"
           />
@@ -47,25 +47,21 @@
   const stepper_tree = inject("stepper_tree")
 
   const props = defineProps({
-    input_model_checks: { type: Array, required: true },
+    model_checks: { type: Array, required: true },
     input_geode_object: { type: String, required: true },
-    input_file_name: { type: Array, required: true },
+    filename: { type: String, required: true },
     input_index_array: { type: Array, required: false, default: [] },
   })
-  const {
-    input_model_checks,
-    input_geode_object,
-    input_file_name,
-    input_index_array,
-  } = props
+  const { model_checks, input_geode_object, filename, input_index_array } =
+    props
   const opened_panels = ref([])
 
   watch(
-    input_model_checks,
+    model_checks,
     () => {
       let nb_results = 0
-      for (let index = 0; index < input_model_checks.length; index++) {
-        const current_check = input_model_checks[index]
+      for (let index = 0; index < model_checks.length; index++) {
+        const current_check = model_checks[index]
         if (current_check.value == null) {
           continue
         }
@@ -79,7 +75,7 @@
         }
         nb_results++
       }
-      if (nb_results == input_model_checks.length) {
+      if (nb_results == model_checks.length) {
         update_result(stepper_tree.model_checks, input_index_array, true)
       }
     },
@@ -87,7 +83,7 @@
   )
   onMounted(() => {
     get_tests_results()
-    opened_panels.value = Array.from(Array(input_model_checks.length).keys())
+    opened_panels.value = Array.from(Array(model_checks.length).keys())
   })
 
   function update_array(index) {
@@ -122,13 +118,13 @@
   }
 
   async function get_tests_results() {
-    for (let index = 0; index < input_model_checks.length; index++) {
-      const check = input_model_checks[index]
+    for (let index = 0; index < model_checks.length; index++) {
+      const check = model_checks[index]
       if (check.is_leaf && check.value == undefined) {
         const children_array = input_index_array.concat(index)
         get_test_result(
           input_geode_object,
-          input_file_name[0],
+          filename,
           check.route,
           children_array,
         )
