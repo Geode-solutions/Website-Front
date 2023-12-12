@@ -15,3 +15,6 @@
   SITE_BRANCH = "/test"
   RECAPTCHA_SITE_KEY = "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"
   SITE_URL = "https://next.geode-solutions.com"
+[build]
+  command = "rm -rf node_modules package-lock.json && npm i && npm run build"
+  publish = "www"
