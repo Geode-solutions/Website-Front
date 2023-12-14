@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid style="background-color: white" class="pa-10">
+  <v-container fluid style="background-color: white" class="pa-1">
     <h2 class="section text-h2" align="center">What are our skills</h2>
     <v-row justify="space-around" class="container mx-auto">
       <v-col>
