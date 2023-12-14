@@ -3,7 +3,7 @@
     :src="hero_img"
     alt="Geode-solutions next generation of modeling challenges"
   >
-    <v-row class="fill-height" align="center" justify="center">
+    <v-row class="screensize" align="center" justify="center">
       <v-col
         class="text-center justify-center"
         xs="12"
@@ -27,7 +27,7 @@
             class="mx-auto"
           />
           <h1
-            class="text-h2 text-center mb-3 text-primary xs12 sm12 md12 lg12 xl12 headline"
+            class="font-style text-center mb-3 text-primary xs12 sm12 md12 lg12 xl12 headline"
             style="white-space: nowrap"
           >
             Geode-solutions
@@ -41,6 +41,21 @@
     </v-row>
   </v-parallax>
 </template>
+
+<style scoped>
+  .screensize {
+    height: 80%;
+  }
+
+  .font-style {
+    font-size: 2.75rem;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.0083333333em;
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
+  }
+</style>
 
 <script setup>
   import logo from "@/assets/img/logo.svg"
