@@ -41,7 +41,7 @@
     {
       name: "DHI",
       logo: logo_dhi,
-      url: "https://www.mosart-pme.org/",
+      url: "https://worldwide.dhigroup.com/fr",
     },
     {
       name: "GeoRessources",
