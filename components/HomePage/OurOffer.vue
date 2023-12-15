@@ -7,7 +7,7 @@
           <v-col v-for="card in masterCards" :key="card.title" cols="12" md="6">
             <v-hover v-slot="{ hover }">
               <v-card
-                height="500"
+                height="350"
                 :elevation="hover ? 20 : 2"
                 :to="card.url"
                 class="d-flex"
