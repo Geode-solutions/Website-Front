@@ -26,6 +26,7 @@
             alt="Geode-solutions logo"
             width="40%"
             class="mx-auto pa-2"
+
           />
           <h1
             class="font-style text-center mb-3 text-primary xs12 sm12 md12 lg12 xl12 headline"
