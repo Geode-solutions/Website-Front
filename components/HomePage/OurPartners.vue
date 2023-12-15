@@ -20,6 +20,7 @@
   import logo_arxitek from "~/assets/img/logos/logo_arxitek.png"
   import logo_earth_quick from "~/assets/img/logos/logo_earth_quick.jpg"
   import logo_mosart_pme from "~/assets/img/logos/LOGOMOSART-PME.png"
+  import logo_dhi from "~/assets/img/logos/logo_DHI.png"
 
   const partners_list = [
     {
@@ -36,6 +37,11 @@
       name: "RING",
       logo: logo_ring,
       url: "https://www.ring-team.org",
+    },
+    {
+      name: "DHI",
+      logo: logo_dhi,
+      url: "https://worldwide.dhigroup.com/fr",
     },
     {
       name: "GeoRessources",
