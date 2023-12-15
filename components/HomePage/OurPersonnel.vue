@@ -4,7 +4,7 @@
     <v-row justify="center" class="mx-auto">
       <v-col v-for="(guy, index) in us_list" :key="index" cols="12" md="4">
         <v-card
-          class="text-center size-card"
+          class="text-center size-card marges"
           :class="{ 'size-card-md': mdAndUp }"
         >
           <v-avatar :size="mdAndUp ? 200 : 150" class="ma-2">
@@ -36,6 +36,16 @@
 
   .size-card-md {
     max-width: 100%;
+  }
+
+  .marges {
+    margin: 40px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .marges {
+      margin: 0;
+    }
   }
 </style>
 
