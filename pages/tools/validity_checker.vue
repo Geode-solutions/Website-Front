@@ -14,9 +14,6 @@
   import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
 
   import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
 
   const cards_list = [
     {
@@ -55,7 +52,6 @@
             multiple: false,
             key: key,
             route: "tools/upload_file",
-            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -67,9 +63,10 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             key: key,
-            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -87,9 +84,10 @@
           component_options: {
             multiple: true,
             input_geode_object: input_geode_object,
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             route: "tools/upload_file",
-            schema: MissingFileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -114,10 +112,10 @@
         component: {
           component_name: shallowRef(ToolsValidityCheckerResultsPanels),
           component_options: {
-            input_model_checks: model_checks,
-            input_geode_object: input_geode_object,
-            input_file_name: computed(() => {
-              return files.value.map((file) => file.name)
+            model_checks,
+            input_geode_object,
+            filename: computed(() => {
+              return files.value[0].name
             }),
             input_index_array: [],
           },

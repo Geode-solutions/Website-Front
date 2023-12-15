@@ -17,12 +17,12 @@
             <v-col :order-sm="index % 2" cols="12" sm="5">
               <v-card-title
                 primary-title
-                class="text-center text-h4"
+                class="text-center text-h4 text-wrap"
                 v-text="mesh.title"
               />
             </v-col>
             <v-col cols="12" sm="7">
-              <v-card flat>
+              <v-card flat elevation="0">
                 <v-card-text
                   align="justify"
                   class="text-h6"

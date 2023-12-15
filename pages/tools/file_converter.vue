@@ -16,10 +16,6 @@
   import ToolsFileSelectorConversionButton from "@/components/Tools/FileConverter/ConversionButton.vue"
 
   import versions_schema from "@/components/Tools/FileConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
-  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -58,7 +54,6 @@
           component_options: {
             multiple: true,
             route: "tools/upload_file",
-            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -70,8 +65,9 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            files: files,
-            schema: ObjectSelectorSchema,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
           },
         },
         chips: computed(() => {
@@ -89,9 +85,10 @@
           component_options: {
             multiple: true,
             input_geode_object: input_geode_object,
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             route: "tools/upload_file",
-            schema: MissingFileSelectorSchema,
           },
           skippable: true,
         },
@@ -107,7 +104,9 @@
           component_name: shallowRef(ExtensionSelector),
           component_options: {
             input_geode_object: input_geode_object,
-            schema: ExtensionSelectorSchema,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
           },
         },
         chips: computed(() => {
@@ -132,7 +131,9 @@
         component: {
           component_name: shallowRef(ToolsFileSelectorConversionButton),
           component_options: {
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             input_geode_object: input_geode_object,
             output_geode_object: output_geode_object,
             output_extension: output_extension,

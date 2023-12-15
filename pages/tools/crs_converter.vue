@@ -17,11 +17,6 @@
   import ToolsCrsSelectorConversionButton from "@/components/Tools/CrsConverter/ConversionButton.vue"
 
   import versions_schema from "@/components/Tools/CrsConverter/PackagesVersions.json"
-  import FileSelectorSchema from "@/components/Tools/FileSelector.json"
-  import ObjectSelectorSchema from "@/components/Tools/ObjectSelector.json"
-  import MissingFileSelectorSchema from "@/components/Tools/MissingFilesSelector.json"
-  import CrsSelectorSchema from "@/components/Tools/CrsConverter/CrsSelectorSchema.json"
-  import ExtensionSelectorSchema from "@/components/Tools/ExtensionSelector.json"
 
   const cards_list = [
     {
@@ -66,7 +61,6 @@
             multiple: true,
             key: key,
             route: "tools/upload_file",
-            schema: FileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -78,9 +72,10 @@
         component: {
           component_name: shallowRef(ObjectSelector),
           component_options: {
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             key: key,
-            schema: ObjectSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -99,9 +94,10 @@
           component_options: {
             multiple: true,
             input_geode_object: input_geode_object,
-            files: files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             route: "tools/upload_file",
-            schema: MissingFileSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -117,7 +113,6 @@
           component_options: {
             input_geode_object: input_geode_object,
             key_to_update: "input_crs",
-            schema: CrsSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -131,7 +126,6 @@
           component_options: {
             input_geode_object: input_geode_object,
             key_to_update: "output_crs",
-            schema: CrsSelectorSchema,
           },
         },
         chips: computed(() => {
@@ -144,7 +138,9 @@
           component_name: shallowRef(ExtensionSelector),
           component_options: {
             input_geode_object: input_geode_object,
-            schema: ExtensionSelectorSchema,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
           },
         },
         chips: computed(() => {
@@ -169,7 +165,9 @@
         component: {
           component_name: shallowRef(ToolsCrsSelectorConversionButton),
           component_options: {
-            files,
+            filenames: computed(() => {
+              return files.value.map((file) => file.name)
+            }),
             input_geode_object,
             input_crs,
             output_crs,

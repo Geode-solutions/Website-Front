@@ -6,7 +6,7 @@
     <v-row class="fill-height" align="center" justify="center">
       <v-col class="text-center justify-center" cols="auto">
         <v-card
-          width="600"
+          width="50vw"
           style="
             border: 1px solid primary;
             border-radius: 80px 0px;
@@ -16,7 +16,7 @@
           <v-img
             :src="logo"
             alt="Geode-solutions logo"
-            width="50%"
+            width="40%"
             class="mx-auto"
           />
           <h1 class="text-h2 text-center mb-3 text-primary">Geode-solutions</h1>
