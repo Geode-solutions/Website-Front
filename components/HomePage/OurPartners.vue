@@ -3,13 +3,14 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">Our partners</h2>
-        <CommonCarousel :items="partners_list" />
+        <Carousel :items="partners_list" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup>
+  import Carousel from "@geode/opengeodeweb-front/components/Carousel.vue"
   import logo_pole_avenia from "~/assets/img/logos/logo-avenia.svg"
   import logo_total_energies from "~/assets/img/logos/logo_totalenergies.png"
   import logo_ring from "~/assets/img/logos/logo_ring.png"

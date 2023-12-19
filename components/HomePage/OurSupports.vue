@@ -3,13 +3,14 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">They support us</h2>
-        <CommonCarousel :items="supports_list" />
+        <Carousel :items="supports_list" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup>
+  import Carousel from "@geode/opengeodeweb-front/components/Carousel.vue"
   import logo_helioparc from "~/assets/img/logos/logo_helioparc.svg"
   import logo_banquiz from "~/assets/img/logos/logo_banquiz.png"
   import logo_naos from "~/assets/img/logos/logo_NAOS.png"

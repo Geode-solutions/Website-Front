@@ -53,13 +53,14 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">They use our services</h2>
-        <CommonCarousel :items="services_users" />
+        <Carousel :items="services_users" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup>
+  import Carousel from "@geode/opengeodeweb-front/components/Carousel.vue"
   import logo_totalenergies from "@/assets/img/logos/logo_totalenergies.png"
   import logo_DHI from "@/assets/img/logos/logo_DHI.png"
   import integration from "@/assets/img/services/integration.jpg"

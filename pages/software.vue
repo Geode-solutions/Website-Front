@@ -155,13 +155,14 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">Thanks to our pilots</h2>
-        <CommonCarousel :items="pilots_list" />
+        <Carousel :items="pilots_list" />
       </v-col>
-    </v-row>
+    </v-row>   
   </v-container>
 </template>
 
 <script setup>
+  import Carousel from "@geode/opengeodeweb-front/components/Carousel.vue"
   import coming_soon from "@/assets/img/techno/coming-soon.jpg"
   import dfn from "@/assets/img/techno/dfn.jpg"
   import corbi from "@/assets/img/techno/corbi.gif"

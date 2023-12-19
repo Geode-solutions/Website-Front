@@ -146,7 +146,7 @@
       <v-row class="container mx-auto">
         <v-col>
           <h2 class="section text-h2" align="center">They use it</h2>
-          <CommonCarousel :items="users_list" />
+          <Carousel :items="users_list" />
         </v-col>
       </v-row>
     </v-container>
@@ -154,6 +154,8 @@
 </template>
 
 <script setup>
+
+  import Carousel from "@geode/opengeodeweb-front/components/Carousel.vue"
   import { useDisplay } from "vuetify"
   import road from "@/assets/img/opengeode/road.jpg"
   import canyon from "@/assets/img/opengeode/antelope-canyon.jpg"
