@@ -155,7 +155,7 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">Thanks to our pilots</h2>
-        <CommonCarousel :items="pilots_list" />
+        <Carousel :items="pilots_list" />
       </v-col>
     </v-row>
   </v-container>

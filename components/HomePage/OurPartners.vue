@@ -3,7 +3,7 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">Our partners</h2>
-        <CommonCarousel :items="partners_list" />
+        <Carousel :items="partners_list" />
       </v-col>
     </v-row>
   </v-container>
