@@ -3,7 +3,7 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">They support us</h2>
-        <CommonCarousel :items="supports_list" />
+        <Carousel :items="supports_list" />
       </v-col>
     </v-row>
   </v-container>

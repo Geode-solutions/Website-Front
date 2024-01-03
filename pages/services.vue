@@ -53,7 +53,7 @@
     <v-row class="container mx-auto">
       <v-col>
         <h2 class="section text-h2" align="center">They use our services</h2>
-        <CommonCarousel :items="services_users" />
+        <Carousel :items="services_users" />
       </v-col>
     </v-row>
   </v-container>
