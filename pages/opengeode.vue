@@ -146,7 +146,7 @@
       <v-row class="container mx-auto">
         <v-col>
           <h2 class="section text-h2" align="center">They use it</h2>
-          <CommonCarousel :items="users_list" />
+          <Carousel :items="users_list" />
         </v-col>
       </v-row>
     </v-container>
