@@ -1,5 +1,7 @@
 import colors from "vuetify/lib/util/colors"
 
+import VuetifyModule from "./modules/vuetify"
+
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
@@ -7,14 +9,7 @@ export default defineNuxtConfig({
         process.env.NODE_ENV === "production"
           ? "api.geode-solutions.com"
           : "localhost",
-      VIEWER_PROTOCOL: process.env.NODE_ENV === "production" ? "wss" : "ws",
-      GEODE_PROTOCOL: process.env.NODE_ENV === "production" ? "https" : "http",
-      VIEWER_PORT: process.env.NODE_ENV === "production" ? "443" : "1234",
-      GEODE_PORT: process.env.NODE_ENV === "production" ? "443" : "5000",
-      SITE_BRANCH:
-        process.env.NODE_ENV === "production" ? process.env.SITE_BRANCH : "",
       PROJECT: "website",
-      NODE_ENV: process.env.NODE_ENV,
       RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     },
   },
@@ -66,6 +61,8 @@ export default defineNuxtConfig({
     ],
     "@nuxt/devtools",
     "@vueuse/nuxt",
+    "vuetify-nuxt-module",
+    VuetifyModule,
   ],
 
   cookies: {
@@ -83,7 +80,6 @@ export default defineNuxtConfig({
     dirs: ["stores", "@geode/opengeodeweb-front/stores"],
   },
 
-  // ** Build configuration
   build: {
     transpile: ["vuetify"],
   },
@@ -93,6 +89,12 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => ["md-linedivider"].includes(tag),
     },
   },
+  // vuetify: {
+  //   moduleOptions: {
+  //     /* module specific options */
+  //   },
+  //   vuetifyOptions: "./vuetify.config.ts", // <== you can omit it
+  // },
 
   devtools: {
     enabled: process.env.NODE_ENV === "production" ? false : true,
