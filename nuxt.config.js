@@ -89,12 +89,6 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => ["md-linedivider"].includes(tag),
     },
   },
-  // vuetify: {
-  //   moduleOptions: {
-  //     /* module specific options */
-  //   },
-  //   vuetifyOptions: "./vuetify.config.ts", // <== you can omit it
-  // },
 
   devtools: {
     enabled: process.env.NODE_ENV === "production" ? false : true,

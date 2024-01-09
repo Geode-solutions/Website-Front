@@ -1,6 +1,28 @@
 import colors from "vuetify/lib/util/colors"
 import { defineNuxtModule } from "@nuxt/kit"
-// import vuetify from "@geode/opengeodeweb-front/plugins/vuetify"
+// import vuetify from "@geode/opengeodeweb-front/utils/vuetify"
+
+const vuetify = {
+  defaultAssets: true,
+  icons: {
+    defaultSet: "mdi",
+  },
+  ssr: true,
+  defaults: {
+    VBtn: {
+      style: "text-transform: none;",
+    },
+    VCard: {
+      elevation: 5,
+      style: "border-radius: 15px;",
+    },
+    VExpansionPanel: {
+      elevation: 5,
+      style: "border-radius: 15px;",
+    },
+  },
+}
+console.log("vuetify", vuetify)
 
 const light_theme = {
   dark: false,
@@ -15,14 +37,14 @@ const light_theme = {
     warning: colors.orange.accent4,
   },
 }
-
+// console.log("vuetify", vuetify)
 export default defineNuxtModule({
   setup(_options, nuxt) {
     nuxt.hook("vuetify:registerModule", (register) =>
       register({
         moduleOptions: {},
         vuetifyOptions: {
-          //   vuetify,
+          ...vuetify,
           theme: {
             defaultTheme: "light_theme",
             themes: {
