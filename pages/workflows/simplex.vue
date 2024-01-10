@@ -50,7 +50,7 @@
           <template v-slot:item.3>
             <p class="mb-2 text-body-1 text-center">
               Congratulations! <br />
-              You just generated a tetrahedral mesh with heterogeneous metric,
+              You just generated a tetrahedral mesh with a heterogeneous metric,
               all in a few clicks
             </p>
           </template>
