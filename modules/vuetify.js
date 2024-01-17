@@ -2,7 +2,7 @@ import colors from "vuetify/lib/util/colors"
 import { defineNuxtModule } from "@nuxt/kit"
 // import vuetify from "@geode/opengeodeweb-front/utils/vuetify"
 
-const vuetify = {
+const vuetify_defaults = {
   defaultAssets: true,
   icons: {
     defaultSet: "mdi",
@@ -22,7 +22,6 @@ const vuetify = {
     },
   },
 }
-console.log("vuetify", vuetify)
 
 const light_theme = {
   dark: false,
@@ -44,7 +43,7 @@ export default defineNuxtModule({
       register({
         moduleOptions: {},
         vuetifyOptions: {
-          ...vuetify,
+          ...vuetify_defaults,
           theme: {
             defaultTheme: "light_theme",
             themes: {
