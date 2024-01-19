@@ -24,7 +24,7 @@
     "@geode/opengeodeweb-front": "^6.1.1",
     "@kitware/vtk.js": "^29.4.2",
     "@mdi/font": "^7.4.47",
-    "@nuxt/kit": "^3.9.2",
+    "@nuxt/kit": "^3.9.3",
     "@pinia/nuxt": "^0.5.1",
     "@vueuse/core": "^10.7.2",
     "@vueuse/nuxt": "^10.7.2",
@@ -34,15 +34,14 @@
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",
-    "nuxt": "^3.9.2",
+    "nuxt": "^3.9.3",
     "pinia": "^2.1.7",
-    "sass": "^1.69.7",
+    "sass": "^1.70.0",
     "tsparticles": "^2.12.0",
     "vue-gtag": "^2.0.1",
-    "vue3-carousel": "^0.3.1",
     "vue3-particles": "^2.12.0",
-    "vuetify": "^3.4.9",
-    "vuetify-nuxt-module": "^0.10.1"
+    "vuetify": "^3.4.11",
+    "vuetify-nuxt-module": "^0.10.2"
   },
   "overrides": {
     "vue": "latest"
