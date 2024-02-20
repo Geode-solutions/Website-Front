@@ -71,10 +71,10 @@
 </template>
 
 <script setup>
+  import schemas from "@geode/opengeodeweb-front/utils/schemas.json"
   import implicit_json from "@/pages/workflows/implicit.json"
 
   const inputsStore = useInputStore()
-  const viewer_store = use_viewer_store()
   const nb_constraints = ref(0)
   const nb_isovalues = ref(3)
 
@@ -91,7 +91,7 @@
   })
 
   async function getConstraints() {
-    viewer_store.reset()
+    viewer_call({ schema: schemas.opengeodeweb_viewer.reset })
     await api_fetch(
       { schema: implicit_json.step_0 },
       {
@@ -108,19 +108,33 @@
             nb_constraints.value++
             inputsStore.addConstraint(x)
           }
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_points,
-            id: response._data.points,
+          viewer_call({ schema: schemas.opengeodeweb_viewer.reset })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: [
+              {
+                file_name: response._data.viewable_points,
+                id: response._data.points,
+              },
+            ],
           })
-          viewer_store.point_size({ id: response._data.points, size: 10 })
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_box,
-            id: response._data.box,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.point_size,
+            params: { id: response._data.points, size: 10 },
           })
-          viewer_store.set_vertex_attribute({
-            id: response._data.points,
-            name: "geode_implicit_value",
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_box,
+              id: response._data.box,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.set_vertex_attribute,
+            params: {
+              id: response._data.points,
+              name: "geode_implicit_value",
+            },
           })
         },
       },

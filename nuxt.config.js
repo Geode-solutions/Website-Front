@@ -9,7 +9,6 @@ export default defineNuxtConfig({
         process.env.NODE_ENV === "production"
           ? "api.geode-solutions.com"
           : "localhost",
-      PROJECT: "website",
       RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     },
   },

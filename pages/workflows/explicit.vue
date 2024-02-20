@@ -92,11 +92,11 @@
 </template>
 
 <script setup>
+  import schemas from "@geode/opengeodeweb-front/utils/schemas.json"
   import explicit_json from "./explicit.json"
 
   const cloud_store = use_cloud_store()
   const { is_running } = storeToRefs(cloud_store)
-  const viewer_store = use_viewer_store()
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const nb_corners = ref("-")
@@ -123,22 +123,36 @@
       { schema: explicit_json.base_data },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_1,
-            id: response._data.id1,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id1,
-            visibility: true,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_1,
+              id: response._data.id1,
+            },
           })
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_2,
-            id: response._data.id2,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.toggle_edge_visibility,
+            params: {
+              id: response._data.id1,
+              visibility: true,
+            },
           })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id2,
-            visibility: true,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_2,
+              id: response._data.id2,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.toggle_edge_visibility,
+            params: {
+              id: response._data.id2,
+              visibility: true,
+            },
           })
         },
       },
@@ -150,14 +164,22 @@
       { schema: explicit_json.brep_stats },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id,
-            visibility: true,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.toggle_edge_visibility,
+            params: {
+              id: response._data.id,
+              visibility: true,
+            },
           })
           nb_corners.value = response._data.nb_corners
           nb_lines.value = response._data.nb_lines
@@ -176,14 +198,22 @@
       { schema: explicit_json.remesh, params },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id,
-            visibility: true,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.toggle_edge_visibility,
+            params: {
+              id: response._data.id,
+              visibility: true,
+            },
           })
         },
       },

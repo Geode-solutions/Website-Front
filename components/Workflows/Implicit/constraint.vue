@@ -48,7 +48,12 @@
       { schema: implicit_json.update_value, params },
       {
         response_function: (response) => {
-          viewer_store.update_data({ id: response._data.points })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.update_data,
+            params: {
+              id: response._data.points,
+            },
+          })
         },
       },
     )
