@@ -1,6 +1,6 @@
 {
   "$id": "/tools/validity_checker/versions",
-  "method": "GET",
+  "methods": "GET",
   "type": "object",
   "properties": {},
   "additionalProperties": false

@@ -111,12 +111,10 @@
           viewer_call({ schema: schemas.opengeodeweb_viewer.reset })
           viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
-            params: [
-              {
-                file_name: response._data.viewable_points,
-                id: response._data.points,
-              },
-            ],
+            params: {
+              file_name: response._data.viewable_points,
+              id: response._data.points,
+            },
           })
           viewer_call({
             schema: schemas.opengeodeweb_viewer.point_size,

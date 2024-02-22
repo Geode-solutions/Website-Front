@@ -1,7 +1,7 @@
 {
   "$id": "/tools/file_converter/convert_file",
   "type": "object",
-  "method": "POST",
+  "methods": ["POST"],
   "properties": {
     "input_geode_object": {
       "type": "string"
