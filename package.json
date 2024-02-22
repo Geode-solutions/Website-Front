@@ -20,14 +20,14 @@
     "lint-staged": "^15.2.2"
   },
   "dependencies": {
-    "@dargmuesli/nuxt-cookie-control": "^7.2.6",
-    "@geode/opengeodeweb-front": "^6.1.1",
-    "@kitware/vtk.js": "^29.4.6",
+    "@dargmuesli/nuxt-cookie-control": "^7.2.7",
+    "@geode/opengeodeweb-front": "^6.3.0",
+    "@kitware/vtk.js": "^29.7.2",
     "@mdi/font": "^7.4.47",
     "@nuxt/kit": "^3.10.2",
     "@pinia/nuxt": "^0.5.1",
-    "@vueuse/core": "^10.7.2",
-    "@vueuse/nuxt": "^10.7.2",
+    "@vueuse/core": "^10.8.0",
+    "@vueuse/nuxt": "^10.8.0",
     "ajv": "^8.12.0",
     "d3": "^7.8.5",
     "d3-cloud": "^1.2.7",
@@ -36,12 +36,12 @@
     "node-fetch": "^3.3.2",
     "nuxt": "^3.10.2",
     "pinia": "^2.1.7",
-    "sass": "^1.70.0",
+    "sass": "^1.71.1",
     "tsparticles": "^2.12.0",
     "vue-gtag": "^2.0.1",
     "vue3-particles": "^2.12.0",
     "vuetify": "^3.5.4",
-    "vuetify-nuxt-module": "^0.10.3"
+    "vuetify-nuxt-module": "^0.11.0"
   },
   "overrides": {
     "vue": "latest"
