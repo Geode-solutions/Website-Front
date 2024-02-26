@@ -95,7 +95,7 @@
     await api_fetch(
       { schema: implicit_json.step_0 },
       {
-        response_function: (response) => {
+        response_function: async (response) => {
           const autofilled_constrains = JSON.parse(response._data.constraints)
           for (let i = 0; i < autofilled_constrains.length; i++) {
             const constraint = autofilled_constrains[i]
@@ -108,19 +108,19 @@
             nb_constraints.value++
             inputsStore.addConstraint(x)
           }
-          viewer_call({ schema: schemas.opengeodeweb_viewer.reset })
-          viewer_call({
+          await viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
             params: {
               file_name: response._data.viewable_points,
               id: response._data.points,
             },
           })
+          console.log("END points")
           viewer_call({
             schema: schemas.opengeodeweb_viewer.point_size,
-            params: { id: response._data.points, size: 10 },
+            params: { id: response._data.points, size: 10.0 },
           })
-          viewer_call({
+          await viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
             params: {
               file_name: response._data.viewable_box,
