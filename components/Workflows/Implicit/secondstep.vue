@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <p class="mb-2 text-medium-emphasis text-body-1 text-center">
-      Choose and axis and a coordinate on this axis <br />
-      an Implicit Cross will be extracted on the plane normal to this axis at
-      the given coordinate
+      Choose an axis and a coordinate on this axis <br />
+      An Implicit CrossSection will be extracted on the plane normal to this
+      axis at the given coordinate
     </p>
     <v-select
       v-model="selected_axis"
