@@ -41,12 +41,12 @@
   const stepper_tree = reactive({
     current_step_index: ref(0),
     tool_name: "File converter",
-    route_prefix: route_prefix,
-    files: files,
-    additional_files: additional_files,
-    input_geode_object: input_geode_object,
-    output_geode_object: output_geode_object,
-    output_extension: output_extension,
+    route_prefix,
+    files,
+    additional_files,
+    input_geode_object,
+    output_geode_object,
+    output_extension,
     steps: [
       {
         step_title: "Please select a file(s) to convert",
@@ -54,7 +54,6 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            route: "tools/upload_file",
           },
         },
         chips: computed(() => {
@@ -85,13 +84,11 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            input_geode_object: input_geode_object,
+            input_geode_object,
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            route: "tools/upload_file",
           },
-          skippable: true,
         },
         chips: computed(() => {
           return additional_files.value.map(
@@ -104,7 +101,7 @@
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {
-            input_geode_object: input_geode_object,
+            input_geode_object,
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
@@ -135,9 +132,9 @@
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            input_geode_object: input_geode_object,
-            output_geode_object: output_geode_object,
-            output_extension: output_extension,
+            input_geode_object,
+            output_geode_object,
+            output_extension,
           },
         },
         chips: [],

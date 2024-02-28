@@ -40,19 +40,19 @@
   const output_geode_object = ref("")
   const output_extension = ref("")
   const route_prefix = "tools/crs_converter"
-  const key = "crs"
+  const supported_feature = "crs"
 
   const stepper_tree = reactive({
     current_step_index: ref(0),
     tool_name: "CRS converter",
-    route_prefix: route_prefix,
-    files: files,
-    input_geode_object: input_geode_object,
-    input_crs: input_crs,
-    output_crs: output_crs,
-    output_geode_object: output_geode_object,
-    output_extension: output_extension,
-    key: key,
+    route_prefix,
+    files,
+    input_geode_object,
+    input_crs,
+    output_crs,
+    output_geode_object,
+    output_extension,
+    supported_feature,
     steps: [
       {
         step_title: "Please select a file to convert",
@@ -60,8 +60,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: true,
-            key: key,
-            route: "tools/upload_file",
+            supported_feature,
           },
         },
         chips: computed(() => {
@@ -76,7 +75,7 @@
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            key: key,
+            supported_feature,
           },
         },
         chips: computed(() => {
@@ -94,11 +93,10 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            input_geode_object: input_geode_object,
+            input_geode_object,
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            route: "tools/upload_file",
           },
         },
         chips: computed(() => {
@@ -112,7 +110,7 @@
         component: {
           component_name: shallowRef(CrsSelector),
           component_options: {
-            input_geode_object: input_geode_object,
+            input_geode_object,
             key_to_update: "input_crs",
           },
         },
@@ -125,7 +123,7 @@
         component: {
           component_name: shallowRef(CrsSelector),
           component_options: {
-            input_geode_object: input_geode_object,
+            input_geode_object,
             key_to_update: "output_crs",
           },
         },
@@ -138,7 +136,7 @@
         component: {
           component_name: shallowRef(ExtensionSelector),
           component_options: {
-            input_geode_object: input_geode_object,
+            input_geode_object,
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),

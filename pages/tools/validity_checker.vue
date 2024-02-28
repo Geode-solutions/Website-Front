@@ -34,16 +34,16 @@
   const additional_files = ref([])
   const model_checks = ref([])
   const route_prefix = "tools/validity_checker"
-  const key = "inspector"
+  const supported_feature = "inspector"
 
   const stepper_tree = reactive({
     current_step_index: ref(0),
     tool_name: "Validity checker",
-    route_prefix: route_prefix,
-    files: files,
-    input_geode_object: input_geode_object,
-    model_checks: model_checks,
-    key: key,
+    route_prefix,
+    files,
+    input_geode_object,
+    model_checks,
+    supported_feature,
     steps: [
       {
         step_title: "Please select a file to check",
@@ -51,8 +51,7 @@
           component_name: shallowRef(FileSelector),
           component_options: {
             multiple: false,
-            key: key,
-            route: "tools/upload_file",
+            supported_feature,
           },
         },
         chips: computed(() => {
@@ -67,7 +66,7 @@
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            key: key,
+            supported_feature,
           },
         },
         chips: computed(() => {
@@ -84,11 +83,10 @@
           component_name: shallowRef(MissingFilesSelector),
           component_options: {
             multiple: true,
-            input_geode_object: input_geode_object,
+            input_geode_object,
             filenames: computed(() => {
               return files.value.map((file) => file.name)
             }),
-            route: "tools/upload_file",
           },
         },
         chips: computed(() => {
@@ -102,8 +100,8 @@
         component: {
           component_name: shallowRef(ToolsValidityCheckerInspectionButton),
           component_options: {
-            files: files,
-            input_geode_object: input_geode_object,
+            files,
+            input_geode_object,
           },
         },
         chips: [],
