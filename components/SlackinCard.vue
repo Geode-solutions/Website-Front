@@ -41,7 +41,7 @@
             </v-form>
 
             <v-col v-if="errorMessage" class="mx-auto text-center">
-              <v-alert type="error">toto</v-alert>
+              <v-alert type="error">{{ errorMessage }}</v-alert>
             </v-col>
           </v-row>
 
