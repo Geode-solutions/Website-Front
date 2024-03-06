@@ -115,7 +115,6 @@
               id: response._data.points,
             },
           })
-          console.log("END points")
           viewer_call({
             schema: schemas.opengeodeweb_viewer.point_size,
             params: { id: response._data.points, size: 10.0 },
