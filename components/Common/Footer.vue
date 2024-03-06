@@ -50,7 +50,11 @@
       </v-col>
     </v-row>
 
-    <SlackinCard :show="showSlack" @close="showSlack = false" />
+    <SlackinCard
+      :show="showSlack"
+      :slackToken="process.env.SLACK_TOKEN"
+      @close="showSlack = false"
+    />
   </v-footer>
 </template>
 
