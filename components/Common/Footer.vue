@@ -50,7 +50,7 @@
       </v-col>
     </v-row>
 
-    <slackin-card :show="showSlack" @close="showSlack = false" />
+    <SlackinCard :show="showSlack" @close="showSlack = false" />
   </v-footer>
 </template>
 

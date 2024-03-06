@@ -41,13 +41,15 @@
             </v-form>
 
             <v-col v-if="errorMessage" class="mx-auto text-center">
-              <v-alert type="error">{{ errorMessage }}</v-alert>
+              <v-alert icon="$warning" closable type="error">{{
+                errorMessage
+              }}</v-alert>
             </v-col>
           </v-row>
 
           <v-row>
             <v-col v-if="successMessage" class="mx-auto text-center">
-              <v-alert type="success">{{ successMessage }}</v-alert>
+              <v-alert closable type="success">{{ successMessage }}</v-alert>
             </v-col>
           </v-row>
         </v-card-text>
