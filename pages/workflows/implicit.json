@@ -2,9 +2,7 @@
   "step_0": {
     "$id": "/workflows/implicit/step0",
     "type": "object",
-    "methods": [
-      "POST"
-    ],
+    "methods": ["POST"],
     "properties": {},
     "required": [],
     "additionalProperties": false
@@ -19,19 +17,14 @@
       "value": {
         "type": "number"
       },
-      "required": [
-        "point",
-        "value"
-      ]
+      "required": ["point", "value"]
     },
     "additionalProperties": false
   },
   "step_1": {
     "$id": "/workflows/implicit/step1",
     "type": "object",
-    "methods": [
-      "POST"
-    ],
+    "methods": ["POST"],
     "properties": {
       "isovalues": {
         "type": "array",
@@ -40,17 +33,13 @@
         }
       }
     },
-    "required": [
-      "isovalues"
-    ],
+    "required": ["isovalues"],
     "additionalProperties": false
   },
   "step_2": {
     "$id": "/workflows/implicit/step2",
     "type": "object",
-    "methods": [
-      "POST"
-    ],
+    "methods": ["POST"],
     "properties": {
       "axis": {
         "type": "number"
@@ -59,26 +48,19 @@
         "type": "number"
       }
     },
-    "required": [
-      "axis",
-      "coordinate"
-    ],
+    "required": ["axis", "coordinate"],
     "additionalProperties": false
   },
   "step_3": {
     "$id": "/workflows/implicit/step3",
     "type": "object",
-    "methods": [
-      "POST"
-    ],
+    "methods": ["POST"],
     "properties": {
       "metric": {
         "type": "number"
       }
     },
-    "required": [
-      "metric"
-    ],
+    "required": ["metric"],
     "additionalProperties": false
   }
 }
