@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-  import schemas from "@geode/opengeodeweb-front/utils/schemas.json"
+  import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import simplex_json from "./simplex.json"
 
   const cloud_store = use_cloud_store()

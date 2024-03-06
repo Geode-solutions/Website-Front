@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-  import schemas from "@geode/opengeodeweb-front/utils/schemas.json"
+  import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import implicit_json from "@/pages/workflows/implicit.json"
 
   const inputsStore = useInputStore()

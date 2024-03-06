@@ -1,6 +1,5 @@
 import colors from "vuetify/lib/util/colors"
 import { defineNuxtModule } from "@nuxt/kit"
-// import vuetify from "@geode/opengeodeweb-front/utils/vuetify"
 
 const vuetify_defaults = {
   defaultAssets: true,

@@ -92,7 +92,7 @@
 </template>
 
 <script setup>
-  import schemas from "@geode/opengeodeweb-front/utils/schemas.json"
+  import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import explicit_json from "./explicit.json"
 
   const cloud_store = use_cloud_store()
