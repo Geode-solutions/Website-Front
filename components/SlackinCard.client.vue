@@ -92,26 +92,20 @@
   const sendInvitation = async () => {
     const data = { token: slackToken, email: email.value }
 
+    // `/.netlify/functions/slack?email=${email.value}`,
     try {
       const response = await $fetch.raw(
-        `/.netlify/functions/slack?email=${email.value}`,
+        "/.netlify/functions/slack?email=${email.value}",
       )
-      console.log(response)
+      console.log("response", response)
       if (!response.ok) {
-        const errorBody = await response.json()
-        throw new Error(
-          `Invalid response ${response.status}: ${errorBody.error}`,
-        )
+        console.log("toto", response)
+        if (response.status == 400) {
+          errorMessage.value = "A mail has been already sent."
+        }
+      } else {
+        successMessage.value = "Invitation sent successfully"
       }
-
-      const responseBody = await response.json()
-
-      const { ok, error: providedError } = responseBody
-
-      if (!ok) {
-        throw new Error(providedError)
-      }
-
       console.log(`Invite sent to ${email.value}`)
       successMessage.value = "Invitation sent successfully"
     } catch (error) {
