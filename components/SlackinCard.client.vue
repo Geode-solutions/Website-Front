@@ -105,7 +105,8 @@
       successMessage.value = "Invitation sent successfully"
     } catch (error) {
       console.error("Error:", error)
-      errorMessage.value = "An error occurred. Please try again later."
+      errorMessage.value =
+        "An invitation has already been sent to you by email. Please check your mailbox."
     }
   }
 </script>
