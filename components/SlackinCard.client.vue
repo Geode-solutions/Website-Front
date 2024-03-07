@@ -88,21 +88,21 @@
     errorMessage.value = ""
     emit("close")
   }
+
   const sendInvitation = async () => {
     const data = { token: slackToken, email: email.value }
-
     try {
-      const response = await fetch(
+      const response = await $fetch.raw(
         `/.netlify/functions/slack?email=${email.value}`,
       )
-
-      if (!response.ok) {
-        if (response.status == 400) {
-          errorMessage.value = "A mail has already been sent."
-        }
+      console.log("response", response)
+      if (response.status == 400) {
+        errorMessage.value = "A mail has been already sent."
       } else {
         successMessage.value = "Invitation sent successfully"
       }
+      console.log(`Invite sent to ${email.value}`)
+      successMessage.value = "Invitation sent successfully"
     } catch (error) {
       console.error("Error:", error)
       errorMessage.value = error.message || "An error occurred"
