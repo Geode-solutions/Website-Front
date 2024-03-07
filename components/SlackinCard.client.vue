@@ -105,7 +105,7 @@
       successMessage.value = "Invitation sent successfully"
     } catch (error) {
       console.error("Error:", error)
-      errorMessage.value = error.message || "An error occurred"
+      errorMessage.value = "An error occurred. Please try again later."
     }
   }
 </script>
