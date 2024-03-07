@@ -49,12 +49,13 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <SlackinCard
-      :show="showSlack"
-      :slackToken="process.env.SLACK_TOKEN"
-      @close="showSlack = false"
-    />
+    <ClientOnly>
+      <SlackinCard
+        :show="showSlack"
+        :slackToken="process.env.SLACK_TOKEN"
+        @close="showSlack = false"
+      />
+    </ClientOnly>
   </v-footer>
 </template>
 
