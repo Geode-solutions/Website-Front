@@ -16,6 +16,7 @@ export default defineNuxtConfig({
       PROJECT: "/website",
       NODE_ENV: process.env.NODE_ENV,
       RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+      SLACK_TOKEN: process.env.SLACK_TOKEN,
     },
   },
 

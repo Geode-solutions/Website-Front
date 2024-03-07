@@ -49,13 +49,11 @@
         </v-btn>
       </v-col>
     </v-row>
-    <ClientOnly>
-      <SlackinCard
-        :show="showSlack"
-        :slackToken="process.env.SLACK_TOKEN"
-        @close="showSlack = false"
-      />
-    </ClientOnly>
+    <SlackinCard
+      :show="showSlack"
+      :slackToken="SLACK_TOKEN"
+      @close="showSlack = false"
+    />
   </v-footer>
 </template>
 
@@ -63,6 +61,8 @@
   import NuxtLogo from "@/assets/img/nuxt.svg"
 
   const showSlack = ref(false)
+
+  const SLACK_TOKEN = useRuntimeConfig().public.SLACK_TOKEN
 
   const icons = [
     { icon: "mdi-github", url: "https://github.com/Geode-solutions" },
