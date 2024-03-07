@@ -91,11 +91,9 @@
 
   const sendInvitation = async () => {
     const data = { token: slackToken, email: email.value }
-
-    // `/.netlify/functions/slack?email=${email.value}`,
     try {
       const response = await $fetch.raw(
-        "/.netlify/functions/slack?email=${email.value}",
+        `/.netlify/functions/slack?email=${email.value}`,
       )
       console.log("response", response)
       if (!response.ok) {
