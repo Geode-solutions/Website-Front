@@ -41,7 +41,7 @@
             </v-form>
 
             <v-col v-if="errorMessage" class="mx-auto text-center">
-              <v-alert icon="$warning" closable type="error">{{
+              <v-alert closable icon="$warning" type="error">{{
                 errorMessage
               }}</v-alert>
             </v-col>
