@@ -1,5 +1,4 @@
 const axios = require("axios")
-
 exports.handler = async function (event) {
   try {
     const response = await axios
