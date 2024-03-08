@@ -55,18 +55,17 @@
 </template>
 
 <script setup>
+  import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import implicit_json from "./implicit.json"
 
   const cloud_store = use_cloud_store()
   const { is_running } = storeToRefs(cloud_store)
   const inputsStore = useInputStore()
-  const viewer_store = use_viewer_store()
   const { isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const step = ref(1)
   const items = ["Select data", "Extract section", "Remesh", "Result"]
-
   const title = "Implicit"
   useHead({
     title: title,
@@ -87,14 +86,22 @@
       { schema: implicit_json.step_1, params },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.set_vertex_attribute({
-            id: response._data.id,
-            name: "geode_implicit_attribute",
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.set_vertex_attribute,
+            params: {
+              id: response._data.id,
+              name: "geode_implicit_attribute",
+            },
           })
         },
       },
@@ -110,14 +117,22 @@
       { schema: implicit_json.step_2, params },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.set_vertex_attribute({
-            id: response._data.id,
-            name: "geode_implicit_attribute",
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.set_vertex_attribute,
+            params: {
+              id: response._data.id,
+              name: "geode_implicit_attribute",
+            },
           })
         },
       },
@@ -132,14 +147,19 @@
       { schema: implicit_json.step_3, params },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id,
-            visibility: true,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.toggle_edge_visibility,
+            params: { id: response._data.id, visibility: true },
           })
         },
       },

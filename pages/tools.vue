@@ -30,7 +30,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-col class="pa-4">
-      <NuxtPage keep-alive />
+      <NuxtPage />
     </v-col>
   </v-row>
 </template>

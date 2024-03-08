@@ -1,6 +1,6 @@
 {
   "$id": "/tools/file_converter/versions",
-  "method": "GET",
+  "methods": "GET",
   "type": "object",
   "properties": {},
   "additionalProperties": false

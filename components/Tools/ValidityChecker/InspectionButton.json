@@ -1,6 +1,6 @@
 {
   "$id": "/tools/validity_checker/tests_names",
-  "method": "POST",
+  "methods": ["POST"],
   "type": "object",
   "properties": {
     "input_geode_object": {
