@@ -50,6 +50,7 @@
       </v-col>
     </v-row>
     <SlackinCard
+      id="slack"
       :show="showSlack"
       :slackToken="SLACK_TOKEN"
       @close="showSlack = false"
@@ -61,6 +62,11 @@
   import NuxtLogo from "@/assets/img/nuxt.svg"
 
   const showSlack = ref(false)
+  const route = useRoute()
+  console.log("route", route)
+  if (route.hash === "#slack") {
+    showSlack.value = true
+  }
 
   const SLACK_TOKEN = useRuntimeConfig().public.SLACK_TOKEN
 
