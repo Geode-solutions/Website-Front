@@ -13,7 +13,7 @@
   RECAPTCHA_SITE_KEY = "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"
   SITE_URL = "https://geode-solutions.com"
 [context.branch-deploy.environment]
-  PROJECT: "/website"
+  PROJECT = "/website"
   SITE_BRANCH = "/test"
   RECAPTCHA_SITE_KEY = "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"
   SITE_URL = "https://next.geode-solutions.com"
