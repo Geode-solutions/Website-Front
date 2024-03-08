@@ -8,7 +8,7 @@
   package = "@netlify/plugin-functions-install-core"
 
 [context.production.environment]
-  PROJECT: "/website"
+  PROJECT = "/website"
   SITE_BRANCH = ""
   RECAPTCHA_SITE_KEY = "6Lce72wgAAAAAOXrHyDxRQBhk6NDTD80MrXOlgbC"
   SITE_URL = "https://geode-solutions.com"
