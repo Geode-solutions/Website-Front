@@ -122,11 +122,11 @@
     return api_fetch(
       { schema: explicit_json.base_data },
       {
-        response_function: (response) => {
+        response_function: async (response) => {
           viewer_call({
             schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_call({
+          await viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
             params: {
               file_name: response._data.viewable_1,
@@ -140,7 +140,7 @@
               visibility: true,
             },
           })
-          viewer_call({
+          await viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
             params: {
               file_name: response._data.viewable_2,
@@ -163,11 +163,11 @@
     return api_fetch(
       { schema: explicit_json.brep_stats },
       {
-        response_function: (response) => {
+        response_function: async (response) => {
           viewer_call({
             schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_call({
+          await viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
             params: {
               file_name: response._data.viewable_file_name,
@@ -197,11 +197,11 @@
     return api_fetch(
       { schema: explicit_json.remesh, params },
       {
-        response_function: (response) => {
+        response_function: async (response) => {
           viewer_call({
             schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_call({
+          await viewer_call({
             schema: schemas.opengeodeweb_viewer.create_object_pipeline,
             params: {
               file_name: response._data.viewable_file_name,
