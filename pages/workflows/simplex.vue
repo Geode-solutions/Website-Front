@@ -50,7 +50,7 @@
           <template v-slot:item.3>
             <p class="mb-2 text-body-1 text-center">
               Congratulations! <br />
-              You just generated a tetrahedral mesh with heterogeneous metric,
+              You just generated a tetrahedral mesh with a heterogeneous metric,
               all in a few clicks
             </p>
           </template>
@@ -87,11 +87,11 @@
 </template>
 
 <script setup>
+  import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import simplex_json from "./simplex.json"
 
   const cloud_store = use_cloud_store()
   const { is_running } = storeToRefs(cloud_store)
-  const viewer_store = use_viewer_store()
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const inputsStore = useInputStore()
@@ -116,16 +116,23 @@
   }
 
   async function initialize() {
-    viewer_store.reset()
+    viewer_call({
+      schema: schemas.opengeodeweb_viewer.reset,
+    })
     toggle_loading()
     await api_fetch(
       { schema: simplex_json.initialize },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
           })
         },
       },
@@ -142,14 +149,22 @@
       { schema: simplex_json.remesh, params },
       {
         response_function: (response) => {
-          viewer_store.reset()
-          viewer_store.create_object_pipeline({
-            file_name: response._data.viewable_file_name,
-            id: response._data.id,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.reset,
           })
-          viewer_store.toggle_edge_visibility({
-            id: response._data.id,
-            visibility: true,
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.create_object_pipeline,
+            params: {
+              file_name: response._data.viewable_file_name,
+              id: response._data.id,
+            },
+          })
+          viewer_call({
+            schema: schemas.opengeodeweb_viewer.toggle_edge_visibility,
+            params: {
+              id: response._data.id,
+              visibility: true,
+            },
           })
         },
       },

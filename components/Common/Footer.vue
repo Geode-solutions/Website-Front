@@ -4,10 +4,10 @@
       <v-col cols="auto">
         <v-btn
           v-for="icon in icons"
-          :key="icon"
+          :key="icon.icon"
           class="px-5"
           :icon="icon.icon"
-          :href="icon.url"
+          @click="handleIconClick(icon)"
           target="_blank"
           variant="plain"
           size="30"
@@ -29,6 +29,7 @@
         </v-btn>
       </v-col>
     </v-row>
+
     <v-row style="width: 100%">
       <v-col cols="auto">
         <p class="text-caption">
@@ -48,11 +49,26 @@
         </v-btn>
       </v-col>
     </v-row>
+    <SlackinCard
+      id="slack"
+      :show="showSlack"
+      :slackToken="SLACK_TOKEN"
+      @close="showSlack = false"
+    />
   </v-footer>
 </template>
 
 <script setup>
   import NuxtLogo from "@/assets/img/nuxt.svg"
+
+  const showSlack = ref(false)
+  const route = useRoute()
+  console.log("route", route)
+  if (route.hash === "#slack") {
+    showSlack.value = true
+  }
+
+  const SLACK_TOKEN = useRuntimeConfig().public.SLACK_TOKEN
 
   const icons = [
     { icon: "mdi-github", url: "https://github.com/Geode-solutions" },
@@ -61,12 +77,21 @@
       icon: "mdi-linkedin",
       url: "https://linkedin.com/company/geode-solutions",
     },
-    { icon: "mdi-slack", url: "https://opengeode-slack-invite.herokuapp.com" },
+    { icon: "mdi-slack", url: "" },
     {
       icon: "mdi-youtube",
       url: "https://www.youtube.com/channel/UCkzmIOpr3H8I8kDLCGZBiXA",
     },
     { icon: "mdi-email", url: "mailto:contact@geode-solutions.com" },
   ]
+
   const date = new Date().getFullYear()
+
+  const handleIconClick = (icon) => {
+    if (icon.icon === "mdi-slack") {
+      showSlack.value = !showSlack.value
+    } else {
+      window.open(icon.url, "_blank")
+    }
+  }
 </script>

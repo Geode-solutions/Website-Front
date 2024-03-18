@@ -6,6 +6,8 @@ import "@mdi/font/css/materialdesignicons.css"
 import colors from "vuetify/lib/util/colors"
 import "vuetify/styles"
 
+import vuetify_default from "@geode/opengeodeweb-front/vuetify_config"
+
 const light_theme = {
   dark: false,
   colors: {
@@ -22,6 +24,7 @@ const light_theme = {
 
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
+    ...vuetify_default,
     components: {
       ...components,
     },
@@ -30,24 +33,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       defaultTheme: "light_theme",
       themes: {
         light_theme,
-      },
-    },
-    defaultAssets: false,
-    icons: {
-      defaultSet: "mdi",
-    },
-    ssr: true,
-    defaults: {
-      VBtn: {
-        style: "text-transform: none;",
-      },
-      VCard: {
-        elevation: 5,
-        style: "border-radius: 15px;",
-      },
-      VExpansionPanel: {
-        elevation: 5,
-        style: "border-radius: 15px;",
       },
     },
   })

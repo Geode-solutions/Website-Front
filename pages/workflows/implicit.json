@@ -2,7 +2,7 @@
   "step_0": {
     "$id": "/workflows/implicit/step0",
     "type": "object",
-    "method": "POST",
+    "methods": ["POST"],
     "properties": {},
     "required": [],
     "additionalProperties": false
@@ -24,7 +24,7 @@
   "step_1": {
     "$id": "/workflows/implicit/step1",
     "type": "object",
-    "method": "POST",
+    "methods": ["POST"],
     "properties": {
       "isovalues": {
         "type": "array",
@@ -39,7 +39,7 @@
   "step_2": {
     "$id": "/workflows/implicit/step2",
     "type": "object",
-    "method": "POST",
+    "methods": ["POST"],
     "properties": {
       "axis": {
         "type": "number"
@@ -54,7 +54,7 @@
   "step_3": {
     "$id": "/workflows/implicit/step3",
     "type": "object",
-    "method": "POST",
+    "methods": ["POST"],
     "properties": {
       "metric": {
         "type": "number"
