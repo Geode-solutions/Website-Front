@@ -63,7 +63,7 @@
 
   const showSlack = ref(false)
   const route = useRoute()
-  console.log("route", route)
+
   if (route.hash === "#slack") {
     showSlack.value = true
   }
