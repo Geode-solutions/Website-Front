@@ -93,4 +93,12 @@ export default defineNuxtConfig({
   devtools: {
     enabled: process.env.NODE_ENV === "production" ? false : true,
   },
+
+  css: ["vuetify/lib/styles/main.sass"],
+
+  vite: {
+    optimizeDeps: {
+      include: ["@geode/opengeodeweb-front"],
+    },
+  },
 })
