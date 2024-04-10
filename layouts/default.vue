@@ -2,7 +2,7 @@
   <v-app v-if="!loading" style="contain: layout">
     <CommonHeader />
     <v-main class="bg-secondary">
-      <slot />
+      <NuxtPage />
     </v-main>
     <CookieControl v-if="public_config.NODE_ENV === 'production'" />
     <CommonFooter />
