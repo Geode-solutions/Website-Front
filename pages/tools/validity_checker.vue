@@ -12,7 +12,7 @@
   import ObjectSelector from "@geode/opengeodeweb-front/components/ObjectSelector.vue"
   import MissingFilesSelector from "@geode/opengeodeweb-front/components/MissingFilesSelector.vue"
   import ToolsValidityCheckerInspectionButton from "@/components/Tools/ValidityChecker/InspectionButton.vue"
-  import ToolsValidityCheckerResultsPanels from "@/components/Tools/ValidityChecker/ResultsPanels.vue"
+  import InspectorResultPanel from "@geode/opengeodeweb-front/components/Inspector/ResultPanel.vue"
 
   import versions_schema from "@/components/Tools/ValidityChecker/PackagesVersions.json"
 
@@ -32,7 +32,7 @@
   const files = ref([])
   const input_geode_object = ref("")
   const additional_files = ref([])
-  const model_checks = ref([])
+  const inspection_results = ref([])
   const route_prefix = "tools/validity_checker"
   const supported_feature = "inspector"
 
@@ -42,7 +42,7 @@
     route_prefix,
     files,
     input_geode_object,
-    model_checks,
+    inspection_results,
     supported_feature,
     steps: [
       {
@@ -109,14 +109,9 @@
       {
         step_title: "Inspection results",
         component: {
-          component_name: shallowRef(ToolsValidityCheckerResultsPanels),
+          component_name: shallowRef(InspectorResultPanel),
           component_options: {
-            model_checks,
-            input_geode_object,
-            filename: computed(() => {
-              return files.value[0].name
-            }),
-            input_index_array: [],
+            inspection_results,
           },
         },
         chips: [],
