@@ -9,8 +9,6 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@rollup/plugin-inject": "^5.0.5",
-    "@rollup/plugin-typescript": "^11.1.6",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-nuxt": "^4.0.0",
@@ -19,7 +17,10 @@
     "eslint-plugin-vue": "^9.24.0",
     "eslint-plugin-vuetify": "^2.2.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.2"
+    "lint-staged": "^15.2.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^8.1.0",
