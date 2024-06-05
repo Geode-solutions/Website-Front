@@ -30,7 +30,7 @@
             >Technopole Hélioparc, 2 Avenue Pierre Angot 64053 Pau cedex
             9</strong
           ><br />
-          Au Capital de :<strong> 12000 €</strong><br />
+          Au Capital de :<strong> 10600 €</strong><br />
           SIRET : <strong>852 994 789 00018</strong> R.C.S. :
           <strong>852 994 789</strong><br />
           Numéro TVA intracommunautaire : <strong>FR25 852 994 789</strong
