@@ -3,7 +3,8 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
     </v-col>
-    <v-col v-if="!is_running">
+    <PageUnavailable />
+    <!-- <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -87,7 +88,7 @@
           </p>
         </v-col>
       </v-container>
-    </v-col>
+    </v-col> -->
   </v-container>
 </template>
 
