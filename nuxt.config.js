@@ -99,4 +99,6 @@ export default defineNuxtConfig({
       include: ["@geode/opengeodeweb-front"],
     },
   },
+
+  compatibilityDate: "2024-09-16",
 })

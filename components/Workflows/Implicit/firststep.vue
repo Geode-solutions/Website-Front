@@ -152,7 +152,7 @@
   }
 
   onMounted(() => {
-    runFunctionIfCloudRunning(() => {
+    run_function_when_infra_running(() => {
       getConstraints()
     })
   })

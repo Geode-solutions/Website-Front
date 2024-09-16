@@ -1,8 +1,8 @@
 <template>
   <v-row no-gutters>
     <v-col cols="12" style="contain: layout">
-      <ErrorsBanner />
-      <ErrorsSnackers />
+      <FeedBackErrorBanner />
+      <FeedBackSnackers />
     </v-col>
   </v-row>
   <v-row class="fill-height" no-gutters>

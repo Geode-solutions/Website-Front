@@ -3,11 +3,10 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     </v-col>
-    <PageUnavailable />
-    <!-- <v-col v-if="!is_running">
+    <v-col v-if="!is_running">
       <Launcher />
-    </v-col> -->
-    <!-- <v-col v-else>
+    </v-col>
+    <v-col v-else>
       <v-container class="w-75">
         <v-stepper v-model="step" hide-actions :items="items">
           <template v-slot:item.1>
@@ -83,7 +82,7 @@
           </p>
         </v-col>
       </v-container>
-    </v-col> -->
+    </v-col>
   </v-container>
 </template>
 
@@ -91,8 +90,8 @@
   import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import simplex_json from "./simplex.json"
 
-  const cloud_store = use_cloud_store()
-  const { is_running } = storeToRefs(cloud_store)
+  const infra_store = use_infra_store()
+  const { is_running } = storeToRefs(infra_store)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const inputsStore = useInputStore()
@@ -182,7 +181,7 @@
   }
 
   onMounted(() => {
-    runFunctionIfCloudRunning(() => {
+    run_function_when_infra_running(() => {
       initialize()
     })
   })

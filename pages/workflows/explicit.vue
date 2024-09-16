@@ -3,8 +3,7 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Explicit modeling</h1>
     </v-col>
-    <PageUnavailable />
-    <!-- <v-col v-if="!is_running">
+    <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -88,7 +87,7 @@
           </p>
         </v-col>
       </v-container>
-    </v-col> -->
+    </v-col>
   </v-container>
 </template>
 
@@ -96,8 +95,8 @@
   import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import explicit_json from "./explicit.json"
 
-  const cloud_store = use_cloud_store()
-  const { is_running } = storeToRefs(cloud_store)
+  const infra_store = use_infra_store()
+  const { is_running } = storeToRefs(infra_store)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const nb_corners = ref("-")
@@ -239,7 +238,7 @@
   }
 
   onMounted(() => {
-    runFunctionIfCloudRunning(() => {
+    run_function_when_infra_running(() => {
       displayBase()
     })
   })
