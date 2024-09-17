@@ -5,10 +5,6 @@ import VuetifyModule from "./modules/vuetify"
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      API_URL:
-        process.env.NODE_ENV === "production"
-          ? "api.geode-solutions.com"
-          : "localhost",
       RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
       SLACK_TOKEN: process.env.SLACK_TOKEN,
     },
