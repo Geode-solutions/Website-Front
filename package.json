@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^8.1.0",
-    "@geode/opengeodeweb-front": "^9.0.1",
+    "@geode/opengeodeweb-front": "^9.0.2-rc.1",
     "@geode/opengeodeweb-viewer": "0.2.0",
     "@kitware/vtk.js": "^30.3.1",
     "@mdi/font": "^7.4.47",
