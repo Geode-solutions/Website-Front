@@ -1,11 +1,10 @@
 <template>
   <ToolsHeader :tool_name="stepper_tree.tool_name" :cards_list="cards_list" />
-  <PageUnavailable />
-  <!-- <Wrapper
+  <Wrapper
     :cards_list="cards_list"
     :stepper_tree="stepper_tree"
     :versions_schema="versions_schema"
-  /> -->
+  />
 </template>
 
 <script setup>

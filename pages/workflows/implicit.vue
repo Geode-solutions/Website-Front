@@ -3,8 +3,7 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Implicit modeling</h1>
     </v-col>
-    <PageUnavailable />
-    <!-- <v-col v-if="!is_running">
+    <v-col v-if="!is_running">
       <Launcher />
     </v-col>
     <v-col v-else>
@@ -51,7 +50,7 @@
           <RemoteRenderingView />
         </v-col>
       </v-container>
-    </v-col> -->
+    </v-col>
   </v-container>
 </template>
 
