@@ -59,8 +59,8 @@
   import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import implicit_json from "./implicit.json"
 
-  const cloud_store = use_cloud_store()
-  const { is_running } = storeToRefs(cloud_store)
+  const infra_store = use_infra_store()
+  const { is_running } = storeToRefs(infra_store)
   const inputsStore = useInputStore()
   const { isovalues, axis, coordinate, metric } = storeToRefs(inputsStore)
   const loading = ref(false)

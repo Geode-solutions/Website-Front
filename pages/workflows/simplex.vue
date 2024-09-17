@@ -91,8 +91,8 @@
   import schemas from "@geode/opengeodeweb-viewer/schemas.json"
   import simplex_json from "./simplex.json"
 
-  const cloud_store = use_cloud_store()
-  const { is_running } = storeToRefs(cloud_store)
+  const infra_store = use_infra_store()
+  const { is_running } = storeToRefs(infra_store)
   const loading = ref(false)
   const toggle_loading = useToggle(loading)
   const inputsStore = useInputStore()
@@ -182,7 +182,7 @@
   }
 
   onMounted(() => {
-    runFunctionIfCloudRunning(() => {
+    run_function_when_infra_running(() => {
       initialize()
     })
   })
