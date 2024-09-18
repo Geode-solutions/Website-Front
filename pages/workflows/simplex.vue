@@ -3,10 +3,11 @@
     <v-col>
       <h1 class="text-h2 py-6" align="center">Simplex remesh</h1>
     </v-col>
-    <v-col v-if="!is_running">
+    <PageUnavailable />
+    <!-- <v-col v-if="!is_running">
       <Launcher />
-    </v-col>
-    <v-col v-else>
+    </v-col> -->
+    <!-- <v-col v-else>
       <v-container class="w-75">
         <v-stepper v-model="step" hide-actions :items="items">
           <template v-slot:item.1>
@@ -82,7 +83,7 @@
           </p>
         </v-col>
       </v-container>
-    </v-col>
+    </v-col> -->
   </v-container>
 </template>
 
