@@ -45,7 +45,7 @@
     { title: "Expertise", to: "/expertise" },
     { title: "Software", to: "/software" },
     { title: "Services", to: "/services" },
-    { title: "Free tools", to: "/tools" },
-    { title: "Workflows", to: "/workflows" },
+    // { title: "Free tools", to: "/tools" },
+    // { title: "Workflows", to: "/workflows" },
   ]
 </script>
