@@ -57,7 +57,7 @@
   import FrancoisB from "@/assets/img/FB.jpg"
   import TaoS from "@/assets/img/TS.png"
   import BenjaminP from "@/assets/img/BP.png"
-  import BenoitT from "@/assets/img/BT.png"
+  import MaxL from "@/assets/img/ML.png"
   import { useDisplay } from "vuetify"
   const { mdAndUp } = useDisplay()
 
@@ -112,11 +112,11 @@
       topic: "Web and microservices",
     },
     {
-      name: "Benoit Thebault",
-      pict: BenoitT,
-      job: "C++ Developer",
-      url: "https://www.linkedin.com/in/benoit-thebault-ensg/",
-      topic: "Core framework",
+      name: "Maximilien Landois",
+      pict: MaxL,
+      job: "Web Fullstack Developer",
+      url: "https://www.linkedin.com/in/landois-maximilien-19945a27b/",
+      topic: "Web and microservices",
     },
   ]
 </script>
