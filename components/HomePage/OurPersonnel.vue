@@ -102,7 +102,7 @@
       pict: BenjaminP,
       job: "C++ Developer",
       // url: "https://www.linkedin.com/in/",
-      topic: "Implicit modeling",
+      topic: "Core framework",
     },
     {
       name: "Tao Schiro",
