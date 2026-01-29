@@ -57,6 +57,7 @@
   import FrancoisB from "@/assets/img/FB.jpg"
   import TaoS from "@/assets/img/TS.png"
   import BenjaminP from "@/assets/img/BP.png"
+  import MaxL from "@/assets/img/ML.png"
   import { useDisplay } from "vuetify"
   const { mdAndUp } = useDisplay()
 
@@ -108,6 +109,13 @@
       pict: TaoS,
       job: "Web FullStack Developer",
       url: "https://www.linkedin.com/in/tao-schiro-07aa8027b/",
+      topic: "Web and microservices",
+    },
+    {
+      name: "Maximilien Landois",
+      pict: MaxL,
+      job: "Web Fullstack Developer",
+      url: "https://www.linkedin.com/in/landois-maximilien-19945a27b/",
       topic: "Web and microservices",
     },
   ]
