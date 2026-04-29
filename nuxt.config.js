@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     },
   },
 
-  extends: ["@geode/opengeodeweb-front"],
 
   routeRules: {
     "/tools/**": { ssr: false },
@@ -73,7 +72,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ["stores", "@geode/opengeodeweb-front/stores"],
+    dirs: ["stores"],
   },
 
   build: {
@@ -88,12 +87,6 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: process.env.NODE_ENV === "production" ? false : true,
-  },
-
-  vite: {
-    optimizeDeps: {
-      include: ["@geode/opengeodeweb-front"],
-    },
   },
 
   compatibilityDate: "2024-09-16",
