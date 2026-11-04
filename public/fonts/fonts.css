@@ -1,0 +1,18 @@
+/* Brand fonts: Youth (primary) is replaced by Urbanist, Onest is secondary.
+   Both are self-hosted (SIL Open Font License). "block" avoids a flash of
+   fallback text: the files are preloaded, so they arrive almost at once. */
+@font-face {
+  font-family: "Urbanist";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url("/fonts/urbanist-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url("/fonts/onest-latin.woff2") format("woff2");
+}
