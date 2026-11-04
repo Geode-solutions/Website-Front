@@ -93,6 +93,11 @@
     ink: { type: String, default: "#1E1E1E" },
     // Size of the mark on its own, before it slides next to the wordmark
     startScale: { type: Number, default: 2 },
+    // Play the transition back and forth forever
+    loop: { type: Boolean, default: true },
+    // Pause on the new logo, then on the previous one, in milliseconds
+    holdEnd: { type: Number, default: 1200 },
+    holdStart: { type: Number, default: 1000 },
   })
 
   const clamp = (value) => Math.min(1, Math.max(0, value))
@@ -116,6 +121,19 @@
   const SLIDE = { start: 1250, duration: 950 }
   const REVEAL = { start: 1500, duration: 1000 }
   const END = REVEAL.start + REVEAL.duration
+
+  // Loop: forward, hold on the new logo, backward, hold on the previous one.
+  // Playing backward goes through the exact same frames, so the cycle has no
+  // visible jump.
+  const CYCLE = 2 * END + props.holdEnd + props.holdStart
+  function timeline(elapsed) {
+    if (!props.loop) return Math.min(END, elapsed)
+    const p = elapsed % CYCLE
+    if (p < END) return p
+    if (p < END + props.holdEnd) return END
+    if (p < 2 * END + props.holdEnd) return 2 * END + props.holdEnd - p
+    return 0
+  }
 
   // Mark centered in the lockup at first, shown larger on its own
   const START_SHIFT = 643 - 155
@@ -228,8 +246,9 @@
   function run() {
     const start = performance.now()
     const tick = (now) => {
-      time.value = Math.min(END, Math.max(0, now - start))
-      if (time.value < END) raf = requestAnimationFrame(tick)
+      const elapsed = Math.max(0, now - start)
+      time.value = timeline(elapsed)
+      if (props.loop || elapsed < END) raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
   }
