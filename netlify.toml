@@ -4,6 +4,13 @@
   status = 301
   force = true
 
+# Website under construction: any page that was not generated goes back home.
+# Not forced, so existing files (home, legal notice, assets) are still served.
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 302
+
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
