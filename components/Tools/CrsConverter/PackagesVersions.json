@@ -1,7 +1,0 @@
-{
-  "$id": "/tools/crs_converter/versions",
-  "methods": ["GET"],
-  "type": "object",
-  "properties": {},
-  "additionalProperties": false
-}
